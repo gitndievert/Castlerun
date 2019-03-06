@@ -60,6 +60,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\_Assets\BuildSystem\Example\Scripts\ExternalCalls.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\Demo\MaterialSwitcher.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\Demo\OutlineAnimation.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\Demo\Rotate.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\Demo\Toggle.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\LinkedSet.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\Outline.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\OutlineEffect.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\Data\BuildItem.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\Data\BuildItemContainer.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\Helpers\ObjectPreview.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\Helpers\PivotHelper.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\ObjectPlacer.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\ObjectRemover.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\ObjectSelector.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\UI\BuilderObjectUI.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\UI\BuilderUI.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\UI\IItemSelectionUI.cs" />
+    <Compile Include="Assets\_Assets\BuildSystem\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\BasePrefab.cs" />
     <Compile Include="Assets\Scripts\Companions\Companion.cs" />
     <Compile Include="Assets\Scripts\Enums\GemTypes.cs" />
@@ -193,9 +212,11 @@
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Environment\Water (Basic)\DO_NOT_WORK_IN_VR.txt" />
+    <None Include="Assets\_Assets\BuildSystem\OutlineEffect\Resources\OutlineShader.shader" />
     <None Include="Assets\_Assets\A_piece_of_nature\Readme.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularSmooth.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\Projectors\Guidelines.txt" />
+    <None Include="Assets\_Assets\BuildSystem\OutlineEffect\Resources\OutlineBufferShader.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Readme.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Vehicles\Car\Shaders\DiffuseReflectiveShader.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
@@ -205,6 +226,7 @@
     <None Include="Assets\UnityAssets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Vehicles\Car\Shaders\ReflectiveDiffuseSpec.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Environment\Water\DO_NOT_WORK_IN_VR.txt" />
+    <None Include="Assets\_Assets\BuildSystem\readme.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Fonts\OpenSans\License!.txt" />
