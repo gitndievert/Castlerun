@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wood : MonoBehaviour
+public class Wood : BaseResource
 {
+    protected override void Awake()
+    {
+        ResourceType = ResourceType.Wood;
+        Value = 20;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

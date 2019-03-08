@@ -9,23 +9,32 @@ public class Player : MonoBehaviour
     public float MoveSpeed;
     public float BuildSpeed;    
     #endregion
-
-
+    
     public Companion Companion;
 
-    private Inventory _inventory;
+    public Inventory Inventory { get; private set; }
     private GameObject _mainHand;
     private GameObject _offHand;
-           
-    
+
+
+    private void Awake()
+    {
+        Inventory = GetComponent<Inventory>();
+    }
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Health = 100f;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
+    {
+        
+    }
+
+    private void OnDestroy()
     {
         
     }

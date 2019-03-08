@@ -1317,6 +1317,7 @@ GameObject:
   - component: {fileID: 4156228581322091305}
   - component: {fileID: 4156228581322091306}
   - component: {fileID: 1695393235434212282}
+  - component: {fileID: 2356661098464103568}
   - component: {fileID: 8744243289388795502}
   - component: {fileID: 225326675342080417}
   - component: {fileID: 3524043321765451331}
@@ -1441,6 +1442,22 @@ MonoBehaviour:
   MoveSpeed: 0
   BuildSpeed: 0
   Companion: {fileID: 0}
+--- !u!114 &2356661098464103568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4156228581322091307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2359d927fa25849bad1197a2d17f01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WoodCount: 0
+  RockCount: 0
+  MetalCount: 0
+  GemCount: 0
 --- !u!114 &8744243289388795502
 MonoBehaviour:
   m_ObjectHideFlags: 0
