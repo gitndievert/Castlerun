@@ -4,7 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bust : BasePrefab
-{    
+{
+    /// <summary>
+    /// Two minute life time
+    /// </summary>
+    const float LIFE_TIME = 120f;
+
     private int _amount;
     private ResourceType _rt;
     private GameObject _bustObj;
@@ -32,6 +37,7 @@ public class Bust : BasePrefab
         if(_bustObj != null)
         {
             _bustObj.SetActive(true);
+            Destroy(gameObject, LIFE_TIME);
         }
     }
 

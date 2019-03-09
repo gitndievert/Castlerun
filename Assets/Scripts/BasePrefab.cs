@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasePrefab : MonoBehaviour
+public abstract class BasePrefab : MonoBehaviour
 {
     protected Renderer rend;
 
