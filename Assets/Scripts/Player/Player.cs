@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 
     public Companion Companion { get; private set; }
     public Inventory Inventory { get; private set; }
+    public int ActorNumber { get; internal set; }
 
     private GameObject _mainHand;
     private GameObject _offHand;
