@@ -79,6 +79,7 @@
     <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\UI\BuilderUI.cs" />
     <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\UI\IItemSelectionUI.cs" />
     <Compile Include="Assets\_Assets\BuildSystem\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\_Assets\Characters\Knight\scripts\rotator.cs" />
     <Compile Include="Assets\_Assets\SimpleCumulus\Demo\Scripts\Player\FPSWalkerEnhanced.cs" />
     <Compile Include="Assets\_Assets\SimpleCumulus\Demo\Scripts\Player\SmoothMouseLook.cs" />
     <Compile Include="Assets\_Assets\SimpleCumulus\Demo\Scripts\Skybox\SkyboxChanger.cs" />
@@ -91,17 +92,17 @@
     <Compile Include="Assets\Scripts\EventManager.cs" />
     <Compile Include="Assets\Scripts\Game\CastleProp.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Helpers\TransformHelper.cs" />
     <Compile Include="Assets\Scripts\Player\Global.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Resource\BaseResource.cs" />
     <Compile Include="Assets\Scripts\Resource\Bust.cs" />
-    <Compile Include="Assets\Scripts\Resource\Gems.cs" />
     <Compile Include="Assets\Scripts\Resource\Inventory.cs" />
     <Compile Include="Assets\Scripts\Resource\IResource.cs" />
-    <Compile Include="Assets\Scripts\Resource\Metal.cs" />
-    <Compile Include="Assets\Scripts\Resource\Rock.cs" />
-    <Compile Include="Assets\Scripts\Resource\Wood.cs" />
+    <Compile Include="Assets\Scripts\Resource\Resource.cs" />
     <Compile Include="Assets\Scripts\Settings\Settings.cs" />
+    <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
+    <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -266,6 +267,7 @@
     <None Include="Assets\_Assets\BuildSystem\OutlineEffect\Resources\OutlineBufferShader.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Readme.txt" />
+    <None Include="Assets\Sfx\Sound\Fantasy Arcade RPG Freedom World Sounds - Free Package\assetexplain.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Vehicles\Car\Shaders\DiffuseReflectiveShader.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
@@ -282,6 +284,7 @@
     <None Include="Assets\UnityAssets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Fonts\OpenSans\License!.txt" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\_Assets\Characters\Knight\shaders\doublesidedshader.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />

@@ -7,12 +7,27 @@ public class Player : MonoBehaviour
     #region BaseStats
     public float Health;
     public float MoveSpeed;
-    public float BuildSpeed;    
+    public float BuildSpeed;
     #endregion
-    
-    public Companion Companion;
 
+    private string _playerName;
+
+    public string PlayerName
+    {
+        get { return _playerName; }
+        set
+        {
+            if (value.Length > 20)
+                _playerName = value.Substring(0, 20);
+            else
+                _playerName = value;
+        }
+    }
+    
+
+    public Companion Companion { get; private set; }
     public Inventory Inventory { get; private set; }
+
     private GameObject _mainHand;
     private GameObject _offHand;
 

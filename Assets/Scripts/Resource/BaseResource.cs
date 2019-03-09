@@ -7,6 +7,8 @@ public abstract class BaseResource : BasePrefab, IResource
 {
     public ResourceType ResourceType;
     public GameObject BustResourceObj;
+    public AudioClip[] HitSounds;
+    public AudioClip BustSound;
 
     public int GetDurability()
     {
@@ -16,6 +18,11 @@ public abstract class BaseResource : BasePrefab, IResource
     public ResourceType GetResourceType()
     {
         return ResourceType;
+    }
+
+    public void PlayHitSounds()
+    {
+        SoundManager.PlaySound(HitSounds);
     }
 
     public void SetHit(int amount)
@@ -47,7 +54,8 @@ public abstract class BaseResource : BasePrefab, IResource
             //Sounds
             //Effects
             var bustValues = bust.GetComponent<Bust>();
-            bustValues.SetValues(ResourceType, Value);
+            bustValues.SetValues(ResourceType, Value, BustSound);
+            bustValues.Spawn();
             Destroy(gameObject);
         }
     }

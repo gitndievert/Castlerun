@@ -3,4 +3,5 @@
     int GetDurability();
     ResourceType GetResourceType();
     void SetHit(int amount);
+    void PlayHitSounds();
 }

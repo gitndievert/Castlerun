@@ -163,8 +163,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5679051004854470924}
-  - component: {fileID: 9162353530098576234}
   - component: {fileID: 151945430409329574}
+  - component: {fileID: 3427963128301602540}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -188,21 +188,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 42.852, z: 0}
---- !u!114 &9162353530098576234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8335102779712757600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54bbc1b0fa96b8d468f8873846387793, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ResourceType: 2
-  BustResourceObj: {fileID: 3437016267795738889, guid: 1c769235749a2814dbdd50c6022af4e6,
-    type: 3}
 --- !u!65 &151945430409329574
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -216,3 +201,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.9098849, z: 1}
   m_Center: {x: 0, y: 0.44417262, z: 0}
+--- !u!114 &3427963128301602540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8335102779712757600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeaeed2595927de44bbaa564e38e3d27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourceType: 2
+  BustResourceObj: {fileID: 3437016267795738889, guid: 1c769235749a2814dbdd50c6022af4e6,
+    type: 3}
+  HitSounds: []
+  BustSound: {fileID: 8300000, guid: 134c83d6b10fe6945bba6b0cc14be6c1, type: 3}

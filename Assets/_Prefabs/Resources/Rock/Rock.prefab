@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 42074807}
   - component: {fileID: 7510518077395333807}
   - component: {fileID: 886243327009608492}
-  - component: {fileID: 9113934510227628348}
   - component: {fileID: 7352499073577755643}
+  - component: {fileID: 1856157303880177324}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Resource
@@ -79,21 +79,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &9113934510227628348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1164129049438969375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f94dc3d8ff4746c4a9382cfb685a4625, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ResourceType: 1
-  BustResourceObj: {fileID: 3437016267795738889, guid: 1c769235749a2814dbdd50c6022af4e6,
-    type: 3}
 --- !u!65 &7352499073577755643
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -107,3 +92,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1450186, y: 0.5356346, z: 0.90231717}
   m_Center: {x: 0.037335098, y: 0.26776233, z: 0.03232251}
+--- !u!114 &1856157303880177324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164129049438969375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeaeed2595927de44bbaa564e38e3d27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourceType: 1
+  BustResourceObj: {fileID: 3437016267795738889, guid: 1c769235749a2814dbdd50c6022af4e6,
+    type: 3}
+  HitSounds: []
+  BustSound: {fileID: 8300000, guid: 134c83d6b10fe6945bba6b0cc14be6c1, type: 3}
