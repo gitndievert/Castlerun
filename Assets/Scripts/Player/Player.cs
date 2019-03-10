@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public StatModifier StatsModifier;
+    
     #region BaseStats
     public float Health;
     public float MoveSpeed;
@@ -32,22 +34,26 @@ public class Player : MonoBehaviour
 
     private GameObject _mainHand;
     private GameObject _offHand;
+    private Stats _stat;
 
     private void Awake()
     {
         Inventory = GetComponent<Inventory>();
+        StatsModifier = GetComponent<StatModifier>();
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-        Health = 100f;
+        _stat = StatModifier.CurrentStats;
     }
 
     // Update is called once per frame
     private void Update()
-    {
-        
+    {        
+        Health = _stat.Health;
+        MoveSpeed = _stat.MoveSpeed;
+        BuildSpeed = _stat.BuildSpeed;
     }
 
     private void OnDestroy()

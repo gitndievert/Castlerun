@@ -5,10 +5,17 @@ using UnityEngine;
 public class CastleProp : BaseResource
 {
     public string Name;
+    public StatModifier StatModifier;
 
     protected override void Awake()
     {
         
+    }
+
+    protected override void Start()
+    {
+        //StatModifier = GetPlayer(1).StatsModifier;
+        //When castle is create we need to popoulate the stats on its player
     }
 
     private void Update()
@@ -16,6 +23,8 @@ public class CastleProp : BaseResource
         
 
     }
+
+    
 
     /// <summary>
     /// Level of the Castle (levels 1 to 3)
@@ -25,21 +34,21 @@ public class CastleProp : BaseResource
     
     #region BonusMoveSpeed
     public bool HasBonusMoveSpeed = false;
-    public float BonusMoveSpeed = 1f;
+    protected float _BonusMoveSpeed = 1f;
     #endregion
 
     #region BonusBuildSpeed
     public bool HasBonusBuildSpeed = false;
-    public float BonusBuildSpeed = 1f;
+    protected float _BonusBuildSpeed = 1f;
     #endregion
 
     #region BonusLowerCost
     public bool HasBonusLowerCost = false;
-    public float BonusLowerCost = .5f;
+    protected float BonusLowerCost = .5f;
     #endregion
 
-    public bool HasArchers = false;
-    public bool HasGuards = false;
+    protected bool HasArchers = false;
+    protected bool HasGuards = false;
 
     public Color CastleColorHue { get; private set; }
 
