@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
-{
-    public StatModifier StatsModifier;
+{ 
     
     #region BaseStats
     public float Health;
@@ -30,6 +29,7 @@ public class Player : MonoBehaviour
     public Companion Companion { get; private set; }
     public Inventory Inventory { get; private set; }
     public int ActorNumber { get; internal set; }
+    public StatModifier StatsModifier;
     #endregion
 
     private GameObject _mainHand;
