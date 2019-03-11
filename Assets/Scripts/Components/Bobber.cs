@@ -56,7 +56,7 @@ public class Bobber : MonoBehaviour
 
     private IEnumerator Bob()
     {
-        float transSeconds = 0.3f;
+        float transSeconds = 0.8f;
         //Vector3 pos = transform.position;
         //transform.position = new Vector3(pos.x, pos.y + BobHeight, pos.z);
         yield return new WaitForSeconds(transSeconds);
