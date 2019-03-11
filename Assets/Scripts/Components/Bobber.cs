@@ -35,7 +35,7 @@ public class Bobber : MonoBehaviour
         if (_isBobbing)
         {
             float sinY = Mathf.Sin(Time.time * BobSpeed);
-            //transform.position = new Vector3(transform.position.x, sinY, transform.position.z) * BobHeight;
+            transform.position = new Vector3(transform.position.x, sinY, transform.position.z) * BobHeight;
         }
         if(_isRotating)
         {
