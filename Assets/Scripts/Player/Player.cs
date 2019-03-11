@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
 
     private GameObject _mainHand;
     private GameObject _offHand;
-    private Stats _stat;
+    private Stats _stat;    
 
     private void Awake()
     {
@@ -54,6 +54,45 @@ public class Player : MonoBehaviour
         Health = _stat.Health;
         MoveSpeed = _stat.MoveSpeed;
         BuildSpeed = _stat.BuildSpeed;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (TransformHelper.DistanceLess(hit.transform, transform, Inventory.HARVEST_DISTANCE))
+                {
+                    if (hit.collider != null && hit.transform.tag == "Resource")
+                    {
+                        var resource = hit.transform.GetComponent<IResource>();
+                        int durability = resource.GetDurability();
+                        ResourceType rt = resource.GetResourceType();
+                        switch (rt)
+                        {
+                            case ResourceType.Wood:
+                                resource.SetHit(50);
+                                break;
+                            case ResourceType.Rock:
+                                resource.SetHit(25);
+                                break;
+                            case ResourceType.Metal:
+                                resource.SetHit(10);
+                                break;
+                            case ResourceType.Gems:
+                                resource.SetHit(5);
+                                break;
+                        }
+
+                        //NATE NOTE: Come back
+                        //resource.PlayHitSounds();
+
+                        Debug.Log(hit.transform.gameObject.name);
+                        Debug.Log(durability + " " + rt.ToString());
+                    }
+                }
+            }
+        }
     }
 
     private void OnDestroy()

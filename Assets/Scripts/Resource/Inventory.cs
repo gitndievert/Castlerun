@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    const float HARVEST_DISTANCE = 2.0f;
+    public const float HARVEST_DISTANCE = 2.0f;    
 
     public int WoodCount = 0;
     public int RockCount = 0;
@@ -42,46 +42,7 @@ public class Inventory : MonoBehaviour
         _ui.WoodText.text = WoodCount.ToString();
         _ui.RockText.text = RockCount.ToString();
         _ui.MetalText.text = MetalCount.ToString();
-        _ui.GemsText.text = GemsCount.ToString();
-
-        if (Input.GetMouseButtonDown(0))
-        {            
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);            
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {                
-                if (TransformHelper.DistanceLess(hit.transform, transform, HARVEST_DISTANCE))
-                {
-                    if (hit.collider != null && hit.transform.tag == "Resource")
-                    {
-                        var resource = hit.transform.GetComponent<IResource>();
-                        int durability = resource.GetDurability();
-                        ResourceType rt = resource.GetResourceType();
-                        switch (rt)
-                        {
-                            case ResourceType.Wood:
-                                resource.SetHit(50);
-                                break;
-                            case ResourceType.Rock:
-                                resource.SetHit(25);
-                                break;
-                            case ResourceType.Metal:
-                                resource.SetHit(10);
-                                break;
-                            case ResourceType.Gems:
-                                resource.SetHit(5);
-                                break;
-                        }
-
-                        //NATE NOTE: Come back
-                        //resource.PlayHitSounds();
-
-                        Debug.Log(hit.transform.gameObject.name);
-                        Debug.Log(durability + " " + rt.ToString());
-                    }
-                }
-            }
-        }
+        _ui.GemsText.text = GemsCount.ToString();        
     }
        
     public void ResetAll()
