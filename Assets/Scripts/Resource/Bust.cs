@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bust : BasePrefab
 {
     /// <summary>
-    /// Two minute life time
+    /// Two minute life time!
     /// </summary>
     const float LIFE_TIME = 120f;
+
+    public bool HasMagnet = false;
 
     private int _amount;
     private ResourceType _rt;
@@ -18,6 +17,19 @@ public class Bust : BasePrefab
     protected override void Start()
     {
         base.Start();
+    }
+
+    private void FixedUpdate()
+    {
+        float overlapRadius = 3f;
+        float force = -30f;
+        foreach (var col in Physics.OverlapSphere(transform.position, overlapRadius))
+        {
+            if(col.transform.tag == "Player")
+            {
+                transform.GetComponent<Rigidbody>().AddExplosionForce(force, col.transform.position, 5f, 0, ForceMode.Force);
+            }
+        }    
     }
 
     public void SetValues(ResourceType type, int amount, AudioClip bustsound)
@@ -36,7 +48,7 @@ public class Bust : BasePrefab
     {
         if(_bustObj != null)
         {
-            _bustObj.SetActive(true);
+            _bustObj.SetActive(true);           
             Destroy(gameObject, LIFE_TIME);
         }
     }

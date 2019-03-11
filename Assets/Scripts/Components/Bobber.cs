@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Bobber : MonoBehaviour
 {
+    [Range(0,3f)]
     public float BobHeight = 0.5f;
+    [Range(1f, 30f)]
     public float RotateSpeed = 1f;
+    [Range(0, 5f)]
     public float BobSpeed = 1f;
+    [Range(0, 5f)]
+    public float BumpForce = 2f;
 
     public bool AutoStartBob = false;
     public bool Rotate = false;
@@ -14,6 +19,7 @@ public class Bobber : MonoBehaviour
     private Rigidbody _rb;
     private bool _isBobbing;
     private bool _isRotating;
+    private Vector3 _lockPos;
 
     private void Awake()
     {
@@ -31,16 +37,17 @@ public class Bobber : MonoBehaviour
     }
 
     private void Update()
-    {
+    {               
         if (_isBobbing)
         {
-            float sinY = Mathf.Sin(Time.time * BobSpeed);
-            transform.position = new Vector3(transform.position.x, sinY, transform.position.z) * BobHeight;
+            if (_isRotating)
+            {
+                transform.Rotate(Vector3.up, Time.deltaTime * RotateSpeed);
+            }
+            float sinY = Mathf.Sin(Time.time * BobSpeed) * BobHeight;            
+            transform.position = new Vector3(_lockPos.x, sinY + _lockPos.y, _lockPos.z);
         }
-        if(_isRotating)
-        {
-            transform.Rotate(Vector3.up, Time.deltaTime * RotateSpeed);
-        }
+        
     }
 
     public void StartBob(bool rotate = false)
@@ -57,11 +64,12 @@ public class Bobber : MonoBehaviour
     private IEnumerator Bob()
     {
         float transSeconds = 0.8f;
-        //Vector3 pos = transform.position;
-        //transform.position = new Vector3(pos.x, pos.y + BobHeight, pos.z);
+        _rb.velocity = Vector3.forward * BumpForce;
         yield return new WaitForSeconds(transSeconds);
-        _isBobbing = true;
+        _lockPos = transform.position;        
         yield return new WaitForSeconds(transSeconds);
+        _isBobbing = true;        
     }
+
 
 }

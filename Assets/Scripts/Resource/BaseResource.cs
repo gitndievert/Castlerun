@@ -8,12 +8,7 @@ public abstract class BaseResource : BasePrefab, IResource
     public ResourceType ResourceType;
     public GameObject BustResourceObj;
     public AudioClip[] HitSounds;
-    public AudioClip BustSound;
-
-    public Player GetPlayer(int number)
-    {
-        return GameManager.Instance.GetPlayer(number);
-    }
+    public AudioClip BustSound;    
 
     public int GetDurability()
     {
