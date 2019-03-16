@@ -34,12 +34,14 @@ public class Player : MonoBehaviour
 
     private GameObject _mainHand;
     private GameObject _offHand;
-    private Stats _stat;    
+    private Stats _stat;
+    private Animator _anim;
 
     private void Awake()
     {
         Inventory = GetComponent<Inventory>();
         StatsModifier = GetComponent<StatModifier>();
+        _anim = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -55,8 +57,9 @@ public class Player : MonoBehaviour
         MoveSpeed = _stat.MoveSpeed;
         BuildSpeed = _stat.BuildSpeed;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))            
         {
+            _anim.SetBool("Swing", true);
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
@@ -92,6 +95,10 @@ public class Player : MonoBehaviour
                     }
                 }
             }
+        }
+        else
+        {
+            _anim.SetBool("Swing", false);
         }
     }
 

@@ -46,6 +46,7 @@ public class MovementInput : MonoBehaviour
         _moveVector = new Vector3(0, _verticalVelocity, 0);
         CharacterController.Move(_moveVector);
                 
+        //Legacy
         //if there is no root motion available
         /*Vector3 newPosition = transform.position;
         newPosition.z += _anim.GetFloat("InputMagnitude") * Time.deltaTime;
@@ -81,23 +82,15 @@ public class MovementInput : MonoBehaviour
         InputX = Input.GetAxis("Horizontal");
         InputZ = Input.GetAxis("Vertical");
 
+        var vecout = new Vector2(InputZ, InputX);        
+
         _anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2f);
         _anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);
 
         //Calc the Input Magnitude
         Speed = new Vector2(InputX, InputZ).sqrMagnitude * 5;
 
-        //Physically Move Player
-        if(Speed > AllowPlayerRotation)
-        {
-            _anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
-            PlayerMoveAndRotation();
-        }
-        else if(Speed < AllowPlayerRotation)
-        {
-            _anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
-        }
-
+        _anim.SetFloat("Speed", Speed, 0.0f, Time.deltaTime);
     }
 
 
