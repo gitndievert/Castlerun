@@ -8,7 +8,8 @@ public abstract class BaseResource : BasePrefab, IResource
     public ResourceType ResourceType;
     public GameObject BustResourceObj;
     public AudioClip[] HitSounds;
-    public AudioClip BustSound;    
+    public AudioClip BustSound;
+    public int Value = 10;
 
     public int GetDurability()
     {
@@ -32,7 +33,7 @@ public abstract class BaseResource : BasePrefab, IResource
     }
 
     protected int Durability = 100;
-    protected int Value = 10;
+    
 
     protected override void Awake()
     {

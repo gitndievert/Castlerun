@@ -6,8 +6,8 @@ public class Bust : BasePrefab
     /// Two minute life time!
     /// </summary>
     const float LIFE_TIME = 120f;
-
-    public bool HasMagnet = false;
+       
+    public bool GravityPull = false;
 
     private int _amount;
     private ResourceType _rt;
@@ -21,15 +21,18 @@ public class Bust : BasePrefab
 
     private void FixedUpdate()
     {
-        float overlapRadius = 3f;
-        float force = -30f;
-        foreach (var col in Physics.OverlapSphere(transform.position, overlapRadius))
+        if (GravityPull)
         {
-            if(col.transform.tag == "Player")
+            float overlapRadius = 3f;
+            float force = -30f;
+            foreach (var col in Physics.OverlapSphere(transform.position, overlapRadius))
             {
-                transform.GetComponent<Rigidbody>().AddExplosionForce(force, col.transform.position, 5f, 0, ForceMode.Force);
+                if (col.transform.tag == "Player")
+                {
+                    transform.GetComponent<Rigidbody>().AddExplosionForce(force, col.transform.position, 5f, 0, ForceMode.Force);
+                }
             }
-        }    
+        }
     }
 
     public void SetValues(ResourceType type, int amount, AudioClip bustsound)
@@ -40,8 +43,7 @@ public class Bust : BasePrefab
         _bustObj = transform.Find(type.ToString()).gameObject;
         _bustSound = bustsound;
     }
-
-
+    
     //NATE NOTE
     //Maybe setup and animation corroutine here
     public void Spawn()        

@@ -1,7 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * 
+ * Player networking will be account based, storing castles, wins etc.
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * */
 public class Player : MonoBehaviour
 { 
     
