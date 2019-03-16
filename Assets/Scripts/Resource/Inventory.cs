@@ -22,7 +22,7 @@ public class Inventory : MonoBehaviour
     public bool IsMetalFull { get { return MetalCount >= MaxMetal; } }
     public bool IsGemsFull { get { return GemsCount >= MaxGems; } }
 
-    private InventoryUI _ui;
+    private InventoryUI _ui;    
 
     private void Awake()
     {
@@ -33,8 +33,17 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         _ui = UIManager.Instance.InventoryUIPanel;
-        ResetAll();        
-    }    
+        ResetAll();
+        //To Trigger Events
+        //EventManager.StartListening("Resource", ResourceMessage);
+        //EventManager.TriggerEvent("Resource");
+        //public void ResourceMessage(){}
+    }
+
+    private void OnDestroy()
+    {
+        //EventManager.StopListening("Resource", ResourceMessage);
+    }
 
     // Update is called once per frame
     void Update()
@@ -55,35 +64,57 @@ public class Inventory : MonoBehaviour
        
         
     public void Set(ResourceType type, int amount = 0)
-    {
-        switch(type)
+    {        
+        switch (type)
         {
             case ResourceType.Wood:
-                if((amount + WoodCount) <= MaxWood)
+                if ((amount + WoodCount) <= MaxWood)
+                {
                     WoodCount += amount;
-                //else
-                    //Trigger that message event back to user
+                    _ui.Messages.text = $"You gathered {amount} wood";                    
+                }
+                else
+                {
+                    _ui.Messages.text = "You cannot store anymore wood";
+                }                
                 break;
             case ResourceType.Rock:
                 if ((amount + RockCount) <= MaxRock)
+                {
                     RockCount += amount;
-                //else
-                    //Trigger that message event back to user
+                    _ui.Messages.text = $"You gathered {amount} rock";
+                }
+                else
+                {
+                    _ui.Messages.text = "You cannot store anymore rock";
+                }                
                 break;
             case ResourceType.Metal:
                 if ((amount + MetalCount) <= MaxMetal)
+                {
                     MetalCount += amount;
-                //else
-                    //Trigger that message event back to user
+                    _ui.Messages.text = $"You gathered {amount} metal";
+                }
+                else
+                {
+                    _ui.Messages.text = "You cannot store anymore metal";
+                }                
                 break;
             case ResourceType.Gems:
                 if ((amount + GemsCount) <= MaxGems)
+                {
                     GemsCount += amount;
-                //else
-                    //Trigger that message event back to user
+                    _ui.Messages.text = $"You gathered {amount} gems";
+                }
+                else
+                {
+                    _ui.Messages.text = "You cannot store anymore gems";
+                }                
                 break;
-        }   
-    }
+        }
+     
+    }   
 
+   
    
 }
