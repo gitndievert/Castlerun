@@ -8,7 +8,12 @@ public partial class UIManager : PSingle<UIManager>
     /// <summary>
     /// Inventory Panel
     /// </summary>
-    public InventoryUI InventoryUIPanel;       
+    public InventoryUI InventoryUIPanel;
+
+    /// <summary>
+    /// Player Panel
+    /// </summary>
+    public PlayerUI PlayerUIPanel;
 
     protected override void PAwake()
     {

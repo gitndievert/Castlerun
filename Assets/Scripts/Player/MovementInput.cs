@@ -45,6 +45,8 @@ public class MovementInput : MonoBehaviour
         
         _moveVector = new Vector3(0, _verticalVelocity, 0);
         CharacterController.Move(_moveVector);
+
+        if(Input.GetKeyDown(KeyCode.Space)) Jump();        
                 
         //Legacy
         //if there is no root motion available
@@ -91,6 +93,11 @@ public class MovementInput : MonoBehaviour
         Speed = new Vector2(InputX, InputZ).sqrMagnitude * 5;
 
         _anim.SetFloat("Speed", Speed, 0.0f, Time.deltaTime);
+    }
+
+    public void Jump()
+    {
+        _anim.Play("Jump");
     }
 
 

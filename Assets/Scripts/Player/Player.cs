@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     private GameObject _offHand;
     private Stats _stat;
     private Animator _anim;
+    private bool _swinging = false;
 
     private void Awake()
     {
@@ -47,7 +48,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        _stat = StatModifier.CurrentStats;
+        _stat = StatModifier.CurrentStats;        
     }
 
     // Update is called once per frame
@@ -55,51 +56,64 @@ public class Player : MonoBehaviour
     {        
         Health = _stat.Health;
         MoveSpeed = _stat.MoveSpeed;
-        BuildSpeed = _stat.BuildSpeed;
+        BuildSpeed = _stat.BuildSpeed;        
+    }
 
-        if (Input.GetMouseButtonDown(0))            
+    private void FixedUpdate()
+    {
+        if (Input.GetMouseButton(0))
+        {            
+            if (!_swinging)
+            {             
+                _swinging = true;
+                _anim.SetBool("Swing", true);
+            }
+
+        }
+    }
+
+    public void Swing()
+    {        
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            _anim.SetBool("Swing", true);
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (TransformHelper.DistanceLess(hit.transform, transform, Inventory.HARVEST_DISTANCE))
             {
-                if (TransformHelper.DistanceLess(hit.transform, transform, Inventory.HARVEST_DISTANCE))
+                if (hit.collider != null && hit.transform.tag == "Resource")
                 {
-                    if (hit.collider != null && hit.transform.tag == "Resource")
+                    var resource = hit.transform.GetComponent<IResource>();
+                    int durability = resource.GetDurability();
+                    ResourceType rt = resource.GetResourceType();
+                    switch (rt)
                     {
-                        var resource = hit.transform.GetComponent<IResource>();
-                        int durability = resource.GetDurability();
-                        ResourceType rt = resource.GetResourceType();
-                        switch (rt)
-                        {
-                            case ResourceType.Wood:
-                                resource.SetHit(50);
-                                break;
-                            case ResourceType.Rock:
-                                resource.SetHit(25);
-                                break;
-                            case ResourceType.Metal:
-                                resource.SetHit(10);
-                                break;
-                            case ResourceType.Gems:
-                                resource.SetHit(5);
-                                break;
-                        }
-
-                        //NATE NOTE: Come back
-                        //resource.PlayHitSounds();
-
-                        Debug.Log(hit.transform.gameObject.name);
-                        Debug.Log(durability + " " + rt.ToString());
+                        case ResourceType.Wood:
+                            resource.SetHit(50);
+                            break;
+                        case ResourceType.Rock:
+                            resource.SetHit(25);
+                            break;
+                        case ResourceType.Metal:
+                            resource.SetHit(10);
+                            break;
+                        case ResourceType.Gems:
+                            resource.SetHit(5);
+                            break;
                     }
+
+                    //NATE NOTE: Come back
+                    //resource.PlayHitSounds();
+                                       
+                    Debug.Log(durability + " " + rt.ToString());
                 }
             }
         }
-        else
-        {
-            _anim.SetBool("Swing", false);
-        }
+    }
+    
+    public void SwingStop()
+    {
+        _swinging = false;
+        _anim.SetBool("Swing", false);
     }
 
     private void OnDestroy()

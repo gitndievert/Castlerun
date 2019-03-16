@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8d72335e720b0584d8d3d08d012ba758
+guid: 0fa848f05b012e141867f4729c7bccff
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -57,7 +57,7 @@ ModelImporter:
     400048: RigSpine1
     400050: RigSpine2
     400052: RigSpine3
-    7400000: Standing Melee Attack Horizontal
+    7400000: mixamo.com
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
@@ -75,7 +75,7 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
       rotation in copied configuration does not match rotation in animation file:\n\t'RigSpine3'
-      : rotation error = 5.895610 deg\n\t'RigNeck' : rotation error = 3.214660 deg\n"
+      : rotation error = 7.658089 deg\n\t'RigNeck' : rotation error = 4.171592 deg\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'mixamo.com' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar to
@@ -93,49 +93,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Standing Melee Attack Horizontal
-      takeName: mixamo.com
-      firstFrame: 0
-      lastFrame: 42
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events:
-      - time: 0.92111367
-        functionName: SwingStop
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.4211663
-        functionName: Swing
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []

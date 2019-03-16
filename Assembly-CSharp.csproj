@@ -60,25 +60,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\_Assets\BuildSystem\Example\Scripts\ExternalCalls.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\Demo\MaterialSwitcher.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\Demo\OutlineAnimation.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\Demo\Rotate.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\Demo\Toggle.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\LinkedSet.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\Outline.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\OutlineEffect\OutlineEffect.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\Data\BuildItem.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\Data\BuildItemContainer.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\Helpers\ObjectPreview.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\Helpers\PivotHelper.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\ObjectPlacer.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\ObjectRemover.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\ObjectSelector.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\UI\BuilderObjectUI.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\UI\BuilderUI.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\Scripts\Building\UI\IItemSelectionUI.cs" />
-    <Compile Include="Assets\_Assets\BuildSystem\Scripts\PlayerController.cs" />
     <Compile Include="Assets\_Assets\Characters\Knight\scripts\rotator.cs" />
     <Compile Include="Assets\_Assets\SimpleCumulus\Demo\Scripts\Player\FPSWalkerEnhanced.cs" />
     <Compile Include="Assets\_Assets\SimpleCumulus\Demo\Scripts\Player\SmoothMouseLook.cs" />
@@ -126,6 +107,7 @@
     <Compile Include="Assets\Scripts\Resource\Resource.cs" />
     <Compile Include="Assets\Scripts\Settings\Settings.cs" />
     <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerUI.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
@@ -303,7 +285,6 @@
     <None Include="Assets\Photon\PhotonUnityNetworking\link.xml" />
     <None Include="Assets\UnityAssets\Standard Assets\Environment\Water (Basic)\DO_NOT_WORK_IN_VR.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\NFAA.shader" />
-    <None Include="Assets\_Assets\BuildSystem\OutlineEffect\Resources\OutlineShader.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\TiltShiftHdrLensBlur.shader" />
     <None Include="Assets\_Assets\Models\A_piece_of_nature\Readme.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\VignetteShader.shader" />
@@ -313,7 +294,6 @@
     <None Include="Assets\_Assets\UI\Simple Health Bar\README.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\MotionBlur.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
-    <None Include="Assets\_Assets\BuildSystem\OutlineEffect\Resources\OutlineBufferShader.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\SSAA.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\RadialBlur.shader" />
@@ -337,7 +317,6 @@
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Vehicles\Car\Shaders\ReflectiveDiffuseSpec.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Environment\Water\DO_NOT_WORK_IN_VR.txt" />
-    <None Include="Assets\_Assets\BuildSystem\readme.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBlur.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\SSAOShader.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
