@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 /**
  * 
- * Player networking will be account based, storing castles, wins etc.
- * 
- * 
- * 
- * 
- * 
+ * Player networking will be account based, storing castles, wins etc. 
  * 
  * */
 public class Player : MonoBehaviour
@@ -34,30 +29,38 @@ public class Player : MonoBehaviour
         }
     }
 
+    public int PlayerNumber;
+    public CastleType CastleType;
+
     #region Player Components
     public Companion Companion { get; private set; }
     public Inventory Inventory { get; private set; }
     public int ActorNumber { get; internal set; }
     public StatModifier StatsModifier;
+    public Castle Castle { get; private set; }
     #endregion
 
     private GameObject _mainHand;
     private GameObject _offHand;
     private Stats _stat;
     private Animator _anim;
-    private bool _swinging = false;
+    private bool _swinging = false;  
 
     private void Awake()
     {
         Inventory = GetComponent<Inventory>();
         StatsModifier = GetComponent<StatModifier>();
         _anim = GetComponent<Animator>();
+        Castle = null;
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-        _stat = StatModifier.CurrentStats;        
+        _stat = StatModifier.CurrentStats;
+
+        //Multiplayer will change this later on
+        PlayerNumber = 1;
     }
 
     // Update is called once per frame
@@ -79,6 +82,13 @@ public class Player : MonoBehaviour
             }
 
         }
+    }
+
+    private void Init()
+    {
+        //Initialize and check everything on start of player
+
+
     }
 
     public void Swing()
@@ -123,6 +133,12 @@ public class Player : MonoBehaviour
     {
         _swinging = false;
         _anim.SetBool("Swing", false);
+    }
+
+    public void SetCastle(CastleType type, int level)
+    {        
+        Castle = CastleManager.Instance.GetCastleByType(type, level);
+        CastleType = type;        
     }
 
     private void OnDestroy()
