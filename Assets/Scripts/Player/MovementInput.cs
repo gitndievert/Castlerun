@@ -30,7 +30,7 @@ public class MovementInput : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         InputMagnitude();
         IsGrounded = CharacterController.isGrounded;
@@ -56,7 +56,7 @@ public class MovementInput : MonoBehaviour
 
     }  
 
-    private void PlayerMoveAndRotation()
+    /*private void PlayerMoveAndRotation()
     {
         InputX = Input.GetAxis("Horizontal");
         InputZ = Input.GetAxis("Vertical");
@@ -76,7 +76,7 @@ public class MovementInput : MonoBehaviour
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(DesiredMoveDirection), DesiredRotationSpeed);
         }
-    }
+    }*/
 
     private void InputMagnitude()
     {

@@ -13,6 +13,11 @@ public class CastleManager : PSingle<CastleManager>
     public List<Castle> CastleList;
     public Transform[] SpawnPads;
 
+    public Castle Player1Castle = null;
+    public Castle Player2Castle = null;
+    public Castle Player3Castle = null;
+    public Castle Player4Castle = null;
+
     protected override void PAwake()
     {
         if (CastleList != null && CastleList.Count == 0)
@@ -69,11 +74,45 @@ public class CastleManager : PSingle<CastleManager>
         return null;
     }
 
-    public void SpawnCastle(Player player, int castleLevel)
+    public Castle GetCastleByType(CastleType type)
+    {
+        foreach (var castle in CastleList)
+        {
+            if (castle.CastleType == type)
+                return castle;
+        }
+
+        return null;
+    }
+
+    public void SpawnCastle(Castle castle, Player player)
     {
         var stats = player.StatsModifier;
-        var spawnpad = GetSpawnPad(player.PlayerNumber);
+        var spawnPad = GetSpawnPad(player.PlayerNumber);
+        Bounds padBounds = spawnPad.GetComponent<MeshFilter>().mesh.bounds;
 
+        var castleObj = Instantiate(castle.gameObject, spawnPad, false);
+
+        if (player.PlayerNumber == 1)
+            Player1Castle = castle;
+        if (player.PlayerNumber == 2)
+            Player2Castle = castle;
+        if (player.PlayerNumber == 3)
+            Player3Castle = castle;
+        if (player.PlayerNumber == 4)
+            Player4Castle = castle;
+
+        //Align castle to ground
+        //(transform.gameObject.transform.localScale.y/2)
+        castleObj.transform.position = new Vector3(castleObj.transform.position.x,
+            spawnPad.position.y + 3f, castleObj.transform.position.z);
+
+        /*
+         * Transform car;
+            Bounds carBounds = car.GetComponent<MeshFilter>().mesh.bounds;
+            Vector3 whereYouWantMe;
+            Vector3 offset = car.transform.position - car.transform.TransformPoint(carBounds.center);
+            car.transform.position = whereYouWantMe + offset;*/
 
 
     }

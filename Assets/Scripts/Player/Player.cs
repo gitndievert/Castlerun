@@ -30,7 +30,9 @@ public class Player : MonoBehaviour
     }
 
     public int PlayerNumber;
-    public CastleType CastleType;
+
+    [Tooltip("For Testing Changes on Castles")]
+    public CastleType CastleType = CastleType.None;
 
     #region Player Components
     public Companion Companion { get; private set; }
@@ -58,9 +60,24 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _stat = StatModifier.CurrentStats;
+        var castlemanger = CastleManager.Instance;
 
         //Multiplayer will change this later on
         PlayerNumber = 1;
+
+        //Set the castle Properties
+        if (Castle == null)
+        {
+            //var castleType = CastleType == CastleType.None ? CastleType.Castle3 : CastleType;
+            
+            Castle = castlemanger.GetCastleByType(CastleType);
+            Castle.Level = 2;
+            Castle.Experience = 4050f;
+        }
+        
+        CastleManager.Instance.SpawnCastle(Castle, this);
+
+
     }
 
     // Update is called once per frame
@@ -135,12 +152,7 @@ public class Player : MonoBehaviour
         _anim.SetBool("Swing", false);
     }
 
-    public void SetCastle(CastleType type, int level)
-    {        
-        Castle = CastleManager.Instance.GetCastleByType(type, level);
-        CastleType = type;        
-    }
-
+    
     private void OnDestroy()
     {
         

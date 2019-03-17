@@ -1,5 +1,6 @@
 ﻿public enum CastleType
 {
+    None,
     Default,
     Castle1,
     Castle2,
