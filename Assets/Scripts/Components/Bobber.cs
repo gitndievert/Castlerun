@@ -64,11 +64,8 @@ public class Bobber : MonoBehaviour
     private IEnumerator Bob()
     {        
         _rb.velocity = Vector3.forward * BumpForce;
-        yield return new WaitForSeconds(0.2f);
-        _rb.isKinematic = true;
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.5f);
         _lockPos = transform.position;        
-        yield return new WaitForSeconds(0.8f);
         _isBobbing = true;        
     }
 

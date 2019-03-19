@@ -53,7 +53,7 @@ public abstract class BaseResource : BasePrefab, IResource
             var bust = Instantiate(BustResourceObj, new Vector3(transform.position.x,
                 transform.position.y + 2f, transform.position.z), Quaternion.identity);
             //Sounds
-            //Effects
+            //Effects                   
             var bustValues = bust.GetComponent<Bust>();
             bustValues.SetValues(ResourceType, Value, BustSound);
             bustValues.Spawn();

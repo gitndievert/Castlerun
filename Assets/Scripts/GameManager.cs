@@ -36,6 +36,6 @@ public class GameManager : PSingle<GameManager>
 
     protected override void PDestroy()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

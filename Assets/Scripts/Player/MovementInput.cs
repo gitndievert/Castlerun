@@ -33,7 +33,7 @@ public class MovementInput : MonoBehaviour
     void FixedUpdate()
     {
         InputMagnitude();
-        IsGrounded = CharacterController.isGrounded;
+        /*IsGrounded = CharacterController.isGrounded;
         if(IsGrounded)
         {
             _verticalVelocity -= 0;
@@ -41,7 +41,7 @@ public class MovementInput : MonoBehaviour
         else
         {
             _verticalVelocity -= 2;
-        }
+        }*/
         
         _moveVector = new Vector3(0, _verticalVelocity, 0);
         CharacterController.Move(_moveVector);

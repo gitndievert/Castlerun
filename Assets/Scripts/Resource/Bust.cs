@@ -9,8 +9,10 @@ public class Bust : BasePrefab
     const float LIFE_TIME = 120f;
        
     public bool GravityPull = false;
-    public TextMeshPro ResouceText;
-    public TextMeshPro ResouceAmt;
+
+    //Maybe for future
+    //public TextMeshPro ResouceText;
+    //public TextMeshPro ResouceAmt;
 
     private int _amount;
     private ResourceType _rt;
@@ -24,24 +26,20 @@ public class Bust : BasePrefab
         base.Start();              
     }
 
-    private void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
-    {   
-        float overlapRadius = 3f;        
-        foreach (var col in Physics.OverlapSphere(transform.position, overlapRadius))
+    {
+        if (GravityPull)
         {
-            if (col.transform.tag == "Player")
-            {                
-                if (GravityPull) {
+            float overlapRadius = 3f;
+            foreach (var col in Physics.OverlapSphere(transform.position, overlapRadius))
+            {
+                if (col.transform.tag == "Player")
+                {
                     float force = -30f;
                     transform.GetComponent<Rigidbody>().AddExplosionForce(force, col.transform.position, 5f, 0, ForceMode.Force);
                 }
             }
-        }        
+        }
     }
 
     public void SetValues(ResourceType type, int amount, AudioClip bustsound)
@@ -51,8 +49,8 @@ public class Bust : BasePrefab
         _amount = amount;
         _bustObj = transform.Find(type.ToString()).gameObject;
         _bustSound = bustsound;
-        ResouceText.text = type.ToString();
-        ResouceAmt.text = amount.ToString();
+        //ResouceText.text = type.ToString();
+        //ResouceAmt.text = amount.ToString();
     }
     
     //NATE NOTE
@@ -61,13 +59,12 @@ public class Bust : BasePrefab
     {
         if(_bustObj != null)
         {
-            _bustObj.SetActive(true);           
+            _bustObj.SetActive(true);            
             Destroy(gameObject, LIFE_TIME);
         }
     }
 
-
-    private void OnCollisionEnter(Collision col)
+    private void OnTriggerEnter(Collider col)
     {
         if (col.transform.tag != "Player") return;
         var player = col.transform.GetComponent<Player>();
@@ -78,5 +75,6 @@ public class Bust : BasePrefab
             SoundManager.PlaySound(_bustSound);
         }
     }
+       
 }
 
