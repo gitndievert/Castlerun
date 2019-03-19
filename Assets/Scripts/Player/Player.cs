@@ -37,29 +37,26 @@ public class Player : MonoBehaviour
     #region Player Components
     public Companion Companion { get; private set; }
     public Inventory Inventory { get; private set; }
-    public int ActorNumber { get; internal set; }
-    public StatModifier StatsModifier;
+    public int ActorNumber { get; internal set; }    
     public Castle Castle { get; private set; }
     #endregion
 
     private GameObject _mainHand;
-    private GameObject _offHand;
-    private Stats _stat;
+    private GameObject _offHand;    
     private Animator _anim;
     private bool _swinging = false;  
 
     private void Awake()
     {
         Inventory = GetComponent<Inventory>();
-        StatsModifier = GetComponent<StatModifier>();
+        
         _anim = GetComponent<Animator>();
         Castle = null;
     }
 
     // Start is called before the first frame update
     private void Start()
-    {
-        _stat = StatModifier.CurrentStats;
+    {        
         var castlemanger = CastleManager.Instance;
 
         //Multiplayer will change this later on
@@ -83,9 +80,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {        
-        Health = _stat.Health;
-        MoveSpeed = _stat.MoveSpeed;
-        BuildSpeed = _stat.BuildSpeed;        
+        //Health = _stat.Health;
+        //MoveSpeed = _stat.MoveSpeed;
+        //BuildSpeed = _stat.BuildSpeed;        
     }
 
     private void FixedUpdate()

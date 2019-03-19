@@ -87,7 +87,7 @@ public class CastleManager : PSingle<CastleManager>
 
     public void SpawnCastle(Castle castle, Player player)
     {
-        var stats = player.StatsModifier;
+        //var stats = player.StatsModifier;
         var spawnPad = GetSpawnPad(player.PlayerNumber);
         Bounds padBounds = spawnPad.GetComponent<MeshFilter>().mesh.bounds;
 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using TMPro;
 
 public class Bust : BasePrefab
 {
@@ -8,31 +9,39 @@ public class Bust : BasePrefab
     const float LIFE_TIME = 120f;
        
     public bool GravityPull = false;
+    public TextMeshPro ResouceText;
+    public TextMeshPro ResouceAmt;
 
     private int _amount;
     private ResourceType _rt;
     private GameObject _bustObj;
     private AudioClip _bustSound;
+    private Transform _backplane;
+
 
     protected override void Start()
     {
-        base.Start();
+        base.Start();              
+    }
+
+    private void Update()
+    {
+        
     }
 
     private void FixedUpdate()
-    {
-        if (GravityPull)
+    {   
+        float overlapRadius = 3f;        
+        foreach (var col in Physics.OverlapSphere(transform.position, overlapRadius))
         {
-            float overlapRadius = 3f;
-            float force = -30f;
-            foreach (var col in Physics.OverlapSphere(transform.position, overlapRadius))
-            {
-                if (col.transform.tag == "Player")
-                {
+            if (col.transform.tag == "Player")
+            {                
+                if (GravityPull) {
+                    float force = -30f;
                     transform.GetComponent<Rigidbody>().AddExplosionForce(force, col.transform.position, 5f, 0, ForceMode.Force);
                 }
             }
-        }
+        }        
     }
 
     public void SetValues(ResourceType type, int amount, AudioClip bustsound)
@@ -42,6 +51,8 @@ public class Bust : BasePrefab
         _amount = amount;
         _bustObj = transform.Find(type.ToString()).gameObject;
         _bustSound = bustsound;
+        ResouceText.text = type.ToString();
+        ResouceAmt.text = amount.ToString();
     }
     
     //NATE NOTE

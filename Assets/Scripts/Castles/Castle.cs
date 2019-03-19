@@ -14,15 +14,14 @@ public class Castle : BasePrefab
     public Color CastleColorHue;
 
     public float Experience;
+    public CastleStats CastleStats;
 
     public float[] ExpLevels = { 25000f, 80000f, MaxExp };
 
     //List of NPC the castle can offer
-    //public Npc[] Npcs;
+    //public Npc[] Npcs;   
 
-    public StatModifier StatsModifier;
-
-    private CastleManager _manager;
+    private CastleManager _manager;    
 
 
     //Castles will have many passive properties
@@ -30,7 +29,7 @@ public class Castle : BasePrefab
     //Need something for icons
     //Need something for ambient noise
     //Need Health
-    
+
     protected override void Awake()
     {
         base.Awake();
