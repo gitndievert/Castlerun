@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 /**
  * 
@@ -7,13 +8,9 @@ using UnityEngine;
  * 
  * */
 public class Player : MonoBehaviour
-{ 
-    
-    #region BaseStats
-    public float Health;
-    public float MoveSpeed;
-    public float BuildSpeed;
-    #endregion
+{
+    [SerializeField]
+    public PlayerStats PlayerStats;
 
     private string _playerName;
 
@@ -38,29 +35,38 @@ public class Player : MonoBehaviour
     public Companion Companion { get; private set; }
     public Inventory Inventory { get; private set; }
     public int ActorNumber { get; internal set; }    
-    public Castle Castle { get; private set; }
+    public Castle Castle { get; private set; }    
     #endregion
 
     private GameObject _mainHand;
     private GameObject _offHand;    
     private Animator _anim;
-    private bool _swinging = false;  
+    private bool _swinging = false;
+    private StatsManager _stat;
+    private PlayerUI _playerUI;
+
 
     private void Awake()
     {
-        Inventory = GetComponent<Inventory>();
-        
+        Inventory = GetComponent<Inventory>();        
         _anim = GetComponent<Animator>();
-        Castle = null;
+        _stat = GetComponent<StatsManager>();
+        _playerUI = UIManager.Instance.PlayerUIPanel;
+        Castle = null;        
     }
 
     // Start is called before the first frame update
     private void Start()
-    {        
+    {
+        PlayerStats = StatsManager.Player;
+
         var castlemanger = CastleManager.Instance;
 
         //Multiplayer will change this later on
         PlayerNumber = 1;
+                
+        //Set Nane
+        _playerUI.PlayerName.text = "Krunchy";
 
         //Set the castle Properties
         if (Castle == null)
@@ -74,15 +80,12 @@ public class Player : MonoBehaviour
         
         CastleManager.Instance.SpawnCastle(Castle, this);
 
-
     }
 
     // Update is called once per frame
     private void Update()
     {        
-        //Health = _stat.Health;
-        //MoveSpeed = _stat.MoveSpeed;
-        //BuildSpeed = _stat.BuildSpeed;        
+    
     }
 
     private void FixedUpdate()
@@ -141,7 +144,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
-    }
+    }        
     
     public void SwingStop()
     {
@@ -155,6 +158,9 @@ public class Player : MonoBehaviour
         
     }
 
-
+    private void OnCollisionEnter(Collision col)
+    {
+        
+    }
 
 }

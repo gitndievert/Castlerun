@@ -7,7 +7,7 @@ public class StatsManager : MonoBehaviour
     public static readonly PlayerStats Player = new PlayerStats();    
     public static Stack<string> BonusList = new Stack<string>();
         
-    private void Start()
+    private void Awake()
     {
         Initialize();
     }
@@ -24,7 +24,7 @@ public class StatsManager : MonoBehaviour
         if (stats.Health != 0)
         {
             Player.Health += stats.Health;
-            BonusList.Push($"+{stats.Health} to player health");
+            BonusList.Push($"+{stats.Health} to player health");            
         }
         if (stats.MoveSpeed != 0)
         {
@@ -60,6 +60,16 @@ public class StatsManager : MonoBehaviour
             BonusList.Push($"Castle Bonus - Guards");
 
         return Player;
+    }
+
+    public void Damage(float amount)
+    {
+
+    }
+
+    public void Heal(float amount)
+    {
+
     }
              
 }
