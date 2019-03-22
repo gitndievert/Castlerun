@@ -7,25 +7,26 @@ public class PlacementController : PSingle<PlacementController>
 {
     const int GROUND_LAYER = 8;
 
-    public GameObject placeableObjectPrefab;
-    
+    public GameObject placeableObjectPrefab;    
 
     public bool BuildMode = false;
-    public float RotateAmount = 45f;
-
-    [SerializeField]
-    private readonly KeyCode newObjectHotkey = KeyBindings.BuildKey1;
+    public float RotateAmount = 45f;    
 
     [SerializeField]
     private MeshRenderer _placeObjectMeshRend;
 
     private GameObject _currObj;
-    private float mouseWheelRotation;    
+    private float mouseWheelRotation;
+    private bool _triggerBuild = false;
 
+    /// <summary>
+    /// Object to parent on for player 1
+    /// </summary>
+    private Transform _player1Builds;
 
     protected override void PAwake()
-    {
-        LoadObject(placeableObjectPrefab);
+    {        
+        _player1Builds = GameObject.Find("Player_1_Builds").transform;
     }
 
     protected override void PDestroy()
@@ -35,14 +36,12 @@ public class PlacementController : PSingle<PlacementController>
 
     public void LoadObject(GameObject obj)
     {
-        if (placeableObjectPrefab == null)
-            placeableObjectPrefab = obj;
-
+        placeableObjectPrefab = obj;
         _placeObjectMeshRend = placeableObjectPrefab.GetComponent<MeshRenderer>();
-
+        _triggerBuild = true;
     }
         
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -51,7 +50,7 @@ public class PlacementController : PSingle<PlacementController>
             return;
         }
 
-        if (Input.GetKeyDown(newObjectHotkey))
+        if (_triggerBuild)
         {
             if (_currObj != null)
             {
@@ -60,7 +59,10 @@ public class PlacementController : PSingle<PlacementController>
             else
             {
                 _currObj = Instantiate(placeableObjectPrefab);
+                _currObj.transform.parent = _player1Builds; //sets the player 1 parent
             }
+
+            _triggerBuild = false;
         }
 
         if (_currObj != null)

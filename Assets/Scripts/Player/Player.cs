@@ -40,12 +40,18 @@ public class Player : MonoBehaviour
     private bool _swinging = false;    
     private PlayerUI _playerUI;
 
+    //Temporary for now
+    private GenericPlans _plans;
+
 
     private void Awake()
     {
         Inventory = GetComponent<Inventory>();        
         _anim = GetComponent<Animator>();                
-        Castle = null;        
+        Castle = null;
+
+        //Temporary for now
+        _plans = GetComponent<GenericPlans>();
     }
 
     // Start is called before the first frame update
@@ -77,15 +83,37 @@ public class Player : MonoBehaviour
         
     private void Update()
     {
-        if (Input.GetMouseButton(0))
-        {            
-            if (!_swinging && !PlacementController.Instance.BuildMode)
-            {             
-                _swinging = true;
-                _anim.SetBool("Swing", true);
-            }
-
+        //Temporary, work out the details for build mappings later
+        if(Input.GetKeyDown(KeyBindings.BuildKey1))
+        {
+            PlacementController.Instance.LoadObject(_plans.Plan1);
         }
+        else if(Input.GetKeyDown(KeyBindings.BuildKey2))
+        {
+            PlacementController.Instance.LoadObject(_plans.Plan2);
+        }
+        else if (Input.GetKeyDown(KeyBindings.BuildKey3))
+        {
+            PlacementController.Instance.LoadObject(_plans.Plan3);
+        }
+        else if (Input.GetKeyDown(KeyBindings.BuildKey4))
+        {
+            PlacementController.Instance.LoadObject(_plans.Plan4);
+        }
+        else
+        {
+            if (Input.GetMouseButton(0))
+            {
+                if (!_swinging && !PlacementController.Instance.BuildMode)
+                {
+                    _swinging = true;
+                    _anim.SetBool("Swing", true);
+                }
+
+            }
+        }
+
+        
     }
 
     private void Init()
