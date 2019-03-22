@@ -4,22 +4,28 @@ using UnityEngine;
 using SBK.Unity;
 
 public class PlacementController : PSingle<PlacementController>
-{    
+{
+    const int GROUND_LAYER = 8;
+
     public GameObject placeableObjectPrefab;
+    
+
     public bool BuildMode = false;
+    public float RotateAmount = 45f;
 
     [SerializeField]
     private readonly KeyCode newObjectHotkey = KeyBindings.BuildKey1;
 
+    [SerializeField]
+    private MeshRenderer _placeObjectMeshRend;
+
     private GameObject _currObj;
-
-    private float mouseWheelRotation;
-
+    private float mouseWheelRotation;    
 
 
     protected override void PAwake()
     {
-        
+        LoadObject(placeableObjectPrefab);
     }
 
     protected override void PDestroy()
@@ -27,9 +33,24 @@ public class PlacementController : PSingle<PlacementController>
         
     }
 
+    public void LoadObject(GameObject obj)
+    {
+        if (placeableObjectPrefab == null)
+            placeableObjectPrefab = obj;
+
+        _placeObjectMeshRend = placeableObjectPrefab.GetComponent<MeshRenderer>();
+
+    }
         
     void FixedUpdate()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _currObj = null;
+            BuildMode = false;
+            return;
+        }
+
         if (Input.GetKeyDown(newObjectHotkey))
         {
             if (_currObj != null)
@@ -46,8 +67,7 @@ public class PlacementController : PSingle<PlacementController>
         {
             BuildMode = true;
             MoveCurrentObjectToMouse();
-            RotateFromMouseWheel();
-            ReleaseIfClicked();
+            RotateFromMouseWheel();            
         }
     }   
 
@@ -57,23 +77,24 @@ public class PlacementController : PSingle<PlacementController>
                
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            _currObj.transform.position = hit.point;
-            _currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            if (hit.transform.gameObject.layer == GROUND_LAYER)
+            {
+                //float offset = hit.point.y + _placeObjectMeshRend.bounds.min.y;
+                //_currObj.transform.position = new Vector3(hit.point.x, offset + 2, hit.point.z);                
+                _currObj.transform.position = hit.point;
+                _currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            }
         }
+    }
+
+    private void SnapToGround()
+    {
+
     }
 
     private void RotateFromMouseWheel()
     {        
         mouseWheelRotation += Input.mouseScrollDelta.y;
-        _currObj.transform.Rotate(Vector3.up, mouseWheelRotation * 10f);
-    }
-
-    private void ReleaseIfClicked()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            _currObj = null;
-            BuildMode = false;
-        }
-    }
+        _currObj.transform.Rotate(Vector3.up, mouseWheelRotation * RotateAmount);
+    }   
 }

@@ -3140,7 +3140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1677240243, guid: 2cbf9720c61f4f849838ed2f54244f8d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: 30.49
       objectReference: {fileID: 0}
     - target: {fileID: 1677240243, guid: 2cbf9720c61f4f849838ed2f54244f8d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3320,6 +3320,7 @@ GameObject:
   - component: {fileID: 1261652206}
   - component: {fileID: 1261652208}
   - component: {fileID: 1261652207}
+  - component: {fileID: 1261652209}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3366,6 +3367,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Players: []
+--- !u!114 &1261652209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261652205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f7e33029fdc1e9448473bc1f7ebae72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeableObjectPrefab: {fileID: 8248327924452078943, guid: 79fe5544fa407164584b68641f6efd6e,
+    type: 3}
+  BuildMode: 0
+  RotateAmount: 10
+  _placeObjectMeshRend: {fileID: 0}
 --- !u!1 &1324874996
 GameObject:
   m_ObjectHideFlags: 0
@@ -3640,8 +3658,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &1392029558
-MeshCollider:
+--- !u!65 &1392029558
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3650,10 +3668,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 2
+  m_Size: {x: 9.999999, y: 2.220446e-16, z: 10.000001}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1392029559
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4311,8 +4328,8 @@ Transform:
   m_Father: {fileID: 210445562}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1478514560
-MeshCollider:
+--- !u!65 &1478514560
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4321,10 +4338,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 2
+  m_Size: {x: 9.999999, y: 2.220446e-16, z: 10.000001}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1478514561
 MeshRenderer:
   m_ObjectHideFlags: 0
