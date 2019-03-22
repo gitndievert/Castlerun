@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class StatsManager : MonoBehaviour
+public class PlayerStatManager : MonoBehaviour
 {    
     public static readonly PlayerStats Player = new PlayerStats();    
     public static Stack<string> BonusList = new Stack<string>();
+
+    public PlayerUI PlayerUIPanel { get; private set; }
         
+    private Player _player;
+
     private void Awake()
     {
-        Initialize();
+        Initialize();       
     }
 
     public void Initialize()
@@ -17,6 +22,21 @@ public class StatsManager : MonoBehaviour
         Player.Health = 100;
         Player.MoveSpeed = 1f;
         Player.BuildSpeed = 1f;
+
+        //Setup those hooks later
+        //_playerHealthText = PlayerUIPanel.HealthText;
+        //_playerHealthBar = PlayerUIPanel.HealthBar;        
+
+    }
+
+    private void Start()
+    {
+        _player = transform.GetComponent<Player>();
+        if (_player == null)
+            _player = GameManager.Instance.GetPlayer(0);
+        PlayerUIPanel = UIManager.Instance.PlayerUIPanel;
+
+        PlayerUIPanel.PlayerName.text = _player.PlayerName;
     }
 
     public PlayerStats UpdateBonus(PlayerStats stats)
@@ -36,6 +56,9 @@ public class StatsManager : MonoBehaviour
             Player.BuildSpeed *= stats.BuildSpeed;
             BonusList.Push($"Build speed x {stats.BuildSpeed}");
         }
+
+        
+
         return Player;
     }
 

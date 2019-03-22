@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-/**
- * 
- * Player networking will be account based, storing castles, wins etc. 
- * 
- * */
+
 public class Player : MonoBehaviour
 {
     [SerializeField]
@@ -41,24 +37,21 @@ public class Player : MonoBehaviour
     private GameObject _mainHand;
     private GameObject _offHand;    
     private Animator _anim;
-    private bool _swinging = false;
-    private StatsManager _stat;
+    private bool _swinging = false;    
     private PlayerUI _playerUI;
 
 
     private void Awake()
     {
         Inventory = GetComponent<Inventory>();        
-        _anim = GetComponent<Animator>();
-        _stat = GetComponent<StatsManager>();
-        _playerUI = UIManager.Instance.PlayerUIPanel;
+        _anim = GetComponent<Animator>();                
         Castle = null;        
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-        PlayerStats = StatsManager.Player;
+        _playerUI = UIManager.Instance.PlayerUIPanel;
 
         var castlemanger = CastleManager.Instance;
 
@@ -81,18 +74,12 @@ public class Player : MonoBehaviour
         CastleManager.Instance.SpawnCastle(Castle, this);
 
     }
-
-    // Update is called once per frame
+        
     private void Update()
-    {        
-    
-    }
-
-    private void FixedUpdate()
     {
         if (Input.GetMouseButton(0))
         {            
-            if (!_swinging)
+            if (!_swinging && !PlacementController.Instance.BuildMode)
             {             
                 _swinging = true;
                 _anim.SetBool("Swing", true);

@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
 public class KeyBindings
 {
-    public KeyCode BuildKey = KeyCode.E;
-    
+    public static KeyCode BuildKey1 = KeyCode.Alpha1;
+    public static KeyCode BuildKey2 = KeyCode.Alpha2;
+    public static KeyCode BuildKey3 = KeyCode.Alpha3;
+    public static KeyCode BuildKey4 = KeyCode.Alpha4;
+
 }
