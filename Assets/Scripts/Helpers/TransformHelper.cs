@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public static class TransformHelper
 {
@@ -38,6 +39,84 @@ public static class TransformHelper
     {
         float dist = DistanceCheck(t1, t2);
         return dist < amount;
+    }   
+
+    #region Extension Methods for Transforms
+
+    /// <summary>
+    /// Extenstion Method to LERP a transform from point A to point B
+    /// </summary>
+    /// <param name="trans"></param>
+    /// <param name="targetPosition"></param>
+    /// <param name="speedInSec"></param>
+    /// <returns></returns>
+    public static IEnumerator Lerp(this Transform trans, Vector3 targetPosition, float speedInSec)
+    {
+        float time = 0f;
+        //Disable Drags
+        while (true)
+        {            
+            time += Time.deltaTime * speedInSec;
+            trans.position = Vector3.Lerp(trans.position, targetPosition, time);
+
+            //Stop on Final Position
+            if (trans.position == targetPosition)
+            {         
+                yield break;
+            }
+
+            yield return null;
+        }
     }
+
+    /// <summary>
+    /// Extension Method to scale down the size of a transform over time
+    /// </summary>
+    /// <param name="trans"></param>
+    /// <param name="size"></param>
+    /// <param name="speedInSec"></param>
+    /// <returns></returns>
+    public static IEnumerator ScaleDown(this Transform trans, float size, float speedInSec)
+    {
+        float time = 0f;
+
+        while (true)
+        {
+            time += Time.deltaTime;
+            var scale = trans.localScale;
+            trans.localScale -= new Vector3(scale.x, scale.y, scale.z) * Time.deltaTime * size;
+
+            if (trans.localScale.x <= size)
+                yield break;
+
+            yield return null;
+        }
+    }
+
+    /// <summary>
+    /// Extension Method to scale up the size of a transform over time
+    /// </summary>
+    /// <param name="trans"></param>
+    /// <param name="size"></param>
+    /// <param name="speedInSec"></param>
+    /// <returns></returns>
+    public static IEnumerator ScaleUp(this Transform trans, float size, float speedInSec)
+    {
+        float time = 0f;
+
+        while (true)
+        {
+            time += Time.deltaTime;
+            var scale = trans.localScale;
+            trans.localScale += new Vector3(scale.x, scale.y, scale.z) * Time.deltaTime * size;
+
+            if (trans.localScale.x >= size)
+                yield break;
+
+            yield return null;
+        }
+    }
+
+    #endregion
 
 }

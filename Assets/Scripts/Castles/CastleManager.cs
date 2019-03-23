@@ -40,12 +40,10 @@ public class CastleManager : PSingle<CastleManager>
         {
             foreach (var pad in SpawnPads)
             {
+                if (!pad.gameObject.activeSelf) continue;
                 var id = pad.name.Last();
                 int t_num = int.Parse(id.ToString());
-                if (t_num == playerNumber)
-                    return pad;
-                else
-                    throw new System.Exception("Map does not have pads mapped for all players");
+                if (t_num == playerNumber) return pad;                
             }
         }
 
@@ -89,10 +87,8 @@ public class CastleManager : PSingle<CastleManager>
     {
         //var stats = player.StatsModifier;
         var spawnPad = GetSpawnPad(player.PlayerNumber);
-        Bounds padBounds = spawnPad.GetComponent<MeshFilter>().mesh.bounds;
-
         var castleObj = Instantiate(castle.gameObject, spawnPad, false);
-
+        //Bounds padBounds = spawnPad.GetComponent<MeshFilter>().mesh.bounds;
         if (player.PlayerNumber == 1)
             Player1Castle = castle;
         if (player.PlayerNumber == 2)
@@ -104,9 +100,12 @@ public class CastleManager : PSingle<CastleManager>
 
         //Align castle to ground
         //(transform.gameObject.transform.localScale.y/2)
-        castleObj.transform.position = new Vector3(castleObj.transform.position.x,
-            spawnPad.position.y + 3f, castleObj.transform.position.z);
-
+        //castleObj.transform.position = new Vector3(castleObj.transform.position.x, spawnPad.position.y, castleObj.transform.position.z);
+        if(Physics.Raycast(spawnPad.position,Vector3.up, out RaycastHit hit))
+        {
+            castleObj.transform.position = hit.point;
+        }
+               
         /*
          * Transform car;
             Bounds carBounds = car.GetComponent<MeshFilter>().mesh.bounds;

@@ -7,8 +7,13 @@ public class PlacementController : PSingle<PlacementController>
 {
     const int GROUND_LAYER = 8;
 
-    public GameObject placeableObjectPrefab;    
+    public GameObject placeableObjectPrefab = null;
 
+    [Tooltip("This is the transparent lay material")]
+    public Material LayMaterial;
+    [Tooltip("This is the transparent lay material if you cannot build in a zone")]
+    public Material ErrorMaterial;
+    
     public bool BuildMode = false;
     public float RotateAmount = 45f;    
 
@@ -16,6 +21,8 @@ public class PlacementController : PSingle<PlacementController>
     private MeshRenderer _placeObjectMeshRend;
 
     private GameObject _currObj;
+    private Material _saveMaterial;    
+
     private float mouseWheelRotation;
     private bool _triggerBuild = false;
 
@@ -41,10 +48,12 @@ public class PlacementController : PSingle<PlacementController>
         _triggerBuild = true;
     }
         
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if(_currObj != null)
+                _currObj.transform.GetComponent<Renderer>().material = _saveMaterial;
             _currObj = null;
             BuildMode = false;
             return;
@@ -58,7 +67,9 @@ public class PlacementController : PSingle<PlacementController>
             }
             else
             {
-                _currObj = Instantiate(placeableObjectPrefab);
+                _currObj = Instantiate(placeableObjectPrefab);                
+                _saveMaterial = _currObj.transform.GetComponent<Renderer>().material;
+                _currObj.transform.GetComponent<Renderer>().material = LayMaterial;
                 _currObj.transform.parent = _player1Builds; //sets the player 1 parent
             }
 

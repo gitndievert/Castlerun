@@ -60,9 +60,6 @@ public class Player : MonoBehaviour
         _playerUI = UIManager.Instance.PlayerUIPanel;
 
         var castlemanger = CastleManager.Instance;
-
-        //Multiplayer will change this later on
-        PlayerNumber = 1;
                 
         //Set Nane
         _playerUI.PlayerName.text = "Krunchy";
