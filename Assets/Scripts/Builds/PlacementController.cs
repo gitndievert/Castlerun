@@ -17,6 +17,7 @@ public class PlacementController : PSingle<PlacementController>
     public bool BuildMode = false;
     public float RotateAmount = 45f;
     public bool SnapOnGrid = true;
+    public float SnapSize = 1f;
 
     [SerializeField]
     private MeshRenderer _placeObjectMeshRend;
@@ -115,7 +116,7 @@ public class PlacementController : PSingle<PlacementController>
                 //float offset = hit.point.y + _placeObjectMeshRend.bounds.min.y;
                 //_currObj.transform.position = new Vector3(hit.point.x, offset + 2, hit.point.z);                
                 if(SnapOnGrid)
-                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x),hit.point.y,Mathf.Round(hit.point.z));
+                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, hit.point.y,Mathf.Round(hit.point.z) * SnapSize);
                 else
                     _currObj.transform.position = hit.point;
                 _currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
