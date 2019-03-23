@@ -99,14 +99,10 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (Input.GetMouseButton(0))
-            {
-                if (!_swinging && !PlacementController.Instance.BuildMode)
-                {
-                    _swinging = true;
-                    _anim.SetBool("Swing", true);
-                }
-
+            if (Input.GetKeyDown(KeyCode.E) && !_swinging)
+            {                                
+                _swinging = true;
+                _anim.SetBool("Swing", true);                
             }
         }
 
