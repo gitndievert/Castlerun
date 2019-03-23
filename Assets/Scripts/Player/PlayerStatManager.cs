@@ -7,8 +7,6 @@ public class PlayerStatManager : MonoBehaviour
 {    
     public static readonly PlayerStats Player = new PlayerStats();    
     public static Stack<string> BonusList = new Stack<string>();
-
-    public PlayerUI PlayerUIPanel { get; private set; }
         
     private Player _player;
 
@@ -31,12 +29,7 @@ public class PlayerStatManager : MonoBehaviour
 
     private void Start()
     {
-        _player = transform.GetComponent<Player>();
-        if (_player == null)
-            _player = GameManager.Instance.GetPlayer(0);
-        PlayerUIPanel = UIManager.Instance.PlayerUIPanel;
-
-        PlayerUIPanel.PlayerName.text = _player.PlayerName;
+        
     }
 
     public PlayerStats UpdateBonus(PlayerStats stats)

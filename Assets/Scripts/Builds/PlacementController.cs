@@ -15,7 +15,8 @@ public class PlacementController : PSingle<PlacementController>
     public Material ErrorMaterial;
     
     public bool BuildMode = false;
-    public float RotateAmount = 45f;    
+    public float RotateAmount = 45f;
+    public bool SnapOnGrid = true;
 
     [SerializeField]
     private MeshRenderer _placeObjectMeshRend;
@@ -29,11 +30,30 @@ public class PlacementController : PSingle<PlacementController>
     /// <summary>
     /// Object to parent on for player 1
     /// </summary>
-    private Transform _player1Builds;
+    [SerializeField]
+    private Transform _player1Builds = null;
+    /// <summary>
+    /// Object to parent on for player 2
+    /// </summary>
+    [SerializeField]
+    private Transform _player2Builds = null;
+    /// <summary>
+    /// Object to parent on for player 3
+    /// </summary>
+    [SerializeField]
+    private Transform _player3Builds = null;
+    /// <summary>
+    /// Object to parent on for player 4
+    /// </summary>
+    [SerializeField]
+    private Transform _player4Builds = null;
 
     protected override void PAwake()
     {        
         _player1Builds = GameObject.Find("Player_1_Builds").transform;
+        //_player2Builds = GameObject.Find("Player_2_Builds").transform;
+        //_player3Builds = GameObject.Find("Player_3_Builds").transform;
+        //_player4Builds = GameObject.Find("Player_4_Builds").transform;
     }
 
     protected override void PDestroy()
@@ -94,7 +114,10 @@ public class PlacementController : PSingle<PlacementController>
             {
                 //float offset = hit.point.y + _placeObjectMeshRend.bounds.min.y;
                 //_currObj.transform.position = new Vector3(hit.point.x, offset + 2, hit.point.z);                
-                _currObj.transform.position = hit.point;
+                if(SnapOnGrid)
+                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x),hit.point.y,Mathf.Round(hit.point.z));
+                else
+                    _currObj.transform.position = hit.point;
                 _currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
             }
         }

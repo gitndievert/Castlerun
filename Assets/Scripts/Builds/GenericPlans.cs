@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenericPlans : BuildPlans
+public class GenericPlans : MonoBehaviour
 {
     public GameObject Plan1;
     public GameObject Plan2;

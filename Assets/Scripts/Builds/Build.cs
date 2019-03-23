@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BuildPlans : BasePrefab
+public abstract class Build : BasePrefab, IBuild
 {
+    //public float GridSnap = 0.5f;
     
 }

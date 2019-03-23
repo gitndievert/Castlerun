@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
         }
         
         CastleManager.Instance.SpawnCastle(Castle, this);
-
+        _playerUI.CastleLevel.text = Castle.Level.ToString();
     }
         
     private void Update()
