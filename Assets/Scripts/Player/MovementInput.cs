@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MovementInput : MonoBehaviour
 {
-
     public float InputX;
     public float InputZ;
     public Vector3 DesiredMoveDirection;
