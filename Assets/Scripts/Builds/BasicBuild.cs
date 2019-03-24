@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BasicBuild : Build
 {
-
+    //Basic Builds are Instant
+    protected override float BuildTime { get { return 0f; } }
 
     private void OnCollisionEnter(Collision col)
     {

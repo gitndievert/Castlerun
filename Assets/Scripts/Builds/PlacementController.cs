@@ -65,7 +65,7 @@ public class PlacementController : PSingle<PlacementController>
     public void LoadObject(GameObject obj)
     {
         placeableObjectPrefab = obj;
-        _placeObjectMeshRend = placeableObjectPrefab.GetComponent<MeshRenderer>();
+        _placeObjectMeshRend = placeableObjectPrefab.GetComponentInChildren<MeshRenderer>();
         _triggerBuild = true;
     }
         
@@ -73,8 +73,11 @@ public class PlacementController : PSingle<PlacementController>
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if(_currObj != null)
-                _currObj.transform.GetComponent<Renderer>().material = _saveMaterial;
+            if (_currObj != null)
+            {
+                _currObj.transform.GetComponentInChildren<Renderer>().material = _saveMaterial;
+                _currObj.transform.GetComponent<IBuild>().ConfirmPlacement();
+            }
             _currObj = null;
             BuildMode = false;
             return;
@@ -88,9 +91,9 @@ public class PlacementController : PSingle<PlacementController>
             }
             else
             {
-                _currObj = Instantiate(placeableObjectPrefab);                
-                _saveMaterial = _currObj.transform.GetComponent<Renderer>().material;
-                _currObj.transform.GetComponent<Renderer>().material = LayMaterial;
+                _currObj = Instantiate(placeableObjectPrefab);
+                _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().material;
+                _currObj.transform.GetComponentInChildren<Renderer>().material = LayMaterial;
                 _currObj.transform.parent = _player1Builds; //sets the player 1 parent
             }
 
@@ -113,13 +116,14 @@ public class PlacementController : PSingle<PlacementController>
         {
             if (hit.transform.gameObject.layer == GROUND_LAYER)
             {
-                //float offset = hit.point.y + _placeObjectMeshRend.bounds.min.y;
+                //float offset = hit.point.y + (_placeObjectMeshRend.bounds.min.y / 2);
                 //_currObj.transform.position = new Vector3(hit.point.x, offset + 2, hit.point.z);                
                 if(SnapOnGrid)
-                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, hit.point.y,Mathf.Round(hit.point.z) * SnapSize);
+                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, hit.point.y + (_currObj.transform.localScale.y * 0.5f), Mathf.Round(hit.point.z) * SnapSize);
                 else
-                    _currObj.transform.position = hit.point;
-                _currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                    _currObj.transform.position = hit.point;                
+                
+                _currObj.transform.rotation = Quaternion.FromToRotation(hit.transform.up, hit.normal);
             }
         }
     }

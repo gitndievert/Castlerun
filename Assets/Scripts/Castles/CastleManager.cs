@@ -87,7 +87,7 @@ public class CastleManager : PSingle<CastleManager>
     {
         //var stats = player.StatsModifier;
         var spawnPad = GetSpawnPad(player.PlayerNumber);
-        var castleObj = Instantiate(castle.gameObject, spawnPad, false);
+        var castleObj = Instantiate(castle.gameObject);
         //Bounds padBounds = spawnPad.GetComponent<MeshFilter>().mesh.bounds;
         if (player.PlayerNumber == 1)
             Player1Castle = castle;
@@ -97,15 +97,20 @@ public class CastleManager : PSingle<CastleManager>
             Player3Castle = castle;
         if (player.PlayerNumber == 4)
             Player4Castle = castle;
+        
+        //castleObj.transform.parent = spawnPad.transform;
+        castleObj.transform.position = spawnPad.transform.position;
+        
+
 
         //Align castle to ground
         //(transform.gameObject.transform.localScale.y/2)
         //castleObj.transform.position = new Vector3(castleObj.transform.position.x, spawnPad.position.y, castleObj.transform.position.z);
-        if(Physics.Raycast(spawnPad.position,Vector3.up, out RaycastHit hit))
+        /*if(Physics.Raycast(spawnPad.position,Vector3.up, out RaycastHit hit))
         {
             castleObj.transform.position = hit.point;
-        }
-               
+        }*/
+
         /*
          * Transform car;
             Bounds carBounds = car.GetComponent<MeshFilter>().mesh.bounds;
