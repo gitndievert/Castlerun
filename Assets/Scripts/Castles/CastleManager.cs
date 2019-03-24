@@ -97,8 +97,8 @@ public class CastleManager : PSingle<CastleManager>
             Player3Castle = castle;
         if (player.PlayerNumber == 4)
             Player4Castle = castle;
-        
-        //castleObj.transform.parent = spawnPad.transform;
+               
+        castleObj.transform.parent = spawnPad.transform;
         castleObj.transform.position = spawnPad.transform.position;
         
 
