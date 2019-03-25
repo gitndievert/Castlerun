@@ -1,4 +1,5 @@
 ﻿public interface IBuild
 {
-    void ConfirmPlacement();    
+    void ConfirmPlacement();
+    bool SetResourceType(ResourceType type);    
 }

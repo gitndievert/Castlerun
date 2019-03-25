@@ -45,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 2.2904096}
-  m_Center: {x: 0, y: 0, z: 0.24902502}
+  m_Size: {x: 2.3242543, y: 2.600597, z: 4.9177475}
+  m_Center: {x: 0.2388711, y: -0.2832172, z: 0.28336847}
 --- !u!114 &9086477737352126635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,10 +59,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d042ab368b91e0a4b93dda18f5ad4614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireSounds: []
+  PlacementCost: 50
+  FireSounds:
+  - {fileID: 8300000, guid: 632c8b93a9b3eb141bbffd47c8259051, type: 3}
+  - {fileID: 8300000, guid: f27b8ab7f2f880543937b1b75dad4536, type: 3}
   DestroySound: {fileID: 0}
   Projectile: {fileID: 5626375184533069836, guid: 96682d61ef29f1d4fae5576831e6618f,
     type: 3}
+  FireEffect: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 3}
   FireTimer: 3
   FireRate: 5
   FirePower: 70
@@ -129,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 5058298972119075428, guid: df91fa929b9f325428f9f886d20e1104,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.043619405
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5058298972119075428, guid: df91fa929b9f325428f9f886d20e1104,
         type: 3}
@@ -144,7 +148,7 @@ PrefabInstance:
     - target: {fileID: 5058298972119075428, guid: df91fa929b9f325428f9f886d20e1104,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9990483
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5058298972119075428, guid: df91fa929b9f325428f9f886d20e1104,
         type: 3}
@@ -154,7 +158,7 @@ PrefabInstance:
     - target: {fileID: 5058298972119075428, guid: df91fa929b9f325428f9f886d20e1104,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5058298972119075428, guid: df91fa929b9f325428f9f886d20e1104,
         type: 3}

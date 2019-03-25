@@ -23,10 +23,12 @@ public class PlacementController : PSingle<PlacementController>
     private MeshRenderer _placeObjectMeshRend;
 
     private GameObject _currObj;
-    private Material _saveMaterial;    
+    private Material _saveMaterial;
+    private InventoryUI _ui;
 
     private float mouseWheelRotation;
     private bool _triggerBuild = false;
+
 
     /// <summary>
     /// Object to parent on for player 1
@@ -50,7 +52,8 @@ public class PlacementController : PSingle<PlacementController>
     private Transform _player4Builds = null;
 
     protected override void PAwake()
-    {        
+    {
+        _ui = UIManager.Instance.InventoryUIPanel;
         _player1Builds = GameObject.Find("Player_1_Builds").transform;
         //_player2Builds = GameObject.Find("Player_2_Builds").transform;
         //_player3Builds = GameObject.Find("Player_3_Builds").transform;
@@ -69,14 +72,46 @@ public class PlacementController : PSingle<PlacementController>
         _triggerBuild = true;
     }
         
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             if (_currObj != null)
             {
                 _currObj.transform.GetComponentInChildren<Renderer>().material = _saveMaterial;
-                _currObj.transform.GetComponent<IBuild>().ConfirmPlacement();
+                var build = _currObj.transform.GetComponent<Build>();
+
+                //For Testing 
+                //Might need to move this down to the layprefab part so we can highlight it red
+                //TODO: Come Back later
+                var rt = ResourceType.Metal;
+                bool cancelBuild = false;
+                if (build.SetResourceType(rt))
+                {
+                    Inventory inv = ReturnPlayerInventory(0);
+                    int invcount = inv.GetCount(rt);
+                    if (invcount > 0 && (invcount - build.PlacementCost >= 0))
+                    {
+                        build.ConfirmPlacement();
+                        inv.Set(rt, -build.PlacementCost);
+                    }
+                    else
+                    {
+                        cancelBuild = true;
+                        _ui.Messages.text = $"You will need to gather more {rt.ToString()}";
+                    }
+                }
+                else
+                {
+                    cancelBuild = true;
+                    _ui.Messages.text = "That resource will not work to build this plan";
+                }
+
+                if(cancelBuild)
+                {
+                    Destroy(_currObj);
+                }
+                
             }
             _currObj = null;
             BuildMode = false;
@@ -123,7 +158,7 @@ public class PlacementController : PSingle<PlacementController>
                 else
                     _currObj.transform.position = hit.point;                
                 
-                _currObj.transform.rotation = Quaternion.FromToRotation(hit.transform.up, hit.normal);
+                _currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
             }
         }
     }
@@ -138,4 +173,9 @@ public class PlacementController : PSingle<PlacementController>
         mouseWheelRotation += Input.mouseScrollDelta.y;
         _currObj.transform.Rotate(Vector3.up, mouseWheelRotation * RotateAmount);
     }   
+
+    private Inventory ReturnPlayerInventory(int playerPos)
+    {
+        return GameManager.Instance.GetPlayer(playerPos).Inventory;
+    }
 }

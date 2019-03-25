@@ -7,6 +7,7 @@ public class OffensiveBuild : Build
     public AudioClip[] FireSounds;
     public AudioClip DestroySound;
     public GameObject Projectile;
+    public GameObject FireEffect;
 
     public float FireTimer = 0.3f;
     public float FireRate = 0.5f;
@@ -19,7 +20,8 @@ public class OffensiveBuild : Build
     private float _ConstructionTime;
     private float _trackFireTimer;
 
-    protected override float BuildTime { get { return _ConstructionTime; } }        
+    protected override float BuildTime => _ConstructionTime;
+    protected override ResourceType ResouceType => ResourceType.Metal;
 
     protected override void Start()
     {
@@ -59,7 +61,12 @@ public class OffensiveBuild : Build
         IsFiring = true;
         var proj = Instantiate(Projectile, FirePosition.position, Quaternion.identity);
         proj.name = "Incoming";
-        proj.GetComponent<Rigidbody>().velocity = FirePosition.TransformDirection(Vector3.forward * FirePower);
+        proj.GetComponent<Rigidbody>().velocity = FirePosition.TransformDirection(Vector3.forward * FirePower);        
+        SoundManager.PlaySoundOnGameObject(gameObject, FireSounds);
+        if (FireEffect != null)
+        {
+            Instantiate(FireEffect, FirePosition.position, Quaternion.identity);
+        }
         //proj.transform.parent = transform.GetChild(0);     
     }
 
@@ -74,6 +81,11 @@ public class OffensiveBuild : Build
             return Vector3.forward;
         else
             return Vector3.down;
+    }
+
+    public override bool SetResourceType(ResourceType type)
+    {
+        return type == ResouceType;
     }
 
 }

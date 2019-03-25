@@ -395,10 +395,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7704809051097041922}
   - component: {fileID: 5584536207678523201}
-  - component: {fileID: 2062981194512407525}
-  - component: {fileID: 5981508280868858046}
   m_Layer: 0
-  m_Name: Default
+  m_Name: Default_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -498,45 +496,3 @@ MonoBehaviour:
   - Assets/MT Assets/Easy Mesh Combiner/Combined/Demo_1/Mesh/Combined Meshes (Material
     4) (2019323215254190).asset
   undoConfirmation: 0
---- !u!114 &2062981194512407525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7704809051097041923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c33ca233a96b4c744bc6e7121c0b7e8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Level: 2
-  DoorBustHealth: 100
-  CastleType: 1
-  AmbientMusic: {fileID: 0}
-  CastleColorHue: {r: 0, g: 0, b: 0, a: 0}
-  Experience: 0
-  CastleStats:
-    HasArchers: 1
-    HasGuards: 1
-    BonusHealth: 50
-    BonusMoveSpeed: 0
-    BonusLowerCost: 0
-  ExpLevels:
-  - 25000
-  - 80000
-  - 124360
---- !u!64 &5981508280868858046
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7704809051097041923}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 0}

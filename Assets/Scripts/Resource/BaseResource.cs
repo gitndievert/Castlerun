@@ -10,6 +10,7 @@ public abstract class BaseResource : BasePrefab, IResource
     public AudioClip[] HitSounds;
     public AudioClip BustSound;
     public int Value = 10;
+    public int Durability = 100;
 
     public int GetDurability()
     {
@@ -23,18 +24,16 @@ public abstract class BaseResource : BasePrefab, IResource
 
     public void PlayHitSounds()
     {
-        SoundManager.PlaySound(HitSounds);
+        if(HitSounds != null)
+            SoundManager.PlaySound(HitSounds);
     }
 
     public void SetHit(int amount)
     {
-        if (Durability <= 0) BustResource();
         Durability -= amount;
+        if (Durability <= 0) BustResource();        
     }
-
-    protected int Durability = 100;
     
-
     protected override void Awake()
     {
         base.Awake();

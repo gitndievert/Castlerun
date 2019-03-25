@@ -42,6 +42,23 @@ public class SoundManager : PSingle<SoundManager>, IAudio
         PlaySound(clips[rand],channel);
     }
 
+    public static void PlaySoundOnGameObject(GameObject obj, AudioClip clip)
+    {
+        var source = obj.GetComponent<AudioSource>();
+        if(source == null)
+        {
+            obj.AddComponent(typeof(AudioSource));
+        }
+
+        source.PlayOneShot(clip);        
+    }
+
+    public static void PlaySoundOnGameObject(GameObject obj, AudioClip[] clips)
+    {
+        int rand = Random.Range(0, clips.Length);
+        PlaySoundOnGameObject(obj, clips[rand]);
+    }
+
     public static void PlaySoundWithDelay(AudioClip[] clips, float delaySec, int channel = 1)
     {
         int rand = Random.Range(0, clips.Length);

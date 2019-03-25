@@ -57,6 +57,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        SetBasicPlayerStats();
+
         _playerUI = UIManager.Instance.PlayerUIPanel;
 
         var castlemanger = CastleManager.Instance;
@@ -76,6 +78,14 @@ public class Player : MonoBehaviour
         
         CastleManager.Instance.SpawnCastle(Castle, this);
         _playerUI.CastleLevel.text = Castle.Level.ToString();
+    }
+
+    private void SetBasicPlayerStats()
+    {
+        PlayerStats.Health = 100;
+        PlayerStats.MoveSpeed = 10f;
+        PlayerStats.BuildSpeed = 10f;
+        PlayerStats.HitAmount = 10;        
     }
         
     private void Update()
@@ -99,7 +109,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.E) && !_swinging)
+            if (Input.GetMouseButton(0) && !_swinging)
             {                                
                 _swinging = true;
                 _anim.SetBool("Swing", true);                
@@ -128,27 +138,12 @@ public class Player : MonoBehaviour
                 {
                     var resource = hit.transform.GetComponent<IResource>();
                     int durability = resource.GetDurability();
-                    ResourceType rt = resource.GetResourceType();
-                    switch (rt)
-                    {
-                        case ResourceType.Wood:
-                            resource.SetHit(50);
-                            break;
-                        case ResourceType.Rock:
-                            resource.SetHit(25);
-                            break;
-                        case ResourceType.Metal:
-                            resource.SetHit(10);
-                            break;
-                        case ResourceType.Gems:
-                            resource.SetHit(5);
-                            break;
-                    }
+                    resource.SetHit(PlayerStats.HitAmount);
+                    resource.PlayHitSounds();
 
-                    //NATE NOTE: Come back
-                    //resource.PlayHitSounds();
-                                       
-                    Debug.Log(durability + " " + rt.ToString());
+                    //To Debug things for a resource type
+                    //var rt = resource.GetResourceType();
+                    //Debug.Log(durability + " " + rt.ToString());
                 }
             }
         }

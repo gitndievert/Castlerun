@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7352499073577755643}
   - component: {fileID: 1856157303880177324}
   m_Layer: 0
-  m_Name: Rock
+  m_Name: R_Rock1
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,5 +107,9 @@ MonoBehaviour:
   ResourceType: 1
   BustResourceObj: {fileID: 3437016267795738889, guid: 1c769235749a2814dbdd50c6022af4e6,
     type: 3}
-  HitSounds: []
+  HitSounds:
+  - {fileID: 8300000, guid: 6b8b2b05c9e78c742969cb6fc32f4a88, type: 3}
+  - {fileID: 8300000, guid: 223e2e486ad4ce84da907f710c915d03, type: 3}
   BustSound: {fileID: 8300000, guid: 134c83d6b10fe6945bba6b0cc14be6c1, type: 3}
+  Value: 10
+  Durability: 100

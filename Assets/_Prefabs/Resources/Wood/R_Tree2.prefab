@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6430617740491588940}
   - component: {fileID: 3776080433212003976}
   m_Layer: 0
-  m_Name: Pine_tree_double
+  m_Name: R_Tree2
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,8 +114,11 @@ MonoBehaviour:
   ResourceType: 0
   BustResourceObj: {fileID: 3437016267795738889, guid: 1c769235749a2814dbdd50c6022af4e6,
     type: 3}
-  HitSounds: []
+  HitSounds:
+  - {fileID: 8300000, guid: e575ee8525e12e443b87810b059e0874, type: 3}
   BustSound: {fileID: 8300000, guid: 04aaa9b70ee7dce42a52ec18a5229d57, type: 3}
+  Value: 10
+  Durability: 100
 --- !u!65 &3776080433212003976
 BoxCollider:
   m_ObjectHideFlags: 0
