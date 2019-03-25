@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
                 if (hit.collider != null && hit.transform.tag == "Resource")
                 {
                     var resource = hit.transform.GetComponent<IResource>();
-                    int durability = resource.GetDurability();
+                    int health = resource.GetHealth();
                     resource.SetHit(PlayerStats.HitAmount);
                     resource.PlayHitSounds();
 

@@ -9,12 +9,11 @@ public abstract class BaseResource : BasePrefab, IResource
     public GameObject BustResourceObj;
     public AudioClip[] HitSounds;
     public AudioClip BustSound;
-    public int Value = 10;
-    public int Durability = 100;
+    public int Value = 10;    
 
-    public int GetDurability()
+    public int GetHealth()
     {
-        return Durability;
+        return Health;
     }
 
     public ResourceType GetResourceType()
@@ -28,16 +27,16 @@ public abstract class BaseResource : BasePrefab, IResource
             SoundManager.PlaySound(HitSounds);
     }
 
-    public void SetHit(int amount)
+    public override void SetHit(int amount)
     {
-        Durability -= amount;
-        if (Durability <= 0) BustResource();        
+        Health -= amount;
+        if (Health <= 0) BustResource();        
     }
     
     protected override void Awake()
     {
-        base.Awake();
-        tag = "Resource";
+        base.Awake();        
+        TagPrefab("Resource");
     }
 
     protected override void Start()

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class OffensiveBuild : Build
 {
-    public AudioClip[] FireSounds;
-    public AudioClip DestroySound;
+    public AudioClip[] FireSounds;    
     public GameObject Projectile;
     public GameObject FireEffect;
 

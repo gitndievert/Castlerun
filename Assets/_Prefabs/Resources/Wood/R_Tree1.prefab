@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeaeed2595927de44bbaa564e38e3d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 20
+  DestroySound: {fileID: 0}
   ResourceType: 0
   BustResourceObj: {fileID: 3437016267795738889, guid: 1c769235749a2814dbdd50c6022af4e6,
     type: 3}
@@ -98,7 +100,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e575ee8525e12e443b87810b059e0874, type: 3}
   BustSound: {fileID: 8300000, guid: 04aaa9b70ee7dce42a52ec18a5229d57, type: 3}
   Value: 10
-  Durability: 100
 --- !u!65 &1048116074620825710
 BoxCollider:
   m_ObjectHideFlags: 0

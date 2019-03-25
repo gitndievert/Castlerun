@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Castle : BasePrefab
+public class Castle : MonoBehaviour
 {
     const float MaxExp = 124360f;
 
@@ -30,18 +30,15 @@ public class Castle : BasePrefab
     //Need something for ambient noise
     //Need Health
 
-    protected override void Awake()
-    {
-        base.Awake();
+    private void Awake()
+    {        
         _manager = CastleManager.Instance;
     }
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-    }
-
-    
+        
+    }    
 
     /// <summary>
     /// !!!TODO!!! - For Jessia
