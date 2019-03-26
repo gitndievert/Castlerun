@@ -69,10 +69,13 @@ public class Bust : BasePrefab
         if (col.transform.tag != "Player") return;
         var player = col.transform.GetComponent<Player>();
         if (player)
-        {
+        {            
             player.Inventory.Set(_rt, _amount);
-            Destroy(gameObject);
-            SoundManager.PlaySound(_bustSound);
+            if (!player.Inventory.IsFull(_rt))
+            {
+                Destroy(gameObject);
+                SoundManager.PlaySound(_bustSound);
+            }
         }
     }
        

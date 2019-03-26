@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour
 
     public bool ResetOnStart = false;
 
-    public bool IsWoodFull {  get { return WoodCount >= MaxWood; } }
+    public bool IsWoodFull { get { return WoodCount >= MaxWood; } }
     public bool IsRockFull { get { return RockCount >= MaxRock; } }
     public bool IsMetalFull { get { return MetalCount >= MaxMetal; } }
     public bool IsGemsFull { get { return GemsCount >= MaxGems; } }
@@ -89,10 +89,26 @@ public class Inventory : MonoBehaviour
                 return 0;
         }
     }
+
+    public bool IsFull(ResourceType type)
+    {
+        switch(type)
+        {
+             case ResourceType.Wood:
+                return IsWoodFull;
+            case ResourceType.Rock:
+                return IsRockFull;
+            case ResourceType.Metal:
+                return IsMetalFull;
+            case ResourceType.Gems:
+                return IsGemsFull;
+            default:
+                return false;
+        }
+    }
         
     public void Set(ResourceType type, int amount = 0)
     {
-
         switch (type)
         {
             case ResourceType.Wood:

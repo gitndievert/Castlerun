@@ -152,7 +152,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2.2
+  m_Height: 2.1
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -187,6 +187,7 @@ MonoBehaviour:
   RockCount: 0
   MetalCount: 0
   GemsCount: 0
+  ResetOnStart: 0
 --- !u!114 &115547232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +204,7 @@ MonoBehaviour:
     Health: 0
     MoveSpeed: 0
     BuildSpeed: 0
+    HitAmount: 0
     CastleStats:
       HasArchers: 0
       HasGuards: 0

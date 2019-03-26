@@ -11,7 +11,7 @@ public class CastleManager : PSingle<CastleManager>
     /// </summary>
     [Tooltip("All the castle prefabs in the game")]
     public List<Castle> CastleList;
-    public Transform[] SpawnPads;
+    public PlayerPad[] SpawnPads;
 
     public Castle Player1Castle = null;
     public Castle Player2Castle = null;
@@ -34,7 +34,7 @@ public class CastleManager : PSingle<CastleManager>
         
     }
 
-    public Transform GetSpawnPad(int playerNumber)
+    public PlayerPad GetSpawnPad(int playerNumber)
     {
         if (SpawnPads.Length > 0)
         {
@@ -98,8 +98,9 @@ public class CastleManager : PSingle<CastleManager>
         if (player.PlayerNumber == 4)
             Player4Castle = castle;
                
-        castleObj.transform.parent = spawnPad.transform;
-        castleObj.transform.position = spawnPad.transform.position;
+        //castleObj.transform.parent = spawnPad.transform;
+        castleObj.transform.position = spawnPad.SpawnPosition;
+        castleObj.transform.rotation = spawnPad.Rotation;
         
 
 

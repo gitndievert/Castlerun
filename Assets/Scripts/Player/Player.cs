@@ -70,13 +70,14 @@ public class Player : MonoBehaviour
         if (Castle == null)
         {
             //var castleType = CastleType == CastleType.None ? CastleType.Castle3 : CastleType;
-            
+
             Castle = castlemanger.GetCastleByType(CastleType);
             Castle.Level = 2;
             Castle.Experience = 4050f;
+            Castle.CastleOwner = this;
         }
         
-        CastleManager.Instance.SpawnCastle(Castle, this);
+        CastleManager.Instance.SpawnCastle(Castle, Castle.CastleOwner);
         _playerUI.CastleLevel.text = Castle.Level.ToString();
     }
 
@@ -109,7 +110,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (Input.GetMouseButton(0) && !_swinging)
+            if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !_swinging)
             {                                
                 _swinging = true;
                 _anim.SetBool("Swing", true);                

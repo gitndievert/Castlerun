@@ -11,6 +11,11 @@ public class BasicBuild : Build
 
     private ResourceType _pickType;
 
+    protected override void Awake()
+    {
+        //Do not load audiosource
+    }
+
     private void OnCollisionEnter(Collision col)
     {
         if(col.gameObject.tag == "Build")

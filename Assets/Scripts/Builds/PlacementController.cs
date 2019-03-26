@@ -139,7 +139,7 @@ public class PlacementController : PSingle<PlacementController>
         {
             BuildMode = true;
             MoveCurrentObjectToMouse();
-            RotateFromMouseWheel();            
+            //RotateFromMouseWheel();            
         }
     }   
 
@@ -158,7 +158,7 @@ public class PlacementController : PSingle<PlacementController>
                 else
                     _currObj.transform.position = hit.point;                
                 
-                _currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                //_currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
             }
         }
     }

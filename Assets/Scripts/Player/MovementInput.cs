@@ -42,10 +42,17 @@ public class MovementInput : MonoBehaviour
             _verticalVelocity -= 2;
         }*/
         
-        _moveVector = new Vector3(0, _verticalVelocity, 0);
+        _moveVector = new Vector3(_verticalVelocity, _verticalVelocity, _verticalVelocity);
         CharacterController.Move(_moveVector);
 
-        if(Input.GetKeyDown(KeyCode.Space)) Jump();        
+        if (Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
+        {
+            float mouseInput = Input.GetAxis("Mouse X");
+            Vector3 lookhere = new Vector3(0, mouseInput, 0);
+            transform.Rotate(lookhere * 3f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)) Jump();        
                 
         //Legacy
         //if there is no root motion available
@@ -77,13 +84,14 @@ public class MovementInput : MonoBehaviour
         }
     }*/
 
+
+    //NOTE: Come back here to add the strafe on X
     private void InputMagnitude()
     {
+
         //Calc input vectors
         InputX = Input.GetAxis("Horizontal");
-        InputZ = Input.GetAxis("Vertical");
-
-        var vecout = new Vector2(InputZ, InputX);        
+        InputZ = Input.GetAxis("Vertical");            
 
         _anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2f);
         _anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);

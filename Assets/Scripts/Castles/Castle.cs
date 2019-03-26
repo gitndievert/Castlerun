@@ -12,9 +12,9 @@ public class Castle : MonoBehaviour
     public CastleType CastleType = CastleType.Default;
     public AudioClip AmbientMusic;
     public Color CastleColorHue;
-
     public float Experience;
     public CastleStats CastleStats;
+    public Player CastleOwner { get; set; }
 
     public float[] ExpLevels = { 25000f, 80000f, MaxExp };
 
