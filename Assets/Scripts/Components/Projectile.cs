@@ -7,7 +7,7 @@ public class Projectile : BasePrefab
 {
     public AudioClip TravelSound;
     public AudioClip ImpactSound;
-    public float Damage;   
+    public int Damage;   
     
     protected override void Awake()
     {
@@ -23,6 +23,11 @@ public class Projectile : BasePrefab
     private void OnDestroy()
     {
         
+    }
+
+    public int GetDamage()
+    {
+        return Damage;
     }
 
     private void PlayTravelSound()
@@ -43,8 +48,7 @@ public class Projectile : BasePrefab
 
     private void OnCollisionEnter(Collision col)
     {
-        PlayHitSound();
-        Debug.Log($"Hit target for {Damage}");
+        PlayHitSound();        
         Destroy(gameObject);        
     }
 }

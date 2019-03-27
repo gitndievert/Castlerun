@@ -5,6 +5,11 @@ public class CameraRotate : MonoBehaviour
 {
     public Transform target;
 
+    public bool FreezeCamera
+    {
+        set { _rb.isKinematic = value; }
+    }
+
     public float targetHeight = 1.7f;
     public float distance = 5.0f;
     public float offsetFromWall = 0.1f;
@@ -27,6 +32,12 @@ public class CameraRotate : MonoBehaviour
     private float _currentDistance;
     private float _desiredDistance;
     private float _correctedDistance;
+    private Rigidbody _rb;
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
 
     void Start()
     {
@@ -39,7 +50,7 @@ public class CameraRotate : MonoBehaviour
         _correctedDistance = distance;
 
         // Make the rigid body not change rotation
-        GetComponent<Rigidbody>().freezeRotation = true;
+        _rb.freezeRotation = true;
     }
 
     /**
@@ -60,7 +71,6 @@ public class CameraRotate : MonoBehaviour
                 _xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
                 _yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
             }
-
             // otherwise, ease behind the target if any of the directional keys are pressed
             else if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
             {

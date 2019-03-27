@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using SBK.Unity;
 
+public enum BuildDirections
+{
+    North,
+    East,
+    South,
+    West
+}
+
 public class PlacementController : PSingle<PlacementController>
 {
     const int GROUND_LAYER = 8;
 
-    public GameObject placeableObjectPrefab = null;
+    public GameObject PlaceableObjectPrefab = null;
+    public GameObject CameraRig;
 
     [Tooltip("This is the transparent lay material")]
     public Material LayMaterial;
@@ -28,6 +37,7 @@ public class PlacementController : PSingle<PlacementController>
 
     private float mouseWheelRotation;
     private bool _triggerBuild = false;
+    private CameraRotate _cam;
 
 
     /// <summary>
@@ -58,6 +68,7 @@ public class PlacementController : PSingle<PlacementController>
         //_player2Builds = GameObject.Find("Player_2_Builds").transform;
         //_player3Builds = GameObject.Find("Player_3_Builds").transform;
         //_player4Builds = GameObject.Find("Player_4_Builds").transform;
+        _cam = CameraRig.GetComponent<CameraRotate>();
     }
 
     protected override void PDestroy()
@@ -67,13 +78,15 @@ public class PlacementController : PSingle<PlacementController>
 
     public void LoadObject(GameObject obj)
     {
-        placeableObjectPrefab = obj;
-        _placeObjectMeshRend = placeableObjectPrefab.GetComponentInChildren<MeshRenderer>();
+        PlaceableObjectPrefab = obj;
+        _placeObjectMeshRend = PlaceableObjectPrefab.GetComponentInChildren<MeshRenderer>();
         _triggerBuild = true;
     }
         
     void Update()
-    {
+    {        
+        var rotating = RotateFromMouseWheel();
+
         if (Input.GetMouseButtonDown(0))
         {
             if (_currObj != null)
@@ -126,7 +139,7 @@ public class PlacementController : PSingle<PlacementController>
             }
             else
             {
-                _currObj = Instantiate(placeableObjectPrefab);
+                _currObj = Instantiate(PlaceableObjectPrefab);
                 _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().material;
                 _currObj.transform.GetComponentInChildren<Renderer>().material = LayMaterial;
                 _currObj.transform.parent = _player1Builds; //sets the player 1 parent
@@ -135,11 +148,11 @@ public class PlacementController : PSingle<PlacementController>
             _triggerBuild = false;
         }
 
-        if (_currObj != null)
+        if (_currObj != null && !rotating)
         {
+            _cam.FreezeCamera = false;
             BuildMode = true;
-            MoveCurrentObjectToMouse();
-            //RotateFromMouseWheel();            
+            MoveCurrentObjectToMouse();               
         }
     }   
 
@@ -154,7 +167,7 @@ public class PlacementController : PSingle<PlacementController>
                 //float offset = hit.point.y + (_placeObjectMeshRend.bounds.min.y / 2);
                 //_currObj.transform.position = new Vector3(hit.point.x, offset + 2, hit.point.z);                
                 if(SnapOnGrid)
-                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, hit.point.y + (_currObj.transform.localScale.y * 0.5f), Mathf.Round(hit.point.z) * SnapSize);
+                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, (hit.point.y + (_currObj.transform.localScale.y * 0.5f)) * SnapSize, Mathf.Round(hit.point.z) * SnapSize);
                 else
                     _currObj.transform.position = hit.point;                
                 
@@ -168,14 +181,25 @@ public class PlacementController : PSingle<PlacementController>
 
     }
 
-    private void RotateFromMouseWheel()
-    {        
-        mouseWheelRotation += Input.mouseScrollDelta.y;
-        _currObj.transform.Rotate(Vector3.up, mouseWheelRotation * RotateAmount);
+    private bool RotateFromMouseWheel()
+    {
+        if (_currObj == null) return false;
+        _cam.FreezeCamera = true;
+        float rotation = mouseWheelRotation + Input.mouseScrollDelta.y;
+
+        if (rotation != mouseWheelRotation)
+        {
+            mouseWheelRotation = rotation;
+            _currObj.transform.Rotate(Vector3.up, mouseWheelRotation * RotateAmount);
+            return true;
+        }
+
+        return false;        
     }   
 
     private Inventory ReturnPlayerInventory(int playerPos)
     {
         return GameManager.Instance.GetPlayer(playerPos).Inventory;
-    }
+    }    
+
 }

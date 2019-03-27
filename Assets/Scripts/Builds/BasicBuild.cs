@@ -22,6 +22,12 @@ public class BasicBuild : Build
         {
             Debug.Log(col.transform.position);
         }
+        if(col.gameObject.tag == "Projectile" || col.gameObject.tag == "Smasher")
+        {
+            //Random chance later, roll dice?? using .GetChance()
+            int damage = col.gameObject.GetComponent<IDamager>().GetDamage();
+            SetHit(damage);
+        }
     }  
     
     public override bool SetResourceType(ResourceType type)
