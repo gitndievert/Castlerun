@@ -164,10 +164,13 @@ public class PlacementController : PSingle<PlacementController>
         {
             if (hit.transform.gameObject.layer == GROUND_LAYER)
             {
+                Debug.Log("Offset " + _placeObjectMeshRend.bounds.min.y / 2);
+                Debug.Log("Local " + _currObj.transform.localPosition.y);
                 //float offset = hit.point.y + (_placeObjectMeshRend.bounds.min.y / 2);
-                //_currObj.transform.position = new Vector3(hit.point.x, offset + 2, hit.point.z);                
+                //_currObj.transform.position = new Vector3(hit.point.x, offset + 2, hit.point.z);   
+                Debug.Log(hit.point);                    
                 if(SnapOnGrid)
-                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, (hit.point.y + (_currObj.transform.localScale.y * 0.5f)) * SnapSize, Mathf.Round(hit.point.z) * SnapSize);
+                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, (hit.point.y + (_currObj.transform.localPosition.y * 0.5f)) * SnapSize, Mathf.Round(hit.point.z) * SnapSize);
                 else
                     _currObj.transform.position = hit.point;                
                 
@@ -183,14 +186,13 @@ public class PlacementController : PSingle<PlacementController>
 
     private bool RotateFromMouseWheel()
     {
-        if (_currObj == null) return false;
-        _cam.FreezeCamera = true;
+        if (_currObj == null) return false;        
         float rotation = mouseWheelRotation + Input.mouseScrollDelta.y;
 
         if (rotation != mouseWheelRotation)
         {
             mouseWheelRotation = rotation;
-            _currObj.transform.Rotate(Vector3.up, mouseWheelRotation * RotateAmount);
+            _currObj.transform.Rotate(Vector3.down, mouseWheelRotation * RotateAmount);
             return true;
         }
 
