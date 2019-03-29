@@ -170,7 +170,7 @@ public class PlacementController : PSingle<PlacementController>
                 //_currObj.transform.position = new Vector3(hit.point.x, offset + 2, hit.point.z);   
                 Debug.Log(hit.point);                    
                 if(SnapOnGrid)
-                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, (hit.point.y + (_currObj.transform.localPosition.y * 0.5f)) * SnapSize, Mathf.Round(hit.point.z) * SnapSize);
+                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, (hit.point.y + (_currObj.transform.localScale.y * 0.5f)), Mathf.Round(hit.point.z) * SnapSize);
                 else
                     _currObj.transform.position = hit.point;                
                 

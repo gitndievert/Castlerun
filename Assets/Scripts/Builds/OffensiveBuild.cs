@@ -60,7 +60,7 @@ public class OffensiveBuild : Build
         IsFiring = true;
         var proj = Instantiate(Projectile, FirePosition.position, Quaternion.identity);
         proj.name = "Incoming";
-        proj.GetComponent<Rigidbody>().velocity = FirePosition.TransformDirection(Vector3.up * FirePower);        
+        proj.GetComponent<Rigidbody>().velocity = FirePosition.TransformDirection(Vector3.forward * FirePower);        
         SoundManager.PlaySoundOnGameObject(gameObject, FireSounds);
         if (FireEffect != null)
         {

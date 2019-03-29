@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
 public abstract class BaseResource : BasePrefab, IResource
 {
     public ResourceType ResourceType;
