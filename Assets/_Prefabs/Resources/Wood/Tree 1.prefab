@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5120630912429866652}
   - component: {fileID: 1159334732418174836}
   - component: {fileID: 2872675371939482305}
+  - component: {fileID: 8122361574414994189}
   m_Layer: 0
   m_Name: Tree 1
   m_TagString: Untagged
@@ -101,7 +102,7 @@ LODGroup:
   - screenRelativeHeight: 0.3
     fadeTransitionWidth: 0
     renderers: []
-  - screenRelativeHeight: 0.1
+  - screenRelativeHeight: 0
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
@@ -118,3 +119,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.99092, y: 7.008627, z: 2.4366436}
   m_Center: {x: 0.093547866, y: 3.127772, z: 0.11482615}
+--- !u!114 &8122361574414994189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4557374105528676549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeaeed2595927de44bbaa564e38e3d27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 50
+  DestroySound: {fileID: 0}
+  ResourceType: 0
+  BustResourceObj: {fileID: 3437016267795738889, guid: 1c769235749a2814dbdd50c6022af4e6,
+    type: 3}
+  HitSounds:
+  - {fileID: 8300000, guid: e575ee8525e12e443b87810b059e0874, type: 3}
+  BustSound: {fileID: 8300000, guid: b95147a4c31cc23428d33533a5d8c449, type: 3}
+  Value: 40
