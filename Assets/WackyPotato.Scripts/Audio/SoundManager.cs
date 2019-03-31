@@ -44,13 +44,7 @@ public class SoundManager : PSingle<SoundManager>, IAudio
 
     public static void PlaySoundOnGameObject(GameObject obj, AudioClip clip)
     {
-        var source = obj.GetComponent<AudioSource>();
-        if(source == null)
-        {
-            obj.AddComponent(typeof(AudioSource));
-        }
-
-        source.PlayOneShot(clip);        
+        AudioSource.PlayClipAtPoint(clip, obj.transform.position);
     }
 
     public static void PlaySoundOnGameObject(GameObject obj, AudioClip[] clips)
