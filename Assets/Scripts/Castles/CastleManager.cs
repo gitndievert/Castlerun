@@ -87,20 +87,23 @@ public class CastleManager : PSingle<CastleManager>
     {
         //var stats = player.StatsModifier;
         var playerPad = GetSpawnPad(player.PlayerNumber);
-        var castleObj = Instantiate(castle.gameObject);
-        //Bounds padBounds = spawnPad.GetComponent<MeshFilter>().mesh.bounds;
-        if (player.PlayerNumber == 1)
-            Player1Castle = castle;
-        if (player.PlayerNumber == 2)
-            Player2Castle = castle;
-        if (player.PlayerNumber == 3)
-            Player3Castle = castle;
-        if (player.PlayerNumber == 4)
-            Player4Castle = castle;
-               
-        //castleObj.transform.parent = spawnPad.transform;
-        castleObj.transform.position = playerPad.CastleSpawnPosition;
-        castleObj.transform.rotation = playerPad.CastleRotation;
+        if (playerPad)
+        {
+            var castleObj = Instantiate(castle.gameObject);
+            //Bounds padBounds = spawnPad.GetComponent<MeshFilter>().mesh.bounds;
+            if (player.PlayerNumber == 1)
+                Player1Castle = castle;
+            if (player.PlayerNumber == 2)
+                Player2Castle = castle;
+            if (player.PlayerNumber == 3)
+                Player3Castle = castle;
+            if (player.PlayerNumber == 4)
+                Player4Castle = castle;
+
+            //castleObj.transform.parent = spawnPad.transform;
+            castleObj.transform.position = playerPad.CastleSpawnPosition;
+            castleObj.transform.rotation = playerPad.CastleRotation;
+        }
         
 
 

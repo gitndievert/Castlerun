@@ -56,7 +56,7 @@ public class GameManager : PSingle<GameManager>
             if (player.PlayerNumber == 1)
             {
                 Transform pt = player.transform;
-                CameraRig.GetComponent<AutoCam>().SetTarget(pt);
+                //CameraRig.GetComponent<AutoCam>().SetTarget(pt);
                 CameraRig.GetComponent<CameraRotate>().target = pt;
             }
         }                
