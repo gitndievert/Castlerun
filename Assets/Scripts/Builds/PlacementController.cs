@@ -27,7 +27,11 @@ public class PlacementController : PSingle<PlacementController>
     public float RotateAmount = 45f;
     public bool SnapOnGrid = true;
     public float SnapSize = 1f;
+    public float maxPlaceDistance = 10f;
+    public float objectSnapCurrentRotaion = 15f;
 
+    [SerializeField]
+    private bool mouseIsNotOnUI = true;
     [SerializeField]
     private MeshRenderer _placeObjectMeshRend;
 
@@ -37,7 +41,7 @@ public class PlacementController : PSingle<PlacementController>
 
     private float mouseWheelRotation;
     private bool _triggerBuild = false;
-    private CameraRotate _cam;
+    private bool _rotating = false;
 
 
     /// <summary>
@@ -67,8 +71,7 @@ public class PlacementController : PSingle<PlacementController>
         _player1Builds = GameObject.Find("Player_1_Builds").transform;
         //_player2Builds = GameObject.Find("Player_2_Builds").transform;
         //_player3Builds = GameObject.Find("Player_3_Builds").transform;
-        //_player4Builds = GameObject.Find("Player_4_Builds").transform;
-        _cam = CameraRig.GetComponent<CameraRotate>();
+        //_player4Builds = GameObject.Find("Player_4_Builds").transform;        
     }
 
     protected override void PDestroy()
@@ -82,10 +85,33 @@ public class PlacementController : PSingle<PlacementController>
         _placeObjectMeshRend = PlaceableObjectPrefab.GetComponentInChildren<MeshRenderer>();
         _triggerBuild = true;
     }
-        
-    void Update()
-    {        
-        var rotating = RotateFromMouseWheel();
+
+    #if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.red;
+            Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Gizmos.DrawLine(r.origin, r.origin + r.direction);
+        }
+    }
+#endif
+
+    private void FixedUpdate()
+    {
+        if (_currObj != null && !_rotating)
+        {
+            BuildMode = true;
+            MoveCurrentObjectToMouse();
+            //BUILD CODE - This is where we want to add the object snap rotation
+            objectSnapCurrentRotaion =  GetFaceToRotation(transform, _currObj.transform);
+        }
+    }
+
+    private void Update()
+    {
+        _rotating = RotateFromMouseWheel();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -146,21 +172,22 @@ public class PlacementController : PSingle<PlacementController>
             }
 
             _triggerBuild = false;
-        }
-
-        if (_currObj != null && !rotating)
-        {
-            _cam.FreezeCamera = false;
-            BuildMode = true;
-            MoveCurrentObjectToMouse();               
-        }
+        }        
     }   
 
     private void MoveCurrentObjectToMouse()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-               
-        if (Physics.Raycast(ray, out RaycastHit hit))
+
+        if (Physics.Raycast(ray, out RaycastHit hit, maxPlaceDistance, GROUND_LAYER))
+        {
+            //set object position to hit point
+            Vector3 pos = hit.point;
+            _currObj.transform.position = pos;
+            AlignToSurface(_currObj.transform, hit.normal);
+        }
+
+        /*if (Physics.Raycast(ray, out RaycastHit hit))
         {
             if (hit.transform.gameObject.layer == GROUND_LAYER)
             {
@@ -176,7 +203,24 @@ public class PlacementController : PSingle<PlacementController>
                 
                 //_currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
             }
-        }
+        }*/
+    }
+
+    //BUILD CODE - This is the alignment being used for the transforms
+    
+    private void AlignToSurface(Transform itemToAlign,Vector3 hitNormal)
+    {
+       if (itemToAlign == null) return;
+       itemToAlign.rotation = Quaternion.FromToRotation(Vector3.up, hitNormal) * Quaternion.Euler(new Vector3(0, objectSnapCurrentRotaion, 0));
+    }
+
+    private float GetFaceToRotation(Transform target, Transform other)
+    {
+        if (target == null || other == null)
+            Debug.LogError("GetFaceToRotaion can't have null parameters");
+
+        Vector3 dir = target.position - other.position;
+        return Quaternion.LookRotation(dir.normalized).eulerAngles.y;
     }
 
     private void SnapToGround()

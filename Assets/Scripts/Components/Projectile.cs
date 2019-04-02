@@ -17,7 +17,7 @@ public class Projectile : BasePrefab
     
     protected override void Start()
     {
-        PlayTravelSound();
+        //PlayTravelSound();
     }
     
     private void OnDestroy()
@@ -41,9 +41,7 @@ public class Projectile : BasePrefab
     private void PlayHitSound()
     {
         if (ImpactSound == null) return;
-        audioSource.Stop();
-        audioSource.loop = false;
-        audioSource.PlayOneShot(ImpactSound);
+        SoundManager.PlaySoundOnGameObject(gameObject, ImpactSound);
     }
 
     private void OnCollisionEnter(Collision col)

@@ -133,10 +133,11 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            if (TransformHelper.DistanceLess(hit.transform, transform, Inventory.HARVEST_DISTANCE))
+            if (hit.collider != null && hit.transform.tag == "Resource")
             {
-                if (hit.collider != null && hit.transform.tag == "Resource")
+                if (TransformHelper.DistanceLess(hit.transform, transform, Inventory.HARVEST_DISTANCE))
                 {
+
                     var resource = hit.transform.GetComponent<IResource>();
                     int health = resource.GetHealth();
                     resource.SetHit(PlayerStats.HitAmount);
@@ -145,6 +146,7 @@ public class Player : MonoBehaviour
                     //To Debug things for a resource type
                     //var rt = resource.GetResourceType();
                     //Debug.Log(durability + " " + rt.ToString());
+
                 }
             }
         }
