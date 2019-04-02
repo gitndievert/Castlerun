@@ -168,6 +168,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2057798275, guid: 512b5e159a9e90c419de9d78dda8db6c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 512b5e159a9e90c419de9d78dda8db6c, type: 3}
 --- !u!4 &37792488 stripped
@@ -2247,8 +2251,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474729818}
-  m_LocalRotation: {x: -0.14134672, y: 0, z: 0, w: 0.9899602}
-  m_LocalPosition: {x: 185.53925, y: 18.536572, z: 43.379593}
+  m_LocalRotation: {x: 0.032456994, y: 0.048695233, z: 0.0015819201, w: -0.998285}
+  m_LocalPosition: {x: 42.083344, y: 35.970314, z: -137.8645}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2650,8 +2654,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534790568}
-  m_LocalRotation: {x: -0.14134672, y: -0, z: -0, w: 0.9899602}
-  m_LocalPosition: {x: 186.61601, y: 20.180891, z: 29.814148}
+  m_LocalRotation: {x: 0.032456994, y: 0.048695233, z: 0.0015819201, w: -0.998285}
+  m_LocalPosition: {x: 43.160107, y: 37.61463, z: -151.42995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 210445562}
@@ -4647,8 +4651,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027134132}
-  m_LocalRotation: {x: -0.14134672, y: 0, z: 0, w: 0.9899602}
-  m_LocalPosition: {x: 185.53925, y: 22.65657, z: 43.379593}
+  m_LocalRotation: {x: 0.032456994, y: 0.048695233, z: 0.0015819201, w: -0.998285}
+  m_LocalPosition: {x: 42.083344, y: 40.090313, z: -137.8645}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4804,8 +4808,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134567122}
-  m_LocalRotation: {x: -0.14134672, y: 0, z: 0, w: 0.9899602}
-  m_LocalPosition: {x: 185.53925, y: 18.536572, z: 43.379593}
+  m_LocalRotation: {x: 0.032456994, y: 0.048695233, z: 0.0015819201, w: -0.998285}
+  m_LocalPosition: {x: 42.083344, y: 35.970314, z: -137.8645}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5116,7 +5120,7 @@ Terrain:
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_ScaleInLightmap: 0.1024
-  m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightmapParameters: {fileID: 15201, guid: 0000000000000000f000000000000000, type: 0}
   m_GroupingID: 0
   m_AllowAutoConnect: 1
 --- !u!4 &1231810931
@@ -5266,6 +5270,9 @@ MonoBehaviour:
   RotateAmount: 90
   SnapOnGrid: 1
   SnapSize: 1
+  maxPlaceDistance: 10
+  objectSnapCurrentRotaion: 15
+  mouseIsNotOnUI: 1
   _placeObjectMeshRend: {fileID: 0}
   _player1Builds: {fileID: 0}
   _player2Builds: {fileID: 0}
