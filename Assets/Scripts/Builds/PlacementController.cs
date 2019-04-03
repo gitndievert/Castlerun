@@ -15,23 +15,18 @@ public class PlacementController : PSingle<PlacementController>
 {
     const int GROUND_LAYER = 8;
 
-    public GameObject PlaceableObjectPrefab = null;
-    public GameObject CameraRig;
+    public GameObject PlaceableObjectPrefab = null;    
 
     [Tooltip("This is the transparent lay material")]
     public Material LayMaterial;
     [Tooltip("This is the transparent lay material if you cannot build in a zone")]
     public Material ErrorMaterial;
-    
+
     public bool BuildMode = false;
     public float RotateAmount = 45f;
     public bool SnapOnGrid = true;
     public float SnapSize = 1f;
-    public float maxPlaceDistance = 10f;
-    public float objectSnapCurrentRotaion = 15f;
 
-    [SerializeField]
-    private bool mouseIsNotOnUI = true;
     [SerializeField]
     private MeshRenderer _placeObjectMeshRend;
 
@@ -42,7 +37,7 @@ public class PlacementController : PSingle<PlacementController>
     private float mouseWheelRotation;
     private bool _triggerBuild = false;
     private bool _rotating = false;
-
+    
 
     /// <summary>
     /// Object to parent on for player 1
@@ -76,7 +71,7 @@ public class PlacementController : PSingle<PlacementController>
 
     protected override void PDestroy()
     {
-        
+
     }
 
     public void LoadObject(GameObject obj)
@@ -86,30 +81,16 @@ public class PlacementController : PSingle<PlacementController>
         _triggerBuild = true;
     }
 
-    #if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        if (Application.isPlaying)
-        {
-            Gizmos.color = Color.red;
-            Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Gizmos.DrawLine(r.origin, r.origin + r.direction);
-        }
-    }
-#endif
-
     private void FixedUpdate()
     {
-        if (_currObj != null && !_rotating)
-        {
+         if (_currObj != null && !_rotating)
+        {            
             BuildMode = true;
             MoveCurrentObjectToMouse();
-            //BUILD CODE - This is where we want to add the object snap rotation
-            objectSnapCurrentRotaion =  GetFaceToRotation(transform, _currObj.transform);
         }
     }
 
-    private void Update()
+    void Update()
     {
         _rotating = RotateFromMouseWheel();
 
@@ -146,11 +127,11 @@ public class PlacementController : PSingle<PlacementController>
                     _ui.Messages.text = "That resource will not work to build this plan";
                 }
 
-                if(cancelBuild)
+                if (cancelBuild)
                 {
                     Destroy(_currObj);
                 }
-                
+
             }
             _currObj = null;
             BuildMode = false;
@@ -172,22 +153,14 @@ public class PlacementController : PSingle<PlacementController>
             }
 
             _triggerBuild = false;
-        }        
-    }   
+        }       
+    }
 
     private void MoveCurrentObjectToMouse()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, maxPlaceDistance, GROUND_LAYER))
-        {
-            //set object position to hit point
-            Vector3 pos = hit.point;
-            _currObj.transform.position = pos;
-            AlignToSurface(_currObj.transform, hit.normal);
-        }
-
-        /*if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
             if (hit.transform.gameObject.layer == GROUND_LAYER)
             {
@@ -195,32 +168,15 @@ public class PlacementController : PSingle<PlacementController>
                 Debug.Log("Local " + _currObj.transform.localPosition.y);
                 //float offset = hit.point.y + (_placeObjectMeshRend.bounds.min.y / 2);
                 //_currObj.transform.position = new Vector3(hit.point.x, offset + 2, hit.point.z);   
-                Debug.Log(hit.point);                    
-                if(SnapOnGrid)
-                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, (hit.point.y + (_currObj.transform.localScale.y * 0.5f)), Mathf.Round(hit.point.z) * SnapSize);
+                Debug.Log(hit.point);
+                if (SnapOnGrid)
+                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, hit.point.y, Mathf.Round(hit.point.z) * SnapSize);
                 else
-                    _currObj.transform.position = hit.point;                
-                
+                    _currObj.transform.position = hit.point;
+
                 //_currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
             }
-        }*/
-    }
-
-    //BUILD CODE - This is the alignment being used for the transforms
-    
-    private void AlignToSurface(Transform itemToAlign,Vector3 hitNormal)
-    {
-       if (itemToAlign == null) return;
-       itemToAlign.rotation = Quaternion.FromToRotation(Vector3.up, hitNormal) * Quaternion.Euler(new Vector3(0, objectSnapCurrentRotaion, 0));
-    }
-
-    private float GetFaceToRotation(Transform target, Transform other)
-    {
-        if (target == null || other == null)
-            Debug.LogError("GetFaceToRotaion can't have null parameters");
-
-        Vector3 dir = target.position - other.position;
-        return Quaternion.LookRotation(dir.normalized).eulerAngles.y;
+        }
     }
 
     private void SnapToGround()
@@ -230,7 +186,7 @@ public class PlacementController : PSingle<PlacementController>
 
     private bool RotateFromMouseWheel()
     {
-        if (_currObj == null) return false;        
+        if (_currObj == null) return false;
         float rotation = mouseWheelRotation + Input.mouseScrollDelta.y;
 
         if (rotation != mouseWheelRotation)
@@ -240,12 +196,12 @@ public class PlacementController : PSingle<PlacementController>
             return true;
         }
 
-        return false;        
-    }   
+        return false;
+    }
 
     private Inventory ReturnPlayerInventory(int playerPos)
     {
         return GameManager.Instance.GetPlayer(playerPos).Inventory;
-    }    
+    }
 
 }

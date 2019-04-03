@@ -1199,7 +1199,7 @@ PrefabInstance:
     - target: {fileID: 861930985960648141, guid: ddf61c7e10f78a64b8de4b243837627c,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1141724513550356809, guid: ddf61c7e10f78a64b8de4b243837627c,
         type: 3}
@@ -1520,7 +1520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1fb4e1060b5aa41bbc4a9e4f0432ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerSpawnPosition: {x: 188, y: 25, z: 242.43}
+  PlayerSpawnPosition: {x: 202.5, y: 25, z: 58.22}
   CastleSpawnPosition: {x: 180.4, y: 2, z: 10.5}
   CastleRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &356541805
@@ -2251,8 +2251,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474729818}
-  m_LocalRotation: {x: 0.032456994, y: 0.048695233, z: 0.0015819201, w: -0.998285}
-  m_LocalPosition: {x: 42.083344, y: 35.970314, z: -137.8645}
+  m_LocalRotation: {x: -0.11954676, y: 0.13730405, z: 0.016696967, w: 0.9831467}
+  m_LocalPosition: {x: 135.2359, y: -0.84636307, z: 111.01814}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2433,8 +2433,7 @@ PrefabInstance:
     - target: {fileID: 11400000, guid: baec086904791744185aaa07a6cf55c2, type: 3}
       propertyPath: m_Target
       value: 
-      objectReference: {fileID: 115547228, guid: 829777c3b0c57404ca3d3a2f9a3ed1df,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: baec086904791744185aaa07a6cf55c2, type: 3}
       propertyPath: m_FollowVelocity
       value: 1
@@ -2457,7 +2456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: baec086904791744185aaa07a6cf55c2, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: baec086904791744185aaa07a6cf55c2, type: 3}
       propertyPath: m_Enabled
@@ -2654,8 +2653,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534790568}
-  m_LocalRotation: {x: 0.032456994, y: 0.048695233, z: 0.0015819201, w: -0.998285}
-  m_LocalPosition: {x: 43.160107, y: 37.61463, z: -151.42995}
+  m_LocalRotation: {x: -0.11954676, y: 0.13730405, z: 0.016696967, w: 0.9831467}
+  m_LocalPosition: {x: 136.31267, y: 0.79795647, z: 97.4527}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 210445562}
@@ -2900,7 +2899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &569712441
 Transform:
   m_ObjectHideFlags: 0
@@ -4651,8 +4650,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027134132}
-  m_LocalRotation: {x: 0.032456994, y: 0.048695233, z: 0.0015819201, w: -0.998285}
-  m_LocalPosition: {x: 42.083344, y: 40.090313, z: -137.8645}
+  m_LocalRotation: {x: -0.14134672, y: 0, z: 0, w: 0.9899602}
+  m_LocalPosition: {x: 185.53925, y: 22.65657, z: 43.379593}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4808,8 +4807,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134567122}
-  m_LocalRotation: {x: 0.032456994, y: 0.048695233, z: 0.0015819201, w: -0.998285}
-  m_LocalPosition: {x: 42.083344, y: 35.970314, z: -137.8645}
+  m_LocalRotation: {x: -0.14134672, y: 0, z: 0, w: 0.9899602}
+  m_LocalPosition: {x: 185.53925, y: 18.536572, z: 43.379593}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5263,16 +5262,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlaceableObjectPrefab: {fileID: 0}
-  CameraRig: {fileID: 487774255}
   LayMaterial: {fileID: 2100000, guid: ff0d980d5353d134cb38746605f0d628, type: 2}
   ErrorMaterial: {fileID: 2100000, guid: a0c0af64964bcac489a1224c240cda71, type: 2}
   BuildMode: 0
   RotateAmount: 90
   SnapOnGrid: 1
   SnapSize: 1
-  maxPlaceDistance: 10
-  objectSnapCurrentRotaion: 15
-  mouseIsNotOnUI: 1
   _placeObjectMeshRend: {fileID: 0}
   _player1Builds: {fileID: 0}
   _player2Builds: {fileID: 0}
@@ -7955,7 +7950,7 @@ PrefabInstance:
     - target: {fileID: 861930985960648141, guid: ddf61c7e10f78a64b8de4b243837627c,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1141724513550356809, guid: ddf61c7e10f78a64b8de4b243837627c,
         type: 3}

@@ -35,9 +35,9 @@ public class GameManager : PSingle<GameManager>
 
     protected override void PAwake()
     {
-        //FOR TESTING
-        SetNumberOfPlayers(2);
-        PlayerPads = gameObject.GetComponentsInChildren<PlayerPad>();
+        //FOR TESTING        
+        PlayerPads = gameObject.GetComponentsInChildren<PlayerPad>();        
+        SetNumberOfPlayers(PlayerPads.Length);
     }
 
     private void Start()
@@ -56,6 +56,7 @@ public class GameManager : PSingle<GameManager>
             if (player.PlayerNumber == 1)
             {
                 Transform pt = player.transform;
+                //Having issues with autocam, so removing it
                 //CameraRig.GetComponent<AutoCam>().SetTarget(pt);
                 CameraRig.GetComponent<CameraRotate>().target = pt;
             }
