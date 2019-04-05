@@ -83,7 +83,7 @@ public class PlacementController : PSingle<PlacementController>
 
     private void FixedUpdate()
     {
-         if (_currObj != null && !_rotating)
+        if (_currObj != null && !_rotating)
         {            
             BuildMode = true;
             MoveCurrentObjectToMouse();

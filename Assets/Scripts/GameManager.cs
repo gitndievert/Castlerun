@@ -49,7 +49,6 @@ public class GameManager : PSingle<GameManager>
             var character = Instantiate(PlayerInstance, PlayerPads[i - 1].PlayerSpawnPosition, Quaternion.identity);
             var player = character.GetComponent<Player>();
             player.PlayerNumber = i;
-            player.Inventory.ResetOnStart = false; //Gives all resources
             Players.Add(player);
 
             //Will need to be totally redone with the multiplayer code
@@ -67,4 +66,6 @@ public class GameManager : PSingle<GameManager>
     {
         
     }
+
+
 }

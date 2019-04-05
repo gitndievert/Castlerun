@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8223759723889958670}
   - component: {fileID: 2882258132270718939}
   - component: {fileID: 7774042128992094269}
+  - component: {fileID: 3264862447048341503}
+  - component: {fileID: 7359507103237115776}
   m_Layer: 0
   m_Name: Gem1
   m_TagString: Untagged
@@ -97,3 +99,38 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &3264862447048341503
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646387907439330849}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.051456627, y: 0.051840115, z: 0.037308283}
+  m_Center: {x: -0.005565625, y: 0.023469409, z: 0.013663683}
+--- !u!114 &7359507103237115776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646387907439330849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeaeed2595927de44bbaa564e38e3d27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 50
+  DestroySound: {fileID: 0}
+  ResourceType: 3
+  BustResourceObj: {fileID: 3437016267795738889, guid: 1c769235749a2814dbdd50c6022af4e6,
+    type: 3}
+  HitSounds:
+  - {fileID: 8300000, guid: 6b8b2b05c9e78c742969cb6fc32f4a88, type: 3}
+  - {fileID: 8300000, guid: 223e2e486ad4ce84da907f710c915d03, type: 3}
+  BustSound: {fileID: 8300000, guid: 134c83d6b10fe6945bba6b0cc14be6c1, type: 3}
+  Value: 10
