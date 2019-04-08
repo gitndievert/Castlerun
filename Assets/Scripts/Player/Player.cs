@@ -133,9 +133,12 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            if (hit.collider != null && hit.transform.tag == "Resource")
+            if (hit.transform != null && hit.transform.tag == "Resource")
             {
-                if (TransformHelper.DistanceLess(hit.transform, transform, Inventory.HARVEST_DISTANCE))
+
+                Debug.Log(TransformHelper.DistanceCheck(hit.transform, transform));
+
+                if (TransformHelper.DistanceLess(transform, hit.transform, Inventory.HARVEST_DISTANCE))
                 {
 
                     var resource = hit.transform.GetComponent<IResource>();
