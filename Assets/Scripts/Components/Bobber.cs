@@ -16,7 +16,7 @@ public class Bobber : MonoBehaviour
     public bool AutoStartBob = false;
     public bool Rotate = false;
 
-    private Rigidbody _rb;
+    private Rigidbody _rb;    
     private bool _isBobbing;
     private bool _isRotating;
     private Vector3 _lockPos;
@@ -25,12 +25,12 @@ public class Bobber : MonoBehaviour
     {
         if (!transform.GetComponent(typeof(Rigidbody)))
             gameObject.AddComponent<Rigidbody>();
-        _rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();        
     }
 
     private void Start()
-    {
-        if(AutoStartBob)
+    {        
+        if (AutoStartBob)
         {
             StartBob(Rotate);
         }
@@ -66,7 +66,7 @@ public class Bobber : MonoBehaviour
         _rb.velocity = Vector3.forward * BumpForce;
         yield return new WaitForSeconds(0.5f);
         _lockPos = transform.position;        
-        _isBobbing = true;        
+        _isBobbing = true;
     }
 
 

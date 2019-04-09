@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3243121306507876778
+--- !u!1 &1002730516505533656
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5089013634996229682}
-  - component: {fileID: 1242735369956390136}
-  - component: {fileID: 3224806875876635432}
-  - component: {fileID: 1186474557619820844}
-  - component: {fileID: 3131845804202879061}
+  - component: {fileID: 1154599797500993371}
+  - component: {fileID: 6713943350499002310}
+  - component: {fileID: 9160233082973357515}
+  - component: {fileID: 199159965483385223}
+  - component: {fileID: 5377408447087205655}
   m_Layer: 0
-  m_Name: Tree_1_7
+  m_Name: Camp_Gate_1B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5089013634996229682
+--- !u!4 &1154599797500993371
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3243121306507876778}
+  m_GameObject: {fileID: 1002730516505533656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 215.24548, y: 42.61, z: 112.62835}
+  m_LocalPosition: {x: 237.46469, y: 27.99541, z: 97.0842}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1242735369956390136
+--- !u!33 &6713943350499002310
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3243121306507876778}
-  m_Mesh: {fileID: 4300010, guid: f41a46d2a9000ae4685bc8b3141724db, type: 3}
---- !u!23 &3224806875876635432
+  m_GameObject: {fileID: 1002730516505533656}
+  m_Mesh: {fileID: 4300008, guid: 0b66ab6aecd92f3478a1b78050c6727c, type: 3}
+--- !u!23 &9160233082973357515
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3243121306507876778}
+  m_GameObject: {fileID: 1002730516505533656}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -59,9 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 55f740aad4d80994e97de3d669cf5455, type: 2}
-  - {fileID: 2100000, guid: b0b6a7ca85c5dbb49851f85de66d6d52, type: 2}
-  - {fileID: 2100000, guid: 8d9adbfc0fdff634c89861f4b40fb16b, type: 2}
+  - {fileID: 2100000, guid: 764f8772da744e24a9289b3974538681, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,38 +79,32 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1186474557619820844
+--- !u!64 &199159965483385223
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002730516505533656}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300008, guid: 0b66ab6aecd92f3478a1b78050c6727c, type: 3}
+--- !u!114 &5377408447087205655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3243121306507876778}
+  m_GameObject: {fileID: 1002730516505533656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeaeed2595927de44bbaa564e38e3d27, type: 3}
+  m_Script: {fileID: 11500000, guid: a3145189b735dbe41a7154314dc29656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 30
+  Health: 0
   DestroySound: {fileID: 0}
-  ResourceType: 0
-  BustResourceObj: {fileID: 3437016267795738889, guid: 1c769235749a2814dbdd50c6022af4e6,
-    type: 3}
-  HitSounds:
-  - {fileID: 8300000, guid: e575ee8525e12e443b87810b059e0874, type: 3}
-  BustSound: {fileID: 8300000, guid: f51a230b19c465e4caf398a6a47eb3d2, type: 3}
-  Value: 10
---- !u!136 &3131845804202879061
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3243121306507876778}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.80358887
-  m_Height: 27.791084
-  m_Direction: 1
-  m_Center: {x: 0, y: -4, z: 0.8861923}
+  PlacementCost: 10

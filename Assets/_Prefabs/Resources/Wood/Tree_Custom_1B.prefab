@@ -317,8 +317,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7946057574568976027}
-  - component: {fileID: 7497836817956885902}
   - component: {fileID: 4117495622725909944}
+  - component: {fileID: 926272259224419402}
   m_Layer: 0
   m_Name: Tree_Custom_1B
   m_TagString: Untagged
@@ -347,19 +347,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7497836817956885902
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4583924102441410571}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.1584473, y: 8.764366, z: 1.9267349}
-  m_Center: {x: 2.7094574, y: -3.882183, z: -3.7647743}
 --- !u!114 &4117495622725909944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,6 +368,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e575ee8525e12e443b87810b059e0874, type: 3}
   BustSound: {fileID: 8300000, guid: f51a230b19c465e4caf398a6a47eb3d2, type: 3}
   Value: 10
+--- !u!136 &926272259224419402
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583924102441410571}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.9010925
+  m_Height: 19.124117
+  m_Direction: 1
+  m_Center: {x: 2.5, y: 1, z: -3.67}
 --- !u!1 &5187233461936511047
 GameObject:
   m_ObjectHideFlags: 0

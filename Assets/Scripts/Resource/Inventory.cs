@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public const float HARVEST_DISTANCE = 2.5f;
+    public const float HARVEST_DISTANCE = 17f;
 
     private const int MAX_WOOD = 500;
     private const int MAX_ROCK = 500;

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2062476660257798433}
   - component: {fileID: 8948695979265041225}
   - component: {fileID: 5830777864166622366}
-  - component: {fileID: 8976998126539260760}
   - component: {fileID: 7940768883068473414}
+  - component: {fileID: 4444443754047313880}
   m_Layer: 0
   m_Name: Tree_1A(Dead)
   m_TagString: Untagged
@@ -80,19 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8976998126539260760
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1610001184818319156}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.5635986, y: 22.80335, z: 2.370514}
-  m_Center: {x: 1.0001221, y: -0.47652626, z: 0.42975616}
 --- !u!114 &7940768883068473414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,3 +101,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e575ee8525e12e443b87810b059e0874, type: 3}
   BustSound: {fileID: 8300000, guid: f51a230b19c465e4caf398a6a47eb3d2, type: 3}
   Value: 10
+--- !u!136 &4444443754047313880
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610001184818319156}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.3636265
+  m_Height: 22.31899
+  m_Direction: 1
+  m_Center: {x: 0.6824703, y: -1.2639532, z: 0.16624069}
