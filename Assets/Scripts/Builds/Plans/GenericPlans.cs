@@ -8,4 +8,5 @@ public class GenericPlans : MonoBehaviour
     public GameObject Plan2;
     public GameObject Plan3;
     public GameObject Plan4;
+    public GameObject Plan5;
 }

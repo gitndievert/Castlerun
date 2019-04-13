@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9086477737352126637}
   - component: {fileID: 9086477737352126636}
   - component: {fileID: 9086477737352126635}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9086477738911579928}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -114,6 +114,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Combined Meshes
+      objectReference: {fileID: 0}
+    - target: {fileID: 93415659632370133, guid: df91fa929b9f325428f9f886d20e1104,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5058298972119075428, guid: df91fa929b9f325428f9f886d20e1104,
         type: 3}
@@ -169,6 +174,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776230022531544081, guid: df91fa929b9f325428f9f886d20e1104,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df91fa929b9f325428f9f886d20e1104, type: 3}

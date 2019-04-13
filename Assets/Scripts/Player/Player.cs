@@ -108,6 +108,10 @@ public class Player : MonoBehaviour
         {
             PlacementController.Instance.LoadObject(_plans.Plan4);
         }
+        else if (Input.GetKeyDown(KeyBindings.BuildKey5))
+        {
+            PlacementController.Instance.LoadObject(_plans.Plan5);
+        }
         else
         {
             if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !_swinging)

@@ -12,5 +12,6 @@ public class KeyBindings
     public static KeyCode BuildKey2 = KeyCode.Alpha2;
     public static KeyCode BuildKey3 = KeyCode.Alpha3;
     public static KeyCode BuildKey4 = KeyCode.Alpha4;
+    public static KeyCode BuildKey5 = KeyCode.Alpha5;
 
 }

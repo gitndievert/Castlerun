@@ -99,6 +99,7 @@ public class PlacementController : PSingle<PlacementController>
             if (_currObj != null)
             {
                 _currObj.transform.GetComponentInChildren<Renderer>().material = _saveMaterial;
+                _currObj.transform.GetComponent<Collider>().enabled = true;
                 var build = _currObj.transform.GetComponent<Build>();
 
                 //For Testing 
@@ -135,6 +136,7 @@ public class PlacementController : PSingle<PlacementController>
             }
             _currObj = null;
             BuildMode = false;
+            LoadObject(PlaceableObjectPrefab);
             return;
         }
 
@@ -144,13 +146,12 @@ public class PlacementController : PSingle<PlacementController>
             {
                 Destroy(_currObj);
             }
-            else
-            {
-                _currObj = Instantiate(PlaceableObjectPrefab);
-                _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().material;
-                _currObj.transform.GetComponentInChildren<Renderer>().material = LayMaterial;
-                _currObj.transform.parent = _player1Builds; //sets the player 1 parent
-            }
+            
+            _currObj = Instantiate(PlaceableObjectPrefab);
+            _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().material;
+            _currObj.transform.GetComponent<Collider>().enabled = false;
+            _currObj.transform.GetComponentInChildren<Renderer>().material = LayMaterial;
+            _currObj.transform.parent = _player1Builds; //sets the player 1 parent          
 
             _triggerBuild = false;
         }       

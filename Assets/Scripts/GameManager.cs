@@ -6,7 +6,7 @@ using UnityStandardAssets.Cameras;
 
 public class GameManager : PSingle<GameManager>
 {
-    public GameObject CameraRig;
+    public GameObject Camera;
     public GameObject PlayerInstance;
     public PlayerPad[] PlayerPads;
     public List<Player> Players;
@@ -38,11 +38,12 @@ public class GameManager : PSingle<GameManager>
         //FOR TESTING        
         PlayerPads = gameObject.GetComponentsInChildren<PlayerPad>();        
         SetNumberOfPlayers(PlayerPads.Length);
+        
     }
 
     private void Start()
     {
-        if (CameraRig == null)
+        if (Camera == null)
             throw new System.Exception("Must have a Camera Rig set in the Game Manager scripts");
         for (int i = 1; i <= _numOfPlayer; i++)
         {
@@ -54,10 +55,10 @@ public class GameManager : PSingle<GameManager>
             //Will need to be totally redone with the multiplayer code
             if (player.PlayerNumber == 1)
             {
-                Transform pt = player.transform;
+                Transform pt = player.transform;                
                 //Having issues with autocam, so removing it
                 //CameraRig.GetComponent<AutoCam>().SetTarget(pt);
-                CameraRig.GetComponent<CameraRotate>().target = pt;
+                Camera.GetComponent<CameraRotate>().target = pt;
             }
         }                
     }
