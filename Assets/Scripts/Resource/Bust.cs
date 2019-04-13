@@ -19,13 +19,16 @@ public class Bust : BasePrefab
     private GameObject _bustObj;
     private AudioClip _bustSound;
     private Transform _backplane;
-
-
+    private Collider _col;
+    private bool _locked = false;
+    
     protected override void Start()
     {
-        base.Start();              
+        base.Start();
+        _col = GetComponent<Collider>();
+        _col.isTrigger = false;
     }
-
+    
     private void FixedUpdate()
     {
         if (GravityPull)
@@ -64,12 +67,33 @@ public class Bust : BasePrefab
         }
     }
 
+    private void OnCollisionEnter(Collision col)
+    {
+        if (_locked) return;
+        if (col.transform.tag == "Player")
+        {
+            PickUp(col.transform.GetComponent<Player>());
+        }
+        else if (col.gameObject.layer == Global.GROUND_LAYER)
+        {
+            _col.isTrigger = true;
+            transform.GetComponent<Rigidbody>().isKinematic = true;
+            _locked = true;
+            transform.GetComponent<Bobber>().StartBob(true);
+            return;
+        }
+    }
+
     private void OnTriggerEnter(Collider col)
     {
-        if (col.transform.tag != "Player") return;
-        var player = col.transform.GetComponent<Player>();
+        if (col.transform.tag != "Player") return;        
+        PickUp(col.transform.GetComponent<Player>());        
+    }   
+
+    public void PickUp(Player player)
+    {
         if (player)
-        {            
+        {
             player.Inventory.Set(_rt, _amount);
             if (!player.Inventory.IsFull(_rt))
             {
@@ -78,6 +102,6 @@ public class Bust : BasePrefab
             }
         }
     }
-       
 }
 
+    

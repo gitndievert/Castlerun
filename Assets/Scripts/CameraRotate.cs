@@ -84,12 +84,7 @@ public class CameraRotate : MonoBehaviour
         if (_targetRigidbody == null && target != null)
             _targetRigidbody = target.GetComponent<Rigidbody>();
     }
-
-    private void FixedUpdate()
-    {
-        FollowTarget(Time.deltaTime);
-    }
-
+    
     /**
      * Camera logic on LateUpdate to only update after all character movement logic has been handled.
      */
@@ -99,6 +94,8 @@ public class CameraRotate : MonoBehaviour
 
         // Don't do anything if target is not defined
         if (!target) return;
+
+        FollowTarget(Time.deltaTime);
 
         // If either mouse buttons are down, let the mouse govern camera position
         if (GUIUtility.hotControl == 0)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SBK.Unity;
+using TMPro;
 
 public partial class UIManager : PSingle<UIManager>
 {
@@ -14,6 +15,8 @@ public partial class UIManager : PSingle<UIManager>
     /// Player Panel
     /// </summary>
     public PlayerUI PlayerUIPanel;
+
+    public TextMeshProUGUI Messages;
 
     protected override void PAwake()
     {

@@ -90,37 +90,55 @@ public class Player : MonoBehaviour
     }
         
     private void Update()
-    {
+    {   
         //Temporary, work out the details for build mappings later
-        if(Input.GetKeyDown(KeyBindings.BuildKey1))
-        {
-            PlacementController.Instance.LoadObject(_plans.Plan1);
-        }
-        else if(Input.GetKeyDown(KeyBindings.BuildKey2))
-        {
-            PlacementController.Instance.LoadObject(_plans.Plan2);
-        }
-        else if (Input.GetKeyDown(KeyBindings.BuildKey3))
-        {
-            PlacementController.Instance.LoadObject(_plans.Plan3);
-        }
-        else if (Input.GetKeyDown(KeyBindings.BuildKey4))
-        {
-            PlacementController.Instance.LoadObject(_plans.Plan4);
-        }
-        else if (Input.GetKeyDown(KeyBindings.BuildKey5))
-        {
-            PlacementController.Instance.LoadObject(_plans.Plan5);
-        }
-        else
-        {
-            if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !_swinging)
-            {                                
-                _swinging = true;
-                _anim.SetBool("Swing", true);                
-            }
-        }
 
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            Global.BuildMode = !Global.BuildMode;
+            Debug.Log(Global.BuildMode);
+            if(Global.BuildMode)
+            {
+                //Annouce build mode on
+                UIManager.Instance.Messages.text = "Build Mode ON";
+                PlacementController.Instance.LoadObject(_plans.Plan1);
+            }
+            else
+            {
+                //Annouce build mode off
+                UIManager.Instance.Messages.text = "Build Mode OFF";
+                PlacementController.Instance.ClearObject();
+            }
+            
+        }
+        if (Global.BuildMode)
+        {
+            if (Input.GetKeyDown(KeyBindings.BuildKey1))
+            {
+                PlacementController.Instance.LoadObject(_plans.Plan1);
+            }
+            else if (Input.GetKeyDown(KeyBindings.BuildKey2))
+            {
+                PlacementController.Instance.LoadObject(_plans.Plan2);
+            }
+            else if (Input.GetKeyDown(KeyBindings.BuildKey3))
+            {
+                PlacementController.Instance.LoadObject(_plans.Plan3);
+            }
+            else if (Input.GetKeyDown(KeyBindings.BuildKey4))
+            {
+                PlacementController.Instance.LoadObject(_plans.Plan4);
+            }
+            else if (Input.GetKeyDown(KeyBindings.BuildKey5))
+            {
+                PlacementController.Instance.LoadObject(_plans.Plan5);
+            }
+        }        
+        else if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !_swinging && !Global.BuildMode)
+        {
+            _swinging = true;
+            _anim.SetBool("Swing", true);
+        }
         
     }
 
@@ -139,9 +157,7 @@ public class Player : MonoBehaviour
         {
             if (hit.transform != null && hit.transform.tag == "Resource")
             {
-
-                Debug.Log(TransformHelper.DistanceCheck(hit.transform, transform));
-
+                
                 if (TransformHelper.DistanceLess(transform, hit.transform, Inventory.HARVEST_DISTANCE))
                 {
 

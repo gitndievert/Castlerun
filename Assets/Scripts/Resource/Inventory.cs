@@ -118,7 +118,7 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    _ui.Messages.text = "You cannot store anymore wood";
+                    UIManager.Instance.Messages.text = "You cannot store anymore wood";
                     return;
                 }                
                 break;
@@ -129,7 +129,7 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    _ui.Messages.text = "You cannot store anymore rock";
+                    UIManager.Instance.Messages.text = "You cannot store anymore rock";
                     return;
                 }                
                 break;
@@ -140,7 +140,7 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    _ui.Messages.text = "You cannot store anymore metal";
+                    UIManager.Instance.Messages.text = "You cannot store anymore metal";
                     return;
                 }                
                 break;
@@ -151,7 +151,7 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    _ui.Messages.text = "You cannot store anymore gems";
+                    UIManager.Instance.Messages.text = "You cannot store anymore gems";
                     return;
 
                 }                
@@ -160,11 +160,11 @@ public class Inventory : MonoBehaviour
 
         if (amount > 0)
         {
-            _ui.Messages.text = $"You gathered {amount} {type.ToString()}";
+            UIManager.Instance.Messages.text = $"You gathered {amount} {type.ToString()}";
         }
         else
         {
-            _ui.Messages.text = $"You used {Mathf.Abs(amount)} {type.ToString()}";
+            UIManager.Instance.Messages.text = $"You used {Mathf.Abs(amount)} {type.ToString()}";
         }
 
 

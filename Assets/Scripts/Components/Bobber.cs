@@ -45,29 +45,21 @@ public class Bobber : MonoBehaviour
                 transform.Rotate(Vector3.up, Time.deltaTime * RotateSpeed);
             }
             float sinY = Mathf.Sin(Time.time * BobSpeed) * BobHeight;            
-            transform.position = new Vector3(_lockPos.x, sinY + _lockPos.y, _lockPos.z);
+            transform.position = new Vector3(_lockPos.x, sinY + _lockPos.y + 1, _lockPos.z);
         }
         
     }
 
     public void StartBob(bool rotate = false)
     {
+        _lockPos = transform.position;
         _isRotating = rotate;
-        StartCoroutine(Bob());
+        _isBobbing = true;
     }
 
     public void StopBob()
     {
-        StopCoroutine(Bob());
+        _isBobbing = false;
     }
-
-    private IEnumerator Bob()
-    {        
-        _rb.velocity = Vector3.forward * BumpForce;
-        yield return new WaitForSeconds(0.5f);
-        _lockPos = transform.position;        
-        _isBobbing = true;
-    }
-
 
 }
