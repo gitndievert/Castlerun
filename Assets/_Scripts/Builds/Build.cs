@@ -14,6 +14,11 @@ public abstract class Build : BasePrefab, IBuild
     protected virtual void Start()
     {        
         if(Health == 0) Health = 20;
+        if(BuildTime > 0)
+        {
+            //Come back, I need to have the timers run 
+            //StartCoroutine(RunBuild());
+        }
     }
 
     public virtual void ConfirmPlacement()
@@ -24,5 +29,12 @@ public abstract class Build : BasePrefab, IBuild
     }
 
     public abstract bool SetResourceType(ResourceType type);
+
+    protected IEnumerator RunBuild()
+    {
+        Debug.Log("Start Build");
+        yield return new WaitForSeconds(BuildTime);
+        Debug.Log("Finish Build");
+    }
     
 }

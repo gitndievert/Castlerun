@@ -32,7 +32,24 @@ public class BasicBuild : Build
     
     public override bool SetResourceType(ResourceType type)
     {
-        return type == ResourceType;
+        _pickType = type;
+        switch (type)
+        {
+            case ResourceType.Wood:
+                PlacementCost = 10;
+                break;
+            case ResourceType.Rock:
+                PlacementCost = 10;
+                break;
+            case ResourceType.Metal:
+                PlacementCost = 20;
+                break;
+            default:
+                PlacementCost = 0;
+                return false;
+        }
+
+        return true;
     }
 
 }

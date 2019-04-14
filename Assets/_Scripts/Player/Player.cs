@@ -42,6 +42,7 @@ public class Player : BasePrefab
 
     //Temporary for now
     private GenericPlans _plans;
+    private OffensivePlans _oPlans;
 
 
     protected override void Awake()
@@ -53,6 +54,7 @@ public class Player : BasePrefab
 
         //Temporary for now
         _plans = GetComponent<GenericPlans>();
+        _oPlans = GetComponent<OffensivePlans>();
     }
 
     // Start is called before the first frame update
@@ -103,7 +105,7 @@ public class Player : BasePrefab
             {
                 //Annouce build mode on
                 UIManager.Instance.Messages.text = "Build Mode ON";
-                PlacementController.Instance.LoadObject(_plans.Plan1);
+                PlacementController.Instance.LoadObject(_plans.Wall);
             }
             else
             {
@@ -120,16 +122,20 @@ public class Player : BasePrefab
 
             if (Input.GetKeyDown(KeyBindings.BuildKey1))
             {
-                PlacementController.Instance.LoadObject(_plans.Plan1);
+                PlacementController.Instance.LoadObject(_plans.Wall);
             }
             else if (Input.GetKeyDown(KeyBindings.BuildKey2))
             {
-                PlacementController.Instance.LoadObject(_plans.Plan2);
+                PlacementController.Instance.LoadObject(_plans.Floor);
             }
             else if (Input.GetKeyDown(KeyBindings.BuildKey3))
             {
-                PlacementController.Instance.LoadObject(_plans.Plan3);
-            }          
+                PlacementController.Instance.LoadObject(_plans.Ramp);
+            }  
+            else if(Input.GetKeyDown(KeyCode.B))
+            {
+                PlacementController.Instance.LoadObject(_oPlans.Barracks);
+            }
         }        
         else if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !_swinging && !Global.BuildMode)
         {

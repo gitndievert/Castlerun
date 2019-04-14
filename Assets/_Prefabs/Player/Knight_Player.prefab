@@ -1208,6 +1208,7 @@ GameObject:
   - component: {fileID: 1507808361}
   - component: {fileID: 1507808362}
   - component: {fileID: 706162164831775572}
+  - component: {fileID: 3858733312294855992}
   m_Layer: 2
   m_Name: Knight_Player
   m_TagString: Player
@@ -1281,9 +1282,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857534b65a2506d488e6e7492e8f068a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Plan1: {fileID: 1002730516505533656, guid: 32fb27023304f9646a8c6c3c21380621, type: 3}
-  Plan2: {fileID: 1002730516505533656, guid: ca59f118567368241b6e11ed2539d626, type: 3}
-  Plan3: {fileID: 1002730516505533656, guid: ff079e41b30530146a575eebb39cb1eb, type: 3}
+  Wall: {fileID: 0}
+  Floor: {fileID: 0}
+  Ramp: {fileID: 0}
 --- !u!114 &1507808359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1379,6 +1380,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.1, z: 0}
+--- !u!114 &3858733312294855992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507808357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df23a32e2d4fcb44855c4f713579a7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Barracks: {fileID: 1516178438436275324, guid: 54672a048a056214aae7a6e4dae17ef5,
+    type: 3}
 --- !u!1 &1511076747
 GameObject:
   m_ObjectHideFlags: 0

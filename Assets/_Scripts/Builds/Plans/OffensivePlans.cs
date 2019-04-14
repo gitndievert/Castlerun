@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class OffensivePlans : MonoBehaviour
 {
-    
+    public GameObject Barracks;
 }

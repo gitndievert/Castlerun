@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class ArmyBuild : Build
 {
-    public ArmyBuildType ArmyOutputType = ArmyBuildType.Infantry;
+    
+    protected override float BuildTime => ConstructionTime;
 
+    protected override ResourceType ResourceType => ResourceType.Wood;
+
+    public ArmyBuildType ArmyOutputType = ArmyBuildType.Infantry;
+    
     public GameObject Troop;
 
     /// <summary>
@@ -19,6 +24,11 @@ public class ArmyBuild : Build
     public float TrainingTime;
 
     /// <summary>
+    /// This is the start timer for the initial Troops. Hi Jessia
+    /// </summary>
+    public float StartTime;
+
+    /// <summary>
     /// The number of troops trained on each training pass
     /// </summary>
     public int NumberToTrain = 1;
@@ -28,9 +38,7 @@ public class ArmyBuild : Build
     private ResourceType _pickType;
     
 
-    //This seems dumb now
-    protected override float BuildTime => ConstructionTime;
-    protected override ResourceType ResourceType => ResourceType.Wood;
+   
 
     public override bool SetResourceType(ResourceType type)
     {
@@ -57,7 +65,7 @@ public class ArmyBuild : Build
     // Start is called before the first frame update
     protected override void Start()
     {
-        
+        BuildTroops();
     }
 
     // Update is called once per frame
@@ -69,14 +77,25 @@ public class ArmyBuild : Build
 
     public void BuildTroops()
     {
-
+        if (Troop == null) return;
+        InvokeRepeating("Build", StartTime, TrainingTime);
     }
 
     public void StopBuild()
     {
 
+
+
     }
     
+
+    private void Build()
+    {
+        for(int i = 0; i < NumberToTrain; i++)
+        {
+            Instantiate(Troop, transform.position + (Vector3.forward * 2), Quaternion.identity);
+        }
+    }
 
 
 }

@@ -2,7 +2,7 @@
 
 public class GenericPlans : MonoBehaviour
 {
-    public GameObject Plan1;
-    public GameObject Plan2;
-    public GameObject Plan3;    
+    public GameObject Wall;
+    public GameObject Floor;
+    public GameObject Ramp;    
 }
