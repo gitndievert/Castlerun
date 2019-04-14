@@ -167,6 +167,8 @@ public class PlacementController : PSingle<PlacementController>
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+        float distToGround = _placeObjectMeshRend.bounds.extents.y;
+
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
@@ -175,11 +177,12 @@ public class PlacementController : PSingle<PlacementController>
                 //Debug.Log("Local " + _currObj.transform.localPosition.y);
 
                 //float offset = hit.point.y + (_placeObjectMeshRend.bounds.min.y / 2);
+
                 //_currObj.transform.position = new Vector3(hit.point.x, offset + 2, hit.point.z);   
-                //Debug.Log(hit.point);
+                //Debug.Log(hit.point);                
 
                 if (SnapOnGrid)
-                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, hit.point.y, Mathf.Round(hit.point.z) * SnapSize);
+                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, hit.point.y + distToGround, Mathf.Round(hit.point.z) * SnapSize);
                 else
                     _currObj.transform.position = hit.point;
 
