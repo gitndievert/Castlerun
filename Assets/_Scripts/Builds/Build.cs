@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public abstract class Build : BasePrefab, IBuild
 {
     public int PlacementCost;    
     private bool _isPlaced = false;
+
+    private Vector3 _offset;
 
     //public float GridSnap = 0.5f;  
     protected abstract float BuildTime { get; }
@@ -36,5 +39,16 @@ public abstract class Build : BasePrefab, IBuild
         yield return new WaitForSeconds(BuildTime);
         Debug.Log("Finish Build");
     }
-    
+
+    /*protected void OnTriggerEnter(Collider col)
+    {        
+        if (col.gameObject.tag != "Build") return;
+        Debug.Log("This Hits");
+        if (!_isPlaced)
+        {
+            Debug.Log("This Hits");
+            transform.position = transform.position - col.transform.position;            
+        }
+    }*/
+
 }

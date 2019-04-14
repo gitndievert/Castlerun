@@ -29,12 +29,12 @@ public class PlacementController : PSingle<PlacementController>
     private MeshRenderer _placeObjectMeshRend;
 
     private GameObject _currObj;
-    private Material _saveMaterial;    
+    private Material[] _saveMaterial;    
 
     private float mouseWheelRotation;
     private bool _triggerBuild = false;
     private bool _rotating = false;
-    
+
 
     /// <summary>
     /// Object to parent on for player 1
@@ -101,7 +101,7 @@ public class PlacementController : PSingle<PlacementController>
         {
             if (_currObj != null)
             {
-                _currObj.transform.GetComponentInChildren<Renderer>().material = _saveMaterial;
+                _currObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;
                 _currObj.gameObject.layer = Global.DEFAULT_LAYER;
                 _currObj.transform.GetComponent<Collider>().enabled = true;
                 var build = _currObj.transform.GetComponent<Build>();
@@ -153,9 +153,16 @@ public class PlacementController : PSingle<PlacementController>
             }
             
             _currObj = Instantiate(PlaceableObjectPrefab);
-            _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().material;
+            _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().materials;
             _currObj.transform.GetComponent<Collider>().enabled = false;
-            _currObj.transform.GetComponentInChildren<Renderer>().material = LayMaterial;
+            //_currObj.transform.GetComponentInChildren<Renderer>().material = LayMaterial;
+            var mats = _currObj.transform.GetComponentInChildren<Renderer>().materials;
+            Material[] laymats = new Material[mats.Length];
+            for(int i = 0; i < mats.Length; i++)
+            {
+                laymats[i] = LayMaterial;
+            }
+            _currObj.transform.GetComponentInChildren<Renderer>().materials = laymats;
             _currObj.transform.parent = _player1Builds; //sets the player 1 parent     
             _currObj.gameObject.layer = Global.IGNORE_LAYER;
 
@@ -214,6 +221,24 @@ public class PlacementController : PSingle<PlacementController>
     private Inventory ReturnPlayerInventory(int playerPos)
     {
         return GameManager.Instance.GetPlayer(playerPos).Inventory;
+    }
+
+    private void ChangeMaterial()
+    {
+        /*void ChangeMaterial(Material newMat)
+        {
+            Renderer[] children;
+            children = GetComponentsInChildren<Renderer>();
+            foreach (Renderer rend in children)
+            {
+                var mats = new Material[rend.materials.Length];
+                for (var j = 0; j < rend.materials.Length; j++)
+                {
+                    mats[j] = newMat;
+                }
+                rend.materials = mats;
+            }
+        }*/
     }
 
 }

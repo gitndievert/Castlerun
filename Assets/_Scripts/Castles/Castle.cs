@@ -13,6 +13,8 @@ public class Castle : MonoBehaviour
     public AudioClip AmbientMusic;
     public Color CastleColorHue;
     public float Experience;
+
+    [Header("Stats and Owner")]
     public CastleStats CastleStats;
     public Player CastleOwner { get; set; }
 
