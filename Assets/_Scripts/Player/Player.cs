@@ -87,7 +87,10 @@ public class Player : BasePrefab
     private void SetBasicPlayerStats()
     {
         PlayerStats.Health = 100;
-        //_playerUI.HealthBar.UpdateBar(50f, PlayerStats.Health);
+        
+        //Figure out later
+        //_playerUI.HealthBarInstance.BarValue = 100f;
+
         PlayerStats.MoveSpeed = 10f;
         PlayerStats.BuildSpeed = 10f;
         PlayerStats.HitAmount = 10;        
