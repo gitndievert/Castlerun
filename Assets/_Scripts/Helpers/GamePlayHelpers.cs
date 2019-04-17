@@ -4,6 +4,13 @@ using UnityEngine;
 
 public static class GamePlayHelpers
 {
+    /// <summary>
+    /// Extention method that pulls a random chance on a fixed amount
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <param name="min"></param>
+    /// <param name="max"></param>
+    /// <returns>int</returns>
     public static int GetChance(this int amount, int min, int max)
     {
         if (amount > max) return max;
@@ -11,6 +18,13 @@ public static class GamePlayHelpers
         return pick < amount ? pick : amount;
     }
        
+    /// <summary>
+    /// Shakes the camera (action quake)
+    /// </summary>
+    /// <param name="camera"></param>
+    /// <param name="duration"></param>
+    /// <param name="intensity"></param>
+    /// <returns></returns>
     public static IEnumerator ShakeCamera(Camera camera, float duration, float intensity)
     {
         Vector2 origPos = camera.transform.position;

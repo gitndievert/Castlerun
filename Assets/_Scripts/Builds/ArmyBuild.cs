@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ArmyBuild : Build
-{
-    
+{    
     protected override float BuildTime => ConstructionTime;
 
     protected override ResourceType ResourceType => ResourceType.Wood;
