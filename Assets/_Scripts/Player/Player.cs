@@ -55,6 +55,8 @@ public class Player : BasePrefab
         //Temporary for now
         _plans = GetComponent<GenericPlans>();
         _oPlans = GetComponent<OffensivePlans>();
+
+        PlacementController.Instance.MyPlayer = this;
     }
 
     // Start is called before the first frame update

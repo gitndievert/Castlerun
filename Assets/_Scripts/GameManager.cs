@@ -12,7 +12,12 @@ public class GameManager : PSingle<GameManager>
     public List<Player> Players;
 
     private int _numOfPlayer;
-    
+
+    public Player GetMyPlayer()
+    {
+        return GetPlayer(0);
+    }
+
     public Player GetPlayer(int position)
     {
         return Players.ElementAt(position);

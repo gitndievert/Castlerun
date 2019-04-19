@@ -13,17 +13,20 @@ public enum BuildDirections
 
 public class PlacementController : PSingle<PlacementController>
 {
-    public GameObject PlaceableObjectPrefab = null;    
+    public GameObject PlaceableObjectPrefab = null;
+    public Player MyPlayer;
 
     [Tooltip("This is the transparent lay material")]
     public Material LayMaterial;
     [Tooltip("This is the transparent lay material if you cannot build in a zone")]
     public Material ErrorMaterial;
 
+    [Header("Build Properties")]
     public bool BuildMode = false;
     public float RotateAmount = 45f;
     public bool SnapOnGrid = true;
-    public float SnapSize = 1f;
+    public float SnapSize = 1f;    
+    public bool MoveOnMouse = false;
 
     [SerializeField]
     private MeshRenderer _placeObjectMeshRend;
@@ -89,7 +92,14 @@ public class PlacementController : PSingle<PlacementController>
         if (_currObj != null && !_rotating)
         {            
             BuildMode = true;
-            MoveCurrentObjectToMouse();
+            if (MoveOnMouse)
+                MoveCurrentObjectToMouse();
+            else
+            {
+                _currObj.transform.parent = MyPlayer.transform;
+                // ModeCurrentObjectOnScreen();
+            }
+                
         }
     }
 
@@ -104,6 +114,7 @@ public class PlacementController : PSingle<PlacementController>
                 _currObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;
                 _currObj.gameObject.layer = Global.DEFAULT_LAYER;
                 _currObj.transform.GetComponent<Collider>().enabled = true;
+                _currObj.transform.parent = _player1Builds; //sets the player 1 parent  
                 var build = _currObj.transform.GetComponent<Build>();
 
                 //For Testing 
@@ -113,7 +124,7 @@ public class PlacementController : PSingle<PlacementController>
                 bool cancelBuild = false;
                 if (build.SetResourceType(rt))
                 {
-                    Inventory inv = ReturnPlayerInventory(0);
+                    Inventory inv = ReturnPlayerInventory();
                     int invcount = inv.GetCount(rt);
                     if (invcount > 0 && (invcount - build.PlacementCost >= 0))
                     {
@@ -151,8 +162,8 @@ public class PlacementController : PSingle<PlacementController>
             {
                 Destroy(_currObj);
             }
-            
-            _currObj = Instantiate(PlaceableObjectPrefab);
+
+            _currObj = Instantiate(PlaceableObjectPrefab,MyPlayer.transform.position,Quaternion.identity);            
             _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().materials;
             _currObj.transform.GetComponent<Collider>().enabled = false;
             //_currObj.transform.GetComponentInChildren<Renderer>().material = LayMaterial;
@@ -162,14 +173,37 @@ public class PlacementController : PSingle<PlacementController>
             {
                 laymats[i] = LayMaterial;
             }
-            _currObj.transform.GetComponentInChildren<Renderer>().materials = laymats;
-            _currObj.transform.parent = _player1Builds; //sets the player 1 parent     
+            _currObj.transform.GetComponentInChildren<Renderer>().materials = laymats;               
             _currObj.gameObject.layer = Global.IGNORE_LAYER;
 
             _triggerBuild = false;
         }       
     }
 
+    private void ModeCurrentObjectOnScreen()
+    {
+        Vector3 playerPos = MyPlayer.transform.position;
+        Vector3 playerDirection = MyPlayer.transform.forward;
+        Quaternion playerRotation = MyPlayer.transform.rotation;
+
+        Vector3 posOffset = playerPos + playerDirection * 10f; //the spawn distance
+
+        _placeObjectMeshRend.transform.position = new Vector3(Camera.main.transform.forward.x, playerPos.y, posOffset.z);
+        //_placeObjectMeshRend.transform.position = new Vector3(playerPos.x, playerPos.y, posOffset.z);
+        _placeObjectMeshRend.transform.rotation = playerRotation;
+
+        
+        /*
+            if (SnapOnGrid)
+                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, distToGround, Mathf.Round(hit.point.z) * SnapSize);
+                else
+                    _currObj.transform.position = hit.point;
+
+                //_currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+           
+        }*/
+    }
+ 
     private void MoveCurrentObjectToMouse()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -218,9 +252,9 @@ public class PlacementController : PSingle<PlacementController>
         return false;
     }
 
-    private Inventory ReturnPlayerInventory(int playerPos)
+    private Inventory ReturnPlayerInventory()
     {
-        return GameManager.Instance.GetPlayer(playerPos).Inventory;
+        return MyPlayer.Inventory;
     }
 
     private void ChangeMaterial()
