@@ -31,4 +31,9 @@ public abstract class BasePrefab : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public override string ToString()
+    {
+        return Health.ToString();
+    }
 }

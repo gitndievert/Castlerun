@@ -4,9 +4,13 @@ using System.Text;
 using UnityEngine;
 
 public class Player : BasePrefab
-{
-    [SerializeField]
-    public PlayerStats PlayerStats;
+{    
+    public float MoveSpeed { get; set; }
+    public float BuildSpeed { get; set; }
+    public int HitAmount { get; set; }
+    public CastleStats CastleStats { get; set; }
+
+    public bool IsDead = false;
 
     private string _playerName;
 
@@ -88,19 +92,20 @@ public class Player : BasePrefab
 
     private void SetBasicPlayerStats()
     {
-        PlayerStats.Health = 100;
+        Health = 100;
         
-        //Figure out later
-        //_playerUI.HealthBarInstance.BarValue = 100f;
+        //Figure out later        
+        UIManager.Instance.HealthBar.BarValue = 100f;
 
-        PlayerStats.MoveSpeed = 10f;
-        PlayerStats.BuildSpeed = 10f;
-        PlayerStats.HitAmount = 10;        
+        MoveSpeed = 10f;
+        BuildSpeed = 10f;
+        HitAmount = 10;        
     }
         
     private void Update()
-    {   
+    {
         //Temporary, work out the details for build mappings later
+        MovementInput.Lock = IsDead;        
 
         if(Input.GetKeyDown(KeyCode.Q))
         {
@@ -120,6 +125,16 @@ public class Player : BasePrefab
             }
             
         }
+
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            if (!IsDead)
+            {
+                Debug.Log("Doing damage to player!");
+                SetHit(HitAmount);
+            }
+        }
+
         if (Global.BuildMode)
         {
             //TODO: Need something to manage all the Plans in a Planmanager or something similar
@@ -174,16 +189,16 @@ public class Player : BasePrefab
                 case "Resource":
                     var resource = hit.transform.GetComponent<IResource>();
                     int health = resource.GetHealth();                    
-                    resource.SetHit(PlayerStats.HitAmount);                    
+                    resource.SetHit(HitAmount);                    
                     break;
                 case "Build":
                     var build = hit.transform.GetComponent<IBuild>();
-                    build.SetHit(PlayerStats.HitAmount);                    
+                    build.SetHit(HitAmount);                    
                     break;
                 case "Player":                    
                 case "Npc":
                     var character = hit.transform.GetComponent<ICharacter>();
-                    character.SetHit(PlayerStats.HitAmount);                    
+                    character.SetHit(HitAmount);                    
                     break;
             }
             
@@ -204,7 +219,36 @@ public class Player : BasePrefab
 
     private void OnCollisionEnter(Collision col)
     {
+
         
+    }
+
+    public override void SetHit(int amount)
+    {
+        //You're dead, go back
+        if (Health <= 0 || IsDead) return;
+
+        if (Health - amount > 0)
+        {
+            Health -= amount;
+            _playerUI.HealthText.text = $"{Health}/100";
+            UIManager.Instance.HealthBar.BarValue = Health;
+            _anim.Play("Hit");
+        }
+        else
+        {
+            IsDead = true;
+            Die();            
+        }
+    }
+
+    public void Die()
+    {
+        Health = 0;
+        _playerUI.HealthText.text = $"0/100";
+        UIManager.Instance.HealthBar.BarValue = 0;
+        Debug.Log("I am DEAD!");
+        _anim.Play("Death1");        
     }
 
 }

@@ -6,6 +6,9 @@ using TMPro;
 
 public partial class UIManager : PSingle<UIManager>
 {
+    public ProgressBar HealthBar;
+    public ProgressBar StaminaBar;
+
     /// <summary>
     /// Inventory Panel
     /// </summary>

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MovementInput : MonoBehaviour
 {
+    public static bool Lock;
+
     public float InputX;
     public float InputZ;
     public Vector3 DesiredMoveDirection;
@@ -26,11 +28,13 @@ public class MovementInput : MonoBehaviour
         _anim = GetComponent<Animator>();
         _camera = Camera.main;
         CharacterController = GetComponent<CharacterController>();
+        Lock = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Lock) return;
         InputMagnitude();
         /*IsGrounded = CharacterController.isGrounded;
         if(IsGrounded)
