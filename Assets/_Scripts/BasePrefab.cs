@@ -4,13 +4,11 @@ public abstract class BasePrefab : MonoBehaviour
 {
     public int Health;
     public AudioClip DestroySound;
-
-    protected Renderer rend;        
+       
 
     protected virtual void Awake()
     {
-        rend = GetComponent<Renderer>();                        
-
+               
     }
     
     protected void TagPrefab(string tag)
