@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {   
-
-    private const int MAX_WOOD = 500;
-    private const int MAX_ROCK = 500;
-    private const int MAX_METAL = 500;
-    private const int MAX_GEMS = 200;
+    const int MAX_WOOD = 500;
+    const int MAX_ROCK = 500;
+    const int MAX_METAL = 500;
+    const int MAX_GEMS = 200;
 
     [Range(0,MAX_WOOD)]
     public int WoodCount = 0;
@@ -19,6 +18,20 @@ public class Inventory : MonoBehaviour
     public int MetalCount = 0;
     [Range(0, MAX_GEMS)]
     public int GemsCount = 0;
+
+    [Header("Main Hand Weapons")]
+    [SerializeField]
+    private GameObject PrimaryHand;
+    [SerializeField]
+    private GameObject SecondaryHand;
+
+    [Header("Harvesting Tools")]
+    public GameObject PickAxe;
+    public GameObject Axe;
+
+    [Header("Weapons")]
+    public GameObject Weapon;
+    public GameObject Shield;
 
     public static int MaxWood = 500;
     public static int MaxRock = 500;
@@ -36,7 +49,7 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        
+       
     }
 
     // Start is called before the first frame update
@@ -44,6 +57,9 @@ public class Inventory : MonoBehaviour
     {
         _ui = UIManager.Instance.InventoryUIPanel;
         if(ResetOnStart) ResetAll();
+        //Set up hands
+        ResetHands();
+
         //To Trigger Events
         //EventManager.StartListening("Resource", ResourceMessage);
         //EventManager.TriggerEvent("Resource");
@@ -165,11 +181,79 @@ public class Inventory : MonoBehaviour
         {
             UIManager.Instance.Messages.text = $"You used {Mathf.Abs(amount)} {type.ToString()}";
         }
+    }
+
+    public bool ResourceCheck()
+    {
+        float colRadius = 2f;
+        var colliders = Physics.OverlapSphere(transform.position, colRadius);
+
+        foreach (var col in colliders)
+        {
+            if (col.gameObject.tag != "Resource") continue;
+            var resource = col.GetComponent<Resource>();
+            switch (resource.ResourceType)
+            {
+                case ResourceType.Wood:
+                    SwitchHand(Axe, "primary");
+                    EmptyHand("secondary");
+                    break;
+                case ResourceType.Rock:
+                case ResourceType.Metal:
+                case ResourceType.Gems:
+                    SwitchHand(PickAxe, "primary");
+                    EmptyHand("secondary");
+                    break;
+                default:
+                    SwitchHand(Weapon, "primary");
+                    SwitchHand(Shield, "secondary");
+                    break;
+            }
+
+            return true;
+        }
+
+        return false;
+
+    }
+
+    public void ResetHands()
+    {
+        EmptyHand("primary");
+        EmptyHand("secondary");
+        PrimaryHand = Weapon;
+        PrimaryHand.SetActive(true);
+        SecondaryHand = Shield;
+        SecondaryHand.SetActive(true);
+    }
+
+    public void SwitchHand(GameObject newHand, string hand)
+    {
+        if (hand == "primary")
+        {
+            PrimaryHand.SetActive(false);
+            PrimaryHand = newHand;
+            PrimaryHand.SetActive(true);
+        }
+        else if (hand == "secondary")
+        {
+            SecondaryHand.SetActive(false);
+            SecondaryHand = newHand;
+            SecondaryHand.SetActive(true);
+        }
+    }
+
+    public void EmptyHand(string hand)
+    {
+        if (hand == "primary" && PrimaryHand != null)
+        {
+            PrimaryHand.SetActive(false);
+        }
+        else if (hand == "secondary" && SecondaryHand != null)
+        {
+            SecondaryHand.SetActive(false);
+        }
+    }
 
 
-
-    }   
-
-   
-   
 }

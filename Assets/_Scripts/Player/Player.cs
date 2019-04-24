@@ -161,8 +161,11 @@ public class Player : BasePrefab
     {        
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+        if(!Inventory.ResourceCheck()) Inventory.ResetHands();        
+
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
+            
             if (hit.transform == null) return;
             if (!TransformHelper.DistanceLess(transform, hit.transform, Global.STRIKE_DIST)) return;
             
@@ -170,12 +173,12 @@ public class Player : BasePrefab
             {
                 case "Resource":
                     var resource = hit.transform.GetComponent<IResource>();
-                    int health = resource.GetHealth();
+                    int health = resource.GetHealth();                    
                     resource.SetHit(PlayerStats.HitAmount);                    
                     break;
                 case "Build":
                     var build = hit.transform.GetComponent<IBuild>();
-                    build.SetHit(PlayerStats.HitAmount);
+                    build.SetHit(PlayerStats.HitAmount);                    
                     break;
                 case "Player":                    
                 case "Npc":
