@@ -347,6 +347,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e968c93e052a3184a9badfb947cdc95a, type: 3}
+--- !u!1 &22087378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 22087382}
+  - component: {fileID: 22087381}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &22087381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22087378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4760f6dadc81084988d6fb1668143ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicClips:
+  - {fileID: 8300000, guid: 9367e5e32b9586a4f9423379a622d6c1, type: 3}
+  - {fileID: 8300000, guid: 3ba148fba1e135446a0e0d8e629869ef, type: 3}
+  FadeOutTime: 3
+  FadeInTime: 3
+  MusicEnabled: 1
+--- !u!4 &22087382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22087378}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 188.17876, y: 13.236487, z: 275.58862}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &32537662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10356,7 +10405,7 @@ MonoBehaviour:
   RotateAmount: 90
   SnapOnGrid: 1
   SnapSize: 1
-  MoveOnMouse: 1
+  MoveOnMouse: 0
   _placeObjectMeshRend: {fileID: 0}
   _player1Builds: {fileID: 0}
   _player2Builds: {fileID: 0}
@@ -10999,7 +11048,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1378269407}
   - component: {fileID: 1378269409}
-  - component: {fileID: 1378269408}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -11024,18 +11072,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1378269408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378269406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891801e55a4964d4daf548d80efa3b1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1378269409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11048,7 +11084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d919cd179639a654bb5b3f6d5acbdfb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 487774255}
+  CameraRig: {fileID: 487774255}
   PlayerInstance: {fileID: 1507808357, guid: a8a8ea44aa8990c42a88a50b81cee1ee, type: 3}
   PlayerPads: []
   Players: []

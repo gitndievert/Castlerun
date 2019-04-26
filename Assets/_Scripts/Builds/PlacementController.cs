@@ -31,7 +31,7 @@ public class PlacementController : PSingle<PlacementController>
     [SerializeField]
     private MeshRenderer _placeObjectMeshRend;
 
-    private GameObject _currObj;
+    private GameObject _currObj;    
     private Material[] _saveMaterial;    
 
     private float mouseWheelRotation;
@@ -60,6 +60,9 @@ public class PlacementController : PSingle<PlacementController>
     [SerializeField]
     private Transform _player4Builds = null;
 
+
+    private bool _triggerPlacement = false;
+
     protected override void PAwake()
     {        
         _player1Builds = GameObject.Find("Player_1_Builds").transform;
@@ -67,7 +70,7 @@ public class PlacementController : PSingle<PlacementController>
         //_player3Builds = GameObject.Find("Player_3_Builds").transform;
         //_player4Builds = GameObject.Find("Player_4_Builds").transform;        
     }
-
+        
     protected override void PDestroy()
     {
 
@@ -78,6 +81,7 @@ public class PlacementController : PSingle<PlacementController>
         PlaceableObjectPrefab = obj;
         _placeObjectMeshRend = PlaceableObjectPrefab.GetComponentInChildren<MeshRenderer>();
         _triggerBuild = true;
+
     }
 
     public void ClearObject()
@@ -92,12 +96,14 @@ public class PlacementController : PSingle<PlacementController>
         if (_currObj != null && !_rotating)
         {            
             BuildMode = true;
+            
             if (MoveOnMouse)
                 MoveCurrentObjectToMouse();
             else
             {
-                _currObj.transform.parent = MyPlayer.transform;
-                // ModeCurrentObjectOnScreen();
+                //_currObj.transform.parent = MyPlayer.PlacementSpawn.transform;
+                //ModeCurrentObjectOnScreen();
+                PlaceObjectToGround();
             }
                 
         }
@@ -177,7 +183,50 @@ public class PlacementController : PSingle<PlacementController>
             _currObj.gameObject.layer = Global.IGNORE_LAYER;
 
             _triggerBuild = false;
+            
         }       
+    }
+
+    private float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
+    {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
+    }
+
+    private void PlaceObjectToGround()
+    {
+        //_currObj.transform.parent = MyPlayer.PlacementSpawn.transform;
+
+        Vector3 spawnPos = MyPlayer.PlacementSpawn.transform.position;
+        Vector3 playerPos = MyPlayer.transform.position;
+        
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        float distToGround = _placeObjectMeshRend.bounds.extents.y;
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
+            {
+                Transform placeSpawn = MyPlayer.PlacementSpawn;
+
+                if (SnapOnGrid)
+                    _currObj.transform.position = new Vector3(Mathf.Round(spawnPos.x), playerPos.y + distToGround, Mathf.Round(spawnPos.z) * SnapSize);
+                else
+                    _currObj.transform.position = hit.point;
+
+                //_currObj.transform.rotation = Quaternion.LookRotation(playerDirection,MyPlayer.transform.up);
+
+                //_currObj.transform.rotation = Quaternion.LookRotation(MyPlayer.transform.position);
+
+                _currObj.transform.rotation = MyPlayer.PlacementSpawn.rotation;
+
+                //_currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);                
+                //_currObj.transform.LookAt(MyPlayer.transform, Vector3.forward);
+                //_currObj.transform.Rotate(Vector3.down, mouseWheelRotation * RotateAmount);
+
+            }
+        }
+
     }
 
     private void ModeCurrentObjectOnScreen()
@@ -186,22 +235,50 @@ public class PlacementController : PSingle<PlacementController>
         Vector3 playerDirection = MyPlayer.transform.forward;
         Quaternion playerRotation = MyPlayer.transform.rotation;
 
-        Vector3 posOffset = playerPos + playerDirection * 10f; //the spawn distance
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        _placeObjectMeshRend.transform.position = new Vector3(Camera.main.transform.forward.x, playerPos.y, posOffset.z);
-        //_placeObjectMeshRend.transform.position = new Vector3(playerPos.x, playerPos.y, posOffset.z);
-        _placeObjectMeshRend.transform.rotation = playerRotation;
+        float distToGround = _placeObjectMeshRend.bounds.extents.y;
 
-        
-        /*
-            if (SnapOnGrid)
-                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, distToGround, Mathf.Round(hit.point.z) * SnapSize);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
+            {
+                //Debug.Log("Offset " + _placeObjectMeshRend.bounds.min.y / 2);
+                //Debug.Log("Local " + _currObj.transform.localPosition.y);
+
+                //float offset = hit.point.y + (_placeObjectMeshRend.bounds.min.y / 2);
+
+                //_currObj.transform.position = new Vector3(hit.point.x, offset + 2, hit.point.z);   
+                //Debug.Log(hit.point);        
+
+                Transform placeSpawn = MyPlayer.PlacementSpawn;
+
+                if (SnapOnGrid)
+                    _currObj.transform.position = new Vector3(Mathf.Round(placeSpawn.position.x) * SnapSize, playerPos.y + distToGround, Mathf.Round(placeSpawn.position.z + 2f) * SnapSize);
                 else
                     _currObj.transform.position = hit.point;
 
-                //_currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-           
-        }*/
+                //_currObj.transform.rotation = Quaternion.LookRotation(playerDirection,MyPlayer.transform.up);
+                _currObj.transform.rotation = Quaternion.LookRotation(MyPlayer.transform.position);
+
+                //_currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);                
+                //_currObj.transform.LookAt(MyPlayer.transform, Vector3.forward);
+                //_currObj.transform.Rotate(Vector3.down, mouseWheelRotation * RotateAmount);
+
+            }
+        }
+
+        //Vector3 positionOnScreen = Camera.main.WorldToViewportPoint(_currObj.transform.position);
+        //Get the Screen position of the mouse
+        //Vector3 mouseOnScreen = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        //Get the angle between the points
+        //float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);        
+        //_currObj.transform.rotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
+
+        //_currObj.transform.LookAt(MyPlayer.transform);
+        //_currObj.transform.rotation = Quaternion.LookRotation(-playerDirection, MyPlayer.transform.up);
+
+
     }
  
     private void MoveCurrentObjectToMouse()
@@ -227,8 +304,8 @@ public class PlacementController : PSingle<PlacementController>
                 else
                     _currObj.transform.position = hit.point;
 
-                //_currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-                _currObj.transform.LookAt(MyPlayer.transform, Vector3.forward);
+                //_currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);                
+                //_currObj.transform.LookAt(MyPlayer.transform, Vector3.forward);
                 //_currObj.transform.Rotate(Vector3.down, mouseWheelRotation * RotateAmount);
 
             }

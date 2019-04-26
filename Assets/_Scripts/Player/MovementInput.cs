@@ -56,7 +56,9 @@ public class MovementInput : MonoBehaviour
             transform.Rotate(lookhere * 3f);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) Jump();        
+        if (Input.GetKeyDown(KeyBindings.Jump)) Jump();
+        if (Input.GetKeyDown(KeyBindings.Dance1)) Dance();
+
                 
         //Legacy
         //if there is no root motion available
@@ -109,6 +111,16 @@ public class MovementInput : MonoBehaviour
     public void Jump()
     {
         _anim.Play("Jump");
+    }
+
+    public void Dance()
+    {
+        _anim.Play("Dance");
+    }
+
+    public void StopDancing()
+    {
+        //_anim.
     }
 
 

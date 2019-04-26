@@ -26,6 +26,8 @@ public class Player : BasePrefab
         }
     }
 
+    public Transform PlacementSpawn { get; set; }
+
     public int PlayerNumber;
 
     [Tooltip("For Testing Changes on Castles")]
@@ -88,6 +90,8 @@ public class Player : BasePrefab
         
         CastleManager.Instance.SpawnCastle(Castle, Castle.CastleOwner);
         _playerUI.CastleLevel.text = Castle.Level.ToString();
+
+        PlacementSpawn = transform.Find("PlacementSpawn");
     }
 
     private void SetBasicPlayerStats()

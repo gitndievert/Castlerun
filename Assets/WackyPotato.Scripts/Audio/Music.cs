@@ -68,23 +68,23 @@ public class Music : PSingle<Music>, IAudio
 
         if (MusicEnabled)
         {
-            //MusicManager.play(MusicClips[MusicIndex], FadeOutTime, FadeInTime);
+            MusicManager.play(MusicClips[MusicIndex], FadeOutTime, FadeInTime);
         }
     }
 
     public void PauseTrack()
     {
-        //MusicManager.pause();
+        MusicManager.pause();
     }
 
     public void UnPauseTrack()
     {
-        //MusicManager.unpause();
+        MusicManager.unpause();
     }
 
     public void StopMusic()
     {
-        //MusicManager.stop(FadeStopTime);
+        MusicManager.stop(FadeStopTime);
     }
 
     /*public void Volume(float percent)
@@ -92,5 +92,5 @@ public class Music : PSingle<Music>, IAudio
         MusicManager.setVolume(percent);
         GameState.SettingsData.MusicVolume = percent;
         VolumeLevel = percent;
-    } */   
+    }*/
 }
