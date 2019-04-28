@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{87BAD694-22AB-FDEE-852A-0A627AAF5DA2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -105,6 +106,7 @@
     <Compile Include="Assets\_Scripts\ICharacter.cs" />
     <Compile Include="Assets\_Scripts\MenuManager.cs" />
     <Compile Include="Assets\_Scripts\Photon\Launcher.cs" />
+    <Compile Include="Assets\_Scripts\BasicCameraBehaviour.cs" />
     <Compile Include="Assets\_Scripts\Player\Global.cs" />
     <Compile Include="Assets\_Scripts\Player\KeyBindings.cs" />
     <Compile Include="Assets\_Scripts\Player\MovementInput.cs" />

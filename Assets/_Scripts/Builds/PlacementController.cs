@@ -103,7 +103,7 @@ public class PlacementController : PSingle<PlacementController>
             {
                 //_currObj.transform.parent = MyPlayer.PlacementSpawn.transform;
                 //ModeCurrentObjectOnScreen();
-                PlaceObjectToGround();
+                //PlaceObjectToGround();
             }
                 
         }
@@ -183,7 +183,9 @@ public class PlacementController : PSingle<PlacementController>
             _currObj.gameObject.layer = Global.IGNORE_LAYER;
 
             _triggerBuild = false;
-            
+
+            PlaceObjectToGround();
+
         }       
     }
 
