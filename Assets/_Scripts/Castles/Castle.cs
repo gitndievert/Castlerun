@@ -3,22 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Castle : MonoBehaviour
-{
-    const float MaxExp = 124360f;
-
-    [Range(1,3)]
-    public int Level = 1;
+{   
+       
     public float DoorBustHealth = 100f;
     public CastleType CastleType = CastleType.Default;
     public AudioClip AmbientMusic;
-    public Color CastleColorHue;
-    public float Experience;
+    public Color CastleColorHue;    
 
     [Header("Stats and Owner")]
     public CastleStats CastleStats;
-    public Player CastleOwner { get; set; }
-
-    public float[] ExpLevels = { 25000f, 80000f, MaxExp };
+    public Player CastleOwner { get; set; }    
 
     //List of NPC the castle can offer
     //public Npc[] Npcs;   

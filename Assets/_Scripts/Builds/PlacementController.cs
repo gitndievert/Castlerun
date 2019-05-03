@@ -111,7 +111,7 @@ public class PlacementController : PSingle<PlacementController>
 
     void Update()
     {
-        //_rotating = RotateFromMouseWheel();
+        _rotating = RotateFromMouseWheel();
 
         if (Input.GetMouseButtonDown(0) && PlaceableObjectPrefab != null)
         {
@@ -308,7 +308,7 @@ public class PlacementController : PSingle<PlacementController>
 
                 //_currObj.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);                
                 //_currObj.transform.LookAt(MyPlayer.transform, Vector3.forward);
-                //_currObj.transform.Rotate(Vector3.down, mouseWheelRotation * RotateAmount);
+                _currObj.transform.Rotate(Vector3.down, mouseWheelRotation * RotateAmount);
 
             }
         }

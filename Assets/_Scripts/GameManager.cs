@@ -75,8 +75,8 @@ public class GameManager : PSingle<GameManager>
                 Transform pt = player.transform;
                 //Having issues with autocam, so removing it
                 //CameraRig.GetComponent<AutoCam>().SetTarget(pt);
-                //CameraRig.GetComponent<CameraRotate>().target = pt;
-                CameraRig.GetComponent<BasicCameraBehaviour>().SetPlayerTarget = pt;
+                CameraRig.GetComponent<CameraRotate>().target = pt;
+                //CameraRig.GetComponent<BasicCameraBehaviour>().SetPlayerTarget = pt;
             }
         }
     }

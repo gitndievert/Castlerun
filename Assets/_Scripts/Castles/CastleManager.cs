@@ -51,22 +51,11 @@ public class CastleManager : PSingle<CastleManager>
         return null;
     }
 
-    public Castle GetCastlebyName(string name, int level)
+    public Castle GetCastlebyName(string name)
     {
         foreach (var castle in CastleList)
         {
-            if (castle.name == name && castle.Level == level)
-                return castle;
-        }
-
-        return null;
-    }
-
-    public Castle GetCastleByType(CastleType type, int level)
-    {
-        foreach(var castle in CastleList)
-        {
-            if (castle.CastleType == type && castle.Level == level)
+            if (castle.name == name)
                 return castle;
         }
 
@@ -75,7 +64,7 @@ public class CastleManager : PSingle<CastleManager>
 
     public Castle GetCastleByType(CastleType type)
     {
-        foreach (var castle in CastleList)
+        foreach(var castle in CastleList)
         {
             if (castle.CastleType == type)
                 return castle;
@@ -83,7 +72,7 @@ public class CastleManager : PSingle<CastleManager>
 
         return null;
     }
-
+    
     public void SpawnCastle(Castle castle, Player player)
     {
         //var stats = player.StatsModifier;

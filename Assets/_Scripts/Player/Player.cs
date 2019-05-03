@@ -82,14 +82,11 @@ public class Player : BasePrefab
         {
             //var castleType = CastleType == CastleType.None ? CastleType.Castle3 : CastleType;
 
-            Castle = castlemanger.GetCastleByType(CastleType);
-            Castle.Level = 2;
-            Castle.Experience = 4050f;
+            Castle = castlemanger.GetCastleByType(CastleType);                        
             Castle.CastleOwner = this;
         }
         
-        CastleManager.Instance.SpawnCastle(Castle, Castle.CastleOwner);
-        _playerUI.CastleLevel.text = Castle.Level.ToString();
+        CastleManager.Instance.SpawnCastle(Castle, Castle.CastleOwner);        
 
         PlacementSpawn = transform.Find("PlacementSpawn");
     }
@@ -100,6 +97,7 @@ public class Player : BasePrefab
         
         //Figure out later        
         UIManager.Instance.HealthBar.BarValue = 100f;
+        UIManager.Instance.StaminaBar.BarValue = 100f;
 
         MoveSpeed = 10f;
         BuildSpeed = 10f;
