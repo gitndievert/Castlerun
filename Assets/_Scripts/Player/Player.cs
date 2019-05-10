@@ -161,8 +161,10 @@ public class Player : BasePrefab
         }        
         else if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !_swinging && !Global.BuildMode)
         {
-            _swinging = true;
-            _anim.SetBool("Swing", true);
+            //TODO: I think I need something that checks for target on swing here later
+            Debug.Log("Swining for attack");
+            //_swinging = true;
+            //_anim.SetBool("Swing", true);
         }
         
     }
