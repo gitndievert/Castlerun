@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class Build : BasePrefab, IBuild
 {
     public int PlacementCost;    
-    private bool _isPlaced = false;
+    protected bool _isPlaced = false;
 
     private Vector3 _offset;
 
@@ -16,19 +16,17 @@ public abstract class Build : BasePrefab, IBuild
 
     protected virtual void Start()
     {        
-        if(Health == 0) Health = 20;
-        if(BuildTime > 0)
-        {
-            //Come back, I need to have the timers run 
-            //StartCoroutine(RunBuild());
-        }
+        if(Health == 0) Health = 20;        
     }
 
     public virtual void ConfirmPlacement()
     {
         _isPlaced = true;
-        TagPrefab("Build");
-        SoundManager.PlaySound(SoundList.Instance.BuildSound);
+        TagPrefab("Build");        
+        if (BuildTime > 0)
+        {   
+            StartCoroutine(RunBuild());
+        }
     }
 
     public abstract bool SetResourceType(ResourceType type);
@@ -36,8 +34,11 @@ public abstract class Build : BasePrefab, IBuild
     protected IEnumerator RunBuild()
     {
         Debug.Log("Start Build");
+        Global.BuildMode = false;        
         yield return new WaitForSeconds(BuildTime);
-        Debug.Log("Finish Build");
+        SoundManager.PlaySound(SoundList.Instance.BuildSound);
+        Debug.Log("Finish Build");        
+        Global.BuildMode = true;
     }
 
     /*protected void OnTriggerEnter(Collider col)

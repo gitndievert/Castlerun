@@ -35,9 +35,13 @@ public class ArmyBuild : Build
 
     private bool _IsBuilding = false;
     private ResourceType _pickType;
-    
 
-   
+
+    private void OnMouseDown()
+    {
+        Debug.Log("Clicked on the barracks");
+    }
+
 
     public override bool SetResourceType(ResourceType type)
     {
@@ -64,7 +68,7 @@ public class ArmyBuild : Build
     // Start is called before the first frame update
     protected override void Start()
     {
-        BuildTroops();
+        
     }
 
     // Update is called once per frame
