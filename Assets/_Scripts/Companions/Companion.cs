@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Companion : MonoBehaviour
 {
+    public CompanionType CompanionType = CompanionType.None;
+    public bool IsRare = false;
+    
     // Start is called before the first frame update
     void Start()
     {

@@ -1,0 +1,950 @@
+fileFormatVersion: 2
+guid: 41d3f6e4befc7124783c6dd1c6f78b1e
+timeCreated: 1505391034
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Raccoon
+    100004: RaccoonHead
+    100006: RaccoonLLeg1
+    100008: RaccoonLLeg1 1
+    100010: RaccoonLLeg2
+    100012: RaccoonLLeg2 1
+    100014: RaccoonLLegCollarbone
+    100016: RaccoonLLegDigit00
+    100018: RaccoonLLegDigit11
+    100020: RaccoonLLegPalm
+    100022: RaccoonLLegPalm 1
+    100024: RaccoonNeck
+    100026: RaccoonPelvis
+    100028: RaccoonRibcage
+    100030: RaccoonRLeg1
+    100032: RaccoonRLeg1 1
+    100034: RaccoonRLeg2
+    100036: RaccoonRLeg2 1
+    100038: RaccoonRLegDigit00
+    100040: RaccoonRLegDigit11
+    100042: RaccoonRLegPalm
+    100044: RaccoonRLegPalm 1
+    100046: RaccoonRLegShoulderblade
+    100048: RaccoonSpine1
+    100050: RaccoonSpine2
+    100052: RaccoonSpine3
+    100054: RaccoonSpine4
+    100056: RaccoonTail1
+    100058: RaccoonTail2
+    100060: RaccoonTail3
+    100062: RaccoonTail4
+    400000: //RootNode
+    400002: Raccoon
+    400004: RaccoonHead
+    400006: RaccoonLLeg1
+    400008: RaccoonLLeg1 1
+    400010: RaccoonLLeg2
+    400012: RaccoonLLeg2 1
+    400014: RaccoonLLegCollarbone
+    400016: RaccoonLLegDigit00
+    400018: RaccoonLLegDigit11
+    400020: RaccoonLLegPalm
+    400022: RaccoonLLegPalm 1
+    400024: RaccoonNeck
+    400026: RaccoonPelvis
+    400028: RaccoonRibcage
+    400030: RaccoonRLeg1
+    400032: RaccoonRLeg1 1
+    400034: RaccoonRLeg2
+    400036: RaccoonRLeg2 1
+    400038: RaccoonRLegDigit00
+    400040: RaccoonRLegDigit11
+    400042: RaccoonRLegPalm
+    400044: RaccoonRLegPalm 1
+    400046: RaccoonRLegShoulderblade
+    400048: RaccoonSpine1
+    400050: RaccoonSpine2
+    400052: RaccoonSpine3
+    400054: RaccoonSpine4
+    400056: RaccoonTail1
+    400058: RaccoonTail2
+    400060: RaccoonTail3
+    400062: RaccoonTail4
+    4300000: Raccoon
+    7400000: Walk
+    7400002: Idle_01
+    7400004: Idle_02
+    7400006: Idle_03
+    7400008: Run
+    7400010: Attack
+    7400012: Get_Hit
+    7400014: Death
+    9500000: //RootNode
+    13700000: Raccoon
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Raccoon
+        weight: 1
+      - path: RaccoonPelvis
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm/RaccoonLLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm/RaccoonRLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1/RaccoonLLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck/RaccoonHead
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1/RaccoonRLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3/RaccoonTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_01
+      takeName: Take 001
+      firstFrame: 60
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Raccoon
+        weight: 1
+      - path: RaccoonPelvis
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm/RaccoonLLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm/RaccoonRLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1/RaccoonLLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck/RaccoonHead
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1/RaccoonRLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3/RaccoonTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_02
+      takeName: Take 001
+      firstFrame: 105
+      lastFrame: 170
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Raccoon
+        weight: 1
+      - path: RaccoonPelvis
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm/RaccoonLLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm/RaccoonRLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1/RaccoonLLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck/RaccoonHead
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1/RaccoonRLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3/RaccoonTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_03
+      takeName: Take 001
+      firstFrame: 220
+      lastFrame: 270
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Raccoon
+        weight: 1
+      - path: RaccoonPelvis
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm/RaccoonLLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm/RaccoonRLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1/RaccoonLLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck/RaccoonHead
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1/RaccoonRLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3/RaccoonTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Run
+      takeName: Take 001
+      firstFrame: 190
+      lastFrame: 215
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Raccoon
+        weight: 1
+      - path: RaccoonPelvis
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm/RaccoonLLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm/RaccoonRLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1/RaccoonLLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck/RaccoonHead
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1/RaccoonRLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3/RaccoonTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      firstFrame: 280
+      lastFrame: 305
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Raccoon
+        weight: 1
+      - path: RaccoonPelvis
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm/RaccoonLLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm/RaccoonRLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1/RaccoonLLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck/RaccoonHead
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1/RaccoonRLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3/RaccoonTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Get_Hit
+      takeName: Take 001
+      firstFrame: 310
+      lastFrame: 328
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Raccoon
+        weight: 1
+      - path: RaccoonPelvis
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm/RaccoonLLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm/RaccoonRLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1/RaccoonLLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck/RaccoonHead
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1/RaccoonRLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3/RaccoonTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Death
+      takeName: Take 001
+      firstFrame: 335
+      lastFrame: 360
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Raccoon
+        weight: 1
+      - path: RaccoonPelvis
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonLLeg1/RaccoonLLeg2/RaccoonLLegPalm/RaccoonLLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm
+        weight: 1
+      - path: RaccoonPelvis/RaccoonRLeg1/RaccoonRLeg2/RaccoonRLegPalm/RaccoonRLegDigit00
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonLLegCollarbone/RaccoonLLeg1
+          1/RaccoonLLeg2 1/RaccoonLLegPalm 1/RaccoonLLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonNeck/RaccoonHead
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonSpine1/RaccoonSpine2/RaccoonSpine3/RaccoonSpine4/RaccoonRibcage/RaccoonRLegShoulderblade/RaccoonRLeg1
+          1/RaccoonRLeg2 1/RaccoonRLegPalm 1/RaccoonRLegDigit11
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3
+        weight: 1
+      - path: RaccoonPelvis/RaccoonTail1/RaccoonTail2/RaccoonTail3/RaccoonTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

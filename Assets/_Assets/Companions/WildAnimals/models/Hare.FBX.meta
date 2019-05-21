@@ -1,0 +1,880 @@
+fileFormatVersion: 2
+guid: e5d132de8b1d7674393a3a6d7fda136b
+timeCreated: 1505385819
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Hare
+    100004: HareHead
+    100006: HareLEar
+    100008: HareLLeg1
+    100010: HareLLeg1 1
+    100012: HareLLeg2
+    100014: HareLLegCollarbone
+    100016: HareLLegDigit00
+    100018: HareLLegDigit11
+    100020: HareLLegPalm
+    100022: HareLLegPalm 1
+    100024: HareNeck
+    100026: HarePelvis
+    100028: HareREar
+    100030: HareRibcage
+    100032: HareRLeg1
+    100034: HareRLeg1 1
+    100036: HareRLeg2
+    100038: HareRLegDigit00
+    100040: HareRLegDigit11
+    100042: HareRLegPalm
+    100044: HareRLegPalm 1
+    100046: HareRLegShoulderblade
+    100048: HareSpine1
+    100050: HareSpine2
+    100052: HareSpine3
+    100054: HareSpine4
+    100056: HareTail1
+    400000: //RootNode
+    400002: Hare
+    400004: HareHead
+    400006: HareLEar
+    400008: HareLLeg1
+    400010: HareLLeg1 1
+    400012: HareLLeg2
+    400014: HareLLegCollarbone
+    400016: HareLLegDigit00
+    400018: HareLLegDigit11
+    400020: HareLLegPalm
+    400022: HareLLegPalm 1
+    400024: HareNeck
+    400026: HarePelvis
+    400028: HareREar
+    400030: HareRibcage
+    400032: HareRLeg1
+    400034: HareRLeg1 1
+    400036: HareRLeg2
+    400038: HareRLegDigit00
+    400040: HareRLegDigit11
+    400042: HareRLegPalm
+    400044: HareRLegPalm 1
+    400046: HareRLegShoulderblade
+    400048: HareSpine1
+    400050: HareSpine2
+    400052: HareSpine3
+    400054: HareSpine4
+    400056: HareTail1
+    4300000: Hare
+    7400000: Walk
+    7400002: Run
+    7400004: Idle_02
+    7400006: Idle_01
+    7400008: Idle_03
+    7400010: Attack
+    7400012: Get_Hit
+    7400014: Death
+    9500000: //RootNode
+    13700000: Hare
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Hare
+        weight: 1
+      - path: HarePelvis
+        weight: 1
+      - path: HarePelvis/HareLLeg1
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm/HareLLegDigit00
+        weight: 1
+      - path: HarePelvis/HareRLeg1
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm/HareRLegDigit00
+        weight: 1
+      - path: HarePelvis/HareSpine1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1/HareLLegDigit11
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareLEar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareREar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1/HareRLegDigit11
+        weight: 1
+      - path: HarePelvis/HareTail1
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Run
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Hare
+        weight: 1
+      - path: HarePelvis
+        weight: 1
+      - path: HarePelvis/HareLLeg1
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm/HareLLegDigit00
+        weight: 1
+      - path: HarePelvis/HareRLeg1
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm/HareRLegDigit00
+        weight: 1
+      - path: HarePelvis/HareSpine1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1/HareLLegDigit11
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareLEar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareREar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1/HareRLegDigit11
+        weight: 1
+      - path: HarePelvis/HareTail1
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_02
+      takeName: Take 001
+      firstFrame: 30
+      lastFrame: 95
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Hare
+        weight: 1
+      - path: HarePelvis
+        weight: 1
+      - path: HarePelvis/HareLLeg1
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm/HareLLegDigit00
+        weight: 1
+      - path: HarePelvis/HareRLeg1
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm/HareRLegDigit00
+        weight: 1
+      - path: HarePelvis/HareSpine1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1/HareLLegDigit11
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareLEar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareREar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1/HareRLegDigit11
+        weight: 1
+      - path: HarePelvis/HareTail1
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_01
+      takeName: Take 001
+      firstFrame: 105
+      lastFrame: 135
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Hare
+        weight: 1
+      - path: HarePelvis
+        weight: 1
+      - path: HarePelvis/HareLLeg1
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm/HareLLegDigit00
+        weight: 1
+      - path: HarePelvis/HareRLeg1
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm/HareRLegDigit00
+        weight: 1
+      - path: HarePelvis/HareSpine1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1/HareLLegDigit11
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareLEar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareREar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1/HareRLegDigit11
+        weight: 1
+      - path: HarePelvis/HareTail1
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_03
+      takeName: Take 001
+      firstFrame: 140
+      lastFrame: 215
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Hare
+        weight: 1
+      - path: HarePelvis
+        weight: 1
+      - path: HarePelvis/HareLLeg1
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm/HareLLegDigit00
+        weight: 1
+      - path: HarePelvis/HareRLeg1
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm/HareRLegDigit00
+        weight: 1
+      - path: HarePelvis/HareSpine1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1/HareLLegDigit11
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareLEar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareREar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1/HareRLegDigit11
+        weight: 1
+      - path: HarePelvis/HareTail1
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      firstFrame: 230
+      lastFrame: 260
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Hare
+        weight: 1
+      - path: HarePelvis
+        weight: 1
+      - path: HarePelvis/HareLLeg1
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm/HareLLegDigit00
+        weight: 1
+      - path: HarePelvis/HareRLeg1
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm/HareRLegDigit00
+        weight: 1
+      - path: HarePelvis/HareSpine1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1/HareLLegDigit11
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareLEar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareREar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1/HareRLegDigit11
+        weight: 1
+      - path: HarePelvis/HareTail1
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Get_Hit
+      takeName: Take 001
+      firstFrame: 265
+      lastFrame: 290
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Hare
+        weight: 1
+      - path: HarePelvis
+        weight: 1
+      - path: HarePelvis/HareLLeg1
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm/HareLLegDigit00
+        weight: 1
+      - path: HarePelvis/HareRLeg1
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm/HareRLegDigit00
+        weight: 1
+      - path: HarePelvis/HareSpine1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1/HareLLegDigit11
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareLEar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareREar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1/HareRLegDigit11
+        weight: 1
+      - path: HarePelvis/HareTail1
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Death
+      takeName: Take 001
+      firstFrame: 295
+      lastFrame: 325
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Hare
+        weight: 1
+      - path: HarePelvis
+        weight: 1
+      - path: HarePelvis/HareLLeg1
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm
+        weight: 1
+      - path: HarePelvis/HareLLeg1/HareLLeg2/HareLLegPalm/HareLLegDigit00
+        weight: 1
+      - path: HarePelvis/HareRLeg1
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm
+        weight: 1
+      - path: HarePelvis/HareRLeg1/HareRLeg2/HareRLegPalm/HareRLegDigit00
+        weight: 1
+      - path: HarePelvis/HareSpine1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareLLegCollarbone/HareLLeg1
+          1/HareLLegPalm 1/HareLLegDigit11
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareLEar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareNeck/HareHead/HareREar
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1
+        weight: 1
+      - path: HarePelvis/HareSpine1/HareSpine2/HareSpine3/HareSpine4/HareRibcage/HareRLegShoulderblade/HareRLeg1
+          1/HareRLegPalm 1/HareRLegDigit11
+        weight: 1
+      - path: HarePelvis/HareTail1
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

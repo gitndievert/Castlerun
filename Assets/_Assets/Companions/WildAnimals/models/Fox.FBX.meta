@@ -1,0 +1,868 @@
+fileFormatVersion: 2
+guid: c5a8466ea975e4c499434e3449a496c1
+timeCreated: 1505381985
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Fox
+    100004: FoxHead
+    100006: FoxHeadBone001
+    100008: FoxHeadBone002
+    100010: FoxLLeg1
+    100012: FoxLLeg2
+    100014: FoxLLegDigit01
+    100016: FoxLLegFront1
+    100018: FoxLLegFront2
+    100020: FoxLLegFrontCollarbone
+    100022: FoxLLegFrontPalm
+    100024: FoxLLegPalm
+    100026: FoxNeck
+    100028: FoxPelvis
+    100030: FoxRibcage
+    100032: FoxRLeg1
+    100034: FoxRLeg2
+    100036: FoxRLegDigit01
+    100038: FoxRLegFront1
+    100040: FoxRLegFront2
+    100042: FoxRLegFrontPalm
+    100044: FoxRLegFrontShoulderblade
+    100046: FoxRLegPalm
+    100048: FoxSpine1
+    100050: FoxSpine2
+    100052: FoxSpine3
+    100054: FoxTail1
+    100056: FoxTail2
+    100058: FoxTail3
+    100060: FoxTail4
+    400000: //RootNode
+    400002: Fox
+    400004: FoxHead
+    400006: FoxHeadBone001
+    400008: FoxHeadBone002
+    400010: FoxLLeg1
+    400012: FoxLLeg2
+    400014: FoxLLegDigit01
+    400016: FoxLLegFront1
+    400018: FoxLLegFront2
+    400020: FoxLLegFrontCollarbone
+    400022: FoxLLegFrontPalm
+    400024: FoxLLegPalm
+    400026: FoxNeck
+    400028: FoxPelvis
+    400030: FoxRibcage
+    400032: FoxRLeg1
+    400034: FoxRLeg2
+    400036: FoxRLegDigit01
+    400038: FoxRLegFront1
+    400040: FoxRLegFront2
+    400042: FoxRLegFrontPalm
+    400044: FoxRLegFrontShoulderblade
+    400046: FoxRLegPalm
+    400048: FoxSpine1
+    400050: FoxSpine2
+    400052: FoxSpine3
+    400054: FoxTail1
+    400056: FoxTail2
+    400058: FoxTail3
+    400060: FoxTail4
+    4300000: Fox
+    7400000: Walk
+    7400002: Run
+    7400004: Idle_02
+    7400006: Idle_01
+    7400008: Idle_03
+    7400010: Attack
+    7400012: Get_Hit
+    7400014: Death
+    9500000: //RootNode
+    13700000: Fox
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Fox
+        weight: 1
+      - path: FoxPelvis
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm/FoxLLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm/FoxRLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxSpine1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2/FoxLLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone001
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone002
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2/FoxRLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxTail1
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3/FoxTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Run
+      takeName: Take 001
+      firstFrame: 28
+      lastFrame: 47
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Fox
+        weight: 1
+      - path: FoxPelvis
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm/FoxLLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm/FoxRLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxSpine1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2/FoxLLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone001
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone002
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2/FoxRLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxTail1
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3/FoxTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_02
+      takeName: Take 001
+      firstFrame: 95
+      lastFrame: 145
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Fox
+        weight: 1
+      - path: FoxPelvis
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm/FoxLLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm/FoxRLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxSpine1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2/FoxLLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone001
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone002
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2/FoxRLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxTail1
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3/FoxTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_01
+      takeName: Take 001
+      firstFrame: 50
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Fox
+        weight: 1
+      - path: FoxPelvis
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm/FoxLLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm/FoxRLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxSpine1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2/FoxLLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone001
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone002
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2/FoxRLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxTail1
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3/FoxTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_03
+      takeName: Take 001
+      firstFrame: 150
+      lastFrame: 195
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Fox
+        weight: 1
+      - path: FoxPelvis
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm/FoxLLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm/FoxRLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxSpine1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2/FoxLLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone001
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone002
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2/FoxRLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxTail1
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3/FoxTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      firstFrame: 240
+      lastFrame: 280
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Fox
+        weight: 1
+      - path: FoxPelvis
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm/FoxLLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm/FoxRLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxSpine1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2/FoxLLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone001
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone002
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2/FoxRLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxTail1
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3/FoxTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Get_Hit
+      takeName: Take 001
+      firstFrame: 290
+      lastFrame: 310
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Fox
+        weight: 1
+      - path: FoxPelvis
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm/FoxLLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm/FoxRLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxSpine1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2/FoxLLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone001
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone002
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2/FoxRLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxTail1
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3/FoxTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Death
+      takeName: Take 001
+      firstFrame: 315
+      lastFrame: 350
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Fox
+        weight: 1
+      - path: FoxPelvis
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxLLeg1/FoxLLeg2/FoxLLegPalm/FoxLLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm
+        weight: 1
+      - path: FoxPelvis/FoxRLeg1/FoxRLeg2/FoxRLegPalm/FoxRLegDigit01
+        weight: 1
+      - path: FoxPelvis/FoxSpine1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxLLegFrontCollarbone/FoxLLegFront1/FoxLLegFront2/FoxLLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone001
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxNeck/FoxHead/FoxHeadBone002
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2
+        weight: 1
+      - path: FoxPelvis/FoxSpine1/FoxSpine2/FoxSpine3/FoxRibcage/FoxRLegFrontShoulderblade/FoxRLegFront1/FoxRLegFront2/FoxRLegFrontPalm
+        weight: 1
+      - path: FoxPelvis/FoxTail1
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3
+        weight: 1
+      - path: FoxPelvis/FoxTail1/FoxTail2/FoxTail3/FoxTail4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -34,10 +34,10 @@ public class Player : BasePrefab
     public CastleType CastleType = CastleType.None;
 
     #region Player Components
-    public Companion Companion { get; private set; }
+    public List<Companion> Companions { get; private set; }
     public Inventory Inventory { get; private set; }
     public int ActorNumber { get; internal set; }    
-    public Castle Castle { get; private set; }    
+    public List<Castle> Castles { get; private set; }    
     #endregion
 
     private GameObject _mainHand;
@@ -45,24 +45,36 @@ public class Player : BasePrefab
     private Animator _anim;
     private bool _swinging = false;    
     private PlayerUI _playerUI;
+    private Companion _companion;
+    private Castle _castle;
 
     //Temporary for now
     private GenericPlans _plans;
-    private OffensivePlans _oPlans;
+    private OffensivePlans _oPlans;    
+
+    /// <summary>
+    /// Returns the current companion of the player
+    /// </summary>
+    public Companion GetPlayerCompanion { get { return _companion; } }
+    /// <summary>
+    /// Returns the current castle being used by the player
+    /// </summary>
+    public Castle GetPlayerCastle { get { return _castle; } }
 
 
     protected override void Awake()
     {
         base.Awake();
         Inventory = GetComponent<Inventory>();        
-        _anim = GetComponent<Animator>();                
-        Castle = null;
+        _anim = GetComponent<Animator>();                        
 
         //Temporary for now
         _plans = GetComponent<GenericPlans>();
         _oPlans = GetComponent<OffensivePlans>();
 
         PlacementController.Instance.MyPlayer = this;
+
+        
     }
 
     // Start is called before the first frame update
@@ -78,15 +90,13 @@ public class Player : BasePrefab
         _playerUI.PlayerName.text = "Krunchy";
 
         //Set the castle Properties
-        if (Castle == null)
-        {
-            //var castleType = CastleType == CastleType.None ? CastleType.Castle3 : CastleType;
+        Castles = new List<Castle>();
+        //var castleType = CastleType == CastleType.None ? CastleType.Castle3 : CastleType;
+        _castle = castlemanger.GetCastleByType(CastleType);
+        Castles.Add(_castle);
 
-            Castle = castlemanger.GetCastleByType(CastleType);                        
-            Castle.CastleOwner = this;
-        }
-        
-        CastleManager.Instance.SpawnCastle(Castle, Castle.CastleOwner);        
+        //TODO: Just pull the first castle for now        
+        CastleManager.Instance.SpawnCastle(_castle, this);     
 
         PlacementSpawn = transform.Find("PlacementSpawn");
     }
@@ -176,6 +186,11 @@ public class Player : BasePrefab
 
     }
 
+    public void SetCompanion(CompanionType companion)
+    {
+        
+    }
+
     public void Swing()
     {        
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -254,5 +269,7 @@ public class Player : BasePrefab
         Debug.Log("I am DEAD!");
         _anim.Play("Death1");        
     }
+
+   
 
 }

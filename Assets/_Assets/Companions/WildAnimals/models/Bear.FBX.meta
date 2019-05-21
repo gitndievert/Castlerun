@@ -1,0 +1,844 @@
+fileFormatVersion: 2
+guid: a18cb1127c9c9f142a162d57f1e74d34
+timeCreated: 1505315198
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Bear
+    100004: BearHead
+    100006: BearHeadBone001
+    100008: BearHeadBone002
+    100010: BearLLeg1
+    100012: BearLLeg1 1
+    100014: BearLLeg2
+    100016: BearLLeg2 1
+    100018: BearLLegAnkle
+    100020: BearLLegCollarbone
+    100022: BearLLegDigit01
+    100024: BearLLegPalm
+    100026: BearNeck
+    100028: BearPelvis
+    100030: BearRibcage
+    100032: BearRLeg1
+    100034: BearRLeg1 1
+    100036: BearRLeg2
+    100038: BearRLeg2 1
+    100040: BearRLegAnkle
+    100042: BearRLegCollarbone
+    100044: BearRLegDigit01
+    100046: BearRLegPalm
+    100048: BearSpine1
+    100050: BearSpine2
+    100052: BearSpine3
+    400000: //RootNode
+    400002: Bear
+    400004: BearHead
+    400006: BearHeadBone001
+    400008: BearHeadBone002
+    400010: BearLLeg1
+    400012: BearLLeg1 1
+    400014: BearLLeg2
+    400016: BearLLeg2 1
+    400018: BearLLegAnkle
+    400020: BearLLegCollarbone
+    400022: BearLLegDigit01
+    400024: BearLLegPalm
+    400026: BearNeck
+    400028: BearPelvis
+    400030: BearRibcage
+    400032: BearRLeg1
+    400034: BearRLeg1 1
+    400036: BearRLeg2
+    400038: BearRLeg2 1
+    400040: BearRLegAnkle
+    400042: BearRLegCollarbone
+    400044: BearRLegDigit01
+    400046: BearRLegPalm
+    400048: BearSpine1
+    400050: BearSpine2
+    400052: BearSpine3
+    4300000: Bear
+    7400000: Walk
+    7400002: Idle_02
+    7400004: Idle_01
+    7400006: Idle_03
+    7400008: Run
+    7400010: Attack
+    7400012: Get_Hit
+    7400014: Death
+    9500000: //RootNode
+    13700000: Bear
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bear
+        weight: 1
+      - path: BearPelvis
+        weight: 1
+      - path: BearPelvis/BearLLeg1
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm/BearLLegDigit01
+        weight: 1
+      - path: BearPelvis/BearRLeg1
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm/BearRLegDigit01
+        weight: 1
+      - path: BearPelvis/BearSpine1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1/BearLLegAnkle
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone001
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone002
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1/BearRLegAnkle
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_02
+      takeName: Take 001
+      firstFrame: 45
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bear
+        weight: 1
+      - path: BearPelvis
+        weight: 1
+      - path: BearPelvis/BearLLeg1
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm/BearLLegDigit01
+        weight: 1
+      - path: BearPelvis/BearRLeg1
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm/BearRLegDigit01
+        weight: 1
+      - path: BearPelvis/BearSpine1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1/BearLLegAnkle
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone001
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone002
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1/BearRLegAnkle
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_01
+      takeName: Take 001
+      firstFrame: 90
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bear
+        weight: 1
+      - path: BearPelvis
+        weight: 1
+      - path: BearPelvis/BearLLeg1
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm/BearLLegDigit01
+        weight: 1
+      - path: BearPelvis/BearRLeg1
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm/BearRLegDigit01
+        weight: 1
+      - path: BearPelvis/BearSpine1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1/BearLLegAnkle
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone001
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone002
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1/BearRLegAnkle
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_03
+      takeName: Take 001
+      firstFrame: 120
+      lastFrame: 168
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bear
+        weight: 1
+      - path: BearPelvis
+        weight: 1
+      - path: BearPelvis/BearLLeg1
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm/BearLLegDigit01
+        weight: 1
+      - path: BearPelvis/BearRLeg1
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm/BearRLegDigit01
+        weight: 1
+      - path: BearPelvis/BearSpine1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1/BearLLegAnkle
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone001
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone002
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1/BearRLegAnkle
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Run
+      takeName: Take 001
+      firstFrame: 175
+      lastFrame: 195
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bear
+        weight: 1
+      - path: BearPelvis
+        weight: 1
+      - path: BearPelvis/BearLLeg1
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm/BearLLegDigit01
+        weight: 1
+      - path: BearPelvis/BearRLeg1
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm/BearRLegDigit01
+        weight: 1
+      - path: BearPelvis/BearSpine1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1/BearLLegAnkle
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone001
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone002
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1/BearRLegAnkle
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      firstFrame: 255
+      lastFrame: 290
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bear
+        weight: 1
+      - path: BearPelvis
+        weight: 1
+      - path: BearPelvis/BearLLeg1
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm/BearLLegDigit01
+        weight: 1
+      - path: BearPelvis/BearRLeg1
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm/BearRLegDigit01
+        weight: 1
+      - path: BearPelvis/BearSpine1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1/BearLLegAnkle
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone001
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone002
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1/BearRLegAnkle
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Get_Hit
+      takeName: Take 001
+      firstFrame: 300
+      lastFrame: 312
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bear
+        weight: 1
+      - path: BearPelvis
+        weight: 1
+      - path: BearPelvis/BearLLeg1
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm/BearLLegDigit01
+        weight: 1
+      - path: BearPelvis/BearRLeg1
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm/BearRLegDigit01
+        weight: 1
+      - path: BearPelvis/BearSpine1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1/BearLLegAnkle
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone001
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone002
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1/BearRLegAnkle
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Death
+      takeName: Take 001
+      firstFrame: 320
+      lastFrame: 340
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bear
+        weight: 1
+      - path: BearPelvis
+        weight: 1
+      - path: BearPelvis/BearLLeg1
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm
+        weight: 1
+      - path: BearPelvis/BearLLeg1/BearLLeg2/BearLLegPalm/BearLLegDigit01
+        weight: 1
+      - path: BearPelvis/BearRLeg1
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm
+        weight: 1
+      - path: BearPelvis/BearRLeg1/BearRLeg2/BearRLegPalm/BearRLegDigit01
+        weight: 1
+      - path: BearPelvis/BearSpine1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearLLegCollarbone/BearLLeg1
+          1/BearLLeg2 1/BearLLegAnkle
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone001
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearNeck/BearHead/BearHeadBone002
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1
+        weight: 1
+      - path: BearPelvis/BearSpine1/BearSpine2/BearSpine3/BearRibcage/BearRLegCollarbone/BearRLeg1
+          1/BearRLeg2 1/BearRLegAnkle
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
