@@ -10,9 +10,28 @@ public class Player : BasePrefab
     public int HitAmount { get; set; }
     public CastleStats CastleStats { get; set; }
 
+    public bool CompanionOut = false;
     public bool IsDead = false;
+    public int PlayerNumber;
 
-    private string _playerName;
+    [Tooltip("For changing the companion on the player")]
+    public CompanionType CompanionType = CompanionType.None;
+    [Tooltip("For Testing Changes on Castles")]
+    public CastleType CastleType = CastleType.None;
+
+    /// <summary>
+    /// Returns the current companion of the player
+    /// </summary>
+    public Companion PlayerCompanion { get; set; }
+    /// <summary>
+    /// Returns the current castle being used by the player
+    /// </summary>
+    public Castle PlayerCastle { get; set; }
+
+    /// <summary>
+    /// Placement tranform for the player spawn coords
+    /// </summary>
+    public Transform PlacementSpawn { get; set; }
 
     public string PlayerName
     {
@@ -24,57 +43,37 @@ public class Player : BasePrefab
             else
                 _playerName = value;
         }
-    }
-
-    public Transform PlacementSpawn { get; set; }
-
-    public int PlayerNumber;
-
-    [Tooltip("For Testing Changes on Castles")]
-    public CastleType CastleType = CastleType.None;
-
-    #region Player Components
-    public List<Companion> Companions { get; private set; }
+    }    
+   
+    #region Player Components      
     public Inventory Inventory { get; private set; }
-    public int ActorNumber { get; internal set; }    
-    public List<Castle> Castles { get; private set; }    
+    public int ActorNumber { get; internal set; }
     #endregion
 
+    #region Private Members
     private GameObject _mainHand;
     private GameObject _offHand;    
     private Animator _anim;
     private bool _swinging = false;    
-    private PlayerUI _playerUI;
-    private Companion _companion;
-    private Castle _castle;
-
+    private PlayerUI _playerUI;    
+    private string _playerName;
     //Temporary for now
     private GenericPlans _plans;
-    private OffensivePlans _oPlans;    
-
-    /// <summary>
-    /// Returns the current companion of the player
-    /// </summary>
-    public Companion GetPlayerCompanion { get { return _companion; } }
-    /// <summary>
-    /// Returns the current castle being used by the player
-    /// </summary>
-    public Castle GetPlayerCastle { get { return _castle; } }
+    private OffensivePlans _oPlans;
+    #endregion
 
 
     protected override void Awake()
     {
         base.Awake();
         Inventory = GetComponent<Inventory>();        
-        _anim = GetComponent<Animator>();                        
+        _anim = GetComponent<Animator>();        
 
         //Temporary for now
         _plans = GetComponent<GenericPlans>();
         _oPlans = GetComponent<OffensivePlans>();
 
-        PlacementController.Instance.MyPlayer = this;
-
-        
+        PlacementController.Instance.MyPlayer = this;        
     }
 
     // Start is called before the first frame update
@@ -87,18 +86,19 @@ public class Player : BasePrefab
         var castlemanger = CastleManager.Instance;
                 
         //Set Nane
-        _playerUI.PlayerName.text = "Krunchy";
+        _playerUI.PlayerName.text = "Krunchy";        
 
-        //Set the castle Properties
-        Castles = new List<Castle>();
-        //var castleType = CastleType == CastleType.None ? CastleType.Castle3 : CastleType;
-        _castle = castlemanger.GetCastleByType(CastleType);
-        Castles.Add(_castle);
-
-        //TODO: Just pull the first castle for now        
-        CastleManager.Instance.SpawnCastle(_castle, this);     
+        //NOTE
+        //Pulls the first castle out for now (just one castle)
+        Castle castle = castlemanger.GetCastleByType(CastleType);               
+        CastleManager.Instance.SpawnCastle(castle, this);     
 
         PlacementSpawn = transform.Find("PlacementSpawn");
+
+        if (CompanionOut && CompanionType != CompanionType.None)
+        {
+            SetCompanion(CompanionType);
+        }
     }
 
     private void SetBasicPlayerStats()
@@ -175,7 +175,7 @@ public class Player : BasePrefab
             Debug.Log("Swining for attack");
             //_swinging = true;
             //_anim.SetBool("Swing", true);
-        }
+        }       
         
     }
 
@@ -186,10 +186,23 @@ public class Player : BasePrefab
 
     }
 
+
+    //These three methods probably need their own class
     public void SetCompanion(CompanionType companion)
     {
-        
+        var mycompanion = Instantiate(CompanionManager.Instance.GetCompanionByType(companion));        
+        PlayerCompanion = mycompanion.GetComponent<Companion>();
+        GetComponent<MovementInput>().SetPlayerCompanion = PlayerCompanion;
+        PlayerCompanion.transform.parent = transform;
+        PlayerCompanion.transform.position = transform.position + (Vector3.right * 1.5f);
     }
+
+    public void ReleaseCompanion()
+    {
+        Destroy(PlayerCompanion.gameObject);
+        GetComponent<MovementInput>().SetPlayerCompanion = null;
+        PlayerCompanion = null;
+    }   
 
     public void Swing()
     {        

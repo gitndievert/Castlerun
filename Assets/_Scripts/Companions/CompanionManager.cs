@@ -9,12 +9,11 @@ public class CompanionManager : PSingle<CompanionManager>
     /// All Castles in Game
     /// </summary>
     [Tooltip("All the companion prefabs in the game")]
-    public List<Companion> CompanionList;
+    public List<GameObject> CompanionList;
 
     protected override void PAwake()
     {
-        if (CompanionList != null && CompanionList.Count == 0)
-            CompanionList.AddRange(transform.GetComponentsInChildren<Companion>());
+       
     }
 
     protected override void PDestroy()
@@ -22,11 +21,12 @@ public class CompanionManager : PSingle<CompanionManager>
 
     }
 
-    public Companion GetCompanionByType(CompanionType companion)
+    public GameObject GetCompanionByType(CompanionType companion)
     {
         foreach(var c in CompanionList)
         {
-            if (c.CompanionType == companion)
+            var comp = c.GetComponent<Companion>();
+            if (comp.CompanionType == companion)
                 return c;
         }
 
