@@ -4,6 +4,7 @@
     Deer,
     Hare,
     Fox,
+    Fox_S,
     Racoon,
     None
 }

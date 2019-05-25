@@ -21,8 +21,14 @@ public class MovementInput : MonoBehaviour
     {
         set
         {
-            if (value == null) _companionAnim = null;
-            _companionAnim = value.gameObject.GetComponent<Animator>();
+            if (value == null)
+            {
+                _companionAnim = null;
+            }
+            else
+            {
+                _companionAnim = value.gameObject.GetComponent<Animator>();
+            }
         }
     }
 

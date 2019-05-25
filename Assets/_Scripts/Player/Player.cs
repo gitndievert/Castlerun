@@ -147,6 +147,16 @@ public class Player : BasePrefab
             }
         }
 
+        //Companion Test
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            SetCompanion(CompanionType.Fox);
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            SetCompanion(CompanionType.Fox_S);
+        }
+
         if (Global.BuildMode)
         {
             //TODO: Need something to manage all the Plans in a Planmanager or something similar
@@ -173,8 +183,8 @@ public class Player : BasePrefab
         {
             //TODO: I think I need something that checks for target on swing here later
             Debug.Log("Swining for attack");
-            //_swinging = true;
-            //_anim.SetBool("Swing", true);
+            _swinging = true;
+            _anim.SetBool("Swing", true);
         }       
         
     }
@@ -182,15 +192,13 @@ public class Player : BasePrefab
     public void Init()
     {
         //Initialize and check everything on start of player
-
-
     }
-
 
     //These three methods probably need their own class
     public void SetCompanion(CompanionType companion)
     {
-        var mycompanion = Instantiate(CompanionManager.Instance.GetCompanionByType(companion));        
+        ReleaseCompanion();
+        var mycompanion = Instantiate(CompanionManager.Instance.GetCompanionByType(companion),transform.position,transform.rotation);        
         PlayerCompanion = mycompanion.GetComponent<Companion>();
         GetComponent<MovementInput>().SetPlayerCompanion = PlayerCompanion;
         PlayerCompanion.transform.parent = transform;
@@ -199,6 +207,7 @@ public class Player : BasePrefab
 
     public void ReleaseCompanion()
     {
+        if (PlayerCompanion == null) return;
         Destroy(PlayerCompanion.gameObject);
         GetComponent<MovementInput>().SetPlayerCompanion = null;
         PlayerCompanion = null;
