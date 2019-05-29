@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GenericPlans : MonoBehaviour
+public class GenericPlans : ScriptableObject
 {
     public GameObject Wall;
     public GameObject Floor;
