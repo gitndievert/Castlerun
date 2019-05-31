@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OffensivePlans : ScriptableObject
+public class OffensivePlans : MonoBehaviour
 {
     public GameObject Barracks;
 }

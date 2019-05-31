@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefensePlans : ScriptableObject
+public class DefensePlans : MonoBehaviour
 {
    
 }
