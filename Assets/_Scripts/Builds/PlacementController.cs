@@ -91,8 +91,7 @@ public class PlacementController : PSingle<PlacementController>
             {
                 _currObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;
                 _currObj.gameObject.layer = Global.DEFAULT_LAYER;
-                //_currObj.transform.GetComponent<Collider>().enabled = true;
-                //_currObj.transform.GetComponent<Collider>().isTrigger = false;
+                _currObj.transform.GetComponent<Collider>().isTrigger = false;
                 _currObj.transform.parent = _player1Builds; //sets the player 1 parent  
                 var build = _currObj.transform.GetComponent<Build>();
                                 
@@ -143,8 +142,7 @@ public class PlacementController : PSingle<PlacementController>
 
             _currObj = Instantiate(PlaceableObjectPrefab,MyPlayer.transform.position,Quaternion.identity);            
             _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().materials;
-            //For Testing
-            //_currObj.transform.GetComponent<Collider>().isTrigger = true;
+            _currObj.transform.GetComponent<Collider>().isTrigger = true;
             
 
             //_currObj.transform.GetComponentInChildren<Renderer>().material = LayMaterial;

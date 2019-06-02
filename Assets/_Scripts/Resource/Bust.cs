@@ -10,9 +10,6 @@ public class Bust : BasePrefab
        
     public bool GravityPull = false;
 
-    //Maybe for future
-    //public TextMeshPro ResouceText;
-    //public TextMeshPro ResouceAmt;
 
     private int _amount;
     private ResourceType _rt;

@@ -7,10 +7,12 @@ public class CamShake : MonoBehaviour
     public const float DefaultIntensity = 2f;
 
     private static CamShake _instance;
+    private static Camera _cam;
 
     private void Awake()
     {
         _instance = this;
+        _cam = _instance.GetComponentInChildren<Camera>();
     }
 
     private void OnDestroy()
@@ -45,7 +47,7 @@ public class CamShake : MonoBehaviour
 
     private static IEnumerator ShakeCamera(float intensity, float duration)
     {
-        Transform cam = Camera.main.transform;
+        Transform cam = _cam.transform;
         Vector2 origPos = cam.position;
 
         for (float t = 0.0f; t < duration; t += Time.deltaTime * intensity)

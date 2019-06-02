@@ -11,7 +11,5 @@ public static class Global
     public const float STRIKE_DIST = 10f;
     #endregion
 
-    public static string GlobalExampleString = "This is the example string";
-    public static List<string> Playerlist;
     public static bool BuildMode = false;    
 }

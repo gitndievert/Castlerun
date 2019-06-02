@@ -157,6 +157,12 @@ public class Player : BasePrefab
             SetCompanion(CompanionType.Fox_S);
         }
 
+        //Cam Shaker
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            CamShake.Shake();
+        }
+
         if (Global.BuildMode)
         {
             //TODO: Need something to manage all the Plans in a Planmanager or something similar
