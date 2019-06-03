@@ -10,8 +10,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject CameraRig = null;
     public GameObject PlayerInstance;
-    public PlayerPad[] PlayerPads;
-    public List<Player> Players;
+    public PlayerPad[] PlayerPads;    
 
     private int _numOfPlayer = 2;     
   
@@ -32,23 +31,42 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void StartPlayersTest()
     {
-        for (int i = 1; i < _numOfPlayer; i++)
+        //PUN Networking pieces
+        if (Player.LocalPlayerInstance == null)
         {
-            var character = Instantiate(PlayerInstance, PlayerPads[i - 1].PlayerSpawnPosition, Quaternion.identity);
-            var player = character.GetComponent<Player>();
-            player.PlayerNumber = i;
-            Players.Add(player);
+            //Need to figure out spawn positions (with PUN)
+            var character = PhotonNetwork.Instantiate(PlayerInstance.name, PlayerPads[0].PlayerSpawnPosition, Quaternion.identity);
+            //if (photonView.IsMine)
+            //{
+                //Transform pt = character.transform;
+                CameraRig.GetComponent<CameraRotate>().target = character.transform;
+            //}
+        }
+        else
+        {
+            Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+        }
+        
+        /*for (int i = 1; i < _numOfPlayer; i++)
+        {
+            //Photon Instantiation
+            //var character = Instantiate(PlayerInstance, PlayerPads[i - 1].PlayerSpawnPosition, Quaternion.identity);
+            
+           
+            //var player = character.GetComponent<Player>();
+            //player.PlayerNumber = i;            
 
             //Will need to be totally redone with the multiplayer code
-            if (player.PlayerNumber == 1)
+            //if (player.PlayerNumber == 1)
+            if(photonView.IsMine)
             {
-                Transform pt = player.transform;
+                Transform pt = transform;
                 //Having issues with autocam, so removing it
                 //CameraRig.GetComponent<AutoCam>().SetTarget(pt);
                 CameraRig.GetComponent<CameraRotate>().target = pt;
                 //CameraRig.GetComponent<BasicCameraBehaviour>().SetPlayerTarget = pt;
             }
-        }
+        }*/
     }
 
     #region Photon Callbacks

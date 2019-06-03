@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class Player : BasePrefab
-{    
+public class Player : BasePrefab, IPunObservable
+{
+    [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
+    public static GameObject LocalPlayerInstance;
+
     public float MoveSpeed { get; set; }
     public float BuildSpeed { get; set; }
     public int HitAmount { get; set; }
@@ -62,9 +66,51 @@ public class Player : BasePrefab
     private OffensivePlans _oPlans;
     #endregion
 
+    //This is the network sync
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            //stream.SendNext(IsFiring);
+            //stream.SendNext(Health);
+        }
+        else
+        {
+            // Network player, receive data
+            //this.IsFiring = (bool)stream.ReceiveNext();
+            //this.Health = (float)stream.ReceiveNext();
+        }
+    }
+
+#if UNITY_5_4_OR_NEWER
+    void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
+    {
+        CalledOnLevelWasLoaded(scene.buildIndex);
+    }
+#endif
+
+#if UNITY_5_4_OR_NEWER
+    public override void OnDisable()
+    {
+        // Always call the base to remove callbacks
+        base.OnDisable();
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+#endif
 
     protected override void Awake()
     {
+        // #Important
+        // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
+        if (photonView.IsMine)
+        {
+            LocalPlayerInstance = gameObject;
+        }
+        // #Critical
+        // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
+        DontDestroyOnLoad(gameObject);
+
         base.Awake();
         Inventory = GetComponent<Inventory>();        
         _anim = GetComponent<Animator>();        
@@ -99,6 +145,29 @@ public class Player : BasePrefab
         {
             SetCompanion(CompanionType);
         }
+
+#if UNITY_5_4_OR_NEWER
+        // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+#endif
+    }
+
+    #if !UNITY_5_4_OR_NEWER
+    /// <summary>See CalledOnLevelWasLoaded. Outdated in Unity 5.4.</summary>
+    void OnLevelWasLoaded(int level)
+    {
+        this.CalledOnLevelWasLoaded(level);
+    }
+    #endif
+
+
+    void CalledOnLevelWasLoaded(int level)
+    {
+        // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
+        if (!Physics.Raycast(transform.position, -Vector3.up, 5f))
+        {
+            transform.position = new Vector3(0f, 5f, 0f);
+        }
     }
 
     private void SetBasicPlayerStats()
@@ -116,6 +185,7 @@ public class Player : BasePrefab
         
     private void Update()
     {
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) return;
         //Temporary, work out the details for build mappings later
         MovementInput.Lock = IsDead;        
 
@@ -298,6 +368,5 @@ public class Player : BasePrefab
         _anim.Play("Death1");        
     }
 
-   
-
+    
 }
