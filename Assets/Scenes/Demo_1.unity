@@ -5850,7 +5850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &569712441
 Transform:
   m_ObjectHideFlags: 0
@@ -11405,9 +11405,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraRig: {fileID: 487774255}
-  PlayerInstance: {fileID: 1507808357, guid: a8a8ea44aa8990c42a88a50b81cee1ee, type: 3}
+  PlayerInstance: {fileID: 1507808357, guid: 47c4c30cb31bfbb47bf369cc29485702, type: 3}
   PlayerPads: []
-  Players: []
 --- !u!1001 &1386098782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13800,6 +13799,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 210445562}
     m_Modifications:
+    - target: {fileID: 128088, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
+      propertyPath: m_Name
+      value: Tower_1
+      objectReference: {fileID: 0}
     - target: {fileID: 453206, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 99.77676
@@ -13855,10 +13858,6 @@ PrefabInstance:
     - target: {fileID: 453206, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.6830704
-      objectReference: {fileID: 0}
-    - target: {fileID: 128088, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
-      propertyPath: m_Name
-      value: Tower_1
       objectReference: {fileID: 0}
     - target: {fileID: 13714620, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
       propertyPath: m_AABB.m_Center.x
