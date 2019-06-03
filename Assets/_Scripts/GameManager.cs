@@ -4,65 +4,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Cameras;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
-public class GameManager : PSingle<GameManager>
+public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject CameraRig = null;
-
     public GameObject PlayerInstance;
     public PlayerPad[] PlayerPads;
     public List<Player> Players;
 
-    private int _numOfPlayer;
-       
-    public Player GetMyPlayer()
-    {
-        return GetPlayer(0);
-    }
+    private int _numOfPlayer = 2;     
+  
 
-    public Player GetPlayer(int position)
-    {
-        return Players.ElementAt(position);
-    }
-
-    public Player GetPlayer(string name)
-    {
-        return Players.Where(p => p.PlayerName == name).First();
-    }
-
-    public Player MatchPlayer(Player player)
-    {
-        return Players.Where(p => p.Equals(player)).First();
-    }
-
-    public void SetNumberOfPlayers(int num)
-    {
-        _numOfPlayer = num;
-    }
-
-    protected override void PAwake()
+    void Awake()
     {
         //FOR TESTING        
-        PlayerPads = gameObject.GetComponentsInChildren<PlayerPad>();        
-        SetNumberOfPlayers(PlayerPads.Length);                
+        PlayerPads = gameObject.GetComponentsInChildren<PlayerPad>();                              
     }
 
-    private void Start()
+    void Start()
     {
         if (CameraRig == null)
             throw new System.Exception("Must have a Camera Rig Hooked Up on the Game Manager");
         StartPlayersTest();
         Music.Instance.PlayMusicTrack(1);
-    }
-
-    protected override void PDestroy()
-    {
-        
-    }
+    }    
 
     private void StartPlayersTest()
     {
-        for (int i = 1; i <= _numOfPlayer; i++)
+        for (int i = 1; i < _numOfPlayer; i++)
         {
             var character = Instantiate(PlayerInstance, PlayerPads[i - 1].PlayerSpawnPosition, Quaternion.identity);
             var player = character.GetComponent<Player>();
@@ -81,6 +51,70 @@ public class GameManager : PSingle<GameManager>
         }
     }
 
+    #region Photon Callbacks
+
+
+    /// <summary>
+    /// Called when the local player left the room. We need to load the launcher scene.
+    /// </summary>
+    public override void OnLeftRoom()
+    {
+        //For now, just load the first scene index
+        SceneManager.LoadScene(0);
+    }
+       
+
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player other)
+    {
+        Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting
+
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
+
+
+            LoadArena();
+        }
+    }
+
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player other)
+    {
+        Debug.LogFormat("OnPlayerLeftRoom() {0}", other.NickName); // seen when other disconnects
+               
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
+            LoadArena();
+        }
+    }
+
+
+
+    #endregion
+
+
+    #region Public Methods
+
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+
+    #endregion
+
+    private void LoadArena()
+    {
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
+        }
+        Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
+        PhotonNetwork.LoadLevel("Room for " + PhotonNetwork.CurrentRoom.PlayerCount);
+    }
 
 
 
