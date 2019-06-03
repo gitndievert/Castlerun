@@ -41,6 +41,7 @@ public class CastleManager : PSingle<CastleManager>
         {
             foreach (var pad in SpawnPads)
             {
+                if (pad == null) continue;
                 if (!pad.gameObject.activeSelf) continue;
                 var id = pad.name.Last();
                 int t_num = int.Parse(id.ToString());

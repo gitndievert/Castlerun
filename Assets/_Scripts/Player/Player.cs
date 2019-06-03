@@ -125,6 +125,22 @@ public class Player : BasePrefab, IPunObservable
     // Start is called before the first frame update
     protected void Start()
     {
+
+        CameraWork _cameraWork = gameObject.GetComponent<CameraWork>();
+
+        if (_cameraWork != null)
+        {
+            if (photonView.IsMine)
+            {
+                _cameraWork.OnStartFollowing();
+            }
+        }
+        else
+        {
+            Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
+        }
+
+
         SetBasicPlayerStats();
 
         _playerUI = UIManager.Instance.PlayerUIPanel;

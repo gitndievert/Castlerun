@@ -1213,6 +1213,7 @@ GameObject:
   - component: {fileID: 5919460253656820829}
   - component: {fileID: 5066382079321786906}
   - component: {fileID: 8305912603750217469}
+  - component: {fileID: 5519497936662690120}
   m_Layer: 2
   m_Name: Knight_Player
   m_TagString: Player
@@ -1443,10 +1444,10 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: Blend
   - Type: 1
-    SynchronizeType: 2
+    SynchronizeType: 1
     Name: InputX
   - Type: 1
-    SynchronizeType: 2
+    SynchronizeType: 1
     Name: InputZ
   - Type: 1
     SynchronizeType: 1
@@ -1461,10 +1462,27 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: Speed
   m_SynchronizeLayers:
-  - SynchronizeType: 0
+  - SynchronizeType: 1
     LayerIndex: 0
   - SynchronizeType: 0
     LayerIndex: 1
+--- !u!114 &5519497936662690120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507808357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe58988859614c439ea13df6c24a558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 7
+  height: 3
+  heightSmoothLag: 0.3
+  centerOffset: {x: 0, y: 0, z: 0}
+  followOnStart: 0
 --- !u!1 &1511076747
 GameObject:
   m_ObjectHideFlags: 0

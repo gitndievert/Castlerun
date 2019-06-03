@@ -35,11 +35,16 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (Player.LocalPlayerInstance == null)
         {
             //Need to figure out spawn positions (with PUN)
-            var character = PhotonNetwork.Instantiate(PlayerInstance.name, PlayerPads[0].PlayerSpawnPosition, Quaternion.identity);
+            int spawnIndex = PhotonNetwork.IsMasterClient ? 0 : 1;
+            var character = PhotonNetwork.Instantiate(PlayerInstance.name, PlayerPads[spawnIndex].PlayerSpawnPosition, Quaternion.identity);
+
+            var player = character.GetComponent<Player>();
+            player.PlayerNumber = spawnIndex + 1; //total hack for player number right now
+
             //if (photonView.IsMine)
             //{
-                //Transform pt = character.transform;
-                CameraRig.GetComponent<CameraRotate>().target = character.transform;
+            //Transform pt = character.transform;
+            CameraRig.GetComponent<CameraRotate>().target = character.transform;
             //}
         }
         else
