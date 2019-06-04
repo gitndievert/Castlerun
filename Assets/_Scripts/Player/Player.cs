@@ -276,7 +276,7 @@ public class Player : BasePrefab, IPunObservable
             //TODO: I think I need something that checks for target on swing here later
             Debug.Log("Swining for attack");
             _swinging = true;
-            _anim.SetBool("Swing", true);
+            //_anim.SetBool("Swing", true);
         }       
         
     }
