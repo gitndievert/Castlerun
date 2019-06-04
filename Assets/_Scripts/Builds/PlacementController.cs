@@ -34,13 +34,13 @@ public class PlacementController : PSingle<PlacementController>
     /// Object to parent on for player 1
     /// </summary>
     [SerializeField]
-    private Transform _player1Builds = null;
+    private Transform _playerBuilds = null;
 
     private bool _triggerPlacement = false;
 
     protected override void PAwake()
     {        
-        _player1Builds = GameObject.Find("Player_1_Builds").transform;  
+        _playerBuilds = GameObject.Find("Player_Builds").transform;
     }
         
     protected override void PDestroy()
@@ -92,7 +92,7 @@ public class PlacementController : PSingle<PlacementController>
                 _currObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;
                 _currObj.gameObject.layer = Global.DEFAULT_LAYER;
                 _currObj.transform.GetComponent<Collider>().isTrigger = false;
-                _currObj.transform.parent = _player1Builds; //sets the player 1 parent  
+                _currObj.transform.parent = _playerBuilds; //sets the player 1 parent  
                 var build = _currObj.transform.GetComponent<Build>();
                                 
                 //Might need to move this down to the layprefab part so we can highlight it red

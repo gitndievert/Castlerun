@@ -148,10 +148,12 @@ public class Player : BasePrefab, IPunObservable
         var castlemanger = CastleManager.Instance;
                 
         //Set Nane
-        _playerUI.PlayerName.text = "Krunchy";        
+        _playerUI.PlayerName.text = "Krunchy";
 
         //NOTE
-        //Pulls the first castle out for now (just one castle)
+        //Quick test for two types of castles
+        CastleType = PlayerNumber == 1 ? CastleType.Default : CastleType.FortressOfDoom;
+
         Castle castle = castlemanger.GetCastleByType(CastleType);               
         CastleManager.Instance.SpawnCastle(castle, this);     
 
