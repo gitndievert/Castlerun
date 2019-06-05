@@ -11,8 +11,7 @@ public class CastleManager : PSingle<CastleManager>
     /// </summary>
     [Tooltip("All the castle prefabs in the game")]
     public List<Castle> CastleList;
-    public PlayerPad[] SpawnPads;
-    public GameObject[] CastleBanners;
+    public PlayerPad[] SpawnPads;    
 
     public Castle Player1Castle = null;
     public Castle Player2Castle = null;
