@@ -9,14 +9,14 @@ public class Player : BasePrefab, IPunObservable
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
 
-    public float MoveSpeed { get; set; }
-    public float BuildSpeed { get; set; }
-    public int HitAmount { get; set; }
-    public CastleStats CastleStats { get; set; }
-
+    public float MoveSpeed;
+    public float BuildSpeed;
+    public int HitAmount;
     public bool CompanionOut = false;
     public bool IsDead = false;
-    public int PlayerNumber;
+
+    [Range(1,4)]
+    public int PlayerNumber = 1;
 
     [Tooltip("For changing the companion on the player")]
     public CompanionType CompanionType = CompanionType.None;
@@ -37,6 +37,8 @@ public class Player : BasePrefab, IPunObservable
     /// </summary>
     public Transform PlacementSpawn { get; set; }
 
+    public CastleStats CastleStats { get; set; }
+
     public string PlayerName
     {
         get { return _playerName; }
@@ -50,7 +52,7 @@ public class Player : BasePrefab, IPunObservable
     }    
    
     #region Player Components      
-    public Inventory Inventory { get; private set; }
+    public Inventory Inventory { get; private set; }    
     public int ActorNumber { get; internal set; }
     #endregion
 
@@ -64,6 +66,7 @@ public class Player : BasePrefab, IPunObservable
     //Temporary for now
     private GenericPlans _plans;
     private OffensivePlans _oPlans;
+    private PlacementController _placementController;
     #endregion
 
     //This is the network sync
@@ -113,13 +116,11 @@ public class Player : BasePrefab, IPunObservable
 
         base.Awake();
         Inventory = GetComponent<Inventory>();        
-        _anim = GetComponent<Animator>();        
-
+        _anim = GetComponent<Animator>();      
         //Temporary for now
         _plans = GetComponent<GenericPlans>();
         _oPlans = GetComponent<OffensivePlans>();
-
-        PlacementController.Instance.MyPlayer = this;        
+        _placementController = GetComponent<PlacementController>();
     }
 
     // Start is called before the first frame update
@@ -213,15 +214,15 @@ public class Player : BasePrefab, IPunObservable
             
             if(Global.BuildMode)
             {
-                //Annouce build mode on
-                UIManager.Instance.Messages.text = "Build Mode ON";
-                PlacementController.Instance.LoadObject(_plans.Wall);
+                //Annouce build mode on                
+                _placementController.SetGrid = true;
+                _placementController.LoadObject(_plans.Wall);
             }
             else
             {
-                //Annouce build mode off
-                UIManager.Instance.Messages.text = "Build Mode OFF";
-                PlacementController.Instance.ClearObject();
+                //Annouce build mode off                
+                _placementController.SetGrid = false;
+                _placementController.ClearObject();
             }
             
         }
@@ -258,19 +259,19 @@ public class Player : BasePrefab, IPunObservable
 
             if (Input.GetKeyDown(KeyBindings.BuildKey1))
             {
-                PlacementController.Instance.LoadObject(_plans.Wall);
+                _placementController.LoadObject(_plans.Wall);
             }
             else if (Input.GetKeyDown(KeyBindings.BuildKey2))
             {
-                PlacementController.Instance.LoadObject(_plans.Floor);
+                _placementController.LoadObject(_plans.Floor);
             }
             else if (Input.GetKeyDown(KeyBindings.BuildKey3))
             {
-                PlacementController.Instance.LoadObject(_plans.Ramp);
+                _placementController.LoadObject(_plans.Ramp);
             }  
             else if(Input.GetKeyDown(KeyCode.B))
             {
-                PlacementController.Instance.LoadObject(_oPlans.Barracks);
+                _placementController.LoadObject(_oPlans.Barracks);
             }
         }        
         else if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !_swinging && !Global.BuildMode)
@@ -344,20 +345,8 @@ public class Player : BasePrefab, IPunObservable
     {
         _swinging = false;
         _anim.SetBool("Swing", false);
-    }
-
-    
-    private void OnDestroy()
-    {
-        
-    }
-
-    private void OnCollisionEnter(Collision col)
-    {
-
-        
-    }
-
+    }    
+  
     public override void SetHit(int amount)
     {
         //You're dead, go back

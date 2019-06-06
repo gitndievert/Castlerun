@@ -9,6 +9,7 @@ public static class Global
     public const int IGNORE_LAYER = 2;
     public const int GROUND_LAYER = 8;
     public const float STRIKE_DIST = 10f;
+    public const int BUILD_GRID_LAYER = 9;
     #endregion
 
     public static bool BuildMode = false;    

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using SBK.Unity;
 
-public class PlacementController : PSingle<PlacementController>
+public class PlacementController : MonoBehaviour
 {
-    public GameObject PlaceableObjectPrefab = null;
-    public Player MyPlayer;
+    public GameObject PlaceableObjectPrefab = null;    
 
     [Tooltip("This is the transparent lay material")]
     public Material LayMaterial;
@@ -14,7 +13,7 @@ public class PlacementController : PSingle<PlacementController>
     public Material ErrorMaterial;
 
     [Header("Build Properties")]
-    public bool BuildMode = false;
+    public bool BuildMode;
     public float RotateAmount = 45f;
     public bool SnapOnGrid = true;
     public float SnapSize = 1f;    
@@ -29,6 +28,8 @@ public class PlacementController : PSingle<PlacementController>
     private float mouseWheelRotation;
     private bool _triggerBuild = false;
     private bool _rotating = false;
+    private Player _player;
+    private GameObject _grid;
 
     /// <summary>
     /// Object to parent on for player 1
@@ -38,14 +39,17 @@ public class PlacementController : PSingle<PlacementController>
 
     private bool _triggerPlacement = false;
 
-    protected override void PAwake()
-    {        
-        _playerBuilds = GameObject.Find("Player_Builds").transform;
-    }
-        
-    protected override void PDestroy()
+    private void Awake()
     {
+        _player = GetComponent<Player>();
+        GameObject build = new GameObject("Player_Builds");
+        _playerBuilds = build.transform;
+        _grid = _player.transform.Find("Grid").gameObject;
+    }
 
+    private void Start()
+    {
+        BuildMode = false;
     }
 
     public void LoadObject(GameObject obj)
@@ -63,14 +67,29 @@ public class PlacementController : PSingle<PlacementController>
         PlaceableObjectPrefab = null;
     }
 
+    public bool SetGrid
+    {
+        set
+        {
+            if (_grid != null)
+            {
+                _grid.SetActive(value);
+                string status = _grid.activeSelf ? "ON" : "OFF";
+                UIManager.Instance.Messages.text = $"Build Mode {status}";
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
         if (_currObj != null && !_rotating)
         {            
             BuildMode = true;
-            
+
             if (MoveOnMouse)
+            {
                 MoveCurrentObjectToMouse();
+            }
             else
             {
                 //_currObj.transform.parent = MyPlayer.PlacementSpawn.transform;
@@ -78,6 +97,10 @@ public class PlacementController : PSingle<PlacementController>
                 //PlaceObjectToGround();
             }
                 
+        }
+        else
+        {
+            BuildMode = false;
         }
     }
 
@@ -101,7 +124,7 @@ public class PlacementController : PSingle<PlacementController>
                 bool cancelBuild = false;
                 if (build.SetResourceType(rt))
                 {
-                    Inventory inv = MyPlayer.Inventory;
+                    Inventory inv = _player.Inventory;
                     int invcount = inv.GetCount(rt);
                     if (invcount > 0 && (invcount - build.PlacementCost >= 0))
                     {
@@ -127,8 +150,7 @@ public class PlacementController : PSingle<PlacementController>
                 }
 
             }
-            _currObj = null;
-            BuildMode = false;
+            _currObj = null;            
             LoadObject(PlaceableObjectPrefab);
             return;
         }
@@ -140,7 +162,7 @@ public class PlacementController : PSingle<PlacementController>
                 Destroy(_currObj);
             }
 
-            _currObj = Instantiate(PlaceableObjectPrefab,MyPlayer.transform.position,Quaternion.identity);            
+            _currObj = Instantiate(PlaceableObjectPrefab,_player.transform.position,Quaternion.identity);            
             _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().materials;
             _currObj.transform.GetComponent<Collider>().isTrigger = true;
             
