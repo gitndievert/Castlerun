@@ -43,13 +43,13 @@ public class PlacementController : MonoBehaviour
     {
         _player = GetComponent<Player>();
         GameObject build = new GameObject("Player_Builds");
-        _playerBuilds = build.transform;
-        _grid = _player.transform.Find("Grid").gameObject;
+        _playerBuilds = build.transform;        
     }
 
     private void Start()
     {
         BuildMode = false;
+        _grid = _player.transform.Find("Grid").gameObject;
     }
 
     public void LoadObject(GameObject obj)

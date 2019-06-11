@@ -1,7 +1,6 @@
-﻿using Photon.Pun;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class BasePrefab : MonoBehaviourPunCallbacks
+public abstract class BasePrefab : MonoBehaviour
 {
     public int Health;
     public AudioClip DestroySound;

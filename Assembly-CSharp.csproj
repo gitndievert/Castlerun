@@ -64,6 +64,128 @@
   <ItemGroup>
     <Compile Include="Assets\_Assets\Characters\Knight\scripts\rotator.cs" />
     <Compile Include="Assets\_Assets\Models\Medieval castle kit\Features\FreeCamera\FreeCamera.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Examples\Cube Forge\Scripts\CubeForgeGame.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Examples\Cube Forge\Scripts\NetCam.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Examples\Cube Forge\Scripts\Primitive.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Examples\Proximity\ExampleProximityPlayer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Examples\Proximity\ExampleProximitySpawn.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Generated\NetworkManager.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Generated\NetworkObjectFactory.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Generated\UserGenerated\ChatManagerBehavior.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Generated\UserGenerated\ChatManagerNetworkObject.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Generated\UserGenerated\CubeForgeGameBehavior.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Generated\UserGenerated\CubeForgeGameNetworkObject.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Generated\UserGenerated\ExampleProximityPlayerBehavior.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Generated\UserGenerated\ExampleProximityPlayerNetworkObject.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Generated\UserGenerated\NetworkCameraBehavior.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Generated\UserGenerated\NetworkCameraNetworkObject.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Generated\UserGenerated\TestBehavior.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Generated\UserGenerated\TestNetworkObject.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Modules\Chat\ChatMaker.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Modules\Chat\ChatManager.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Modules\LobbySystem\LobbyManager.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Modules\LobbySystem\LobbyPlayer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Modules\LobbySystem\LobbyPlayerItem.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Modules\Stand Alone Chat\StandAloneChat.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Modules\VOIP\VOIP.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Modules\VOIP\VoipStarter.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\BMSUnityExtensions.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\ForgeGeneratedField.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\GeneratedInterpolAttribute.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\GeneratedRPCAttribute.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\GeneratedRPCVariableNamesAttribute.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\InterpolateQuaternion.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\InterpolateVector2.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\InterpolateVector3.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\InterpolateVector4.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Logging\BMSLogger.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\MainThreadManager.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Multiplayer Menu\MultiplayerMenu.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\NetworkBehavior.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\ArgumentParser.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\BeardedMath.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\BMSByte.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\BMSExtensions.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\BufferManager.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Concurrency.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\DataStore\Cache.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Logging\BMSLog.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Logging\IBMSLogger.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\BasePacketComposer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\BaseSteamP2P.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\BaseTCP.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\BaseUDP.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\CachedSteamP2PClient.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\CachedUdpClient.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\CommonServer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Enums\Receivers.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Exceptions.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Filters\IConnectionFilter.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Frame\Binary.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Frame\ConnectionClose.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Frame\Continuation.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Frame\Error.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Frame\Factory.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Frame\FrameStream.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Frame\Ping.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Frame\Pong.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Frame\Text.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\IClient.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\IClientMockPlayer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\IServer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\IUserAuthenticator.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Lobby\ILobbyMaster.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Lobby\LobbyService.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\LocalNetworkScanning.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\MasterServerResponse.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Nat\NatHolePunch.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\NetWorker.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\NetworkingPlayer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\ObjectMapper.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Objects\IInterpolator.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Objects\INetworkBehavior.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Objects\INetworkObjectFactory.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Objects\Interpolated.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Objects\InterpolateDouble.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Objects\InterpolateFloat.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Objects\NetworkObject.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Objects\Rewind.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\RouterIds.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Rpc.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\RpcArgs.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\RPCInfo.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\SteamNetworkingPlayer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\SteamP2PClient.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\SteamP2PPacketComposer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\SteamP2PServer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\TCPClient.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\TCPClientBase.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\TCPClientWebsockets.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\TCPMasterClient.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\TCPServer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Time.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\UDPClient.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\UDPGroupIds.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\UDPNetworkingPlayer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\UDPPacket.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\UDPPacketComposer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\UDPPacketGroup.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\UDPPacketManager.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\UDPPacketSequence.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\UDPServer.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Forge\Networking\Websockets.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\GridLocation.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Logging\ForgeLogger.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\SimpleJSON.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Threading\IThreadRunner.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Threading\Task.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Networking\Vector.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\NetworkManager.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\NetworkObjectFactoryBase.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Server Browser\ServerBrowser.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\Server Browser\ServerBrowserItem.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\TemplateSystem.cs" />
+    <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Scripts\UnityObjectMapper.cs" />
     <Compile Include="Assets\_Assets\Particles\Tazo_fx\Script\BillBoard.cs" />
     <Compile Include="Assets\_Assets\Particles\Tazo_fx\Script\button_target.cs" />
     <Compile Include="Assets\_Assets\Particles\Tazo_fx\Script\demo.cs" />
@@ -92,6 +214,7 @@
     <Compile Include="Assets\_Scripts\Builds\Plans\OffensivePlans.cs" />
     <Compile Include="Assets\_Scripts\Camera\CameraRotate.cs" />
     <Compile Include="Assets\_Scripts\Camera\CameraWork.cs" />
+    <Compile Include="Assets\_Scripts\Camera\WowCamera.cs" />
     <Compile Include="Assets\_Scripts\Castles\Castle.cs" />
     <Compile Include="Assets\_Scripts\Castles\CastleManager.cs" />
     <Compile Include="Assets\_Scripts\Castles\CastleStats.cs" />
@@ -116,8 +239,6 @@
     <Compile Include="Assets\_Scripts\Helpers\TransformHelper.cs" />
     <Compile Include="Assets\_Scripts\ICharacter.cs" />
     <Compile Include="Assets\_Scripts\MenuManager.cs" />
-    <Compile Include="Assets\_Scripts\Photon\Launcher.cs" />
-    <Compile Include="Assets\_Scripts\Photon\PlayerNameInputField.cs" />
     <Compile Include="Assets\_Scripts\Player\Global.cs" />
     <Compile Include="Assets\_Scripts\Player\KeyBindings.cs" />
     <Compile Include="Assets\_Scripts\Player\MovementInput.cs" />
@@ -133,17 +254,6 @@
     <Compile Include="Assets\_Scripts\UI\InventoryUI.cs" />
     <Compile Include="Assets\_Scripts\UI\PlayerUI.cs" />
     <Compile Include="Assets\_Scripts\UI\UIManager.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\Common\EventSystemSpawner.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\Common\OnStartDelete.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\Common\TextButtonTransition.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\Common\TextToggleIsOnTransition.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChannelSelector.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChatAppIdCheckerUI.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChatGui.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\FriendItem.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
-    <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -319,7 +429,6 @@
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurves.shader" />
     <None Include="Assets\_Assets\Models\Medieval Castle pack volume 1\Old version\Shaders\Flag.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\ScreenSpaceAmbientObscurance.shader" />
-    <None Include="Assets\Photon\PhotonUnityNetworking\link.xml" />
     <None Include="Assets\UnityAssets\Standard Assets\Environment\Water (Basic)\DO_NOT_WORK_IN_VR.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\NFAA.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\TiltShiftHdrLensBlur.shader" />
@@ -340,7 +449,6 @@
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\ContrastComposite.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset3.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
-    <None Include="Assets\Photon\PhotonLibs\Photon3Unity3D.xml" />
     <None Include="Assets\_Assets\Sounds\Fantasy Arcade RPG Freedom World Sounds - Free Package\assetexplain.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Vehicles\Car\Shaders\DiffuseReflectiveShader.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -349,7 +457,6 @@
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />
     <None Include="Assets\_Assets\Models\Medieval Castle pack volume 1\1.3 Version\Shaders\Double sided.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Vehicles\Aircraft\AircraftGuidelines.txt" />
-    <None Include="Assets\Photon\PhotonLibs\release_history.txt" />
     <None Include="Assets\_Assets\Characters\Meshtint Free Knight\www.meshtint.com.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Vehicles\Car\Shaders\ReflectiveDiffuseSpecTransp.shader" />
     <None Include="Assets\_Assets\Models\Medieval castle kit\Shaders\Vertex shaders 5.5\StandardSpecularVC.shader" />
@@ -398,6 +505,7 @@
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlur.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
+    <None Include="Assets\Logs\bmslog.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\DLAA.shader" />
     <None Include="Assets\_Assets\Characters\Meshtint Free Knight\Read me.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
@@ -416,7 +524,6 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\NoiseAndGrain.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Vehicles\Car\CarGuidelines.txt" />
-    <None Include="Assets\Photon\PhotonUnityNetworking\readme.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\Projectors\Shaders\ProjectorMultiply.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\VignettingShader.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
@@ -447,7 +554,6 @@
     <None Include="Assets\UnityAssets\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularDisplacement.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAA3Console.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
-    <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\UnityAssets\SampleScenes\Shaders\Skybox-Procedural.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
@@ -677,12 +783,6 @@
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Photon3Unity3D">
-      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
-    </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
@@ -1038,40 +1138,6 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="PhotonUnityNetworking.Utilities.PhotonPlayer.Editor.csproj">
-      <Project>{EC1EA3E0-D9D5-C873-2A47-8AA6F347D649}</Project>
-      <Name>PhotonUnityNetworking.Utilities.PhotonPlayer.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Utilities.csproj">
-      <Project>{F25AF8B9-336F-118C-267D-BA45F3DC959E}</Project>
-      <Name>PhotonUnityNetworking.Utilities</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonWebSocket.csproj">
-      <Project>{BC2D37D6-1785-B8BB-8446-F77F3C93FFB6}</Project>
-      <Name>PhotonWebSocket</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonRealtime.csproj">
-      <Project>{73733CED-1292-9C3E-3EB2-9451C2A2833C}</Project>
-      <Name>PhotonRealtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.csproj">
-      <Project>{1B4B0155-62C4-D337-617F-E2ABD0208112}</Project>
-      <Name>PhotonUnityNetworking</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonChat.csproj">
-      <Project>{975989A6-B038-403E-2397-978EE0EA84DF}</Project>
-      <Name>PhotonChat</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Utilities.Culling.Editor.csproj">
-      <Project>{75705F09-3DCE-8937-FD12-673BBF4FBFE4}</Project>
-      <Name>PhotonUnityNetworking.Utilities.Culling.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Editor.csproj">
-      <Project>{B2C4CCEF-F973-F590-30CF-24CF2096BA14}</Project>
-      <Name>PhotonUnityNetworking.Editor</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
