@@ -91,19 +91,16 @@ public class Player : BasePrefab
     // Start is called before the first frame update
     protected void Start()
     {
-
-        CameraWork _cameraWork = gameObject.GetComponent<CameraWork>();
-
-        if (_cameraWork != null)
+        var cameraWork = gameObject.GetComponent<CameraWork>();
+        if (cameraWork != null)
         {
-            _cameraWork.OnStartFollowing();
+            cameraWork.OnStartFollowing();
         }
         else
         {
             Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
         }
-
-
+        
         SetBasicPlayerStats();
 
         _playerUI = UIManager.Instance.PlayerUIPanel;
@@ -190,6 +187,11 @@ public class Player : BasePrefab
         {
             CamShake.Shake();
         }
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            CamShake.Shake(1f, 0.5f);
+        }
+
 
         if (Global.BuildMode)
         {
