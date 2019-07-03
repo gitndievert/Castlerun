@@ -35,8 +35,7 @@ public class Player : BasePrefab
     /// Placement tranform for the player spawn coords
     /// </summary>
     public Transform PlacementSpawn { get; set; }
-
-    public CastleStats CastleStats { get; set; }
+    
 
     public string PlayerName
     {
@@ -112,10 +111,8 @@ public class Player : BasePrefab
 
         //NOTE
         //Quick test for two types of castles
-        CastleType = PlayerNumber == 1 ? CastleType.Default : CastleType.FortressOfDoom;
-
-        Castle castle = castlemanger.GetCastleByType(CastleType);               
-        CastleManager.Instance.SpawnCastle(castle, this);     
+        CastleType = PlayerNumber == 1 ? CastleType.Default : CastleType.FortressOfDoom;                
+        castlemanger.SpawnCastle(CastleType, this);     
 
         PlacementSpawn = transform.Find("PlacementSpawn");
 
