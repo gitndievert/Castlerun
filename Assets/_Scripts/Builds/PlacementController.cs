@@ -14,10 +14,11 @@ public class PlacementController : MonoBehaviour
 
     [Header("Build Properties")]
     public bool BuildMode;
-    public float RotateAmount = 45f;
+    public float RotateAmount = 90f;
     public bool SnapOnGrid = true;
     public float SnapSize = 1f;    
     public bool MoveOnMouse = false;
+    public float BuildDistance = 1f;
 
     [SerializeField]
     private MeshRenderer _placeObjectMeshRend;
@@ -111,6 +112,9 @@ public class PlacementController : MonoBehaviour
         {
             if (_currObj != null)
             {
+                //Must be inside of grid to build
+                if (!ObjectInGrid(_currObj.transform)) return;
+
                 _currObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;
                 _currObj.gameObject.layer = Global.DEFAULT_LAYER;
                 _currObj.transform.GetComponent<Collider>().isTrigger = false;
@@ -184,6 +188,11 @@ public class PlacementController : MonoBehaviour
     {
         return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }    
+
+    private bool ObjectInGrid(Transform placedObj)
+    {
+        return Vector3.Distance(placedObj.position, _player.transform.position) <= BuildDistance;
+    }
  
     private void MoveCurrentObjectToMouse()
     {
@@ -196,9 +205,24 @@ public class PlacementController : MonoBehaviour
             if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
             {
                 if (SnapOnGrid)
-                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, hit.point.y + distToGround, Mathf.Round(hit.point.z) * SnapSize);
+                {
+                    //Snap to grid edge
+                    //(transform.position - otherObject.transform.position).normalized * distance + otherObject.transform.position;                    
+                    if (ObjectInGrid(_currObj.transform) || 
+                        Vector3.Distance(hit.transform.position,_currObj.transform.position) < BuildDistance)
+                    {
+                        //_currObj.transform.position = (transform.position - _player.transform.position).normalized * BuildDistance + _player.transform.position;
+                        _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, hit.point.y + distToGround, Mathf.Round(hit.point.z) * SnapSize);
+                    }
+                    else
+                    {                        
+                        _currObj.transform.position = _currObj.transform.position;
+                    }                   
+                }
                 else
+                {
                     _currObj.transform.position = hit.point;
+                }
             }
         }
     }
