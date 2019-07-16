@@ -41,15 +41,14 @@ public class PlacementController : MonoBehaviour
 
     private void Awake()
     {
-        _player = GetComponent<Player>();
-        GameObject build = new GameObject("Player_Builds");
-        _playerBuilds = build.transform;        
+        _player = GetComponent<Player>();        
     }
 
     private void Start()
     {
         BuildMode = false;
         _grid = _player.transform.Find("Grid").gameObject;
+        _playerBuilds = _player.PlayerWorldItems.transform;
     }
 
     public void LoadObject(GameObject obj)

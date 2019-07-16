@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
-{
-    public GameObject CameraRig = null;
+{    
     public GameObject PlayerInstance;
-    public PlayerPad[] PlayerPads;    
+    public PlayerPad[] PlayerPads;     
 
     private int _numOfPlayer = 2;     
   
@@ -15,13 +14,11 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         //FOR TESTING        
-        PlayerPads = gameObject.GetComponentsInChildren<PlayerPad>();                              
+        PlayerPads = gameObject.GetComponentsInChildren<PlayerPad>();                
     }
 
     void Start()
     {
-        if (CameraRig == null)
-            throw new System.Exception("Must have a Camera Rig Hooked Up on the Game Manager");
         StartPlayersTest();
         Music.Instance.PlayMusicTrack(1);
     }    
@@ -35,11 +32,7 @@ public class GameManager : MonoBehaviour
 
             var character = Instantiate(PlayerInstance, PlayerPads[spawnIndex].PlayerSpawnPosition, Quaternion.identity);
             var player = character.GetComponent<Player>();
-            
-            player.PlayerNumber = spawnIndex + 1; //total hack for player number right now
-
-            CameraRig.GetComponent<CameraRotate>().target = character.transform;            
-
+            player.Init("Krunchy", spawnIndex + 1); //Player number is a hack until things are setup            
         }       
         
         /*for (int i = 1; i < _numOfPlayer; i++)

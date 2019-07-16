@@ -14,9 +14,6 @@ public class Player : BasePrefab
     public bool CompanionOut = false;
     public bool IsDead = false;
 
-    [Range(1,4)]
-    public int PlayerNumber = 1;
-
     [Tooltip("For changing the companion on the player")]
     public CompanionType CompanionType = CompanionType.None;
     [Tooltip("For Testing Changes on Castles")]
@@ -35,7 +32,9 @@ public class Player : BasePrefab
     /// Placement tranform for the player spawn coords
     /// </summary>
     public Transform PlacementSpawn { get; set; }
-    
+
+    [Range(1, 4)]
+    public int PlayerNumber = 1;
 
     public string PlayerName
     {
@@ -52,6 +51,7 @@ public class Player : BasePrefab
     #region Player Components      
     public Inventory Inventory { get; private set; }    
     public int ActorNumber { get; internal set; }
+    public GameObject PlayerWorldItems { get; internal set; }
     #endregion
 
     #region Private Members
@@ -65,15 +65,15 @@ public class Player : BasePrefab
     private GenericPlans _plans;
     private OffensivePlans _oPlans;
     private PlacementController _placementController;
+
+    //Camera Rig
+    private GameObject _camRig;
     #endregion
-
     
-
 
     protected override void Awake()
     {        
-        LocalPlayerInstance = gameObject;
-        
+        LocalPlayerInstance = gameObject;        
         // #Critical
         // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
         DontDestroyOnLoad(gameObject);
@@ -85,34 +85,29 @@ public class Player : BasePrefab
         _plans = GetComponent<GenericPlans>();
         _oPlans = GetComponent<OffensivePlans>();
         _placementController = GetComponent<PlacementController>();
+        _camRig = GameObject.FindGameObjectWithTag(Global.CAM_RIG_TAG);
+        PlayerWorldItems = new GameObject("PlayerWorldItems");
     }
 
     // Start is called before the first frame update
     protected void Start()
     {
-        var cameraWork = gameObject.GetComponent<CameraWork>();
-        if (cameraWork != null)
-        {
-            cameraWork.OnStartFollowing();
-        }
-        else
-        {
-            Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
-        }
+        //Set UI (hard coded for now)
+        _playerUI = UIManager.Instance.PlayerUIPanel;        
+        _playerUI.PlayerName.text = _playerName;
+
+        //Initialize the object dumps for the world       
         
-        SetBasicPlayerStats();
+        //Set player camera
+        _camRig.GetComponent<CameraRotate>().target = transform;
 
-        _playerUI = UIManager.Instance.PlayerUIPanel;
-
-        var castlemanger = CastleManager.Instance;
-                
-        //Set Nane
-        _playerUI.PlayerName.text = "Krunchy";
+        //Player stats
+        SetBasicPlayerStats();        
 
         //NOTE
-        //Quick test for two types of castles
-        CastleType = PlayerNumber == 1 ? CastleType.Default : CastleType.FortressOfDoom;                
-        castlemanger.SpawnCastle(CastleType, this);     
+        //Quick test for two types of castles        
+        CastleType = PlayerNumber == 1 ? CastleType.Default : CastleType.FortressOfDoom;
+        CastleManager.Instance.SpawnCastle(CastleType, this);     
 
         PlacementSpawn = transform.Find("PlacementSpawn");
 
@@ -121,6 +116,12 @@ public class Player : BasePrefab
             SetCompanion(CompanionType);
         }
 
+    }
+
+    public void Init(string name, int playernum)
+    {
+        PlayerName = name;
+        PlayerNumber = playernum;
     }
  
     private void SetBasicPlayerStats()
@@ -220,12 +221,7 @@ public class Player : BasePrefab
             //_anim.SetBool("Swing", true);
         }       
         
-    }
-
-    public void Init()
-    {
-        //Initialize and check everything on start of player
-    }
+    }   
 
     //These three methods probably need their own class
     public void SetCompanion(CompanionType companion)
@@ -249,9 +245,7 @@ public class Player : BasePrefab
     public void Swing()
     {        
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if(!Inventory.ResourceCheck()) Inventory.ResetHands();        
-
+        
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             
@@ -259,12 +253,7 @@ public class Player : BasePrefab
             if (!TransformHelper.DistanceLess(transform, hit.transform, Global.STRIKE_DIST)) return;
             
             switch (hit.transform.tag)
-            {
-                case "Resource":
-                    var resource = hit.transform.GetComponent<IResource>();
-                    int health = resource.GetHealth();                    
-                    resource.SetHit(HitAmount);                    
-                    break;
+            {                
                 case "Build":
                     var build = hit.transform.GetComponent<IBuild>();
                     build.SetHit(HitAmount);                    
@@ -274,8 +263,7 @@ public class Player : BasePrefab
                     var character = hit.transform.GetComponent<ICharacter>();
                     character.SetHit(HitAmount);                    
                     break;
-            }
-            
+            }            
         }
     }        
     

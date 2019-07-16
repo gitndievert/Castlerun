@@ -4,6 +4,12 @@ using UnityEngine;
 
 public static class Global
 {
+
+    #region Game Objects
+    public const string CAM_RIG_TAG = "CamRig";
+
+    #endregion
+
     #region Game Constants
     public const int DEFAULT_LAYER = 0;
     public const int IGNORE_LAYER = 2;
@@ -12,5 +18,7 @@ public static class Global
     public const int BUILD_GRID_LAYER = 9;
     #endregion
 
-    public static bool BuildMode = false;    
+    #region Player Flags
+    public static bool BuildMode = false;
+    #endregion
 }
