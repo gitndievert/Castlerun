@@ -16,13 +16,14 @@ public abstract class Build : BasePrefab, IBuild
     protected abstract float BuildTime { get; }
     protected abstract ResourceType ResourceType { get; }
 
-    protected Rigidbody RigidBody;
+    protected Rigidbody RigidBody;    
 
     protected virtual void Start()
     {                
         RigidBody = GetComponent<Rigidbody>();
         //Replace HealthText with UI elements
-        HealthText.gameObject.SetActive(false);
+        if (HealthText != null)
+            HealthText.gameObject.SetActive(false);
         if (Health == 0) Health = 20;
         SetHealthText(Health);
         MaxHealth = Health;
@@ -30,12 +31,14 @@ public abstract class Build : BasePrefab, IBuild
     
     protected void OnMouseOver()
     {
-        HealthText.gameObject.SetActive(true);
+        if (HealthText != null)
+            HealthText.gameObject.SetActive(true);
     }
 
     protected void OnMouseExit()
     {
-        HealthText.gameObject.SetActive(false);
+        if (HealthText != null)
+            HealthText.gameObject.SetActive(false);
     }
 
     public virtual void ConfirmPlacement()
@@ -60,14 +63,15 @@ public abstract class Build : BasePrefab, IBuild
         Global.BuildMode = true;
     }
 
-    protected void OnCollisionEnter(Collision col)
-    {        
-        switch(col.gameObject.tag)
+    protected virtual void OnCollisionEnter(Collision col)
+    {
+        var colObj = col.gameObject;
+        switch (colObj.tag)
         {
             default:
                 return;
             case "Build":
-                Debug.Log("Hitting the Target");
+                Debug.Log("Hitting the Target");                
                 break;
             case "Projectile":
             case "Smasher":
@@ -80,6 +84,8 @@ public abstract class Build : BasePrefab, IBuild
                 break;
         }        
     }
+
+   
 
     //Old Hitblocker code
     /*protected void OnTriggerEnter(Collider col)

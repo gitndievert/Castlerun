@@ -12,6 +12,11 @@ public class ArmyBuild : Build
     
     public GameObject Troop;
 
+    [Tooltip("Turn on the Builder")]
+    [Header("Turn On Builder")]
+    public bool EnableBuilder = false;
+
+
     /// <summary>
     /// The time it takes to build the structure
     /// </summary>
@@ -74,7 +79,18 @@ public class ArmyBuild : Build
     // Update is called once per frame
     void Update()
     {
-        
+        if(EnableBuilder && !_IsBuilding)
+        {
+            BuildTroops();
+            _IsBuilding = true;
+            Debug.Log("Building Turned on for Barracks");
+        }
+
+        if(!EnableBuilder && _IsBuilding)
+        {
+            StopBuild();
+            Debug.Log("Building Turned OFF");
+        }
     }
 
 
@@ -86,9 +102,8 @@ public class ArmyBuild : Build
 
     public void StopBuild()
     {
-
-
-
+        CancelInvoke();
+        _IsBuilding = false;
     }
     
 

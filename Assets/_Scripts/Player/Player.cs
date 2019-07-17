@@ -153,7 +153,34 @@ public class Player : BasePrefab
             
         }
 
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Global.BuildMode)
+        {
+            //TODO: Need something to manage all the Plans in a Planmanager or something similar
+            //The manager will handle both generic, and complex plans
+
+            if (Input.GetKeyDown(KeyBindings.BuildKey1))
+            {
+                _placementController.LoadObject(_plans.Wall);
+            }
+            else if (Input.GetKeyDown(KeyBindings.BuildKey2))
+            {
+                _placementController.LoadObject(_plans.Floor);
+            }
+            else if (Input.GetKeyDown(KeyBindings.BuildKey3))
+            {
+                _placementController.LoadObject(_plans.Ramp);
+            }
+            else if (Input.GetKeyDown(KeyCode.B))
+            {
+                _placementController.LoadObject(_oPlans.Barracks);
+            }
+        }
+        else if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode)
+        {
+            _movement.Swing();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (!IsDead)
             {
@@ -184,35 +211,7 @@ public class Player : BasePrefab
         if(Input.GetKeyDown(KeyCode.P))
         {
             CamShake.Shake(1f, 0.5f);
-        }
-
-
-        if (Global.BuildMode)
-        {
-            //TODO: Need something to manage all the Plans in a Planmanager or something similar
-            //The manager will handle both generic, and complex plans
-
-            if (Input.GetKeyDown(KeyBindings.BuildKey1))
-            {
-                _placementController.LoadObject(_plans.Wall);
-            }
-            else if (Input.GetKeyDown(KeyBindings.BuildKey2))
-            {
-                _placementController.LoadObject(_plans.Floor);
-            }
-            else if (Input.GetKeyDown(KeyBindings.BuildKey3))
-            {
-                _placementController.LoadObject(_plans.Ramp);
-            }  
-            else if(Input.GetKeyDown(KeyCode.B))
-            {
-                _placementController.LoadObject(_oPlans.Barracks);
-            }
-        }        
-        else if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode)
-        {            
-            _movement.Swing();            
-        }       
+        }    
         
     }   
 
