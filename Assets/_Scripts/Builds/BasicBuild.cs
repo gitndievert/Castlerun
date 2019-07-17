@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicBuild : Build
-{
+{   
+    
     //Basic Builds are Instant
     protected override float BuildTime { get { return 0f; } }
 
@@ -15,32 +16,8 @@ public class BasicBuild : Build
     {
         //Do not load audiosource  
     }
-        
-    private void OnCollisionEnter(Collision col)
-    {
-        Debug.Log(col.transform.position);
-
-        if (col.gameObject.tag == "Build")
-        {
-            Debug.Log(col.transform.position);
-        }
-
-        if (col.gameObject.tag == "Projectile" || col.gameObject.tag == "Smasher")
-        {
-            //Random chance later, roll dice?? using .GetChance()
-            int damage = col.gameObject.GetComponent<IDamager>().GetDamage();
-            SetHit(damage);
-        }
-    }
-
-    /*private void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.tag == "Build")
-        {
-            Debug.Log(col.transform.position);
-        }
-    }*/
-
+      
+    
     public override bool SetResourceType(ResourceType type)
     {
         _pickType = type;

@@ -1351,8 +1351,6 @@ MonoBehaviour:
   GemsCount: 200
   PrimaryHand: {fileID: 0}
   SecondaryHand: {fileID: 0}
-  PickAxe: {fileID: 2778554037575477180}
-  Axe: {fileID: 7293228162635947038}
   Weapon: {fileID: 1618773104}
   Shield: {fileID: 1469274858}
   ResetOnStart: 0
@@ -1408,7 +1406,6 @@ MonoBehaviour:
   SnapOnGrid: 1
   SnapSize: 1
   MoveOnMouse: 1
-  BuildDistance: 10
   _placeObjectMeshRend: {fileID: 0}
   _playerBuilds: {fileID: 0}
 --- !u!1 &1511076747
@@ -1961,10 +1958,10 @@ Light:
   serializedVersion: 9
   m_Type: 0
   m_Color: {r: 0, g: 0.07088524, b: 0.745283, a: 1}
-  m_Intensity: 2
-  m_Range: 90
-  m_SpotAngle: 60
-  m_InnerSpotAngle: 6
+  m_Intensity: 5
+  m_Range: 200
+  m_SpotAngle: 100
+  m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -1992,13 +1989,13 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 2800000, guid: c03c72978d15ecb4d91060d3a10d14f0, type: 3}
+  m_Cookie: {fileID: 2800000, guid: 7e7e16f1a23d8b8488541f188337c618, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 819
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
@@ -2075,12 +2072,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 356a47310a2e76e48bfdb276e5e088aa, type: 3}
---- !u!1 &2778554037575477180 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 143216, guid: 356a47310a2e76e48bfdb276e5e088aa,
-    type: 3}
-  m_PrefabInstance: {fileID: 2778554037575600332}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2778554037575682972 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 443216, guid: 356a47310a2e76e48bfdb276e5e088aa,
@@ -2148,12 +2139,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4b2ba08836e8804ab424fc2f3fc16b9, type: 3}
---- !u!1 &7293228162635947038 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 189872, guid: a4b2ba08836e8804ab424fc2f3fc16b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 7293228162635839918}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7293228162636300350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 489872, guid: a4b2ba08836e8804ab424fc2f3fc16b9,

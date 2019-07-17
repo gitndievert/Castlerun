@@ -18,7 +18,6 @@ public class PlacementController : MonoBehaviour
     public bool SnapOnGrid = true;
     public float SnapSize = 1f;    
     public bool MoveOnMouse = false;
-    public float BuildDistance = 1f;
 
     [SerializeField]
     private MeshRenderer _placeObjectMeshRend;
@@ -36,9 +35,7 @@ public class PlacementController : MonoBehaviour
     /// Object to parent on for player
     /// </summary>
     [SerializeField]
-    private Transform _playerBuilds = null;
-
-    private bool _triggerPlacement = false;
+    private Transform _playerBuilds = null;    
 
     private void Awake()
     {
@@ -84,12 +81,12 @@ public class PlacementController : MonoBehaviour
     {
         if (_currObj != null && !_rotating)
         {            
-            BuildMode = true;
+            BuildMode = true;            
 
             if (MoveOnMouse)
             {
                 MoveCurrentObjectToMouse();
-            }
+            }          
             else
             {
                 //_currObj.transform.parent = MyPlayer.PlacementSpawn.transform;
@@ -107,17 +104,18 @@ public class PlacementController : MonoBehaviour
     void Update()
     {
         _rotating = RotateFromMouseWheel();
+        LockCursorPos();
 
         if (Input.GetMouseButtonDown(0) && PlaceableObjectPrefab != null)
         {
             if (_currObj != null)
             {
-                //Must be inside of grid to build
-                if (!ObjectInGrid(_currObj.transform)) return;
+                if (Vector3.Distance(_currObj.transform.position, _player.transform.position) > 20f) return;
 
+                PlayerCollision(false);
                 _currObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;
                 _currObj.gameObject.layer = Global.DEFAULT_LAYER;
-                _currObj.transform.GetComponent<Collider>().isTrigger = false;
+
                 _currObj.transform.parent = _playerBuilds; //sets the player 1 parent  
                 var build = _currObj.transform.GetComponent<Build>();
                                 
@@ -165,10 +163,10 @@ public class PlacementController : MonoBehaviour
                 Destroy(_currObj);
             }
 
-            _currObj = Instantiate(PlaceableObjectPrefab,_player.transform.position,Quaternion.identity);            
+            _currObj = Instantiate(PlaceableObjectPrefab,_player.transform.position * 2,Quaternion.identity);            
             _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().materials;
-            _currObj.transform.GetComponent<Collider>().isTrigger = true;
-            
+                                    
+            PlayerCollision(true);
 
             //_currObj.transform.GetComponentInChildren<Renderer>().material = LayMaterial;
             var mats = _currObj.transform.GetComponentInChildren<Renderer>().materials;
@@ -178,46 +176,50 @@ public class PlacementController : MonoBehaviour
                 laymats[i] = LayMaterial;
             }
             _currObj.transform.GetComponentInChildren<Renderer>().materials = laymats;               
-            _currObj.gameObject.layer = Global.IGNORE_LAYER;
+            _currObj.gameObject.layer = Global.IGNORE_LAYER;                      
 
             _triggerBuild = false;
         }       
     }
 
+    private void PlayerCollision(bool collide)
+    {
+        if (_currObj == null) return;
+        Physics.IgnoreCollision(_currObj.GetComponent<Collider>(), _player.GetComponent<Collider>(), collide);
+    }
+
+    private float GetDistToGround()
+    {
+        return (_placeObjectMeshRend != null) ? _placeObjectMeshRend.bounds.extents.y : 0f;
+    }
+
     private float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
     {
         return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
-    }    
-
-    private bool ObjectInGrid(Transform placedObj)
+    }   
+    
+    private void LockCursorPos()
     {
-        return Vector3.Distance(placedObj.position, _player.transform.position) <= BuildDistance;
-    }
+        if (_currObj == null) return;
+        if (Vector3.Distance(_currObj.transform.position, _player.transform.position) > 15f)
+        {
+            Vector3 playerP = _player.transform.position;
+            _currObj.transform.position = new Vector3(playerP.x,playerP.y + GetDistToGround(), playerP.z + 3f);
+            //_currObj.transform.position = _currObj.transform.position + Vector3.back;
+        }
+    }   
  
     private void MoveCurrentObjectToMouse()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        float distToGround = _placeObjectMeshRend.bounds.extents.y;
-
+        
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
             {
                 if (SnapOnGrid)
-                {
-                    //Snap to grid edge
-                    //(transform.position - otherObject.transform.position).normalized * distance + otherObject.transform.position;                    
-                    if (ObjectInGrid(_currObj.transform) || 
-                        Vector3.Distance(hit.transform.position,_currObj.transform.position) < BuildDistance)
-                    {
-                        //_currObj.transform.position = (transform.position - _player.transform.position).normalized * BuildDistance + _player.transform.position;
-                        _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, hit.point.y + distToGround, Mathf.Round(hit.point.z) * SnapSize);
-                    }
-                    else
-                    {                        
-                        _currObj.transform.position = _currObj.transform.position;
-                    }                   
+                {                    
+                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, hit.point.y + GetDistToGround(), Mathf.Round(hit.point.z) * SnapSize);                    
                 }
                 else
                 {

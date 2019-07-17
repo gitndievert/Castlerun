@@ -25,10 +25,6 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject SecondaryHand;
 
-    [Header("Harvesting Tools")]
-    public GameObject PickAxe;
-    public GameObject Axe;
-
     [Header("Weapons")]
     public GameObject Weapon;
     public GameObject Shield;
@@ -181,41 +177,7 @@ public class Inventory : MonoBehaviour
         {
             UIManager.Instance.Messages.text = $"You used {Mathf.Abs(amount)} {type.ToString()}";
         }
-    }
-
-    public bool ResourceCheck()
-    {
-        float colRadius = 2f;
-        var colliders = Physics.OverlapSphere(transform.position, colRadius);
-
-        foreach (var col in colliders)
-        {
-            if (col.gameObject.tag != "Resource") continue;
-            var resource = col.GetComponent<Resource>();
-            switch (resource.ResourceType)
-            {
-                case ResourceType.Wood:
-                    SwitchHand(Axe, "primary");
-                    EmptyHand("secondary");
-                    break;
-                case ResourceType.Rock:
-                case ResourceType.Metal:
-                case ResourceType.Gems:
-                    SwitchHand(PickAxe, "primary");
-                    EmptyHand("secondary");
-                    break;
-                default:
-                    SwitchHand(Weapon, "primary");
-                    SwitchHand(Shield, "secondary");
-                    break;
-            }
-
-            return true;
-        }
-
-        return false;
-
-    }
+    }   
 
     public void ResetHands()
     {
