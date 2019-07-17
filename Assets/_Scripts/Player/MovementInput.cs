@@ -13,7 +13,8 @@ public class MovementInput : MonoBehaviour
     public float DesiredRotationSpeed;
     public float Speed;    
     public float AllowPlayerRotation;
-    public bool IsGrounded;    
+    public bool IsGrounded;
+    public float RotateOverload = 2f;
     
     public CharacterController CharacterController;
 
@@ -56,18 +57,21 @@ public class MovementInput : MonoBehaviour
         if (Lock) return;
         InputMagnitude();
         _moveVector = Vector3.zero;
-        CharacterController.Move(_moveVector);
+        CharacterController.Move(_moveVector);       
 
+        if (Input.GetKeyDown(KeyBindings.Jump)) Jump();
+        if (Input.GetKeyDown(KeyBindings.Dance1)) Dance();
+    }
+
+    private void Update()
+    {
         if (Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
         {
             float mouseInput = Input.GetAxis("Mouse X");
             Vector3 lookhere = new Vector3(0, mouseInput, 0);
-            transform.Rotate(lookhere * 3f);
+            transform.Rotate(lookhere * RotateOverload);
         }
-
-        if (Input.GetKeyDown(KeyBindings.Jump)) Jump();
-        if (Input.GetKeyDown(KeyBindings.Dance1)) Dance();
-    }  
+    }
 
     //NOTE: Come back here to add the strafe on X
     private void InputMagnitude()
@@ -105,5 +109,25 @@ public class MovementInput : MonoBehaviour
         //_anim.
     }
 
+    public void Swing()
+    {
+        Debug.Log("Swinging for attack");
+        _anim.SetBool("Swing", true);
+    }
+
+    public void SwingStop()
+    {
+        _anim.SetBool("Swing", false);
+    }
+
+    public void Hit()
+    {
+        _anim.Play("Hit");
+    }
+
+    public void Die()
+    {
+        _anim.Play("Death1");
+    }
 
 }

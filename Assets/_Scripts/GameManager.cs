@@ -3,22 +3,28 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : DSingle<GameManager>
 {    
     public GameObject PlayerInstance;
-    public PlayerPad[] PlayerPads;     
+    public PlayerPad[] PlayerPads;
+    public Dictionary<int, Player> PlayerList = new Dictionary<int, Player>();
 
-    private int _numOfPlayer = 2;     
-  
+    private int _numOfPlayer = 2;
 
-    void Awake()
+    protected override void PAwake()
     {
         //FOR TESTING        
-        PlayerPads = gameObject.GetComponentsInChildren<PlayerPad>();                
+        PlayerPads = gameObject.GetComponentsInChildren<PlayerPad>();
     }
+
+    protected override void PDestroy()
+    {
+     
+    }   
 
     void Start()
     {
+        PlayerList.Clear();
         StartPlayersTest();
         Music.Instance.PlayMusicTrack(1);
     }    
@@ -26,15 +32,14 @@ public class GameManager : MonoBehaviour
     private void StartPlayersTest()
     {
         //PUN Networking pieces
-        if (Player.LocalPlayerInstance == null)
-        {
-            int spawnIndex = 0;
+        int spawnIndex = 0;
 
-            var character = Instantiate(PlayerInstance, PlayerPads[spawnIndex].PlayerSpawnPosition, Quaternion.identity);
-            var player = character.GetComponent<Player>();
-            player.Init("Krunchy", spawnIndex + 1); //Player number is a hack until things are setup            
-        }       
-        
+        var character = Instantiate(PlayerInstance, PlayerPads[spawnIndex].PlayerSpawnPosition, Quaternion.identity);
+        var player = character.GetComponent<Player>();
+        int playerNum = spawnIndex + 1;
+        player.Init("Krunchy", playerNum); //Player number is a hack until things are setup            
+        PlayerList.Add(playerNum, player);
+
         /*for (int i = 1; i < _numOfPlayer; i++)
         {
             //Photon Instantiation

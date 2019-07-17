@@ -143,7 +143,6 @@ GameObject:
   - component: {fileID: 400004}
   - component: {fileID: 5400000}
   - component: {fileID: 11400002}
-  - component: {fileID: 11400000}
   m_Layer: 0
   m_Name: MultipurposeCameraRig
   m_TagString: CamRig
@@ -200,26 +199,3 @@ MonoBehaviour:
   visualiseInEditor: 1
   closestDistance: 0.5
   dontClipTag: Player
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8d3968294210ba4a9d2bb96dfa74a16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 0}
-  m_AutoTargetPlayer: 1
-  m_UpdateType: 0
-  m_MoveSpeed: 3
-  m_TurnSpeed: 1
-  m_RollSpeed: 0.2
-  m_FollowVelocity: 0
-  m_FollowTilt: 1
-  m_SpinTurnLimit: 90
-  m_TargetVelocityLowerLimit: 4
-  m_SmoothTurnTime: 0.2

@@ -33,7 +33,7 @@ public class PlacementController : MonoBehaviour
     private GameObject _grid;
 
     /// <summary>
-    /// Object to parent on for player 1
+    /// Object to parent on for player
     /// </summary>
     [SerializeField]
     private Transform _playerBuilds = null;

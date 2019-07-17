@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class Player : BasePrefab
 {
-    [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
-    public static GameObject LocalPlayerInstance;
-
     public float MoveSpeed;
     public float BuildSpeed;
     public int HitAmount;
@@ -56,15 +53,14 @@ public class Player : BasePrefab
 
     #region Private Members
     private GameObject _mainHand;
-    private GameObject _offHand;    
-    private Animator _anim;
-    private bool _swinging = false;    
+    private GameObject _offHand;           
     private PlayerUI _playerUI;    
     private string _playerName;
     //Temporary for now
     private GenericPlans _plans;
     private OffensivePlans _oPlans;
     private PlacementController _placementController;
+    private MovementInput _movement;
 
     //Camera Rig
     private GameObject _camRig;
@@ -72,21 +68,17 @@ public class Player : BasePrefab
     
 
     protected override void Awake()
-    {        
-        LocalPlayerInstance = gameObject;        
-        // #Critical
-        // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
-        DontDestroyOnLoad(gameObject);
-
+    {   
         base.Awake();
-        Inventory = GetComponent<Inventory>();        
-        _anim = GetComponent<Animator>();      
+        Inventory = GetComponent<Inventory>();                    
         //Temporary for now
         _plans = GetComponent<GenericPlans>();
         _oPlans = GetComponent<OffensivePlans>();
         _placementController = GetComponent<PlacementController>();
         _camRig = GameObject.FindGameObjectWithTag(Global.CAM_RIG_TAG);
+        _movement = GetComponent<MovementInput>();
         PlayerWorldItems = new GameObject("PlayerWorldItems");
+
     }
 
     // Start is called before the first frame update
@@ -179,6 +171,10 @@ public class Player : BasePrefab
         {
             SetCompanion(CompanionType.Fox_S);
         }
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            ReleaseCompanion();
+        }
 
         //Cam Shaker
         if(Input.GetKeyDown(KeyCode.O))
@@ -213,12 +209,9 @@ public class Player : BasePrefab
                 _placementController.LoadObject(_oPlans.Barracks);
             }
         }        
-        else if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !_swinging && !Global.BuildMode)
-        {
-            //TODO: I think I need something that checks for target on swing here later
-            Debug.Log("Swining for attack");
-            _swinging = true;
-            //_anim.SetBool("Swing", true);
+        else if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode)
+        {            
+            _movement.Swing();            
         }       
         
     }   
@@ -226,6 +219,7 @@ public class Player : BasePrefab
     //These three methods probably need their own class
     public void SetCompanion(CompanionType companion)
     {
+        CompanionOut = true;
         ReleaseCompanion();
         var mycompanion = Instantiate(CompanionManager.Instance.GetCompanionByType(companion),transform.position,transform.rotation);        
         PlayerCompanion = mycompanion.GetComponent<Companion>();
@@ -240,6 +234,7 @@ public class Player : BasePrefab
         Destroy(PlayerCompanion.gameObject);
         GetComponent<MovementInput>().SetPlayerCompanion = null;
         PlayerCompanion = null;
+        CompanionOut = false;
     }   
 
     public void Swing()
@@ -266,12 +261,7 @@ public class Player : BasePrefab
             }            
         }
     }        
-    
-    public void SwingStop()
-    {
-        _swinging = false;
-        _anim.SetBool("Swing", false);
-    }    
+       
   
     public override void SetHit(int amount)
     {
@@ -283,7 +273,7 @@ public class Player : BasePrefab
             Health -= amount;
             _playerUI.HealthText.text = $"{Health}/100";
             UIManager.Instance.HealthBar.BarValue = Health;
-            _anim.Play("Hit");
+            _movement.Hit();
         }
         else
         {
@@ -298,7 +288,7 @@ public class Player : BasePrefab
         _playerUI.HealthText.text = $"0/100";
         UIManager.Instance.HealthBar.BarValue = 0;
         Debug.Log("I am DEAD!");
-        _anim.Play("Death1");        
+        _movement.Die();
     }
 
     
