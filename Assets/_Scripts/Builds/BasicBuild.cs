@@ -5,7 +5,9 @@ using System.Linq;
 
 public class BasicBuild : Build
 {
-    protected List<Transform> SnapPoints = new List<Transform>();
+    public bool Locked;
+
+    public List<SnapPoints> SnapPoints = new List<SnapPoints>();
 
     //Basic Builds are Instant
     protected override float BuildTime { get { return 0f; } }
@@ -25,8 +27,11 @@ public class BasicBuild : Build
         var snap = GetComponentsInChildren<Transform>().Skip(1).ToList();
         if (snap.Count > 0 && snap != null)
         {
-            SnapPoints = snap;
-        }
+            foreach(var s in snap)
+            {
+                SnapPoints.Add(new SnapPoints(s.transform));
+            }
+        }        
     }
 
     public override bool SetResourceType(ResourceType type)
@@ -51,6 +56,11 @@ public class BasicBuild : Build
         return true;
     }
 
+    public Vector3[] SnapPointPos
+    {
+        get { return SnapPoints.Select(a => a.Position).ToArray(); }
+    }
+
     protected override void OnCollisionEnter(Collision col)
     {
         var colObj = col.gameObject;
@@ -63,8 +73,15 @@ public class BasicBuild : Build
                 var build = colObj.GetComponent<BasicBuild>();
                 if(build)
                 {
-                    var bah = GetCloseSnapByBuild(build);
-                    //Debug.Log(bah.transform.position);
+                    
+                    
+                    /*var snapTransform = GetCloseSnapByBuild(build);
+                    if(snapTransform)
+                    {
+                        Debug.Log(snapTransform.gameObject.name);
+                        snapTransform.position = transform.position;                       
+                    }*/
+                    
                 }                
                 break;
             case "Projectile":
@@ -79,20 +96,45 @@ public class BasicBuild : Build
         }
     }
 
-    public Transform GetCloseSnapByBuild(BasicBuild build)
+    public Transform GetCloseSnapByBuild(BasicBuild collidingbuild)
     {
-        var connectingBuildPos = build.SnapPoints;
-        foreach (var point in connectingBuildPos)
+        foreach (SnapPoints point in SnapPoints)
         {
-            Debug.Log(point.position);
-        }
+            if (point.Snapped) continue;            
+            foreach(var colpoint in collidingbuild.SnapPoints)
+            {
+                float dist = Vector3.Distance(point.Position, colpoint.Position);
+                if (dist < 1f) return colpoint.PointTransform;              
+            }          
+        }       
 
         return null;
-        /*foreach (var point in SnapPoints)
-        {
-            var pos = point.position;            
-        }*/
+    }
+}
 
+public class SnapPoints
+{
+    public bool Snapped { get; set; }
+    public Transform PointTransform { get; set; }
+
+    public SnapPoints(Transform point)
+    {
+        PointTransform = point;
+        Snapped = false;
     }
 
+    public Vector3 Position
+    {
+        get { return PointTransform.position;  }
+    }
+    public Vector3 LocalPosition
+    {
+        get { return PointTransform.localPosition; }
+    }
+
+    public GameObject GameObject
+    {
+        get { return PointTransform.gameObject; }
+    }
 }
+
