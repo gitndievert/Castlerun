@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 
 [ExecuteInEditMode]
-
 public class ProgressBar : MonoBehaviour
 {
 
