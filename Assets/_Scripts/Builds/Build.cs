@@ -17,13 +17,9 @@ public abstract class Build : BasePrefab, IBuild
     //public float GridSnap = 0.5f;  
     protected abstract float BuildTime { get; }
     protected abstract ResourceType ResourceType { get; }
-
-    public Rigidbody RigidBody { get; private set; }    
         
-
     protected virtual void Start()
-    {                
-        RigidBody = GetComponent<Rigidbody>();
+    {                    
         if (Health == 0) Health = 20;        
         MaxHealth = Health;
     }

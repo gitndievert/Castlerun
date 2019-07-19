@@ -125,7 +125,7 @@ public class PlacementController : MonoBehaviour
         _rotating = RotateFromMouseWheel();
         LockCursorPos();
 
-        if (Input.GetMouseButtonDown(0) && PlaceableObjectPrefab != null)
+        if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON) && PlaceableObjectPrefab != null)
         {
             if (_currObj != null)
             {

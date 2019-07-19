@@ -8,7 +8,7 @@ public class Bobber : MonoBehaviour
     public float BobHeight = 0.5f;
     [Range(1f, 30f)]
     public float RotateSpeed = 1f;
-    [Range(0, 5f)]
+    [Range(0, 10f)]
     public float BobSpeed = 1f;
     [Range(0, 5f)]
     public float BumpForce = 2f;

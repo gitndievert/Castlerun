@@ -9,7 +9,7 @@ public class Player : BasePrefab
     public float BuildSpeed;
     public int HitAmount;
     public bool CompanionOut = false;
-    public bool IsDead = false;
+    public bool IsDead = false;    
 
     [Tooltip("For changing the companion on the player")]
     public CompanionType CompanionType = CompanionType.None;
@@ -56,6 +56,7 @@ public class Player : BasePrefab
     private GameObject _offHand;           
     private PlayerUI _playerUI;    
     private string _playerName;
+    private BattleCursor _battleCursor;
     //Temporary for now
     private GenericPlans _plans;
     private OffensivePlans _oPlans;
@@ -81,7 +82,7 @@ public class Player : BasePrefab
         _camRig = GameObject.FindGameObjectWithTag(Global.CAM_RIG_TAG);
         _movement = GetComponent<MovementInput>();
         PlayerWorldItems = new GameObject("PlayerWorldItems");
-
+        _battleCursor = GetComponent<BattleCursor>();
     }
 
     // Start is called before the first frame update
@@ -117,6 +118,7 @@ public class Player : BasePrefab
     {
         PlayerName = name;
         PlayerNumber = playernum;
+        Global.BattleMode = false;
     }
  
     private void SetBasicPlayerStats()
@@ -151,62 +153,80 @@ public class Player : BasePrefab
     private void Update()
     {        
         //Temporary, work out the details for build mappings later
-        MovementInput.Lock = IsDead;        
+        MovementInput.Lock = IsDead;
 
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            Global.BuildMode = !Global.BuildMode;
-            
-            if(Global.BuildMode)
-            {
-                //Annouce build mode on                
-                _placementController.SetGrid = true;
-                _placementController.LoadObject(_plans.Wall);                
-            }
-            else
-            {
-                //Annouce build mode off                
-                _placementController.SetGrid = false;
-                _placementController.ClearObject();
-            }
-            
-        }
-
-        if (Global.BuildMode)
-        {
-            //TODO: Need something to manage all the Plans in a Planmanager or something similar
-            //The manager will handle both generic, and complex plans
-
-            if(Input.GetKeyDown(KeyCode.E))
-            {
-                _selectedResource = SwitchResource();                
-                _placementController.SetResource(_selectedResource);
-                UIManager.Instance.Messages.text = $"Building with {_selectedResource.ToString()}";
-            }
-
-            if (Input.GetKeyDown(KeyBindings.BuildKey1))
-            {
-                _placementController.LoadObject(_plans.Wall);
-            }
-            else if (Input.GetKeyDown(KeyBindings.BuildKey2))
-            {
-                _placementController.LoadObject(_plans.Floor);
-            }
-            else if (Input.GetKeyDown(KeyBindings.BuildKey3))
-            {
-                _placementController.LoadObject(_plans.Ramp);
-            }
-            else if (Input.GetKeyDown(KeyCode.B))
-            {
-                _placementController.LoadObject(_oPlans.Barracks);
-            }
-
-
-        }
-        else if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode)
+        if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode)
         {
             _movement.Swing();
         }
+
+        if (Input.GetKeyDown(KeyBindings.BattleToggle))
+        {
+            if (Global.BuildMode)
+            {
+                UIManager.Instance.Messages.text = $"Cannot engage battlemode in build mode";
+            }
+            else
+            {
+                Global.BattleMode = !Global.BattleMode;
+                _battleCursor.Toggle();
+                string status = Global.BattleMode ? "ON" : "OFF";
+                UIManager.Instance.Messages.text = $"Battle Mode {status}";
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Global.BuildMode = !Global.BuildMode;
+                _battleCursor.Off();
+
+                if (Global.BuildMode)
+                {
+                    //Annouce build mode on                
+                    _placementController.SetGrid = true;
+                    _placementController.LoadObject(_plans.Wall);
+                }
+                else
+                {
+                    //Annouce build mode off                
+                    _placementController.SetGrid = false;
+                    _placementController.ClearObject();
+                }
+
+            }
+
+            if (Global.BuildMode)
+            {
+                //TODO: Need something to manage all the Plans in a Planmanager or something similar
+                //The manager will handle both generic, and complex plans
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    _selectedResource = SwitchResource();
+                    _placementController.SetResource(_selectedResource);
+                    UIManager.Instance.Messages.text = $"Building with {_selectedResource.ToString()}";
+                }
+
+                if (Input.GetKeyDown(KeyBindings.BuildKey1))
+                {
+                    _placementController.LoadObject(_plans.Wall);
+                }
+                else if (Input.GetKeyDown(KeyBindings.BuildKey2))
+                {
+                    _placementController.LoadObject(_plans.Floor);
+                }
+                else if (Input.GetKeyDown(KeyBindings.BuildKey3))
+                {
+                    _placementController.LoadObject(_plans.Ramp);
+                }
+                else if (Input.GetKeyDown(KeyCode.B))
+                {
+                    _placementController.LoadObject(_oPlans.Barracks);
+                }
+            }
+        }
+                       
 
         if (Input.GetKeyDown(KeyCode.F))
         {

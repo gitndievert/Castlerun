@@ -22,4 +22,5 @@ public class KeyBindings
     public static KeyCode Dance1 = KeyCode.G;
     #endregion
 
+    public static KeyCode BattleToggle = KeyCode.Tab;
 }

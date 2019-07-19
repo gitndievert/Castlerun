@@ -55,15 +55,8 @@ public class ArmyBuild : Build
         {
             case ResourceType.Wood:
                 PlacementCost = 10;
-                break;
-            case ResourceType.Rock:
-                PlacementCost = 10;
-                break;
-            case ResourceType.Metal:
-                PlacementCost = 20;
-                break;
-            default:
-                PlacementCost = 0;
+                break;            
+            default:                
                 return false;
         }
 
@@ -73,7 +66,8 @@ public class ArmyBuild : Build
     // Start is called before the first frame update
     protected override void Start()
     {
-        
+        if (Health == 0) Health = 40;
+        MaxHealth = Health;
     }
 
     // Update is called once per frame
