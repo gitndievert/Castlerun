@@ -16,8 +16,7 @@ public class PlacementController : MonoBehaviour
     public bool BuildMode;
     public float RotateAmount = 90f;
     public bool SnapOnGrid = true;
-    public float SnapSize = 1f;    
-    public bool MoveOnMouse = false;
+    public float SnapSize = 1f;        
 
     public static ResourceType[] ResourceIndex = {
         ResourceType.Wood,
@@ -96,26 +95,32 @@ public class PlacementController : MonoBehaviour
     
     void Update()
     {
-        if (_currObj != null && !_rotating)
-        {
-            BuildMode = true;
-
-            if (MoveOnMouse && !_currObj.GetComponent<IBuild>().Locked)
+        //Hide 
+        if (_currObj != null)
+        { 
+            if (Global.MouseLook)
             {
-                MoveCurrentObjectToMouse();
+                _currObj.SetActive(false);
+            }
+            else if (!Global.MouseLook && !_currObj.activeInHierarchy)
+            {
+                _currObj.SetActive(true);
+            }
+
+            if (!_rotating)
+            {
+                BuildMode = true;
+
+                if (!_currObj.GetComponent<IBuild>().Locked)
+                {
+                    MoveCurrentObjectToMouse();
+                }
             }
             else
             {
-                //_currObj.transform.parent = MyPlayer.PlacementSpawn.transform;
-                //ModeCurrentObjectOnScreen();
-                //PlaceObjectToGround();
+                BuildMode = false;
             }
-
-        }
-        else
-        {
-            BuildMode = false;
-        }
+        }       
 
         _rotating = RotateFromMouseWheel();
         LockCursorPos();

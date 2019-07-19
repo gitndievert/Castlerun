@@ -70,6 +70,11 @@ public class MovementInput : MonoBehaviour
             float mouseInput = Input.GetAxis("Mouse X");
             Vector3 lookhere = new Vector3(0, mouseInput, 0);
             transform.Rotate(lookhere * RotateOverload);
+            Global.MouseLook = true;
+        }
+        else
+        {
+            Global.MouseLook = false;
         }
     }
 

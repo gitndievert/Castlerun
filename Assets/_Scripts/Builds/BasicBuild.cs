@@ -53,9 +53,7 @@ public class BasicBuild : Build
                 PlacementCost = 0;
                 return false;
         }
-
-        UIManager.Instance.Messages.text = $" Resource {type.ToString()}";
-
+        
         return true;
     }
 

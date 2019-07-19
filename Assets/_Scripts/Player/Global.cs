@@ -21,5 +21,6 @@ public static class Global
 
     #region Player Flags
     public static bool BuildMode = false;
+    public static bool MouseLook = false;
     #endregion
 }
