@@ -19,6 +19,16 @@ public partial class UIManager : PSingle<UIManager>
     /// </summary>
     public PlayerUI PlayerUIPanel;
 
+    /// <summary>
+    /// Target Panel UI Text
+    /// </summary>    
+    public TargetUI TargetUI;
+    
+    /// <summary>
+    /// Target Panel
+    /// </summary>
+    public Transform TargetPanel;
+
     public TextMeshProUGUI Messages;
 
     protected override void PAwake()
@@ -30,4 +40,5 @@ public partial class UIManager : PSingle<UIManager>
     {
         
     }
+    
 }

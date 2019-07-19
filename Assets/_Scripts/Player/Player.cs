@@ -62,6 +62,9 @@ public class Player : BasePrefab
     private PlacementController _placementController;
     private MovementInput _movement;
 
+    private int _resourceIndex = 0;
+    private ResourceType _selectedResource;
+
     //Camera Rig
     private GameObject _camRig;
     #endregion
@@ -128,6 +131,22 @@ public class Player : BasePrefab
         BuildSpeed = 10f;
         HitAmount = 10;        
     }
+
+    private ResourceType SwitchResource()
+    {       
+        if (_resourceIndex >= PlacementController.ResourceIndex.Length - 1)
+        {
+            _resourceIndex = 0;
+        }
+        else
+        {
+            _resourceIndex++;
+        }
+        
+        _selectedResource = PlacementController.ResourceIndex[_resourceIndex];
+
+        return _selectedResource;
+    }
         
     private void Update()
     {        
@@ -142,7 +161,7 @@ public class Player : BasePrefab
             {
                 //Annouce build mode on                
                 _placementController.SetGrid = true;
-                _placementController.LoadObject(_plans.Wall);
+                _placementController.LoadObject(_plans.Wall);                
             }
             else
             {
@@ -157,6 +176,13 @@ public class Player : BasePrefab
         {
             //TODO: Need something to manage all the Plans in a Planmanager or something similar
             //The manager will handle both generic, and complex plans
+
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                _selectedResource = SwitchResource();                
+                _placementController.SetResource(_selectedResource);
+                UIManager.Instance.Messages.text = $"Building with {_selectedResource.ToString()}";
+            }
 
             if (Input.GetKeyDown(KeyBindings.BuildKey1))
             {
@@ -174,6 +200,8 @@ public class Player : BasePrefab
             {
                 _placementController.LoadObject(_oPlans.Barracks);
             }
+
+
         }
         else if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode)
         {

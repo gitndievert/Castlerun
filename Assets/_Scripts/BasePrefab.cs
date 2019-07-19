@@ -9,6 +9,14 @@ public abstract class BasePrefab : MonoBehaviour
 
     protected int MaxHealth;
 
+    protected TargetUI TargetUI
+    {
+        get
+        {
+            return UIManager.Instance.TargetUI;
+        }
+    }
+
     protected virtual void Awake()
     {
       
@@ -18,30 +26,41 @@ public abstract class BasePrefab : MonoBehaviour
     {
         transform.tag = tag;
     }
-
-    protected void SetHealthText(int max)
+    
+    protected void OnMouseOver()
     {
-        SetHealthText(max, max);
-    }   
+        TargetPanel(true);
+        TargetUI.Target.text = $"{Health}/{MaxHealth}";
+    }
 
-    protected void SetHealthText(int current, int max)
+    protected void OnMouseExit()
     {
-        if (HealthText != null)
-            HealthText.text = $"{current}/{max}";
+        ClearTarget();
+    }
+
+    private void ClearTarget()
+    {
+        TargetUI.Target.text = "";
+        TargetPanel(false);
+    }
+
+    protected void TargetPanel(bool show)
+    {
+        UIManager.Instance.TargetPanel.gameObject.SetActive(show);
     }
 
     public virtual void SetHit(int amount)
     {
         if (Health - amount > 0)
         {
-            Health -= amount;
-            SetHealthText(Health, MaxHealth);
+            Health -= amount;            
         }
         else
         {
             if (DestroySound != null)
                 SoundManager.PlaySoundOnGameObject(gameObject, DestroySound);
             Destroy(gameObject);
+            ClearTarget();
         }
     }       
 

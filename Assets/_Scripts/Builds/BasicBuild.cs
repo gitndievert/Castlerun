@@ -5,9 +5,15 @@ using System.Linq;
 
 public class BasicBuild : Build
 {
-    public bool Locked;
+    #region Basic Build Resource Cost
+    public const int WOOD_COST = 10;
+    public const int ROCK_COST = 20;
+    public const int METAL_COST = 30;
+    #endregion
 
     public List<SnapPoints> SnapPoints = new List<SnapPoints>();
+
+    public Material[] Materials;
 
     //Basic Builds are Instant
     protected override float BuildTime { get { return 0f; } }
@@ -15,23 +21,18 @@ public class BasicBuild : Build
     protected override ResourceType ResourceType {  get { return _pickType; } }
 
     private ResourceType _pickType;
+    private Renderer _rend;
 
     protected override void Awake()
     {
-        //Do not load audiosource  
+        
     }
 
     protected override void Start()
     {
         base.Start();
-        var snap = GetComponentsInChildren<Transform>().Skip(1).ToList();
-        if (snap.Count > 0 && snap != null)
-        {
-            foreach(var s in snap)
-            {
-                SnapPoints.Add(new SnapPoints(s.transform));
-            }
-        }        
+        SnapPoints = GetComponents<SnapPoints>().ToList();
+        _rend = GetComponent<Renderer>();        
     }
 
     public override bool SetResourceType(ResourceType type)
@@ -40,25 +41,27 @@ public class BasicBuild : Build
         switch (type)
         {
             case ResourceType.Wood:
-                PlacementCost = 10;
+                PlacementCost = WOOD_COST;                
                 break;
             case ResourceType.Rock:
-                PlacementCost = 10;
+                PlacementCost = ROCK_COST;
                 break;
             case ResourceType.Metal:
-                PlacementCost = 20;
+                PlacementCost = METAL_COST;
                 break;
             default:
                 PlacementCost = 0;
                 return false;
         }
 
+        UIManager.Instance.Messages.text = $" Resource {type.ToString()}";
+
         return true;
     }
 
     public Vector3[] SnapPointPos
     {
-        get { return SnapPoints.Select(a => a.Position).ToArray(); }
+        get { return SnapPoints.Select(a => a.transform.position).ToArray(); }
     }
 
     protected override void OnCollisionEnter(Collision col)
@@ -67,23 +70,7 @@ public class BasicBuild : Build
         switch (colObj.tag)
         {
             default:
-                return;
-            case "Build":
-                Debug.Log("Hitting the Target");
-                var build = colObj.GetComponent<BasicBuild>();
-                if(build)
-                {
-                    
-                    
-                    /*var snapTransform = GetCloseSnapByBuild(build);
-                    if(snapTransform)
-                    {
-                        Debug.Log(snapTransform.gameObject.name);
-                        snapTransform.position = transform.position;                       
-                    }*/
-                    
-                }                
-                break;
+                return;            
             case "Projectile":
             case "Smasher":
                 //Random change on damage??
@@ -96,7 +83,7 @@ public class BasicBuild : Build
         }
     }
 
-    public Transform GetCloseSnapByBuild(BasicBuild collidingbuild)
+    /*public Transform GetCloseSnapByBuild(BasicBuild collidingbuild)
     {
         foreach (SnapPoints point in SnapPoints)
         {
@@ -109,32 +96,5 @@ public class BasicBuild : Build
         }       
 
         return null;
-    }
+    }*/
 }
-
-public class SnapPoints
-{
-    public bool Snapped { get; set; }
-    public Transform PointTransform { get; set; }
-
-    public SnapPoints(Transform point)
-    {
-        PointTransform = point;
-        Snapped = false;
-    }
-
-    public Vector3 Position
-    {
-        get { return PointTransform.position;  }
-    }
-    public Vector3 LocalPosition
-    {
-        get { return PointTransform.localPosition; }
-    }
-
-    public GameObject GameObject
-    {
-        get { return PointTransform.gameObject; }
-    }
-}
-

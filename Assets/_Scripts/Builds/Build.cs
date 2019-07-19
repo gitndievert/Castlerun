@@ -6,39 +6,31 @@ using UnityEngine;
 //[RequireComponent(typeof(Collider))]
 public abstract class Build : BasePrefab, IBuild
 {
+    public bool Locked { get; private set; }
+
     public int PlacementCost;   
 
     protected bool _isPlaced = false;
-    
+
     private Vector3 _offset;
 
     //public float GridSnap = 0.5f;  
     protected abstract float BuildTime { get; }
     protected abstract ResourceType ResourceType { get; }
 
-    protected Rigidbody RigidBody;    
+    public Rigidbody RigidBody { get; private set; }    
+        
 
     protected virtual void Start()
     {                
         RigidBody = GetComponent<Rigidbody>();
-        //Replace HealthText with UI elements
-        if (HealthText != null)
-            HealthText.gameObject.SetActive(false);
-        if (Health == 0) Health = 20;
-        SetHealthText(Health);
+        if (Health == 0) Health = 20;        
         MaxHealth = Health;
     }
     
-    protected void OnMouseOver()
+    public void Lock(bool lockit)
     {
-        if (HealthText != null)
-            HealthText.gameObject.SetActive(true);
-    }
-
-    protected void OnMouseExit()
-    {
-        if (HealthText != null)
-            HealthText.gameObject.SetActive(false);
+        Locked = lockit;
     }
 
     public virtual void ConfirmPlacement()

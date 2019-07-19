@@ -7,6 +7,7 @@ public static class Global
 
     #region Game Objects
     public const string CAM_RIG_TAG = "CamRig";
+    public const string SNAP_POINT_TAG = "SnapPoint";
 
     #endregion
 

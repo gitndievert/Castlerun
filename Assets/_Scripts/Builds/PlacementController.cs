@@ -19,11 +19,18 @@ public class PlacementController : MonoBehaviour
     public float SnapSize = 1f;    
     public bool MoveOnMouse = false;
 
+    public static ResourceType[] ResourceIndex = {
+        ResourceType.Wood,
+        ResourceType.Rock,
+        ResourceType.Metal
+    };
+
     [SerializeField]
     private MeshRenderer _placeObjectMeshRend;
 
     private GameObject _currObj;    
-    private Material[] _saveMaterial;    
+    private Material[] _saveMaterial;
+    private ResourceType _selectedResource;
 
     private float mouseWheelRotation;
     private bool _triggerBuild = false;
@@ -47,21 +54,31 @@ public class PlacementController : MonoBehaviour
         BuildMode = false;
         _grid = _player.transform.Find("Grid").gameObject;
         _playerBuilds = _player.PlayerWorldItems.transform;
+        SetResource(ResourceType.Wood);
     }
 
     public void LoadObject(GameObject obj)
     {        
         PlaceableObjectPrefab = obj;
-        _placeObjectMeshRend = PlaceableObjectPrefab.GetComponentInChildren<MeshRenderer>();
+        _placeObjectMeshRend = PlaceableObjectPrefab.GetComponentInChildren<MeshRenderer>();        
         _triggerBuild = true;
+    }
 
+    public void SetResource(ResourceType resource)
+    {
+        _selectedResource = resource;
     }
 
     public void ClearObject()
-    {        
-        Destroy(_currObj);
+    {
+        KillBuild();
         _triggerBuild = false;
-        PlaceableObjectPrefab = null;
+        PlaceableObjectPrefab = null;        
+    }
+
+    private void KillBuild()
+    {
+        Destroy(_currObj);        
     }
 
     public bool SetGrid
@@ -76,33 +93,30 @@ public class PlacementController : MonoBehaviour
             }
         }
     }
-
-    private void FixedUpdate()
+    
+    void Update()
     {
         if (_currObj != null && !_rotating)
-        {            
-            BuildMode = true;            
+        {
+            BuildMode = true;
 
-            if (MoveOnMouse)
+            if (MoveOnMouse && !_currObj.GetComponent<IBuild>().Locked)
             {
                 MoveCurrentObjectToMouse();
-            }          
+            }
             else
             {
                 //_currObj.transform.parent = MyPlayer.PlacementSpawn.transform;
                 //ModeCurrentObjectOnScreen();
                 //PlaceObjectToGround();
             }
-                
+
         }
         else
         {
             BuildMode = false;
         }
-    }
 
-    void Update()
-    {
         _rotating = RotateFromMouseWheel();
         LockCursorPos();
 
@@ -118,11 +132,11 @@ public class PlacementController : MonoBehaviour
 
                 _currObj.transform.parent = _playerBuilds; //sets the player 1 parent  
                 var build = _currObj.transform.GetComponent<Build>();
-                                
-                //Might need to move this down to the layprefab part so we can highlight it red
-                //TODO: Come Back later
-                var rt = ResourceType.Metal;
+                
+                ResourceType rt = _selectedResource;
+
                 bool cancelBuild = false;
+
                 if (build.SetResourceType(rt))
                 {
                     Inventory inv = _player.Inventory;
@@ -158,10 +172,7 @@ public class PlacementController : MonoBehaviour
 
         if (_triggerBuild)
         {
-            if (_currObj != null)
-            {
-                Destroy(_currObj);
-            }
+            if (_currObj != null) KillBuild();
 
             _currObj = Instantiate(PlaceableObjectPrefab,_player.transform.position * 2,Quaternion.identity);            
             _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().materials;
@@ -217,9 +228,10 @@ public class PlacementController : MonoBehaviour
         {
             if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
             {
+                //if()
                 if (SnapOnGrid)
                 {                    
-                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, hit.point.y + GetDistToGround(), Mathf.Round(hit.point.z) * SnapSize);                    
+                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) + SnapSize, hit.point.y + GetDistToGround(), Mathf.Round(hit.point.z) + SnapSize);                    
                 }
                 else
                 {
