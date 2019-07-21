@@ -6,16 +6,20 @@ using UnityEngine;
 public class GameManager : DSingle<GameManager>
 {    
     public GameObject PlayerInstance;
-    public PlayerPad[] PlayerPads;    
+    public PlayerPad[] PlayerPads;
+
+    public Plans Plans { get; set; }
     
     public Dictionary<int, Player> PlayerList = new Dictionary<int, Player>();
 
-    private int _numOfPlayer = 2;
+    [SerializeField]
+    private readonly int _numOfPlayer = 2;
 
     protected override void PAwake()
     {
         //FOR TESTING        
         PlayerPads = gameObject.GetComponentsInChildren<PlayerPad>();
+        Plans = GetComponent<Plans>();
     }
 
     protected override void PDestroy()

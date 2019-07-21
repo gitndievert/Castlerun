@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 public class Gatherer : Troop
 {
-    public Transform[] points;
-
     protected float Speed;
 
     private NavMeshAgent _nav;
@@ -23,7 +21,7 @@ public class Gatherer : Troop
     {
         _nav = GetComponent<NavMeshAgent>();
         _anim = GetComponent<Animator>();
-        _anim.Play("HumanoidRun");
+        _anim.Play("Walk");
     }
 
     // Update is called once per frame

@@ -56,9 +56,8 @@ public class Player : BasePrefab
     private GameObject _offHand;                 
     private string _playerName;
     private BattleCursor _battleCursor;
-    //Temporary for now
-    private GenericPlans _plans;
-    private OffensivePlans _oPlans;
+    
+    
     private PlacementController _placementController;
     private MovementInput _movement;
 
@@ -74,9 +73,7 @@ public class Player : BasePrefab
     {   
         base.Awake();
         Inventory = GetComponent<Inventory>();                    
-        //Temporary for now
-        _plans = GetComponent<GenericPlans>();
-        _oPlans = GetComponent<OffensivePlans>();
+                
         _placementController = GetComponent<PlacementController>();
         _camRig = GameObject.FindGameObjectWithTag(Global.CAM_RIG_TAG);
         _movement = GetComponent<MovementInput>();
@@ -131,6 +128,11 @@ public class Player : BasePrefab
         HitAmount = 10;        
     }
 
+    private Plans GetPlans()
+    {
+        return GameManager.Instance.Plans;
+    }
+
     private ResourceType SwitchResource()
     {       
         if (_resourceIndex >= PlacementController.ResourceIndex.Length - 1)
@@ -182,7 +184,7 @@ public class Player : BasePrefab
                 {
                     //Annouce build mode on                
                     _placementController.SetGrid = true;
-                    _placementController.LoadObject(_plans.Wall);
+                    _placementController.LoadObject(GetPlans().Wall);
                 }
                 else
                 {
@@ -207,19 +209,23 @@ public class Player : BasePrefab
 
                 if (Input.GetKeyDown(KeyBindings.BuildKey1))
                 {
-                    _placementController.LoadObject(_plans.Wall);
+                    _placementController.LoadObject(GetPlans().Wall);
                 }
                 else if (Input.GetKeyDown(KeyBindings.BuildKey2))
                 {
-                    _placementController.LoadObject(_plans.Floor);
+                    _placementController.LoadObject(GetPlans().Floor);
                 }
                 else if (Input.GetKeyDown(KeyBindings.BuildKey3))
                 {
-                    _placementController.LoadObject(_plans.Ramp);
+                    _placementController.LoadObject(GetPlans().Ramp);
                 }
                 else if (Input.GetKeyDown(KeyCode.B))
                 {
-                    _placementController.LoadObject(_oPlans.Barracks);
+                    _placementController.LoadObject(GetPlans().Barracks);
+                }
+                else if (Input.GetKeyDown(KeyCode.H))
+                {
+                    _placementController.LoadObject(GetPlans().ResourceDepot);
                 }
             }
         }

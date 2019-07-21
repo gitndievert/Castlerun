@@ -37,6 +37,7 @@ public abstract class BasePrefab : MonoBehaviour
     
     protected void OnMouseOver()
     {
+        if(transform.tag == "Player") return;
         TargetPanel(true);
         TargetUI.Target.text = $"{Health}/{MaxHealth}";
     }
