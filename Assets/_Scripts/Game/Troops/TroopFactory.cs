@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GatheringBuild : Build
+public class TroopFactory : Build
 {
     protected override float BuildTime => ConstructionTime;
 
@@ -13,7 +13,7 @@ public class GatheringBuild : Build
     /// </summary>
     public float ConstructionTime;
 
-    public GameObject[] Gatherers;
+    public Troop[] Troops;
 
     [Tooltip("Turn on the Builder")]
     [Header("Turn On Builder")]
@@ -70,6 +70,12 @@ public class GatheringBuild : Build
         }
     }
 
+    private void OnMouseDown()
+    {
+        Debug.Log("Clicked on the target");
+    }
+
+
     public override bool SetResourceType(ResourceType type)
     {
         _pickType = type;
@@ -87,7 +93,7 @@ public class GatheringBuild : Build
 
     public void BuildTroops()
     {
-        if (Gatherers == null) return;
+        if (Troops == null) return;
         InvokeRepeating("Build", StartTime, TrainingTime);
     }
 
@@ -102,8 +108,8 @@ public class GatheringBuild : Build
     {
         for (int i = 0; i < NumberToTrain; i++)
         {
-            var randTroop = (GameObject)Gatherers[Random.Range(0, Gatherers.Length - 1)];            
-            Instantiate(randTroop, transform.position + (Vector3.forward * 2), Quaternion.identity);
+            var randTroop = Troops[Random.Range(0, Troops.Length - 1)];            
+            Instantiate(randTroop.gameObject, transform.position + (Vector3.forward * 2), Quaternion.identity);
             _trainedCounter++;
         }
     }

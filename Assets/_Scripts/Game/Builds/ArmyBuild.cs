@@ -8,8 +8,14 @@ public class ArmyBuild : Build
 
     protected override ResourceType ResourceType => ResourceType.Wood;
 
-    public ArmyBuildType ArmyOutputType = ArmyBuildType.Infantry;
-    
+    //public ArmyBuildType ArmyOutputType = ArmyBuildType.Infantry;
+
+    /// <summary>
+    /// The time it takes to build the structure
+    /// </summary>C:\PROJECTS\CastleRun\Assets\_Scripts\Game\Builds\ArmyBuild.cs
+    public float ConstructionTime;
+
+
     public GameObject Troop;
 
     [Tooltip("Turn on the Builder")]
@@ -17,10 +23,6 @@ public class ArmyBuild : Build
     public bool EnableBuilder = false;
 
 
-    /// <summary>
-    /// The time it takes to build the structure
-    /// </summary>
-    public float ConstructionTime;
 
     /// <summary>
     /// Time to train each troop
