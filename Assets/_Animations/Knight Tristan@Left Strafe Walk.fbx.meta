@@ -1,97 +1,275 @@
 fileFormatVersion: 2
 guid: 45053c7d2df4c4a43949f9fe51a30ee6
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: RigHead
-    100004: RigHeadBone001
-    100006: RigLCalf
-    100008: RigLCollarbone
-    100010: RigLFinger1
-    100012: RigLFinger2
-    100014: RigLFinger3
-    100016: RigLFinger4
-    100018: RigLFoot
-    100020: RigLForearm
-    100022: RigLPalm
-    100024: RigLThigh
-    100026: RigLThumb1
-    100028: RigLThumb2
-    100030: RigLThumb3
-    100032: RigLThumb4
-    100034: RigLToe11
-    100036: RigLToe12
-    100038: RigLUpperarm
-    100040: RigNeck
-    100042: RigPelvis
-    100044: RigRCalf
-    100046: RigRCollarbone
-    100048: RigRFinger1
-    100050: RigRFinger2
-    100052: RigRFinger3
-    100054: RigRFinger4
-    100056: RigRFoot
-    100058: RigRForearm
-    100060: RigRibcage
-    100062: RigRPalm
-    100064: RigRThigh
-    100066: RigRThumb1
-    100068: RigRThumb2
-    100070: RigRThumb3
-    100072: RigRThumb4
-    100074: RigRToe11
-    100076: RigRToe12
-    100078: RigRUpperarm
-    100080: RigSpine1
-    100082: RigSpine2
-    100084: RigSpine3
-    400000: //RootNode
-    400002: RigHead
-    400004: RigHeadBone001
-    400006: RigLCalf
-    400008: RigLCollarbone
-    400010: RigLFinger1
-    400012: RigLFinger2
-    400014: RigLFinger3
-    400016: RigLFinger4
-    400018: RigLFoot
-    400020: RigLForearm
-    400022: RigLPalm
-    400024: RigLThigh
-    400026: RigLThumb1
-    400028: RigLThumb2
-    400030: RigLThumb3
-    400032: RigLThumb4
-    400034: RigLToe11
-    400036: RigLToe12
-    400038: RigLUpperarm
-    400040: RigNeck
-    400042: RigPelvis
-    400044: RigRCalf
-    400046: RigRCollarbone
-    400048: RigRFinger1
-    400050: RigRFinger2
-    400052: RigRFinger3
-    400054: RigRFinger4
-    400056: RigRFoot
-    400058: RigRForearm
-    400060: RigRibcage
-    400062: RigRPalm
-    400064: RigRThigh
-    400066: RigRThumb1
-    400068: RigRThumb2
-    400070: RigRThumb3
-    400072: RigRThumb4
-    400074: RigRToe11
-    400076: RigRToe12
-    400078: RigRUpperarm
-    400080: RigSpine1
-    400082: RigSpine2
-    400084: RigSpine3
-    7400000: Left Strafe Walk
-    9500000: //RootNode
-    2186277476908879412: ImportLogs
+  serializedVersion: 25
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: RigHead
+  - first:
+      1: 100004
+    second: RigHeadBone001
+  - first:
+      1: 100006
+    second: RigLCalf
+  - first:
+      1: 100008
+    second: RigLCollarbone
+  - first:
+      1: 100010
+    second: RigLFinger1
+  - first:
+      1: 100012
+    second: RigLFinger2
+  - first:
+      1: 100014
+    second: RigLFinger3
+  - first:
+      1: 100016
+    second: RigLFinger4
+  - first:
+      1: 100018
+    second: RigLFoot
+  - first:
+      1: 100020
+    second: RigLForearm
+  - first:
+      1: 100022
+    second: RigLPalm
+  - first:
+      1: 100024
+    second: RigLThigh
+  - first:
+      1: 100026
+    second: RigLThumb1
+  - first:
+      1: 100028
+    second: RigLThumb2
+  - first:
+      1: 100030
+    second: RigLThumb3
+  - first:
+      1: 100032
+    second: RigLThumb4
+  - first:
+      1: 100034
+    second: RigLToe11
+  - first:
+      1: 100036
+    second: RigLToe12
+  - first:
+      1: 100038
+    second: RigLUpperarm
+  - first:
+      1: 100040
+    second: RigNeck
+  - first:
+      1: 100042
+    second: RigPelvis
+  - first:
+      1: 100044
+    second: RigRCalf
+  - first:
+      1: 100046
+    second: RigRCollarbone
+  - first:
+      1: 100048
+    second: RigRFinger1
+  - first:
+      1: 100050
+    second: RigRFinger2
+  - first:
+      1: 100052
+    second: RigRFinger3
+  - first:
+      1: 100054
+    second: RigRFinger4
+  - first:
+      1: 100056
+    second: RigRFoot
+  - first:
+      1: 100058
+    second: RigRForearm
+  - first:
+      1: 100060
+    second: RigRibcage
+  - first:
+      1: 100062
+    second: RigRPalm
+  - first:
+      1: 100064
+    second: RigRThigh
+  - first:
+      1: 100066
+    second: RigRThumb1
+  - first:
+      1: 100068
+    second: RigRThumb2
+  - first:
+      1: 100070
+    second: RigRThumb3
+  - first:
+      1: 100072
+    second: RigRThumb4
+  - first:
+      1: 100074
+    second: RigRToe11
+  - first:
+      1: 100076
+    second: RigRToe12
+  - first:
+      1: 100078
+    second: RigRUpperarm
+  - first:
+      1: 100080
+    second: RigSpine1
+  - first:
+      1: 100082
+    second: RigSpine2
+  - first:
+      1: 100084
+    second: RigSpine3
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: RigHead
+  - first:
+      4: 400004
+    second: RigHeadBone001
+  - first:
+      4: 400006
+    second: RigLCalf
+  - first:
+      4: 400008
+    second: RigLCollarbone
+  - first:
+      4: 400010
+    second: RigLFinger1
+  - first:
+      4: 400012
+    second: RigLFinger2
+  - first:
+      4: 400014
+    second: RigLFinger3
+  - first:
+      4: 400016
+    second: RigLFinger4
+  - first:
+      4: 400018
+    second: RigLFoot
+  - first:
+      4: 400020
+    second: RigLForearm
+  - first:
+      4: 400022
+    second: RigLPalm
+  - first:
+      4: 400024
+    second: RigLThigh
+  - first:
+      4: 400026
+    second: RigLThumb1
+  - first:
+      4: 400028
+    second: RigLThumb2
+  - first:
+      4: 400030
+    second: RigLThumb3
+  - first:
+      4: 400032
+    second: RigLThumb4
+  - first:
+      4: 400034
+    second: RigLToe11
+  - first:
+      4: 400036
+    second: RigLToe12
+  - first:
+      4: 400038
+    second: RigLUpperarm
+  - first:
+      4: 400040
+    second: RigNeck
+  - first:
+      4: 400042
+    second: RigPelvis
+  - first:
+      4: 400044
+    second: RigRCalf
+  - first:
+      4: 400046
+    second: RigRCollarbone
+  - first:
+      4: 400048
+    second: RigRFinger1
+  - first:
+      4: 400050
+    second: RigRFinger2
+  - first:
+      4: 400052
+    second: RigRFinger3
+  - first:
+      4: 400054
+    second: RigRFinger4
+  - first:
+      4: 400056
+    second: RigRFoot
+  - first:
+      4: 400058
+    second: RigRForearm
+  - first:
+      4: 400060
+    second: RigRibcage
+  - first:
+      4: 400062
+    second: RigRPalm
+  - first:
+      4: 400064
+    second: RigRThigh
+  - first:
+      4: 400066
+    second: RigRThumb1
+  - first:
+      4: 400068
+    second: RigRThumb2
+  - first:
+      4: 400070
+    second: RigRThumb3
+  - first:
+      4: 400072
+    second: RigRThumb4
+  - first:
+      4: 400074
+    second: RigRToe11
+  - first:
+      4: 400076
+    second: RigRToe12
+  - first:
+      4: 400078
+    second: RigRUpperarm
+  - first:
+      4: 400080
+    second: RigSpine1
+  - first:
+      4: 400082
+    second: RigSpine2
+  - first:
+      4: 400084
+    second: RigSpine3
+  - first:
+      74: 7400000
+    second: Left Strafe Walk
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -105,8 +283,8 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
-      rotation in copied configuration does not match rotation in animation file:\n\t'RigRibcage'
+    rigImportWarnings: "Avatar Rig Configuration mis-match. Inbetween bone rotation
+      in configuration does not match rotation in animation file:\n\t'RigRibcage'
       : rotation error = 13.334077 deg\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'mixamo.com' has import animation warnings that
@@ -128,6 +306,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Left Strafe Walk
       takeName: mixamo.com
+      internalID: 7400000
       firstFrame: 0
       lastFrame: 28
       wrapMode: 0
@@ -167,18 +346,19 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -187,10 +367,11 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 1
+  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human:
     - boneName: RigPelvis
       humanName: Hips
@@ -465,28 +646,13 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Knight Tristan(Clone)
+    - name: Knight Tristan@Left Strafe Walk(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: Knight Tristan
-      parentName: Knight Tristan(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Rig
-      parentName: Knight Tristan(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.50000006, y: -0.50000006, z: -0.49999997, w: 0.49999997}
-      scale: {x: 1, y: 1, z: 1}
-    - name: RigLPlatform
-      parentName: Knight Tristan(Clone)
-      position: {x: -0.16568772, y: 0.001838433, z: 0.16310729}
-      rotation: {x: 0.50000006, y: -0.50000006, z: -0.49999997, w: 0.49999997}
-      scale: {x: 1, y: 1, z: 1}
     - name: RigPelvis
-      parentName: Knight Tristan(Clone)
+      parentName: Knight Tristan@Left Strafe Walk(Clone)
       position: {x: -9.094947e-15, y: 0.8453481, z: 0.007656836}
       rotation: {x: 0.5, y: -0.50000006, z: -0.5, w: 0.5}
       scale: {x: 1, y: 1, z: 1}
@@ -498,7 +664,7 @@ ModelImporter:
     - name: RigLCalf
       parentName: RigLThigh
       position: {x: -0.28892258, y: 0.000007075071, z: -0.000000333786}
-      rotation: {x: -0.045783646, y: -0.0032721008, z: 0.036056083, w: 0.9982952}
+      rotation: {x: -0.045783643, y: -0.0032721008, z: 0.03605608, w: 0.9982952}
       scale: {x: 1.0000004, y: 1.0000007, z: 1.0000002}
     - name: RigLFoot
       parentName: RigLCalf
@@ -618,7 +784,7 @@ ModelImporter:
     - name: RigLThumb4
       parentName: RigLThumb3
       position: {x: -0.03500961, y: -0.00000015258789, z: 0}
-      rotation: {x: -0.08968987, y: 0.11995592, z: 0.98837006, w: 0.026285479}
+      rotation: {x: -0.08968987, y: 0.11995593, z: 0.98837006, w: 0.02628548}
       scale: {x: 0.9999989, y: 1.0000027, z: 1.0000017}
     - name: RigNeck
       parentName: RigRibcage
@@ -696,11 +862,6 @@ ModelImporter:
       position: {x: -0.03500965, y: 0.00000019073485, z: 0.000000038146972}
       rotation: {x: -0.08968975, y: 0.11995593, z: -0.9883702, w: -0.026284928}
       scale: {x: 1.0000021, y: 0.9999998, z: 0.9999997}
-    - name: RigRPlatform
-      parentName: Knight Tristan(Clone)
-      position: {x: 0.1656877, y: 0.001838379, z: 0.16310734}
-      rotation: {x: 0.50000006, y: -0.50000006, z: -0.49999997, w: 0.49999997}
-      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -708,12 +869,12 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 2c9f1fc285f1b614bb0fe18cb75c4217,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 3
   humanoidOversampling: 1
   additionalBone: 0

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1516178438436275324
+--- !u!1 &1547467594100615071
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,26 +8,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5777603644977092347}
-  - component: {fileID: 3347713589622766675}
-  - component: {fileID: 8531511223425318712}
-  - component: {fileID: 3747102575168005721}
-  - component: {fileID: -789397437547243032}
-  - component: {fileID: 7856360647941694591}
+  - component: {fileID: 1547467594100850647}
+  - component: {fileID: 1547467594103704789}
+  - component: {fileID: 1547467594102825673}
+  - component: {fileID: 814880543415800105}
+  - component: {fileID: 7457598439211614266}
+  - component: {fileID: 5028009657086996972}
   m_Layer: 2
-  m_Name: Barracks
+  m_Name: ResourceDepot2
   m_TagString: Build
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5777603644977092347
+--- !u!4 &1547467594100850647
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516178438436275324}
+  m_GameObject: {fileID: 1547467594100615071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -35,21 +35,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3347713589622766675
+--- !u!33 &1547467594103704789
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516178438436275324}
-  m_Mesh: {fileID: 4300000, guid: 2112854f9c1e1bd4abf766d44f57f570, type: 3}
---- !u!23 &8531511223425318712
+  m_GameObject: {fileID: 1547467594100615071}
+  m_Mesh: {fileID: 4300004, guid: d560ba09072002848845b1f0e6833235, type: 3}
+--- !u!23 &1547467594102825673
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516178438436275324}
+  m_GameObject: {fileID: 1547467594100615071}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -80,42 +80,42 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!54 &3747102575168005721
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516178438436275324}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!65 &-789397437547243032
+--- !u!65 &814880543415800105
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516178438436275324}
+  m_GameObject: {fileID: 1547467594100615071}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.0999994, y: 5.25, z: 4.4000006}
-  m_Center: {x: 0.011075139, y: -0.16908014, z: 0.00000035762787}
---- !u!114 &7856360647941694591
+  m_Size: {x: 8.999998, y: 7.187415, z: 7.0971317}
+  m_Center: {x: 0.43718362, y: -0.18404555, z: -0.00000059604645}
+--- !u!54 &7457598439211614266
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547467594100615071}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &5028009657086996972
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516178438436275324}
+  m_GameObject: {fileID: 1547467594100615071}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cccf1f594902fdd4c974af9a464aafb7, type: 3}
@@ -128,8 +128,8 @@ MonoBehaviour:
   PlacementCost: 100
   ConstructionTime: 10
   Troops:
-  - {fileID: -4497893882281100752, guid: d3623546911d1e949823c67f53407132, type: 3}
-  StartTime: 0
-  TrainingTime: 0
+  - {fileID: 3710154189911815501, guid: b721e89ab386bd044ae686c19cccd397, type: 3}
+  StartTime: 5
+  TrainingTime: 15
   NumberToTrain: 1
   MaxTrained: 5

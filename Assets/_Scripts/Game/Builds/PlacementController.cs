@@ -14,8 +14,7 @@ public class PlacementController : MonoBehaviour
 
     [Header("Build Properties")]
     public bool BuildMode;
-    public float RotateAmount = 90f;
-    public bool SnapOnGrid = true;
+    public float RotateAmount = 90f;    
     public float SnapSize = 1f;        
 
     public static ResourceType[] ResourceIndex = {
@@ -233,15 +232,9 @@ public class PlacementController : MonoBehaviour
         {
             if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
             {
-                //if()
-                if (SnapOnGrid)
-                {                    
-                    _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) + SnapSize, hit.point.y + GetDistToGround(), Mathf.Round(hit.point.z) + SnapSize);                    
-                }
-                else
-                {
-                    _currObj.transform.position = hit.point;
-                }
+                Debug.Log($"Hit range {hit.point.y}");
+                Debug.Log(GetDistToGround());
+                _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) + SnapSize, hit.point.y + GetDistToGround(), Mathf.Round(hit.point.z) + SnapSize);
             }
         }
     }

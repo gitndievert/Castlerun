@@ -6,6 +6,10 @@ using UnityEngine;
 //[RequireComponent(typeof(Collider))]
 public abstract class Build : BasePrefab, IBuild
 {
+    [Tooltip("Turn on the Builder")]
+    [Header("Turn On Builder")]
+    public bool EnableTroopBuilder = false;
+
     public bool Locked { get; private set; }
 
     public int PlacementCost;   
@@ -32,24 +36,10 @@ public abstract class Build : BasePrefab, IBuild
     public virtual void ConfirmPlacement()
     {
         _isPlaced = true;
-        TagPrefab("Build");        
-        if (BuildTime > 0)
-        {   
-            StartCoroutine(RunBuild());
-        }
+        TagPrefab("Build");                
     }
 
-    public abstract bool SetResourceType(ResourceType type);
-
-    protected IEnumerator RunBuild()
-    {
-        Debug.Log("Start Build");
-        Global.BuildMode = false;        
-        yield return new WaitForSeconds(BuildTime);
-        SoundManager.PlaySound(SoundList.Instance.BuildSound);
-        Debug.Log("Finish Build");        
-        Global.BuildMode = true;
-    }
+    public abstract bool SetResourceType(ResourceType type);    
 
     protected virtual void OnCollisionEnter(Collision col)
     {

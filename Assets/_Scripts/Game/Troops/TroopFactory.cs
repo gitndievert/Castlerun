@@ -15,10 +15,6 @@ public class TroopFactory : Build
 
     public Troop[] Troops;
 
-    [Tooltip("Turn on the Builder")]
-    [Header("Turn On Builder")]
-    public bool EnableBuilder = false;
-
     /// <summary>
     /// This is the start timer for the initial Troops. Hi Jessia
     /// </summary>
@@ -53,17 +49,37 @@ public class TroopFactory : Build
         MaxHealth = Health;
     }
 
+    public override void ConfirmPlacement()
+    {
+        base.ConfirmPlacement();
+        if (BuildTime > 0)
+        {
+            StartCoroutine(RunBuild());
+        }
+    }
+
+    protected IEnumerator RunBuild()
+    {
+        Debug.Log("Start Build");
+        Global.BuildMode = false;
+        yield return new WaitForSeconds(BuildTime);
+        SoundManager.PlaySound(SoundList.Instance.BuildSound);
+        Debug.Log("Finish Build");
+        Global.BuildMode = true;
+        EnableTroopBuilder = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (EnableBuilder && !_IsBuilding)
+        if (EnableTroopBuilder && !_IsBuilding)
         {
             BuildTroops();
             _IsBuilding = true;
             Debug.Log("Building Turned on for Harvesting Peoples");
         }
 
-        if ((!EnableBuilder && _IsBuilding) || _trainedCounter == MaxTrained)
+        if ((!EnableTroopBuilder && _IsBuilding) || _trainedCounter == MaxTrained)
         {
             StopBuild();
             Debug.Log("Max Number of Harvesters Made");
@@ -90,6 +106,7 @@ public class TroopFactory : Build
 
         return true;
     }
+        
 
     public void BuildTroops()
     {

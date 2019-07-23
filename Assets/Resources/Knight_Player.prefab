@@ -1207,7 +1207,6 @@ GameObject:
   - component: {fileID: 1507808360}
   - component: {fileID: 1507808361}
   - component: {fileID: 706162164831775572}
-  - component: {fileID: 3858733312294855992}
   - component: {fileID: -482309525190335055}
   - component: {fileID: -2392940468147617419}
   m_Layer: 0
@@ -1288,6 +1287,12 @@ MonoBehaviour:
   Wall: {fileID: 2543357986072876719, guid: ce3313f25ddf62341a9e1fb23f0a923e, type: 3}
   Floor: {fileID: 7275474268219041069, guid: a5569e4373cef9a45811601800540512, type: 3}
   Ramp: {fileID: 5436822143744326069, guid: 347f0c6a657386e45a71938d5169fd61, type: 3}
+  ResourceDepot: {fileID: 0}
+  Barracks: {fileID: 0}
+  WizardSpire: {fileID: 0}
+  ArcherRange: {fileID: 0}
+  Cannon: {fileID: 0}
+  Catapult: {fileID: 0}
 --- !u!114 &1507808359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1372,20 +1377,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.1, z: 0}
---- !u!114 &3858733312294855992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1507808357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1df23a32e2d4fcb44855c4f713579a7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Barracks: {fileID: 1516178438436275324, guid: 54672a048a056214aae7a6e4dae17ef5,
-    type: 3}
 --- !u!114 &-482309525190335055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1403,7 +1394,6 @@ MonoBehaviour:
   ErrorMaterial: {fileID: 2100000, guid: a0c0af64964bcac489a1224c240cda71, type: 2}
   BuildMode: 0
   RotateAmount: 90
-  SnapOnGrid: 1
   SnapSize: 1
   _placeObjectMeshRend: {fileID: 0}
   _playerBuilds: {fileID: 0}
