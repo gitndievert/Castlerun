@@ -219,11 +219,11 @@ public class Player : BasePrefab, IPlayer
                 }
                 else if (Input.GetKeyDown(KeyCode.B))
                 {
-                    _placementController.LoadObject(GetPlans().Barracks);
+                    _placementController.LoadObject(GetPlans().Barracks, true);
                 }
                 else if (Input.GetKeyDown(KeyCode.H))
                 {
-                    _placementController.LoadObject(GetPlans().ResourceDepot);
+                    _placementController.LoadObject(GetPlans().ResourceDepot, true);
                 }
             }
         }

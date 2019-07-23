@@ -8,9 +8,7 @@ public abstract class Build : BasePrefab, IBuild
 {
     [Tooltip("Turn on the Builder")]
     [Header("Turn On Builder")]
-    public bool EnableTroopBuilder = false;
-
-    public bool Locked { get; private set; }
+    public bool EnableTroopBuilder = false;    
 
     public int PlacementCost { get; set; }
 
@@ -28,11 +26,6 @@ public abstract class Build : BasePrefab, IBuild
     {                    
         if (Health == 0) Health = 20;        
         MaxHealth = Health;
-    }
-    
-    public void Lock(bool lockit)
-    {
-        Locked = lockit;
     }
 
     public virtual void ConfirmPlacement()

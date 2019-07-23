@@ -35,6 +35,7 @@ public class PlacementController : MonoBehaviour
     private bool _rotating = false;
     private Player _player;
     private GameObject _grid;
+    private bool _outsideGrid;
 
     /// <summary>
     /// Object to parent on for player
@@ -55,11 +56,12 @@ public class PlacementController : MonoBehaviour
         SetResource(ResourceType.Wood);
     }
 
-    public void LoadObject(GameObject obj)
-    {        
+    public void LoadObject(GameObject obj, bool outsidegrid = false)
+    {       
         PlaceableObjectPrefab = obj;
         _placeObjectMeshRend = PlaceableObjectPrefab.GetComponentInChildren<MeshRenderer>();        
         _triggerBuild = true;
+        _outsideGrid = outsidegrid;
     }
 
     public void SetResource(ResourceType resource)
@@ -114,12 +116,8 @@ public class PlacementController : MonoBehaviour
 
             if (!_rotating)
             {
-                BuildMode = true;
-
-                if (!_currObj.GetComponent<IBuild>().Locked)
-                {
-                    MoveCurrentObjectToMouse();
-                }
+                BuildMode = true;                
+                MoveCurrentObjectToMouse();                
             }
             else
             {
@@ -222,7 +220,7 @@ public class PlacementController : MonoBehaviour
     
     private void LockCursorPos()
     {
-        if (_currObj == null) return;
+        if (_currObj == null || _outsideGrid) return;
         if (Vector3.Distance(_currObj.transform.position, _player.transform.position) > 15f)
         {
             Vector3 playerP = _player.transform.position;
@@ -239,8 +237,6 @@ public class PlacementController : MonoBehaviour
         {
             if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
             {
-                Debug.Log($"Hit range {hit.point.y}");
-                Debug.Log(GetDistToGround());
                 _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) + SnapSize, hit.point.y + GetDistToGround(), Mathf.Round(hit.point.z) + SnapSize);
             }
         }
