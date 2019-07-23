@@ -13,12 +13,11 @@ public class GameManager : DSingle<GameManager>
     public Dictionary<int, Player> PlayerList = new Dictionary<int, Player>();
 
     [SerializeField]
-    private readonly int _numOfPlayer = 2;
-
+    private readonly int _numOfPlayer = 2;    
+    
     protected override void PAwake()
     {
-        //FOR TESTING        
-        PlayerPads = gameObject.GetComponentsInChildren<PlayerPad>();
+        //FOR TESTING                
         Plans = GetComponent<Plans>();
     }
 
@@ -38,11 +37,17 @@ public class GameManager : DSingle<GameManager>
     {
         //PUN Networking pieces
         int spawnIndex = 0;
-
-        var character = Instantiate(PlayerInstance, PlayerPads[spawnIndex].PlayerSpawnPosition, Quaternion.identity);
-        var player = character.GetComponent<Player>();
         int playerNum = spawnIndex + 1;
+        var pad = PlayerPads[spawnIndex];
+
+        if (!pad.gameObject.activeSelf)
+            throw new System.Exception($"Player Pad is not active for player {playerNum}");
+
+        var character = Instantiate(PlayerInstance, pad.PlayerSpawnPosition, Quaternion.identity);
+        var player = character.GetComponent<Player>();
+        
         player.Init("Krunchy", playerNum); //Player number is a hack until things are setup            
+        player.PlayerPad = pad;
         PlayerList.Add(playerNum, player);
 
         /*for (int i = 1; i < _numOfPlayer; i++)

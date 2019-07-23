@@ -26,9 +26,9 @@ public class Player : BasePrefab, IPlayer
     public Castle PlayerCastle { get; set; }
 
     /// <summary>
-    /// Placement tranform for the player spawn coords
+    /// Placement Pad for this player
     /// </summary>
-    public Transform PlacementSpawn { get; set; }
+    public PlayerPad PlayerPad { get; set; }
 
     [Range(1, 4)]
     public int PlayerNumber = 1;
@@ -97,9 +97,7 @@ public class Player : BasePrefab, IPlayer
         //NOTE
         //Quick test for two types of castles        
         CastleType = PlayerNumber == 1 ? CastleType.Default : CastleType.FortressOfDoom;
-        CastleManager.Instance.SpawnCastle(CastleType, this);     
-
-        PlacementSpawn = transform.Find("PlacementSpawn");
+        CastleManager.Instance.SpawnCastle(CastleType, this);             
 
         if (CompanionOut && CompanionType != CompanionType.None)
         {
