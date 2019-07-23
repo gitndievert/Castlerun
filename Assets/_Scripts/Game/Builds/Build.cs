@@ -12,11 +12,13 @@ public abstract class Build : BasePrefab, IBuild
 
     public bool Locked { get; private set; }
 
-    public int PlacementCost;   
+    public int PlacementCost { get; set; }
 
     protected bool _isPlaced = false;
+    protected Player Player = null;
 
     private Vector3 _offset;
+    
 
     //public float GridSnap = 0.5f;  
     protected abstract float BuildTime { get; }
@@ -39,7 +41,12 @@ public abstract class Build : BasePrefab, IBuild
         TagPrefab("Build");                
     }
 
-    public abstract bool SetResourceType(ResourceType type);    
+    public abstract bool SetResourceType(ResourceType type);
+
+    public void SetPlayer(Player player)
+    {
+        Player = player;
+    }
 
     protected virtual void OnCollisionEnter(Collision col)
     {
@@ -63,7 +70,7 @@ public abstract class Build : BasePrefab, IBuild
         }        
     }
 
-   
+  
 
     //Old Hitblocker code
     /*protected void OnTriggerEnter(Collider col)

@@ -15,15 +15,18 @@ public class PlayerPad : MonoBehaviour
     /// </summary>
     public GameObject SideResources;
 
-    [SerializeField]
-    private Transform[] _resources;
+    /// <summary>
+    /// Gets all the player assigned resource points
+    /// </summary>
+    public Transform[] ResourcePoints { get; private set; }
+    
 
     private void Start()
     {
         //Load in the reources that are on the curent players territory
         if (SideResources != null)
         {
-            _resources = SideResources.FindComponentsInChildrenWithTag<Transform>(Global.RESOURCE_TAG);                 
+            ResourcePoints = SideResources.FindComponentsInChildrenWithTag<Transform>(Global.RESOURCE_TAG);                 
         }
     }
 }

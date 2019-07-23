@@ -24,11 +24,12 @@ public class Bobber : MonoBehaviour
     {
         if (!transform.GetComponent(typeof(Rigidbody)))
             gameObject.AddComponent<Rigidbody>();
-        _rb = GetComponent<Rigidbody>();        
+        _rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
-    {        
+    {
+        
         if (AutoStartBob)
         {
             StartBob(Rotate);

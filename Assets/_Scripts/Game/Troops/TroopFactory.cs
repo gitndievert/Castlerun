@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TroopFactory : Build
 {
+    #region Resource Cost
+    public const int WOOD_COST = 10;
+    #endregion
+
     protected override float BuildTime => ConstructionTime;
 
     protected override ResourceType ResourceType => ResourceType.Wood;
@@ -36,11 +40,10 @@ public class TroopFactory : Build
     /// <summary>
     /// The number of troops trained on each training pass
     /// </summary>
-    public int MaxTrained = 5;
-
+    public int MaxTrained = 5;    
 
     private ResourceType _pickType;
-    private bool _IsBuilding = false;
+    private bool _IsBuilding = false;    
 
     // Start is called before the first frame update
     protected override void Start()
@@ -98,15 +101,14 @@ public class TroopFactory : Build
         switch (type)
         {
             case ResourceType.Wood:
-                PlacementCost = 10;
+                PlacementCost = WOOD_COST;
                 break;
             default:
                 return false;
         }
 
         return true;
-    }
-        
+    }        
 
     public void BuildTroops()
     {
@@ -126,7 +128,11 @@ public class TroopFactory : Build
         for (int i = 0; i < NumberToTrain; i++)
         {
             var randTroop = Troops[Random.Range(0, Troops.Length - 1)];            
-            Instantiate(randTroop.gameObject, transform.position + (Vector3.forward * 2), Quaternion.identity);
+            var makeTroop = Instantiate(randTroop.gameObject, transform.position + (Vector3.forward * 2), Quaternion.identity);
+            //Come back
+            if(Player != null)
+                makeTroop.GetComponent<Troop>().points = Player.PlayerPad.ResourcePoints; //Might change all this later
+
             _trainedCounter++;
         }
     }

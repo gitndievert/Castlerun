@@ -79,6 +79,12 @@ public class PlacementController : MonoBehaviour
         Destroy(_currObj);        
     }
 
+    private Transform[] GetResourcePlacements()
+    {
+        if (_player == null) return null;
+        return _player.PlayerPad.ResourcePoints;
+    }
+
     public bool SetGrid
     {
         set
@@ -135,18 +141,19 @@ public class PlacementController : MonoBehaviour
                 _currObj.gameObject.layer = Global.DEFAULT_LAYER;
 
                 _currObj.transform.parent = _playerBuilds; //sets the player 1 parent  
-                var build = _currObj.transform.GetComponent<Build>();
+                var build = _currObj.transform.GetComponent<IBuild>();
                 
                 ResourceType rt = _selectedResource;
 
                 bool cancelBuild = false;
 
                 if (build.SetResourceType(rt))
-                {
+                {                    
                     Inventory inv = _player.Inventory;
                     int invcount = inv.GetCount(rt);
                     if (invcount > 0 && (invcount - build.PlacementCost >= 0))
                     {
+                        build.SetPlayer(_player);
                         build.ConfirmPlacement();
                         inv.Set(rt, -build.PlacementCost);
                     }
