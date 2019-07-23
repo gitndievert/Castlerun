@@ -115,8 +115,7 @@ public class MovementInput : MonoBehaviour
     }
 
     public void Swing()
-    {
-        Debug.Log("Swinging for attack");
+    {        
         _anim.SetBool("Swing", true);
     }
 

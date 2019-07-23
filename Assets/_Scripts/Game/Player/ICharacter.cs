@@ -1,12 +1,11 @@
-﻿public interface IPlayer
+﻿public interface ICharacter
 {
-    void Init();
-    void Swing();
-    void SwingStop();
-    void SetHit(int damage);    
+    void SetHit(int damage);
 }
 
-public interface ICharacter : IPlayer
+
+public interface IPlayer : ICharacter
 {
-    
+    void Init(string name, int playernum);
+    void Swing();     
 }

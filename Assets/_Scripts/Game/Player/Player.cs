@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class Player : BasePrefab
+public class Player : BasePrefab, IPlayer
 {
     public float MoveSpeed;
     public float BuildSpeed;
@@ -107,7 +107,7 @@ public class Player : BasePrefab
         }
 
     }
-
+    
     public void Init(string name, int playernum)
     {
         PlayerName = name;
@@ -287,9 +287,11 @@ public class Player : BasePrefab
         CompanionOut = false;
     }   
 
+
+    /* This whole thing is lame, need to replace */
     public void Swing()
     {        
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        /*var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
@@ -308,8 +310,10 @@ public class Player : BasePrefab
                     var character = hit.transform.GetComponent<ICharacter>();
                     character.SetHit(HitAmount);                    
                     break;
+                default:
+                    return;
             }            
-        }
+        }*/
     }        
        
   
