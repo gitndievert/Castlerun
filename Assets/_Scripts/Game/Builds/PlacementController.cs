@@ -237,7 +237,10 @@ public class PlacementController : MonoBehaviour
         {
             if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
             {
-                _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) + SnapSize, hit.point.y + GetDistToGround(), Mathf.Round(hit.point.z) + SnapSize);
+                Debug.Log($"Hit point y {hit.point.y}");
+                Debug.Log($"Dist to ground{GetDistToGround()}");
+                float halfHeight = _currObj.GetComponent<Collider>().bounds.size.y / 2;
+                _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, Mathf.Round(hit.point.y) + halfHeight, Mathf.Round(hit.point.z) * SnapSize);
             }
         }
     }

@@ -96,8 +96,8 @@ public class Player : BasePrefab, IPlayer
 
         //NOTE
         //Quick test for two types of castles        
-        CastleType = PlayerNumber == 1 ? CastleType.Default : CastleType.FortressOfDoom;
-        CastleManager.Instance.SpawnCastle(CastleType, this);             
+        //CastleType = PlayerNumber == 1 ? CastleType.Default : CastleType.FortressOfDoom;
+        CastleManager.Instance.SpawnCastle(CastleType.FortressOfDoom, this);             
 
         if (CompanionOut && CompanionType != CompanionType.None)
         {
@@ -224,6 +224,10 @@ public class Player : BasePrefab, IPlayer
                 else if (Input.GetKeyDown(KeyCode.H))
                 {
                     _placementController.LoadObject(GetPlans().ResourceDepot, true);
+                }
+                else if (Input.GetKeyDown(KeyCode.T))
+                {
+                    _placementController.LoadObject(GetPlans().WizardSpire, true);
                 }
             }
         }
