@@ -187,8 +187,9 @@ public class Player : BasePrefab, IPlayer
                 else
                 {
                     //Annouce build mode off                
+                    CameraRotate.BuildCamMode = false;
                     _placementController.SetGrid = false;
-                    _placementController.ClearObject();
+                    _placementController.ClearObject();                    
                 }
 
             }

@@ -50,20 +50,106 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 1
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000000000000000000000000000000000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
+      transformMask:
+      - path: 
+        weight: 1
+      - path: RigPelvis
+        weight: 1
+      - path: RigPelvis/RigLThigh
+        weight: 1
+      - path: RigPelvis/RigLThigh/RigLCalf
+        weight: 1
+      - path: RigPelvis/RigLThigh/RigLCalf/RigLFoot
+        weight: 1
+      - path: RigPelvis/RigLThigh/RigLCalf/RigLFoot/RigLToe11
+        weight: 1
+      - path: RigPelvis/RigLThigh/RigLCalf/RigLFoot/RigLToe11/RigLToe12
+        weight: 0
+      - path: RigPelvis/RigRThigh
+        weight: 1
+      - path: RigPelvis/RigRThigh/RigRCalf
+        weight: 1
+      - path: RigPelvis/RigRThigh/RigRCalf/RigRFoot
+        weight: 1
+      - path: RigPelvis/RigRThigh/RigRCalf/RigRFoot/RigRToe11
+        weight: 1
+      - path: RigPelvis/RigRThigh/RigRCalf/RigRFoot/RigRToe11/RigRToe12
+        weight: 0
+      - path: RigPelvis/RigSpine1
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigLCollarbone
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigLCollarbone/RigLUpperarm
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigLCollarbone/RigLUpperarm/RigLForearm
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigLCollarbone/RigLUpperarm/RigLForearm/RigLPalm
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigLCollarbone/RigLUpperarm/RigLForearm/RigLPalm/RigLFinger1
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigLCollarbone/RigLUpperarm/RigLForearm/RigLPalm/RigLFinger1/RigLFinger2
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigLCollarbone/RigLUpperarm/RigLForearm/RigLPalm/RigLFinger1/RigLFinger2/RigLFinger3
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigLCollarbone/RigLUpperarm/RigLForearm/RigLPalm/RigLFinger1/RigLFinger2/RigLFinger3/RigLFinger4
+        weight: 0
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigLCollarbone/RigLUpperarm/RigLForearm/RigLPalm/RigLThumb1
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigLCollarbone/RigLUpperarm/RigLForearm/RigLPalm/RigLThumb1/RigLThumb2
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigLCollarbone/RigLUpperarm/RigLForearm/RigLPalm/RigLThumb1/RigLThumb2/RigLThumb3
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigLCollarbone/RigLUpperarm/RigLForearm/RigLPalm/RigLThumb1/RigLThumb2/RigLThumb3/RigLThumb4
+        weight: 0
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigNeck
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigNeck/RigHead
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigNeck/RigHead/RigHeadBone001
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigRCollarbone
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigRCollarbone/RigRUpperarm
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigRCollarbone/RigRUpperarm/RigRForearm
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigRCollarbone/RigRUpperarm/RigRForearm/RigRPalm
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigRCollarbone/RigRUpperarm/RigRForearm/RigRPalm/RigRFinger1
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigRCollarbone/RigRUpperarm/RigRForearm/RigRPalm/RigRFinger1/RigRFinger2
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigRCollarbone/RigRUpperarm/RigRForearm/RigRPalm/RigRFinger1/RigRFinger2/RigRFinger3
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigRCollarbone/RigRUpperarm/RigRForearm/RigRPalm/RigRFinger1/RigRFinger2/RigRFinger3/RigRFinger4
+        weight: 0
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigRCollarbone/RigRUpperarm/RigRForearm/RigRPalm/RigRThumb1
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigRCollarbone/RigRUpperarm/RigRForearm/RigRPalm/RigRThumb1/RigRThumb2
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigRCollarbone/RigRUpperarm/RigRForearm/RigRPalm/RigRThumb1/RigRThumb2/RigRThumb3
+        weight: 1
+      - path: RigPelvis/RigSpine1/RigSpine2/RigSpine3/RigRibcage/RigRCollarbone/RigRUpperarm/RigRForearm/RigRPalm/RigRThumb1/RigRThumb2/RigRThumb3/RigRThumb4
+        weight: 0
+      maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     isReadable: 0

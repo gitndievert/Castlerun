@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using SBK.Unity;
+﻿using UnityEngine;
 
 public class PlacementController : MonoBehaviour
 {
@@ -62,6 +59,7 @@ public class PlacementController : MonoBehaviour
         _placeObjectMeshRend = PlaceableObjectPrefab.GetComponentInChildren<MeshRenderer>();        
         _triggerBuild = true;
         _outsideGrid = outsidegrid;
+        CameraRotate.BuildCamMode = outsidegrid;
     }
 
     public void SetResource(ResourceType resource)
@@ -132,7 +130,7 @@ public class PlacementController : MonoBehaviour
         {
             if (_currObj != null)
             {
-                if (Vector3.Distance(_currObj.transform.position, _player.transform.position) > 20f) return;
+                if (Vector3.Distance(_currObj.transform.position, _player.transform.position) > 20f && !_outsideGrid) return;
 
                 PlayerCollision(false);
                 _currObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;
@@ -151,9 +149,17 @@ public class PlacementController : MonoBehaviour
                     int invcount = inv.GetCount(rt);
                     if (invcount > 0 && (invcount - build.PlacementCost >= 0))
                     {
-                        build.SetPlayer(_player);
-                        build.ConfirmPlacement();
-                        inv.Set(rt, -build.PlacementCost);
+                        //Confirm that placement can be made on build
+                        if (!build.ConfirmPlacement())
+                        {
+                            cancelBuild = true;
+                            UIManager.Instance.Messages.text = "You cannot build here, try again";
+                        }                    
+                        else
+                        {
+                            build.SetPlayer(_player);
+                            inv.Set(rt, -build.PlacementCost);
+                        }
                     }
                     else
                     {
@@ -175,7 +181,7 @@ public class PlacementController : MonoBehaviour
 
             }
             _currObj = null;            
-            LoadObject(PlaceableObjectPrefab);
+            LoadObject(PlaceableObjectPrefab, _outsideGrid);
             return;
         }
 

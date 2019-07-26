@@ -25,7 +25,17 @@ ModelImporter:
       might lower retargeting quality:\nNote: Activate translation DOF on avatar to
       improve retargeting quality.\n\t'RigRibcage' is inbetween humanoid transforms
       and has rotation animation that will be discarded.\n"
-    animationRetargetingWarnings: 
+    animationRetargetingWarnings: "\nRetargeting quality report for clip 'mixamo.com':\n\tLeftUpperArm
+      average position error 3.0 mm and maximum position error 5.1 mm at time 0:29
+      (78.4%) Frame 29\n\tLeftLowerArm average position error 2.0 mm and maximum position
+      error 3.5 mm at time 0:29 (78.4%) Frame 29\n\tLeftHand average position error
+      1.4 mm and maximum position error 3.5 mm at time 0:28 (75.7%) Frame 28\n\tRightUpperArm
+      average position error 3.0 mm and maximum position error 5.2 mm at time 0: 9
+      (24.3%) Frame 9\n\tRightLowerArm average position error 2.1 mm and maximum position
+      error 3.8 mm at time 0:27 (73.0%) Frame 27\n\tRightHand average position error
+      2.2 mm and maximum position error 4.4 mm at time 0:27 (73.0%) Frame 27\n\tHead
+      average position error 1.0 mm and maximum position error 1.8 mm at time 0:28
+      (75.7%) Frame 28\n"
     animationDoRetargetingWarnings: 1
     importAnimatedCustomProperties: 0
     importConstraints: 0
@@ -56,7 +66,7 @@ ModelImporter:
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000

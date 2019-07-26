@@ -39,14 +39,15 @@ public class OffensiveBuild : Build
 
     }
 
-    public override void ConfirmPlacement()
+    public override bool ConfirmPlacement()
     {
         base.ConfirmPlacement();
-        if(Projectile != null)
+        if (Projectile != null)
         {
             Fire();
         }
-            
+
+        return true;
     }
 
     public void Fire()

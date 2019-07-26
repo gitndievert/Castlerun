@@ -3,13 +3,8 @@
 [RequireComponent(typeof(Rigidbody))]
 public class CameraRotate : MonoBehaviour
 {
-    public Transform target;
+    public Transform target;    
 
-    public bool FreezeCamera
-    {
-        set { _rb.isKinematic = value; }
-    }
-    
     //Camera Settings
     public float targetHeight = 1.7f;
     public float distance = 5.0f;
@@ -35,6 +30,10 @@ public class CameraRotate : MonoBehaviour
     private Rigidbody _rb;
     private Rigidbody _targetRigidbody;
 
+    //Fixed Build Cam
+    private float b_dist_y = 13.75f;
+    private float b_rotation_x = 64.6f;
+      
     //Auto Cam
     // How fast the rig will move to keep up with target's position
     private float m_MoveSpeed = 3;
@@ -84,6 +83,8 @@ public class CameraRotate : MonoBehaviour
         if (_targetRigidbody == null && target != null)
             _targetRigidbody = target.GetComponent<Rigidbody>();
     }
+
+    public static bool BuildCamMode = false;
     
     /**
      * Camera logic on LateUpdate to only update after all character movement logic has been handled.
@@ -122,7 +123,7 @@ public class CameraRotate : MonoBehaviour
         _yDeg = ClampAngle(_yDeg, yMinLimit, yMaxLimit);
 
         // set camera rotation
-        Quaternion rotation = Quaternion.Euler(_yDeg, _xDeg, 0);
+        Quaternion rotation = Quaternion.Euler(BuildCamMode ? b_rotation_x : _yDeg, _xDeg, 0);
         _correctedDistance = _desiredDistance;
 
         // calculate desired camera position
@@ -155,7 +156,7 @@ public class CameraRotate : MonoBehaviour
         position = target.position - (rotation * Vector3.forward * _currentDistance + vTargetOffset);
 
         transform.rotation = rotation;
-        transform.position = position;
+        transform.position = new Vector3(position.x, BuildCamMode ? b_dist_y + position.y : position.y,position.z);
     }
 
     private static float ClampAngle(float angle, float min, float max)

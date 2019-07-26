@@ -28,10 +28,11 @@ public abstract class Build : BasePrefab, IBuild
         MaxHealth = Health;
     }
 
-    public virtual void ConfirmPlacement()
+    public virtual bool ConfirmPlacement()
     {
         _isPlaced = true;
-        TagPrefab("Build");                
+        TagPrefab("Build");
+        return _isPlaced;
     }
 
     public abstract bool SetResourceType(ResourceType type);
