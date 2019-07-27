@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: -724241541021319829}
   - component: {fileID: 3410138631332346923}
   - component: {fileID: 2197402741631013300}
+  - component: {fileID: 4679121284884910853}
   m_Layer: 0
   m_Name: Necromancer
   m_TagString: Npc
@@ -667,6 +668,14 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!222 &4679121284884910853
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2750229220499736087}
+  m_CullTransparentMesh: 0
 --- !u!1 &2783684166736639407
 GameObject:
   m_ObjectHideFlags: 0

@@ -127,6 +127,7 @@ MonoBehaviour:
   HealthText: {fileID: 0}
   EnableTroopBuilder: 0
   ConstructionTime: 10
+  PlacementDistance: 2
   Troops:
   - {fileID: 3710154189911815501, guid: b721e89ab386bd044ae686c19cccd397, type: 3}
   BuildArea: {fileID: 8088768754258402662}
@@ -162,7 +163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6650768802920326687}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.46, z: 0}
+  m_LocalPosition: {x: 0, y: -1.88, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1547467594100850647}
@@ -193,7 +194,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 45f52058e17d9a046b37eb255ccf96e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
