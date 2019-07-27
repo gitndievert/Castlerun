@@ -1,8 +1,22 @@
-﻿using System.Collections;
+﻿// ********************************************************************
+// CONFIDENTIAL - DO NOT DISTRIBUTE
+// COPYRIGHT 2019-2020 Wacky Potato Games, LLC. All Rights Reserved.
+// 
+// If you send, receive, or use this file for any purpose other than
+// internal use by Wacky Potato Games, it is without permission and an act of theft.
+// Report any misuse of this file immediately to contact@wackypotato.com
+// Misuse or failure to report misuse will subject you to legal action.
+// 
+// The intellectual and technical concepts contained herein are
+// proprietary and are protected by trade secret and/or copyright law.
+// Dissemination or reproduction of this material is forbidden.
+// ********************************************************************
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TroopFactory : Build
+public class TroopFactory : Build, ISelectable
 {
     #region Resource Cost
     public const int WOOD_COST = 10;
@@ -16,6 +30,8 @@ public class TroopFactory : Build
     /// The time it takes to build the structure
     /// </summary>
     public float ConstructionTime;
+
+    public float PlacementDistance = 2f;
 
     public Troop[] Troops;
     public BuildArea BuildArea;
@@ -137,9 +153,9 @@ public class TroopFactory : Build
         for (int i = 0; i < NumberToTrain; i++)
         {
             var randTroop = Troops[Random.Range(0, Troops.Length - 1)];            
-            var makeTroop = Instantiate(randTroop.gameObject, transform.position + (Vector3.forward * 2), Quaternion.identity);
+            var makeTroop = Instantiate(randTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);            
             //Come back
-            if(Player != null)
+            if (Player != null)
                 makeTroop.GetComponent<Troop>().points = Player.PlayerPad.ResourcePoints; //Might change all this later
 
             _trainedCounter++;

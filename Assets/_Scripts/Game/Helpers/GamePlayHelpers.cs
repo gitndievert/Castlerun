@@ -1,5 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// ********************************************************************
+// CONFIDENTIAL - DO NOT DISTRIBUTE
+// COPYRIGHT 2019-2020 Wacky Potato Games, LLC. All Rights Reserved.
+// 
+// If you send, receive, or use this file for any purpose other than
+// internal use by Wacky Potato Games, it is without permission and an act of theft.
+// Report any misuse of this file immediately to contact@wackypotato.com
+// Misuse or failure to report misuse will subject you to legal action.
+// 
+// The intellectual and technical concepts contained herein are
+// proprietary and are protected by trade secret and/or copyright law.
+// Dissemination or reproduction of this material is forbidden.
+// ********************************************************************
+
+using System.Collections;
 using UnityEngine;
 
 public static class GamePlayHelpers
@@ -25,7 +38,7 @@ public static class GamePlayHelpers
     /// <param name="duration"></param>
     /// <param name="intensity"></param>
     /// <returns></returns>
-    public static IEnumerator ShakeCamera(Camera camera, float duration, float intensity)
+    public static IEnumerator ShakeCamera(this Camera camera, float duration, float intensity)
     {
         Vector2 origPos = camera.transform.position;
         for (float t = 0.0f; t < duration; t += Time.deltaTime * intensity)

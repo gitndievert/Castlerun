@@ -10,7 +10,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{87BAD694-22AB-FDEE-852A-0A627AAF5DA2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -215,6 +216,7 @@
     <Compile Include="Assets\_Scripts\Game\Builds\PlacementController.cs" />
     <Compile Include="Assets\_Scripts\Game\Builds\Plans\Plans.cs" />
     <Compile Include="Assets\_Scripts\Game\Builds\SnapPoints.cs" />
+    <Compile Include="Assets\_Scripts\Game\Builds\Troops\Army\Fighter.cs" />
     <Compile Include="Assets\_Scripts\Game\Builds\Troops\Army\Necromancer.cs" />
     <Compile Include="Assets\_Scripts\Game\Builds\Troops\Troop.cs" />
     <Compile Include="Assets\_Scripts\Game\Builds\Troops\TroopFactory.cs" />
@@ -228,6 +230,7 @@
     <Compile Include="Assets\_Scripts\Game\Components\CamShake.cs" />
     <Compile Include="Assets\_Scripts\Game\Components\GravityWell.cs" />
     <Compile Include="Assets\_Scripts\Game\Components\IDamager.cs" />
+    <Compile Include="Assets\_Scripts\Game\Components\ISelectable.cs" />
     <Compile Include="Assets\_Scripts\Game\Components\ObjBar.cs" />
     <Compile Include="Assets\_Scripts\Game\Components\ParticleCleanup.cs" />
     <Compile Include="Assets\_Scripts\Game\Components\Projectile.cs" />
@@ -236,20 +239,21 @@
     <Compile Include="Assets\_Scripts\Game\Enums\CompanionType.cs" />
     <Compile Include="Assets\_Scripts\Game\Enums\GemTypes.cs" />
     <Compile Include="Assets\_Scripts\Game\Enums\ResourceType.cs" />
+    <Compile Include="Assets\_Scripts\Game\Global.cs" />
     <Compile Include="Assets\_Scripts\Game\Helpers\FlyCamera.cs" />
     <Compile Include="Assets\_Scripts\Game\Helpers\GamePlayHelpers.cs" />
     <Compile Include="Assets\_Scripts\Game\Helpers\TransformHelper.cs" />
     <Compile Include="Assets\_Scripts\Game\Managers\EventManager.cs" />
     <Compile Include="Assets\_Scripts\Game\Managers\GameManager.cs" />
     <Compile Include="Assets\_Scripts\Game\Managers\MenuManager.cs" />
-    <Compile Include="Assets\_Scripts\Game\Player\Global.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\ICharacter.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\Inventory.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\KeyBindings.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\MovementInput.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\Player.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\PlayerPad.cs" />
-    <Compile Include="Assets\_Scripts\Game\Player\PlayerText.cs" />
+    <Compile Include="Assets\_Scripts\Game\Player\PlayerText.Messages.cs" />
+    <Compile Include="Assets\_Scripts\Game\Player\PlayerText.Titles.cs" />
     <Compile Include="Assets\_Scripts\Game\Resource_Old\BaseResource.cs" />
     <Compile Include="Assets\_Scripts\Game\Resource_Old\Bust.cs" />
     <Compile Include="Assets\_Scripts\Game\Resource_Old\IResource.cs" />
@@ -260,6 +264,7 @@
     <Compile Include="Assets\_Scripts\Game\UI\TargetUI.cs" />
     <Compile Include="Assets\_Scripts\Game\UI\UIManager.cs" />
     <Compile Include="Assets\_Scripts\Settings\Settings.cs" />
+    <Compile Include="Assets\Scripts\DistroyModel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
