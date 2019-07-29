@@ -969,7 +969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a61e356236d9264c9160cac9a0ad4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crackedModel: {fileID: 6442064250894107342, guid: 89a385709b80a6543aff6a8f4b463f85,
+  crackedModel: {fileID: 5761900642498306543, guid: 89a385709b80a6543aff6a8f4b463f85,
     type: 3}
 --- !u!1 &4487753279505332291
 GameObject:
@@ -2423,11 +2423,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2945498390030256713}
     m_Modifications:
-    - target: {fileID: 3185765712011266218, guid: c4c1e96667ffc7448b4ae533d87f8302,
-        type: 3}
-      propertyPath: m_Name
-      value: Wall
-      objectReference: {fileID: 0}
     - target: {fileID: 1904253884799122105, guid: c4c1e96667ffc7448b4ae533d87f8302,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2483,6 +2478,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3185765712011266218, guid: c4c1e96667ffc7448b4ae533d87f8302,
+        type: 3}
+      propertyPath: m_Name
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 273380482035012704, guid: c4c1e96667ffc7448b4ae533d87f8302,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4050426375852392183, guid: c4c1e96667ffc7448b4ae533d87f8302,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264125659890943383, guid: c4c1e96667ffc7448b4ae533d87f8302,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102456739741780565, guid: c4c1e96667ffc7448b4ae533d87f8302,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6803990320726964855, guid: c4c1e96667ffc7448b4ae533d87f8302,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9181204044531495249, guid: c4c1e96667ffc7448b4ae533d87f8302,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8846585850148980309, guid: c4c1e96667ffc7448b4ae533d87f8302,
         type: 3}
       propertyPath: m_Convex
@@ -2493,37 +2523,7 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 273380482035012704, guid: c4c1e96667ffc7448b4ae533d87f8302,
-        type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3264125659890943383, guid: c4c1e96667ffc7448b4ae533d87f8302,
-        type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7951656377401407747, guid: c4c1e96667ffc7448b4ae533d87f8302,
-        type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9181204044531495249, guid: c4c1e96667ffc7448b4ae533d87f8302,
-        type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6102456739741780565, guid: c4c1e96667ffc7448b4ae533d87f8302,
-        type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050426375852392183, guid: c4c1e96667ffc7448b4ae533d87f8302,
-        type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6803990320726964855, guid: c4c1e96667ffc7448b4ae533d87f8302,
         type: 3}
       propertyPath: m_Convex
       value: 1

@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a61e356236d9264c9160cac9a0ad4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crackedModel: {fileID: 2853089506969708165, guid: 5f7a5887c634c9743ae065a7d70130e2,
+  crackedModel: {fileID: 1394325959284342197, guid: 5f7a5887c634c9743ae065a7d70130e2,
     type: 3}
 --- !u!1 &4923531935878007235
 GameObject:
@@ -162,7 +162,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 7384328630774979640, guid: 1167e2b3ab3963d45981d3f5b78e5cdc, type: 3}
 --- !u!1 &6655977115114709151
@@ -259,7 +259,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: -7508742584237898787, guid: 1167e2b3ab3963d45981d3f5b78e5cdc, type: 3}
 --- !u!1 &6703329122674086091
@@ -356,7 +356,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: -6208080743906942372, guid: 1167e2b3ab3963d45981d3f5b78e5cdc, type: 3}
 --- !u!1 &7188361077550396636
@@ -397,11 +397,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1735805664397639154}
     m_Modifications:
-    - target: {fileID: 1246882519065632058, guid: 36a5978649c41b34893e9db6e90ddc07,
-        type: 3}
-      propertyPath: m_Name
-      value: Stone_ramp
-      objectReference: {fileID: 0}
     - target: {fileID: 2816589059304714025, guid: 36a5978649c41b34893e9db6e90ddc07,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -456,6 +451,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246882519065632058, guid: 36a5978649c41b34893e9db6e90ddc07,
+        type: 3}
+      propertyPath: m_Name
+      value: Stone_ramp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5555495669100932413, guid: 36a5978649c41b34893e9db6e90ddc07,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1292136154026593031, guid: 36a5978649c41b34893e9db6e90ddc07,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1073572628736309205, guid: 36a5978649c41b34893e9db6e90ddc07,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
