@@ -2194,6 +2194,7 @@ RectTransform:
   m_LocalScale: {x: 0.7071343, y: 0.7071343, z: 0.7071343}
   m_Children:
   - {fileID: 1949150135}
+  - {fileID: 591531878}
   m_Father: {fileID: 1462091506}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3105,6 +3106,41 @@ MonoBehaviour:
   CastleSpawnPosition: {x: 211.1, y: 2, z: 358.9}
   CastleRotation: {x: 0, y: -180, z: 0, w: 0}
   SideResources: {fileID: 1730822416}
+--- !u!1 &591531877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591531878}
+  m_Layer: 5
+  m_Name: MiniMapRender
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &591531878
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591531877}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 359217151}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &624321556
 GameObject:
   m_ObjectHideFlags: 0
@@ -5591,11 +5627,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857534b65a2506d488e6e7492e8f068a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WoodWall: {fileID: 8208068511369443011, guid: 88c6b190e1953c44593f1a16d6bdc601,
+  WoodWall: {fileID: 2543357986072876719, guid: ce3313f25ddf62341a9e1fb23f0a923e,
     type: 3}
-  WoodFloor: {fileID: 5498626848652336081, guid: abbb0965f78e897478734c0045601418,
+  WoodFloor: {fileID: 7275474268219041069, guid: a5569e4373cef9a45811601800540512,
     type: 3}
-  WoodRamp: {fileID: 8664697776613789162, guid: 637a4facab1c4504f9b5c8062dc6a063,
+  WoodRamp: {fileID: 5436822143744326069, guid: 347f0c6a657386e45a71938d5169fd61,
     type: 3}
   RockWall: {fileID: 2300661592371690102, guid: e437ee786aa4038479fe158999460951,
     type: 3}
@@ -6369,7 +6405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1462091503
 MonoBehaviour:
   m_ObjectHideFlags: 0

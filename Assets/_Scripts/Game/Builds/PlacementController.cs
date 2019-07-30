@@ -259,9 +259,16 @@ public class PlacementController : MonoBehaviour
         {
             if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
             {
-                Debug.Log($"Hit point y {hit.point.y}");
-                Debug.Log($"Dist to ground{GetDistToGround()}");
+                //Debug.Log($"Hit point y {hit.point.y}");
+                //Debug.Log($"Dist to ground{GetDistToGround()}");
+
+                //EXPIRIMENT - Get render bounds from mesh rather than collider
                 float halfHeight = _currObj.GetComponent<Collider>().bounds.size.y / 2;
+
+                Debug.Log("Half Height: " + halfHeight);
+                //Don't need to put in the halfheight
+                //float halfHeight = 0f;
+
                 _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, Mathf.Round(hit.point.y) + halfHeight, Mathf.Round(hit.point.z) * SnapSize);
             }
         }
