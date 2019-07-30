@@ -18,5 +18,8 @@ using UnityEngine;
 
 public class Fighter : Troop, ISelectable
 {
-    
+    //Selectables
+    public bool IsSelected { get; set; }
+    public bool PreSelected { get; set; }
+    public Transform Transform => transform;
 }

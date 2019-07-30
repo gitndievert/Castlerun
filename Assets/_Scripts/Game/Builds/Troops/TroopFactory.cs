@@ -36,6 +36,12 @@ public class TroopFactory : Build, ISelectable
     public Troop[] Troops;
     public BuildArea BuildArea;
 
+
+    //Selectables
+    public bool IsSelected { get; set; }
+    public bool PreSelected { get; set; }
+    public Transform Transform => transform;
+
     /// <summary>
     /// This is the start timer for the initial Troops. Hi Jessia
     /// </summary>

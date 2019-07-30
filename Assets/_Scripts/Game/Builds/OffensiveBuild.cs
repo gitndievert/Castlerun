@@ -34,6 +34,11 @@ public class OffensiveBuild : Build, ISelectable
     protected override float BuildTime => _ConstructionTime;
     protected override ResourceType ResourceType => ResourceType.Metal;
 
+    //Selectables
+    public bool IsSelected { get; set; }
+    public bool PreSelected { get; set; }
+    public Transform Transform => transform;
+
     protected override void Start()
     {
         base.Start();

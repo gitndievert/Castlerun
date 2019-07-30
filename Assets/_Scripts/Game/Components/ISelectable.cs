@@ -12,8 +12,12 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using UnityEngine;
+
 public interface ISelectable
 {
-
+    bool IsSelected { get; set; }
+    bool PreSelected { get; set; } //remove
+    Transform Transform { get; } //remove
+    //bool IsWithinSelectionBounds(ISelectable selectable);
 }
-

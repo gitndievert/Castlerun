@@ -18,9 +18,17 @@ public class Plans : MonoBehaviour
 {
     [Header("Basic Build Models")]
     [Space(5)]
-    public GameObject Wall;
-    public GameObject Floor;
-    public GameObject Ramp;
+    public GameObject WoodWall;
+    public GameObject WoodFloor;
+    public GameObject WoodRamp;
+    [Space(5)]
+    public GameObject RockWall;
+    public GameObject RockFloor;
+    public GameObject RockRamp;
+    [Space(5)]
+    public GameObject MetalWall;
+    public GameObject MetalFloor;
+    public GameObject MetalRamp;
 
     [Header("Player Source Models")]
     [Space(5)]
@@ -35,6 +43,41 @@ public class Plans : MonoBehaviour
     public GameObject Cannon;
     public GameObject Catapult;
 
+
+    public GameObject GetPlans(ResourceType resource, string build)
+    {        
+        build = build.ToLower();
+        switch (resource)
+        {
+            case ResourceType.Wood:
+                if (build == "wall")
+                    return WoodWall;
+                if (build == "floor")
+                    return WoodFloor;
+                if (build == "ramp")
+                    return WoodRamp;
+                break;
+            case ResourceType.Rock:
+                if (build == "wall")
+                    return RockWall;
+                if (build == "floor")
+                    return RockFloor;
+                if (build == "ramp")
+                    return RockRamp;
+                break;
+            case ResourceType.Metal:
+                if (build == "wall")
+                    return MetalWall;
+                if (build == "floor")
+                    return MetalFloor;
+                if (build == "ramp")
+                    return MetalRamp;
+                break;
+
+        }
+
+        return null;
+    }
 
 
 }

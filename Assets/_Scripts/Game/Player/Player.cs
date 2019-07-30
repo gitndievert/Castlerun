@@ -32,6 +32,11 @@ public class Player : BasePrefab, IPlayer, ISelectable
     [Tooltip("For Testing Changes on Castles")]
     public CastleType CastleType = CastleType.None;
 
+    //Selectables
+    public bool IsSelected { get; set; }
+    public bool PreSelected { get; set; }
+    public Transform Transform => transform;
+
     /// <summary>
     /// Returns the current companion of the player
     /// </summary>
@@ -72,6 +77,7 @@ public class Player : BasePrefab, IPlayer, ISelectable
     private GameObject _offHand;                 
     private string _playerName;
     private BattleCursor _battleCursor;
+    private Plans _plans;
     
     
     private PlacementController _placementController;
@@ -120,6 +126,8 @@ public class Player : BasePrefab, IPlayer, ISelectable
             SetCompanion(CompanionType);
         }
 
+        _plans = GameManager.Instance.Plans;
+
     }
     
     public void Init(string name, int playernum)
@@ -141,12 +149,7 @@ public class Player : BasePrefab, IPlayer, ISelectable
         BuildSpeed = 10f;
         HitAmount = 10;        
     }
-
-    private Plans GetPlans()
-    {
-        return GameManager.Instance.Plans;
-    }
-
+    
     private ResourceType SwitchResource()
     {       
         if (_resourceIndex >= PlacementController.ResourceIndex.Length - 1)
@@ -198,7 +201,7 @@ public class Player : BasePrefab, IPlayer, ISelectable
                 {
                     //Annouce build mode on                
                     _placementController.SetGrid = true;
-                    _placementController.LoadObject(GetPlans().Wall);
+                    _placementController.LoadObject(_plans.GetPlans(ResourceType.Wood,"wall"));
                 }
                 else
                 {
@@ -222,29 +225,29 @@ public class Player : BasePrefab, IPlayer, ISelectable
                     UIManager.Instance.Messages.text = $"Building with {_selectedResource.ToString()}";
                 }
 
-                if (Input.GetKeyDown(KeyBindings.BuildKey1))
+                if (Input.GetKeyDown(KeyBindings.BuildKey1))                    
                 {
-                    _placementController.LoadObject(GetPlans().Wall);
+                    _placementController.LoadObject(_plans.GetPlans(_selectedResource, "wall"));
                 }
                 else if (Input.GetKeyDown(KeyBindings.BuildKey2))
                 {
-                    _placementController.LoadObject(GetPlans().Floor);
+                    _placementController.LoadObject(_plans.GetPlans(_selectedResource, "floor"));
                 }
                 else if (Input.GetKeyDown(KeyBindings.BuildKey3))
                 {
-                    _placementController.LoadObject(GetPlans().Ramp);
+                    _placementController.LoadObject(_plans.GetPlans(_selectedResource, "ramp"));
                 }
                 else if (Input.GetKeyDown(KeyCode.B))
                 {
-                    _placementController.LoadObject(GetPlans().Barracks, true);
+                    _placementController.LoadObject(_plans.Barracks, true);
                 }
                 else if (Input.GetKeyDown(KeyCode.H))
                 {
-                    _placementController.LoadObject(GetPlans().ResourceDepot, true);
+                    _placementController.LoadObject(_plans.ResourceDepot, true);
                 }
                 else if (Input.GetKeyDown(KeyCode.T))
                 {
-                    _placementController.LoadObject(GetPlans().WizardSpire, true);
+                    _placementController.LoadObject(_plans.WizardSpire, true);
                 }
             }
         }
