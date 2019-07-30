@@ -16,10 +16,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fighter : Troop, ISelectable
+public class Fighter : Troop
 {
-    //Selectables
-    public bool IsSelected { get; set; }
-    public bool PreSelected { get; set; }
-    public Transform Transform => transform;
+  
 }

@@ -22,28 +22,31 @@ public class Selectable : MonoBehaviour
     public Color SelectionBoxColor;
     public Color BorderColor;
 
-    private bool _isSelecting = false;
+    public static bool IsSelecting = false;
     private Vector3 mousePosition1;
 
     private void Update()
     {
         //Start selection
-        if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
+        if (Global.BuildMode || Global.BattleMode)
         {
-            _isSelecting = true;
-            mousePosition1 = Input.mousePosition;
-        }
-     
-        //Stop Selection
-        if (Input.GetMouseButtonUp(KeyBindings.LEFT_MOUSE_BUTTON))
-        {
-            _isSelecting = false;
+            if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
+            {
+                IsSelecting = true;
+                mousePosition1 = Input.mousePosition;               
+            }
+
+            //Stop Selection
+            if (Input.GetMouseButtonUp(KeyBindings.LEFT_MOUSE_BUTTON))
+            {
+                IsSelecting = false;
+            }
         }
     }
 
     private void OnGUI()
     {
-        if (!_isSelecting) return;               
+        if (!IsSelecting) return;               
         var rect = SelectionBox.GetScreenRect(mousePosition1, Input.mousePosition);        
         SelectionBox.DrawScreenRect(rect, SelectionBoxColor);        
         SelectionBox.DrawScreenRectBorder(rect, 2, BorderColor);
@@ -51,12 +54,14 @@ public class Selectable : MonoBehaviour
 
     public bool IsWithinSelectionBounds(GameObject gameObject)
     {
-        if (!_isSelecting) return false;
+        if (!IsSelecting) return false;       
 
         var camera = Camera.main;
         var viewportBounds =
             SelectionBox.GetViewportBounds(camera, mousePosition1, Input.mousePosition);
 
-        return viewportBounds.Contains(camera.WorldToViewportPoint(gameObject.transform.position));
+        bool insideBox = viewportBounds.Contains(camera.WorldToViewportPoint(gameObject.transform.position));        
+
+        return insideBox && gameObject.GetComponent<ISelectable>() != null;        
     }
 }

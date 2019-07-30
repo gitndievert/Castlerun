@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class Player : BasePrefab, IPlayer, ISelectable
+public class Player : BasePrefab, IPlayer
 {
     [Header("Basic Player Properties")]
     public float MoveSpeed;
@@ -31,11 +31,6 @@ public class Player : BasePrefab, IPlayer, ISelectable
     public CompanionType CompanionType = CompanionType.None;
     [Tooltip("For Testing Changes on Castles")]
     public CastleType CastleType = CastleType.None;
-
-    //Selectables
-    public bool IsSelected { get; set; }
-    public bool PreSelected { get; set; }
-    public Transform Transform => transform;
 
     /// <summary>
     /// Returns the current companion of the player
@@ -171,7 +166,7 @@ public class Player : BasePrefab, IPlayer, ISelectable
         //Temporary, work out the details for build mappings later
         MovementInput.Lock = IsDead;
 
-        if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode)
+        if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode && !Selectable.IsSelecting)
         {
             _movement.Swing();
         }

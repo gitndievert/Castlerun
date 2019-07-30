@@ -43,9 +43,12 @@ public partial class UIManager : PSingle<UIManager>
 
     public TextMeshProUGUI Messages;
 
+    public Selectable SelectableComponent;
+
     protected override void PAwake()
     {
-        
+        if (SelectableComponent == null)
+            SelectableComponent = GetComponent<Selectable>();
     }
 
     protected override void PDestroy()

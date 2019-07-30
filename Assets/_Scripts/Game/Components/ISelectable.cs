@@ -16,8 +16,7 @@ using UnityEngine;
 
 public interface ISelectable
 {
-    bool IsSelected { get; set; }
-    bool PreSelected { get; set; } //remove
-    Transform Transform { get; } //remove
-    //bool IsWithinSelectionBounds(ISelectable selectable);
+    bool IsSelected { get; set; }    
+    void UnSelect();
+    void Select();
 }

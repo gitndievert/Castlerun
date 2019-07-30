@@ -14,16 +14,19 @@
 
 using UnityEngine;
 
-public class OffensiveBuild : Build, ISelectable
+public class OffensiveBuild : Build
 {
     public AudioClip[] FireSounds;    
     public GameObject Projectile;
     public GameObject FireEffect;
 
+    [Header("Projectile Properties")]
     public float FireTimer = 0.3f;
     public float FireRate = 0.5f;
     public float FirePower = 5.5f;
     public Transform FirePosition;
+
+    [Space(5)]
     [HideInInspector]
     public bool IsFiring = false;
 
@@ -33,11 +36,6 @@ public class OffensiveBuild : Build, ISelectable
 
     protected override float BuildTime => _ConstructionTime;
     protected override ResourceType ResourceType => ResourceType.Metal;
-
-    //Selectables
-    public bool IsSelected { get; set; }
-    public bool PreSelected { get; set; }
-    public Transform Transform => transform;
 
     protected override void Start()
     {

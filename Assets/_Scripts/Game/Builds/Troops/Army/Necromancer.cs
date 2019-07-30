@@ -16,10 +16,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Necromancer : Troop, ISelectable
-{
-    //Selectables
-    public bool IsSelected { get; set; }
-    public bool PreSelected { get; set; }
-    public Transform Transform => transform;
+public class Necromancer : Troop
+{      
+
 }
