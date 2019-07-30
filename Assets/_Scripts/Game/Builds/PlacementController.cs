@@ -246,8 +246,7 @@ public class PlacementController : MonoBehaviour
         if (Vector3.Distance(_currObj.transform.position, _player.transform.position) > 15f)
         {
             Vector3 playerP = _player.transform.position;
-            _currObj.transform.position = new Vector3(playerP.x,playerP.y + GetDistToGround(), playerP.z + 3f);
-            //_currObj.transform.position = _currObj.transform.position + Vector3.back;
+            _currObj.transform.position = new Vector3(playerP.x,playerP.y + GetDistToGround(), playerP.z + 3f);            
         }
     }   
  
@@ -259,9 +258,11 @@ public class PlacementController : MonoBehaviour
         {
             if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
             {
-                Debug.Log($"Hit point y {hit.point.y}");
-                Debug.Log($"Dist to ground{GetDistToGround()}");
-                float halfHeight = _currObj.GetComponent<Collider>().bounds.size.y / 2;
+                //float halfHeight = _currObj.GetComponent<Collider>().bounds.size.y / 2;
+                //float halfHeight = GetDistToGround() > 0.35f ? GetDistToGround() : 0f;                
+                
+                //EXPLANATION: Removed the half height, it appears to counterbalance on y. Rounded off y instead and that works by normalizing height
+                float halfHeight = 0f;
                 _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, Mathf.Round(hit.point.y) + halfHeight, Mathf.Round(hit.point.z) * SnapSize);
             }
         }

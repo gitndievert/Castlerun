@@ -35,6 +35,7 @@ public class BasicBuild : Build
 
     private ResourceType _pickType;
     private Renderer _rend;
+    
 
     protected override void Awake()
     {
