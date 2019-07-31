@@ -19,4 +19,5 @@ public interface IBuild
     void SetHit(int amount);        
     void SetPlayer(Player player);
     int PlacementCost { get; set; }
+    bool IsBasic { get; set; }
 }

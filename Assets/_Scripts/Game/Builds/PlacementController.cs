@@ -174,7 +174,7 @@ public class PlacementController : MonoBehaviour
                         else
                         {
                             build.SetPlayer(_player);
-                            inv.Set(rt, -build.PlacementCost);
+                            inv.Set(rt, -build.PlacementCost);                            
                         }
                     }
                     else

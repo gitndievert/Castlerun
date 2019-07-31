@@ -153,10 +153,14 @@ public class TroopFactory : Build
         for (int i = 0; i < NumberToTrain; i++)
         {
             var randTroop = Troops[Random.Range(0, Troops.Length - 1)];            
-            var makeTroop = Instantiate(randTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);            
+            var makeTroop = Instantiate(randTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);
             //Come back
             if (Player != null)
+            {
                 makeTroop.GetComponent<Troop>().points = Player.PlayerPad.ResourcePoints; //Might change all this later
+                //Parent to Player Builds
+                makeTroop.transform.parent = Player.PlayerWorldItems.transform;
+            }
 
             _trainedCounter++;
         }

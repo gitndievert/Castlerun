@@ -17,8 +17,8 @@ using UnityEngine;
 
 public abstract class Troop : BasePrefab, ICharacter, ISelectable
 {
-    [Header("All the points that this Troop will Follow")]
-    public Transform[] points;
+    [Header("All the waypoints that this Troop will follow")]
+    public Transform[] points;    
 
     public Light SelectionTarget;
 

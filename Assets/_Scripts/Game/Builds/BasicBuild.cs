@@ -45,7 +45,8 @@ public class BasicBuild : Build
     {
         base.Start();
         SnapPoints = GetComponents<SnapPoints>().ToList();
-        _rend = GetComponent<Renderer>();        
+        _rend = GetComponent<Renderer>();
+        IsBasic = true;
     }
 
     public override bool SetResourceType(ResourceType type)

@@ -22,6 +22,8 @@ public abstract class Build : BasePrefab, IBuild
 
     public int PlacementCost { get; set; }
 
+    public bool IsBasic { get; set; }
+
     protected bool _isPlaced = false;
     protected Player Player = null;
 
@@ -36,6 +38,7 @@ public abstract class Build : BasePrefab, IBuild
     {                    
         if (Health == 0) Health = 20;        
         MaxHealth = Health;
+        IsBasic = false;
     }
 
     public virtual bool ConfirmPlacement()
