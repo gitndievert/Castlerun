@@ -25,6 +25,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     //Selectable
     public bool IsSelected { get; set; }
 
+    public GameObject GameObject => gameObject;
+
     protected static Color SelectedColor = Color.green;
     protected static Color DamageColor = Color.red;
 
@@ -33,14 +35,18 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         SelectionTargetStatus(false);
     }
 
+    private void OnMouseDown()
+    {
+        if(Global.BattleMode && !IsSelected)
+            Select();        
+    }
+
     //No Idea what to do, maybe create another BasePrefab class for this???
     protected virtual void Update()
     {
         //For Selectable Troops
-        if (UIManager.Instance.SelectableComponent.IsWithinSelectionBounds(gameObject) && !IsSelected)
-        {
-            Select();   
-        }
+        if (UIManager.Instance.SelectableComponent.IsWithinSelectionBounds(gameObject) && !IsSelected)        
+            Select();           
     }
 
     public void UnSelect()
@@ -49,6 +55,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         {
             IsSelected = false;
             SelectionTargetStatus(false);
+            UIManager.Instance.SelectableComponent.ClearList(this);
         }
     }
 
@@ -59,6 +66,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             IsSelected = true;
             Debug.Log("Hit on " + gameObject.name);
             SelectionTargetStatus(true, SelectedColor);
+            UIManager.Instance.SelectableComponent.UpdateList(this);
         }
     }
     

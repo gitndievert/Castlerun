@@ -208,7 +208,14 @@ public class Player : BasePrefab, IPlayer
 
             }
 
-            if (Global.BuildMode)
+            //Special Actions in **BATTLE MODE**
+            if(Global.BattleMode)
+            {
+                if(Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Selectable.IsSelecting)
+                    UIManager.Instance.SelectableComponent.ClearList();
+            }
+            //Special Actions in $$BUILD MODE$$
+            else if (Global.BuildMode)
             {
                 //TODO: Need something to manage all the Plans in a Planmanager or something similar
                 //The manager will handle both generic, and complex plans
@@ -247,7 +254,7 @@ public class Player : BasePrefab, IPlayer
             }
         }
                        
-
+        //OTHER ACTIONS
         if (Input.GetKeyDown(KeyCode.F))
         {
             if (!IsDead)
@@ -280,6 +287,8 @@ public class Player : BasePrefab, IPlayer
         {
             CamShake.Shake(1f, 0.5f);
         }    
+
+        //END OTHER ACTIONS
         
     }   
 

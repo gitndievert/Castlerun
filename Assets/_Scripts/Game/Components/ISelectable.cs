@@ -19,4 +19,5 @@ public interface ISelectable
     bool IsSelected { get; set; }    
     void UnSelect();
     void Select();
+    GameObject GameObject { get; }
 }

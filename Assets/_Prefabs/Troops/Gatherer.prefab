@@ -832,6 +832,7 @@ GameObject:
   - component: {fileID: 3710154189911815502}
   - component: {fileID: 3710154189911815501}
   - component: {fileID: 8462511514284035109}
+  - component: {fileID: 250135939591595503}
   m_Layer: 0
   m_Name: Gatherer
   m_TagString: Npc
@@ -939,6 +940,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &250135939591595503
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3710154189911815500}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.0873451
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9370929, z: 0}
 --- !u!1 &3710162289663270626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,7 +1957,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6559098, guid: 620e80b629f538f4b82aa6492946a77e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 620e80b629f538f4b82aa6492946a77e, type: 3}
 --- !u!4 &5047968893162967092 stripped
 Transform:

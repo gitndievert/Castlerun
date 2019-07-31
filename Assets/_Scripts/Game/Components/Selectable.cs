@@ -19,6 +19,8 @@ using UnityEngine;
 
 public class Selectable : MonoBehaviour
 {
+    public List<GameObject> SelectionList = new List<GameObject>();
+    
     public Color SelectionBoxColor;
     public Color BorderColor;
 
@@ -63,5 +65,21 @@ public class Selectable : MonoBehaviour
         bool insideBox = viewportBounds.Contains(camera.WorldToViewportPoint(gameObject.transform.position));        
 
         return insideBox && gameObject.GetComponent<ISelectable>() != null;        
+    }
+
+    public void UpdateList(ISelectable selection)
+    {
+        SelectionList.Add(selection.GameObject);
+    }
+
+    public void ClearList()
+    {
+        if (SelectionList.Count > 0)
+            SelectionList.Clear();
+    }
+
+    public void ClearList(ISelectable selection)
+    {
+        SelectionList.Remove(selection.GameObject);
     }
 }

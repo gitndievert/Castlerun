@@ -17,7 +17,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CameraRotate : MonoBehaviour
 {
-    public Transform target;    
+    public Transform target;
+
+    public bool LookWithLeftMouseButton = false;
 
     //Camera Settings
     public float targetHeight = 1.7f;
@@ -115,7 +117,8 @@ public class CameraRotate : MonoBehaviour
         // If either mouse buttons are down, let the mouse govern camera position
         if (GUIUtility.hotControl == 0)
         {
-            if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
+            if ((LookWithLeftMouseButton && Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON)) || 
+                Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
             {
                 _xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
                 _yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
