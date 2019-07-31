@@ -2809,11 +2809,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   LookWithLeftMouseButton: 0
-  targetHeight: 2
+  targetHeight: 2.5
   distance: 0
   offsetFromWall: 0.1
   maxDistance: 20
-  minDistance: 3
+  minDistance: 5
   speedDistance: 5
   xSpeed: 120
   ySpeed: 120
@@ -2825,18 +2825,6 @@ MonoBehaviour:
   collisionLayers:
     serializedVersion: 2
     m_Bits: 818
---- !u!114 &487774257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 487774255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0e80205d92b09e40942b3811fed3038, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &498057644
 GameObject:
   m_ObjectHideFlags: 0
@@ -4292,6 +4280,24 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.125, y: 0.043, z: 0.46500003}
   m_TimeToStationary: 0.5
+--- !u!1 &842770418 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: baec086904791744185aaa07a6cf55c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 487774254}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &842770423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842770418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0e80205d92b09e40942b3811fed3038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &863225506
 PrefabInstance:
   m_ObjectHideFlags: 0
