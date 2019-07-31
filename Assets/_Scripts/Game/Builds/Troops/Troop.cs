@@ -38,6 +38,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     private void Start()
     {
         SelectionTargetStatus(false);
+        MaxHealth = Health;
     }
 
     private void OnMouseDown()

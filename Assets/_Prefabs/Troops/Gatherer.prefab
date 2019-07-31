@@ -910,6 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 0
+  HealthBar: {fileID: 0}
   DestroySound: {fileID: 0}
   HealthText: {fileID: 0}
   points:
@@ -919,6 +920,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   SelectionTarget: {fileID: 5047968893961185192}
+  SelectionCall: []
+  Acknowledgement: []
 --- !u!195 &8462511514284035109
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -21,16 +21,12 @@ public abstract class BasePrefab : MonoBehaviour
     /// Health Tracker for all Base Prefabs
     /// </summary>
     public int Health;
-    /// <summary>
-    /// Progress Bar for Troops
-    /// </summary>
-    public ProgressBar HealthBar;
 
     public AudioClip DestroySound;
     public TextMeshPro HealthText;
 
     protected int MaxHealth;
-
+    
     protected PlayerUI PlayerUI
     {
         get
@@ -49,9 +45,9 @@ public abstract class BasePrefab : MonoBehaviour
 
     protected virtual void Awake()
     {
-      
-    }
-    
+             
+    }   
+
     protected void TagPrefab(string tag)
     {
         transform.tag = tag;
@@ -84,11 +80,7 @@ public abstract class BasePrefab : MonoBehaviour
     {
         if (Health - amount > 0)
         {
-            Health -= amount;            
-            if(HealthBar != null)
-            {
-
-            }
+            Health -= amount;                        
         }
         else
         {
