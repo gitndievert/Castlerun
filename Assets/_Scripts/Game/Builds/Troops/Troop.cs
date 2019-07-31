@@ -27,8 +27,13 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public GameObject GameObject => gameObject;
 
-    protected static Color SelectedColor = Color.green;
-    protected static Color DamageColor = Color.red;
+    protected static readonly Color SelectedColor = Color.green;
+    protected static readonly Color DamageColor = Color.red;
+    
+    #region AudioClips For Troops
+    public AudioClip[] SelectionCall;
+    public AudioClip[] Acknowledgement;
+    #endregion
 
     private void Start()
     {
@@ -83,4 +88,9 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         SelectionTarget.color = SelectedColor;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        //Come Back here!
+        if (collision.transform.tag != "Blah") return;
+    }
 }
