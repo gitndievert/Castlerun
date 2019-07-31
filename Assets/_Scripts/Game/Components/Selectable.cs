@@ -30,7 +30,10 @@ public class Selectable : MonoBehaviour
     private void Update()
     {
         //Start selection
-        if (Global.BuildMode || Global.BattleMode)
+
+        //NOTE: Removed selection reticle from BuildMode for now
+        //COME BACK!!!
+        if (/*Global.BuildMode || */Global.BattleMode)
         {
             if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
             {
