@@ -1209,6 +1209,7 @@ GameObject:
   - component: {fileID: 706162164831775572}
   - component: {fileID: -482309525190335055}
   - component: {fileID: -2392940468147617419}
+  - component: {fileID: 7703449772116736736}
   m_Layer: 0
   m_Name: Knight_Player
   m_TagString: Player
@@ -1420,6 +1421,19 @@ MonoBehaviour:
     type: 3}
   Distance: 0
   CursorOn: 0
+--- !u!65 &7703449772116736736
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507808357}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.9152814, z: 1}
+  m_Center: {x: 0, y: 0.97498214, z: 0}
 --- !u!1 &1511076747
 GameObject:
   m_ObjectHideFlags: 0
