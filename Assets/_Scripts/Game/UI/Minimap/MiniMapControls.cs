@@ -33,10 +33,11 @@ public class MiniMapControls : MonoBehaviour
 
     [SerializeField]
     private float _zoomFactorIncrement = 20f;
+    [SerializeField]
+    private readonly bool _camFollow = false;
 
     private Vector3 _origPos;    
-    private Transform _cameraTransformParent;
-    private bool _camFollow = false;
+    private Transform _cameraTransformParent;    
 
     public static Transform PlayerTransform;
 

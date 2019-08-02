@@ -2507,7 +2507,7 @@ MonoBehaviour:
   MiniMapCamera: {fileID: 1521137909}
   MaxZoomFactor: 174
   MinZoomFactor: 60
-  _zoomFactorInrement: 20
+  _zoomFactorIncrement: 20
 --- !u!222 &359217153
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9120,6 +9120,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower_1
       objectReference: {fileID: 0}
+    - target: {fileID: 128088, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 453206, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 99.77676
@@ -9199,6 +9203,14 @@ PrefabInstance:
     - target: {fileID: 13714620, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
       propertyPath: m_AABB.m_Extent.z
       value: 5.0000963
+      objectReference: {fileID: 0}
+    - target: {fileID: 170780, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 109126, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
