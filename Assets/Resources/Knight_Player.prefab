@@ -1202,7 +1202,6 @@ GameObject:
   - component: {fileID: 1507808365}
   - component: {fileID: 1507808364}
   - component: {fileID: 1507808363}
-  - component: {fileID: 1507808358}
   - component: {fileID: 1507808359}
   - component: {fileID: 1507808360}
   - component: {fileID: 1507808361}
@@ -1274,33 +1273,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1507808358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1507808357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 857534b65a2506d488e6e7492e8f068a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WoodWall: {fileID: 0}
-  WoodFloor: {fileID: 0}
-  WoodRamp: {fileID: 0}
-  RockWall: {fileID: 0}
-  RockFloor: {fileID: 0}
-  RockRamp: {fileID: 0}
-  MetalWall: {fileID: 0}
-  MetalFloor: {fileID: 0}
-  MetalRamp: {fileID: 0}
-  ResourceDepot: {fileID: 0}
-  Barracks: {fileID: 0}
-  WizardSpire: {fileID: 0}
-  ArcherRange: {fileID: 0}
-  Cannon: {fileID: 0}
-  Catapult: {fileID: 0}
 --- !u!114 &1507808359
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -24,15 +24,12 @@ public class RoomPortal : MonoBehaviour
     [Space(10)]
     public WarpType WarpType = WarpType.Entrance;
 
-    private Collider _col;
-    private Castle _attachedCastle;      
+    private Collider _col;    
     
     private void Awake()
     {
         _col = GetComponent<Collider>();
-        _col.isTrigger = true;
-        _attachedCastle = GetComponentInParent<Castle>();
-        _attachedCastle.InnerCastle.SetActive(false);
+        _col.isTrigger = true;        
     }
    
     /// <summary>
