@@ -264,8 +264,6 @@ public class PlacementController : MonoBehaviour
 
                 //EXPIRIMENT - Get render bounds from mesh rather than collider
                 float halfHeight = _currObj.GetComponent<Collider>().bounds.size.y / 2;
-
-                Debug.Log("Half Height: " + halfHeight);
                 //Don't need to put in the halfheight
                 //float halfHeight = 0f;
 
