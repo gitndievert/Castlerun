@@ -32,7 +32,7 @@ public class MiniMapControls : MonoBehaviour
     public float MinZoomFactor = 60f;
 
     [SerializeField]
-    private float _zoomFactorInrement = 20f;
+    private float _zoomFactorIncrement = 20f;
 
     private Vector3 _origPos;    
     private Transform _cameraTransformParent;
@@ -44,7 +44,7 @@ public class MiniMapControls : MonoBehaviour
     {
         set {
             if(value % 2 == 0 && value > 0f && value <= 160f)
-                _zoomFactorInrement = value;
+                _zoomFactorIncrement = value;
         }
     }
     
@@ -73,21 +73,22 @@ public class MiniMapControls : MonoBehaviour
 
     public void ZoomIn()
     {
-        if ((MiniMapCamera.orthographicSize - _zoomFactorInrement) <= MinZoomFactor) return;
+        if ((MiniMapCamera.orthographicSize - _zoomFactorIncrement) <= MinZoomFactor) return;
         MiniMapCamera.transform.parent = PlayerTransform;        
-        MiniMapCamera.orthographicSize -= _zoomFactorInrement;
-        MiniMapCamera.ScreenToWorldPoint(new Vector2(PlayerTransform.position.x, PlayerTransform.position.z));
+        MiniMapCamera.orthographicSize -= _zoomFactorIncrement;
+        //Need to COME BACK and position this correctly
+        MiniMapCamera.ScreenToWorldPoint(new Vector2(PlayerTransform.position.x * 2, PlayerTransform.position.z * 2));
     }
 
     public void ZoomOut()
     {
-        if ((MiniMapCamera.orthographicSize + _zoomFactorInrement) >= MaxZoomFactor)
+        if ((MiniMapCamera.orthographicSize + _zoomFactorIncrement) >= MaxZoomFactor)
         {
             MiniMapCamera.transform.parent = _cameraTransformParent;
             MiniMapCamera.transform.position = _origPos;
             return;
         }
             
-        MiniMapCamera.orthographicSize += _zoomFactorInrement;
+        MiniMapCamera.orthographicSize += _zoomFactorIncrement;
     }
 }
