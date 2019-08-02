@@ -19,9 +19,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 /**
- * For future additions
+ * For future additions for general extensions
  */
-public static class Extensions
+public static partial class Extensions
 {
     public static string SetupForClass(this string setup, string another)
     {

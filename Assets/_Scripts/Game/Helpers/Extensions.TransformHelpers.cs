@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public static class TransformHelper
+public static partial class Extensions
 {
 
     /// <summary>

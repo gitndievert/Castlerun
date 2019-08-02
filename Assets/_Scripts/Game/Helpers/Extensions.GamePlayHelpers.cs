@@ -15,7 +15,7 @@
 using System.Collections;
 using UnityEngine;
 
-public static class GamePlayHelpers
+public static partial class Extensions
 {
     /// <summary>
     /// Extention method that pulls a random chance on a fixed amount
