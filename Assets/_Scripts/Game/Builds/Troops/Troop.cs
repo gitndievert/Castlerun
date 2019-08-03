@@ -43,7 +43,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     private void OnMouseDown()
     {
-        if(Global.BattleMode && !IsSelected)
+        if(!IsSelected)
             Select();        
     }
 

@@ -85,8 +85,8 @@ public class MiniMapControls : MonoBehaviour
     {
         if ((MiniMapCamera.orthographicSize + _zoomFactorIncrement) >= MaxZoomFactor)
         {
-            MiniMapCamera.transform.parent = _cameraTransformParent;
-            MiniMapCamera.transform.position = _origPos;
+            //MiniMapCamera.transform.parent = _cameraTransformParent;
+            //MiniMapCamera.transform.position = _origPos;
             return;
         }
             

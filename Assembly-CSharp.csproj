@@ -10,8 +10,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{87BAD694-22AB-FDEE-852A-0A627AAF5DA2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -253,9 +252,9 @@
     <Compile Include="Assets\_Scripts\Game\Enums\ResourceType.cs" />
     <Compile Include="Assets\_Scripts\Game\Global.cs" />
     <Compile Include="Assets\_Scripts\Game\Helpers\Extensions.cs" />
-    <Compile Include="Assets\_Scripts\Game\Helpers\FlyCamera.cs" />
     <Compile Include="Assets\_Scripts\Game\Helpers\Extensions.GamePlayHelpers.cs" />
     <Compile Include="Assets\_Scripts\Game\Helpers\Extensions.TransformHelpers.cs" />
+    <Compile Include="Assets\_Scripts\Game\Helpers\FlyCamera.cs" />
     <Compile Include="Assets\_Scripts\Game\Managers\EventManager.cs" />
     <Compile Include="Assets\_Scripts\Game\Managers\GameManager.cs" />
     <Compile Include="Assets\_Scripts\Game\Managers\MenuManager.cs" />

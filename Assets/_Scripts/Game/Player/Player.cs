@@ -129,7 +129,7 @@ public class Player : BasePrefab, IPlayer
     {
         PlayerName = name;
         PlayerNumber = playernum;
-        Global.BattleMode = false;
+        //Global.BattleMode = false;
         MiniMapControls.PlayerTransform = transform;
     }
  

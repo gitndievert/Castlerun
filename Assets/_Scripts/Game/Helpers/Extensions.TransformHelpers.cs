@@ -5,6 +5,7 @@ using System;
 
 public static partial class Extensions
 {
+    #region Transform Distance Checks
 
     /// <summary>
     /// Distance between two transforms in world space
@@ -43,6 +44,7 @@ public static partial class Extensions
         return dist < amount;
     }
 
+    #endregion
 
     #region Tag Itteration on GameObjects
     /// <summary>
@@ -73,8 +75,7 @@ public static partial class Extensions
     }    
 
     #endregion
-
-
+    
     #region Extension Methods for Transforms
 
     /// <summary>

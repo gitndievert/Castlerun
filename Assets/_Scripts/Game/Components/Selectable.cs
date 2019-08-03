@@ -29,24 +29,19 @@ public class Selectable : MonoBehaviour
 
     private void Update()
     {
-        //Start selection
-
-        //NOTE: Removed selection reticle from BuildMode for now
-        //COME BACK!!!
-        if (/*Global.BuildMode || */Global.BattleMode)
+        //Start selection        
+        if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
         {
-            if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
-            {
-                IsSelecting = true;
-                mousePosition1 = Input.mousePosition;               
-            }
-
-            //Stop Selection
-            if (Input.GetMouseButtonUp(KeyBindings.LEFT_MOUSE_BUTTON))
-            {
-                IsSelecting = false;
-            }
+            IsSelecting = true;
+            mousePosition1 = Input.mousePosition;               
         }
+
+        //Stop Selection
+        if (Input.GetMouseButtonUp(KeyBindings.LEFT_MOUSE_BUTTON))
+        {
+            IsSelecting = false;
+        }
+        
     }
 
     private void OnGUI()
