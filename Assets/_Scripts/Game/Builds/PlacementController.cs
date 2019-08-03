@@ -137,9 +137,12 @@ public class PlacementController : MonoBehaviour
             {
                 BuildMode = false;
             }
-        }       
+        }
 
-        _rotating = RotateFromMouseWheel();
+        //Don't allow rotations on non-basics
+        if (!_outsideGrid)
+            _rotating = RotateFromMouseWheel();
+
         LockCursorPos();
 
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON) && PlaceableObjectPrefab != null)

@@ -167,101 +167,84 @@ public class Player : BasePrefab, IPlayer
         //Temporary, work out the details for build mappings later
         MovementInput.Lock = IsDead;
 
-        if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode && !Selectable.IsSelecting)
+        //Will probably have this only when a target is in the way or something
+        /*if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode && !Selectable.IsSelecting)
         {
             _movement.Swing();
-        }
+        }*/
 
-        if (Input.GetKeyDown(KeyBindings.BattleToggle))
+
+        if (Input.GetKeyDown(KeyCode.Q))
         {
+            Global.BuildMode = !Global.BuildMode;
+            _battleCursor.Off();
+
             if (Global.BuildMode)
             {
-                UIManager.Instance.Messages.text = $"Cannot engage battlemode in build mode";
+                //Annouce build mode on                
+                _placementController.SetGrid = true;
+                _placementController.LoadObject(_plans.GetPlans(ResourceType.Wood, "wall"));
             }
             else
             {
-                Global.BattleMode = !Global.BattleMode;
-                _battleCursor.Toggle();
-                string status = Global.BattleMode ? "ON" : "OFF";
-                UIManager.Instance.Messages.text = $"Battle Mode {status}";
+                //Annouce build mode off                
+                CameraRotate.BuildCamMode = false;
+                _placementController.SetGrid = false;
+                _placementController.ClearObject();
             }
+
         }
-        else
+
+        if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Selectable.IsSelecting)
+            UIManager.Instance.SelectableComponent.ClearList();
+
+        //Special Actions in **BATTLE MODE**
+        if (Global.BuildMode)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            //TODO: Need something to manage all the Plans in a Planmanager or something similar
+            //The manager will handle both generic, and complex plans
+
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                Global.BuildMode = !Global.BuildMode;
-                _battleCursor.Off();
-
-                if (Global.BuildMode)
-                {
-                    //Annouce build mode on                
-                    _placementController.SetGrid = true;
-                    _placementController.LoadObject(_plans.GetPlans(ResourceType.Wood,"wall"));
-                }
-                else
-                {
-                    //Annouce build mode off                
-                    CameraRotate.BuildCamMode = false;
-                    _placementController.SetGrid = false;
-                    _placementController.ClearObject();                    
-                }
-
+                _selectedResource = SwitchResource();
+                _placementController.SetResource(_selectedResource);
+                UIManager.Instance.Messages.text = $"Building with {_selectedResource.ToString()}";
             }
 
-            //Special Actions in **BATTLE MODE**
-            if(Global.BattleMode)
+            if (Input.GetKeyDown(KeyBindings.BuildKey1))
             {
-                if(Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Selectable.IsSelecting)
-                    UIManager.Instance.SelectableComponent.ClearList();
+                _placementController.LoadObject(_plans.GetPlans(_selectedResource, "wall"));
             }
-            //Special Actions in $$BUILD MODE$$
-            else if (Global.BuildMode)
+            else if (Input.GetKeyDown(KeyBindings.BuildKey2))
             {
-                //TODO: Need something to manage all the Plans in a Planmanager or something similar
-                //The manager will handle both generic, and complex plans
-
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    _selectedResource = SwitchResource();
-                    _placementController.SetResource(_selectedResource);
-                    UIManager.Instance.Messages.text = $"Building with {_selectedResource.ToString()}";
-                }
-
-                if (Input.GetKeyDown(KeyBindings.BuildKey1))                    
-                {
-                    _placementController.LoadObject(_plans.GetPlans(_selectedResource, "wall"));
-                }
-                else if (Input.GetKeyDown(KeyBindings.BuildKey2))
-                {
-                    _placementController.LoadObject(_plans.GetPlans(_selectedResource, "floor"));
-                }
-                else if (Input.GetKeyDown(KeyBindings.BuildKey3))
-                {
-                    _placementController.LoadObject(_plans.GetPlans(_selectedResource, "ramp"));
-                }
-                else if (Input.GetKeyDown(KeyCode.B))
-                {
-                    _placementController.LoadObject(_plans.Barracks, true);
-                }
-                else if (Input.GetKeyDown(KeyCode.H))
-                {
-                    _placementController.LoadObject(_plans.ResourceDepot, true);
-                }
-                else if (Input.GetKeyDown(KeyCode.T))
-                {
-                    _placementController.LoadObject(_plans.WizardSpire, true);
-                }
-                else if (Input.GetKeyDown(KeyCode.U))
-                {
-                    _placementController.LoadObject(_plans.Cannon, true);
-                }
-                else if (Input.GetKeyDown(KeyCode.I))
-                {
-                    _placementController.LoadObject(_plans.Catapult, true);
-                }
+                _placementController.LoadObject(_plans.GetPlans(_selectedResource, "floor"));
+            }
+            else if (Input.GetKeyDown(KeyBindings.BuildKey3))
+            {
+                _placementController.LoadObject(_plans.GetPlans(_selectedResource, "ramp"));
+            }
+            else if (Input.GetKeyDown(KeyCode.B))
+            {
+                _placementController.LoadObject(_plans.Barracks, true);
+            }
+            else if (Input.GetKeyDown(KeyCode.H))
+            {
+                _placementController.LoadObject(_plans.ResourceDepot, true);
+            }
+            else if (Input.GetKeyDown(KeyCode.T))
+            {
+                _placementController.LoadObject(_plans.WizardSpire, true);
+            }
+            else if (Input.GetKeyDown(KeyCode.U))
+            {
+                _placementController.LoadObject(_plans.Cannon, true);
+            }
+            else if (Input.GetKeyDown(KeyCode.I))
+            {
+                _placementController.LoadObject(_plans.Catapult, true);
             }
         }
+        
                        
         //OTHER ACTIONS
         if (Input.GetKeyDown(KeyCode.F))
