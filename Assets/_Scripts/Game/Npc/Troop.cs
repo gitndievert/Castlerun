@@ -112,7 +112,9 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     {
         if(IsSelected)
         {
-            transform.Lerp(position, 2f);
+            //Need a nice walk animation and movement
+            //transform.Lerp(position, 2f);
+            transform.position = position;
         }
     }
    

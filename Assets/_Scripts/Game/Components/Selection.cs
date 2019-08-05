@@ -64,8 +64,11 @@ public class Selection : MonoBehaviour
 
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
         {
+            IsSelecting = true;
+            mousePosition1 = Input.mousePosition;
+
             //Deselect on ground on building selection
-            if (hit.GetLayer() == Global.GROUND_LAYER || hit.GetTag() == Global.BUILD_TAG)
+            if (hit.transform.gameObject.layer == Global.GROUND_LAYER || hit.transform.tag == Global.BUILD_TAG)
             {
                 foreach(var select in SelectionList)
                 {
@@ -75,15 +78,14 @@ public class Selection : MonoBehaviour
                 ClearList();
             }
 
-            IsSelecting = true;
-            mousePosition1 = Input.mousePosition;               
+                         
         }
         else if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) 
             && !SelectionTargetObj.activeSelf)
         {
             StartCoroutine("SelectionCursor");            
             
-            if(hit.GetLayer() == Global.GROUND_LAYER)
+            if(hit.transform.gameObject.layer == Global.GROUND_LAYER)
             {
                 foreach(var selection in SelectionList)
                 {
@@ -96,7 +98,7 @@ public class Selection : MonoBehaviour
             }
             else
             {
-                if(hit.GetTag() == Global.ARMY_TAG)
+                if(hit.transform.tag == Global.ARMY_TAG)
                 {
                     Debug.Log("Be... All that you can be! "+hit.transform.name);
                 }
