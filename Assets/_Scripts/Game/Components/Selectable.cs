@@ -23,9 +23,17 @@ public class Selectable : MonoBehaviour
     
     public Color SelectionBoxColor;
     public Color BorderColor;
-
     public static bool IsSelecting = false;
+    public GameObject SelectionTargetObj;
+
     private Vector3 mousePosition1;
+
+    private void Awake()
+    {
+        if (SelectionTargetObj == null)
+            throw new System.Exception("You must bind a selection target object to selectables!");
+        SelectionTargetObj.SetActive(false);
+    }
 
     private void Update()
     {
@@ -34,6 +42,11 @@ public class Selectable : MonoBehaviour
         {
             IsSelecting = true;
             mousePosition1 = Input.mousePosition;               
+        }
+        else if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) 
+            && !SelectionTargetObj.activeSelf)
+        {
+            StartCoroutine("SelectionCursor");
         }
 
         //Stop Selection
@@ -79,5 +92,25 @@ public class Selectable : MonoBehaviour
     public void ClearList(ISelectable selection)
     {
         SelectionList.Remove(selection.GameObject);
+    }
+
+    private IEnumerator SelectionCursor()
+    {
+        SelectionTargetObj.SetActive(true);
+        SelectionTargetObj.transform.position = GroundPoint();
+        yield return new WaitForSeconds(.5f);
+        SelectionTargetObj.SetActive(false);
+    }
+
+    private Vector3 GroundPoint()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.transform.gameObject.layer == Global.GROUND_LAYER) return hit.point;             
+        }
+
+        return Vector3.zero;
     }
 }

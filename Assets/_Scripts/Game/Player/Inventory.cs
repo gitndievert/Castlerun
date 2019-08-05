@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
     const int MAX_WOOD = 500;
     const int MAX_ROCK = 500;
     const int MAX_METAL = 500;
-    const int MAX_GEMS = 200;
+    const int MAX_GEMS = 10;
 
     [Range(0,MAX_WOOD)]
     public int WoodCount = 0;
