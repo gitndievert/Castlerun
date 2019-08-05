@@ -354,7 +354,7 @@ public class Player : BasePrefab, IPlayer
         }
     }
 
-    public void Die()
+    public override void Die()
     {
         Health = 0;
         PlayerUI.HealthText.text = $"0/100";
@@ -367,9 +367,9 @@ public class Player : BasePrefab, IPlayer
     {
         throw new System.NotImplementedException();
     }
-
-    public void Move(Vector3 position)
+       
+    public void Move(Transform point)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

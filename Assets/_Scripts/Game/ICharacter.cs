@@ -18,6 +18,6 @@ public interface ICharacter
 {
     void SetHit(int damage);
     void Target(ISelectable target);
-    void Move(Vector3 position);
+    void Move(Transform point);
     void Die();
 }

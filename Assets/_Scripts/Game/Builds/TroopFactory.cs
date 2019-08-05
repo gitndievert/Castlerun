@@ -161,7 +161,10 @@ public class TroopFactory : Build, ISelectable
             //Come back
             if (Player != null)
             {
-                makeTroop.GetComponent<Troop>().points = Player.PlayerPad.ResourcePoints; //Might change all this later
+                for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
+                {
+                    makeTroop.GetComponent<Troop>().points.Add(p, Player.PlayerPad.ResourcePoints[p]); //Might change all this later
+                }
                 //Parent to Player Builds
                 makeTroop.transform.parent = Player.PlayerWorldItems.transform;
             }

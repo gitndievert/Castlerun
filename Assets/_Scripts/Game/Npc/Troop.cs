@@ -13,6 +13,8 @@
 // ********************************************************************
 
 
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,7 +22,7 @@ using UnityEngine.AI;
 public abstract class Troop : BasePrefab, ICharacter, ISelectable
 {
     [Header("All the waypoints that this Troop will follow")]
-    public Transform[] points;    
+    public Dictionary<int, Transform> points = new Dictionary<int, Transform>();
 
     public Light SelectionTarget;
 
@@ -33,11 +35,14 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     protected static readonly Color DamageColor = Color.red;
 
     protected Animator anim;
+    protected NavMeshAgent nav;
 
     #region AudioClips For Troops
     public AudioClip[] SelectionCall;
     public AudioClip[] Acknowledgement;
     #endregion
+
+    private int _destPoint;
 
     protected override void Awake()
     {
@@ -45,12 +50,33 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         anim = GetComponent<Animator>();
         //Seconds until object is destroyes and cleaned up
         DestroyTimer = 1f;
+        nav = GetComponent<NavMeshAgent>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         SelectionTargetStatus(false);
         MaxHealth = Health;
+    }
+
+    // Update is called once per frame
+    protected virtual void FixedUpdate()
+    {
+        if (!nav.pathPending)
+        {
+            GoToNextPoint();
+        }
+        else
+        {
+            anim.Play("dle");
+        }
+    }
+
+    protected void GoToNextPoint()
+    {
+        if (points.Count == 0) return;        
+        nav.destination = points[_destPoint].position;
+        _destPoint = (_destPoint + 1) % points.Count;
     }
 
     private void OnMouseDown()
@@ -72,7 +98,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         if (IsSelected)
         {
             IsSelected = false;
-            SelectionTargetStatus(false);            
+            SelectionTargetStatus(false);
+            points.Clear();
         }
     }
 
@@ -108,13 +135,15 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public abstract void Target(ISelectable target);    
 
-    public void Move(Vector3 position)
+    public void Move(Transform point)
     {
         if(IsSelected)
         {
             //Need a nice walk animation and movement
-            //transform.Lerp(position, 2f);
-            transform.position = position;
+
+            //transform.position = point.position;
+            anim.Play("Walk");
+            points[0] = point;
         }
     }
    

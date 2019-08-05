@@ -106,7 +106,7 @@ public class Selection : MonoBehaviour
                     var character = selection.GameObject.GetComponent<ICharacter>();
                     if (character != null)
                     {
-                        character.Move(hit.point);
+                        character.Move(hit.transform);
                     }
                 }
             }

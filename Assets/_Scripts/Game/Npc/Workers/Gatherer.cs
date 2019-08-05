@@ -18,42 +18,29 @@ using UnityEngine.AI;
 
 public class Gatherer : Troop
 {
-    protected float Speed;
-
-    private NavMeshAgent _nav;
-    private int _destPoint;    
+    protected float Speed;       
 
     protected override void Awake()
     {
-        base.Awake();
+        base.Awake();        
     }
 
     // Start is called before the first frame update
-    protected void Start()
+    protected override void Start()
     {
-        _nav = GetComponent<NavMeshAgent>();
+        base.Start();
         anim.Play("Walk");
     }
 
     // Update is called once per frame
-    protected void FixedUpdate()
+    protected override void FixedUpdate()
     {
-        if (!_nav.pathPending && _nav.remainingDistance < 0.5f)
+        if (!nav.pathPending && nav.remainingDistance < 0.5f)
         {            
             GoToNextPoint();
         }
     }
-
-    protected void GoToNextPoint()
-    {
-        if (points.Length == 0)
-        {
-            return;
-        }
-        _nav.destination = points[_destPoint].position;
-        _destPoint = (_destPoint + 1) % points.Length;
-    }
-
+    
     private IEnumerator Wait()
     {
         yield return new WaitForSeconds(3f);
