@@ -18,5 +18,8 @@ using UnityEngine;
 
 public class Fighter : Troop
 {
-  
+    public override void Target(ISelectable target)
+    {
+        
+    }
 }

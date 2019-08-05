@@ -26,6 +26,7 @@ public abstract class BasePrefab : MonoBehaviour
     public TextMeshPro HealthText;
 
     protected int MaxHealth;
+    protected float DestroyTimer = 2f;
     
     protected PlayerUI PlayerUI
     {
@@ -86,13 +87,18 @@ public abstract class BasePrefab : MonoBehaviour
         {
             if (DestroySound != null)
                 SoundManager.PlaySoundOnGameObject(gameObject, DestroySound);
-            Destroy(gameObject);
-            ClearTarget();
+            Die();
         }
     }       
 
     public override string ToString()
     {
-        return Health.ToString();
+        return transform.name;
+    }
+
+    public virtual void Die()
+    {
+        Destroy(gameObject, DestroyTimer);
+        ClearTarget();
     }
 }

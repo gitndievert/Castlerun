@@ -12,11 +12,12 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Necromancer : Troop
-{      
-
+public interface ICharacter
+{
+    void SetHit(int damage);
+    void Target(ISelectable target);
+    void Move(Vector3 position);
+    void Die();
 }

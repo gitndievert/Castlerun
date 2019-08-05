@@ -17,9 +17,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Selectable : MonoBehaviour
+public class Selection : MonoBehaviour
 {
-    public List<GameObject> SelectionList = new List<GameObject>();
+    public List<ISelectable> SelectionList = new List<ISelectable>();
     
     public Color SelectionBoxColor;
     public Color BorderColor;
@@ -27,6 +27,26 @@ public class Selectable : MonoBehaviour
     public GameObject SelectionTargetObj;
 
     private Vector3 mousePosition1;
+
+    public static Vector3 GroundPoint
+    {
+        get
+        {
+            RaycastHit hit = SelectionRayHit;
+            if (hit.transform.gameObject.layer == Global.GROUND_LAYER) return hit.point;            
+            return Vector3.zero;
+        }
+    }
+
+    public static RaycastHit SelectionRayHit
+    {
+        get
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Physics.Raycast(ray, out RaycastHit hit);
+            return hit;            
+        }
+    }
 
     private void Awake()
     {
@@ -38,15 +58,50 @@ public class Selectable : MonoBehaviour
     private void Update()
     {
         //Start selection        
+
+        //Get the hit
+        RaycastHit hit = SelectionRayHit;
+
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
         {
+            //Deselect on ground on building selection
+            if (hit.GetLayer() == Global.GROUND_LAYER || hit.GetTag() == Global.BUILD_TAG)
+            {
+                foreach(var select in SelectionList)
+                {
+                    select.UnSelect();                    
+                }
+
+                ClearList();
+            }
+
             IsSelecting = true;
             mousePosition1 = Input.mousePosition;               
         }
         else if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) 
             && !SelectionTargetObj.activeSelf)
         {
-            StartCoroutine("SelectionCursor");
+            StartCoroutine("SelectionCursor");            
+            
+            if(hit.GetLayer() == Global.GROUND_LAYER)
+            {
+                foreach(var selection in SelectionList)
+                {
+                    var character = selection.GameObject.GetComponent<ICharacter>();
+                    if (character != null)
+                    {
+                        character.Move(hit.point);
+                    }
+                }
+            }
+            else
+            {
+                if(hit.GetTag() == Global.ARMY_TAG)
+                {
+                    Debug.Log("Be... All that you can be! "+hit.transform.name);
+                }
+            }         
+            
         }
 
         //Stop Selection
@@ -80,7 +135,7 @@ public class Selectable : MonoBehaviour
 
     public void UpdateList(ISelectable selection)
     {
-        SelectionList.Add(selection.GameObject);
+        SelectionList.Add(selection);
     }
 
     public void ClearList()
@@ -91,26 +146,15 @@ public class Selectable : MonoBehaviour
 
     public void ClearList(ISelectable selection)
     {
-        SelectionList.Remove(selection.GameObject);
+        SelectionList.Remove(selection);
     }
 
     private IEnumerator SelectionCursor()
     {
         SelectionTargetObj.SetActive(true);
-        SelectionTargetObj.transform.position = GroundPoint();
+        SelectionTargetObj.transform.position = GroundPoint;
         yield return new WaitForSeconds(.5f);
         SelectionTargetObj.SetActive(false);
-    }
-
-    private Vector3 GroundPoint()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            if (hit.transform.gameObject.layer == Global.GROUND_LAYER) return hit.point;             
-        }
-
-        return Vector3.zero;
-    }
+    }    
+    
 }

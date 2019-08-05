@@ -21,8 +21,7 @@ public class Gatherer : Troop
     protected float Speed;
 
     private NavMeshAgent _nav;
-    private int _destPoint;
-    private Animator _anim;
+    private int _destPoint;    
 
     protected override void Awake()
     {
@@ -33,8 +32,7 @@ public class Gatherer : Troop
     protected void Start()
     {
         _nav = GetComponent<NavMeshAgent>();
-        _anim = GetComponent<Animator>();
-        _anim.Play("Walk");
+        anim.Play("Walk");
     }
 
     // Update is called once per frame
@@ -64,14 +62,23 @@ public class Gatherer : Troop
     //NOTE: Come back here to add the strafe on X
     private void InputMagnitude()
     {
-        
 
-        _anim.SetFloat("InputZ", 1f, 0.0f, Time.deltaTime * 2f);
+
+        anim.SetFloat("InputZ", 1f, 0.0f, Time.deltaTime * 2f);
         //_anim.SetFloat("InputX", 1f, 0.0f, Time.deltaTime * 2f);
 
         //Calc the Input Magnitude
         Speed = new Vector2(0f, 1f).sqrMagnitude * 5;
 
-        _anim.SetFloat("Speed", Speed, 0.0f, Time.deltaTime);
+        anim.SetFloat("Speed", Speed, 0.0f, Time.deltaTime);
+    }
+
+    /// <summary>
+    /// Attack the rocks and shrubbery!
+    /// </summary>
+    /// <param name="target"></param>
+    public override void Target(ISelectable target)
+    {
+        
     }
 }

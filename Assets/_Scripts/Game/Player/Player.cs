@@ -195,7 +195,7 @@ public class Player : BasePrefab, IPlayer
 
         }
 
-        if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Selectable.IsSelecting)
+        if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Selection.IsSelecting)
             UIManager.Instance.SelectableComponent.ClearList();
 
         //Special Actions in **BATTLE MODE**
@@ -363,5 +363,13 @@ public class Player : BasePrefab, IPlayer
         _movement.Die();
     }
 
-    
+    public void Target(ISelectable target)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Move(Vector3 position)
+    {
+        throw new System.NotImplementedException();
+    }
 }

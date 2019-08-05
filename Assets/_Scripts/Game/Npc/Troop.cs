@@ -14,7 +14,9 @@
 
 
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public abstract class Troop : BasePrefab, ICharacter, ISelectable
 {
     [Header("All the waypoints that this Troop will follow")]
@@ -29,11 +31,21 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     protected static readonly Color SelectedColor = Color.green;
     protected static readonly Color DamageColor = Color.red;
-    
+
+    protected Animator anim;
+
     #region AudioClips For Troops
     public AudioClip[] SelectionCall;
     public AudioClip[] Acknowledgement;
     #endregion
+
+    protected override void Awake()
+    {
+        base.Awake();
+        anim = GetComponent<Animator>();
+        //Seconds until object is destroyes and cleaned up
+        DestroyTimer = 1f;
+    }
 
     private void Start()
     {
@@ -60,8 +72,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         if (IsSelected)
         {
             IsSelected = false;
-            SelectionTargetStatus(false);
-            UIManager.Instance.SelectableComponent.ClearList(this);
+            SelectionTargetStatus(false);            
         }
     }
 
@@ -94,4 +105,16 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         //Come Back here!
         if (collision.transform.tag != "Blah") return;
     }
+
+    public abstract void Target(ISelectable target);    
+
+    public void Move(Vector3 position)
+    {
+        if(IsSelected)
+        {
+            transform.Lerp(position, 2f);
+        }
+    }
+   
+
 }

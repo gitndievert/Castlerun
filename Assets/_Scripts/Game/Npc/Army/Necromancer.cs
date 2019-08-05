@@ -12,43 +12,14 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
-/**
- * For future additions for general extensions
- */
-public static partial class Extensions
+public class Necromancer : Troop
 {
-    public static string SetupForClass(this string setup, string another)
+    public override void Target(ISelectable target)
     {
-        return another;
+        
     }
-
-    /// <summary>
-    /// Returns the layer for the hit transform
-    /// </summary>
-    /// <param name="hit"></param>
-    /// <returns></returns>
-    public static int GetLayer(this RaycastHit hit)
-    {
-        return hit.transform.gameObject.layer;
-    }
-
-    /// <summary>
-    /// Returns the tag from the hit transform
-    /// </summary>
-    /// <param name="hit"></param>
-    /// <returns></returns>
-    public static string GetTag(this RaycastHit hit)
-    {
-        return hit.transform.tag;
-    }
-
-
 }
-

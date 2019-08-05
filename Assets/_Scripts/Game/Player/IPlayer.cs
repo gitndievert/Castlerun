@@ -12,13 +12,8 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-public interface ICharacter
-{
-    void SetHit(int damage);
-}
-
 public interface IPlayer : ICharacter
 {
     void Init(string name, int playernum);
-    void Swing();     
+    void Swing();
 }

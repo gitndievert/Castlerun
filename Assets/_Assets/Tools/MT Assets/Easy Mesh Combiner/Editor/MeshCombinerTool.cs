@@ -60,7 +60,7 @@ namespace MTAssets
         void OnGUI()
         {
             //Get selected GameObjects
-            selectedGameObjects = Selection.gameObjects;
+            selectedGameObjects = UnityEditor.Selection.gameObjects;
 
             //Valid the objects
             listOfInvalidGameObjects.Clear();
@@ -519,7 +519,7 @@ namespace MTAssets
             EditorUtility.DisplayDialog("GameObjects combined!", "The selected GameObjects were combined. If you enable \"Save Mesh In Assets\", the data can be found in the following directory...\n\n\"MT Assets/Easy Mesh Combiner/Combined/"+ SceneManager.GetActiveScene().name + "/\n\nIf you prefer to undo the merge quickly, just click on the GameObject result and use the \"Combined Meshes Manager\" to do this.\n\nThe GameObject result of this merge is being selected for you!\"", "Cool!");
 
             //Select Combined Meshes
-            Selection.activeGameObject = rootGameObject;
+            UnityEditor.Selection.activeGameObject = rootGameObject;
 
             //Set to static root GameObject
             GameObjectUtility.SetStaticEditorFlags(rootGameObject, StaticEditorFlags.BatchingStatic);

@@ -33,6 +33,23 @@ public static class Global
     public const string BUILDAREA_TAG = "BuildArea";
     #endregion
 
+    #region Selectable Objects
+    /// <summary>
+    /// Tag for Selectable Buildings
+    /// </summary>
+    public const string BUILD_TAG = "Build";
+
+    /// <summary>
+    /// Tag for selectable troops that are combat active
+    /// </summary>
+    public const string ARMY_TAG = "Army";
+
+    /// <summary>
+    /// Tag for generic selectable troops that are NPC's (NON COMBAT)
+    /// </summary>
+    public const string NPC_TAG = "Npc";
+    #endregion
+
     #region Game Constants
     public const int DEFAULT_LAYER = 0;
     public const int IGNORE_LAYER = 2;

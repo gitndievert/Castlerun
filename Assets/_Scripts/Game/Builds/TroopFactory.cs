@@ -16,7 +16,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TroopFactory : Build
+public class TroopFactory : Build, ISelectable
 {
     #region Resource Cost
     public const int WOOD_COST = 10;
@@ -25,6 +25,10 @@ public class TroopFactory : Build
     protected override float BuildTime => ConstructionTime;
 
     protected override ResourceType ResourceType => ResourceType.Wood;
+
+    public bool IsSelected { get; set; }
+
+    public GameObject GameObject => gameObject;
 
     /// <summary>
     /// The time it takes to build the structure
@@ -164,5 +168,15 @@ public class TroopFactory : Build
 
             _trainedCounter++;
         }
+    }
+
+    public void UnSelect()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Select()
+    {
+        throw new System.NotImplementedException();
     }
 }
