@@ -16,6 +16,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Selection : MonoBehaviour
 {
@@ -24,9 +25,10 @@ public class Selection : MonoBehaviour
     public Color SelectionBoxColor;
     public Color BorderColor;
     public static bool IsSelecting = false;
-    public GameObject SelectionTargetObj;
+    public GameObject SelectionTargetObj;    
 
     private Vector3 mousePosition1;
+    private TroopUI _troopUI;
 
     public static Vector3 GroundPoint
     {
@@ -55,6 +57,11 @@ public class Selection : MonoBehaviour
         SelectionTargetObj.SetActive(false);
     }
 
+    private void Start()
+    {
+        _troopUI = UIManager.Instance.TroopUI;
+    }
+
     private void Update()
     {
         //Start selection        
@@ -67,15 +74,22 @@ public class Selection : MonoBehaviour
             IsSelecting = true;
             mousePosition1 = Input.mousePosition;
 
-            //Deselect on ground on building selection
-            if (hit.transform.gameObject.layer == Global.GROUND_LAYER || hit.transform.tag == Global.BUILD_TAG)
-            {
-                foreach(var select in SelectionList)
-                {
-                    select.UnSelect();                    
-                }
+            int listcount = SelectionList.Count;
 
-                ClearList();
+            //Deselect on ground on building selection
+            if (hit.transform.gameObject.layer == Global.GROUND_LAYER 
+                || (hit.transform.tag == Global.BUILD_TAG && listcount < 1) || 
+                (hit.transform.tag == Global.ARMY_TAG && listcount < 1))
+            {
+                if (listcount > 0)
+                {
+                    foreach (var select in SelectionList)
+                    {
+                        select.UnSelect();
+                    }
+
+                    ClearList();
+                }
             }
 
                          
@@ -138,17 +152,22 @@ public class Selection : MonoBehaviour
     public void UpdateList(ISelectable selection)
     {
         SelectionList.Add(selection);
+        _troopUI.UnsortedListText.text += selection + "\r\n";
     }
 
     public void ClearList()
     {
         if (SelectionList.Count > 0)
+        {
             SelectionList.Clear();
+            _troopUI.UnsortedListText.text = "";
+        }
     }
 
     public void ClearList(ISelectable selection)
     {
         SelectionList.Remove(selection);
+        _troopUI.UnsortedListText.text = "";
     }
 
     private IEnumerator SelectionCursor()

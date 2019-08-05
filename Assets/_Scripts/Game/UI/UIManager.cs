@@ -41,6 +41,11 @@ public partial class UIManager : PSingle<UIManager>
     /// </summary>
     public Transform TargetPanel;
 
+    /// <summary>
+    /// Troop UI Panel
+    /// </summary>
+    public TroopUI TroopUI;
+
     public TextMeshProUGUI Messages;
 
     public Selection SelectableComponent;
