@@ -291,7 +291,8 @@ public class Player : BasePrefab, IPlayer
         ReleaseCompanion();
         var mycompanion = Instantiate(CompanionManager.Instance.GetCompanionByType(companion),transform.position,transform.rotation);        
         PlayerCompanion = mycompanion.GetComponent<Companion>();
-        GetComponent<MovementInput>().SetPlayerCompanion = PlayerCompanion;
+        if(_movement != null)
+            _movement.SetPlayerCompanion = PlayerCompanion;
         PlayerCompanion.transform.parent = transform;
         PlayerCompanion.transform.position = transform.position + (Vector3.right * 1.5f);
     }
@@ -300,7 +301,8 @@ public class Player : BasePrefab, IPlayer
     {
         if (PlayerCompanion == null) return;
         Destroy(PlayerCompanion.gameObject);
-        GetComponent<MovementInput>().SetPlayerCompanion = null;
+        if(_movement != null)
+            _movement.SetPlayerCompanion = null;
         PlayerCompanion = null;
         CompanionOut = false;
     }   

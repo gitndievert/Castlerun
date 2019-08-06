@@ -15,7 +15,6 @@ public enum WarpType
     Exit
 }
 
-[RequireComponent(typeof(Collider))]
 public class RoomPortal : MonoBehaviour
 {    
     public RoomPortal DestinationPortal;
@@ -23,6 +22,11 @@ public class RoomPortal : MonoBehaviour
     public WarpDirection WarpOutDirection = WarpDirection.North;
     [Space(10)]
     public WarpType WarpType = WarpType.Entrance;
+
+    /// <summary>
+    /// Gets/Sets the Player Position going into the entrance
+    /// </summary>
+    public Vector3 PlayerPositionInbound { get; set; }
 
     private Collider _col;    
     
@@ -43,11 +47,19 @@ public class RoomPortal : MonoBehaviour
         {
             //CC On Player will jack with position, need to disable and re-enable
             col.transform.GetComponent<CharacterController>().enabled = false;
-            col.transform.position = DestinationPortal.transform.position;    
+            col.transform.position = DestinationPortal.transform.position;
+            //Set Player Position
+            DestinationPortal.PlayerPositionInbound = col.transform.position;
             //Rotate(col.transform);
             col.transform.GetComponent<CharacterController>().enabled = true;                     
         }
+        else if(col.transform.tag == "Player" && WarpType == WarpType.Exit)
+        {
+            col.transform.position = new Vector3(transform.position.x, PlayerPositionInbound.y, transform.position.z);
+        }
     }
+
+    
     
     private void Rotate(Transform target)
     {

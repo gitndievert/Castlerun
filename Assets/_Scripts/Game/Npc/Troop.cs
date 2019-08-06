@@ -60,6 +60,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     {
         SelectionTargetStatus(false);
         MaxHealth = Health;
+        nav.updateRotation = false;
+        nav.updatePosition = true;
     }
 
     // Update is called once per frame

@@ -49,18 +49,27 @@ public class MovementInput : MonoBehaviour
     private Animator _anim;    
     private Vector3 _moveVector;
     private Animator _companionAnim;
+    private Collider _col;
+
+    [SerializeField]
+    private float _groundCheckDistance = 0.1f;
+
+    private float _origGroundCheckDistance;
 
     private void Awake()
     {
         _anim = GetComponent<Animator>();
         _camera = Camera.main;
-        CharacterController = GetComponent<CharacterController>();     
+        CharacterController = GetComponent<CharacterController>();
+        Global.MouseLook = false;
+        _col = GetComponent<Collider>();
     }
 
     // Start is called before the first frame update
     void Start()
     {        
-        Lock = false;      
+        Lock = false;
+        _origGroundCheckDistance = _groundCheckDistance;
     }
 
     // Update is called once per frame
@@ -69,14 +78,17 @@ public class MovementInput : MonoBehaviour
         if (Lock) return;
         InputMagnitude();
         _moveVector = Vector3.zero;
-        CharacterController.Move(_moveVector);       
-
+        CharacterController.Move(_moveVector);
+                
+        //Add Grounding
+       
         if (Input.GetKeyDown(KeyBindings.Jump)) Jump();
         if (Input.GetKeyDown(KeyBindings.Dance1)) Dance();
     }
 
     private void Update()
     {
+        //Allowed the Mouse Look on Right Mouse Button
         if (Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
         {
             float mouseInput = Input.GetAxis("Mouse X");
@@ -145,5 +157,5 @@ public class MovementInput : MonoBehaviour
     {
         _anim.Play("Death1");
     }
-
+    
 }

@@ -34,19 +34,20 @@ public class Selection : MonoBehaviour
     {
         get
         {
-            RaycastHit hit = SelectionRayHit;
-            if (hit.transform.gameObject.layer == Global.GROUND_LAYER) return hit.point;            
-            return Vector3.zero;
+            if (Physics.Raycast(SelectionRayHit, out RaycastHit hit))
+            {
+                if (hit.transform.gameObject.layer == Global.GROUND_LAYER && hit.point != null) return hit.point;
+            }
+
+            return Vector3.zero; // Some Top Level Point of player, might be a big bug
         }
     }
 
-    public static RaycastHit SelectionRayHit
+    public static Ray SelectionRayHit
     {
         get
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray, out RaycastHit hit);
-            return hit;            
+            return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
     }
 
@@ -67,7 +68,7 @@ public class Selection : MonoBehaviour
         //Start selection        
 
         //Get the hit
-        RaycastHit hit = SelectionRayHit;
+        Physics.Raycast(SelectionRayHit, out RaycastHit hit);
 
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
         {
@@ -77,44 +78,51 @@ public class Selection : MonoBehaviour
             int listcount = SelectionList.Count;
 
             //Deselect on ground on building selection
-            if (hit.transform.gameObject.layer == Global.GROUND_LAYER 
-                || (hit.transform.tag == Global.BUILD_TAG && listcount < 1) || 
-                (hit.transform.tag == Global.ARMY_TAG && listcount < 1))
+            if (hit.point != null)
             {
-                if (listcount > 0)
+                if (hit.transform.gameObject.layer == Global.GROUND_LAYER
+                    || (hit.transform.tag == Global.BUILD_TAG && listcount < 1) ||
+                    (hit.transform.tag == Global.ARMY_TAG && listcount < 1))
                 {
-                    foreach (var select in SelectionList)
+                    if (listcount > 0)
                     {
-                        select.UnSelect();
-                    }
+                        foreach (var select in SelectionList)
+                        {
+                            select.UnSelect();
+                        }
 
-                    ClearList();
-                }
-            }                         
-        }
-        else if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) 
-            && !SelectionTargetObj.activeSelf)
-        {
-            StartCoroutine("SelectionCursor");            
-            
-            if(hit.transform.gameObject.layer == Global.GROUND_LAYER)
-            {
-                foreach(var selection in SelectionList)
-                {
-                    var character = selection.GameObject.GetComponent<ICharacter>();
-                    if (character != null)
-                    {
-                        character.Move(hit.point);
+                        ClearList();
                     }
                 }
             }
-            else
+        }
+        else if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) 
+            && !SelectionTargetObj.activeSelf && !Global.MouseLook)
+        {
+            StartCoroutine("SelectionCursor");
+
+            if (hit.transform != null)
             {
-                if(hit.transform.tag == Global.ARMY_TAG)
+                if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
                 {
-                    Debug.Log("Be... All that you can be! "+hit.transform.name);
+                    foreach (var select in SelectionList)
+                    {
+                        var character = select.GameObject.GetComponent<ICharacter>();
+                        if (character != null)
+                        {
+                            character.Move(hit.point);
+                        }
+                    }
                 }
-            }         
+                else
+                {
+                    //Some Kind of Attack Logic Here
+                    if (hit.transform.tag == Global.ARMY_TAG)
+                    {
+                        Debug.Log("Be... All that you can be! " + hit.transform.name);
+                    }
+                }
+            }
             
         }
 

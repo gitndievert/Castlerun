@@ -40,7 +40,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 19105042577669133}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -146,8 +146,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6561831163847074095}
-  - component: {fileID: 8064608895398549021}
   - component: {fileID: 4004764685114933127}
+  - component: {fileID: 8893037975022730324}
   m_Layer: 0
   m_Name: Portal B Exit
   m_TagString: Untagged
@@ -169,19 +169,6 @@ Transform:
   m_Father: {fileID: 8865397774837236139}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!65 &8064608895398549021
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414580814069174670}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.07389184}
-  m_Center: {x: 0, y: 6.38568e-14, z: 0.46305415}
 --- !u!114 &4004764685114933127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +184,19 @@ MonoBehaviour:
   DestinationPortal: {fileID: 0}
   WarpOutDirection: 0
   WarpType: 1
+--- !u!65 &8893037975022730324
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414580814069174670}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &994609039620285608
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,7 +535,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4004960922682985192}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -690,8 +690,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4913875492014538431}
-  - component: {fileID: 6126019641431184874}
   - component: {fileID: 7986714881257679485}
+  - component: {fileID: 5531716761005956982}
   m_Layer: 0
   m_Name: Portal A Exit
   m_TagString: Untagged
@@ -713,19 +713,6 @@ Transform:
   m_Father: {fileID: 2774138853628089346}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6126019641431184874
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5564083504623995745}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7986714881257679485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -741,6 +728,19 @@ MonoBehaviour:
   DestinationPortal: {fileID: 0}
   WarpOutDirection: 0
   WarpType: 1
+--- !u!65 &5531716761005956982
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5564083504623995745}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6782475247556029585
 GameObject:
   m_ObjectHideFlags: 0
