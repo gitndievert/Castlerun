@@ -25,6 +25,11 @@ public abstract class BasePrefab : MonoBehaviour
     public AudioClip DestroySound;
     public TextMeshPro HealthText;
 
+    /// <summary>
+    /// This is the Icon Representing the Base Prefab
+    /// </summary>
+    public Sprite Icon;
+
     protected int MaxHealth;
     protected float DestroyTimer = 2f;
     

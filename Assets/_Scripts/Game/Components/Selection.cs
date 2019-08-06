@@ -16,9 +16,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using SBK.Unity;
 
-public class Selection : MonoBehaviour
+public class Selection : DSingle<Selection>
 {
     public List<ISelectable> SelectionList = new List<ISelectable>();
     
@@ -51,11 +51,16 @@ public class Selection : MonoBehaviour
         }
     }
 
-    private void Awake()
+    protected override void PAwake()
     {
         if (SelectionTargetObj == null)
             throw new System.Exception("You must bind a selection target object to selectables!");
         SelectionTargetObj.SetActive(false);
+    }
+
+    protected override void PDestroy()
+    {
+
     }
 
     private void Start()
@@ -182,6 +187,8 @@ public class Selection : MonoBehaviour
         SelectionTargetObj.transform.position = GroundPoint;
         yield return new WaitForSeconds(.5f);
         SelectionTargetObj.SetActive(false);
-    }    
+    }
+       
+
     
 }
