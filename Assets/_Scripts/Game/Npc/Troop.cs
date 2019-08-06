@@ -34,8 +34,10 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     protected static readonly Color SelectedColor = Color.green;
     protected static readonly Color DamageColor = Color.red;
 
+    #region Visual Troop Control
     protected Animator anim;
     protected NavMeshAgent nav;
+    #endregion
 
     private Vector3 _lockPoint;
     private bool _isMoving = false;
@@ -79,7 +81,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             if (nav.remainingDistance < 0.5f)
             {
                 _isMoving = false;
-                Debug.Log("is Moving");
+                Debug.Log($"{name} is Moving");
                 //anim.Play("Idle");
                 _isMoving = false;                
             }            
