@@ -37,6 +37,9 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     protected Animator anim;
     protected NavMeshAgent nav;
 
+    private Vector3 _lockPoint;
+    private bool _isMoving = false;
+
     #region AudioClips For Troops
     public AudioClip[] SelectionCall;
     public AudioClip[] Acknowledgement;
@@ -61,20 +64,29 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     // Update is called once per frame
     protected virtual void FixedUpdate()
-    {
-        if (!nav.pathPending)
+    {        
+        if (!nav.pathPending && points.Count > 0)
         {
             GoToNextPoint();
-        }
-        else
+        }   
+        
+        if(_isMoving)
         {
-            anim.Play("dle");
+            nav.SetDestination(_lockPoint);
+            
+            if (nav.remainingDistance < 0.5f)
+            {
+                _isMoving = false;
+                Debug.Log("is Moving");
+                //anim.Play("Idle");
+                _isMoving = false;                
+            }            
         }
     }
 
     protected void GoToNextPoint()
     {
-        if (points.Count == 0) return;        
+        if (points.Count == 0) return;               
         nav.destination = points[_destPoint].position;
         _destPoint = (_destPoint + 1) % points.Count;
     }
@@ -99,7 +111,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         {
             IsSelected = false;
             SelectionTargetStatus(false);
-            points.Clear();
+            points.Clear();            
         }
     }
 
@@ -134,18 +146,13 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     }
 
     public abstract void Target(ISelectable target);    
-
-    public void Move(Transform point)
+        
+    public void Move(Vector3 point)
     {
-        if(IsSelected)
-        {
-            //Need a nice walk animation and movement
-
-            //transform.position = point.position;
-            anim.Play("Walk");
-            points[0] = point;
-        }
+        //anim.Play("Walk");
+        _lockPoint = point;
+        _isMoving = true;
     }
-   
+
 
 }

@@ -60,7 +60,7 @@ public class Selection : MonoBehaviour
     private void Start()
     {
         _troopUI = UIManager.Instance.TroopUI;
-    }
+    }      
 
     private void Update()
     {
@@ -90,9 +90,7 @@ public class Selection : MonoBehaviour
 
                     ClearList();
                 }
-            }
-
-                         
+            }                         
         }
         else if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) 
             && !SelectionTargetObj.activeSelf)
@@ -106,7 +104,7 @@ public class Selection : MonoBehaviour
                     var character = selection.GameObject.GetComponent<ICharacter>();
                     if (character != null)
                     {
-                        character.Move(hit.transform);
+                        character.Move(hit.point);
                     }
                 }
             }

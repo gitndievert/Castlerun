@@ -17,7 +17,7 @@ using UnityEngine;
 public interface ICharacter
 {
     void SetHit(int damage);
-    void Target(ISelectable target);
-    void Move(Transform point);
+    void Target(ISelectable target);    
+    void Move(Vector3 point);
     void Die();
 }

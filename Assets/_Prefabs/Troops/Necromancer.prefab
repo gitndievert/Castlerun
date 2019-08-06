@@ -598,7 +598,6 @@ GameObject:
   - component: {fileID: -724241541021319829}
   - component: {fileID: 3410138631332346923}
   - component: {fileID: 2197402741631013300}
-  - component: {fileID: 4679121284884910853}
   - component: {fileID: 1280681375159171017}
   m_Layer: 0
   m_Name: Necromancer
@@ -644,7 +643,6 @@ MonoBehaviour:
   Health: 100
   DestroySound: {fileID: 0}
   HealthText: {fileID: 0}
-  points: []
   SelectionTarget: {fileID: 7287754718042530950}
   SelectionCall: []
   Acknowledgement: []
@@ -659,7 +657,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3ae6b4bdd9d9d7642bacb00133452d02, type: 3}
   m_Controller: {fileID: 9100000, guid: f166537f91b4ed7439699793c088402d, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
@@ -693,8 +691,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 5
+  m_Acceleration: 25
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -705,14 +703,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!222 &4679121284884910853
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2750229220499736087}
-  m_CullTransparentMesh: 0
 --- !u!136 &1280681375159171017
 CapsuleCollider:
   m_ObjectHideFlags: 0

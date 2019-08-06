@@ -45,21 +45,7 @@ public class Gatherer : Troop
     {
         yield return new WaitForSeconds(3f);
     }
-
-    //NOTE: Come back here to add the strafe on X
-    private void InputMagnitude()
-    {
-
-
-        anim.SetFloat("InputZ", 1f, 0.0f, Time.deltaTime * 2f);
-        //_anim.SetFloat("InputX", 1f, 0.0f, Time.deltaTime * 2f);
-
-        //Calc the Input Magnitude
-        Speed = new Vector2(0f, 1f).sqrMagnitude * 5;
-
-        anim.SetFloat("Speed", Speed, 0.0f, Time.deltaTime);
-    }
-
+    
     /// <summary>
     /// Attack the rocks and shrubbery!
     /// </summary>

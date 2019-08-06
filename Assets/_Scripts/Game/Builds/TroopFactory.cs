@@ -158,12 +158,12 @@ public class TroopFactory : Build, ISelectable
         {
             var randTroop = Troops[Random.Range(0, Troops.Length - 1)];            
             var makeTroop = Instantiate(randTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);
-            //Come back
+
             if (Player != null)
             {
                 for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
                 {
-                    makeTroop.GetComponent<Troop>().points.Add(p, Player.PlayerPad.ResourcePoints[p]); //Might change all this later
+                    makeTroop.GetComponent<Troop>().points.Add(p, Player.PlayerPad.ResourcePoints[p]);
                 }
                 //Parent to Player Builds
                 makeTroop.transform.parent = Player.PlayerWorldItems.transform;

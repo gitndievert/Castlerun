@@ -368,7 +368,7 @@ public class Player : BasePrefab, IPlayer
         throw new System.NotImplementedException();
     }
        
-    public void Move(Transform point)
+    public void Move(Vector3 point)
     {
         
     }
