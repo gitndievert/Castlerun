@@ -20,7 +20,15 @@ using SBK.Unity;
 
 public class Selection : DSingle<Selection>
 {
-    public List<ISelectable> SelectionList = new List<ISelectable>();
+    /// <summary>
+    /// List for Mass Friendly Selections
+    /// </summary>
+    public List<ISelectable> MassSelectionList = new List<ISelectable>();
+
+    /// <summary>
+    /// If one target (enemy or friendly) it goes here
+    /// </summary>
+    public ISelectable SingleTargetSelected;
     
     public Color SelectionBoxColor;
     public Color BorderColor;
@@ -75,7 +83,7 @@ public class Selection : DSingle<Selection>
         {
             IsSelecting = true;
             mousePosition1 = Input.mousePosition;
-            int listcount = SelectionList.Count;
+            int listcount = MassSelectionList.Count;
 
             if (Physics.Raycast(SelectionRayHit, out RaycastHit hit))
             {
@@ -88,7 +96,7 @@ public class Selection : DSingle<Selection>
                     {
                         if (listcount > 0)
                         {
-                            foreach (var select in SelectionList)
+                            foreach (var select in MassSelectionList)
                             {
                                 select.UnSelect();
                             }
@@ -110,7 +118,7 @@ public class Selection : DSingle<Selection>
                 {
                     if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
                     {
-                        foreach (var select in SelectionList)
+                        foreach (var select in MassSelectionList)
                         {
                             var character = select.GameObject.GetComponent<ICharacter>();
                             if (character != null)
@@ -160,24 +168,31 @@ public class Selection : DSingle<Selection>
         return insideBox && gameObject.GetComponent<ISelectable>() != null;        
     }
 
-    public void UpdateList(ISelectable selection)
+    public void UpdateMassList(ISelectable selection)
     {
-        SelectionList.Add(selection);
+        MassSelectionList.Add(selection);
         _troopUI.UnsortedListText.text += selection + "\r\n";
+    }
+
+    public void UpdateSingleTarget(ISelectable selection)
+    {
+        SingleTargetSelected = selection;
+        Debug.Log("Single Target " + selection.ToString());
+        //COME BACK - update the ui here
     }
 
     public void ClearList()
     {
-        if (SelectionList.Count > 0)
+        if (MassSelectionList.Count > 0)
         {
-            SelectionList.Clear();
+            MassSelectionList.Clear();
             _troopUI.UnsortedListText.text = "";
         }
     }
 
     public void ClearList(ISelectable selection)
     {
-        SelectionList.Remove(selection);
+        MassSelectionList.Remove(selection);
         _troopUI.UnsortedListText.text = "";
     }
 

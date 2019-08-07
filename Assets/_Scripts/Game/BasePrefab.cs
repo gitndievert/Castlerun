@@ -92,7 +92,9 @@ public abstract class BasePrefab : MonoBehaviour
         
     protected void OnMouseOver()
     {
-        if(transform.tag == "Player") return;
+        //COME BACK
+        //THIS WILL SHOW THE TARGETS WHEN SELECTED
+        if (transform.tag == "Player") return;
         TargetPanel(true);
         UpdateHealthText(Health, MaxHealth);
     }

@@ -121,15 +121,15 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     private void OnMouseDown()
     {
         if(!IsSelected)
-            Select();        
+            Select();
     }
 
     //No Idea what to do, maybe create another BasePrefab class for this???
     protected virtual void Update()
     {
         //For Selectable Troops
-        if (UIManager.Instance.SelectableComponent.IsWithinSelectionBounds(gameObject) && !IsSelected)        
-            Select();           
+        if (UIManager.Instance.SelectableComponent.IsWithinSelectionBounds(gameObject) && !IsSelected)
+            SelectMany();           
     }
 
     public void UnSelect()
@@ -142,21 +142,37 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         }
     }
 
+    public void SelectMany()
+    {
+        if (TroopClass == SelectionClass.Npc) return;
+        if (!IsSelected)
+        {
+            IsSelected = true;
+            if (TroopClass == SelectionClass.Army)
+            {
+                SelectionTargetStatus(true, SelectedColor);
+                UIManager.Instance.SelectableComponent.UpdateMassList(this);                
+            }
+        }
+    }
+
     public void Select()
     {
         if (TroopClass == SelectionClass.Npc) return;
         if (!IsSelected)
         {
-            IsSelected = true;            
+            IsSelected = true;
+            Selection selection = UIManager.Instance.SelectableComponent;
             if(TroopClass == SelectionClass.Army)
             {
                 SelectionTargetStatus(true, SelectedColor);
-                UIManager.Instance.SelectableComponent.UpdateList(this);
+                selection.UpdateMassList(this);
+                selection.UpdateSingleTarget(this);
             }
             else if(TroopClass == SelectionClass.Enemy)
             {
                 SelectionTargetStatus(true, DamageColor);
-                //UIManager.Instance.SelectableComponent.UpdateList(this);
+                selection.UpdateSingleTarget(this);
                 //Put into the enemy target ui panel
             }
             
