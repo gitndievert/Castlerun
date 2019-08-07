@@ -134,13 +134,14 @@ public abstract class BasePrefab : MonoBehaviour
         if (Health - amount > 0)
         {
             Health -= amount;
-            SoundManager.PlaySound(HitSounds);
+            if (HitSounds.Length > 0)
+                SoundManager.PlaySound(HitSounds);
         }
         else
         {
             UpdateHealthText(0, MaxHealth);
             if (DestroySound != null)
-                SoundManager.PlaySoundOnGameObject(gameObject, DestroySound);
+                SoundManager.PlaySound(DestroySound);
             if (CanExplode) Explode();
             Die();
         }

@@ -18,12 +18,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public enum TroopClass
-{
-    Army,
-    Enemy
-}
-
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class Troop : BasePrefab, ICharacter, ISelectable
 {
@@ -37,7 +31,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public GameObject GameObject => gameObject;
 
-    public TroopClass TroopClass = TroopClass.Army;
+    public SelectionClass TroopClass { get; set; }
 
     protected static readonly Color SelectedColor = Color.green;
     protected static readonly Color DamageColor = Color.red;
@@ -85,14 +79,14 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         rb.isKinematic = true;
         //We don't want people exploding lol
         CanExplode = false;
-        TroopClass = tag == Global.ARMY_TAG ? TroopClass.Army : TroopClass.Enemy;
+        TroopClass = tag == Global.ARMY_TAG ? SelectionClass.Army : SelectionClass.Enemy;
         DestroyTimer = 4f;
     }
 
     // Update is called once per frame
     protected virtual void FixedUpdate()
     {
-        if (TroopClass == TroopClass.Army)
+        if (TroopClass == SelectionClass.Army)
         {
             if (!nav.pathPending && points.Count > 0)
             {
@@ -150,16 +144,16 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public void Select()
     {
+        if (TroopClass == SelectionClass.Npc) return;
         if (!IsSelected)
         {
-            IsSelected = true;
-            Debug.Log("Hit on " + gameObject.name);
-            if(TroopClass == TroopClass.Army)
+            IsSelected = true;            
+            if(TroopClass == SelectionClass.Army)
             {
                 SelectionTargetStatus(true, SelectedColor);
                 UIManager.Instance.SelectableComponent.UpdateList(this);
             }
-            else if(TroopClass == TroopClass.Enemy)
+            else if(TroopClass == SelectionClass.Enemy)
             {
                 SelectionTargetStatus(true, DamageColor);
                 //UIManager.Instance.SelectableComponent.UpdateList(this);
@@ -169,13 +163,13 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         }
     }
     
-    private void SelectionTargetStatus(bool status)
+    protected void SelectionTargetStatus(bool status)
     {
         if (SelectionTarget == null) return;
         SelectionTarget.gameObject.SetActive(status);
     }
 
-    private void SelectionTargetStatus(bool status, Color color)
+    protected void SelectionTargetStatus(bool status, Color color)
     {
         if (SelectionTarget == null) return;
         SelectionTargetStatus(status);
@@ -199,6 +193,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public override void SetHit(int amount)
     {
+        if (!IsSelected) return;
         if (Health - amount > 0)
         {
             Health -= amount;

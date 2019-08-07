@@ -909,11 +909,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18e5fcef21af3d45b7f728cfd274ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 0
+  Health: 200
+  CanExplode: 1
   DestroySound: {fileID: 0}
+  HitSounds: []
   HealthText: {fileID: 0}
   Icon: {fileID: 0}
   SelectionTarget: {fileID: 5047968893961185192}
+  TroopClass: 2
   StopDistanceOffset: 0
   SelectionCall: []
   Acknowledgement: []
