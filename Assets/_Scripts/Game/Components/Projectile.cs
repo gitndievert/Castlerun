@@ -20,12 +20,11 @@ public class Projectile : BasePrefab
     public AudioClip ImpactSound;
     public int Damage;   
     
-    protected override void Awake()
+    private void Start()
     {
-        base.Awake();        
         TagPrefab("Projectile");
     }
-    
+
     private void OnDestroy()
     {
         

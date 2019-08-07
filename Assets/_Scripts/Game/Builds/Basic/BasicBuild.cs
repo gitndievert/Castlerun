@@ -33,20 +33,18 @@ public class BasicBuild : Build
 
     protected override ResourceType ResourceType {  get { return _pickType; } }
 
-    private ResourceType _pickType;
-    private Renderer _rend;
+    private ResourceType _pickType;    
 
     protected override void Awake()
     {
-        
+        base.Awake();
+        SnapPoints = GetComponents<SnapPoints>().ToList();        
     }
 
     protected override void Start()
     {
-        base.Start();
-        SnapPoints = GetComponents<SnapPoints>().ToList();
-        _rend = GetComponent<Renderer>();
-        IsBasic = true;
+        base.Start();        
+        IsBasic = true;        
     }
 
     public override bool SetResourceType(ResourceType type)
@@ -76,7 +74,8 @@ public class BasicBuild : Build
         get { return SnapPoints.Select(a => a.transform.position).ToArray(); }
     }
 
-    protected override void OnCollisionEnter(Collision col)
+    //Old code
+    /*protected override void OnCollisionEnter(Collision col)
     {
         var colObj = col.gameObject;
         switch (colObj.tag)
@@ -93,7 +92,7 @@ public class BasicBuild : Build
                 if (!_isPlaced) return;
                 break;
         }
-    }
+    }*/
 
     /*public Transform GetCloseSnapByBuild(BasicBuild collidingbuild)
     {

@@ -45,6 +45,11 @@ public static class Global
     public const string ARMY_TAG = "Army";
 
     /// <summary>
+    /// Tag for Opponents Troops that are combat active
+    /// </summary>
+    public const string ENEMY_TAG = "Enemy";
+
+    /// <summary>
     /// Tag for generic selectable troops that are NPC's (NON COMBAT)
     /// </summary>
     public const string NPC_TAG = "Npc";

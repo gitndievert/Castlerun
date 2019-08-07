@@ -70,33 +70,31 @@ public class Selection : DSingle<Selection>
 
     private void Update()
     {
-        //Start selection        
-
-        //Get the hit
-        Physics.Raycast(SelectionRayHit, out RaycastHit hit);
-
+        //Selection mouse events
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
         {
             IsSelecting = true;
             mousePosition1 = Input.mousePosition;
-
             int listcount = SelectionList.Count;
 
-            //Deselect on ground on building selection
-            if (hit.point != null)
+            if (Physics.Raycast(SelectionRayHit, out RaycastHit hit))
             {
-                if (hit.transform.gameObject.layer == Global.GROUND_LAYER
-                    || (hit.transform.tag == Global.BUILD_TAG && listcount < 1) ||
-                    (hit.transform.tag == Global.ARMY_TAG && listcount < 1))
+                //Deselect on ground on building selection
+                if (hit.point != null)
                 {
-                    if (listcount > 0)
+                    if (hit.transform.gameObject.layer == Global.GROUND_LAYER
+                        || (hit.transform.tag == Global.BUILD_TAG && listcount < 1) ||
+                        (hit.transform.tag == Global.ARMY_TAG && listcount < 1))
                     {
-                        foreach (var select in SelectionList)
+                        if (listcount > 0)
                         {
-                            select.UnSelect();
-                        }
+                            foreach (var select in SelectionList)
+                            {
+                                select.UnSelect();
+                            }
 
-                        ClearList();
+                            ClearList();
+                        }
                     }
                 }
             }
@@ -106,29 +104,31 @@ public class Selection : DSingle<Selection>
         {
             StartCoroutine("SelectionCursor");
 
-            if (hit.transform != null)
+            if (Physics.Raycast(SelectionRayHit, out RaycastHit hit))
             {
-                if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
+                if (hit.transform != null)
                 {
-                    foreach (var select in SelectionList)
+                    if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
                     {
-                        var character = select.GameObject.GetComponent<ICharacter>();
-                        if (character != null)
+                        foreach (var select in SelectionList)
                         {
-                            character.Move(hit.point);
+                            var character = select.GameObject.GetComponent<ICharacter>();
+                            if (character != null)
+                            {
+                                character.Move(hit.point);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //Some Kind of Attack Logic Here
+                        if (hit.transform.tag == Global.ARMY_TAG)
+                        {
+                            Debug.Log("Be... All that you can be! " + hit.transform.name);
                         }
                     }
                 }
-                else
-                {
-                    //Some Kind of Attack Logic Here
-                    if (hit.transform.tag == Global.ARMY_TAG)
-                    {
-                        Debug.Log("Be... All that you can be! " + hit.transform.name);
-                    }
-                }
-            }
-            
+            }            
         }
 
         //Stop Selection

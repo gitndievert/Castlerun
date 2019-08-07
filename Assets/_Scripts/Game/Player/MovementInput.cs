@@ -48,8 +48,7 @@ public class MovementInput : MonoBehaviour
     private Camera _camera;
     private Animator _anim;    
     private Vector3 _moveVector;
-    private Animator _companionAnim;
-    private Collider _col;
+    private Animator _companionAnim;    
 
     [SerializeField]
     private float _groundCheckDistance = 0.1f;
@@ -61,8 +60,7 @@ public class MovementInput : MonoBehaviour
         _anim = GetComponent<Animator>();
         _camera = Camera.main;
         CharacterController = GetComponent<CharacterController>();
-        Global.MouseLook = false;
-        _col = GetComponent<Collider>();
+        Global.MouseLook = false;        
     }
 
     // Start is called before the first frame update

@@ -238,7 +238,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1177188160314681149}
-  m_LocalRotation: {x: 0.07460616, y: -0.31448781, z: -0.0074551436, w: 0.9462958}
+  m_LocalRotation: {x: 0.074606165, y: -0.31448781, z: -0.007455144, w: 0.9462958}
   m_LocalPosition: {x: -0.049496308, y: -0.0002214241, z: -0.06577229}
   m_LocalScale: {x: 1.0000004, y: 1.0000012, z: 0.99999857}
   m_Children:
@@ -331,7 +331,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782980577405752684}
-  m_LocalRotation: {x: 0.00000093250657, y: -0.00028445042, z: 0.00049908576, w: 0.9999998}
+  m_LocalRotation: {x: 0.0000009325066, y: -0.00028445042, z: 0.0004990858, w: 0.9999998}
   m_LocalPosition: {x: -0.037230376, y: -0.00000015258789, z: -0.000000011920928}
   m_LocalScale: {x: 1.0000005, y: 0.9999997, z: 1.0000001}
   m_Children:
@@ -642,10 +642,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 100
+  CanExplode: 1
   DestroySound: {fileID: 0}
   HealthText: {fileID: 0}
   Icon: {fileID: 0}
   SelectionTarget: {fileID: 7287754718042530950}
+  TroopClass: 0
   StopDistanceOffset: 0
   SelectionCall: []
   Acknowledgement: []
@@ -659,12 +661,17 @@ Animator:
   m_GameObject: {fileID: 2750229220499736087}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3ae6b4bdd9d9d7642bacb00133452d02, type: 3}
-  m_Controller: {fileID: 22100000, guid: bd67c09f41812834fb6100bdad18c104, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9f39186fe6b8207479385a3ea315023e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed by
+    Humanoid clips.\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
+    'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
+    'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform 'RigSpine2'\n\tTransform 'RigSpine3'\n\tand
+    more ...\n\tFrom animation clip 'SpinAttack'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -739,7 +746,7 @@ MonoBehaviour:
   m_RunCycleLegOffset: 0.2
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 0.5
+  m_GroundCheckDistance: 0.7
 --- !u!1 &2783684166736639407
 GameObject:
   m_ObjectHideFlags: 0

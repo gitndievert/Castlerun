@@ -16,6 +16,7 @@ using UnityEngine;
 
 public class Bust : BasePrefab
 {
+
     /// <summary>
     /// Two minute life time!
     /// </summary>
@@ -31,9 +32,10 @@ public class Bust : BasePrefab
     private Transform _backplane;
     private Collider _col;
     private bool _locked = false;
-    
-    protected void Start()
-    {        
+
+    protected override void Awake()
+    {
+        base.Awake();
         _col = GetComponent<Collider>();
         _col.isTrigger = false;
     }

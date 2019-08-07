@@ -14,6 +14,8 @@
 
 using UnityEngine;
 using TMPro;
+using System;
+using System.Collections.Generic;
 
 public abstract class BasePrefab : MonoBehaviour
 {
@@ -21,17 +23,19 @@ public abstract class BasePrefab : MonoBehaviour
     /// Health Tracker for all Base Prefabs
     /// </summary>
     public int Health;
-
+    public bool CanExplode = true;
     public AudioClip DestroySound;
+    public AudioClip[] HitSounds;
     public TextMeshPro HealthText;
 
     /// <summary>
     /// This is the Icon Representing the Base Prefab
     /// </summary>
     public Sprite Icon;
-
+        
     protected int MaxHealth;
     protected float DestroyTimer = 2f;
+    private List<MeshExploder> _explodables = new List<MeshExploder>();
     
     protected PlayerUI PlayerUI
     {
@@ -48,22 +52,49 @@ public abstract class BasePrefab : MonoBehaviour
             return UIManager.Instance.TargetUI;
         }
     }
-
+    
     protected virtual void Awake()
     {
-             
+        var renders = gameObject.GetComponentsInChildren<Renderer>();
+        foreach(var render in renders)
+        {
+            var T = render.GetType();
+            if (T != typeof(MeshRenderer) && T != typeof(SkinnedMeshRenderer))
+                continue;
+
+            if (render.gameObject.GetComponent<MeshExploder>() == null)
+            {
+                var exploder = render.gameObject.AddComponent<MeshExploder>();
+                //Set Defaults on Exploder     
+                exploder.useGravity = true;
+
+                _explodables.Add(exploder);
+            }
+            else
+            {
+                _explodables.Add(render.gameObject.GetComponent<MeshExploder>());                
+            }            
+        }
     }   
 
     protected void TagPrefab(string tag)
     {
         transform.tag = tag;
     }
-    
+
+    //For testing
+    /*#if UNITY_EDITOR
+    void OnMouseDown()
+    {
+        Explode();
+    }
+    #endif*/
+        
     protected void OnMouseOver()
     {
         if(transform.tag == "Player") return;
         TargetPanel(true);
-        TargetUI.Target.text = $"{Health}/{MaxHealth}";
+        UpdateHealthText(Health, MaxHealth);
     }
 
     protected void OnMouseExit()
@@ -71,7 +102,7 @@ public abstract class BasePrefab : MonoBehaviour
         ClearTarget();
     }
 
-    private void ClearTarget()
+    protected void ClearTarget()
     {
         TargetUI.Target.text = "";
         TargetPanel(false);
@@ -82,16 +113,35 @@ public abstract class BasePrefab : MonoBehaviour
         UIManager.Instance.TargetPanel.gameObject.SetActive(show);
     }
 
+    protected void Explode()
+    {
+        if(_explodables.Count > 0)
+        {
+            foreach(var boom in _explodables)
+            {
+                boom.Explode();
+            }
+        }
+    }
+
+    protected void UpdateHealthText(int min, int max)
+    {
+        TargetUI.Target.text = $"{min}/{max}";
+    }
+
     public virtual void SetHit(int amount)
     {
         if (Health - amount > 0)
         {
-            Health -= amount;                        
+            Health -= amount;
+            SoundManager.PlaySound(HitSounds);
         }
         else
         {
+            UpdateHealthText(0, MaxHealth);
             if (DestroySound != null)
                 SoundManager.PlaySoundOnGameObject(gameObject, DestroySound);
+            if (CanExplode) Explode();
             Die();
         }
     }       
@@ -103,7 +153,8 @@ public abstract class BasePrefab : MonoBehaviour
 
     public virtual void Die()
     {
-        Destroy(gameObject, DestroyTimer);
+        float timer = CanExplode ? 0 : DestroyTimer;
+        Destroy(gameObject, timer);
         ClearTarget();
     }
 }

@@ -12,12 +12,17 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
+
+public enum TroopClass
+{
+    Army,
+    Enemy
+}
 
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class Troop : BasePrefab, ICharacter, ISelectable
@@ -32,6 +37,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public GameObject GameObject => gameObject;
 
+    public TroopClass TroopClass = TroopClass.Army;
+
     protected static readonly Color SelectedColor = Color.green;
     protected static readonly Color DamageColor = Color.red;
 
@@ -41,7 +48,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     protected Animator anim;
     protected NavMeshAgent nav;
-    protected Rigidbody rigidbody;
+    protected Rigidbody rb;
     #endregion
 
     private Vector3 _lockPoint;
@@ -66,7 +73,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         if (GetComponent<Rigidbody>() == null)
             gameObject.AddComponent<Rigidbody>();
 
-        rigidbody = GetComponent<Rigidbody>();        
+        rb = GetComponent<Rigidbody>();        
     }
 
     protected virtual void Start()
@@ -75,31 +82,38 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         MaxHealth = Health;
         nav.updateRotation = true;
         nav.updatePosition = true;
-        rigidbody.isKinematic = true;
+        rb.isKinematic = true;
+        //We don't want people exploding lol
+        CanExplode = false;
+        TroopClass = tag == Global.ARMY_TAG ? TroopClass.Army : TroopClass.Enemy;
+        DestroyTimer = 4f;
     }
 
     // Update is called once per frame
     protected virtual void FixedUpdate()
-    {        
-        if (!nav.pathPending && points.Count > 0)
+    {
+        if (TroopClass == TroopClass.Army)
         {
-            GoToNextPoint();
-        }
-        
-        if(_isMoving)
-        {
-            nav.SetDestination(_lockPoint);
-
-            if (nav.remainingDistance > nav.stoppingDistance + StopDistanceOffset)
+            if (!nav.pathPending && points.Count > 0)
             {
-                _char.Move(nav.desiredVelocity, false, false);
+                GoToNextPoint();
             }
-            else
-            {                
-                _char.Move(Vector3.zero, false, false);
-                Debug.Log("Stopped Moving");
-                _isMoving = false;
-            }           
+
+            if (_isMoving)
+            {
+                nav.SetDestination(_lockPoint);
+
+                if (nav.remainingDistance > nav.stoppingDistance + StopDistanceOffset)
+                {
+                    _char.Move(nav.desiredVelocity, false, false);
+                }
+                else
+                {
+                    _char.Move(Vector3.zero, false, false);
+                    Debug.Log("Stopped Moving");
+                    _isMoving = false;
+                }
+            }
         }
     }
 
@@ -140,8 +154,18 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         {
             IsSelected = true;
             Debug.Log("Hit on " + gameObject.name);
-            SelectionTargetStatus(true, SelectedColor);
-            UIManager.Instance.SelectableComponent.UpdateList(this);
+            if(TroopClass == TroopClass.Army)
+            {
+                SelectionTargetStatus(true, SelectedColor);
+                UIManager.Instance.SelectableComponent.UpdateList(this);
+            }
+            else if(TroopClass == TroopClass.Enemy)
+            {
+                SelectionTargetStatus(true, DamageColor);
+                //UIManager.Instance.SelectableComponent.UpdateList(this);
+                //Put into the enemy target ui panel
+            }
+            
         }
     }
     
@@ -155,13 +179,14 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     {
         if (SelectionTarget == null) return;
         SelectionTargetStatus(status);
-        SelectionTarget.color = SelectedColor;
+        SelectionTarget.color = color;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         //Come Back here!
-        if (collision.transform.tag == Global.ARMY_TAG) return;
+        if (collision.transform.tag == Global.ARMY_TAG ||
+            collision.transform.tag == Global.ENEMY_TAG) return;
     }
 
     public abstract void Target(ISelectable target);    
@@ -170,6 +195,32 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     {        
         _lockPoint = point;
         _isMoving = true;
+    }
+
+    public override void SetHit(int amount)
+    {
+        if (Health - amount > 0)
+        {
+            Health -= amount;
+            if (HitSounds.Length > 0)
+                SoundManager.PlaySound(HitSounds);
+            anim.Play("Hit");
+        }
+        else
+        {
+            UpdateHealthText(0, MaxHealth);
+            if (DestroySound != null)
+                SoundManager.PlaySound(DestroySound);
+            if (CanExplode) Explode();
+            Die();
+        }
+    }
+
+    public override void Die()
+    {
+        anim.Play("Death1");
+        Destroy(gameObject, DestroyTimer);
+        ClearTarget();
     }
 
 

@@ -45,9 +45,8 @@ public abstract class BaseResource : BasePrefab, IResource
         if (Health <= 0) BustResource();        
     }
     
-    protected override void Awake()
+    private void Start()
     {
-        base.Awake();        
         TagPrefab("Resource");
     }
 

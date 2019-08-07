@@ -165,13 +165,15 @@ public class Player : BasePrefab, IPlayer
     private void Update()
     {        
         //Temporary, work out the details for build mappings later
+        //Disallow movements if player is DEAD
         MovementInput.Lock = IsDead;
 
         //Will probably have this only when a target is in the way or something
-        /*if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode && !Selectable.IsSelecting)
-        {
+        if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode 
+            /*&& !Selection.IsSelecting*/)
+        {            
             _movement.Swing();
-        }*/
+        }
 
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -193,10 +195,7 @@ public class Player : BasePrefab, IPlayer
                 _placementController.ClearObject();
             }
 
-        }
-
-        if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) && !Selection.IsSelecting)
-            UIManager.Instance.SelectableComponent.ClearList();
+        }                           
 
         //Special Actions in **BATTLE MODE**
         if (Global.BuildMode)
@@ -311,30 +310,30 @@ public class Player : BasePrefab, IPlayer
     /* This whole thing is lame, need to replace */
     public void Swing()
     {        
-        /*var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
         if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            
+        {            
             if (hit.transform == null) return;
-            if (!TransformHelper.DistanceLess(transform, hit.transform, Global.STRIKE_DIST)) return;
+            if (!Extensions.DistanceLess(transform, hit.transform, Global.STRIKE_DIST)) return;
             
             switch (hit.transform.tag)
             {                
-                case "Build":
+                case Global.BUILD_TAG:
                     var build = hit.transform.GetComponent<IBuild>();
                     build.SetHit(HitAmount);                    
-                    break;
-                case "Player":                    
-                case "Npc":
+                    break;                                
+                case Global.ENEMY_TAG:
                     var character = hit.transform.GetComponent<ICharacter>();
                     character.SetHit(HitAmount);                    
                     break;
+                case "Player":
+                case Global.ARMY_TAG:
                 default:
                     return;
             }            
-        }*/
-    }        
+        }
+    }
        
   
     public override void SetHit(int amount)

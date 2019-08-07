@@ -53,11 +53,7 @@ public class Inventory : MonoBehaviour
     public bool IsGemsFull { get { return GemsCount >= MaxGems; } }
 
     private InventoryUI _ui;    
-
-    private void Awake()
-    {
-       
-    }
+    
 
     // Start is called before the first frame update
     void Start()
