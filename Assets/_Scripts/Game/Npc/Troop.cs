@@ -29,9 +29,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     //Selectable
     public bool IsSelected { get; set; }
 
-    public GameObject GameObject => gameObject;
-
-    public SelectionClass TroopClass { get; set; }
+    public GameObject GameObject => gameObject;    
 
     protected static readonly Color SelectedColor = Color.green;
     protected static readonly Color DamageColor = Color.red;
@@ -78,15 +76,14 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         nav.updatePosition = true;
         rb.isKinematic = true;
         //We don't want people exploding lol
-        CanExplode = false;
-        TroopClass = tag == Global.ARMY_TAG ? SelectionClass.Army : SelectionClass.Enemy;
+        CanExplode = false;        
         DestroyTimer = 4f;
     }
 
     // Update is called once per frame
     protected virtual void FixedUpdate()
     {
-        if (TroopClass == SelectionClass.Army)
+        if (GetTag == Global.ARMY_TAG)
         {
             if (!nav.pathPending && points.Count > 0)
             {
@@ -144,11 +141,11 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public void SelectMany()
     {
-        if (TroopClass == SelectionClass.Npc) return;
+        if (GetTag == Global.NPC_TAG) return;
         if (!IsSelected)
         {
             IsSelected = true;
-            if (TroopClass == SelectionClass.Army)
+            if (GetTag == Global.ARMY_TAG)
             {
                 SelectionTargetStatus(true, SelectedColor);
                 UIManager.Instance.SelectableComponent.UpdateMassList(this);                
@@ -158,18 +155,18 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public void Select()
     {
-        if (TroopClass == SelectionClass.Npc) return;
+        if (GetTag == Global.NPC_TAG) return;
         if (!IsSelected)
         {
             IsSelected = true;
             Selection selection = UIManager.Instance.SelectableComponent;
-            if(TroopClass == SelectionClass.Army)
+            if(GetTag == Global.ARMY_TAG)
             {
                 SelectionTargetStatus(true, SelectedColor);
                 selection.UpdateMassList(this);
                 selection.UpdateSingleTarget(this);
             }
-            else if(TroopClass == SelectionClass.Enemy)
+            else if(GetTag == Global.ENEMY_TAG)
             {
                 SelectionTargetStatus(true, DamageColor);
                 selection.UpdateSingleTarget(this);

@@ -13,10 +13,12 @@
 // ********************************************************************
 
 using System;
+using UnityEngine;
 using TMPro;
 
 [Serializable]
 public class TargetUI
 {    
     public TextMeshProUGUI Target;
+    public GameObject SingleTargetBox;
 }

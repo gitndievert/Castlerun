@@ -42,8 +42,7 @@ public class Gatherer : Troop
     protected override void Start()
     {
         base.Start();
-        SelectionTargetStatus(true);
-        TroopClass = SelectionClass.Npc;
+        SelectionTargetStatus(true);        
         anim.Play("Walk");
     }
 

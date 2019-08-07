@@ -31,12 +31,7 @@ public class Player : BasePrefab, IPlayer
     public CompanionType CompanionType = CompanionType.None;
     [Tooltip("For Testing Changes on Castles")]
     public CastleType CastleType = CastleType.None;
-
-    /// <summary>
-    /// Set the troop class
-    /// </summary>
-    public SelectionClass TroopClass { get; set; }
-
+        
     /// <summary>
     /// Returns the current companion of the player
     /// </summary>
@@ -106,8 +101,6 @@ public class Player : BasePrefab, IPlayer
     // Start is called before the first frame update
     protected void Start()
     {
-        TroopClass = SelectionClass.Player;
-
         PlayerUI.PlayerName.text = _playerName;
 
         //Initialize the object dumps for the world       

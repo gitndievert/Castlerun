@@ -155,6 +155,14 @@ public class Selection : DSingle<Selection>
         SelectionBox.DrawScreenRectBorder(rect, 2, BorderColor);
     }
 
+    private TargetUI TargetUI
+    {
+        get
+        {
+            return UIManager.Instance.TargetUI;
+        }
+    }
+
     public bool IsWithinSelectionBounds(GameObject gameObject)
     {
         if (!IsSelecting) return false;       
@@ -178,7 +186,11 @@ public class Selection : DSingle<Selection>
     {
         SingleTargetSelected = selection;
         Debug.Log("Single Target " + selection.ToString());
+
+
         //COME BACK - update the ui here
+        //Need to make this friendly to access somehow
+        //TargetUI.SingleTargetBox.
     }
 
     public void ClearList()

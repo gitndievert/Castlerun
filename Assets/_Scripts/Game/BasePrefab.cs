@@ -32,6 +32,11 @@ public abstract class BasePrefab : MonoBehaviour
     /// This is the Icon Representing the Base Prefab
     /// </summary>
     public Sprite Icon;
+
+    public string GetTag
+    {
+        get { return tag; }
+    }
         
     protected int MaxHealth;
     protected float DestroyTimer = 2f;
