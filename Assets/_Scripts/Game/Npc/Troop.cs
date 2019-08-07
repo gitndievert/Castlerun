@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class Troop : BasePrefab, ICharacter, ISelectable
@@ -41,6 +42,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     private Vector3 _lockPoint;
     private bool _isMoving = false;
+    private ThirdPersonCharacter _char;
 
     #region AudioClips For Troops
     public AudioClip[] SelectionCall;
@@ -56,6 +58,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         //Seconds until object is destroyes and cleaned up
         DestroyTimer = 1f;
         nav = GetComponent<NavMeshAgent>();
+        _char = GetComponent<ThirdPersonCharacter>();
     }
 
     protected virtual void Start()
@@ -77,14 +80,26 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         if(_isMoving)
         {
             nav.SetDestination(_lockPoint);
-            
-            if (nav.remainingDistance < 0.5f)
+
+            if (nav.remainingDistance > nav.stoppingDistance)
+            {
+                _char.Move(nav.desiredVelocity, false, false);
+            }
+            else
+            {
+                _isMoving = false;
+                _char.Move(Vector3.zero, false, false);
+            }
+                
+                
+
+           /* if (nav.remainingDistance < nav.stoppingDistance)
             {
                 _isMoving = false;
                 Debug.Log($"{name} is Moving");
-                //anim.Play("Idle");
+                anim.Play("Idle");
                 _isMoving = false;                
-            }            
+            }    */        
         }
     }
 
@@ -152,8 +167,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public abstract void Target(ISelectable target);    
         
     public void Move(Vector3 point)
-    {
-        //anim.Play("Walk");
+    {        
         _lockPoint = point;
         _isMoving = true;
     }

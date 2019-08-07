@@ -599,6 +599,7 @@ GameObject:
   - component: {fileID: 3410138631332346923}
   - component: {fileID: 2197402741631013300}
   - component: {fileID: 1280681375159171017}
+  - component: {fileID: -1553202610924228088}
   m_Layer: 0
   m_Name: Necromancer
   m_TagString: Army
@@ -643,6 +644,7 @@ MonoBehaviour:
   Health: 100
   DestroySound: {fileID: 0}
   HealthText: {fileID: 0}
+  Icon: {fileID: 0}
   SelectionTarget: {fileID: 7287754718042530950}
   SelectionCall: []
   Acknowledgement: []
@@ -655,8 +657,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2750229220499736087}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 3ae6b4bdd9d9d7642bacb00133452d02, type: 3}
-  m_Controller: {fileID: 9100000, guid: f166537f91b4ed7439699793c088402d, type: 2}
+  m_Avatar: {fileID: 9000000, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+  m_Controller: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -717,6 +719,26 @@ CapsuleCollider:
   m_Height: 2.3255486
   m_Direction: 1
   m_Center: {x: 0, y: 0.8211758, z: 0}
+--- !u!114 &-1553202610924228088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2750229220499736087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MovingTurnSpeed: 360
+  m_StationaryTurnSpeed: 180
+  m_JumpPower: 6
+  m_GravityMultiplier: 2
+  m_RunCycleLegOffset: 0.2
+  m_MoveSpeedMultiplier: 1
+  m_AnimSpeedMultiplier: 1
+  m_GroundCheckDistance: 1
 --- !u!1 &2783684166736639407
 GameObject:
   m_ObjectHideFlags: 0
