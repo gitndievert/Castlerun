@@ -19,6 +19,8 @@ using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Rigidbody))]
 public abstract class Troop : BasePrefab, ICharacter, ISelectable
 {
     [Header("All the waypoints that this Troop will follow")]
@@ -75,6 +77,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         nav.updateRotation = true;
         nav.updatePosition = true;
         rb.isKinematic = true;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         //We don't want people exploding lol
         CanExplode = false;        
         DestroyTimer = 4f;
