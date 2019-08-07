@@ -646,6 +646,7 @@ MonoBehaviour:
   HealthText: {fileID: 0}
   Icon: {fileID: 0}
   SelectionTarget: {fileID: 7287754718042530950}
+  StopDistanceOffset: 0
   SelectionCall: []
   Acknowledgement: []
 --- !u!95 &-724241541021319829
@@ -658,7 +659,7 @@ Animator:
   m_GameObject: {fileID: 2750229220499736087}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3ae6b4bdd9d9d7642bacb00133452d02, type: 3}
-  m_Controller: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
+  m_Controller: {fileID: 22100000, guid: bd67c09f41812834fb6100bdad18c104, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -679,7 +680,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

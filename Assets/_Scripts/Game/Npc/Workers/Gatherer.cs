@@ -14,11 +14,24 @@
 
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Gatherer : Troop
 {
-    protected float Speed;       
+    public const int WoodQuantity = 40;
+    public const int RockQuantity = 20;
+    public const int MetalQuantity = 20;
+
+    public float HarvestTime;
+
+    [Space(5)]
+    public bool IsHarvesting = false;
+
+    /// <summary>
+    /// Random set of trips
+    /// </summary>
+    [Space(5)]
+    [Header("# of trips (random)")]
+    public int HarvestTrips = 1;
 
     protected override void Awake()
     {
@@ -35,9 +48,13 @@ public class Gatherer : Troop
     // Update is called once per frame
     protected override void FixedUpdate()
     {
-        if (!nav.pathPending && nav.remainingDistance < 0.5f)
-        {            
-            GoToNextPoint();
+
+        if (!IsHarvesting)
+        {
+            if (!nav.pathPending && nav.remainingDistance < 0.5f)
+            {
+                GoToNextPoint();
+            }
         }
     }
     

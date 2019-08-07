@@ -25,13 +25,17 @@ public class BuildArea : MonoBehaviour
 
     private Collider _col;
     private Renderer _rend;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         _col = GetComponent<Collider>();
         _col.isTrigger = true;
         _rend = GetComponent<Renderer>();
+    }
+
+    // Start is called before the first frame update
+    private void Start()
+    {        
         transform.tag = Global.BUILDAREA_TAG;
         //Initialize Builder
         CanBuild = true;

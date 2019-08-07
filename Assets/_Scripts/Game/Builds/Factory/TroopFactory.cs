@@ -16,6 +16,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * !! Note About This!!!
+ * 
+ * Troop Factories are a generic term for any building that can produce
+ * troops, either Army or Gathering, etc. 
+ * 
+ */
+
 public class TroopFactory : Build, ISelectable
 {
     #region Resource Cost

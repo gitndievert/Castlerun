@@ -36,13 +36,17 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     protected static readonly Color DamageColor = Color.red;
 
     #region Visual Troop Control
+    [Header("Stopping Distance")]
+    public float StopDistanceOffset;
+
     protected Animator anim;
     protected NavMeshAgent nav;
+    protected Rigidbody rigidbody;
     #endregion
 
     private Vector3 _lockPoint;
     private bool _isMoving = false;
-    private ThirdPersonCharacter _char;
+    private ThirdPersonCharacter _char;    
 
     #region AudioClips For Troops
     public AudioClip[] SelectionCall;
@@ -59,6 +63,10 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         DestroyTimer = 1f;
         nav = GetComponent<NavMeshAgent>();
         _char = GetComponent<ThirdPersonCharacter>();
+        if (GetComponent<Rigidbody>() == null)
+            gameObject.AddComponent<Rigidbody>();
+
+        rigidbody = GetComponent<Rigidbody>();        
     }
 
     protected virtual void Start()
@@ -67,6 +75,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         MaxHealth = Health;
         nav.updateRotation = true;
         nav.updatePosition = true;
+        rigidbody.isKinematic = true;
     }
 
     // Update is called once per frame
@@ -81,7 +90,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         {
             nav.SetDestination(_lockPoint);
 
-            if (nav.remainingDistance > nav.stoppingDistance - 0.5f)
+            if (nav.remainingDistance > nav.stoppingDistance + StopDistanceOffset)
             {
                 _char.Move(nav.desiredVelocity, false, false);
             }
@@ -90,17 +99,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
                 _char.Move(Vector3.zero, false, false);
                 Debug.Log("Stopped Moving");
                 _isMoving = false;
-            }
-                
-                
-
-           /* if (nav.remainingDistance < nav.stoppingDistance)
-            {
-                _isMoving = false;
-                Debug.Log($"{name} is Moving");
-                anim.Play("Idle");
-                _isMoving = false;                
-            }    */        
+            }           
         }
     }
 
