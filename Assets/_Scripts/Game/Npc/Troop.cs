@@ -65,7 +65,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     {
         SelectionTargetStatus(false);
         MaxHealth = Health;
-        nav.updateRotation = false;
+        nav.updateRotation = true;
         nav.updatePosition = true;
     }
 
@@ -75,20 +75,21 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         if (!nav.pathPending && points.Count > 0)
         {
             GoToNextPoint();
-        }   
+        }
         
         if(_isMoving)
         {
             nav.SetDestination(_lockPoint);
 
-            if (nav.remainingDistance > nav.stoppingDistance)
+            if (nav.remainingDistance > nav.stoppingDistance - 0.5f)
             {
                 _char.Move(nav.desiredVelocity, false, false);
             }
             else
-            {
-                _isMoving = false;
+            {                
                 _char.Move(Vector3.zero, false, false);
+                Debug.Log("Stopped Moving");
+                _isMoving = false;
             }
                 
                 
@@ -161,7 +162,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     private void OnCollisionEnter(Collision collision)
     {
         //Come Back here!
-        if (collision.transform.tag != "Blah") return;
+        if (collision.transform.tag == Global.ARMY_TAG) return;
     }
 
     public abstract void Target(ISelectable target);    
