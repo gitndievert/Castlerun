@@ -875,7 +875,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: f166537f91b4ed7439699793c088402d, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -916,13 +916,14 @@ MonoBehaviour:
   HealthText: {fileID: 0}
   Icon: {fileID: 0}
   SelectionTarget: {fileID: 5047968893961185192}
-  TroopClass: 2
   StopDistanceOffset: 0
   SelectionCall: []
   Acknowledgement: []
   HarvestTime: 0
   IsHarvesting: 0
+  AssociatedFactory: {fileID: 0}
   HarvestTrips: 1
+  _tripCounter: 0
 --- !u!195 &8462511514284035109
 NavMeshAgent:
   m_ObjectHideFlags: 0

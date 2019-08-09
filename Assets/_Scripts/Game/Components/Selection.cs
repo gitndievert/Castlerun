@@ -17,6 +17,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SBK.Unity;
+using TMPro;
 
 public class Selection : DSingle<Selection>
 {
@@ -28,7 +29,7 @@ public class Selection : DSingle<Selection>
     /// <summary>
     /// If one target (enemy or friendly) it goes here
     /// </summary>
-    public ISelectable SingleTargetSelected;
+    public ISelectable SingleTargetSelected = null;
     
     public Color SelectionBoxColor;
     public Color BorderColor;
@@ -91,8 +92,7 @@ public class Selection : DSingle<Selection>
                 if (hit.point != null)
                 {
                     if (hit.transform.gameObject.layer == Global.GROUND_LAYER
-                        || (hit.transform.tag == Global.BUILD_TAG && listcount < 1) ||
-                        (hit.transform.tag == Global.ARMY_TAG && listcount < 1))
+                        || (hit.transform.tag == Global.ARMY_TAG && listcount < 1))
                     {
                         if (listcount > 0)
                         {
@@ -100,8 +100,14 @@ public class Selection : DSingle<Selection>
                             {
                                 select.UnSelect();
                             }
-
+                                                                                   
                             ClearList();
+                        }
+
+                        if (SingleTargetSelected != null)
+                        {
+                            SingleTargetSelected.UnSelect();
+                            ClearSingleTarget();
                         }
                     }
                 }
@@ -186,11 +192,17 @@ public class Selection : DSingle<Selection>
     {
         SingleTargetSelected = selection;
         Debug.Log("Single Target " + selection.ToString());
-
+        TargetUI.SingleTargetBox.GetComponentInChildren<TextMeshProUGUI>().text = SingleTargetSelected.ToString();
 
         //COME BACK - update the ui here
         //Need to make this friendly to access somehow
         //TargetUI.SingleTargetBox.
+    }
+
+    public void ClearSingleTarget()
+    {
+        SingleTargetSelected = null;
+        TargetUI.SingleTargetBox.GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
     }
 
     public void ClearList()
@@ -198,14 +210,14 @@ public class Selection : DSingle<Selection>
         if (MassSelectionList.Count > 0)
         {
             MassSelectionList.Clear();
-            _troopUI.UnsortedListText.text = "";
+            _troopUI.UnsortedListText.text = string.Empty;
         }
     }
 
     public void ClearList(ISelectable selection)
     {
         MassSelectionList.Remove(selection);
-        _troopUI.UnsortedListText.text = "";
+        _troopUI.UnsortedListText.text = string.Empty;
     }
 
     private IEnumerator SelectionCursor()

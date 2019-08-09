@@ -144,7 +144,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public void SelectMany()
     {
-        if (GetTag == Global.NPC_TAG) return;
+        if (GetTag != Global.ARMY_TAG) return;
         if (!IsSelected)
         {
             IsSelected = true;

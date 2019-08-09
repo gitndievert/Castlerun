@@ -90,15 +90,19 @@ public class TroopFactory : Build, ISelectable
         if (!BuildArea.CanBuild) return false;
         base.ConfirmPlacement();
         BuildArea.ShowPlane(false);
-        if (BuildTime > 0)
+        /*if (BuildTime > 0)
         {
             StartCoroutine(RunBuild());            
-        }
+        }*/
+
+        //Subbed in this property
+        EnableTroopBuilder = true;
 
         return true;
     }
 
-    protected IEnumerator RunBuild()
+    //Come back
+    /*protected IEnumerator RunBuild()
     {
         Debug.Log("Start Build");
         Global.BuildMode = false;
@@ -107,7 +111,7 @@ public class TroopFactory : Build, ISelectable
         Debug.Log("Finish Build");
         Global.BuildMode = true;
         EnableTroopBuilder = true;
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
@@ -175,6 +179,10 @@ public class TroopFactory : Build, ISelectable
                 }
                 //Parent to Player Builds
                 makeTroop.transform.parent = Player.PlayerWorldItems.transform;
+                if(makeTroop.GetComponent<Gatherer>())
+                {
+                    makeTroop.GetComponent<Gatherer>().SetFactory(this);
+                }
             }
 
             _trainedCounter++;

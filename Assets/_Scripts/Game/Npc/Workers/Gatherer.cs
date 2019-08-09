@@ -26,6 +26,8 @@ public class Gatherer : Troop
     [Space(5)]
     public bool IsHarvesting = false;
 
+    public TroopFactory AssociatedFactory { get; private set; }
+
     /// <summary>
     /// Random set of trips
     /// </summary>
@@ -33,10 +35,14 @@ public class Gatherer : Troop
     [Header("# of trips (random)")]
     public int HarvestTrips = 1;
 
+
+
+
     protected override void Awake()
     {
         base.Awake();        
     }
+
 
     // Start is called before the first frame update
     protected override void Start()
@@ -57,6 +63,11 @@ public class Gatherer : Troop
                 GoToNextPoint();
             }
         }
+    }
+
+    public void SetFactory(TroopFactory factory)
+    {
+        AssociatedFactory = factory;
     }
     
     private IEnumerator Wait()
