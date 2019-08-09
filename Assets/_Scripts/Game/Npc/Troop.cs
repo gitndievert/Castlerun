@@ -199,7 +199,9 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             collision.transform.tag == Global.ENEMY_TAG) return;
     }
 
-    public abstract void Target(ISelectable target);    
+    public abstract void Target(ISelectable target);
+
+    public abstract void Attack();
         
     public void Move(Vector3 point)
     {        

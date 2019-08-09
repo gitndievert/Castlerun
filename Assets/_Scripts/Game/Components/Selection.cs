@@ -122,25 +122,23 @@ public class Selection : DSingle<Selection>
             {
                 if (hit.transform != null)
                 {
-                    if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
+                    if (hit.transform.gameObject.layer == Global.GROUND_LAYER || hit.transform.tag == Global.ENEMY_TAG)
                     {
                         foreach (var select in MassSelectionList)
                         {
-                            var character = select.GameObject.GetComponent<ICharacter>();
+                            var character = select.GameObject.GetComponent<Troop>();
                             if (character != null)
                             {
-                                character.Move(hit.point);
+                                character.Move(hit.point);                                
+
+                                if (hit.transform.tag == Global.ENEMY_TAG)
+                                {
+                                    Debug.Log("Attacking!");
+                                    character.Target(hit.transform.GetComponent<ISelectable>());
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        //Some Kind of Attack Logic Here
-                        if (hit.transform.tag == Global.ARMY_TAG)
-                        {
-                            Debug.Log("Be... All that you can be! " + hit.transform.name);
-                        }
-                    }
+                    }                   
                 }
             }            
         }

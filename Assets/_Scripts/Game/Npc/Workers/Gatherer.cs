@@ -83,4 +83,9 @@ public class Gatherer : Troop
     {
         
     }
+
+    public override void Attack()
+    {
+        throw new System.NotImplementedException();
+    }
 }

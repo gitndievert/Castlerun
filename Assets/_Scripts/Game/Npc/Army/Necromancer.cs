@@ -18,8 +18,27 @@ using UnityEngine;
 
 public class Necromancer : Troop
 {
+    private Transform _target;
+
+    protected override void Update()
+    {
+        base.Update();
+        if(_target != null)
+        {
+            if (Vector3.Distance(transform.position, _target.position) < 2f)
+            {
+                Attack();
+            }
+        }
+    }
+
     public override void Target(ISelectable target)
     {
-        
+        _target = target.GameObject.transform;
+    }
+
+    public override void Attack()
+    {
+        Debug.Log("Attack! " + _target.name.ToString());
     }
 }
