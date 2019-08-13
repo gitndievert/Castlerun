@@ -18,6 +18,14 @@ using UnityEngine;
 
 public class Necromancer : Troop
 {
+    /// <summary>
+    /// Number of Skeletons You Can Spawn
+    /// </summary>
+    [Range(0,5)]    
+    public int SkeletonSpawnLimit = 3;
+
+
+
     private Transform _target;
 
     protected override void Update()
@@ -40,5 +48,10 @@ public class Necromancer : Troop
     public override void Attack()
     {
         Debug.Log("Attack! " + _target.name.ToString());
+    }
+
+    public void SpawnSkeletons()
+    {
+
     }
 }
