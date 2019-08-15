@@ -462,7 +462,7 @@ namespace MTAssets
                 }
                 if (lightmapSupport == true)
                 {
-                    GameObjectUtility.SetStaticEditorFlags(gameObject, StaticEditorFlags.BatchingStatic | StaticEditorFlags.NavigationStatic | StaticEditorFlags.LightmapStatic);
+                    GameObjectUtility.SetStaticEditorFlags(gameObject, StaticEditorFlags.BatchingStatic | StaticEditorFlags.NavigationStatic | StaticEditorFlags.ContributeGI);
                 }
 
                 //Get current date
