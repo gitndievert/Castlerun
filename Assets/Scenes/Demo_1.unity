@@ -3911,6 +3911,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.06
       objectReference: {fileID: 0}
+    - target: {fileID: 7204306015810725810, guid: 29c749a079e342644a570f1ef542e263,
+        type: 3}
+      propertyPath: Health
+      value: 50000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29c749a079e342644a570f1ef542e263, type: 3}
 --- !u!1 &637305755
@@ -5857,6 +5862,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
+--- !u!1 &1055083518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5415348238613011193, guid: 29c749a079e342644a570f1ef542e263,
+    type: 3}
+  m_PrefabInstance: {fileID: 632228734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1055083523
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055083518}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.016000021, y: 0.049600013, z: 0.0017914977}
+  m_Center: {x: 0.007999677, y: 0.024799947, z: -0.00049981277}
 --- !u!1 &1093967642
 GameObject:
   m_ObjectHideFlags: 0
@@ -7135,6 +7159,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1354875208}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1361270342 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5415348238613011193, guid: 29c749a079e342644a570f1ef542e263,
+    type: 3}
+  m_PrefabInstance: {fileID: 792799035}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1361270347
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361270342}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.016000014, y: 0.049600013, z: 0.0017914969}
+  m_Center: {x: 0.008000061, y: 0.024800029, z: -0.0005000662}
 --- !u!1 &1378269406
 GameObject:
   m_ObjectHideFlags: 0
@@ -7179,7 +7222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857534b65a2506d488e6e7492e8f068a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WoodWall: {fileID: 2543357986072876719, guid: ce3313f25ddf62341a9e1fb23f0a923e,
+  WoodWall: {fileID: 2543357986072876719, guid: 026efacea9dda6747b5e03af1bc8e39e,
     type: 3}
   WoodFloor: {fileID: 7275474268219041069, guid: a5569e4373cef9a45811601800540512,
     type: 3}

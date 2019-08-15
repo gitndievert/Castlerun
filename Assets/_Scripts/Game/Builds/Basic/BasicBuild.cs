@@ -24,7 +24,7 @@ public class BasicBuild : Build
     public const int METAL_COST = 30;
     #endregion
 
-    public List<SnapPoints> SnapPoints = new List<SnapPoints>();
+    //public List<SnapPoints> SnapPoints = new List<SnapPoints>();
 
     public Material[] Materials;
 
@@ -33,18 +33,26 @@ public class BasicBuild : Build
 
     protected override ResourceType ResourceType {  get { return _pickType; } }
 
-    private ResourceType _pickType;    
+    private ResourceType _pickType;
+    private Animator _anim;
 
     protected override void Awake()
     {
         base.Awake();
-        SnapPoints = GetComponents<SnapPoints>().ToList();        
+        //SnapPoints = GetComponents<SnapPoints>().ToList();
+        _anim = GetComponentInChildren<Animator>();        
     }
 
     protected override void Start()
     {
         base.Start();        
         IsBasic = true;        
+    }
+
+    public override bool ConfirmPlacement()
+    {
+        _anim.Play("Wall");
+        return base.ConfirmPlacement();
     }
 
     public override bool SetResourceType(ResourceType type)
@@ -69,10 +77,10 @@ public class BasicBuild : Build
         return true;
     }
 
-    public Vector3[] SnapPointPos
+    /*public Vector3[] SnapPointPos
     {
         get { return SnapPoints.Select(a => a.transform.position).ToArray(); }
-    }
+    }*/
 
     //Old code
     /*protected override void OnCollisionEnter(Collision col)

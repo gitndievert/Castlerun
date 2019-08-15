@@ -16,7 +16,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Archer : Troop
+public class Archer : RangeTroop
 {
     public override void Attack()
     {

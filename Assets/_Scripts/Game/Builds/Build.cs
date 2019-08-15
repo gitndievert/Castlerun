@@ -24,7 +24,7 @@ public abstract class Build : BasePrefab, IBuild
 
     public bool IsBasic { get; set; }
 
-    protected bool _isPlaced = false;
+    protected bool isPlaced = false;
     protected Player Player = null;
 
     private Vector3 _offset;
@@ -43,9 +43,9 @@ public abstract class Build : BasePrefab, IBuild
 
     public virtual bool ConfirmPlacement()
     {
-        _isPlaced = true;
+        isPlaced = true;
         TagPrefab("Build");
-        return _isPlaced;
+        return isPlaced;
     }
 
     public abstract bool SetResourceType(ResourceType type);
@@ -72,7 +72,7 @@ public abstract class Build : BasePrefab, IBuild
                 SetHit(damage);
                 break;
             case "Player":
-                if (!_isPlaced) return;
+                if (!isPlaced) return;
                 break;
         }        
     }

@@ -131,6 +131,12 @@ public abstract class BasePrefab : MonoBehaviour
         }
     }
 
+    protected void SetStartHealth(int value)
+    {
+        Health = value;
+        MaxHealth = value;        
+    }
+
     protected void UpdateHealthText(int min, int max)
     {
         TargetUI.Target.text = $"{min}/{max}";
