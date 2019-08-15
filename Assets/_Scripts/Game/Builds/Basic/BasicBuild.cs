@@ -51,7 +51,7 @@ public class BasicBuild : Build
 
     public override bool ConfirmPlacement()
     {
-        _anim.Play("Wall");
+        _anim.Play("Basic");
         return base.ConfirmPlacement();
     }
 

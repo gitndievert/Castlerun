@@ -34,6 +34,10 @@ public class TroopFactory : Build, ISelectable
 
     protected override ResourceType ResourceType => ResourceType.Wood;
 
+    [Tooltip("Turn on the Builder")]    
+    public bool EnableTroopBuilder = false;
+
+
     public bool IsSelected { get; set; }
 
     public GameObject GameObject => gameObject;

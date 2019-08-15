@@ -15,14 +15,14 @@
 using UnityEngine;
 
 public abstract class Build : BasePrefab, IBuild
-{
-    [Tooltip("Turn on the Builder")]
-    [Header("Turn On Builder")]
-    public bool EnableTroopBuilder = false;    
+{ 
 
     public int PlacementCost { get; set; }
 
     public bool IsBasic { get; set; }
+
+    [Space(5)]
+    public GameObject BuildEffect;
 
     protected bool isPlaced = false;
     protected Player Player = null;
@@ -53,6 +53,12 @@ public abstract class Build : BasePrefab, IBuild
     public void SetPlayer(Player player)
     {
         Player = player;
+    }
+
+    public void StartBuildEffect()
+    {
+        if (BuildEffect != null && !BuildEffect.activeSelf)
+            BuildEffect.SetActive(true);
     }
 
     protected virtual void OnCollisionEnter(Collision col)

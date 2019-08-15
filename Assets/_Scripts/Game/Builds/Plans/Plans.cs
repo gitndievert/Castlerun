@@ -15,7 +15,7 @@
 using UnityEngine;
 
 public class Plans : MonoBehaviour
-{
+{    
     [Header("Basic Build Models")]
     [Space(5)]
     public GameObject WoodWall;
