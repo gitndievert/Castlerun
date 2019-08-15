@@ -646,11 +646,12 @@ MonoBehaviour:
   DestroySound: {fileID: 0}
   HitSounds: []
   HealthText: {fileID: 0}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 2c249046f3304cd42a5731c8ea26adcd, type: 3}
   SelectionTarget: {fileID: 7287754718042530950}
   StopDistanceOffset: 0
   SelectionCall: []
   Acknowledgement: []
+  SkeletonSpawnLimit: 3
 --- !u!95 &-724241541021319829
 Animator:
   serializedVersion: 3
@@ -865,6 +866,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -994,6 +996,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
