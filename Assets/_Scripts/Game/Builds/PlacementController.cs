@@ -46,8 +46,7 @@ public class PlacementController : MonoBehaviour
     private float mouseWheelRotation;
     private bool _triggerBuild = false;
     private bool _rotating = false;
-    private Player _player;
-    private GameObject _grid;
+    private Player _player;    
     private bool _outsideGrid;
 
     /// <summary>
@@ -63,8 +62,7 @@ public class PlacementController : MonoBehaviour
 
     private void Start()
     {
-        BuildMode = false;
-        _grid = _player.transform.Find("Grid").gameObject;
+        BuildMode = false;        
         _playerBuilds = _player.PlayerWorldItems.transform;
         SetResource(ResourceType.Wood);
     }
@@ -104,13 +102,9 @@ public class PlacementController : MonoBehaviour
     public bool SetGrid
     {
         set
-        {
-            if (_grid != null)
-            {
-                _grid.SetActive(value);
-                string status = _grid.activeSelf ? "ON" : "OFF";
-                UIManager.Instance.Messages.text = $"Build Mode {status}";
-            }
+        {                
+            string status = value ? "ON" : "OFF";
+            UIManager.Instance.Messages.text = $"Build Mode {status}";            
         }
     }
     
