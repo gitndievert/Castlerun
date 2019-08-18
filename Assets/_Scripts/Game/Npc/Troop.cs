@@ -32,9 +32,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public bool IsSelected { get; set; }
 
     public GameObject GameObject => gameObject;    
-
-    protected static readonly Color SelectedColor = Color.green;
-    protected static readonly Color DamageColor = Color.red;
+    
 
     #region Visual Troop Control
     [Header("Stopping Distance")]
@@ -52,6 +50,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     #region AudioClips For Troops
     public AudioClip[] SelectionCall;
     public AudioClip[] Acknowledgement;
+    public AudioClip[] AttackBattleCryClips;
     #endregion
 
     private int _destPoint;
@@ -110,7 +109,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             }
         }
     }
-
+        
     protected void GoToNextPoint()
     {
         if (points.Count == 0) return;               

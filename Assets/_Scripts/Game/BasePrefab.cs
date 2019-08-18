@@ -40,6 +40,12 @@ public abstract class BasePrefab : MonoBehaviour
         
     protected int MaxHealth;
     protected float DestroyTimer = 2f;
+
+    //Colors
+    protected static readonly Color SelectedColor = Color.green;
+    protected static readonly Color DamageColor = Color.red;
+    protected static readonly Color PassiveColor = Color.yellow;
+
     private List<MeshExploder> _explodables = new List<MeshExploder>();
     
     protected PlayerUI PlayerUI
@@ -95,13 +101,25 @@ public abstract class BasePrefab : MonoBehaviour
     }
     #endif*/
         
-    protected void OnMouseOver()
+    protected virtual void OnMouseOver()
     {
         //COME BACK
         //THIS WILL SHOW THE TARGETS WHEN SELECTED
         if (transform.tag == "Player") return;
         TargetPanel(true);
         UpdateHealthText(Health, MaxHealth);
+        switch (GetTag)
+        {
+            case Global.ARMY_TAG:
+                //glow green
+                break;
+            case Global.BUILD_TAG:
+                //glow yellow
+                break;
+            case Global.ENEMY_TAG:
+                //glow red
+                break;
+        }
     }
 
     protected void OnMouseExit()
