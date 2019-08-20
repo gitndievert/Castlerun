@@ -170,7 +170,7 @@ public class Player : BasePrefab, IPlayer
 
         //Will probably have this only when a target is in the way or something
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode 
-            /*&& !Selection.IsSelecting*/)
+            && (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl)))
         {            
             _movement.Swing();
         }

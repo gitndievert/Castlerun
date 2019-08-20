@@ -176,17 +176,19 @@ public class TroopFactory : Build, ISelectable
             var makeTroop = Instantiate(randTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);
 
             if (Player != null)
-            {
-                for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
-                {
-                    makeTroop.GetComponent<Troop>().points.Add(p, Player.PlayerPad.ResourcePoints[p]);
-                }
+            {                
                 //Parent to Player Builds
                 makeTroop.transform.parent = Player.PlayerWorldItems.transform;
-                if(makeTroop.GetComponent<Gatherer>())
-                {
-                    makeTroop.GetComponent<Gatherer>().SetFactory(this);
-                }
+
+                Gatherer gatherer = makeTroop.GetComponent<Gatherer>();
+                if (gatherer != null)
+                {                    
+                    gatherer.SetFactory(this);
+                    for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
+                    {
+                        gatherer.points.Add(p, Player.PlayerPad.ResourcePoints[p]);
+                    }
+                }                
             }
 
             _trainedCounter++;

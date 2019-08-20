@@ -92,7 +92,7 @@ public class Selection : DSingle<Selection>
                 if (hit.point != null)
                 {
                     if (hit.transform.gameObject.layer == Global.GROUND_LAYER
-                        || (hit.transform.tag == Global.ARMY_TAG && listcount < 1))
+                        || (hit.transform.tag == Global.ARMY_TAG && listcount > 1))
                     {
                         if (listcount > 0)
                         {
@@ -188,6 +188,7 @@ public class Selection : DSingle<Selection>
 
     public void UpdateSingleTarget(ISelectable selection)
     {
+        ClearSingleTarget();
         SingleTargetSelected = selection;
         Debug.Log("Single Target " + selection.ToString());
         TargetUI.SingleTargetBox.GetComponentInChildren<TextMeshProUGUI>().text = SingleTargetSelected.ToString();
