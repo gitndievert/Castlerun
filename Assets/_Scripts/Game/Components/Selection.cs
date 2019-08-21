@@ -92,7 +92,7 @@ public class Selection : DSingle<Selection>
                 if (hit.point != null)
                 {
                     if (hit.transform.gameObject.layer == Global.GROUND_LAYER
-                        || (hit.transform.tag == Global.ARMY_TAG && listcount > 1))
+                        || (hit.transform.tag == Global.ARMY_TAG && listcount < 1))
                     {
                         if (listcount > 0)
                         {

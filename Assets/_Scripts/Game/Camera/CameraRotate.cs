@@ -115,12 +115,14 @@ public class CameraRotate : MonoBehaviour
         // If either mouse buttons are down, let the mouse govern camera position
         if (GUIUtility.hotControl == 0)
         {
+            //This will enable both middle and right buttons. Right will assist in camera changes, 
+            //and middle will allow freelook
             if (Input.GetMouseButton(KeyBindings.MIDDLE_MOUSE_BUTTON) || Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
             {
                 _xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
                 _yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
             }
-            // otherwise, ease behind the target if any of the directional keys are pressed
+            //otherwise, ease behind the target if any of the directional keys are pressed
             else if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
             {
                 float targetRotationAngle = target.eulerAngles.y;

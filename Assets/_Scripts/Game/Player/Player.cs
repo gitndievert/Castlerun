@@ -169,10 +169,9 @@ public class Player : BasePrefab, IPlayer
         MovementInput.Lock = IsDead;
 
         //Will probably have this only when a target is in the way or something
-        if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON) && !Global.BuildMode 
-            && (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl)))
+        if (!Global.BuildMode && Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON))
         {            
-            _movement.Swing();
+            //_movement.SwingPlayer();            
         }
 
 
@@ -315,15 +314,14 @@ public class Player : BasePrefab, IPlayer
         if (Physics.Raycast(ray, out RaycastHit hit))
         {            
             if (hit.transform == null) return;
-            if (!Extensions.DistanceLess(transform, hit.transform, Global.STRIKE_DIST)) return;
-            
+            if (!Extensions.DistanceLess(transform, hit.transform, Global.STRIKE_DIST)) return;            
             switch (hit.transform.tag)
             {                
-                case Global.BUILD_TAG:
+                case Global.BUILD_TAG:                    
                     var build = hit.transform.GetComponent<IBuild>();
                     build.SetHit(HitAmount);                    
                     break;                                
-                case Global.ENEMY_TAG:
+                case Global.ENEMY_TAG:                    
                     var character = hit.transform.GetComponent<ICharacter>();
                     character.SetHit(HitAmount);                    
                     break;

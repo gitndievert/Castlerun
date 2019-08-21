@@ -1,65 +1,179 @@
 fileFormatVersion: 2
 guid: 8d72335e720b0584d8d3d08d012ba758
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: RigHead
-    100004: RigHeadBone001
-    100006: RigLCalf
-    100008: RigLCollarbone
-    100010: RigLFoot
-    100012: RigLForearm
-    100014: RigLPalm
-    100016: RigLThigh
-    100018: RigLToe11
-    100020: RigLToe12
-    100022: RigLUpperarm
-    100024: RigNeck
-    100026: RigPelvis
-    100028: RigRCalf
-    100030: RigRCollarbone
-    100032: RigRFoot
-    100034: RigRForearm
-    100036: RigRibcage
-    100038: RigRPalm
-    100040: RigRThigh
-    100042: RigRToe11
-    100044: RigRToe12
-    100046: RigRUpperarm
-    100048: RigSpine1
-    100050: RigSpine2
-    100052: RigSpine3
-    400000: //RootNode
-    400002: RigHead
-    400004: RigHeadBone001
-    400006: RigLCalf
-    400008: RigLCollarbone
-    400010: RigLFoot
-    400012: RigLForearm
-    400014: RigLPalm
-    400016: RigLThigh
-    400018: RigLToe11
-    400020: RigLToe12
-    400022: RigLUpperarm
-    400024: RigNeck
-    400026: RigPelvis
-    400028: RigRCalf
-    400030: RigRCollarbone
-    400032: RigRFoot
-    400034: RigRForearm
-    400036: RigRibcage
-    400038: RigRPalm
-    400040: RigRThigh
-    400042: RigRToe11
-    400044: RigRToe12
-    400046: RigRUpperarm
-    400048: RigSpine1
-    400050: RigSpine2
-    400052: RigSpine3
-    7400000: Standing Melee Attack Horizontal
-    9500000: //RootNode
-    2186277476908879412: ImportLogs
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: RigHead
+  - first:
+      1: 100004
+    second: RigHeadBone001
+  - first:
+      1: 100006
+    second: RigLCalf
+  - first:
+      1: 100008
+    second: RigLCollarbone
+  - first:
+      1: 100010
+    second: RigLFoot
+  - first:
+      1: 100012
+    second: RigLForearm
+  - first:
+      1: 100014
+    second: RigLPalm
+  - first:
+      1: 100016
+    second: RigLThigh
+  - first:
+      1: 100018
+    second: RigLToe11
+  - first:
+      1: 100020
+    second: RigLToe12
+  - first:
+      1: 100022
+    second: RigLUpperarm
+  - first:
+      1: 100024
+    second: RigNeck
+  - first:
+      1: 100026
+    second: RigPelvis
+  - first:
+      1: 100028
+    second: RigRCalf
+  - first:
+      1: 100030
+    second: RigRCollarbone
+  - first:
+      1: 100032
+    second: RigRFoot
+  - first:
+      1: 100034
+    second: RigRForearm
+  - first:
+      1: 100036
+    second: RigRibcage
+  - first:
+      1: 100038
+    second: RigRPalm
+  - first:
+      1: 100040
+    second: RigRThigh
+  - first:
+      1: 100042
+    second: RigRToe11
+  - first:
+      1: 100044
+    second: RigRToe12
+  - first:
+      1: 100046
+    second: RigRUpperarm
+  - first:
+      1: 100048
+    second: RigSpine1
+  - first:
+      1: 100050
+    second: RigSpine2
+  - first:
+      1: 100052
+    second: RigSpine3
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: RigHead
+  - first:
+      4: 400004
+    second: RigHeadBone001
+  - first:
+      4: 400006
+    second: RigLCalf
+  - first:
+      4: 400008
+    second: RigLCollarbone
+  - first:
+      4: 400010
+    second: RigLFoot
+  - first:
+      4: 400012
+    second: RigLForearm
+  - first:
+      4: 400014
+    second: RigLPalm
+  - first:
+      4: 400016
+    second: RigLThigh
+  - first:
+      4: 400018
+    second: RigLToe11
+  - first:
+      4: 400020
+    second: RigLToe12
+  - first:
+      4: 400022
+    second: RigLUpperarm
+  - first:
+      4: 400024
+    second: RigNeck
+  - first:
+      4: 400026
+    second: RigPelvis
+  - first:
+      4: 400028
+    second: RigRCalf
+  - first:
+      4: 400030
+    second: RigRCollarbone
+  - first:
+      4: 400032
+    second: RigRFoot
+  - first:
+      4: 400034
+    second: RigRForearm
+  - first:
+      4: 400036
+    second: RigRibcage
+  - first:
+      4: 400038
+    second: RigRPalm
+  - first:
+      4: 400040
+    second: RigRThigh
+  - first:
+      4: 400042
+    second: RigRToe11
+  - first:
+      4: 400044
+    second: RigRToe12
+  - first:
+      4: 400046
+    second: RigRUpperarm
+  - first:
+      4: 400048
+    second: RigSpine1
+  - first:
+      4: 400050
+    second: RigSpine2
+  - first:
+      4: 400052
+    second: RigSpine3
+  - first:
+      74: 7400000
+    second: Standing Melee Attack Horizontal
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -97,8 +211,9 @@ ModelImporter:
     - serializedVersion: 16
       name: Standing Melee Attack Horizontal
       takeName: mixamo.com
+      internalID: 7400000
       firstFrame: 0
-      lastFrame: 33
+      lastFrame: 32.4
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -118,7 +233,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.4211663
+      - time: 0.2065266
         functionName: Swing
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -143,6 +258,7 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -150,18 +266,19 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -170,10 +287,11 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 1
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human:
     - boneName: RigPelvis
       humanName: Hips
@@ -506,6 +624,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 1

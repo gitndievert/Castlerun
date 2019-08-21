@@ -671,9 +671,10 @@ Animator:
   m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
     are already bound by a Humanoid avatar. These transforms can only be changed by
     Humanoid clips.\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
-    'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
-    'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform 'RigSpine2'\n\tTransform 'RigSpine3'\n\tand
-    more ...\n\tFrom animation clip 'SpinAttack'"
+    'RigRCollarbone'\n\tTransform 'RigLFoot'\n\tTransform 'RigLThumb1'\n\tTransform
+    'RigRUpperarm'\n\tTransform 'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform
+    'RigPelvis'\n\tTransform 'RigLThumb2'\n\tand more ...\n\tFrom animation clip 'Sword
+    And Shield Attack'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -726,9 +727,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2.3255486
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8211758, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &-1553202610924228088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,7 +749,7 @@ MonoBehaviour:
   m_RunCycleLegOffset: 0.2
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 0.4
+  m_GroundCheckDistance: 0.5
 --- !u!1 &2783684166736639407
 GameObject:
   m_ObjectHideFlags: 0

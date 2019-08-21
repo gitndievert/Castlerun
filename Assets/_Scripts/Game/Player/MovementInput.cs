@@ -136,7 +136,7 @@ public class MovementInput : MonoBehaviour
         //_anim.
     }
 
-    public void Swing()
+    public void SwingPlayer()
     {        
         _anim.SetBool("Swing", true);
     }
