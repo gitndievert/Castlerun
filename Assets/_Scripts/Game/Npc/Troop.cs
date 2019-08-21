@@ -96,7 +96,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             {
                 nav.SetDestination(_lockPoint);
 
-                if (nav.remainingDistance > nav.stoppingDistance + StopDistanceOffset)
+                if (nav.remainingDistance >= nav.stoppingDistance + StopDistanceOffset)
                 {
                     _char.Move(nav.desiredVelocity, false, false);
                 }
