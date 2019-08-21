@@ -36,7 +36,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     #region Visual Troop Control
     [Header("Stopping Distance")]
-    public float StopDistanceOffset;
+    public float StopDistanceOffset = 1f;
 
     protected Animator anim;
     protected NavMeshAgent nav;
@@ -102,9 +102,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
                 }
                 else
                 {
-                    _char.Move(Vector3.zero, false, false);
-                    Debug.Log("Stopped Moving");
-                    _isMoving = false;
+                    MoveStop();
                 }
             }
         }
@@ -195,7 +193,10 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     {
         //Come Back here!
         if (collision.transform.tag == Global.ARMY_TAG ||
-            collision.transform.tag == Global.ENEMY_TAG) return;
+            collision.transform.tag == Global.ENEMY_TAG)
+        {
+            MoveStop();            
+        }
     }
 
     public abstract void Target(ISelectable target);
@@ -206,6 +207,12 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     {        
         _lockPoint = point;
         _isMoving = true;
+    }
+
+    public void MoveStop()
+    {
+        _char.Move(Vector3.zero, false, false);        
+        _isMoving = false;
     }
 
     public override void SetHit(int amount)
