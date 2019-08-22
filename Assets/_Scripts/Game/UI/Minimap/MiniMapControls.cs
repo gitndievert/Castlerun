@@ -34,10 +34,11 @@ public class MiniMapControls : MonoBehaviour
     [SerializeField]
     private float _zoomFactorIncrement = 20f;
     [SerializeField]
-    private readonly bool _camFollow = false;
+    private bool _camFollow = false;
 
     private Vector3 _origPos;    
-    private Transform _cameraTransformParent;    
+    private Transform _cameraTransformParent;
+    private Vector3 _velocity = Vector3.zero;
 
     public static Transform PlayerTransform;
 
@@ -62,6 +63,15 @@ public class MiniMapControls : MonoBehaviour
     private void Update()
     {
         //Need to figure out handlers and events for inside the castle
+        if(PlayerTransform != null)
+        {   
+            MiniMapCamera.transform.rotation = Quaternion.Euler(90,0,0);
+            Vector3 point = MiniMapCamera.WorldToViewportPoint(PlayerTransform.position);
+            Vector3 delta = PlayerTransform.position - MiniMapCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
+            Vector3 destination = MiniMapCamera.transform.position + delta;
+            MiniMapCamera.transform.position = Vector3.SmoothDamp(MiniMapCamera.transform.position, destination, ref _velocity, 0.15f);
+        }
+
         if (Global.InsideCastle)
         {
             MiniMapCamera.gameObject.SetActive(false);
@@ -75,10 +85,11 @@ public class MiniMapControls : MonoBehaviour
     public void ZoomIn()
     {
         if ((MiniMapCamera.orthographicSize - _zoomFactorIncrement) <= MinZoomFactor) return;
-        MiniMapCamera.transform.parent = PlayerTransform;        
+        //MiniMapCamera.transform.parent = PlayerTransform;        
+        //_camFollow = true;
         MiniMapCamera.orthographicSize -= _zoomFactorIncrement;
         //Need to COME BACK and position this correctly
-        MiniMapCamera.ScreenToWorldPoint(new Vector2(PlayerTransform.position.x * 2, PlayerTransform.position.z * 2));
+        //MiniMapCamera.ScreenToWorldPoint(new Vector2(PlayerTransform.position.x * 2, PlayerTransform.position.z * 2));        
     }
 
     public void ZoomOut()
@@ -86,10 +97,12 @@ public class MiniMapControls : MonoBehaviour
         if ((MiniMapCamera.orthographicSize + _zoomFactorIncrement) >= MaxZoomFactor)
         {
             //MiniMapCamera.transform.parent = _cameraTransformParent;
-            //MiniMapCamera.transform.position = _origPos;
+            //_camFollow = false;
             return;
         }
-            
-        MiniMapCamera.orthographicSize += _zoomFactorIncrement;
+        else
+        {
+            MiniMapCamera.orthographicSize += _zoomFactorIncrement;
+        }
     }
 }

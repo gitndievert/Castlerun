@@ -648,11 +648,13 @@ MonoBehaviour:
   HealthText: {fileID: 0}
   Icon: {fileID: 21300000, guid: 2c249046f3304cd42a5731c8ea26adcd, type: 3}
   SelectionTarget: {fileID: 7287754718042530950}
-  StopDistanceOffset: 1
+  StopDistanceOffset: 0
   SelectionCall: []
   Acknowledgement: []
   AttackBattleCryClips: []
   SkeletonSpawnLimit: 3
+  Skelly: {fileID: 0}
+  Zombie: {fileID: 0}
 --- !u!95 &-724241541021319829
 Animator:
   serializedVersion: 3
@@ -663,7 +665,7 @@ Animator:
   m_GameObject: {fileID: 2750229220499736087}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3ae6b4bdd9d9d7642bacb00133452d02, type: 3}
-  m_Controller: {fileID: 9100000, guid: 9f39186fe6b8207479385a3ea315023e, type: 2}
+  m_Controller: {fileID: 22100000, guid: 999db907f87c1cb4891acf1c34ea5706, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1

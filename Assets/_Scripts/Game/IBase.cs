@@ -12,10 +12,9 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-using UnityEngine;
-
-public interface ICharacter : IBase
-{    
-    void Target(ISelectable target);
-    void Move(Vector3 point); 
+public interface IBase
+{
+    void SetHit(int amount);
+    void Die();
 }
+    

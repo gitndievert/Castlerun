@@ -14,9 +14,8 @@
 
 using UnityEngine;
 
-public abstract class Build : BasePrefab, IBuild
+public abstract class Build : BasePrefab, IBuild, ISelectable
 { 
-
     public int PlacementCost { get; set; }
 
     public bool IsBasic { get; set; }
@@ -33,7 +32,10 @@ public abstract class Build : BasePrefab, IBuild
     //public float GridSnap = 0.5f;  
     protected abstract float BuildTime { get; }
     protected abstract ResourceType ResourceType { get; }
-        
+    public bool IsSelected { get; set; }
+
+    public GameObject GameObject => gameObject;
+
     protected virtual void Start()
     {                    
         if (Health == 0) Health = 20;        
@@ -47,7 +49,7 @@ public abstract class Build : BasePrefab, IBuild
         TagPrefab("Build");
         return isPlaced;
     }
-
+    
     public abstract bool SetResourceType(ResourceType type);
 
     public void SetPlayer(Player player)
@@ -59,6 +61,28 @@ public abstract class Build : BasePrefab, IBuild
     {
         if (BuildEffect != null && !BuildEffect.activeSelf)
             BuildEffect.SetActive(true);
+    }
+
+    public void OnMouseOver()
+    {
+        SelectionUI.UpdateSingleTarget(this);
+        switch (GetTag)
+        {
+            case Global.ARMY_TAG:
+                //glow green
+                break;
+            case Global.BUILD_TAG:
+                //glow yellow
+                break;
+            case Global.ENEMY_TAG:
+                //glow red
+                break;
+        }
+    }
+
+    public void OnMouseExit()
+    {
+        SelectionUI.ClearSingleTarget();
     }
 
     protected virtual void OnCollisionEnter(Collision col)
@@ -83,33 +107,19 @@ public abstract class Build : BasePrefab, IBuild
         }        
     }
 
-  
-
-    //Old Hitblocker code
-    /*protected void OnTriggerEnter(Collider col)
+    public void Select()
     {
-        if (col.gameObject.tag == "Build")
+        if (!IsSelected)
         {
-            Debug.Log("We got a hit");
-            HitBlocker = true;
+            IsSelected = true;
         }
     }
 
-    protected void OnTriggerExit(Collider other)
+    public void UnSelect()
     {
-        Debug.Log("We left");
-        HitBlocker = false;
-    }*/
-
-    /*protected void OnTriggerEnter(Collider col)
-    {        
-        if (col.gameObject.tag != "Build") return;
-        Debug.Log("This Hits");
-        if (!_isPlaced)
+        if (IsSelected)
         {
-            Debug.Log("This Hits");
-            transform.position = transform.position - col.transform.position;            
+            IsSelected = false;
         }
-    }*/
-
+    }
 }

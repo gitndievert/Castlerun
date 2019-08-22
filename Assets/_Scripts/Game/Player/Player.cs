@@ -161,18 +161,21 @@ public class Player : BasePrefab, IPlayer
 
         return _selectedResource;
     }
+
+    private void FixedUpdate()
+    {
+        //Will probably have this only when a target is in the way or something
+        if (!Global.BuildMode && Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON))
+        {
+            if(SwingTargetSelected() != null) _movement.SwingPlayer();
+        }
+    }
         
     private void Update()
     {        
         //Temporary, work out the details for build mappings later
         //Disallow movements if player is DEAD
-        MovementInput.Lock = IsDead;
-
-        //Will probably have this only when a target is in the way or something
-        if (!Global.BuildMode && Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON))
-        {            
-            //_movement.SwingPlayer();            
-        }
+        MovementInput.Lock = IsDead;       
 
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -304,35 +307,34 @@ public class Player : BasePrefab, IPlayer
         PlayerCompanion = null;
         CompanionOut = false;
     }   
-
-
-    /* This whole thing is lame, need to replace */
+           
     public void Swing()
-    {        
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {            
-            if (hit.transform == null) return;
-            if (!Extensions.DistanceLess(transform, hit.transform, Global.STRIKE_DIST)) return;            
-            switch (hit.transform.tag)
-            {                
-                case Global.BUILD_TAG:                    
-                    var build = hit.transform.GetComponent<IBuild>();
-                    build.SetHit(HitAmount);                    
-                    break;                                
-                case Global.ENEMY_TAG:                    
-                    var character = hit.transform.GetComponent<ICharacter>();
-                    character.SetHit(HitAmount);                    
-                    break;
-                case "Player":
-                case Global.ARMY_TAG:
-                default:
-                    return;
-            }            
-        }
+    {
+        if (SwingTargetSelected() == null) return;
+        var target = SwingTargetSelected().GameObject;
+
+        switch (target.tag)
+        {
+            case Global.BUILD_TAG:
+            case Global.ENEMY_TAG:
+                var build = target.transform.GetComponent<IBase>();
+                build.SetHit(HitAmount);
+                break;
+            case "Player":
+            case Global.ARMY_TAG:
+            default:
+                return;
+        }        
+    }  
+    
+    private ISelectable SwingTargetSelected()
+    {
+        var singletarget = UIManager.Instance.SelectableComponent.SingleTargetSelected;
+        if (singletarget == null) return null;
+        GameObject target = singletarget.GameObject;
+        if (!Extensions.DistanceLess(transform, target.transform, Global.STRIKE_DIST)) return null;
+        return singletarget;
     }
-       
   
     public override void SetHit(int amount)
     {

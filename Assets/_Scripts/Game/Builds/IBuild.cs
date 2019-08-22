@@ -12,11 +12,10 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-public interface IBuild
+public interface IBuild : IBase
 {
     bool ConfirmPlacement();
-    bool SetResourceType(ResourceType type);
-    void SetHit(int amount);        
+    bool SetResourceType(ResourceType type);    
     void SetPlayer(Player player);
     int PlacementCost { get; set; }
     bool IsBasic { get; set; }

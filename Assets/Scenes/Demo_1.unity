@@ -122,55 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 221334c32bb38dd4db88b47301ac104a, type: 2}
---- !u!1 &22087378
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 22087382}
-  - component: {fileID: 22087381}
-  m_Layer: 0
-  m_Name: SoundManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &22087381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 22087378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4760f6dadc81084988d6fb1668143ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MusicClips:
-  - {fileID: 8300000, guid: 9367e5e32b9586a4f9423379a622d6c1, type: 3}
-  - {fileID: 8300000, guid: 3ba148fba1e135446a0e0d8e629869ef, type: 3}
-  FadeOutTime: 3
-  FadeInTime: 3
-  MusicEnabled: 1
---- !u!4 &22087382
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 22087378}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.642761, y: -26.859509, z: 176.16483}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 235755484}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &44384908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,7 +1120,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0.0546875, y: 0.1796875, z: 0.03515625, w: -0.0390625}
+  m_BoundingSphereOverride: {x: 2.47588e+27, y: 2.3509887e-38, z: 1.8e-43, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1943,7 +1894,6 @@ Transform:
   m_LocalPosition: {x: 198.82152, y: 40.095997, z: 99.423805}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 22087382}
   - {fileID: 563847980}
   - {fileID: 406941237}
   - {fileID: 1378269407}
@@ -2093,13 +2043,7 @@ PrefabInstance:
     - target: {fileID: -724241541021319829, guid: d3623546911d1e949823c67f53407132,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed by
-        Humanoid clips.\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
-        'RigRCollarbone'\n\tTransform 'RigLFoot'\n\tTransform 'RigLThumb1'\n\tTransform
-        'RigRUpperarm'\n\tTransform 'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform
-        'RigPelvis'\n\tTransform 'RigLThumb2'\n\tand more ...\n\tFrom animation clip
-        'Sword And Shield Attack'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2197402741631013300, guid: d3623546911d1e949823c67f53407132,
         type: 3}
@@ -2631,6 +2575,7 @@ MonoBehaviour:
   MaxZoomFactor: 174
   MinZoomFactor: 60
   _zoomFactorIncrement: 20
+  _camFollow: 0
 --- !u!222 &359217153
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2872,7 +2817,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 235755484}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &406941238
 MonoBehaviour:
@@ -3470,7 +3415,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 235755484}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &563847981
 MonoBehaviour:
@@ -6842,13 +6787,7 @@ PrefabInstance:
     - target: {fileID: -724241541021319829, guid: d3623546911d1e949823c67f53407132,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed by
-        Humanoid clips.\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
-        'RigRCollarbone'\n\tTransform 'RigLFoot'\n\tTransform 'RigLThumb1'\n\tTransform
-        'RigRUpperarm'\n\tTransform 'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform
-        'RigPelvis'\n\tTransform 'RigLThumb2'\n\tand more ...\n\tFrom animation clip
-        'Sword And Shield Attack'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2197402741631013300, guid: d3623546911d1e949823c67f53407132,
         type: 3}
@@ -7208,7 +7147,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 235755484}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1378269408
 MonoBehaviour:
@@ -7839,13 +7778,7 @@ PrefabInstance:
     - target: {fileID: -724241541021319829, guid: d3623546911d1e949823c67f53407132,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed by
-        Humanoid clips.\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
-        'RigRCollarbone'\n\tTransform 'RigLFoot'\n\tTransform 'RigLThumb1'\n\tTransform
-        'RigRUpperarm'\n\tTransform 'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform
-        'RigPelvis'\n\tTransform 'RigLThumb2'\n\tand more ...\n\tFrom animation clip
-        'Sword And Shield Attack'"
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3623546911d1e949823c67f53407132, type: 3}
@@ -11335,13 +11268,7 @@ PrefabInstance:
     - target: {fileID: -724241541021319829, guid: d3623546911d1e949823c67f53407132,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed by
-        Humanoid clips.\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
-        'RigRCollarbone'\n\tTransform 'RigLFoot'\n\tTransform 'RigLThumb1'\n\tTransform
-        'RigRUpperarm'\n\tTransform 'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform
-        'RigPelvis'\n\tTransform 'RigLThumb2'\n\tand more ...\n\tFrom animation clip
-        'Sword And Shield Attack'"
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3623546911d1e949823c67f53407132, type: 3}
@@ -11822,13 +11749,7 @@ PrefabInstance:
     - target: {fileID: -724241541021319829, guid: d3623546911d1e949823c67f53407132,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed by
-        Humanoid clips.\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
-        'RigRCollarbone'\n\tTransform 'RigLFoot'\n\tTransform 'RigLThumb1'\n\tTransform
-        'RigRUpperarm'\n\tTransform 'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform
-        'RigPelvis'\n\tTransform 'RigLThumb2'\n\tand more ...\n\tFrom animation clip
-        'Sword And Shield Attack'"
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3623546911d1e949823c67f53407132, type: 3}
@@ -11845,6 +11766,7 @@ GameObject:
   - component: {fileID: 1927245852}
   - component: {fileID: 1927245854}
   - component: {fileID: 1927245855}
+  - component: {fileID: 1927245856}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -11864,7 +11786,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 235755484}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1927245852
 MonoBehaviour:
@@ -12086,6 +12008,24 @@ MonoBehaviour:
   Swinging: []
   Death: []
   Grunts: []
+--- !u!114 &1927245856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927245850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4760f6dadc81084988d6fb1668143ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicClips:
+  - {fileID: 8300000, guid: 9367e5e32b9586a4f9423379a622d6c1, type: 3}
+  - {fileID: 8300000, guid: 3ba148fba1e135446a0e0d8e629869ef, type: 3}
+  FadeOutTime: 3
+  FadeInTime: 3
+  MusicEnabled: 1
 --- !u!1 &1927686120
 GameObject:
   m_ObjectHideFlags: 0
@@ -13893,6 +13833,11 @@ PrefabInstance:
     - target: {fileID: 5785308593239815809, guid: 4424976e64c5223418767f18424d8b86,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6222622778425993838, guid: 4424976e64c5223418767f18424d8b86,
+        type: 3}
+      propertyPath: StopDistanceOffset
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

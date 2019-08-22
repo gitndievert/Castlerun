@@ -213,7 +213,7 @@ ModelImporter:
       takeName: mixamo.com
       internalID: 7400000
       firstFrame: 0
-      lastFrame: 32.4
+      lastFrame: 38
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -224,26 +224,28 @@ ModelImporter:
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.2065266
-        functionName: Swing
+      - time: 0.9324675
+        functionName: SwingStop
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 1507808357, guid: 47c4c30cb31bfbb47bf369cc29485702,
+          type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.8051948
-        functionName: SwingStop
+      - time: 0.41042343
+        functionName: Swing
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 1507808357, guid: 47c4c30cb31bfbb47bf369cc29485702,
+          type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

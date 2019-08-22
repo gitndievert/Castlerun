@@ -17,7 +17,7 @@ using TMPro;
 using System;
 using System.Collections.Generic;
 
-public abstract class BasePrefab : MonoBehaviour
+public abstract class BasePrefab : MonoBehaviour, IBase
 {
     /// <summary>
     /// Health Tracker for all Base Prefabs
@@ -63,6 +63,14 @@ public abstract class BasePrefab : MonoBehaviour
             return UIManager.Instance.TargetUI;
         }
     }
+
+    protected Selection SelectionUI
+    {
+        get
+        {
+            return UIManager.Instance.SelectableComponent;
+        }
+    }
     
     protected virtual void Awake()
     {
@@ -92,52 +100,7 @@ public abstract class BasePrefab : MonoBehaviour
     {
         transform.tag = tag;
     }
-
-    //For testing
-    /*#if UNITY_EDITOR
-    void OnMouseDown()
-    {
-        Explode();
-    }
-    #endif*/
-        
-    protected virtual void OnMouseOver()
-    {
-        //COME BACK
-        //THIS WILL SHOW THE TARGETS WHEN SELECTED
-        if (transform.tag == "Player") return;
-        TargetPanel(true);
-        UpdateHealthText(Health, MaxHealth);
-        switch (GetTag)
-        {
-            case Global.ARMY_TAG:
-                //glow green
-                break;
-            case Global.BUILD_TAG:
-                //glow yellow
-                break;
-            case Global.ENEMY_TAG:
-                //glow red
-                break;
-        }
-    }
-
-    protected void OnMouseExit()
-    {
-        ClearTarget();
-    }
-
-    protected void ClearTarget()
-    {
-        TargetUI.Target.text = "";
-        TargetPanel(false);
-    }
-
-    protected void TargetPanel(bool show)
-    {
-        UIManager.Instance.TargetPanel.gameObject.SetActive(show);
-    }
-
+    
     protected void Explode()
     {
         if(_explodables.Count > 0)
@@ -154,12 +117,7 @@ public abstract class BasePrefab : MonoBehaviour
         Health = value;
         MaxHealth = value;        
     }
-
-    protected void UpdateHealthText(int min, int max)
-    {
-        TargetUI.Target.text = $"{min}/{max}";
-    }
-
+    
     public virtual void SetHit(int amount)
     {
         if (Health - amount > 0)
@@ -169,8 +127,7 @@ public abstract class BasePrefab : MonoBehaviour
                 SoundManager.PlaySound(HitSounds);
         }
         else
-        {
-            UpdateHealthText(0, MaxHealth);
+        {            
             if (DestroySound != null)
                 SoundManager.PlaySound(DestroySound);
             if (CanExplode) Explode();
@@ -186,7 +143,6 @@ public abstract class BasePrefab : MonoBehaviour
     public virtual void Die()
     {
         float timer = CanExplode ? 0 : DestroyTimer;
-        Destroy(gameObject, timer);
-        ClearTarget();
+        Destroy(gameObject, timer);        
     }
 }

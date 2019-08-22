@@ -59,7 +59,9 @@ public static class Global
     public const int DEFAULT_LAYER = 0;
     public const int IGNORE_LAYER = 2;
     public const int GROUND_LAYER = 8;
-    public const float STRIKE_DIST = 10f;
+    public const float STRIKE_DIST = 3.5f;
+    public const float CASTER_STRIKE_DIST = 7f;
+    public const float ARCHER_STRIKE_DIST = 10f;
     public const int BUILD_GRID_LAYER = 9;
 
     public const int PLAYER_MAX_SLOTS = 4;

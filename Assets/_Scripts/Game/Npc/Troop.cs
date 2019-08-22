@@ -31,12 +31,11 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     //Selectable
     public bool IsSelected { get; set; }
 
-    public GameObject GameObject => gameObject;    
-    
+    public GameObject GameObject => gameObject;        
 
     #region Visual Troop Control
     [Header("Stopping Distance")]
-    public float StopDistanceOffset = 1f;
+    public float StopDistanceOffset = 0f;
 
     protected Animator anim;
     protected NavMeshAgent nav;
@@ -107,7 +106,26 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             }
         }
     }
-        
+
+    public void OnMouseOver()
+    {
+        SelectionUI.UpdateSingleTarget(this);
+        switch (GetTag)
+        {
+            case Global.ARMY_TAG:
+                //glow green
+                break;            
+            case Global.ENEMY_TAG:
+                //glow red
+                break;
+        }
+    }
+
+    public void OnMouseExit()
+    {
+        SelectionUI.ClearSingleTarget();
+    }
+
     protected void GoToNextPoint()
     {
         if (points.Count == 0) return;               
@@ -163,16 +181,12 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             if(GetTag == Global.ARMY_TAG)
             {
                 SelectionTargetStatus(true, SelectedColor);
-                selection.UpdateMassList(this);
-                selection.UpdateSingleTarget(this);
+                selection.UpdateMassList(this);                
             }
             else if(GetTag == Global.ENEMY_TAG)
             {
-                SelectionTargetStatus(true, DamageColor);
-                selection.UpdateSingleTarget(this);
-                //Put into the enemy target ui panel
-            }
-            
+                SelectionTargetStatus(true, DamageColor);                                
+            }            
         }
     }
     
@@ -226,8 +240,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             anim.Play("Hit");
         }
         else
-        {
-            UpdateHealthText(0, MaxHealth);
+        {            
             if (DestroySound != null)
                 SoundManager.PlaySound(DestroySound);
             if (CanExplode) Explode();
@@ -238,9 +251,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public override void Die()
     {
         anim.Play("Death1");
-        Destroy(gameObject, DestroyTimer);
-        ClearTarget();
+        Destroy(gameObject, DestroyTimer);        
     }
-
 
 }

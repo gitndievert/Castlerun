@@ -14,7 +14,7 @@
 
 using UnityEngine;
 
-public class OffensiveBuild : Build, ISelectable
+public class OffensiveBuild : Build
 {
     public AudioClip[] FireSounds;    
     public GameObject Projectile;
@@ -36,10 +36,6 @@ public class OffensiveBuild : Build, ISelectable
 
     protected override float BuildTime => ConstructionTime;
     protected override ResourceType ResourceType => ResourceType.Metal;
-
-    public bool IsSelected { get; set; }
-
-    public GameObject GameObject => gameObject;
 
     protected override void Start()
     {
@@ -105,15 +101,5 @@ public class OffensiveBuild : Build, ISelectable
     public override bool SetResourceType(ResourceType type)
     {
         return type == ResourceType;
-    }
-
-    public void UnSelect()
-    {
-        
-    }
-
-    public void Select()
-    {
-        
-    }
+    }    
 }

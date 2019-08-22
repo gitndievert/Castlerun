@@ -12,9 +12,13 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+public enum NecroSpawnType
+{
+    Skelly,
+    Zombie
+}
 
 public class Necromancer : Troop
 {
@@ -23,8 +27,8 @@ public class Necromancer : Troop
     /// </summary>
     [Range(0,5)]    
     public int SkeletonSpawnLimit = 3;
-
-
+    public GameObject Skelly;
+    public GameObject Zombie;
 
     private Transform _target;
 
@@ -33,7 +37,7 @@ public class Necromancer : Troop
         base.Update();
         if(_target != null)
         {
-            if (Vector3.Distance(transform.position, _target.position) < 2f)
+            if (Vector3.Distance(transform.position, _target.position) < Global.CASTER_STRIKE_DIST)
             {
                 Attack();
             }
@@ -47,11 +51,22 @@ public class Necromancer : Troop
 
     public override void Attack()
     {
-        Debug.Log("Attack! " + _target.name.ToString());
+        MoveStop();
+        nav.isStopped = true;
+        Debug.Log("Attacking " + _target.name.ToString() + "!");
+        anim.Play("Attack");
     }
 
-    public void SpawnSkeletons()
+    public void Spawn(NecroSpawnType spawnType)
     {
-
+        switch(spawnType)
+        {
+            case NecroSpawnType.Skelly:
+                //skelly
+                break;
+            case NecroSpawnType.Zombie:
+                //zombie
+                break;
+        }
     }
 }

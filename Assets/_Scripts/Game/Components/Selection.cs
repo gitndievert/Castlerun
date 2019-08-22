@@ -38,6 +38,7 @@ public class Selection : DSingle<Selection>
 
     private Vector3 mousePosition1;
     private TroopUI _troopUI;
+    private TextMeshProUGUI _targetText;
 
     public static Vector3 GroundPoint
     {
@@ -60,6 +61,7 @@ public class Selection : DSingle<Selection>
         }
     }
 
+    
     protected override void PAwake()
     {
         if (SelectionTargetObj == null)
@@ -75,6 +77,7 @@ public class Selection : DSingle<Selection>
     private void Start()
     {
         _troopUI = UIManager.Instance.TroopUI;
+        _targetText = TargetUI.SingleTargetBox.GetComponentInChildren<TextMeshProUGUI>();
     }      
 
     private void Update()
@@ -188,20 +191,26 @@ public class Selection : DSingle<Selection>
 
     public void UpdateSingleTarget(ISelectable selection)
     {
+        if (selection == SingleTargetSelected) return;
         ClearSingleTarget();
         SingleTargetSelected = selection;
         Debug.Log("Single Target " + selection.ToString());
-        TargetUI.SingleTargetBox.GetComponentInChildren<TextMeshProUGUI>().text = SingleTargetSelected.ToString();
+        _targetText.text = SingleTargetSelected.ToString();
 
         //COME BACK - update the ui here
         //Need to make this friendly to access somehow
         //TargetUI.SingleTargetBox.
     }
 
+    public void UpdateSingleTarget(GameObject gameObject)
+    {
+        UpdateSingleTarget(gameObject.GetComponent<ISelectable>());
+    }
+
     public void ClearSingleTarget()
     {
         SingleTargetSelected = null;
-        TargetUI.SingleTargetBox.GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
+        _targetText.text = string.Empty;
     }
 
     public void ClearList()
@@ -226,7 +235,18 @@ public class Selection : DSingle<Selection>
         yield return new WaitForSeconds(.5f);
         SelectionTargetObj.SetActive(false);
     }
-       
 
-    
+    private void TargetPanel(bool show)
+    {
+        UIManager.Instance.TargetPanel.gameObject.SetActive(show);
+    }
+
+    private void ClearTarget()
+    {
+        TargetUI.Target.text = "";
+        TargetPanel(false);
+    }
+
+
+
 }

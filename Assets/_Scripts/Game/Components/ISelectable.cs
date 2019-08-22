@@ -20,4 +20,6 @@ public interface ISelectable
     void UnSelect();
     void Select();
     GameObject GameObject { get; }
+    void OnMouseOver();
+    void OnMouseExit();
 }

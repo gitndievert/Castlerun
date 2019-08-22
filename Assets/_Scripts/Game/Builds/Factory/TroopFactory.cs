@@ -24,7 +24,7 @@ using UnityEngine;
  * 
  */
 
-public class TroopFactory : Build, ISelectable
+public class TroopFactory : Build
 {
     #region Resource Cost
     public const int WOOD_COST = 10;
@@ -36,11 +36,6 @@ public class TroopFactory : Build, ISelectable
 
     [Tooltip("Turn on the Builder")]    
     public bool EnableTroopBuilder = false;
-
-
-    public bool IsSelected { get; set; }
-
-    public GameObject GameObject => gameObject;
 
     /// <summary>
     /// The time it takes to build the structure
@@ -193,15 +188,5 @@ public class TroopFactory : Build, ISelectable
 
             _trainedCounter++;
         }
-    }
-
-    public void UnSelect()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Select()
-    {
-        throw new System.NotImplementedException();
-    }
+    }   
 }
