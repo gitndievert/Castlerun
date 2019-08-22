@@ -147,15 +147,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             SelectMany();           
     }
 
-    public void UnSelect()
-    {
-        if (IsSelected)
-        {
-            IsSelected = false;
-            SelectionTargetStatus(false);
-            points.Clear();            
-        }
-    }
+   
 
     public void SelectMany()
     {
@@ -171,6 +163,9 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         }
     }
 
+    /// <summary>
+    /// Called Method on Target Selection
+    /// </summary>
     public void Select()
     {
         if (GetTag == Global.NPC_TAG) return;
@@ -189,7 +184,20 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             }            
         }
     }
-    
+
+    /// <summary>
+    /// Called Method on Target UnSelection
+    /// </summary>
+    public void UnSelect()
+    {
+        if (IsSelected)
+        {
+            IsSelected = false;
+            SelectionTargetStatus(false);
+            points.Clear();
+        }
+    }
+
     protected void SelectionTargetStatus(bool status)
     {
         if (SelectionTarget == null) return;

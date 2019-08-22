@@ -107,6 +107,9 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         }        
     }
 
+    /// <summary>
+    /// Called Method on Target Selection
+    /// </summary>
     public void Select()
     {
         if (!IsSelected)
@@ -115,6 +118,9 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         }
     }
 
+    /// <summary>
+    /// Called Method on Target UnSelection
+    /// </summary>
     public void UnSelect()
     {
         if (IsSelected)
