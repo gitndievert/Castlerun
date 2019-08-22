@@ -61,6 +61,10 @@ public class Selection : DSingle<Selection>
         }
     }
 
+    public int SelectionListCount
+    {
+        get { return MassSelectionList.Count; }
+    }
     
     protected override void PAwake()
     {
@@ -86,8 +90,7 @@ public class Selection : DSingle<Selection>
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
         {
             IsSelecting = true;
-            mousePosition1 = Input.mousePosition;
-            int listcount = MassSelectionList.Count;
+            mousePosition1 = Input.mousePosition;            
 
             if (Physics.Raycast(SelectionRayHit, out RaycastHit hit))
             {
@@ -95,9 +98,9 @@ public class Selection : DSingle<Selection>
                 if (hit.point != null)
                 {
                     if (hit.transform.gameObject.layer == Global.GROUND_LAYER
-                        || (hit.transform.tag == Global.ARMY_TAG && listcount < 1))
+                        || (hit.transform.tag == Global.ARMY_TAG && SelectionListCount < 1))
                     {
-                        if (listcount > 0)
+                        if (SelectionListCount > 0)
                         {
                             foreach (var select in MassSelectionList)
                             {
@@ -116,8 +119,9 @@ public class Selection : DSingle<Selection>
                 }
             }
         }
+        //Select on the ground if not mouselooking and there are selections in queue
         else if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) 
-            && !SelectionTargetObj.activeSelf && !Global.MouseLook)
+            && !SelectionTargetObj.activeSelf && !Global.MouseLook && SelectionListCount > 0)
         {
             StartCoroutine("SelectionCursor");
 

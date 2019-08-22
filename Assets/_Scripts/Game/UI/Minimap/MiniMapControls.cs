@@ -16,6 +16,8 @@ using UnityEngine;
 
 public class MiniMapControls : MonoBehaviour
 {
+    const float CAMERA_DAMPENING = 0.15f;
+
     /// <summary>
     /// MiniMap Camera
     /// </summary>
@@ -61,24 +63,24 @@ public class MiniMapControls : MonoBehaviour
     }
 
     private void Update()
-    {
-        //Need to figure out handlers and events for inside the castle
-        if(PlayerTransform != null)
-        {   
-            MiniMapCamera.transform.rotation = Quaternion.Euler(90,0,0);
-            Vector3 point = MiniMapCamera.WorldToViewportPoint(PlayerTransform.position);
-            Vector3 delta = PlayerTransform.position - MiniMapCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
-            Vector3 destination = MiniMapCamera.transform.position + delta;
-            MiniMapCamera.transform.position = Vector3.SmoothDamp(MiniMapCamera.transform.position, destination, ref _velocity, 0.15f);
-        }
-
+    {      
+        //Show camera only outside, otherwise we hide camera and 
         if (Global.InsideCastle)
         {
-            MiniMapCamera.gameObject.SetActive(false);
+            if(MiniMapCamera.gameObject.activeSelf) MiniMapCamera.gameObject.SetActive(false);
         }
-        else
-        {
-            MiniMapCamera.gameObject.SetActive(true);
+        else if (!Global.InsideCastle)
+        {            
+            if(!MiniMapCamera.gameObject.activeSelf) MiniMapCamera.gameObject.SetActive(true);
+            
+            if (PlayerTransform != null)
+            {
+                MiniMapCamera.transform.rotation = Quaternion.Euler(90, 0, 0);
+                Vector3 point = MiniMapCamera.WorldToViewportPoint(PlayerTransform.position);
+                var delta = PlayerTransform.position - MiniMapCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
+                var destination = MiniMapCamera.transform.position + delta;
+                MiniMapCamera.transform.position = Vector3.SmoothDamp(MiniMapCamera.transform.position, destination, ref _velocity, CAMERA_DAMPENING);
+            }
         }        
     }
 
