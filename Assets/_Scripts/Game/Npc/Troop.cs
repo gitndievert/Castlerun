@@ -31,11 +31,13 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     //Selectable
     public bool IsSelected { get; set; }
 
-    public GameObject GameObject => gameObject;        
+    public GameObject GameObject => gameObject;
 
     #region Visual Troop Control
     [Header("Stopping Distance")]
     public float StopDistanceOffset = 0f;
+
+    public abstract string DisplayName { get; }    
 
     protected Animator anim;
     protected NavMeshAgent nav;
@@ -106,24 +108,10 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             }
         }
     }
-
-    public void OnMouseOver()
-    {
-        SelectionUI.UpdateSingleTarget(this);
-        switch (GetTag)
-        {
-            case Global.ARMY_TAG:
-                //glow green
-                break;            
-            case Global.ENEMY_TAG:
-                //glow red
-                break;
-        }
-    }
-
+    
     public void OnMouseExit()
     {
-        SelectionUI.ClearSingleTarget();
+        //SelectionUI.ClearSingleTarget();
     }
 
     protected void GoToNextPoint()
@@ -133,7 +121,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         _destPoint = (_destPoint + 1) % points.Count;
     }
 
-    private void OnMouseDown()
+    public void OnMouseDown()
     {
         if(!IsSelected)
             Select();
@@ -173,15 +161,21 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         {
             IsSelected = true;
             Selection selection = UIManager.Instance.SelectableComponent;
-            if(GetTag == Global.ARMY_TAG)
+
+            //Single Target Selection Panel
+            SelectionUI.UpdateSingleTarget(this);
+
+            if (GetTag == Global.ARMY_TAG)
             {
                 SelectionTargetStatus(true, SelectedColor);
-                selection.UpdateMassList(this);                
+                selection.UpdateMassList(this);
+                //glow green
             }
             else if(GetTag == Global.ENEMY_TAG)
             {
-                SelectionTargetStatus(true, DamageColor);                                
-            }            
+                SelectionTargetStatus(true, DamageColor);
+                //glow red
+            }
         }
     }
 
@@ -259,7 +253,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public override void Die()
     {
         anim.Play("Death1");
-        Destroy(gameObject, DestroyTimer);        
+        base.Die();
     }
 
 }

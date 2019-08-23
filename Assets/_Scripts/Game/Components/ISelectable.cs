@@ -19,7 +19,14 @@ public interface ISelectable
     bool IsSelected { get; set; }    
     void UnSelect();
     void Select();
+    /// <summary>
+    /// Gets all Properties on this Selectable Object
+    /// </summary>
     GameObject GameObject { get; }
-    void OnMouseOver();
+    void OnMouseDown();
     void OnMouseExit();
+    string DisplayName { get; }
+    Sprite GetIcon();
+    int GetCurrentHealth();
+    int GetMaxHealth();
 }

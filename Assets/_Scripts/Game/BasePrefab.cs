@@ -14,7 +14,6 @@
 
 using UnityEngine;
 using TMPro;
-using System;
 using System.Collections.Generic;
 
 public abstract class BasePrefab : MonoBehaviour, IBase
@@ -37,7 +36,7 @@ public abstract class BasePrefab : MonoBehaviour, IBase
     {
         get { return tag; }
     }
-        
+ 
     protected int MaxHealth;
     protected float DestroyTimer = 2f;
 
@@ -56,11 +55,11 @@ public abstract class BasePrefab : MonoBehaviour, IBase
         }
     }
 
-    protected TargetUI TargetUI
+    protected SingleTargetBox SingleTargetBox
     {
         get
         {
-            return UIManager.Instance.TargetUI;
+            return UIManager.Instance.SingleTargetBox;
         }
     }
 
@@ -94,6 +93,8 @@ public abstract class BasePrefab : MonoBehaviour, IBase
                 _explodables.Add(render.gameObject.GetComponent<MeshExploder>());                
             }            
         }
+
+        
     }   
 
     protected void TagPrefab(string tag)
@@ -135,6 +136,21 @@ public abstract class BasePrefab : MonoBehaviour, IBase
         }
     }       
 
+    public Sprite GetIcon()
+    {
+        return Icon ?? UIManager.Instance.DefaultIcon;
+    }
+
+    public int GetCurrentHealth()
+    {
+        return Health;
+    }
+
+    public int GetMaxHealth()
+    {
+        return MaxHealth;
+    }
+
     public override string ToString()
     {
         return transform.name;
@@ -143,6 +159,10 @@ public abstract class BasePrefab : MonoBehaviour, IBase
     public virtual void Die()
     {
         float timer = CanExplode ? 0 : DestroyTimer;
+        if(SingleTargetBox.Instance.HasSelection)
+        {
+            SingleTargetBox.Instance.ClearTarget();
+        }
         Destroy(gameObject, timer);        
     }
 }

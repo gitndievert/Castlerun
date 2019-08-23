@@ -252,7 +252,6 @@
     <Compile Include="Assets\_Scripts\Game\Helpers\Extensions.TransformHelpers.cs" />
     <Compile Include="Assets\_Scripts\Game\Helpers\FlyCamera.cs" />
     <Compile Include="Assets\_Scripts\Game\IBase.cs" />
-    <Compile Include="Assets\_Scripts\Game\ICharacter.cs" />
     <Compile Include="Assets\_Scripts\Game\Managers\EventManager.cs" />
     <Compile Include="Assets\_Scripts\Game\Managers\GameManager.cs" />
     <Compile Include="Assets\_Scripts\Game\Managers\MenuManager.cs" />
@@ -264,6 +263,7 @@
     <Compile Include="Assets\_Scripts\Game\Npc\RangeTroop.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\Troop.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\Workers\Gatherer.cs" />
+    <Compile Include="Assets\_Scripts\Game\Player\ICharacter.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\Inventory.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\IPlayer.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\KeyBindings.cs" />
@@ -277,7 +277,9 @@
     <Compile Include="Assets\_Scripts\Game\Resource_Old\IResource.cs" />
     <Compile Include="Assets\_Scripts\Game\Resource_Old\Resource.cs" />
     <Compile Include="Assets\_Scripts\Game\Sound and Music\SoundList.cs" />
-    <Compile Include="Assets\_Scripts\Game\UI\CombatSelection\SelectionBox.cs" />
+    <Compile Include="Assets\_Scripts\Game\UI\CombatSelection\MultiTargetBox.cs" />
+    <Compile Include="Assets\_Scripts\Game\UI\CombatSelection\SelectionBoxRect.cs" />
+    <Compile Include="Assets\_Scripts\Game\UI\CombatSelection\SingleTargetBox.cs" />
     <Compile Include="Assets\_Scripts\Game\UI\InventoryUI.cs" />
     <Compile Include="Assets\_Scripts\Game\UI\Minimap\MiniMapControls.cs" />
     <Compile Include="Assets\_Scripts\Game\UI\PlayerUI.cs" />

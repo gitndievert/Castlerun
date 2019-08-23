@@ -28,6 +28,8 @@ public class Gatherer : Troop
 
     public TroopFactory AssociatedFactory { get; private set; }
 
+    public override string DisplayName => "Gatherer";
+
     /// <summary>
     /// Random set of trips
     /// </summary>

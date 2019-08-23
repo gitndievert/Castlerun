@@ -22,7 +22,7 @@ public class Player : BasePrefab, IPlayer
     [Header("Basic Player Properties")]
     public float MoveSpeed;
     public float BuildSpeed;
-    public int HitAmount;
+    public int HitAmount = 50;
     public bool CompanionOut = false;
     public bool IsDead = false;
 
@@ -142,8 +142,7 @@ public class Player : BasePrefab, IPlayer
         UIManager.Instance.StaminaBar.BarValue = 100f;
 
         MoveSpeed = 10f;
-        BuildSpeed = 10f;
-        HitAmount = 10;        
+        BuildSpeed = 10f;        
     }
     
     private ResourceType SwitchResource()

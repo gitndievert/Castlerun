@@ -18,6 +18,8 @@ using UnityEngine;
 
 public class Wizard : RangeTroop
 {
+    public override string DisplayName => "Wizard";
+
     public override void Attack()
     {
         

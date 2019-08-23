@@ -32,6 +32,8 @@ public class Necromancer : Troop
 
     private Transform _target;
 
+    public override string DisplayName => "Necromancer";
+
     protected override void Update()
     {
         base.Update();

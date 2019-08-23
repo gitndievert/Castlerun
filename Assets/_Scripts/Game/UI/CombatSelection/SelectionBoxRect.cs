@@ -14,7 +14,7 @@
 
 using UnityEngine;
     
-public static class SelectionBox
+public static class SelectionBoxRect
 {
     private static Texture2D _whiteTexture;
 

@@ -12,20 +12,36 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using SBK.Unity;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class Archer : RangeTroop
+public class MultiTargetBox : DSingle<MultiTargetBox>
 {
-    public override string DisplayName => "Archer";
+    
+    public TextMeshProUGUI UnsortedListText;
+    
 
-    public override void Attack()
+    protected override void PAwake()
     {
         //
     }
 
-    public override void Target(ISelectable target)
+    protected override void PDestroy()
+    {
+        //
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         
     }

@@ -21,6 +21,8 @@ public partial class UIManager : PSingle<UIManager>
     public ProgressBar HealthBar;
     public ProgressBar StaminaBar;
 
+    public Sprite DefaultIcon;
+
     /// <summary>
     /// Inventory Panel
     /// </summary>
@@ -30,30 +32,41 @@ public partial class UIManager : PSingle<UIManager>
     /// Player Panel
     /// </summary>
     public PlayerUI PlayerUIPanel;
-
-    /// <summary>
-    /// Target Panel UI Text
-    /// </summary>    
-    public TargetUI TargetUI;
     
     /// <summary>
     /// Target Panel
     /// </summary>
     public Transform TargetPanel;
 
-    /// <summary>
-    /// Troop UI Panel
-    /// </summary>
-    public TroopUI TroopUI;
-
     public TextMeshProUGUI Messages;
 
+    /// <summary>
+    /// Selection Controller for all In Game Mouse Selections
+    /// </summary>
     public Selection SelectableComponent;
+
+    /// <summary>
+    /// Target Box (Single Selection)
+    /// </summary>
+    [HideInInspector]
+    public SingleTargetBox SingleTargetBox;
+
+    /// <summary>
+    /// Multitarget Box Manager (All Selected Targets)
+    /// </summary>
+    [HideInInspector]
+    public MultiTargetBox MultiTargetBox;
 
     protected override void PAwake()
     {
         if (SelectableComponent == null)
-            SelectableComponent = GetComponent<Selection>();
+            SelectableComponent = GetComponent<Selection>();       
+    }
+
+    protected void Start()
+    {
+        SingleTargetBox = SingleTargetBox.Instance;
+        MultiTargetBox = MultiTargetBox.Instance;
     }
 
     protected override void PDestroy()

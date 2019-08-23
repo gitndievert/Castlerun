@@ -36,11 +36,14 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
 
     public GameObject GameObject => gameObject;
 
+    public string DisplayName { get; set; } 
+
     protected virtual void Start()
     {                    
         if (Health == 0) Health = 20;        
         MaxHealth = Health;
         IsBasic = false;
+        DisplayName = name;
     }
 
     public virtual bool ConfirmPlacement()
@@ -63,7 +66,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
             BuildEffect.SetActive(true);
     }
 
-    public void OnMouseOver()
+    public void OnMouseDown()
     {
         SelectionUI.UpdateSingleTarget(this);
         switch (GetTag)
@@ -82,7 +85,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
 
     public void OnMouseExit()
     {
-        SelectionUI.ClearSingleTarget();
+        //SelectionUI.ClearSingleTarget();
     }
 
     protected virtual void OnCollisionEnter(Collision col)

@@ -18,6 +18,8 @@ using UnityEngine;
 
 public class Fighter : Troop
 {
+    public override string DisplayName => "Soldier";
+
     public override void Attack()
     {
         throw new System.NotImplementedException();

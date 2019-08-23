@@ -34,12 +34,15 @@ public class Selection : DSingle<Selection>
     public Color SelectionBoxColor;
     public Color BorderColor;
     public static bool IsSelecting = false;
-    public GameObject SelectionTargetObj;    
+
+    /// <summary>
+    /// Selection target ground visual
+    /// </summary>
+    public GameObject SelectionTargetObj;
 
     private Vector3 mousePosition1;
-    private TroopUI _troopUI;
-    private TextMeshProUGUI _targetText;
-
+    private UIManager _ui;
+    
     public static Vector3 GroundPoint
     {
         get
@@ -68,9 +71,7 @@ public class Selection : DSingle<Selection>
     
     protected override void PAwake()
     {
-        if (SelectionTargetObj == null)
-            throw new System.Exception("You must bind a selection target object to selectables!");
-        SelectionTargetObj.SetActive(false);
+        
     }
 
     protected override void PDestroy()
@@ -80,9 +81,8 @@ public class Selection : DSingle<Selection>
 
     private void Start()
     {
-        _troopUI = UIManager.Instance.TroopUI;
-        _targetText = TargetUI.SingleTargetBox.GetComponentInChildren<TextMeshProUGUI>();
-    }      
+        _ui = UIManager.Instance;
+    }
 
     private void Update()
     {
@@ -98,7 +98,7 @@ public class Selection : DSingle<Selection>
                 if (hit.point != null)
                 {
                     if (hit.transform.gameObject.layer == Global.GROUND_LAYER
-                        || (hit.transform.tag == Global.ARMY_TAG && SelectionListCount < 1))
+                        || ((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
                     {
                         if (SelectionListCount > 0)
                         {
@@ -121,7 +121,7 @@ public class Selection : DSingle<Selection>
         }
         //Select on the ground if not mouselooking and there are selections in queue
         else if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) 
-            && !SelectionTargetObj.activeSelf && !Global.MouseLook && SelectionListCount > 0)
+            && !Global.MouseLook && SelectionListCount > 0)
         {
             StartCoroutine("SelectionCursor");
 
@@ -161,26 +161,18 @@ public class Selection : DSingle<Selection>
     private void OnGUI()
     {
         if (!IsSelecting) return;               
-        var rect = SelectionBox.GetScreenRect(mousePosition1, Input.mousePosition);        
-        SelectionBox.DrawScreenRect(rect, SelectionBoxColor);        
-        SelectionBox.DrawScreenRectBorder(rect, 2, BorderColor);
+        var rect = SelectionBoxRect.GetScreenRect(mousePosition1, Input.mousePosition);        
+        SelectionBoxRect.DrawScreenRect(rect, SelectionBoxColor);        
+        SelectionBoxRect.DrawScreenRectBorder(rect, 2, BorderColor);
     }
-
-    private TargetUI TargetUI
-    {
-        get
-        {
-            return UIManager.Instance.TargetUI;
-        }
-    }
-
+        
     public bool IsWithinSelectionBounds(GameObject gameObject)
     {
         if (!IsSelecting) return false;       
 
         var camera = Camera.main;
         var viewportBounds =
-            SelectionBox.GetViewportBounds(camera, mousePosition1, Input.mousePosition);
+            SelectionBoxRect.GetViewportBounds(camera, mousePosition1, Input.mousePosition);
 
         bool insideBox = viewportBounds.Contains(camera.WorldToViewportPoint(gameObject.transform.position));        
 
@@ -190,7 +182,7 @@ public class Selection : DSingle<Selection>
     public void UpdateMassList(ISelectable selection)
     {
         MassSelectionList.Add(selection);
-        _troopUI.UnsortedListText.text += selection + "\r\n";
+        _ui.MultiTargetBox.UnsortedListText.text += selection + "\r\n";
     }
 
     public void UpdateSingleTarget(ISelectable selection)
@@ -198,12 +190,7 @@ public class Selection : DSingle<Selection>
         if (selection == SingleTargetSelected) return;
         ClearSingleTarget();
         SingleTargetSelected = selection;
-        Debug.Log("Single Target " + selection.ToString());
-        _targetText.text = SingleTargetSelected.ToString();
-
-        //COME BACK - update the ui here
-        //Need to make this friendly to access somehow
-        //TargetUI.SingleTargetBox.
+        _ui.SingleTargetBox.SetTarget(SingleTargetSelected);        
     }
 
     public void UpdateSingleTarget(GameObject gameObject)
@@ -214,7 +201,7 @@ public class Selection : DSingle<Selection>
     public void ClearSingleTarget()
     {
         SingleTargetSelected = null;
-        _targetText.text = string.Empty;
+        _ui.SingleTargetBox.ClearTarget();
     }
 
     public void ClearList()
@@ -222,14 +209,14 @@ public class Selection : DSingle<Selection>
         if (MassSelectionList.Count > 0)
         {
             MassSelectionList.Clear();
-            _troopUI.UnsortedListText.text = string.Empty;
+            _ui.MultiTargetBox.UnsortedListText.text = string.Empty;
         }
     }
 
     public void ClearList(ISelectable selection)
     {
         MassSelectionList.Remove(selection);
-        _troopUI.UnsortedListText.text = string.Empty;
+        _ui.MultiTargetBox.UnsortedListText.text = string.Empty;
     }
 
     private IEnumerator SelectionCursor()
@@ -244,13 +231,5 @@ public class Selection : DSingle<Selection>
     {
         UIManager.Instance.TargetPanel.gameObject.SetActive(show);
     }
-
-    private void ClearTarget()
-    {
-        TargetUI.Target.text = "";
-        TargetPanel(false);
-    }
-
-
 
 }
