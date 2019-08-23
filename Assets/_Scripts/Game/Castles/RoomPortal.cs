@@ -15,6 +15,7 @@ public enum WarpType
     Exit
 }
 
+[RequireComponent(typeof(BoxCollider))]
 public class RoomPortal : MonoBehaviour
 {    
     public RoomPortal DestinationPortal;
