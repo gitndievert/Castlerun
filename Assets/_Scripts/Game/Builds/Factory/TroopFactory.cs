@@ -128,12 +128,7 @@ public class TroopFactory : Build
             Debug.Log("Max Number of Harvesters Made");
         }
     }
-
-    private void OnMouseDown()
-    {
-        Debug.Log("Clicked on the target");
-    }
-
+     
 
     public override bool SetResourceType(ResourceType type)
     {
