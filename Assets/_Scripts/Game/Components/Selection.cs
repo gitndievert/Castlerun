@@ -182,7 +182,7 @@ public class Selection : DSingle<Selection>
     public void UpdateMassList(ISelectable selection)
     {
         MassSelectionList.Add(selection);
-        _ui.MultiTargetBox.UnsortedListText.text += selection + "\r\n";
+        _ui.MultiTargetBox.UpdateList(MassSelectionList);
     }
 
     public void UpdateSingleTarget(ISelectable selection)
@@ -209,14 +209,14 @@ public class Selection : DSingle<Selection>
         if (MassSelectionList.Count > 0)
         {
             MassSelectionList.Clear();
-            _ui.MultiTargetBox.UnsortedListText.text = string.Empty;
+            _ui.MultiTargetBox.ClearList();
         }
     }
 
     public void ClearList(ISelectable selection)
     {
         MassSelectionList.Remove(selection);
-        _ui.MultiTargetBox.UnsortedListText.text = string.Empty;
+        _ui.MultiTargetBox.ClearList();
     }
 
     private IEnumerator SelectionCursor()

@@ -24,7 +24,7 @@ public class SingleTargetBox : DSingle<SingleTargetBox>
     public TextMeshProUGUI TargetText;
     public Image TargetIcon;
     public ProgressBar HealthBar;
-
+    
     public bool HasSelection { get; private set; }
 
     public static Color DefaultColor;
@@ -37,7 +37,7 @@ public class SingleTargetBox : DSingle<SingleTargetBox>
         
     protected override void PAwake()
     {
-        //
+        //        
         HasSelection = true; //temp for now        
         _backgroundImage = GetComponent<Image>();
         DefaultColor = _backgroundImage.color;
