@@ -16,10 +16,27 @@ using UnityEngine;
 
 public class Projectile : BasePrefab
 {
+    [Header("Projectile Properties")]
+    public float FireTimer = 0.3f;
+    public float FireRate = 0.5f;
+    public float FirePower = 5.5f;
+
+    public AudioClip[] FireSounds;
     public AudioClip TravelSound;
     public AudioClip ImpactSound;
-    public int Damage;   
-    
+
+    #region Damage Settings
+    /// <summary>
+    /// Minimum Damage Delt
+    /// </summary>
+    public int MinDamage;
+    /// <summary>
+    /// Maximum Damage Delt
+    /// </summary>
+    public int MaxDamage;   
+    #endregion
+
+
     private void Start()
     {
         TagPrefab("Projectile");
@@ -28,11 +45,6 @@ public class Projectile : BasePrefab
     private void OnDestroy()
     {
         
-    }
-
-    public int GetDamage()
-    {
-        return Damage;
     }
 
     private void PlayTravelSound()
@@ -51,7 +63,10 @@ public class Projectile : BasePrefab
 
     private void OnCollisionEnter(Collision col)
     {
-        PlayHitSound();        
-        Destroy(gameObject);        
+        PlayHitSound();      
+        if(col.transform.tag == Global.ENEMY_TAG)
+        {
+            Damage.ApplyDamage(col, MinDamage, MaxDamage, true);            
+        }        
     }
-}
+}   

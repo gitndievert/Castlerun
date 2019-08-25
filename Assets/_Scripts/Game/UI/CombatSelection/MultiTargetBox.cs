@@ -41,10 +41,6 @@ public class MultiTargetBox : DSingle<MultiTargetBox>
             sf.gameObject.SetActive(false);
             _selections.Add(sf);
         }
-        
-        //So on awake, get all 20 list objects and store them
-        //Need something to triger enable and disable, so when the list gets refreshed
-        //Count of MassSelectionList must equal the total number in visible sort list
     }
 
     protected override void PDestroy()

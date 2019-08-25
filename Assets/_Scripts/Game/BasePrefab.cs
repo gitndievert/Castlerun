@@ -27,6 +27,7 @@ public abstract class BasePrefab : MonoBehaviour, IBase
     public AudioClip[] HitSounds;
     public TextMeshPro HealthText;
 
+
     /// <summary>
     /// This is the Icon Representing the Base Prefab
     /// </summary>
@@ -36,7 +37,8 @@ public abstract class BasePrefab : MonoBehaviour, IBase
     {
         get { return tag; }
     }
- 
+
+
     protected int MaxHealth;
     protected float DestroyTimer = 2f;
 

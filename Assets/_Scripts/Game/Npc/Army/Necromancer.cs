@@ -30,6 +30,8 @@ public class Necromancer : Troop
     public GameObject Skelly;
     public GameObject Zombie;
 
+    public GameObject NecroProjectile;
+
     private Transform _target;
 
     public override string DisplayName => "Necromancer";

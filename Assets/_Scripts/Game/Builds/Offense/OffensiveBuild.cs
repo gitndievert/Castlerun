@@ -14,17 +14,17 @@
 
 using UnityEngine;
 
+
+
+//NATE NOTE: I MIGHT NEED TO RETHINK THESE
+//Moving a lot of projectile pieces to it's own class for ALL 
 public class OffensiveBuild : Build
-{
-    public AudioClip[] FireSounds;    
+{      
     public GameObject Projectile;
     public GameObject FireEffect;
     public float ConstructionTime = 2f;
 
-    [Header("Projectile Properties")]
-    public float FireTimer = 0.3f;
-    public float FireRate = 0.5f;
-    public float FirePower = 5.5f;
+
     public Transform FirePosition;
 
     [Space(5)]
@@ -46,11 +46,11 @@ public class OffensiveBuild : Build
         
     void Update()
     {
-        if (_trackFireTimer != FireRate && IsFiring)
+        /*if (_trackFireTimer != FireRate && IsFiring)
         {
             CancelInvoke("FireProjectile");
             Fire();
-        }
+        }*/
 
     }
 
@@ -67,13 +67,13 @@ public class OffensiveBuild : Build
 
     public void Fire()
     {
-        _trackFireTimer = FireRate;
-        InvokeRepeating("FireProjectile", FireTimer, FireRate * 2);
+        /*_trackFireTimer = FireRate;
+        InvokeRepeating("FireProjectile", FireTimer, FireRate * 2);*/
     }
 
     protected void FireProjectile()
     {
-        IsFiring = true;
+        /*IsFiring = true;
         var proj = Instantiate(Projectile, FirePosition.position, Quaternion.identity);
         proj.name = "Incoming";
         proj.GetComponent<Rigidbody>().velocity = FirePosition.TransformDirection(Vector3.forward * FirePower);        
@@ -81,8 +81,8 @@ public class OffensiveBuild : Build
         if (FireEffect != null)
         {
             Instantiate(FireEffect, FirePosition.position, Quaternion.identity);            
-        }
-        //proj.transform.parent = transform.GetChild(0);     
+        }*/
+        
     }
 
     protected static Vector3 RandomFire()
