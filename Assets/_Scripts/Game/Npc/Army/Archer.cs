@@ -25,6 +25,11 @@ public class Archer : RangeTroop
         //
     }
 
+    public override void StopAttack()
+    {
+        //
+    }
+
     public override void Target(ISelectable target)
     {
         

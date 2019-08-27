@@ -24,6 +24,11 @@ public class Fighter : Troop
     {
         throw new System.NotImplementedException();
     }
+        
+    public override void StopAttack()
+    {
+        throw new System.NotImplementedException();
+    }
 
     public override void Target(ISelectable target)
     {

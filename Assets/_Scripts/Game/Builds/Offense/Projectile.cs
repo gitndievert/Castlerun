@@ -14,16 +14,15 @@
 
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Rigidbody))]
 public class Projectile : BasePrefab
 {
-    [Header("Projectile Properties")]
-    public float FireTimer = 0.3f;
-    public float FireRate = 0.5f;
-    public float FirePower = 5.5f;
-
     public AudioClip[] FireSounds;
     public AudioClip TravelSound;
     public AudioClip ImpactSound;
+
+    public ProjectileSource Source { get; set; }
 
     #region Damage Settings
     /// <summary>
@@ -38,8 +37,9 @@ public class Projectile : BasePrefab
 
 
     private void Start()
-    {
+    {        
         TagPrefab("Projectile");
+        SoundManager.PlaySound(FireSounds);        
     }
 
     private void OnDestroy()
@@ -47,8 +47,15 @@ public class Projectile : BasePrefab
         
     }
 
+    private void Update()
+    {
+        
+    }
+
     private void PlayTravelSound()
     {
+        //NEED TO COME BACK
+
         if (TravelSound == null) return;
         //audioSource.loop = true;
         //audioSource.clip = TravelSound;
@@ -62,11 +69,13 @@ public class Projectile : BasePrefab
     }
 
     private void OnCollisionEnter(Collision col)
-    {
+    {        
         PlayHitSound();      
         if(col.transform.tag == Global.ENEMY_TAG)
         {
-            Damage.ApplyDamage(col, MinDamage, MaxDamage, true);            
+            Damage.ApplyDamage(col, MinDamage, MaxDamage, true);
+            //Tuck away, don't destroy            
+            Destroy(gameObject);           
         }        
     }
 }   

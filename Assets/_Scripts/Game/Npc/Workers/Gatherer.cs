@@ -90,4 +90,9 @@ public class Gatherer : Troop
     {
         throw new System.NotImplementedException();
     }
+
+    public override void StopAttack()
+    {
+        throw new System.NotImplementedException();
+    }
 }

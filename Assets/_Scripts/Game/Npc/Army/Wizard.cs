@@ -25,6 +25,11 @@ public class Wizard : RangeTroop
         
     }
 
+    public override void StopAttack()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void Target(ISelectable target)
     {
         

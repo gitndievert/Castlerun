@@ -33,8 +33,15 @@ public class Necromancer : Troop
     public GameObject NecroProjectile;
 
     private Transform _target;
+    private ProjectileSource _pSource;
 
     public override string DisplayName => "Necromancer";
+
+    protected override void Start()
+    {
+        base.Start();
+        _pSource = GetComponent<ProjectileSource>();
+    }
 
     protected override void Update()
     {
@@ -51,6 +58,7 @@ public class Necromancer : Troop
     public override void Target(ISelectable target)
     {
         _target = target.GameObject.transform;
+        _pSource.SetTarget = target;
     }
 
     public override void Attack()
@@ -59,6 +67,11 @@ public class Necromancer : Troop
         nav.isStopped = true;
         Debug.Log("Attacking " + _target.name.ToString() + "!");
         anim.Play("Attack");
+    }
+
+    public override void StopAttack()
+    {
+        anim.Play("Grounded");
     }
 
     public void Spawn(NecroSpawnType spawnType)
@@ -73,4 +86,6 @@ public class Necromancer : Troop
                 break;
         }
     }
+
+   
 }

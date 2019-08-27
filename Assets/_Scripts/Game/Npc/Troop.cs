@@ -218,6 +218,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public abstract void Target(ISelectable target);
 
     public abstract void Attack();
+
+    public abstract void StopAttack();
         
     public void Move(Vector3 point)
     {        
@@ -233,7 +235,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public override void SetHit(int amount)
     {
-        if (!IsSelected) return;
+        //Taking this out to test
+        //if (!IsSelected) return;
         if (Health - amount > 0)
         {
             Health -= amount;
