@@ -21,9 +21,7 @@ public class Projectile : BasePrefab
     public AudioClip[] FireSounds;
     public AudioClip TravelSound;
     public AudioClip ImpactSound;
-
-    public ProjectileSource Source { get; set; }
-
+    
     #region Damage Settings
     /// <summary>
     /// Minimum Damage Delt

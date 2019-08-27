@@ -600,7 +600,6 @@ GameObject:
   - component: {fileID: 2197402741631013300}
   - component: {fileID: 1280681375159171017}
   - component: {fileID: -1553202610924228088}
-  - component: {fileID: 4575879437618283223}
   m_Layer: 0
   m_Name: Necromancer
   m_TagString: Army
@@ -654,6 +653,10 @@ MonoBehaviour:
   SelectionCall: []
   Acknowledgement: []
   AttackBattleCryClips: []
+  Projectile: {fileID: 498153287576550493, guid: 1584d21a16d6fe44bb40ac6a363dee98,
+    type: 3}
+  FirePower: 200
+  SpawnPoint: {fileID: 6995137531866528725}
   SkeletonSpawnLimit: 3
   Skelly: {fileID: 0}
   Zombie: {fileID: 0}
@@ -749,22 +752,6 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.5
---- !u!114 &4575879437618283223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2750229220499736087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55257d19b9a732f4da3b699872bbe367, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Projectile: {fileID: 498153287576550493, guid: 1584d21a16d6fe44bb40ac6a363dee98,
-    type: 3}
-  FirePower: 500
-  SpawnPoint: {fileID: 6995137531866528725}
 --- !u!1 &2783684166736639407
 GameObject:
   m_ObjectHideFlags: 0

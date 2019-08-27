@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &551411264102267733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8590492497724617297}
+  m_Layer: 0
+  m_Name: Spawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8590492497724617297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551411264102267733}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.109, y: 0.932, z: 0.859}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9039012690518097569}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9041012370118533275
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,6 +629,7 @@ Transform:
   - {fileID: 3930807637872236422}
   - {fileID: 6870966924837017709}
   - {fileID: 5778790805735916355}
+  - {fileID: 8590492497724617297}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -702,7 +733,10 @@ MonoBehaviour:
   SelectionCall: []
   Acknowledgement: []
   AttackBattleCryClips: []
-  DistanceToTarget: 10
+  Projectile: {fileID: 498153287576550493, guid: 1584d21a16d6fe44bb40ac6a363dee98,
+    type: 3}
+  FirePower: 5.5
+  SpawnPoint: {fileID: 551411264102267733}
 --- !u!114 &3741364197393562131
 MonoBehaviour:
   m_ObjectHideFlags: 0

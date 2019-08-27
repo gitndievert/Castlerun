@@ -12,35 +12,53 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileSource : MonoBehaviour
+public abstract class Ranged<T> : Troop where T : BasePrefab
 {
     [Header("Projectile Used")]
-    public Projectile Projectile;    
-    [Header("Projectile Properties")]    
+    public Projectile Projectile;
+    [Header("Projectile Properties")]
     public float FirePower = 5.5f;
     public GameObject SpawnPoint;
 
-    public ISelectable SetTarget { get; set; }
+    protected ISelectable SetTarget { get; set; }
 
-    public Troop Attached;
-    
-    private Projectile _createdProjectile;
-    
+    protected Projectile CreatedProjectile;
 
-    private void Awake()
+    protected Transform EnemyTarget;
+
+    protected override void Awake()
     {
-        if(Projectile == null)
+        base.Awake();
+        if (Projectile == null)
             throw new System.Exception("Projectile Required");
-        Attached = GetComponent<Troop>();
     }
-        
+
+    protected override void Update()
+    {
+        base.Update();
+        if (EnemyTarget != null)
+        {
+            if (Vector3.Distance(transform.position, EnemyTarget.position) < Global.CASTER_STRIKE_DIST)
+            {
+                Attack();
+            }
+        }
+    }
+
+    public override void Target(ISelectable target)
+    {
+        EnemyTarget = target.GameObject.transform;
+        SetTarget = target;
+    }
+
     public void Fire()
     {
-      
+
         var project = Instantiate(Projectile, SpawnPoint.transform.position, Quaternion.identity);
-        project.Source = this;        
         project.GetComponent<Rigidbody>().AddForce(SpawnPoint.transform.forward * FirePower);
         /*if (FireEffect != null)
         {

@@ -20,7 +20,7 @@ public enum NecroSpawnType
     Zombie
 }
 
-public class Necromancer : Troop
+public class Necromancer : Ranged<Troop>
 {
     /// <summary>
     /// Number of Skeletons You Can Spawn
@@ -30,48 +30,29 @@ public class Necromancer : Troop
     public GameObject Skelly;
     public GameObject Zombie;
 
-    public GameObject NecroProjectile;
-
-    private Transform _target;
-    private ProjectileSource _pSource;
+    public GameObject NecroProjectile;    
 
     public override string DisplayName => "Necromancer";
 
     protected override void Start()
     {
         base.Start();
-        _pSource = GetComponent<ProjectileSource>();
     }
-
-    protected override void Update()
-    {
-        base.Update();
-        if(_target != null)
-        {
-            if (Vector3.Distance(transform.position, _target.position) < Global.CASTER_STRIKE_DIST)
-            {
-                Attack();
-            }
-        }
-    }
-
-    public override void Target(ISelectable target)
-    {
-        _target = target.GameObject.transform;
-        _pSource.SetTarget = target;
-    }
-
+       
     public override void Attack()
     {
         MoveStop();
         nav.isStopped = true;
-        Debug.Log("Attacking " + _target.name.ToString() + "!");
+        Debug.Log("Attacking " + EnemyTarget.name.ToString() + "!");
         anim.Play("Attack");
     }
 
     public override void StopAttack()
     {
         anim.Play("Grounded");
+        nav.isStopped = false;
+        nav.updateRotation = true;
+        nav.updatePosition = true;
     }
 
     public void Spawn(NecroSpawnType spawnType)
