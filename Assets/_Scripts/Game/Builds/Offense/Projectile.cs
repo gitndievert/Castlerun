@@ -37,7 +37,10 @@ public class Projectile : BasePrefab
     private void Start()
     {        
         TagPrefab("Projectile");
-        SoundManager.PlaySound(FireSounds);        
+        SoundManager.PlaySound(FireSounds);
+        //Default destruction timer
+        //Projectiles should not take longer than 10 seconds to hit a target
+        Destroy(gameObject, 10f);
     }
 
     private void OnDestroy()
