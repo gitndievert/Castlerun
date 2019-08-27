@@ -12,7 +12,6 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -23,30 +22,31 @@ using UnityStandardAssets.Characters.ThirdPerson;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class Troop : BasePrefab, ICharacter, ISelectable
 {
+
+    #region Selectable properties
     [Header("All the waypoints that this Troop will follow")]
     public Dictionary<int, Transform> points = new Dictionary<int, Transform>();
 
     public Light SelectionTarget;
-
-    //Selectable
     public bool IsSelected { get; set; }
-
     public GameObject GameObject => gameObject;
+    #endregion
 
     #region Visual Troop Control
     [Header("Stopping Distance")]
     public float StopDistanceOffset = 0f;
-
     public abstract string DisplayName { get; }    
 
     protected Animator anim;
     protected NavMeshAgent nav;
     protected Rigidbody rb;
-    #endregion
 
     private Vector3 _lockPoint;
     private bool _isMoving = false;
-    private ThirdPersonCharacter _char;    
+    private ThirdPersonCharacter _char;
+    #endregion
+
+
 
     #region AudioClips For Troops
     public AudioClip[] SelectionCall;
@@ -55,6 +55,11 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     #endregion
 
     private int _destPoint;
+
+    #region Targeting Systems
+    protected ISelectable SetTarget { get; set; }
+    protected Transform EnemyTarget { get; set; }  
+    #endregion
 
     protected override void Awake()
     {
@@ -108,7 +113,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             }
         }
     }
-    
+        
     public void OnMouseExit()
     {
         //SelectionUI.ClearSingleTarget();
@@ -214,13 +219,33 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             MoveStop();            
         }
     }
-
-    public abstract void Target(ISelectable target);
-
+    
+    /// <summary>
+    /// Attack methods needed for Troops
+    /// </summary>
     public abstract void Attack();
 
+    /// <summary>
+    /// Stop Attack for Troops
+    /// </summary>
     public abstract void StopAttack();
-        
+
+    /// <summary>
+    /// This Troops target for attack
+    /// </summary>
+    /// <param name="target"></param>
+    public virtual void Target(ISelectable target)
+    {        
+        SetTarget = target;
+        EnemyTarget = target.GameObject.transform;
+    }
+
+    public void ClearEnemyTargets()
+    {
+        SetTarget = null;
+        EnemyTarget = null;
+    }
+
     public void Move(Vector3 point)
     {        
         _lockPoint = point;

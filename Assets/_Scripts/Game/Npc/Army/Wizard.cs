@@ -29,9 +29,5 @@ public class Wizard : Ranged<Troop>
     {
         throw new System.NotImplementedException();
     }
-
-    public override void Target(ISelectable target)
-    {
-        
-    }
+       
 }

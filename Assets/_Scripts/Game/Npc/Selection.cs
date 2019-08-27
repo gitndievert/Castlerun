@@ -141,7 +141,10 @@ public class Selection : DSingle<Selection>
                                 if (hit.transform.tag == Global.ENEMY_TAG)
                                 {
                                     Debug.Log("Attacking!");
-                                    character.Target(hit.transform.GetComponent<ISelectable>());
+                                    var enemy = hit.transform.GetComponent<ISelectable>();
+                                    enemy.TargetingMe.Add(character);
+                                    character.Target(enemy);
+
                                 }
                             }
                         }

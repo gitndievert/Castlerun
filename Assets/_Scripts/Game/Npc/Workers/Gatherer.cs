@@ -36,16 +36,8 @@ public class Gatherer : Troop
     [Space(5)]
     [Header("# of trips (random)")]
     public int HarvestTrips = 1;
-
-
-
-
-    protected override void Awake()
-    {
-        base.Awake();        
-    }
-
-
+         
+    
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -76,16 +68,7 @@ public class Gatherer : Troop
     {
         yield return new WaitForSeconds(3f);
     }
-    
-    /// <summary>
-    /// Attack the rocks and shrubbery!
-    /// </summary>
-    /// <param name="target"></param>
-    public override void Target(ISelectable target)
-    {
-        
-    }
-
+   
     public override void Attack()
     {
         throw new System.NotImplementedException();

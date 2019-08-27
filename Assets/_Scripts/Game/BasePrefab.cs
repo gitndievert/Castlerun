@@ -27,6 +27,12 @@ public abstract class BasePrefab : MonoBehaviour, IBase
     public AudioClip[] HitSounds;
     public TextMeshPro HealthText;
 
+    public bool IsDying = false;
+
+    /// <summary>
+    /// All Troops targeting this gameObject
+    /// </summary>
+    public HashSet<Troop> TargetingMe { get; set; }
 
     /// <summary>
     /// This is the Icon Representing the Base Prefab
@@ -96,7 +102,7 @@ public abstract class BasePrefab : MonoBehaviour, IBase
             }            
         }
 
-        
+        TargetingMe = new HashSet<Troop>();
     }   
 
     protected void TagPrefab(string tag)
@@ -160,11 +166,22 @@ public abstract class BasePrefab : MonoBehaviour, IBase
 
     public virtual void Die()
     {
+        IsDying = true;
+
         float timer = CanExplode ? 0 : DestroyTimer;
-        if(SingleTargetBox.Instance.HasSelection)
+
+        if (SingleTargetBox.Instance.HasSelection)
         {
             SingleTargetBox.Instance.ClearTarget();
         }
-        Destroy(gameObject, timer);        
+        
+        //Stop Attacks
+        foreach (var targets in TargetingMe)
+        {
+            targets.StopAttack();
+        }
+
+        Destroy(gameObject, timer);                
+        
     }
 }

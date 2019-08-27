@@ -15,6 +15,10 @@ public static class Damage
     public static Collision ApplyDamage(Collision col, int mindmg, int maxdmg, bool hascritical = false)
     {
         var contact = col.transform.GetComponent<BasePrefab>();
+        
+        //If contact is dying but not destroyed then don't do damage
+        if (contact.IsDying) return col;
+
         int damage = GetDamage(mindmg, maxdmg, hascritical);
 
         if (damage > maxdmg)

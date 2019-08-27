@@ -49,6 +49,7 @@ public class Necromancer : Ranged<Troop>
 
     public override void StopAttack()
     {
+        anim.StopPlayback();
         anim.Play("Grounded");
         nav.isStopped = false;
         nav.updateRotation = true;

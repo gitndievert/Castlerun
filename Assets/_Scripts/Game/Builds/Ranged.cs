@@ -12,8 +12,6 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Ranged<T> : Troop where T : BasePrefab
@@ -23,12 +21,8 @@ public abstract class Ranged<T> : Troop where T : BasePrefab
     [Header("Projectile Properties")]
     public float FirePower = 5.5f;
     public GameObject SpawnPoint;
-
-    protected ISelectable SetTarget { get; set; }
-
-    protected Projectile CreatedProjectile;
-
-    protected Transform EnemyTarget;
+    
+    protected Projectile CreatedProjectile;    
 
     protected override void Awake()
     {
@@ -47,30 +41,22 @@ public abstract class Ranged<T> : Troop where T : BasePrefab
                 Attack();
             }
         }
-    }
-
-    public override void Target(ISelectable target)
-    {
-        EnemyTarget = target.GameObject.transform;
-        SetTarget = target;
-    }
+    }  
 
     public void Fire()
     {
-
-        var project = Instantiate(Projectile, SpawnPoint.transform.position, Quaternion.identity);
-        project.GetComponent<Rigidbody>().AddForce(SpawnPoint.transform.forward * FirePower);
-        /*if (FireEffect != null)
-        {
-            Instantiate(FireEffect, FirePosition.position, Quaternion.identity);            
-        }*/
+        if (EnemyTarget == null) return;
+        var enemypos = EnemyTarget.transform.position;
+        SpawnPoint.transform.LookAt(new Vector3(enemypos.x,SpawnPoint.transform.position.y,enemypos.z));        
+        var project = Instantiate(Projectile, SpawnPoint.transform.position, Quaternion.identity);        
+        project.GetComponent<Rigidbody>().AddForce(SpawnPoint.transform.forward * FirePower);        
     }
 
     /// <summary>
     /// Could use this for random firing on cannon/catapult
     /// </summary>
     /// <returns></returns>
-    protected static Vector3 RandomFire()
+    /*protected static Vector3 RandomFire()
     {
         int random = Random.Range(0, 100);
         if (random >= 0 && random < 25)
@@ -81,6 +67,6 @@ public abstract class Ranged<T> : Troop where T : BasePrefab
             return Vector3.forward;
         else
             return Vector3.down;
-    }
+    }*/
 
 }

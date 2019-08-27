@@ -13,6 +13,7 @@
 // ********************************************************************
 
 using UnityEngine;
+using System.Collections.Generic;
 
 public interface ISelectable
 {
@@ -29,4 +30,5 @@ public interface ISelectable
     Sprite GetIcon();
     int GetCurrentHealth();
     int GetMaxHealth();
+    HashSet<Troop> TargetingMe { get; set; }
 }

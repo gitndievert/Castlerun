@@ -35,8 +35,6 @@ public class MiniMapControls : MonoBehaviour
 
     [SerializeField]
     private float _zoomFactorIncrement = 20f;
-    [SerializeField]
-    private bool _camFollow = false;
 
     private Vector3 _origPos;    
     private Transform _cameraTransformParent;
@@ -86,25 +84,13 @@ public class MiniMapControls : MonoBehaviour
 
     public void ZoomIn()
     {
-        if ((MiniMapCamera.orthographicSize - _zoomFactorIncrement) <= MinZoomFactor) return;
-        //MiniMapCamera.transform.parent = PlayerTransform;        
-        //_camFollow = true;
-        MiniMapCamera.orthographicSize -= _zoomFactorIncrement;
-        //Need to COME BACK and position this correctly
-        //MiniMapCamera.ScreenToWorldPoint(new Vector2(PlayerTransform.position.x * 2, PlayerTransform.position.z * 2));        
+        if ((MiniMapCamera.orthographicSize - _zoomFactorIncrement) <= MinZoomFactor) return;        
+        MiniMapCamera.orthographicSize -= _zoomFactorIncrement;        
     }
 
     public void ZoomOut()
     {
-        if ((MiniMapCamera.orthographicSize + _zoomFactorIncrement) >= MaxZoomFactor)
-        {
-            //MiniMapCamera.transform.parent = _cameraTransformParent;
-            //_camFollow = false;
-            return;
-        }
-        else
-        {
-            MiniMapCamera.orthographicSize += _zoomFactorIncrement;
-        }
+        if ((MiniMapCamera.orthographicSize + _zoomFactorIncrement) >= MaxZoomFactor) return;
+        MiniMapCamera.orthographicSize += _zoomFactorIncrement;        
     }
 }

@@ -28,10 +28,5 @@ public class Archer : Ranged<Troop>
     public override void StopAttack()
     {
         //
-    }
-
-    public override void Target(ISelectable target)
-    {
-        
-    }
+    }    
 }
