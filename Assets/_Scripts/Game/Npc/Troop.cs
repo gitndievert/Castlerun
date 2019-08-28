@@ -45,9 +45,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     private bool _isMoving = false;
     private ThirdPersonCharacter _char;
     #endregion
-
-
-
+       
     #region AudioClips For Troops
     public AudioClip[] SelectionCall;
     public AudioClip[] Acknowledgement;
@@ -57,8 +55,13 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     private int _destPoint;
 
     #region Targeting Systems
+    [Header("Combat")]
+    public float AttackDelaySec = 3f;
+    [HideInInspector]
+    public bool CanAttack = false;
     protected ISelectable SetTarget { get; set; }
     protected Transform EnemyTarget { get; set; }  
+    protected bool IsAttacking { get; set; }
     #endregion
 
     protected override void Awake()
@@ -93,24 +96,34 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     {
         if (GetTag == Global.ARMY_TAG)
         {
-            if (!nav.pathPending && points.Count > 0)
+            if (CanAttack && !IsAttacking)
             {
-                GoToNextPoint();
+                MoveStop();
+                IsAttacking = true;
+                Attack();
+            }
+            else
+            {
+                if (!nav.pathPending && points.Count > 0)
+                {
+                    GoToNextPoint();
+                }
+
+                if (_isMoving)
+                {
+                    nav.SetDestination(_lockPoint);
+
+                    if (nav.remainingDistance >= nav.stoppingDistance + StopDistanceOffset)
+                    {
+                        _char.Move(nav.desiredVelocity, false, false);
+                    }
+                    else
+                    {
+                        MoveStop();
+                    }
+                }
             }
 
-            if (_isMoving)
-            {
-                nav.SetDestination(_lockPoint);
-
-                if (nav.remainingDistance >= nav.stoppingDistance + StopDistanceOffset)
-                {
-                    _char.Move(nav.desiredVelocity, false, false);
-                }
-                else
-                {
-                    MoveStop();
-                }
-            }
         }
     }
         
@@ -253,8 +266,10 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     }
 
     public void MoveStop()
-    {
-        _char.Move(Vector3.zero, false, false);        
+    {        
+        _char.Move(Vector3.zero, false, false);
+        nav.isStopped = true;
+        nav.ResetPath();
         _isMoving = false;
     }
 

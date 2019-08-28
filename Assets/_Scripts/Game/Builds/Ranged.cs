@@ -12,6 +12,8 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+
+using System.Collections;
 using UnityEngine;
 
 public abstract class Ranged<T> : Troop where T : BasePrefab
@@ -36,10 +38,8 @@ public abstract class Ranged<T> : Troop where T : BasePrefab
         base.Update();
         if (EnemyTarget != null)
         {
-            if (Vector3.Distance(transform.position, EnemyTarget.position) < Global.CASTER_STRIKE_DIST)
-            {
-                Attack();
-            }
+            //Only attack if target is in distance
+            CanAttack = Vector3.Distance(transform.position, EnemyTarget.position) < Global.CASTER_STRIKE_DIST;            
         }
     }  
 
@@ -47,10 +47,11 @@ public abstract class Ranged<T> : Troop where T : BasePrefab
     {
         if (EnemyTarget == null) return;
         var enemypos = EnemyTarget.transform.position;
-        SpawnPoint.transform.LookAt(new Vector3(enemypos.x,SpawnPoint.transform.position.y,enemypos.z));        
+        transform.LookAt(new Vector3(enemypos.x, transform.position.y,enemypos.z));        
         var project = Instantiate(Projectile, SpawnPoint.transform.position, Quaternion.identity);        
         project.GetComponent<Rigidbody>().AddForce(SpawnPoint.transform.forward * FirePower);        
     }
+       
 
     /// <summary>
     /// Could use this for random firing on cannon/catapult

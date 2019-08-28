@@ -41,17 +41,17 @@ public class Necromancer : Ranged<Troop>
        
     public override void Attack()
     {
-        MoveStop();
-        nav.isStopped = true;
+        MoveStop();        
         Debug.Log("Attacking " + EnemyTarget.name.ToString() + "!");
         anim.Play("Attack");
+        InvokeRepeating("Fire", 0, AttackDelaySec * 10);
     }
 
     public override void StopAttack()
     {
-        anim.StopPlayback();
-        anim.Play("Grounded");
-        nav.isStopped = false;
+        IsAttacking = false;        
+        CancelInvoke(); //Stop Combat        
+        anim.Play("Grounded");        
         nav.updateRotation = true;
         nav.updatePosition = true;
     }
@@ -68,6 +68,7 @@ public class Necromancer : Ranged<Troop>
                 break;
         }
     }
+       
 
-   
+
 }
