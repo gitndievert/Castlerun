@@ -13,13 +13,11 @@
 // ********************************************************************
 
 using SBK.Unity;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SingleTargetBox : DSingle<SingleTargetBox>
+public class SingleTargetBox : MonoBehaviour
 {
     public TextMeshProUGUI TargetText;
     public Image TargetIcon;
@@ -35,7 +33,7 @@ public class SingleTargetBox : DSingle<SingleTargetBox>
     private Image _backgroundImage;
 
         
-    protected override void PAwake()
+    private void Awake()
     {
         //        
         HasSelection = true; //temp for now        
@@ -45,12 +43,7 @@ public class SingleTargetBox : DSingle<SingleTargetBox>
         HealthBar.gameObject.SetActive(false);
     }
 
-    protected override void PDestroy()
-    {
-        //
-    }
-
-    protected void Update()
+    private void Update()
     {
         if(HasSelection && HealthBar.isActiveAndEnabled)
             HealthBar.BarValue = _target.GetCurrentHealth();

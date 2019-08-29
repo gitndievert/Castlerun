@@ -61,7 +61,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public bool CanAttack = false;
     protected ISelectable SetTarget { get; set; }
     protected Transform EnemyTarget { get; set; }  
-    protected bool IsAttacking { get; set; }
+    public bool IsAttacking { get; set; }
     #endregion
 
     protected override void Awake()
@@ -95,33 +95,31 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     protected virtual void FixedUpdate()
     {
         if (GetTag == Global.ARMY_TAG)
-        {
+        {            
+            if (!nav.pathPending && points.Count > 0)
+            {
+                GoToNextPoint();
+            }
+
+            if (_isMoving)
+            {
+                nav.SetDestination(_lockPoint);
+
+                if (nav.remainingDistance >= nav.stoppingDistance + StopDistanceOffset)
+                {                    
+                    _char.Move(nav.desiredVelocity, false, false);
+                }
+                else
+                {
+                    MoveStop();
+                }
+            }
+
             if (CanAttack && !IsAttacking)
             {
-                MoveStop();
                 IsAttacking = true;
+                _lockPoint = transform.position;                
                 Attack();
-            }
-            else
-            {
-                if (!nav.pathPending && points.Count > 0)
-                {
-                    GoToNextPoint();
-                }
-
-                if (_isMoving)
-                {
-                    nav.SetDestination(_lockPoint);
-
-                    if (nav.remainingDistance >= nav.stoppingDistance + StopDistanceOffset)
-                    {
-                        _char.Move(nav.desiredVelocity, false, false);
-                    }
-                    else
-                    {
-                        MoveStop();
-                    }
-                }
             }
 
         }
@@ -179,18 +177,19 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         {
             IsSelected = true;
             Selection selection = UIManager.Instance.SelectableComponent;
-
-            //Single Target Selection Panel
-            SelectionUI.UpdateSingleTarget(this);
-
+            
             if (GetTag == Global.ARMY_TAG)
             {
+                //Single Target Selection Panel
+                SelectionUI.UpdateSingleTarget(this);
                 SelectionTargetStatus(true, SelectedColor);
                 selection.UpdateMassList(this);
                 //glow green
             }
             else if(GetTag == Global.ENEMY_TAG)
             {
+                //Single Target Selection Panel
+                SelectionUI.UpdateEnemyTarget(this);
                 SelectionTargetStatus(true, DamageColor);
                 //glow red
             }
@@ -250,7 +249,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public virtual void Target(ISelectable target)
     {        
         SetTarget = target;
-        EnemyTarget = target.GameObject.transform;
+        EnemyTarget = target.GameObject.transform;        
     }
 
     public void ClearEnemyTargets()
@@ -267,9 +266,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public void MoveStop()
     {        
-        _char.Move(Vector3.zero, false, false);
-        nav.isStopped = true;
-        nav.ResetPath();
+        _char.Move(Vector3.zero, false, false);        
         _isMoving = false;
     }
 

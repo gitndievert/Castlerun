@@ -47,28 +47,26 @@ public partial class UIManager : PSingle<UIManager>
 
     /// <summary>
     /// Target Box (Single Selection)
-    /// </summary>
-    [HideInInspector]
+    /// </summary>    
     public SingleTargetBox SingleTargetBox;
 
     /// <summary>
     /// Multitarget Box Manager (All Selected Targets)
-    /// </summary>
-    [HideInInspector]
+    /// </summary>    
     public MultiTargetBox MultiTargetBox;
+
+    /// <summary>
+    /// Enemy Target Box (Single Selection)
+    /// </summary>    
+    public SingleTargetBox EnemyTargetBox;
+
 
     protected override void PAwake()
     {
         if (SelectableComponent == null)
             SelectableComponent = GetComponent<Selection>();       
     }
-
-    protected void Start()
-    {
-        SingleTargetBox = SingleTargetBox.Instance;
-        MultiTargetBox = MultiTargetBox.Instance;
-    }
-
+    
     protected override void PDestroy()
     {
         

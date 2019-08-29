@@ -18,10 +18,13 @@ using UnityEngine;
 
 public abstract class Ranged<T> : Troop where T : BasePrefab
 {
+    const float MAXIMUM_BO_POWER = 2000f;
+
     [Header("Projectile Used")]
     public Projectile Projectile;
     [Header("Projectile Properties")]
-    public float FirePower = 5.5f;
+    [Range(0f, MAXIMUM_BO_POWER)]
+    public float FirePower = 300f;
     public GameObject SpawnPoint;
     
     protected Projectile CreatedProjectile;    
@@ -46,6 +49,8 @@ public abstract class Ranged<T> : Troop where T : BasePrefab
     public void Fire()
     {
         if (EnemyTarget == null) return;
+        Debug.Log("Attacking " + EnemyTarget.name.ToString() + "!");
+        anim.Play("Attack");
         var enemypos = EnemyTarget.transform.position;
         transform.LookAt(new Vector3(enemypos.x, transform.position.y,enemypos.z));        
         var project = Instantiate(Projectile, SpawnPoint.transform.position, Quaternion.identity);        

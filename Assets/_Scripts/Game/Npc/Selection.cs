@@ -30,7 +30,12 @@ public class Selection : DSingle<Selection>
     /// If one target (enemy or friendly) it goes here
     /// </summary>
     public ISelectable SingleTargetSelected = null;
-    
+
+    /// <summary>
+    /// If one target (enemy or friendly) it goes here
+    /// </summary>
+    public ISelectable EnemyTargetSelected = null;
+
     public Color SelectionBoxColor;
     public Color BorderColor;
     public static bool IsSelecting = false;
@@ -115,6 +120,12 @@ public class Selection : DSingle<Selection>
                             SingleTargetSelected.UnSelect();
                             ClearSingleTarget();
                         }
+
+                        if (EnemyTargetSelected != null)
+                        {
+                            EnemyTargetSelected.UnSelect();
+                            ClearEnemyTarget();
+                        }
                     }
                 }
             }
@@ -138,13 +149,13 @@ public class Selection : DSingle<Selection>
                             {
                                 character.Move(hit.point);                                
 
-                                if (hit.transform.tag == Global.ENEMY_TAG)
+                                if (hit.transform.tag == Global.ENEMY_TAG && !character.IsAttacking)
                                 {
                                     Debug.Log("Attacking!");
+                                    _ui.EnemyTargetBox.SetTarget(SingleTargetSelected);
                                     var enemy = hit.transform.GetComponent<ISelectable>();
                                     enemy.TargetingMe.Add(character);
                                     character.Target(enemy);
-
                                 }
                             }
                         }
@@ -201,10 +212,29 @@ public class Selection : DSingle<Selection>
         UpdateSingleTarget(gameObject.GetComponent<ISelectable>());
     }
 
+    public void UpdateEnemyTarget(ISelectable selection)
+    {
+        if (selection == EnemyTargetSelected) return;
+        ClearEnemyTarget();
+        EnemyTargetSelected = selection;
+        _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);
+    }
+
+    public void UpdateEnemyTarget(GameObject gameObject)
+    {
+        UpdateEnemyTarget(gameObject.GetComponent<ISelectable>());
+    }
+
     public void ClearSingleTarget()
     {
         SingleTargetSelected = null;
         _ui.SingleTargetBox.ClearTarget();
+    }
+
+    public void ClearEnemyTarget()
+    {
+        EnemyTargetSelected = null;
+        _ui.EnemyTargetBox.ClearTarget();
     }
 
     public void ClearList()

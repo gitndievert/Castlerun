@@ -647,12 +647,15 @@ MonoBehaviour:
   DestroySound: {fileID: 0}
   HitSounds: []
   HealthText: {fileID: 0}
+  IsDying: 0
   Icon: {fileID: 21300000, guid: 2c249046f3304cd42a5731c8ea26adcd, type: 3}
   SelectionTarget: {fileID: 7287754718042530950}
   StopDistanceOffset: 0
   SelectionCall: []
   Acknowledgement: []
   AttackBattleCryClips: []
+  AttackDelaySec: 1
+  CanAttack: 0
   Projectile: {fileID: 498153287576550493, guid: 1584d21a16d6fe44bb40ac6a363dee98,
     type: 3}
   FirePower: 200
@@ -671,7 +674,7 @@ Animator:
   m_GameObject: {fileID: 2750229220499736087}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3ae6b4bdd9d9d7642bacb00133452d02, type: 3}
-  m_Controller: {fileID: 22100000, guid: 999db907f87c1cb4891acf1c34ea5706, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3a7e90b70d4e75f4a8f6bf421df5577c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1

@@ -67,18 +67,17 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     }
 
     public void OnMouseDown()
-    {
-        SelectionUI.UpdateSingleTarget(this);
+    {        
         switch (GetTag)
         {
             case Global.ARMY_TAG:
-                //glow green
+                SelectionUI.UpdateSingleTarget(this);
                 break;
             case Global.BUILD_TAG:
-                //glow yellow
+                SelectionUI.UpdateSingleTarget(this);
                 break;
             case Global.ENEMY_TAG:
-                //glow red
+                SelectionUI.UpdateEnemyTarget(this);
                 break;
         }
     }
