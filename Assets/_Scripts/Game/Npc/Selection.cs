@@ -152,8 +152,10 @@ public class Selection : DSingle<Selection>
                                 if (hit.transform.tag == Global.ENEMY_TAG && !character.IsAttacking)
                                 {
                                     Debug.Log("Attacking!");
-                                    _ui.EnemyTargetBox.SetTarget(SingleTargetSelected);
                                     var enemy = hit.transform.GetComponent<ISelectable>();
+                                    EnemyTargetSelected = enemy;
+                                    _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);
+                                    UpdateEnemyTarget(EnemyTargetSelected);                                    
                                     enemy.TargetingMe.Add(character);
                                     character.Target(enemy);
                                 }

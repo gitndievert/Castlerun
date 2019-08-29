@@ -45,22 +45,29 @@ public class SingleTargetBox : MonoBehaviour
 
     private void Update()
     {
-        if(HasSelection && HealthBar.isActiveAndEnabled)
-            HealthBar.BarValue = _target.GetCurrentHealth();
+        if (HasSelection && HealthBar.isActiveAndEnabled)
+        {
+            int health = _target.GetCurrentHealth();
+            if (health <= 0 || _target.IsDying)
+            {
+                ClearTarget();
+            }
+            else
+            {
+                HealthBar.BarValue = health;
+            }
+            
+        }
     }
 
     public void SetTarget(ISelectable target)
     {        
         _target = target;
         _targetObj = target.GameObject;
-        if (_targetObj)
+        if (_targetObj && !target.IsDying)
         {
             Process();
-        }
-        else
-        {
-            throw new System.Exception("Unable to Process Target");
-        }
+        }        
     }
 
     public void SetTarget(GameObject target)

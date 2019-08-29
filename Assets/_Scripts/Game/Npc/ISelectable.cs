@@ -31,4 +31,5 @@ public interface ISelectable
     int GetCurrentHealth();
     int GetMaxHealth();
     HashSet<Troop> TargetingMe { get; set; }
+    bool IsDying { get; set; }
 }
