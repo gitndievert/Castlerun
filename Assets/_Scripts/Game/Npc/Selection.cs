@@ -102,18 +102,18 @@ public class Selection : DSingle<Selection>
                 //Deselect on ground on building selection
                 if (hit.point != null)
                 {
-                    if (hit.transform.gameObject.layer == Global.GROUND_LAYER
+                    if(hit.transform.tag == Global.ARMY_TAG && SingleTargetSelected != null)
+                    {                        
+                        UpdateSingleTarget(hit.transform.GetComponent<ISelectable>());
+                    }
+                    else if (hit.transform.tag == Global.ENEMY_TAG && EnemyTargetSelected != null)
+                    {
+                        UpdateEnemyTarget(hit.transform.GetComponent<ISelectable>());
+                    }
+                    else if (hit.transform.gameObject.layer == Global.GROUND_LAYER
                         || ((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
                     {
-                        if (SelectionListCount > 0)
-                        {
-                            foreach (var select in MassSelectionList)
-                            {
-                                select.UnSelect();
-                            }
-                                                                                   
-                            ClearList();
-                        }
+                        ClearAll();
 
                         if (SingleTargetSelected != null)
                         {
@@ -146,10 +146,14 @@ public class Selection : DSingle<Selection>
                         {
                             var character = select.GameObject.GetComponent<Troop>();
                             if (character != null)
-                            {
+                            {                                
                                 character.Move(hit.point);                                
 
-                                if (hit.transform.tag == Global.ENEMY_TAG && !character.IsAttacking)
+                                if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
+                                {
+                                    character.ClearEnemyTargets();                                    
+                                }
+                                else if (hit.transform.tag == Global.ENEMY_TAG /*&& !character.IsAttacking*/)
                                 {
                                     Debug.Log("Attacking!");
                                     var enemy = hit.transform.GetComponent<ISelectable>();
@@ -196,17 +200,27 @@ public class Selection : DSingle<Selection>
     }
 
     public void UpdateMassList(ISelectable selection)
-    {
+    {        
         MassSelectionList.Add(selection);
         _ui.MultiTargetBox.UpdateList(MassSelectionList);
+
+        //Also update the SingleTarget with First Selection
+        SingleTargetSelected = MassSelectionList[0];
+        _ui.SingleTargetBox.SetTarget(SingleTargetSelected);
+
     }
 
     public void UpdateSingleTarget(ISelectable selection)
     {
         if (selection == SingleTargetSelected) return;
-        ClearSingleTarget();
+        if (SingleTargetSelected != null)
+        {
+            ClearSingleTarget();
+        }
         SingleTargetSelected = selection;
-        _ui.SingleTargetBox.SetTarget(SingleTargetSelected);        
+        _ui.SingleTargetBox.SetTarget(SingleTargetSelected);
+        ClearAll();
+        UpdateMassList(SingleTargetSelected);       
     }
 
     public void UpdateSingleTarget(GameObject gameObject)
@@ -217,7 +231,10 @@ public class Selection : DSingle<Selection>
     public void UpdateEnemyTarget(ISelectable selection)
     {
         if (selection == EnemyTargetSelected) return;
-        ClearEnemyTarget();
+        if (EnemyTargetSelected != null)
+        {
+            ClearEnemyTarget();
+        }
         EnemyTargetSelected = selection;
         _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);
     }
@@ -229,12 +246,15 @@ public class Selection : DSingle<Selection>
 
     public void ClearSingleTarget()
     {
+        SingleTargetSelected.UnSelect();
+        ClearList(SingleTargetSelected);
         SingleTargetSelected = null;
         _ui.SingleTargetBox.ClearTarget();
     }
 
     public void ClearEnemyTarget()
     {
+        EnemyTargetSelected.UnSelect();
         EnemyTargetSelected = null;
         _ui.EnemyTargetBox.ClearTarget();
     }
@@ -252,6 +272,19 @@ public class Selection : DSingle<Selection>
     {
         MassSelectionList.Remove(selection);
         _ui.MultiTargetBox.ClearList();
+    }
+
+    public void ClearAll()
+    {
+        if (SelectionListCount > 0)
+        {
+            foreach (var select in MassSelectionList)
+            {
+                select.UnSelect();
+            }
+
+            ClearList();
+        }
     }
 
     private IEnumerator SelectionCursor()

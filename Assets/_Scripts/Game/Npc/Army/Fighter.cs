@@ -20,13 +20,8 @@ public class Fighter : Troop
 {
     public override string DisplayName => "Soldier";
 
-    public override void Attack()
+    public override void Fire()
     {
         throw new System.NotImplementedException();
     }
-        
-    public override void StopAttack()
-    {
-        throw new System.NotImplementedException();
-    }    
 }

@@ -68,13 +68,8 @@ public class Gatherer : Troop
     {
         yield return new WaitForSeconds(3f);
     }
-   
-    public override void Attack()
-    {
-        throw new System.NotImplementedException();
-    }
 
-    public override void StopAttack()
+    public override void Fire()
     {
         throw new System.NotImplementedException();
     }

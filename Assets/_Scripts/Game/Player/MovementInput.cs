@@ -77,9 +77,12 @@ public class MovementInput : MonoBehaviour
         InputMagnitude();
         _moveVector = Vector3.zero;
         CharacterController.Move(_moveVector);
-                
+
+        //Dont Allow Right Mouse if Running
+        Global.MouseLook = Speed > 0;
+
         //Add Grounding
-       
+
         if (Input.GetKeyDown(KeyBindings.Jump)) Jump();
         if (Input.GetKeyDown(KeyBindings.Dance1)) Dance();
     }

@@ -20,14 +20,5 @@ public class Wizard : Ranged<Troop>
 {
     public override string DisplayName => "Wizard";
 
-    public override void Attack()
-    {
-        
-    }
-
-    public override void StopAttack()
-    {
-        throw new System.NotImplementedException();
-    }
-       
+           
 }

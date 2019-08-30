@@ -118,7 +118,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             if (CanAttack && !IsAttacking)
             {
                 IsAttacking = true;
-                _lockPoint = transform.position;                
+                _lockPoint = transform.position; //Stop at this position             
                 Attack();
             }
 
@@ -182,8 +182,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             {
                 //Single Target Selection Panel
                 SelectionUI.UpdateSingleTarget(this);
-                SelectionTargetStatus(true, SelectedColor);
-                selection.UpdateMassList(this);
+                SelectionTargetStatus(true, SelectedColor);                
                 //glow green
             }
             else if(GetTag == Global.ENEMY_TAG)
@@ -235,12 +234,26 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     /// <summary>
     /// Attack methods needed for Troops
     /// </summary>
-    public abstract void Attack();
+    public virtual void Attack()
+    {
+        InvokeRepeating("Fire", 0, AttackDelaySec * 5);
+    }
+
+    /// <summary>
+    /// What happens during the attack UNIQUE per type of troop
+    /// </summary>
+    public abstract void Fire();
 
     /// <summary>
     /// Stop Attack for Troops
     /// </summary>
-    public abstract void StopAttack();
+    public virtual void StopAttack()
+    {
+        IsAttacking = false;
+        ClearEnemyTargets();
+        CancelInvoke(); //Stop Combat        
+        //anim.Play("Grounded");
+    }
 
     /// <summary>
     /// This Troops target for attack
@@ -255,7 +268,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public void ClearEnemyTargets()
     {
         SetTarget = null;
-        EnemyTarget = null;
+        EnemyTarget = null;        
     }
 
     public void Move(Vector3 point)

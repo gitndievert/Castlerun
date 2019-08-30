@@ -38,20 +38,8 @@ public class Necromancer : Ranged<Troop>
     {
         base.Start();
     }
-       
-    public override void Attack()
-    {        
-        InvokeRepeating("Fire", 0, AttackDelaySec * 10);
-    }
-
-    public override void StopAttack()
-    {
-        IsAttacking = false;
-        ClearEnemyTargets();
-        CancelInvoke(); //Stop Combat        
-        anim.Play("Grounded");                
-    }
-
+      
+    
     public void Spawn(NecroSpawnType spawnType)
     {
         switch(spawnType)

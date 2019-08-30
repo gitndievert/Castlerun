@@ -19,14 +19,5 @@ using UnityEngine;
 public class Archer : Ranged<Troop>
 {
     public override string DisplayName => "Archer";
-
-    public override void Attack()
-    {
-        //
-    }
-
-    public override void StopAttack()
-    {
-        //
-    }    
+   
 }

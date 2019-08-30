@@ -43,8 +43,13 @@ public class GameManager : DSingle<GameManager>
     {
         PlayerList.Clear();
         StartPlayersTest();
-        Music.Instance.PlayMusicTrack(1);
+        //StartMusic();
     }    
+
+    private void StartMusic()
+    {
+        Music.Instance.PlayMusicTrack(1);
+    }
 
     private void StartPlayersTest()
     {

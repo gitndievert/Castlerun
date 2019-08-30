@@ -37,16 +37,17 @@ public abstract class Ranged<T> : Troop where T : BasePrefab
     }
 
     protected override void Update()
-    {
-        base.Update();
+    {        
+        //Only attack if target is in distance
         if (EnemyTarget != null)
-        {
-            //Only attack if target is in distance
+        {            
             CanAttack = Vector3.Distance(transform.position, EnemyTarget.position) < Global.CASTER_STRIKE_DIST;            
         }
+
+        base.Update();
     }  
 
-    public void Fire()
+    public override void Fire()
     {
         if (EnemyTarget == null) return;
         Debug.Log("Attacking " + EnemyTarget.name.ToString() + "!");

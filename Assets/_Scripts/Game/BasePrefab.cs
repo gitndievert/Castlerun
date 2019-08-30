@@ -168,8 +168,10 @@ public abstract class BasePrefab : MonoBehaviour, IBase
     public virtual void Die()
     {
         IsDying = true;
+
         float timer = CanExplode ? 0 : DestroyTimer;
-               //Stop Attacks
+        
+        //Stop Attacks
         foreach (var targets in TargetingMe)
         {
             targets.StopAttack();
