@@ -89,6 +89,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         //We don't want people exploding lol
         CanExplode = false;        
         DestroyTimer = 4f;
+        gameObject.layer = GetTag == Global.ARMY_TAG ? Global.ARMY_LAYER : 0;
     }
 
     // Update is called once per frame
@@ -116,7 +117,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             }
 
             if (CanAttack && !IsAttacking)
-            {
+            {                
                 IsAttacking = true;
                 _lockPoint = transform.position; //Stop at this position             
                 Attack();

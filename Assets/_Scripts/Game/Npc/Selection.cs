@@ -103,34 +103,37 @@ public class Selection : DSingle<Selection>
                 if (hit.point != null)
                 {
                     //Multi Single Target Selections with CTRL
-                    if (hit.transform.tag == Global.ARMY_TAG && SelectionListCount >= 1
+                    if (hit.transform.tag == Global.ARMY_TAG && SingleTargetSelected != null
                         && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
                     {
                         UpdateMassList(hit.transform.GetComponent<ISelectable>());
                     }
-                    else if (hit.transform.tag == Global.ARMY_TAG && SingleTargetSelected != null)
-                    {                        
-                        UpdateSingleTarget(hit.transform.GetComponent<ISelectable>());
-                    }
-                    else if (hit.transform.tag == Global.ENEMY_TAG && EnemyTargetSelected != null)
+                    else
                     {
-                        UpdateEnemyTarget(hit.transform.GetComponent<ISelectable>());
-                    }                    
-                    else if (hit.transform.gameObject.layer == Global.GROUND_LAYER
-                        || ((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
-                    {
-                        ClearAll();
-
-                        if (SingleTargetSelected != null)
+                        if (hit.transform.tag == Global.ARMY_TAG && SingleTargetSelected != null)
                         {
-                            SingleTargetSelected.UnSelect();
-                            ClearSingleTarget();
+                            UpdateSingleTarget(hit.transform.GetComponent<ISelectable>());
                         }
-
-                        if (EnemyTargetSelected != null)
+                        else if (hit.transform.tag == Global.ENEMY_TAG && EnemyTargetSelected != null)
                         {
-                            EnemyTargetSelected.UnSelect();
-                            ClearEnemyTarget();
+                            UpdateEnemyTarget(hit.transform.GetComponent<ISelectable>());
+                        }
+                        else if (hit.transform.gameObject.layer == Global.GROUND_LAYER
+                            || ((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
+                        {
+                            ClearAll();
+
+                            if (SingleTargetSelected != null)
+                            {
+                                SingleTargetSelected.UnSelect();
+                                ClearSingleTarget();
+                            }
+
+                            if (EnemyTargetSelected != null)
+                            {
+                                EnemyTargetSelected.UnSelect();
+                                ClearEnemyTarget();
+                            }
                         }
                     }
                 }
@@ -167,7 +170,7 @@ public class Selection : DSingle<Selection>
                                     _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);
                                     UpdateEnemyTarget(EnemyTargetSelected);                                    
                                     enemy.TargetingMe.Add(character);
-                                    character.Target(enemy);
+                                    character.Target(EnemyTargetSelected);
                                 }
                             }
                         }

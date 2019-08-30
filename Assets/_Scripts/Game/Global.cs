@@ -59,6 +59,9 @@ public static class Global
     public const int DEFAULT_LAYER = 0;
     public const int IGNORE_LAYER = 2;
     public const int GROUND_LAYER = 8;
+    public const int ARMY_LAYER = 12;
+    public const int PROJECTILE_LAYER = 12;
+
     public const float STRIKE_DIST = 5f;
     public const float CASTER_STRIKE_DIST = 7f;
     public const float ARCHER_STRIKE_DIST = 10f;
