@@ -33,8 +33,6 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     #endregion
 
     #region Visual Troop Control
-    [Header("Stopping Distance")]
-    public float StopDistanceOffset = 0f;
     public abstract string DisplayName { get; }    
 
     protected Animator anim;
@@ -59,8 +57,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public float AttackDelaySec = 3f;
     [HideInInspector]
     public bool CanAttack = false;
-    protected ISelectable SetTarget { get; set; }
-    protected Transform EnemyTarget { get; set; }  
+    protected ISelectable EnemyTarget { get; set; }
+    protected Transform EnemyTargetTransform { get; set; }  
     public bool IsAttacking { get; set; }
     #endregion
 
@@ -106,7 +104,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             {
                 nav.SetDestination(_lockPoint);
 
-                if (nav.remainingDistance >= nav.stoppingDistance + StopDistanceOffset)
+                if (nav.remainingDistance >= nav.stoppingDistance)
                 {                    
                     _char.Move(nav.desiredVelocity, false, false);
                 }
@@ -237,7 +235,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     /// </summary>
     public virtual void Attack()
     {
-        InvokeRepeating("Fire", 0, AttackDelaySec * 5);
+        InvokeRepeating("Fire", 0, AttackDelaySec);
     }
 
     /// <summary>
@@ -262,14 +260,14 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     /// <param name="target"></param>
     public virtual void Target(ISelectable target)
     {        
-        SetTarget = target;
-        EnemyTarget = target.GameObject.transform;        
+        EnemyTarget = target;
+        EnemyTargetTransform = target.GameObject.transform;        
     }
 
     public void ClearEnemyTargets()
     {
-        SetTarget = null;
-        EnemyTarget = null;        
+        EnemyTarget = null;
+        EnemyTargetTransform = null;        
     }
 
     public void Move(Vector3 point)

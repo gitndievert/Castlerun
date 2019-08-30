@@ -63,6 +63,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Assets\Characters\Knight\scripts\rotator.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\Code\CameraController.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\Code\GUIControlsFREE.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\Code\IKHandsFREE.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\Code\RPGCharacterControllerFREE.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\Code\RPGCharacterInputControllerFREE.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\Code\RPGCharacterMovementControllerFREE.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\Code\RPGCharacterWeaponControllerFREE.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\Scripts\Gravity.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\Scripts\SimpleStateMachine.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\SuperCharacterController\Core\BruteForceMesh.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\SuperCharacterController\Core\BSPTree.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\SuperCharacterController\Core\SuperCharacterController.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\SuperCharacterController\Core\SuperCollider.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\SuperCharacterController\Core\SuperCollisionType.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\SuperCharacterController\Core\SuperMath.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\SuperCharacterController\Core\SuperStateMachine.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\SuperCharacterController\DebugDraw.cs" />
+    <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\SuperCharacterController\Math3d.cs" />
     <Compile Include="Assets\_Assets\General Models\Castles\Medieval castle kit\Features\FreeCamera\FreeCamera.cs" />
     <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Examples\Cube Forge\Scripts\CubeForgeGame.cs" />
     <Compile Include="Assets\_Assets\Networking\Bearded Man Studios Inc\Examples\Cube Forge\Scripts\NetCam.cs" />
@@ -227,7 +245,6 @@
     <Compile Include="Assets\_Scripts\Game\Builds\Offense\Projectile.cs" />
     <Compile Include="Assets\_Scripts\Game\Builds\PlacementController.cs" />
     <Compile Include="Assets\_Scripts\Game\Builds\Plans\Plans.cs" />
-    <Compile Include="Assets\_Scripts\Game\Builds\Ranged.cs" />
     <Compile Include="Assets\_Scripts\Game\Camera\CameraRotate.cs" />
     <Compile Include="Assets\_Scripts\Game\Castles\Castle.cs" />
     <Compile Include="Assets\_Scripts\Game\Castles\CastleManager.cs" />
@@ -258,9 +275,11 @@
     <Compile Include="Assets\_Scripts\Game\Npc\Animals\Crocodile.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\Army\Archer.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\Army\Fighter.cs" />
+    <Compile Include="Assets\_Scripts\Game\Npc\Army\Knight.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\Army\Necromancer.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\Army\Wizard.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\ISelectable.cs" />
+    <Compile Include="Assets\_Scripts\Game\Npc\Ranged.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\Selection.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\Troop.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\Workers\Gatherer.cs" />
@@ -268,11 +287,11 @@
     <Compile Include="Assets\_Scripts\Game\Player\Inventory.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\IPlayer.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\KeyBindings.cs" />
+    <Compile Include="Assets\_Scripts\Game\Player\Messages\PlayerText.Messages.cs" />
+    <Compile Include="Assets\_Scripts\Game\Player\Messages\PlayerText.Titles.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\MovementInput.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\Player.cs" />
     <Compile Include="Assets\_Scripts\Game\Player\PlayerPad.cs" />
-    <Compile Include="Assets\_Scripts\Game\Player\PlayerText.Messages.cs" />
-    <Compile Include="Assets\_Scripts\Game\Player\PlayerText.Titles.cs" />
     <Compile Include="Assets\_Scripts\Game\Resource_Old\BaseResource.cs" />
     <Compile Include="Assets\_Scripts\Game\Resource_Old\Bust.cs" />
     <Compile Include="Assets\_Scripts\Game\Resource_Old\IResource.cs" />
@@ -585,6 +604,7 @@
     <None Include="Assets\_Assets\Characters\Meshtint Free Knight\Read me.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\NoiseAndGrainDX11.shader" />
+    <None Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\SuperCharacterController\README.txt" />
     <None Include="Assets\_Assets\General Models\Castles\Medieval castle kit\Shaders\Vertex shaders 5.5\StandardVC.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BrightPassFilter2.shader" />

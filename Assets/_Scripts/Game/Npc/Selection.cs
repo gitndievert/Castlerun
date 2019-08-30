@@ -241,6 +241,7 @@ public class Selection : DSingle<Selection>
         }
         EnemyTargetSelected = selection;
         _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);
+        SelectionCursorOn();
     }
         
     public void ClearSingleTarget()
@@ -256,6 +257,7 @@ public class Selection : DSingle<Selection>
         EnemyTargetSelected.UnSelect();
         EnemyTargetSelected = null;
         _ui.EnemyTargetBox.ClearTarget();
+        SelectionCursorOff();
     }
 
     public void ClearList()
@@ -288,9 +290,19 @@ public class Selection : DSingle<Selection>
 
     private IEnumerator SelectionCursor()
     {
+        SelectionCursorOn();
+        yield return new WaitForSeconds(.5f);
+        SelectionCursorOff();
+    }
+
+    private void SelectionCursorOn()
+    {
         SelectionTargetObj.SetActive(true);
         SelectionTargetObj.transform.position = GroundPoint;
-        yield return new WaitForSeconds(.5f);
+    }
+
+    private void SelectionCursorOff()
+    {
         SelectionTargetObj.SetActive(false);
     }
 

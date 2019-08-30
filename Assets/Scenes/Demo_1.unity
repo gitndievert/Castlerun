@@ -219,6 +219,11 @@ PrefabInstance:
       propertyPath: m_AABB.m_Extent.z
       value: 0.00007548728
       objectReference: {fileID: 0}
+    - target: {fileID: 1208895443161394805, guid: 21556eb92aa57a048a970b695bdbde41,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21556eb92aa57a048a970b695bdbde41, type: 3}
 --- !u!1001 &11786826
@@ -241,7 +246,7 @@ PrefabInstance:
     - target: {fileID: 242410134351857708, guid: 21556eb92aa57a048a970b695bdbde41,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25
+      value: 24.3
       objectReference: {fileID: 0}
     - target: {fileID: 242410134351857708, guid: 21556eb92aa57a048a970b695bdbde41,
         type: 3}
@@ -1243,7 +1248,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0.09765625, y: 0.02734375, z: 0.0234375, w: -0.02734375}
+  m_BoundingSphereOverride: {x: 8.53e-43, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1797,7 +1802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &210445562
 Transform:
   m_ObjectHideFlags: 0
@@ -12578,14 +12583,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 210445562}
     m_Modifications:
-    - target: {fileID: 128088, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
-      propertyPath: m_Name
-      value: Tower_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 128088, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 453206, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 99.77676
@@ -12641,6 +12638,14 @@ PrefabInstance:
     - target: {fileID: 453206, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.6830704
+      objectReference: {fileID: 0}
+    - target: {fileID: 128088, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
+      propertyPath: m_Name
+      value: Tower_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 128088, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 13714620, guid: 7d03ceb62fac5ee4982e3ba0a469d7bf, type: 3}
       propertyPath: m_AABB.m_Center.x
@@ -15224,17 +15229,17 @@ PrefabInstance:
     - target: {fileID: 1571594578612186681, guid: 3cbcd384f5132ce4db66acc587a9d9f5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 168.39355
+      value: 168.31
       objectReference: {fileID: 0}
     - target: {fileID: 1571594578612186681, guid: 3cbcd384f5132ce4db66acc587a9d9f5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.244555
+      value: 28.31
       objectReference: {fileID: 0}
     - target: {fileID: 1571594578612186681, guid: 3cbcd384f5132ce4db66acc587a9d9f5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 209.21089
+      value: 209.66
       objectReference: {fileID: 0}
     - target: {fileID: 1571594578612186681, guid: 3cbcd384f5132ce4db66acc587a9d9f5,
         type: 3}
@@ -18833,6 +18838,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7309932655649453433, guid: c95151ab6e1994f46a33da0cb64dcc0f,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c95151ab6e1994f46a33da0cb64dcc0f, type: 3}
 --- !u!4 &7238050932744322831 stripped
@@ -18912,6 +18922,11 @@ PrefabInstance:
         type: 3}
       propertyPath: StopDistanceOffset
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5839383575583053153, guid: 4424976e64c5223418767f18424d8b86,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4424976e64c5223418767f18424d8b86, type: 3}

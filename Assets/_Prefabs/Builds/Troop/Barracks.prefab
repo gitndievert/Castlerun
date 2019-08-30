@@ -67,6 +67,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -175,6 +176,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -229,15 +231,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 0
+  CanExplode: 1
   DestroySound: {fileID: 0}
+  HitSounds: []
   HealthText: {fileID: 0}
+  Icon: {fileID: 0}
+  BuildEffect: {fileID: 0}
   EnableTroopBuilder: 0
   ConstructionTime: 10
   PlacementDistance: 2
   Troops:
   - {fileID: -4497893882281100752, guid: d3623546911d1e949823c67f53407132, type: 3}
   BuildArea: {fileID: 3814541487879521833}
-  StartTime: 0
-  TrainingTime: 0
+  StartTime: 5
+  TrainingTime: 15
   NumberToTrain: 1
   MaxTrained: 5

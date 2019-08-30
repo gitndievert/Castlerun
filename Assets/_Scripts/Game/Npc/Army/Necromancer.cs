@@ -29,16 +29,8 @@ public class Necromancer : Ranged<Troop>
     public int SkeletonSpawnLimit = 3;
     public GameObject Skelly;
     public GameObject Zombie;
-
-    public GameObject NecroProjectile;    
-
+        
     public override string DisplayName => "Necromancer";
-
-    protected override void Start()
-    {
-        base.Start();
-    }
-      
     
     public void Spawn(NecroSpawnType spawnType)
     {

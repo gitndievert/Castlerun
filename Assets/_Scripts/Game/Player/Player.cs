@@ -160,23 +160,25 @@ public class Player : BasePrefab, IPlayer
 
         return _selectedResource;
     }
-
-    private void FixedUpdate()
-    {
-        //Will probably have this only when a target is in the way or something
-        if (!Global.BuildMode && Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON))
-        {
-            if(SwingTargetSelected() != null) _movement.SwingPlayer();
-        }
-    }
         
     private void Update()
-    {        
+    {
+
+        /////// ATTACK
+        if (!Global.BuildMode && Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON))
+        {
+            if (SwingEnemyTargetSelected() != null)
+            {
+                //COME BACK!!!! Attack Methods go here
+                _movement.SwingPlayer();
+            }
+        }
+
         //Temporary, work out the details for build mappings later
         //Disallow movements if player is DEAD
-        MovementInput.Lock = IsDead;       
+        MovementInput.Lock = IsDead;
 
-
+        /////// BUILD MODE ACTIVATION
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Global.BuildMode = !Global.BuildMode;
@@ -184,21 +186,21 @@ public class Player : BasePrefab, IPlayer
 
             if (Global.BuildMode)
             {
-                //Annouce build mode on                
+                //Announce build mode on                
                 _placementController.SetGrid = true;
                 _placementController.LoadObject(_plans.GetPlans(ResourceType.Wood, "wall"));
             }
             else
             {
-                //Annouce build mode off                
+                //Announce build mode off                
                 CameraRotate.BuildCamMode = false;
                 _placementController.SetGrid = false;
                 _placementController.ClearObject();
             }
 
-        }                           
+        }
 
-        //Special Actions in **BATTLE MODE**
+        /////// BUILD MODE OPTIONS
         if (Global.BuildMode)
         {
             //TODO: Need something to manage all the Plans in a Planmanager or something similar
@@ -244,9 +246,9 @@ public class Player : BasePrefab, IPlayer
                 _placementController.LoadObject(_plans.Catapult, true);
             }
         }
-        
-                       
-        //OTHER ACTIONS
+
+
+        /////// TEST DAMAGE
         if (Input.GetKeyDown(KeyCode.F))
         {
             if (!IsDead)
@@ -256,8 +258,8 @@ public class Player : BasePrefab, IPlayer
             }
         }
 
-        //Companion Test
-        if(Input.GetKeyDown(KeyCode.C))
+        /////// TEST COMPANIONS
+        if (Input.GetKeyDown(KeyCode.C))
         {
             SetCompanion(CompanionType.Fox);
         }
@@ -270,8 +272,8 @@ public class Player : BasePrefab, IPlayer
             ReleaseCompanion();
         }
 
-        //Cam Shaker
-        if(Input.GetKeyDown(KeyCode.O))
+        /////// TEST CAM SHAKER
+        if (Input.GetKeyDown(KeyCode.O))
         {
             CamShake.Shake();
         }
@@ -279,8 +281,7 @@ public class Player : BasePrefab, IPlayer
         {
             CamShake.Shake(1f, 0.5f);
         }    
-
-        //END OTHER ACTIONS
+               
         
     }   
 
@@ -306,33 +307,32 @@ public class Player : BasePrefab, IPlayer
         PlayerCompanion = null;
         CompanionOut = false;
     }   
-           
+          
     public void Swing()
     {
-        if (SwingTargetSelected() == null) return;
-        var target = SwingTargetSelected().GameObject;
+        if (SwingEnemyTargetSelected() == null) return;
+        var target = SwingEnemyTargetSelected();
 
-        switch (target.tag)
+        switch (target.GameObject.tag)
         {
             case Global.BUILD_TAG:
-            case Global.ENEMY_TAG:
-                var build = target.transform.GetComponent<IBase>();
-                build.SetHit(HitAmount);
+            case Global.ENEMY_TAG:                
+                target.SetHit(HitAmount);
                 break;
             case "Player":
             case Global.ARMY_TAG:
             default:
                 return;
         }        
-    }  
+    }
     
-    private ISelectable SwingTargetSelected()
+    private ISelectable SwingEnemyTargetSelected()
     {
-        var singletarget = UIManager.Instance.SelectableComponent.SingleTargetSelected;
-        if (singletarget == null) return null;
-        GameObject target = singletarget.GameObject;
+        var enemytarget = UIManager.Instance.SelectableComponent.EnemyTargetSelected;
+        if (enemytarget == null) return null;
+        GameObject target = enemytarget.GameObject;
         if (!Extensions.DistanceLess(transform, target.transform, Global.STRIKE_DIST)) return null;
-        return singletarget;
+        return enemytarget;
     }
   
     public override void SetHit(int amount)

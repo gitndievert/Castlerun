@@ -12,12 +12,12 @@ public static class Damage
         return dmg;
     }
 
-    public static Collision ApplyDamage(Collision col, int mindmg, int maxdmg, bool hascritical = false)
+    public static void ApplyDamage(Collision col, int mindmg, int maxdmg, bool hascritical = false)
     {
         var contact = col.transform.GetComponent<BasePrefab>();
-        
+
         //If contact is dying but not destroyed then don't do damage
-        if (contact.IsDying) return col;
+        if (contact.IsDying) return;
 
         int damage = GetDamage(mindmg, maxdmg, hascritical);
 
@@ -30,11 +30,32 @@ public static class Damage
             Debug.Log($"Damage for {damage}");
         }
 
-        contact.SetHit(damage);
-        return col;
+        contact.SetHit(damage);        
     }
 
-    
+    public static void ApplyDamage(ISelectable enemy, int mindmg, int maxdmg, bool hascritical = false)
+    {
+        //If contact is dying but not destroyed then don't do damage
+        if (enemy.IsDying) return;
+
+        int damage = GetDamage(mindmg, maxdmg, hascritical);
+
+        if (damage > maxdmg)
+        {
+            Debug.Log($"CRITICAL HIT! {damage}");
+        }
+        else
+        {
+            Debug.Log($"Damage for {damage}");
+        }
+
+        enemy.SetHit(damage);
+    }
+
+
+
+
+
 
 
 }

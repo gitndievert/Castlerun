@@ -1752,11 +1752,11 @@ MonoBehaviour:
   SelectionCall: []
   Acknowledgement: []
   AttackBattleCryClips: []
-  AttackDelaySec: 3
+  AttackDelaySec: 6
   CanAttack: 0
   Projectile: {fileID: 498153287576550493, guid: 1584d21a16d6fe44bb40ac6a363dee98,
     type: 3}
-  FirePower: 5.5
+  FirePower: 200
   SpawnPoint: {fileID: 3925532070741439731}
 --- !u!114 &7179421089669151334
 MonoBehaviour:
@@ -1908,16 +1908,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7221352568659780545}
     m_Modifications:
-    - target: {fileID: 4812348492574857604, guid: c8074b9f184b95c459f53fbafb9ce2e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Target
-      objectReference: {fileID: 0}
-    - target: {fileID: 4812348492574857604, guid: c8074b9f184b95c459f53fbafb9ce2e4,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 4812348492574857605, guid: c8074b9f184b95c459f53fbafb9ce2e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1972,6 +1962,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812348492574857604, guid: c8074b9f184b95c459f53fbafb9ce2e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Target
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812348492574857604, guid: c8074b9f184b95c459f53fbafb9ce2e4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8074b9f184b95c459f53fbafb9ce2e4, type: 3}

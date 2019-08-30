@@ -20,5 +20,6 @@ public class Wizard : Ranged<Troop>
 {
     public override string DisplayName => "Wizard";
 
-           
+
+   
 }

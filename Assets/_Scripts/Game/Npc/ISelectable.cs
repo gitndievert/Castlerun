@@ -15,7 +15,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public interface ISelectable
+public interface ISelectable : IBase
 {
     bool IsSelected { get; set; }    
     void UnSelect();

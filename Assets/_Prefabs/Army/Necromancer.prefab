@@ -643,7 +643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 100
-  CanExplode: 1
+  CanExplode: 0
   DestroySound: {fileID: 0}
   HitSounds: []
   HealthText: {fileID: 0}
@@ -653,7 +653,7 @@ MonoBehaviour:
   SelectionCall: []
   Acknowledgement: []
   AttackBattleCryClips: []
-  AttackDelaySec: 1
+  AttackDelaySec: 6
   CanAttack: 0
   Projectile: {fileID: 498153287576550493, guid: 1584d21a16d6fe44bb40ac6a363dee98,
     type: 3}
@@ -662,7 +662,6 @@ MonoBehaviour:
   SkeletonSpawnLimit: 3
   Skelly: {fileID: 0}
   Zombie: {fileID: 0}
-  NecroProjectile: {fileID: 0}
 --- !u!95 &-724241541021319829
 Animator:
   serializedVersion: 3
@@ -1765,16 +1764,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3432588045173631719}
     m_Modifications:
-    - target: {fileID: 4812348492574857604, guid: c8074b9f184b95c459f53fbafb9ce2e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Target
-      objectReference: {fileID: 0}
-    - target: {fileID: 4812348492574857604, guid: c8074b9f184b95c459f53fbafb9ce2e4,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 4812348492574857605, guid: c8074b9f184b95c459f53fbafb9ce2e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1829,6 +1818,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812348492574857604, guid: c8074b9f184b95c459f53fbafb9ce2e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Target
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812348492574857604, guid: c8074b9f184b95c459f53fbafb9ce2e4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8074b9f184b95c459f53fbafb9ce2e4, type: 3}
