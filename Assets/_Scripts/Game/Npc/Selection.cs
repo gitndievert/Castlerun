@@ -102,14 +102,20 @@ public class Selection : DSingle<Selection>
                 //Deselect on ground on building selection
                 if (hit.point != null)
                 {
-                    if(hit.transform.tag == Global.ARMY_TAG && SingleTargetSelected != null)
+                    //Multi Single Target Selections with CTRL
+                    if (hit.transform.tag == Global.ARMY_TAG && SelectionListCount >= 1
+                        && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                    {
+                        UpdateMassList(hit.transform.GetComponent<ISelectable>());
+                    }
+                    else if (hit.transform.tag == Global.ARMY_TAG && SingleTargetSelected != null)
                     {                        
                         UpdateSingleTarget(hit.transform.GetComponent<ISelectable>());
                     }
                     else if (hit.transform.tag == Global.ENEMY_TAG && EnemyTargetSelected != null)
                     {
                         UpdateEnemyTarget(hit.transform.GetComponent<ISelectable>());
-                    }
+                    }                    
                     else if (hit.transform.gameObject.layer == Global.GROUND_LAYER
                         || ((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
                     {
@@ -222,12 +228,7 @@ public class Selection : DSingle<Selection>
         ClearAll();
         UpdateMassList(SingleTargetSelected);       
     }
-
-    public void UpdateSingleTarget(GameObject gameObject)
-    {
-        UpdateSingleTarget(gameObject.GetComponent<ISelectable>());
-    }
-
+       
     public void UpdateEnemyTarget(ISelectable selection)
     {
         if (selection == EnemyTargetSelected) return;
@@ -238,12 +239,7 @@ public class Selection : DSingle<Selection>
         EnemyTargetSelected = selection;
         _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);
     }
-
-    public void UpdateEnemyTarget(GameObject gameObject)
-    {
-        UpdateEnemyTarget(gameObject.GetComponent<ISelectable>());
-    }
-
+        
     public void ClearSingleTarget()
     {
         SingleTargetSelected.UnSelect();
