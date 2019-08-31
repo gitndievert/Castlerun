@@ -13,7 +13,9 @@
 // ********************************************************************
 
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshObstacle))]
 public abstract class Build : BasePrefab, IBuild, ISelectable
 { 
     public int PlacementCost { get; set; }
