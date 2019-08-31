@@ -180,6 +180,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             if (GetTag == Global.ARMY_TAG)
             {
                 //Single Target Selection Panel
+                if(SelectionCall.Length > 0)
+                    SoundManager.PlaySound(SelectionCall);
                 SelectionUI.UpdateSingleTarget(this);
                 SelectionTargetStatus(true, SelectedColor);                
                 //glow green
@@ -274,6 +276,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     {        
         _lockPoint = point;
         _isMoving = true;
+        if(AttackBattleCryClips.Length > 0)
+            SoundManager.PlaySound(AttackBattleCryClips);
     }
 
     public void MoveStop()
