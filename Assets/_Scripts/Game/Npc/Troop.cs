@@ -43,8 +43,9 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     private bool _isMoving = false;
     private ThirdPersonCharacter _char;
     #endregion
-       
+
     #region AudioClips For Troops
+    public AudioClip FreshTroop;
     public AudioClip[] SelectionCall;
     public AudioClip[] Acknowledgement;
     public AudioClip[] AttackBattleCryClips;
@@ -147,7 +148,10 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     {
         //For Selectable Troops
         if (UIManager.Instance.SelectableComponent.IsWithinSelectionBounds(gameObject) && !IsSelected)
-            SelectMany();           
+            SelectMany();
+        //Keep Grounded
+        //Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit);
+        //transform.up -= (transform.up - hit.normal) * 0.1f;
     }
 
    

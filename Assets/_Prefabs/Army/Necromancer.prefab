@@ -649,7 +649,7 @@ MonoBehaviour:
   HealthText: {fileID: 0}
   Icon: {fileID: 21300000, guid: 2c249046f3304cd42a5731c8ea26adcd, type: 3}
   SelectionTarget: {fileID: 7287754718042530950}
-  StopDistanceOffset: 0
+  FreshTroop: {fileID: 0}
   SelectionCall: []
   Acknowledgement: []
   AttackBattleCryClips: []
@@ -752,7 +752,7 @@ MonoBehaviour:
   m_RunCycleLegOffset: 0.2
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 0.5
+  m_GroundCheckDistance: 1
 --- !u!1 &2783684166736639407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,6 +1764,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3432588045173631719}
     m_Modifications:
+    - target: {fileID: 4812348492574857604, guid: c8074b9f184b95c459f53fbafb9ce2e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Target
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812348492574857604, guid: c8074b9f184b95c459f53fbafb9ce2e4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4812348492574857605, guid: c8074b9f184b95c459f53fbafb9ce2e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1818,16 +1828,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4812348492574857604, guid: c8074b9f184b95c459f53fbafb9ce2e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Target
-      objectReference: {fileID: 0}
-    - target: {fileID: 4812348492574857604, guid: c8074b9f184b95c459f53fbafb9ce2e4,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8074b9f184b95c459f53fbafb9ce2e4, type: 3}

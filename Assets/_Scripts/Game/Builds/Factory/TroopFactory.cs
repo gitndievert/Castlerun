@@ -170,7 +170,16 @@ public class TroopFactory : Build
                 //Parent to Player Builds
                 makeTroop.transform.parent = Player.PlayerWorldItems.transform;
 
+                //Access Troop Component
+                var troop = makeTroop.GetComponent<Troop>();
+                //Play Spawning Sound FX
+                if (troop.FreshTroop != null)
+                {
+                    SoundManager.PlaySound(troop.FreshTroop);                  
+                }
+
                 Gatherer gatherer = makeTroop.GetComponent<Gatherer>();
+                //If Troop is a Gatherer
                 if (gatherer != null)
                 {                    
                     gatherer.SetFactory(this);

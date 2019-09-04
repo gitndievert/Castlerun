@@ -12,9 +12,17 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using SBK.Unity;
 using UnityEngine;
 
-public class MiniMapControls : MonoBehaviour
+public enum MiniTargetSeverity
+{
+    Low,
+    Medium,
+    High
+}
+
+public class MiniMapControls : PSingle<MiniMapControls>
 {
     const float CAMERA_DAMPENING = 0.15f;
 
@@ -26,12 +34,15 @@ public class MiniMapControls : MonoBehaviour
     /// <summary>
     /// Max Zoom Factor for Minimap
     /// </summary>
-    public float MaxZoomFactor = 160f;
+    public float MaxZoomFactor = 120f;
 
     /// <summary>
     /// Max Zoom Factor for Minimap
     /// </summary>
-    public float MinZoomFactor = 60f;
+    public float MinZoomFactor = 40f;
+
+    //Minimap target used to showing activity
+    public GameObject MiniMapTarget;
 
     [SerializeField]
     private float _zoomFactorIncrement = 20f;
@@ -45,11 +56,21 @@ public class MiniMapControls : MonoBehaviour
     public float SetZoomFactor
     {
         set {
-            if(value % 2 == 0 && value > 0f && value <= 160f)
+            if(value % 2 == 0 && value > 0f && value <= MaxZoomFactor)
                 _zoomFactorIncrement = value;
         }
     }
-    
+
+    protected override void PAwake()
+    {
+
+    }
+
+    protected override void PDestroy()
+    {
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,5 +113,15 @@ public class MiniMapControls : MonoBehaviour
     {
         if ((MiniMapCamera.orthographicSize + _zoomFactorIncrement) >= MaxZoomFactor) return;
         MiniMapCamera.orthographicSize += _zoomFactorIncrement;        
+    }
+    
+    public void MapTarget(GameObject target, MiniTargetSeverity severity)
+    {        
+        Vector3 targetPos = target.transform.position;
+        MiniMapTarget.transform.position = new Vector3(targetPos.x, MiniMapTarget.transform.position.y, targetPos.z);
+        switch (severity)
+        {
+
+        }
     }
 }
