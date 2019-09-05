@@ -302,11 +302,12 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         if (Health - amount > 0)
         {
             Health -= amount;
-            if (HitSounds.Length > 0)
-                SoundManager.PlaySound(HitSounds);
 
             if (_hitCounter >= 5)
             {
+                if (HitSounds.Length > 0)
+                    SoundManager.PlaySound(HitSounds);
+
                 anim.Play("Hit");
                 _hitCounter = 1;
             }
