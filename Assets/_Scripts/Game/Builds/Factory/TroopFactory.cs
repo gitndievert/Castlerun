@@ -115,14 +115,12 @@ public class TroopFactory : Build
     // Update is called once per frame
     void Update()
     {
-        if (EnableTroopBuilder && !_IsBuilding)
+        if (!_IsBuilding && _trainedCounter != MaxTrained)
         {
             BuildTroops();
-            _IsBuilding = true;
-            Debug.Log("Building Turned on for Harvesting Peoples");
+            _IsBuilding = true;            
         }
-
-        if ((!EnableTroopBuilder && _IsBuilding) || _trainedCounter == MaxTrained)
+        else if (_IsBuilding && _trainedCounter == MaxTrained)
         {
             StopBuild();
             Debug.Log("Max Number of Harvesters Made");

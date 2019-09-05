@@ -22,7 +22,8 @@ using UnityStandardAssets.Characters.ThirdPerson;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class Troop : BasePrefab, ICharacter, ISelectable
 {
-
+    const float TROOP_DESTROY_TIMER = 4f;
+    
     #region Selectable properties
     [Header("All the waypoints that this Troop will follow")]
     public Dictionary<int, Transform> points = new Dictionary<int, Transform>();
@@ -32,7 +33,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public GameObject GameObject => gameObject;
     #endregion
 
-    #region Visual Troop Control
+    #region Visual Troop Control        
     public abstract string DisplayName { get; }    
 
     protected Animator anim;
@@ -45,6 +46,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     #endregion
 
     #region AudioClips For Troops
+    [Space(5)]
+    [Header("Troop Audio Clips")]
     public AudioClip FreshTroop;
     public AudioClip[] SelectionCall;
     public AudioClip[] Acknowledgement;
@@ -63,12 +66,13 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public bool IsAttacking { get; set; }
     #endregion
 
+    private int _hitCounter = 1;
+
     protected override void Awake()
     {
         base.Awake();
         anim = GetComponent<Animator>();
-        //Seconds until object is destroyes and cleaned up
-        DestroyTimer = 1f;
+        //Seconds until object is destroyes and cleaned up        
         nav = GetComponent<NavMeshAgent>();
         _char = GetComponent<ThirdPersonCharacter>();
         if (GetComponent<Rigidbody>() == null)
@@ -87,7 +91,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         //We don't want people exploding lol
         CanExplode = false;        
-        DestroyTimer = 4f;
+        DestroyTimer = TROOP_DESTROY_TIMER;
         gameObject.layer = GetTag == Global.ARMY_TAG ? Global.ARMY_LAYER : 0;
     }
 
@@ -103,16 +107,17 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
             if (_isMoving)
             {
-                nav.SetDestination(_lockPoint);
+                nav.SetDestination(_lockPoint);              
 
                 if (nav.remainingDistance >= nav.stoppingDistance)
-                {                    
+                {
                     _char.Move(nav.desiredVelocity, false, false);
                 }
                 else
                 {
                     MoveStop();
                 }
+              
             }
 
             if (CanAttack && !IsAttacking)
@@ -299,7 +304,14 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             Health -= amount;
             if (HitSounds.Length > 0)
                 SoundManager.PlaySound(HitSounds);
-            anim.Play("Hit");
+
+            if (_hitCounter >= 5)
+            {
+                anim.Play("Hit");
+                _hitCounter = 1;
+            }
+
+            _hitCounter++;
         }
         else
         {            

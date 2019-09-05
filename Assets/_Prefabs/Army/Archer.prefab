@@ -648,13 +648,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed by
-    Humanoid clips.\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
-    'RigRCollarbone'\n\tTransform 'RigLFoot'\n\tTransform 'RigLThumb1'\n\tTransform
-    'RigRUpperarm'\n\tTransform 'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform
-    'RigPelvis'\n\tTransform 'RigLThumb2'\n\tand more ...\n\tFrom animation clip 'Sword
-    And Shield Attack'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -729,6 +723,7 @@ MonoBehaviour:
   HealthText: {fileID: 0}
   Icon: {fileID: 21300000, guid: 510903799e6f71a48bba67d32a6b5f7c, type: 3}
   SelectionTarget: {fileID: 3930807637872236537}
+  FormationCollider: {fileID: 0}
   FreshTroop: {fileID: 0}
   SelectionCall: []
   Acknowledgement: []
