@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 666563088013847019}
   - component: {fileID: 666563088008844975}
   - component: {fileID: 666563088013980529}
+  - component: {fileID: 519671171026542947}
   m_Layer: 0
   m_Name: CRMainCamera
   m_TagString: CamRig
@@ -62,7 +63,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  LookWithLeftMouseButton: 0
   targetHeight: 2.5
   distance: 0
   offsetFromWall: 0.1
@@ -79,6 +79,24 @@ MonoBehaviour:
   collisionLayers:
     serializedVersion: 2
     m_Bits: 818
+--- !u!114 &519671171026542947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666563088013882827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b04ec3bda6b7747aa53936ef3b0ae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipMoveTime: 0.05
+  returnTime: 0.4
+  sphereCastRadius: 0.1
+  visualiseInEditor: 0
+  closestDistance: 0.5
+  dontClipTag: Player
 --- !u!1 &666563088013882829
 GameObject:
   m_ObjectHideFlags: 0

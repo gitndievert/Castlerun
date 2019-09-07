@@ -27,7 +27,10 @@ public class MovementInput : MonoBehaviour
     public float AllowPlayerRotation;
     public bool IsGrounded;
     public float RotateOverload = 2f;
-    
+
+    private float _verticalVelocity;
+
+
     public CharacterController CharacterController;
 
     public Companion SetPlayerCompanion
@@ -89,6 +92,13 @@ public class MovementInput : MonoBehaviour
 
     private void Update()
     {
+
+        //Make sure character is grounded
+        IsGrounded = CharacterController.isGrounded;
+         _verticalVelocity -= IsGrounded ? 0 : 1;
+        Vector3 moveVector = new Vector3(0, _verticalVelocity, 0);
+        CharacterController.Move(moveVector);
+
         //Allowed the Mouse Look on Right Mouse Button
         if (Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
         {
