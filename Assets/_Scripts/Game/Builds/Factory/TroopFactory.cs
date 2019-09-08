@@ -170,6 +170,9 @@ public class TroopFactory : Build
 
                 //Access Troop Component
                 var troop = makeTroop.GetComponent<Troop>();
+                //Add Player to Troop
+                troop.TroopPlayer = Player;
+
                 //Play Spawning Sound FX
                 if (troop.FreshTroop != null)
                 {
@@ -181,6 +184,7 @@ public class TroopFactory : Build
                 if (gatherer != null)
                 {                    
                     gatherer.SetFactory(this);
+                    gatherer.HarvestingSelection = ResourceType.Wood;
                     for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
                     {
                         gatherer.points.Add(p, Player.PlayerPad.ResourcePoints[p]);

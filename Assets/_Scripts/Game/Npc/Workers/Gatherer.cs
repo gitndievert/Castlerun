@@ -21,6 +21,7 @@ public class Gatherer : Troop
     public const int RockQuantity = 20;
     public const int MetalQuantity = 20;
 
+    public ResourceType HarvestingSelection;
     public float HarvestTime;
 
     [Space(5)]
@@ -66,6 +67,10 @@ public class Gatherer : Troop
     
     private IEnumerator Wait()
     {
+
+        //For Harvesting....
+        //TroopPlayer.Inventory.Set(ResourceType.Wood, 15);
+
         yield return new WaitForSeconds(3f);
     }
 
