@@ -46,6 +46,8 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         MaxHealth = Health;
         IsBasic = false;
         DisplayName = name;
+        if (Costs.CostFactors.Length == 0)
+            throw new System.Exception("Please add a cost");
     }
 
     public virtual bool ConfirmPlacement()

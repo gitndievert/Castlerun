@@ -18,6 +18,7 @@ using System.Collections.Generic;
 
 public abstract class BasePrefab : MonoBehaviour, IBase
 {
+    #region Base Stats
     /// <summary>
     /// Health Tracker for all Base Prefabs
     /// </summary>
@@ -26,7 +27,6 @@ public abstract class BasePrefab : MonoBehaviour, IBase
     public AudioClip DestroySound;
     public AudioClip[] HitSounds;
     public TextMeshPro HealthText;
-
     public bool IsDying { get; set; }
 
     /// <summary>
@@ -38,12 +38,14 @@ public abstract class BasePrefab : MonoBehaviour, IBase
     /// This is the Icon Representing the Base Prefab
     /// </summary>
     public Sprite Icon;
+    #endregion
+    
+    public Costs Costs;
 
     public string GetTag
     {
         get { return tag; }
     }
-
 
     protected int MaxHealth;
     protected float DestroyTimer = 2f;
@@ -143,8 +145,8 @@ public abstract class BasePrefab : MonoBehaviour, IBase
             if (CanExplode) Explode();
             Die();
         }
-    }       
-
+    }     
+   
     public Sprite GetIcon()
     {
         return Icon ?? UIManager.Instance.DefaultIcon;

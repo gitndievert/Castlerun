@@ -110,7 +110,7 @@ NavMeshSettings:
     agentRadius: 0.5
     agentHeight: 3
     agentSlope: 45
-    agentClimb: 0.6
+    agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -2308,8 +2308,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -17.699997, y: -0.39999962}
-  m_SizeDelta: {x: -123.15, y: 0}
+  m_AnchoredPosition: {x: -31.74, y: -0.39999962}
+  m_SizeDelta: {x: -156.19, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &199033531
 MonoBehaviour:
@@ -3488,7 +3488,7 @@ MonoBehaviour:
     WoodText: {fileID: 728353449}
     RockText: {fileID: 2032728124}
     MetalText: {fileID: 2052619335}
-    GemsText: {fileID: 2029173665}
+    GoldText: {fileID: 2029173665}
   PlayerUIPanel:
     PlayerName: {fileID: 1393977224}
     HealthText: {fileID: 1446394137}
@@ -7235,8 +7235,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 19, y: 0}
-  m_SizeDelta: {x: -123.15, y: 0}
+  m_AnchoredPosition: {x: 4.83, y: 0}
+  m_SizeDelta: {x: -156.5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1231833390
 MonoBehaviour:
@@ -7732,7 +7732,7 @@ GameObject:
   - component: {fileID: 1335061174}
   - component: {fileID: 1335061173}
   m_Layer: 5
-  m_Name: GemImg
+  m_Name: GoldImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10145,7 +10145,7 @@ GameObject:
   - component: {fileID: 1502769386}
   - component: {fileID: 1502769385}
   m_Layer: 5
-  m_Name: GemPanel
+  m_Name: GoldPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10169,8 +10169,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 56.1, y: 0}
-  m_SizeDelta: {x: -123.15, y: 0}
+  m_AnchoredPosition: {x: 56.28, y: 0}
+  m_SizeDelta: {x: -122.74, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1502769385
 MonoBehaviour:
@@ -10578,8 +10578,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -55.300003, y: -0.29999924}
-  m_SizeDelta: {x: -123.15, y: 0}
+  m_AnchoredPosition: {x: -69.08, y: -0.29999924}
+  m_SizeDelta: {x: -155.56, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1558204631
 MonoBehaviour:
@@ -11766,8 +11766,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 148, y: -43}
-  m_SizeDelta: {x: 164.25, y: 41.25}
+  m_AnchoredPosition: {x: 176.55, y: -43}
+  m_SizeDelta: {x: 200.09, y: 41.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1724825051
 MonoBehaviour:
@@ -13712,7 +13712,7 @@ GameObject:
   - component: {fileID: 2029173666}
   - component: {fileID: 2029173665}
   m_Layer: 5
-  m_Name: GemText
+  m_Name: GoldText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13823,7 +13823,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 80.54266, y: 0, z: 98.64459, w: 36.277466}
+  m_margin: {x: 60.720665, y: 0, z: 77.24943, w: 36.277466}
   m_textInfo:
     textComponent: {fileID: 2029173665}
     characterCount: 3

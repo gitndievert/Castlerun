@@ -21,5 +21,5 @@ public class InventoryUI
     public TextMeshProUGUI WoodText;
     public TextMeshProUGUI RockText;
     public TextMeshProUGUI MetalText;
-    public TextMeshProUGUI GemsText;    
+    public TextMeshProUGUI GoldText;    
 }

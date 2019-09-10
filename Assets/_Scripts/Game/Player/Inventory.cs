@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
     const int MAX_WOOD = 500;
     const int MAX_ROCK = 500;
     const int MAX_METAL = 500;
-    const int MAX_GEMS = 10;
+    const int MAX_GOLD = 100000;
 
     [Range(0,MAX_WOOD)]
     public int WoodCount = 0;
@@ -27,8 +27,8 @@ public class Inventory : MonoBehaviour
     public int RockCount = 0;
     [Range(0, MAX_METAL)]
     public int MetalCount = 0;
-    [Range(0, MAX_GEMS)]
-    public int GemsCount = 0;
+    [Range(0, MAX_GOLD)]
+    public int GoldCount = 0;
 
     [Header("Main Hand Weapons")]
     [SerializeField]
@@ -40,17 +40,12 @@ public class Inventory : MonoBehaviour
     public GameObject Weapon;
     public GameObject Shield;
 
-    public static int MaxWood = 500;
-    public static int MaxRock = 500;
-    public static int MaxMetal = 500;
-    public static int MaxGems = 200;
-
     public bool ResetOnStart = false;
 
-    public bool IsWoodFull { get { return WoodCount >= MaxWood; } }
-    public bool IsRockFull { get { return RockCount >= MaxRock; } }
-    public bool IsMetalFull { get { return MetalCount >= MaxMetal; } }
-    public bool IsGemsFull { get { return GemsCount >= MaxGems; } }
+    public bool IsWoodFull { get { return WoodCount >= MAX_WOOD; } }
+    public bool IsRockFull { get { return RockCount >= MAX_ROCK; } }
+    public bool IsMetalFull { get { return MetalCount >= MAX_METAL; } }
+    public bool IsGoldFull { get { return GoldCount >= MAX_GOLD; } }
 
     private InventoryUI _ui;    
     
@@ -80,7 +75,7 @@ public class Inventory : MonoBehaviour
         _ui.WoodText.text = WoodCount.ToString();
         _ui.RockText.text = RockCount.ToString();
         _ui.MetalText.text = MetalCount.ToString();
-        _ui.GemsText.text = GemsCount.ToString();        
+        _ui.GoldText.text = GoldCount.ToString();        
     }
        
     public void ResetAll()
@@ -88,7 +83,7 @@ public class Inventory : MonoBehaviour
         WoodCount = 0;
         RockCount = 0;
         MetalCount = 0;
-        GemsCount = 0;
+        GoldCount = 0;
     }
        
     public int GetCount(ResourceType type)
@@ -101,8 +96,8 @@ public class Inventory : MonoBehaviour
                 return RockCount;
             case ResourceType.Metal:
                 return MetalCount;
-            case ResourceType.Gems:
-                return GemsCount;
+            case ResourceType.Gold:
+                return GoldCount;
             default:
                 return 0;
         }
@@ -118,8 +113,8 @@ public class Inventory : MonoBehaviour
                 return IsRockFull;
             case ResourceType.Metal:
                 return IsMetalFull;
-            case ResourceType.Gems:
-                return IsGemsFull;
+            case ResourceType.Gold:
+                return IsGoldFull;
             default:
                 return false;
         }
@@ -130,7 +125,7 @@ public class Inventory : MonoBehaviour
         switch (type)
         {
             case ResourceType.Wood:
-                if ((amount + WoodCount) <= MaxWood)
+                if ((amount + WoodCount) <= MAX_WOOD)
                 {
                     WoodCount += amount;                    
                 }
@@ -141,7 +136,7 @@ public class Inventory : MonoBehaviour
                 }                
                 break;
             case ResourceType.Rock:
-                if ((amount + RockCount) <= MaxRock)
+                if ((amount + RockCount) <= MAX_ROCK)
                 {
                     RockCount += amount;                    
                 }
@@ -152,7 +147,7 @@ public class Inventory : MonoBehaviour
                 }                
                 break;
             case ResourceType.Metal:
-                if ((amount + MetalCount) <= MaxMetal)
+                if ((amount + MetalCount) <= MAX_METAL)
                 {
                     MetalCount += amount;                    
                 }
@@ -162,10 +157,10 @@ public class Inventory : MonoBehaviour
                     return;
                 }                
                 break;
-            case ResourceType.Gems:
-                if ((amount + GemsCount) <= MaxGems)
+            case ResourceType.Gold:
+                if ((amount + GoldCount) <= MAX_METAL)
                 {
-                    GemsCount += amount;                    
+                    GoldCount += amount;                    
                 }
                 else
                 {

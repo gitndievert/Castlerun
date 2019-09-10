@@ -14,8 +14,8 @@
 
 public enum ResourceType : int
 {
-    Wood = 0,
+    Gold = 0,
+    Wood,
     Rock,
-    Metal,
-    Gems    
+    Metal        
 }

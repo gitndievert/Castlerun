@@ -94,6 +94,10 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         CanExplode = false;        
         DestroyTimer = TROOP_DESTROY_TIMER;
         gameObject.layer = GetTag == Global.ARMY_TAG ? Global.ARMY_LAYER : 0;
+        anim.applyRootMotion = false;
+
+        if (Costs.CostFactors.Length == 0)
+            throw new System.Exception("Please add a cost");
     }
 
     // Update is called once per frame
