@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7067073074842903284}
   - component: {fileID: 7067073074841804852}
   - component: {fileID: 7067073074832575796}
+  - component: {fileID: -8497718064701714264}
+  - component: {fileID: 6120466280266637525}
   m_Layer: 0
   m_Name: Pine_tree_double
   m_TagString: Untagged
@@ -98,3 +100,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!208 &-8497718064701714264
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7067073074839879412}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.5630001, y: 2.723, z: 1.7960001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.007, y: 2.7180002, z: 0.036000002}
+  m_TimeToStationary: 0.5
+--- !u!65 &6120466280266637525
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7067073074839879412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.1252296, y: 5.446314, z: 3.5919704}
+  m_Center: {x: -0.006924987, y: 2.718274, z: 0.03555137}
