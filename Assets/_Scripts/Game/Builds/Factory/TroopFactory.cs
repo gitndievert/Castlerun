@@ -160,8 +160,9 @@ public class TroopFactory : Build
     {
         for (int i = 0; i < NumberToTrain; i++)
         {
-            var randTroop = Troops[Random.Range(0, Troops.Length - 1)];            
+            var randTroop = Troops[Random.Range(0, Troops.Length - 1)];                        
             var makeTroop = Instantiate(randTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);
+                                  
 
             if (Player != null)
             {                

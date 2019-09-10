@@ -649,7 +649,6 @@ MonoBehaviour:
   HealthText: {fileID: 0}
   Icon: {fileID: 21300000, guid: 2c249046f3304cd42a5731c8ea26adcd, type: 3}
   SelectionTarget: {fileID: 7287754718042530950}
-  FormationCollider: {fileID: 0}
   FreshTroop: {fileID: 0}
   SelectionCall: []
   Acknowledgement: []
@@ -753,7 +752,7 @@ MonoBehaviour:
   m_RunCycleLegOffset: 0.2
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 1
+  m_GroundCheckDistance: 0.4
 --- !u!1 &2783684166736639407
 GameObject:
   m_ObjectHideFlags: 0

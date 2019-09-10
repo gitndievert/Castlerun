@@ -50,7 +50,6 @@ public class Gatherer : Troop
     // Update is called once per frame
     protected override void FixedUpdate()
     {
-
         if (!IsHarvesting)
         {
             if (!nav.pathPending && nav.remainingDistance < 0.5f)

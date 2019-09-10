@@ -100,12 +100,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     protected virtual void FixedUpdate()
     {
         if (GetTag == Global.ARMY_TAG)
-        {            
-            if (!nav.pathPending && points.Count > 0)
-            {
-                GoToNextPoint();
-            }
-
+        {  
             if (_isMoving)
             {
                 nav.SetDestination(_lockPoint);              
@@ -116,9 +111,9 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
                 }
                 else
                 {
+                    _isMoving = false;
                     MoveStop();
-                }
-              
+                }              
             }
 
             if (CanAttack && !IsAttacking)
@@ -283,7 +278,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     }
 
     public void Move(Vector3 point)
-    {        
+    {     
         _lockPoint = point;
         _isMoving = true;
         if(AttackBattleCryClips.Length > 0)
@@ -291,9 +286,10 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     }
 
     public void MoveStop()
-    {        
-        _char.Move(Vector3.zero, false, false);        
+    {
         _isMoving = false;
+        _char.Move(Vector3.zero, false, false);
+        nav.velocity = Vector3.zero;         
     }
 
     public override void SetHit(int amount)

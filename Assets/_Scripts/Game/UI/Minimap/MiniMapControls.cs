@@ -105,13 +105,13 @@ public class MiniMapControls : PSingle<MiniMapControls>
 
     public void ZoomIn()
     {
-        if ((MiniMapCamera.orthographicSize - _zoomFactorIncrement) <= MinZoomFactor) return;        
+        if ((MiniMapCamera.orthographicSize - _zoomFactorIncrement) < MinZoomFactor) return;        
         MiniMapCamera.orthographicSize -= _zoomFactorIncrement;        
     }
 
     public void ZoomOut()
     {
-        if ((MiniMapCamera.orthographicSize + _zoomFactorIncrement) >= MaxZoomFactor) return;
+        if ((MiniMapCamera.orthographicSize + _zoomFactorIncrement) > MaxZoomFactor) return;
         MiniMapCamera.orthographicSize += _zoomFactorIncrement;        
     }
     
