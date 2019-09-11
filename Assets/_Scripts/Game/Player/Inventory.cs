@@ -119,7 +119,24 @@ public class Inventory : MonoBehaviour
                 return false;
         }
     }
+
+    /// <summary>
+    /// Pass in the cost summary of a building or troop
+    /// </summary>
+    /// <param name="costs">Costs attached to building or troop</param>
+    public void Set(Costs costs)
+    {
+        foreach(Cost cost in costs.CostFactors)
+        {
+            Set(cost.Resource, -cost.Amount);
+        }
+    }
         
+    /// <summary>
+    /// Set the cost for build or troop
+    /// </summary>
+    /// <param name="type">Resouce Type</param>
+    /// <param name="amount">Amount of Resource</param>
     public void Set(ResourceType type, int amount = 0)
     {
         switch (type)
@@ -158,7 +175,7 @@ public class Inventory : MonoBehaviour
                 }                
                 break;
             case ResourceType.Gold:
-                if ((amount + GoldCount) <= MAX_METAL)
+                if ((amount + GoldCount) <= MAX_GOLD)
                 {
                     GoldCount += amount;                    
                 }
