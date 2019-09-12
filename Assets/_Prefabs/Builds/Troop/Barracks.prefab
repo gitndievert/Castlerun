@@ -236,6 +236,12 @@ MonoBehaviour:
   HitSounds: []
   HealthText: {fileID: 0}
   Icon: {fileID: 0}
+  Costs:
+    CostFactors:
+    - Resource: 0
+      Amount: 500
+    - Resource: 1
+      Amount: 150
   BuildEffect: {fileID: 0}
   EnableTroopBuilder: 0
   ConstructionTime: 10
