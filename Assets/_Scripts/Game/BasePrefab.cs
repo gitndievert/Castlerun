@@ -162,6 +162,11 @@ public abstract class BasePrefab : MonoBehaviour, IBase
         return MaxHealth;
     }
 
+    public Costs GetCosts()
+    {
+        return Costs;
+    }
+
     public override string ToString()
     {
         return transform.name;

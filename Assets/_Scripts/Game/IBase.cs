@@ -16,5 +16,6 @@ public interface IBase
 {
     void SetHit(int amount);
     void Die();
+    Costs GetCosts();
 }
     

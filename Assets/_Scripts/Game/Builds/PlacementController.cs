@@ -158,10 +158,18 @@ public class PlacementController : MonoBehaviour
 
                 if (build.SetResourceType(rt))
                 {                    
-                    Inventory inv = _player.Inventory;
-                    int invcount = inv.GetCount(rt);
-                    if (invcount > 0 && (invcount - build.PlacementCost >= 0))
+                    Inventory inv = _player.Inventory;                    
+
+                    bool metCosts = false;
+                    var costs = build.GetCosts();
+                    foreach(var cost in costs.CostFactors)
                     {
+                        int invcount = inv.GetCount(cost.Resource);
+                        metCosts = invcount > 0 && (invcount - cost.Amount >= 0);
+                    }
+
+                    if (metCosts)
+                    { 
                         //Confirm that placement can be made on build
                         if (!build.ConfirmPlacement())
                         {
@@ -171,7 +179,7 @@ public class PlacementController : MonoBehaviour
                         else
                         {
                             build.SetPlayer(_player);
-                            inv.Set(rt, -build.PlacementCost);                            
+                            inv.Set(costs);
                         }
                     }
                     else
