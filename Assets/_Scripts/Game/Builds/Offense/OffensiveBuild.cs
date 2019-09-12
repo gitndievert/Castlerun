@@ -30,10 +30,6 @@ public class OffensiveBuild : Build
     protected override void Start()
     {
         base.Start();        
-    }
-    
-    public override bool SetResourceType(ResourceType type)
-    {
-        return type == ResourceType;
-    }    
+    }   
+      
 }

@@ -53,29 +53,7 @@ public class BasicBuild : Build
     {
         _anim.Play("Basic");
         return base.ConfirmPlacement();
-    }
-
-    public override bool SetResourceType(ResourceType type)
-    {
-        _pickType = type;
-        switch (type)
-        {
-            case ResourceType.Wood:
-                PlacementCost = WOOD_COST;                
-                break;
-            case ResourceType.Rock:
-                PlacementCost = ROCK_COST;
-                break;
-            case ResourceType.Metal:
-                PlacementCost = METAL_COST;
-                break;
-            default:
-                PlacementCost = 0;
-                return false;
-        }
-        
-        return true;
-    }
+    }   
 
     /*public Vector3[] SnapPointPos
     {

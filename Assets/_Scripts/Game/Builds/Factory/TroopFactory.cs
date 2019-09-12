@@ -126,22 +126,6 @@ public class TroopFactory : Build
             Debug.Log("Max Number of Harvesters Made");
         }
     }
-     
-
-    public override bool SetResourceType(ResourceType type)
-    {
-        _pickType = type;
-        switch (type)
-        {
-            case ResourceType.Wood:
-                PlacementCost = WOOD_COST;
-                break;
-            default:
-                return false;
-        }
-
-        return true;
-    }        
 
     public void BuildTroops()
     {

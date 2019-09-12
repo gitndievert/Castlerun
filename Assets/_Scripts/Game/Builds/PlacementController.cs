@@ -41,7 +41,7 @@ public class PlacementController : MonoBehaviour
 
     private GameObject _currObj;    
     private Material[] _saveMaterial;
-    private ResourceType _selectedResource;
+    //private ResourceType _selectedResource;
 
     private float mouseWheelRotation;
     private bool _triggerBuild = false;
@@ -63,8 +63,7 @@ public class PlacementController : MonoBehaviour
     private void Start()
     {
         BuildMode = false;        
-        _playerBuilds = _player.PlayerWorldItems.transform;
-        SetResource(ResourceType.Wood);
+        _playerBuilds = _player.PlayerWorldItems.transform;        
     }
 
     public void LoadObject(GameObject obj, bool outsidegrid = false)
@@ -74,12 +73,7 @@ public class PlacementController : MonoBehaviour
         _triggerBuild = true;
         _outsideGrid = outsidegrid;
         CameraRotate.BuildCamMode = outsidegrid;
-    }
-
-    public void SetResource(ResourceType resource)
-    {
-        _selectedResource = resource;
-    }
+    }    
 
     public void ClearObject()
     {
@@ -148,52 +142,44 @@ public class PlacementController : MonoBehaviour
                 PlayerCollision(false);
                 _currObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;
                 _currObj.gameObject.layer = Global.DEFAULT_LAYER;
-
                 _currObj.transform.parent = _playerBuilds; //sets the player 1 parent  
+
                 var build = _currObj.transform.GetComponent<IBuild>();
-                
-                ResourceType rt = _selectedResource;
-
                 bool cancelBuild = false;
+                Inventory inv = _player.Inventory;
 
-                if (build.SetResourceType(rt))
-                {                    
-                    Inventory inv = _player.Inventory;                    
+                bool metCosts = false;
+                var costs = build.GetCosts();
+                foreach (var cost in costs.CostFactors)
+                {
+                    int invcount = inv.GetCount(cost.Resource);
+                    metCosts = invcount > 0 && (invcount - cost.Amount >= 0);
+                }
 
-                    bool metCosts = false;
-                    var costs = build.GetCosts();
-                    foreach(var cost in costs.CostFactors)
+                if (metCosts)
+                {
+                    //Confirm that placement can be made on build
+                    if (!build.ConfirmPlacement())
                     {
-                        int invcount = inv.GetCount(cost.Resource);
-                        metCosts = invcount > 0 && (invcount - cost.Amount >= 0);
-                    }
-
-                    if (metCosts)
-                    { 
-                        //Confirm that placement can be made on build
-                        if (!build.ConfirmPlacement())
-                        {
-                            cancelBuild = true;
-                            UIManager.Instance.Messages.text = "You cannot build here, try again";
-                        }                    
-                        else
-                        {
-                            build.SetPlayer(_player);
-                            inv.Set(costs);
-                        }
+                        cancelBuild = true;
+                        UIManager.Instance.Messages.text = "You cannot build here, try again";
                     }
                     else
                     {
-                        cancelBuild = true;
-                        _currObj.transform.GetComponentInChildren<Renderer>().material = ErrorMaterial;
-                        UIManager.Instance.Messages.text = $"You will need to gather more {rt.ToString()}";
+                        build.SetPlayer(_player);
+                        inv.Set(costs);
                     }
                 }
                 else
                 {
                     cancelBuild = true;
-                    UIManager.Instance.Messages.text = "That resource will not work to build this plan";
-                }
+                    _currObj.transform.GetComponentInChildren<Renderer>().material = ErrorMaterial;
+                    //Come Back... Get Messages for Resource Types
+                    //UIManager.Instance.Messages.text = $"You will need to gather more {rt.ToString()}";
+                    UIManager.Instance.Messages.text = "You will need to gather more Resources";
+                }                
+
+
 
                 if (cancelBuild)
                 {

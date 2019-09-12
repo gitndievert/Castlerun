@@ -57,8 +57,6 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         return isPlaced;
     }
     
-    public abstract bool SetResourceType(ResourceType type);
-
     public void SetPlayer(Player player)
     {
         Player = player;

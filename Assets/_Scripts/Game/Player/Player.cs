@@ -77,9 +77,7 @@ public class Player : BasePrefab, IPlayer
     
     private PlacementController _placementController;
     private MovementInput _movement;
-
-    private int _resourceIndex = 0;
-    private ResourceType _selectedResource;
+       
 
     //Camera Rig
     private GameObject _camRig;
@@ -144,22 +142,6 @@ public class Player : BasePrefab, IPlayer
         MoveSpeed = 10f;
         BuildSpeed = 10f;        
     }
-    
-    private ResourceType SwitchResource()
-    {       
-        if (_resourceIndex >= PlacementController.ResourceIndex.Length - 1)
-        {
-            _resourceIndex = 0;
-        }
-        else
-        {
-            _resourceIndex++;
-        }
-        
-        _selectedResource = PlacementController.ResourceIndex[_resourceIndex];
-
-        return _selectedResource;
-    }
         
     private void Update()
     {
@@ -202,28 +184,19 @@ public class Player : BasePrefab, IPlayer
 
         /////// BUILD MODE OPTIONS
         if (Global.BuildMode)
-        {
-            //TODO: Need something to manage all the Plans in a Planmanager or something similar
-            //The manager will handle both generic, and complex plans
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                _selectedResource = SwitchResource();
-                _placementController.SetResource(_selectedResource);
-                UIManager.Instance.Messages.text = $"Building with {_selectedResource.ToString()}";
-            }
+        {                       
 
             if (Input.GetKeyDown(KeyBindings.BuildKey1))
             {
-                _placementController.LoadObject(_plans.GetPlans(_selectedResource, "wall"));
+                _placementController.LoadObject(_plans.GetPlans(ResourceType.Wood, "wall"));
             }
             else if (Input.GetKeyDown(KeyBindings.BuildKey2))
             {
-                _placementController.LoadObject(_plans.GetPlans(_selectedResource, "floor"));
+                _placementController.LoadObject(_plans.GetPlans(ResourceType.Wood, "floor"));
             }
             else if (Input.GetKeyDown(KeyBindings.BuildKey3))
             {
-                _placementController.LoadObject(_plans.GetPlans(_selectedResource, "ramp"));
+                _placementController.LoadObject(_plans.GetPlans(ResourceType.Wood, "ramp"));
             }
             else if (Input.GetKeyDown(KeyCode.B))
             {

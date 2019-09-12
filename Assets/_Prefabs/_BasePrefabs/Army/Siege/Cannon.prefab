@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9086477737352126634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9086477737352126637}
+  - component: {fileID: 9086477737352126636}
+  - component: {fileID: 9086477737352126635}
+  m_Layer: 2
+  m_Name: Cannon
+  m_TagString: Build
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9086477737352126637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9086477737352126634}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 9086477738911579928}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &9086477737352126636
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9086477737352126634}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.3242543, y: 2.604447, z: 4.9177475}
+  m_Center: {x: 0.2388711, y: -0.28514218, z: 0.2833686}
+--- !u!114 &9086477737352126635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9086477737352126634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d042ab368b91e0a4b93dda18f5ad4614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 0
+  HealthBar: {fileID: 0}
+  DestroySound: {fileID: 0}
+  HealthText: {fileID: 0}
+  EnableTroopBuilder: 0
+  FireSounds:
+  - {fileID: 8300000, guid: 632c8b93a9b3eb141bbffd47c8259051, type: 3}
+  Projectile: {fileID: 5626375184533069836, guid: 96682d61ef29f1d4fae5576831e6618f,
+    type: 3}
+  FireEffect: {fileID: 100010, guid: cd0b114e525d800419ad3d7bd7712f93, type: 3}
+  FireTimer: 3
+  FireRate: 5
+  FirePower: 70
+  FirePosition: {fileID: 9086477738911579928}
+  IsFiring: 0
+  _ConstructionTime: 2
+--- !u!1 &9086477738911579927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9086477738911579928}
+  m_Layer: 2
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9086477738911579928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9086477738911579927}
+  m_LocalRotation: {x: -0.13095057, y: -0, z: -0, w: 0.9913889}
+  m_LocalPosition: {x: 0.259, y: 0.95, z: 3.52}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9086477737352126637}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -15.049001, y: 0, z: 0}

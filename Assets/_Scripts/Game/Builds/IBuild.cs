@@ -14,8 +14,7 @@
 
 public interface IBuild : IBase
 {
-    bool ConfirmPlacement();
-    bool SetResourceType(ResourceType type);    
+    bool ConfirmPlacement();    
     void SetPlayer(Player player);    
     bool IsBasic { get; set; }    
 }
