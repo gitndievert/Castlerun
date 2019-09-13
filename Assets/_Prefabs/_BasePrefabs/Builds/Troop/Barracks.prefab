@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 3747102575168005721}
   - component: {fileID: -789397437547243032}
   - component: {fileID: 7856360647941694591}
+  - component: {fileID: 117097734714994420}
   m_Layer: 2
   m_Name: Barracks
   m_TagString: Build
@@ -252,4 +253,20 @@ MonoBehaviour:
   StartTime: 5
   TrainingTime: 15
   NumberToTrain: 1
-  MaxTrained: 5
+  MaxTrained: 1
+--- !u!208 &117097734714994420
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516178438436275324}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.0500002, y: 2.6250002, z: 2.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.011000001, y: -0.16900001, z: 0}
+  m_TimeToStationary: 0.5

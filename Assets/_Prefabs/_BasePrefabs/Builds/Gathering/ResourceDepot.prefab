@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 814880543415800105}
   - component: {fileID: 7457598439211614266}
   - component: {fileID: 5028009657086996972}
+  - component: {fileID: 6610129586762107636}
   m_Layer: 2
-  m_Name: ResourceDepot2
+  m_Name: ResourceDepot
   m_TagString: Build
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,6 +70,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -123,8 +125,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 0
+  CanExplode: 1
   DestroySound: {fileID: 0}
+  HitSounds: []
   HealthText: {fileID: 0}
+  Icon: {fileID: 0}
+  Costs:
+    CostFactors: []
+  BuildEffect: {fileID: 0}
   EnableTroopBuilder: 0
   ConstructionTime: 10
   PlacementDistance: 2
@@ -135,6 +143,22 @@ MonoBehaviour:
   TrainingTime: 15
   NumberToTrain: 1
   MaxTrained: 5
+--- !u!208 &6610129586762107636
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547467594100615071}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 4.5, y: 3.594, z: 3.5490003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.437, y: -0.18400002, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &6650768802920326687
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +226,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

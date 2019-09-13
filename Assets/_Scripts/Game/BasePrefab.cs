@@ -16,6 +16,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(Rigidbody))]
 public abstract class BasePrefab : MonoBehaviour, IBase
 {
     #region Base Stats
@@ -54,6 +55,8 @@ public abstract class BasePrefab : MonoBehaviour, IBase
     protected static readonly Color SelectedColor = Color.green;
     protected static readonly Color DamageColor = Color.red;
     protected static readonly Color PassiveColor = Color.yellow;
+
+    protected Rigidbody RigidBody;
 
     private List<MeshExploder> _explodables = new List<MeshExploder>();
     
@@ -106,6 +109,11 @@ public abstract class BasePrefab : MonoBehaviour, IBase
 
         TargetingMe = new HashSet<Troop>();
         IsDying = false;
+
+        if (GetComponent<Rigidbody>() == null)
+            gameObject.AddComponent<Rigidbody>();
+
+        RigidBody = GetComponent<Rigidbody>();
     }   
 
     protected void TagPrefab(string tag)
@@ -146,6 +154,12 @@ public abstract class BasePrefab : MonoBehaviour, IBase
             Die();
         }
     }     
+
+    public void AddExplosionForce(float power = 10.0f)
+    {
+        if (RigidBody == null) return;
+        RigidBody.AddExplosionForce(power, transform.position + Vector3.forward * 2, 5.0f, 3.0F);
+    }
    
     public Sprite GetIcon()
     {

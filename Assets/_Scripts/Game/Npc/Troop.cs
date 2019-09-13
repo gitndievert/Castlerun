@@ -19,7 +19,6 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CapsuleCollider))]
-[RequireComponent(typeof(Rigidbody))]
 public abstract class Troop : BasePrefab, ICharacter, ISelectable
 {
     const float TROOP_DESTROY_TIMER = 4f;
@@ -38,8 +37,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public abstract string DisplayName { get; }    
 
     protected Animator anim;
-    protected NavMeshAgent nav;
-    protected Rigidbody rb;
+    protected NavMeshAgent nav;    
 
     private Vector3 _lockPoint;
     private bool _isMoving = false;
@@ -56,6 +54,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     #endregion
 
     private int _destPoint;
+    Vector2 smoothDeltaPosition = Vector2.zero;
+    Vector2 velocity = Vector2.zero;
 
     #region Targeting Systems
     [Header("Combat")]
@@ -75,11 +75,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         anim = GetComponent<Animator>();
         //Seconds until object is destroyes and cleaned up        
         nav = GetComponent<NavMeshAgent>();
-        _char = GetComponent<ThirdPersonCharacter>();
-        if (GetComponent<Rigidbody>() == null)
-            gameObject.AddComponent<Rigidbody>();
-
-        rb = GetComponent<Rigidbody>();        
+        //_char = GetComponent<ThirdPersonCharacter>();                
     }
 
     protected virtual void Start()
@@ -88,8 +84,12 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         MaxHealth = Health;
         nav.updateRotation = true;
         nav.updatePosition = true;
-        rb.isKinematic = true;
-        rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+        //Removed this for now
+        //RigidBody.isKinematic = true;
+        //RigidBody.constraints = RigidbodyConstraints.FreezeRotation;
+
+
         //We don't want people exploding lol
         CanExplode = false;        
         DestroyTimer = TROOP_DESTROY_TIMER;
@@ -104,18 +104,18 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     protected virtual void FixedUpdate()
     {
         if (GetTag == Global.ARMY_TAG)
-        {  
+        {           
+
             if (_isMoving)
             {
                 nav.SetDestination(_lockPoint);              
 
                 if (nav.remainingDistance >= nav.stoppingDistance)
                 {
-                    _char.Move(nav.desiredVelocity, false, false);
+                    //_char.Move(nav.desiredVelocity, false, false);
                 }
                 else
-                {
-                    _isMoving = false;
+                {                    
                     MoveStop();
                 }              
             }
@@ -157,9 +157,36 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         //Keep Grounded
         //Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit);
         //transform.up -= (transform.up - hit.normal) * 0.1f;
+
+        //New code
+        if (_isMoving)
+        {
+            Vector3 worldDeltaPosition = nav.nextPosition - transform.position;
+
+            // Map 'worldDeltaPosition' to local space
+            float dx = Vector3.Dot(transform.right, worldDeltaPosition);
+            float dy = Vector3.Dot(transform.forward, worldDeltaPosition);
+            Vector2 deltaPosition = new Vector2(dx, dy);
+
+            // Low-pass filter the deltaMove
+            float smooth = Mathf.Min(1.0f, Time.deltaTime / 0.15f);
+            smoothDeltaPosition = Vector2.Lerp(smoothDeltaPosition, deltaPosition, smooth);
+
+            // Update velocity if time advances
+            if (Time.deltaTime > 1e-5f)
+                velocity = smoothDeltaPosition / Time.deltaTime;
+
+            anim.SetFloat("Forward", velocity.x);
+            anim.SetFloat("Turn", velocity.y);
+        }
     }
 
-   
+    void OnAnimatorMove()
+    {
+        // Update position to agent position
+        transform.position = nav.nextPosition;
+    }
+
 
     public void SelectMany()
     {
@@ -292,8 +319,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public void MoveStop()
     {
         _isMoving = false;
-        _char.Move(Vector3.zero, false, false);
-        nav.velocity = Vector3.zero;         
+        nav.velocity = Vector3.zero;
+        //_char.Move(Vector3.zero, false, false);        
     }
 
     public override void SetHit(int amount)

@@ -231,6 +231,12 @@ public class Player : BasePrefab, IPlayer
             }
         }
 
+        /////// TEST TROOP EXPLODER
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            Selection.Instance.SingleTargetSelected.GameObject.GetComponent<Troop>().AddExplosionForce(10f);
+        }
+
         /////// TEST COMPANIONS
         if (Input.GetKeyDown(KeyCode.C))
         {
