@@ -599,6 +599,7 @@ GameObject:
   - component: {fileID: 3410138631332346923}
   - component: {fileID: 2197402741631013300}
   - component: {fileID: 1280681375159171017}
+  - component: {fileID: -6990100136859382414}
   m_Layer: 12
   m_Name: Necromancer
   m_TagString: Army
@@ -648,7 +649,9 @@ MonoBehaviour:
   HealthText: {fileID: 0}
   Icon: {fileID: 21300000, guid: 2c249046f3304cd42a5731c8ea26adcd, type: 3}
   Costs:
-    CostFactors: []
+    CostFactors:
+    - Resource: 0
+      Amount: 50
   SelectionTarget: {fileID: 7287754718042530950}
   FreshTroop: {fileID: 0}
   SelectionCall: []
@@ -673,7 +676,7 @@ Animator:
   m_GameObject: {fileID: 2750229220499736087}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3ae6b4bdd9d9d7642bacb00133452d02, type: 3}
-  m_Controller: {fileID: 9100000, guid: 3a7e90b70d4e75f4a8f6bf421df5577c, type: 2}
+  m_Controller: {fileID: 9100000, guid: dcfb371dc3896cb4189a6f33a942a389, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -694,7 +697,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -734,6 +737,26 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &-6990100136859382414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2750229220499736087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MovingTurnSpeed: 360
+  m_StationaryTurnSpeed: 180
+  m_JumpPower: 12
+  m_GravityMultiplier: 2
+  m_RunCycleLegOffset: 0.2
+  m_MoveSpeedMultiplier: 1
+  m_AnimSpeedMultiplier: 1
+  m_GroundCheckDistance: 0.4
 --- !u!1 &2783684166736639407
 GameObject:
   m_ObjectHideFlags: 0
