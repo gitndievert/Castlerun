@@ -81,14 +81,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     protected virtual void Start()
     {
         SelectionTargetStatus(false);
-        MaxHealth = Health;
-        //nav.updateRotation = true;
-        //nav.updatePosition = true;
-
-        //Removed this for now
-        //RigidBody.isKinematic = true;
-        //RigidBody.constraints = RigidbodyConstraints.FreezeRotation;
-
+        MaxHealth = Health;    
 
         //We don't want people exploding lol
         CanExplode = false;        
