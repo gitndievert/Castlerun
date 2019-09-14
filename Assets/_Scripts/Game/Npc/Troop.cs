@@ -15,7 +15,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityStandardAssets.Characters.ThirdPerson;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -34,14 +33,32 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     #endregion
 
     #region Visual Troop Control        
-    public abstract string DisplayName { get; }    
+    public abstract string DisplayName { get; }
+
+    public Vector3 StopPoint
+    {
+        get { return nav.destination; }
+        set
+        {
+            nav.destination = value;
+            _smoothDeltaPosition = Vector2.zero;
+        }
+    }
 
     protected Animator anim;
     protected NavMeshAgent nav;    
 
     private Vector3 _lockPoint;
     private bool _isMoving = false;
-    private ThirdPersonCharacter _char;
+
+    private const float SmoothingCoefficient = .15f;
+    private float _velocityDenominatorMultiplier = .5f;
+    private float _minVelx = -2.240229f;
+    private float _maxVelx = 2.205063f;
+    private float _minVely = -2.33254f;
+    private float _maxVely = 3.70712f;
+    private Vector2 _smoothDeltaPosition;
+    
     #endregion
 
     #region AudioClips For Troops
@@ -53,8 +70,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public AudioClip[] AttackBattleCryClips;
     #endregion
 
-    private int _destPoint;
-    private Vector2 _smoothDeltaPosition = Vector2.zero;
+    private int _destPoint;    
     private Vector2 _velocity = Vector2.zero;
 
     #region Targeting Systems
@@ -74,8 +90,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         base.Awake();
         anim = GetComponent<Animator>();
         //Seconds until object is destroyes and cleaned up        
-        nav = GetComponent<NavMeshAgent>();
-        _char = GetComponent<ThirdPersonCharacter>();
+        nav = GetComponent<NavMeshAgent>();        
     }
 
     protected virtual void Start()
@@ -86,11 +101,14 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         //We don't want people exploding lol
         CanExplode = false;        
         DestroyTimer = TROOP_DESTROY_TIMER;
-        gameObject.layer = GetTag == Global.ARMY_TAG ? Global.ARMY_LAYER : 0;
-        //anim.applyRootMotion = false;
+        gameObject.layer = GetTag == Global.ARMY_TAG ? Global.ARMY_LAYER : 0;        
 
         if (Costs.CostFactors.Length == 0)
             throw new System.Exception("Please add a cost");
+        
+        
+        _smoothDeltaPosition = default;
+        StopPoint = transform.position;        
     }
 
     // Update is called once per frame
@@ -100,18 +118,31 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         {
             if (_isMoving)
             {
-                nav.SetDestination(_lockPoint);              
+                nav.SetDestination(_lockPoint);
+               
+                var worldDeltaPosition = nav.nextPosition - transform.position;
+                var dx = Vector3.Dot(transform.right, worldDeltaPosition);
+                var dy = Vector3.Dot(transform.forward, worldDeltaPosition);
+                var deltaPosition = new Vector2(dx, dy);
+                var smooth = Time.fixedDeltaTime / SmoothingCoefficient;
 
-                if (nav.remainingDistance >= nav.stoppingDistance)
+                _smoothDeltaPosition = Vector2.Lerp(_smoothDeltaPosition, deltaPosition, smooth);
+
+                var velocity = _smoothDeltaPosition / (Time.fixedDeltaTime * _velocityDenominatorMultiplier);
+                var shouldMove = nav.remainingDistance > .1f;
+                var x = Mathf.Clamp(Mathf.Round(velocity.x * 1000) / 1000, _minVelx, _maxVelx);
+                var y = Mathf.Clamp(Mathf.Round(velocity.y * 1000) / 1000, _minVely, _maxVely);
+
+                anim.SetBool("move", shouldMove);
+                anim.SetFloat("velx", x);
+                anim.SetFloat("vely", y);
+
+                if (worldDeltaPosition.magnitude > nav.radius / 16 && shouldMove)
                 {
-                    _char.Move(nav.desiredVelocity, false, false);
+                    nav.nextPosition = transform.position + 0.1f * worldDeltaPosition;
                 }
-                else
-                {                    
-                    MoveStop();
-                }              
+                
             }
-
 
             if (CanAttack && !IsAttacking)
             {                
@@ -123,6 +154,14 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         }
     }
         
+    public void OnAnimatorMove()
+    {
+        var position = anim.rootPosition;
+
+        position.y = nav.nextPosition.y;
+        transform.position = position;
+    }    
+
     public void OnMouseExit()
     {
         //SelectionUI.ClearSingleTarget();
@@ -152,12 +191,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         //transform.up -= (transform.up - hit.normal) * 0.1f;  
     }
 
-    /*void OnAnimatorMove()
-    {
-        // Update position to agent position
-        transform.position = nav.nextPosition;
-    }*/
-
+    
     public void SelectMany()
     {
         if (GetTag != Global.ARMY_TAG) return;
@@ -289,8 +323,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public void MoveStop()
     {
         _isMoving = false;
-        nav.velocity = Vector3.zero;        
-        _char.Move(Vector3.zero, false, false);
+        nav.velocity = Vector3.zero;                
     }
 
     public override void SetHit(int amount)
