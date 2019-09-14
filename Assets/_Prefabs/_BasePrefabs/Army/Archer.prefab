@@ -602,7 +602,6 @@ GameObject:
   - component: {fileID: 2739769237762360232}
   - component: {fileID: 8482132186936079667}
   - component: {fileID: 8884544215783108970}
-  - component: {fileID: 3741364197393562131}
   m_Layer: 12
   m_Name: Archer
   m_TagString: Army
@@ -666,7 +665,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -686,7 +685,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -722,6 +721,8 @@ MonoBehaviour:
   HitSounds: []
   HealthText: {fileID: 0}
   Icon: {fileID: 21300000, guid: 510903799e6f71a48bba67d32a6b5f7c, type: 3}
+  Costs:
+    CostFactors: []
   SelectionTarget: {fileID: 3930807637872236537}
   FreshTroop: {fileID: 0}
   SelectionCall: []
@@ -733,26 +734,6 @@ MonoBehaviour:
     type: 3}
   FirePower: 5.5
   SpawnPoint: {fileID: 551411264102267733}
---- !u!114 &3741364197393562131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9041254321426439419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 360
-  m_StationaryTurnSpeed: 180
-  m_JumpPower: 12
-  m_GravityMultiplier: 2
-  m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 1
-  m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 0.4
 --- !u!1 &9041417155675903329
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,16 +2026,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9039012690518097569}
     m_Modifications:
-    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
-        type: 3}
-      propertyPath: m_Name
-      value: MiniMapIcon
-      objectReference: {fileID: 0}
-    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8547001551414770055, guid: ed262e909d070aa41915329ff5d1b7ae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2124,6 +2095,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
+        type: 3}
+      propertyPath: m_Name
+      value: MiniMapIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed262e909d070aa41915329ff5d1b7ae, type: 3}

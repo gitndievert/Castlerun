@@ -131,7 +131,9 @@ MonoBehaviour:
   HealthText: {fileID: 0}
   Icon: {fileID: 0}
   Costs:
-    CostFactors: []
+    CostFactors:
+    - Resource: 0
+      Amount: 10
   BuildEffect: {fileID: 0}
   EnableTroopBuilder: 0
   ConstructionTime: 10

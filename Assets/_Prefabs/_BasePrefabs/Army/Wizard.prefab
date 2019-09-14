@@ -1621,7 +1621,6 @@ GameObject:
   - component: {fileID: -8102165824562744072}
   - component: {fileID: 1758971345344900943}
   - component: {fileID: 899599589692392483}
-  - component: {fileID: 7179421089669151334}
   m_Layer: 12
   m_Name: Wizard
   m_TagString: Army
@@ -1662,7 +1661,7 @@ Animator:
   m_GameObject: {fileID: 7216359068932343393}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 005c121dd6a3d8a48b037db4ad91a394, type: 3}
-  m_Controller: {fileID: 9100000, guid: 9f39186fe6b8207479385a3ea315023e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 93021d92cdfd3f944a2b530cf43f081e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1685,7 +1684,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1719,9 +1718,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &899599589692392483
 MonoBehaviour:
@@ -1758,26 +1757,6 @@ MonoBehaviour:
     type: 3}
   FirePower: 200
   SpawnPoint: {fileID: 3925532070741439731}
---- !u!114 &7179421089669151334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7216359068932343393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 360
-  m_StationaryTurnSpeed: 180
-  m_JumpPower: 12
-  m_GravityMultiplier: 2
-  m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 1
-  m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 0.4
 --- !u!1 &7216388742020999267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1994,16 +1973,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7221352568659780545}
     m_Modifications:
-    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
-        type: 3}
-      propertyPath: m_Name
-      value: MiniMapIcon
-      objectReference: {fileID: 0}
-    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8547001551414770055, guid: ed262e909d070aa41915329ff5d1b7ae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2073,6 +2042,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
+        type: 3}
+      propertyPath: m_Name
+      value: MiniMapIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed262e909d070aa41915329ff5d1b7ae, type: 3}

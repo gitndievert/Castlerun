@@ -108,7 +108,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         
         
         _smoothDeltaPosition = default;
-        StopPoint = transform.position;        
+        //StopPoint = transform.position;        
     }
 
     // Update is called once per frame
@@ -116,10 +116,13 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     {
         if (GetTag == Global.ARMY_TAG)
         {
-            if (_isMoving)
+            if (CanAttack && !IsAttacking)
             {
-                nav.SetDestination(_lockPoint);
-               
+                IsAttacking = true;
+                Attack();
+            }
+            else
+            {
                 var worldDeltaPosition = nav.nextPosition - transform.position;
                 var dx = Vector3.Dot(transform.right, worldDeltaPosition);
                 var dy = Vector3.Dot(transform.forward, worldDeltaPosition);
@@ -129,26 +132,18 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
                 _smoothDeltaPosition = Vector2.Lerp(_smoothDeltaPosition, deltaPosition, smooth);
 
                 var velocity = _smoothDeltaPosition / (Time.fixedDeltaTime * _velocityDenominatorMultiplier);
-                var shouldMove = nav.remainingDistance > .1f;
+                //var shouldMove = nav.remainingDistance > .1f;
                 var x = Mathf.Clamp(Mathf.Round(velocity.x * 1000) / 1000, _minVelx, _maxVelx);
                 var y = Mathf.Clamp(Mathf.Round(velocity.y * 1000) / 1000, _minVely, _maxVely);
 
-                anim.SetBool("move", shouldMove);
+                anim.SetBool("move", nav.remainingDistance >= nav.stoppingDistance);
                 anim.SetFloat("velx", x);
                 anim.SetFloat("vely", y);
 
-                if (worldDeltaPosition.magnitude > nav.radius / 16 && shouldMove)
+                if (worldDeltaPosition.magnitude > nav.radius / 16)
                 {
                     nav.nextPosition = transform.position + 0.1f * worldDeltaPosition;
                 }
-                
-            }
-
-            if (CanAttack && !IsAttacking)
-            {                
-                IsAttacking = true;
-                _lockPoint = transform.position; //Stop at this position             
-                Attack();
             }
 
         }
@@ -315,6 +310,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public void Move(Vector3 point)
     {     
         _lockPoint = point;
+        nav.SetDestination(_lockPoint);
+        transform.LookAt(_lockPoint);
         _isMoving = true;
         if(AttackBattleCryClips.Length > 0)
             SoundManager.PlaySound(AttackBattleCryClips);
@@ -323,7 +320,10 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public void MoveStop()
     {
         _isMoving = false;
-        nav.velocity = Vector3.zero;                
+        nav.velocity = Vector3.zero;
+        anim.SetBool("move", false);
+        _lockPoint = transform.position;
+        nav.isStopped = true;
     }
 
     public override void SetHit(int amount)
