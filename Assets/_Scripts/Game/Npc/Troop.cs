@@ -132,7 +132,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
                 _smoothDeltaPosition = Vector2.Lerp(_smoothDeltaPosition, deltaPosition, smooth);
 
                 var velocity = _smoothDeltaPosition / (Time.fixedDeltaTime * _velocityDenominatorMultiplier);
-                //var shouldMove = nav.remainingDistance > .1f;
+                
                 var x = Mathf.Clamp(Mathf.Round(velocity.x * 1000) / 1000, _minVelx, _maxVelx);
                 var y = Mathf.Clamp(Mathf.Round(velocity.y * 1000) / 1000, _minVely, _maxVely);
 
