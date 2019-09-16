@@ -15,9 +15,23 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum BuildingLabelTypes
+{
+    None,
+    Wall,
+    Floor,
+    Ramp,
+    Barracks,
+    ResourceDepot,
+    Tower
+}
+
+
 [RequireComponent(typeof(NavMeshObstacle))]
 public abstract class Build : BasePrefab, IBuild, ISelectable
-{ 
+{
+    public BuildingLabelTypes BuildingLabelType = BuildingLabelTypes.None;
+
     public int PlacementCost { get; set; }
     public bool IsBasic { get; set; }
 
@@ -45,7 +59,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         if (Health == 0) Health = 20;        
         MaxHealth = Health;
         IsBasic = false;
-        DisplayName = name;
+        DisplayName = BuildingLabelType.ToString();
         if (Costs.CostFactors.Length == 0)
             throw new System.Exception("Please add a cost");
     }
@@ -93,7 +107,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     {
         //SelectionUI.ClearSingleTarget();
     }
-
+    
     protected virtual void OnCollisionEnter(Collision col)
     {
         var colObj = col.gameObject;

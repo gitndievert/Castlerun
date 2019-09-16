@@ -55,7 +55,12 @@ public class TroopFactory : Build
     /// <summary>
     /// The number of troops trained on each training pass
     /// </summary>
-    public int MaxTrained = 5;    
+    public int MaxTrained = 5;
+
+    /// <summary>
+    /// Icon show when constructing build
+    /// </summary>
+    public Sprite WaitingIcon;
 
     private ResourceType _pickType;
     private bool _IsBuilding = false;        
@@ -63,26 +68,28 @@ public class TroopFactory : Build
     // Start is called before the first frame update
     protected override void Start()
     {
-        if (Health == 0) Health = 300;
-        MaxHealth = Health;        
-        if(BuildArea == null)
+        base.Start();
+        if (BuildArea == null)
         {
             BuildArea = GetComponentInChildren<BuildArea>();
-        }
+        }        
+    }
+
+    public override Sprite GetIcon()
+    {
+        WaitingIcon = WaitingIcon ?? UIManager.Instance.DefaultIcon;
+        return !EnableTroopBuilder ? WaitingIcon : Icon ?? UIManager.Instance.DefaultIcon;
     }
 
     public override bool ConfirmPlacement()
     {
         if (!BuildArea.CanBuild) return false;
         base.ConfirmPlacement();
-        BuildArea.ShowPlane(false);
+        BuildArea.ShowPlane(false);        
         /*if (BuildTime > 0)
         {
             StartCoroutine(RunBuild());            
-        }*/
-
-        //Subbed in this property
-        EnableTroopBuilder = true;
+        }*/        
 
         return true;
     }

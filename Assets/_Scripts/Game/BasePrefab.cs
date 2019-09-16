@@ -161,7 +161,7 @@ public abstract class BasePrefab : MonoBehaviour, IBase
         RigidBody.AddExplosionForce(power, transform.position + Vector3.forward * 2, 5.0f, 3.0F);
     }
    
-    public Sprite GetIcon()
+    public virtual Sprite GetIcon()
     {
         return Icon ?? UIManager.Instance.DefaultIcon;
     }
