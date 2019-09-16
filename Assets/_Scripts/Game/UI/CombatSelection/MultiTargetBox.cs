@@ -48,18 +48,6 @@ public class MultiTargetBox : DSingle<MultiTargetBox>
         //
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void UpdateList(ISelectable selection)
     {
         int count = _selections.Count;

@@ -135,9 +135,8 @@ MonoBehaviour:
     - Resource: 0
       Amount: 10
   BuildingLabelType: 5
-  BuildEffect: {fileID: 0}
+  EnableFromBuilder: 1
   ConstructionTime: 10
-  EnableTroopBuilder: 0
   PlacementDistance: 2
   Troops:
   - {fileID: 3710154189911815501, guid: b721e89ab386bd044ae686c19cccd397, type: 3}
@@ -146,6 +145,7 @@ MonoBehaviour:
   TrainingTime: 15
   NumberToTrain: 1
   MaxTrained: 5
+  WaitingIcon: {fileID: 0}
 --- !u!208 &6610129586762107636
 NavMeshObstacle:
   m_ObjectHideFlags: 0

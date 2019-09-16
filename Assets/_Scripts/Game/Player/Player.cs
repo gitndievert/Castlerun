@@ -64,18 +64,16 @@ public class Player : BasePrefab, IPlayer
     #region Player Components      
     public Inventory Inventory { get; private set; }    
     public int ActorNumber { get; internal set; }
-    public GameObject PlayerWorldItems { get; internal set; }
+    public GameObject PlayerWorldItems { get; internal set; }    
     #endregion
 
     #region Private Members
     private GameObject _mainHand;
     private GameObject _offHand;                 
     private string _playerName;
-    private BattleCursor _battleCursor;
-    private Plans _plans;
+    private BattleCursor _battleCursor;    
     
-    
-    private PlacementController _placementController;
+       
     private MovementInput _movement;
        
 
@@ -88,8 +86,8 @@ public class Player : BasePrefab, IPlayer
     {   
         base.Awake();
         Inventory = GetComponent<Inventory>();                    
-                
-        _placementController = GetComponent<PlacementController>();
+               
+        
         _camRig = GameObject.FindGameObjectWithTag(Global.CAM_RIG_TAG);
         _movement = GetComponent<MovementInput>();
         PlayerWorldItems = new GameObject("PlayerWorldItems");
@@ -119,8 +117,7 @@ public class Player : BasePrefab, IPlayer
             SetCompanion(CompanionType);
         }
 
-        _plans = GameManager.Instance.Plans;
-
+        BuildManager.Instance.Placements.Player = this;
     }
     
     public void Init(string name, int playernum)
@@ -128,7 +125,7 @@ public class Player : BasePrefab, IPlayer
         PlayerName = name;
         PlayerNumber = playernum;
         //Global.BattleMode = false;
-        MiniMapControls.PlayerTransform = transform;
+        MiniMapControls.PlayerTransform = transform;        
     }
  
     private void SetBasicPlayerStats()
@@ -168,16 +165,16 @@ public class Player : BasePrefab, IPlayer
 
             if (Global.BuildMode)
             {
-                //Announce build mode on                
-                _placementController.SetGrid = true;
-                _placementController.LoadObject(_plans.GetPlans(ResourceType.Wood, "wall"));
+                //Announce build mode on                                
+                BuildManager.Instance.Placements.SetGrid = true;
+                BuildManager.Instance.LoadBasicWall();
             }
             else
             {
                 //Announce build mode off                
                 CameraRotate.BuildCamMode = false;
-                _placementController.SetGrid = false;
-                _placementController.ClearObject();
+                BuildManager.Instance.Placements.SetGrid = false;                
+                BuildManager.Instance.Placements.ClearObject();                
             }
 
         }
@@ -185,39 +182,18 @@ public class Player : BasePrefab, IPlayer
         /////// BUILD MODE OPTIONS
         if (Global.BuildMode)
         {                       
-
             if (Input.GetKeyDown(KeyBindings.BuildKey1))
             {
-                _placementController.LoadObject(_plans.GetPlans(ResourceType.Wood, "wall"));
+                BuildManager.Instance.LoadBasicWall();
             }
             else if (Input.GetKeyDown(KeyBindings.BuildKey2))
             {
-                _placementController.LoadObject(_plans.GetPlans(ResourceType.Wood, "floor"));
+                BuildManager.Instance.LoadBasicFloor();
             }
             else if (Input.GetKeyDown(KeyBindings.BuildKey3))
             {
-                _placementController.LoadObject(_plans.GetPlans(ResourceType.Wood, "ramp"));
-            }
-            else if (Input.GetKeyDown(KeyCode.B))
-            {
-                _placementController.LoadObject(_plans.Barracks, true);
-            }
-            else if (Input.GetKeyDown(KeyCode.H))
-            {
-                //_placementController.LoadObject(_plans.ResourceDepot, true);
-            }
-            else if (Input.GetKeyDown(KeyCode.T))
-            {
-                //_placementController.LoadObject(_plans.WizardSpire, true);
-            }
-            else if (Input.GetKeyDown(KeyCode.U))
-            {
-                //_placementController.LoadObject(_plans.Cannon, true);
-            }
-            else if (Input.GetKeyDown(KeyCode.I))
-            {
-                //_placementController.LoadObject(_plans.Catapult, true);
-            }
+                BuildManager.Instance.LoadBasicRamp();
+            }            
         }
 
 

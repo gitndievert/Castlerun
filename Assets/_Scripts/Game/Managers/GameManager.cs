@@ -19,9 +19,7 @@ using UnityEngine;
 public class GameManager : DSingle<GameManager>
 {    
     public GameObject PlayerInstance;
-    public List<PlayerPad> PlayerPads;
-
-    public Plans Plans { get; set; }
+    public List<PlayerPad> PlayerPads;    
     
     public Dictionary<int, Player> PlayerList = new Dictionary<int, Player>();
 
@@ -30,8 +28,7 @@ public class GameManager : DSingle<GameManager>
     
     protected override void PAwake()
     {
-        //FOR TESTING                
-        Plans = GetComponent<Plans>();
+        
     }
 
     protected override void PDestroy()

@@ -26,6 +26,8 @@ public class PlacementController : MonoBehaviour
     [Tooltip("This is the transparent lay material if you cannot build in a zone")]
     public Material ErrorMaterial;
 
+    public Player Player { get; set; }
+
     [Header("Build Properties")]
     public bool BuildMode;
     public float RotateAmount = 90f;    
@@ -49,33 +51,28 @@ public class PlacementController : MonoBehaviour
 
     private float mouseWheelRotation;
     private bool _triggerBuild = false;
-    private bool _rotating = false;
-    private Player _player;    
-    private bool _outsideGrid;        
-
-    /// <summary>
-    /// Object to parent on for player
-    /// </summary>
-    [SerializeField]
-    private Transform _playerBuilds = null;    
+    private bool _rotating = false;    
+    private bool _outsideGrid;
+    private bool _isBasic;
+        
 
     private void Awake()
     {
-        _player = GetComponent<Player>();        
+             
     }
 
     private void Start()
     {
-        BuildMode = false;        
-        _playerBuilds = _player.PlayerWorldItems.transform;        
+        BuildMode = false;                
     }
 
-    public void LoadObject(GameObject obj, bool outsidegrid = false)
+    public void LoadObject(GameObject obj, bool isbasic, bool outsidegrid = false)
     {       
         PlaceableObjectPrefab = obj;
         _placeObjectMeshRend = PlaceableObjectPrefab.GetComponentInChildren<MeshRenderer>();        
         _triggerBuild = true;
-        _outsideGrid = outsidegrid;        
+        _outsideGrid = outsidegrid;
+        _isBasic = isbasic;
         CameraRotate.BuildCamMode = outsidegrid;
     }    
         
@@ -135,13 +132,13 @@ public class PlacementController : MonoBehaviour
         {
             if (_currObj != null)
             {
-                if (Vector3.Distance(_currObj.transform.position, _player.transform.position) > 20f && !_outsideGrid) return;
+                if (Vector3.Distance(_currObj.transform.position, Player.transform.position) > 20f && !_outsideGrid) return;
 
                 var build = _currObj.transform.GetComponent<IBuild>();
                 
                 
                 bool cancelBuild = false;
-                Inventory inv = _player.Inventory;
+                Inventory inv = Player.Inventory;
 
                 bool metCosts = false;
                 var costs = build.GetCosts();
@@ -162,6 +159,7 @@ public class PlacementController : MonoBehaviour
                     else
                     {
                         inv.Set(costs);
+                        CameraRotate.BuildCamMode = false;
                         StartCoroutine(CorLoadBuilding(build));
                     }
                 }
@@ -171,19 +169,21 @@ public class PlacementController : MonoBehaviour
                     _currObj.transform.GetComponentInChildren<Renderer>().material = ErrorMaterial;
                     //Come Back... Get Messages for Resource Types
                     //UIManager.Instance.Messages.text = $"You will need to gather more {rt.ToString()}";
-                    UIManager.Instance.Messages.text = "You will need to gather more Resources";
+                    UIManager.Instance.Messages.text = "You will need to gather more Resources";                    
                 }                
                 
 
                 if (cancelBuild)
                 {
                     Destroy(_currObj);
+                    CameraRotate.BuildCamMode = false;
                 }
 
             }
                         
             _currObj = null;
-            LoadObject(PlaceableObjectPrefab, _outsideGrid);
+            if(_isBasic)
+                LoadObject(PlaceableObjectPrefab, _outsideGrid);
             return;
         }
 
@@ -191,13 +191,13 @@ public class PlacementController : MonoBehaviour
         {
             if (_currObj != null) KillBuild();
 
-            _currObj = Instantiate(PlaceableObjectPrefab,_player.transform.position * 2,Quaternion.identity);            
+            _currObj = Instantiate(PlaceableObjectPrefab, Player.transform.position * 2,Quaternion.identity);            
             _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().materials;
                                     
             PlayerCollision(_currObj, true);
 
             //_currObj.transform.GetComponentInChildren<Renderer>().material = LayMaterial;
-            var mats = _currObj.transform.GetComponentInChildren<Renderer>().materials;
+            var mats = _saveMaterial;
             Material[] laymats = new Material[mats.Length];
             for(int i = 0; i < mats.Length; i++)
             {
@@ -212,20 +212,21 @@ public class PlacementController : MonoBehaviour
 
     private IEnumerator CorLoadBuilding(IBuild build)
     {
-        build.SetPlayer(_player);
-        _buildingObj = _currObj;
-        _buildingObj.transform.parent = _playerBuilds; //sets the player 1 parent          
+        build.SetPlayer(Player);
+        _buildingObj = _currObj;        
+        //COME BACK, NEED A DUMPER FOR THESE
+        //_buildingObj.transform.parent = _playerBuilds;
         _buildingObj.gameObject.layer = Global.DEFAULT_LAYER;
         yield return new WaitForSeconds(build.GetConstructionTime());
         PlayerCollision(_buildingObj,false);
         _buildingObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;
-        build.FinishBuild();
+        build.FinishBuild();        
         yield return null;
     }
 
     private void PlayerCollision(GameObject obj, bool collide)
     {        
-        Physics.IgnoreCollision(obj.GetComponent<Collider>(), _player.GetComponent<Collider>(), collide);
+        Physics.IgnoreCollision(obj.GetComponent<Collider>(), Player.GetComponent<Collider>(), collide);
     }
 
     private float GetDistToGround()
@@ -241,9 +242,9 @@ public class PlacementController : MonoBehaviour
     private void LockCursorPos()
     {
         if (_currObj == null || _outsideGrid) return;
-        if (Vector3.Distance(_currObj.transform.position, _player.transform.position) > 15f)
+        if (Vector3.Distance(_currObj.transform.position, Player.transform.position) > 15f)
         {
-            Vector3 playerP = _player.transform.position;
+            Vector3 playerP = Player.transform.position;
             _currObj.transform.position = new Vector3(playerP.x,playerP.y + GetDistToGround(), playerP.z + 3f);
             //_currObj.transform.position = _currObj.transform.position + Vector3.back;
         }

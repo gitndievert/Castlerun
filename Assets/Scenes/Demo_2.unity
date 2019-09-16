@@ -2975,6 +2975,7 @@ Transform:
   m_LocalPosition: {x: 198.82152, y: 40.095997, z: 99.423805}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 609087162}
   - {fileID: 563847980}
   - {fileID: 406941237}
   - {fileID: 1378269407}
@@ -4386,7 +4387,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 235755484}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &406941238
 MonoBehaviour:
@@ -5420,7 +5421,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 235755484}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &563847981
 MonoBehaviour:
@@ -5668,6 +5669,78 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591531877}
   m_CullTransparentMesh: 0
+--- !u!1 &609087161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 609087162}
+  - component: {fileID: 609087163}
+  - component: {fileID: 609087164}
+  m_Layer: 0
+  m_Name: BuildManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &609087162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609087161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 235755484}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &609087163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609087161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9e5f279eb7c674eb4bcec16a0c59dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BasicWall: {fileID: 2543357986072876719, guid: 026efacea9dda6747b5e03af1bc8e39e,
+    type: 3}
+  BasicFloor: {fileID: 4521198004532978720, guid: 0856799f15ad9cb4487f86f0d99bbdf6,
+    type: 3}
+  BasicRamp: {fileID: 5436822143744326069, guid: 347f0c6a657386e45a71938d5169fd61,
+    type: 3}
+  Builds:
+  - {fileID: 5028009657086996972, guid: eaf132c037746644588252e091f4b8f3, type: 3}
+  - {fileID: 7856360647941694591, guid: 54672a048a056214aae7a6e4dae17ef5, type: 3}
+--- !u!114 &609087164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609087161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f7e33029fdc1e9448473bc1f7ebae72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlaceableObjectPrefab: {fileID: 0}
+  LayMaterial: {fileID: 2100000, guid: ff0d980d5353d134cb38746605f0d628, type: 2}
+  ErrorMaterial: {fileID: 2100000, guid: a0c0af64964bcac489a1224c240cda71, type: 2}
+  BuildMode: 0
+  RotateAmount: 90
+  SnapSize: 1
+  _placeObjectMeshRend: {fileID: 0}
 --- !u!4 &618986334 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 419496, guid: 5953515103f4b3c4dbd003cda1894775,
@@ -11730,7 +11803,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 235755484}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1378269408
 MonoBehaviour:
@@ -13770,7 +13843,7 @@ GameObject:
   - component: {fileID: 1501442125}
   - component: {fileID: 1501442127}
   m_Layer: 5
-  m_Name: Building1
+  m_Name: Barracks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13815,7 +13888,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300006, guid: da996d03cf176ea4ca2b2428ff6a1b7f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d1a75ca8113efef40b98536014e629af, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -13875,7 +13948,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1501442125}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 609087163}
+        m_MethodName: LoadByString
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Barracks
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1502769383
@@ -17507,7 +17591,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 235755484}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1927245852
 MonoBehaviour:
@@ -17760,7 +17844,7 @@ GameObject:
   - component: {fileID: 1927686122}
   - component: {fileID: 1927686124}
   m_Layer: 5
-  m_Name: Building1 (1)
+  m_Name: ResourceDepot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17805,7 +17889,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300006, guid: da996d03cf176ea4ca2b2428ff6a1b7f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7bbd0ccb8c4f23c45a913f77f179a736, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -17865,7 +17949,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1927686122}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 609087163}
+        m_MethodName: LoadByString
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ResourceDepot
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1001 &1955624945
@@ -18927,7 +19022,7 @@ PrefabInstance:
     - target: {fileID: 5827383292491164752, guid: f0f775a931d80a446af1747fa00188a5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5827383292491164752, guid: f0f775a931d80a446af1747fa00188a5,
         type: 3}

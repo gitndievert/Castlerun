@@ -35,11 +35,13 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     public int PlacementCost { get; set; }
     public bool IsBasic { get; set; }
 
-    [Space(5)]
-    public GameObject BuildEffect;
+    /// <summary>
+    /// This shows it being selectable or not to player
+    /// </summary>
+    public bool EnableFromBuilder = false;
 
     //public float GridSnap = 0.5f;     
-    
+
     public bool IsSelected { get; set; }
     public GameObject GameObject => gameObject;
     public string DisplayName { get; set; }
@@ -63,6 +65,14 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         DisplayName = BuildingLabelType.ToString();
         if (Costs.CostFactors.Length == 0)
             throw new System.Exception("Please add a cost");
+    }
+
+    protected virtual void Update()
+    {
+        if(!EnableFromBuilder)
+        {
+            //Set Icon Colors;
+        }
     }
 
     public float GetConstructionTime()

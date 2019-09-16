@@ -20,8 +20,6 @@ public class BasicBuild : Build
 {
     //public List<SnapPoints> SnapPoints = new List<SnapPoints>();
 
-    public Material[] Materials;    
-
     private ResourceType _pickType;
     private Animator _anim;
 

@@ -12,8 +12,6 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /*
@@ -26,9 +24,6 @@ using UnityEngine;
 
 public class TroopFactory : Build
 {    
-    [Tooltip("Turn on the Builder")]    
-    public bool EnableTroopBuilder = false;
-
     public float PlacementDistance = 2f;
 
     public Troop[] Troops;
@@ -56,11 +51,7 @@ public class TroopFactory : Build
     /// The number of troops trained on each training pass
     /// </summary>
     public int MaxTrained = 5;
-
-    /// <summary>
-    /// Icon show when constructing build
-    /// </summary>
-    public Sprite WaitingIcon;
+       
 
     private ResourceType _pickType;
     private bool _IsBuilding = false;        
@@ -73,13 +64,7 @@ public class TroopFactory : Build
         {
             BuildArea = GetComponentInChildren<BuildArea>();
         }        
-    }
-
-    public override Sprite GetIcon()
-    {
-        WaitingIcon = WaitingIcon ?? UIManager.Instance.DefaultIcon;
-        return !EnableTroopBuilder ? WaitingIcon : Icon ?? UIManager.Instance.DefaultIcon;
-    }
+    }    
 
     public override bool ConfirmPlacement()
     {
@@ -118,7 +103,7 @@ public class TroopFactory : Build
         {
             StopBuild();
             Debug.Log("Max Number of Harvesters Made");
-        }
+        }        
     }
 
     public void BuildTroops()
