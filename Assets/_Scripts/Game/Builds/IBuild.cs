@@ -18,4 +18,5 @@ public interface IBuild : IBase
     void SetPlayer(Player player);    
     bool IsBasic { get; set; }
     float GetConstructionTime();
+    void FinishBuild(); 
 }

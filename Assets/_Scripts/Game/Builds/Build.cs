@@ -53,6 +53,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     protected Player Player = null;
 
     private Vector3 _offset;
+    private bool _isFinished = false;
 
     protected virtual void Start()
     {                    
@@ -81,14 +82,20 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         Player = player;
     }
 
-    public void StartBuildEffect()
+    /*public void StartBuildEffect()
     {
-        if (BuildEffect != null && !BuildEffect.activeSelf)
+        if (BuildEffect != null && !BuildEffect.activeSelf && !_isFinished)
             BuildEffect.SetActive(true);
+    }*/
+
+    public void FinishBuild()
+    {
+        _isFinished = true;
     }
 
     public void OnMouseDown()
-    {        
+    {
+        if (!_isFinished) return;
         switch (GetTag)
         {
             case Global.ARMY_TAG:
@@ -111,6 +118,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     protected virtual void OnCollisionEnter(Collision col)
     {
         var colObj = col.gameObject;
+        if (!_isFinished) return;
         switch (colObj.tag)
         {
             default:
@@ -135,7 +143,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     /// </summary>
     public void Select()
     {
-        if (!IsSelected)
+        if (!IsSelected && _isFinished)
         {
             IsSelected = true;
         }

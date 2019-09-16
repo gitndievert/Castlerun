@@ -194,7 +194,7 @@ public class PlacementController : MonoBehaviour
             _currObj = Instantiate(PlaceableObjectPrefab,_player.transform.position * 2,Quaternion.identity);            
             _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().materials;
                                     
-            PlayerCollision(true);
+            PlayerCollision(_currObj, true);
 
             //_currObj.transform.GetComponentInChildren<Renderer>().material = LayMaterial;
             var mats = _currObj.transform.GetComponentInChildren<Renderer>().materials;
@@ -217,15 +217,15 @@ public class PlacementController : MonoBehaviour
         _buildingObj.transform.parent = _playerBuilds; //sets the player 1 parent          
         _buildingObj.gameObject.layer = Global.DEFAULT_LAYER;
         yield return new WaitForSeconds(build.GetConstructionTime());
-        PlayerCollision(false);
-        _buildingObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;                        
+        PlayerCollision(_buildingObj,false);
+        _buildingObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;
+        build.FinishBuild();
         yield return null;
     }
 
-    private void PlayerCollision(bool collide)
-    {
-        if (_currObj == null) return;
-        Physics.IgnoreCollision(_currObj.GetComponent<Collider>(), _player.GetComponent<Collider>(), collide);
+    private void PlayerCollision(GameObject obj, bool collide)
+    {        
+        Physics.IgnoreCollision(obj.GetComponent<Collider>(), _player.GetComponent<Collider>(), collide);
     }
 
     private float GetDistToGround()
