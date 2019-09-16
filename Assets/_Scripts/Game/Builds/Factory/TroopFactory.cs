@@ -25,22 +25,9 @@ using UnityEngine;
  */
 
 public class TroopFactory : Build
-{
-    #region Resource Cost
-    public const int WOOD_COST = 10;
-    #endregion
-
-    protected override float BuildTime => ConstructionTime;
-
-    protected override ResourceType ResourceType => ResourceType.Wood;
-
+{    
     [Tooltip("Turn on the Builder")]    
     public bool EnableTroopBuilder = false;
-
-    /// <summary>
-    /// The time it takes to build the structure
-    /// </summary>
-    public float ConstructionTime;
 
     public float PlacementDistance = 2f;
 
@@ -117,7 +104,7 @@ public class TroopFactory : Build
     {
         if (!_IsBuilding && _trainedCounter != MaxTrained)
         {
-            BuildTroops();
+            //BuildTroops();
             _IsBuilding = true;            
         }
         else if (_IsBuilding && _trainedCounter == MaxTrained)

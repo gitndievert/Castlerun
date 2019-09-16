@@ -18,20 +18,9 @@ using System.Linq;
 
 public class BasicBuild : Build
 {
-    #region Basic Build Resource Cost
-    public const int WOOD_COST = 10;
-    public const int ROCK_COST = 20;
-    public const int METAL_COST = 30;
-    #endregion
-
     //public List<SnapPoints> SnapPoints = new List<SnapPoints>();
 
-    public Material[] Materials;
-
-    //Basic Builds are Instant
-    protected override float BuildTime { get { return 0f; } }
-
-    protected override ResourceType ResourceType {  get { return _pickType; } }
+    public Material[] Materials;    
 
     private ResourceType _pickType;
     private Animator _anim;

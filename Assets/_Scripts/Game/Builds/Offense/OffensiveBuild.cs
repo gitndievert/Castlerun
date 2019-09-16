@@ -19,13 +19,8 @@ using UnityEngine;
 //NATE NOTE: I MIGHT NEED TO RETHINK THESE
 //Moving a lot of projectile pieces to it's own class for ALL 
 public class OffensiveBuild : Build
-{     
-    
+{   
     public GameObject FireEffect;
-    public float ConstructionTime = 2f;
-       
-    protected override float BuildTime => ConstructionTime;
-    protected override ResourceType ResourceType => ResourceType.Metal;
 
     protected override void Start()
     {

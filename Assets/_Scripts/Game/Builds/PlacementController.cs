@@ -12,6 +12,7 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using System.Collections;
 using UnityEngine;
 
 public class PlacementController : MonoBehaviour
@@ -39,7 +40,10 @@ public class PlacementController : MonoBehaviour
     [SerializeField]
     private MeshRenderer _placeObjectMeshRend;
 
-    private GameObject _currObj;    
+    //TODO MOVE TO QUEUES
+    private GameObject _currObj;
+    private GameObject _buildingObj;
+
     private Material[] _saveMaterial;
     //private ResourceType _selectedResource;
 
@@ -47,7 +51,7 @@ public class PlacementController : MonoBehaviour
     private bool _triggerBuild = false;
     private bool _rotating = false;
     private Player _player;    
-    private bool _outsideGrid;
+    private bool _outsideGrid;        
 
     /// <summary>
     /// Object to parent on for player
@@ -71,10 +75,10 @@ public class PlacementController : MonoBehaviour
         PlaceableObjectPrefab = obj;
         _placeObjectMeshRend = PlaceableObjectPrefab.GetComponentInChildren<MeshRenderer>();        
         _triggerBuild = true;
-        _outsideGrid = outsidegrid;
+        _outsideGrid = outsidegrid;        
         CameraRotate.BuildCamMode = outsidegrid;
     }    
-
+        
     public void ClearObject()
     {
         KillBuild();
@@ -85,13 +89,7 @@ public class PlacementController : MonoBehaviour
     private void KillBuild()
     {
         Destroy(_currObj);        
-    }
-
-    private Transform[] GetResourcePlacements()
-    {
-        if (_player == null) return null;
-        return _player.PlayerPad.ResourcePoints;
-    }
+    }  
 
     public bool SetGrid
     {
@@ -139,12 +137,9 @@ public class PlacementController : MonoBehaviour
             {
                 if (Vector3.Distance(_currObj.transform.position, _player.transform.position) > 20f && !_outsideGrid) return;
 
-                PlayerCollision(false);
-                _currObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;
-                _currObj.gameObject.layer = Global.DEFAULT_LAYER;
-                _currObj.transform.parent = _playerBuilds; //sets the player 1 parent  
-
                 var build = _currObj.transform.GetComponent<IBuild>();
+                
+                
                 bool cancelBuild = false;
                 Inventory inv = _player.Inventory;
 
@@ -166,8 +161,8 @@ public class PlacementController : MonoBehaviour
                     }
                     else
                     {
-                        build.SetPlayer(_player);
                         inv.Set(costs);
+                        StartCoroutine(CorLoadBuilding(build));
                     }
                 }
                 else
@@ -178,8 +173,7 @@ public class PlacementController : MonoBehaviour
                     //UIManager.Instance.Messages.text = $"You will need to gather more {rt.ToString()}";
                     UIManager.Instance.Messages.text = "You will need to gather more Resources";
                 }                
-
-
+                
 
                 if (cancelBuild)
                 {
@@ -187,7 +181,8 @@ public class PlacementController : MonoBehaviour
                 }
 
             }
-            _currObj = null;            
+                        
+            _currObj = null;
             LoadObject(PlaceableObjectPrefab, _outsideGrid);
             return;
         }
@@ -213,6 +208,18 @@ public class PlacementController : MonoBehaviour
 
             _triggerBuild = false;
         }       
+    }
+
+    private IEnumerator CorLoadBuilding(IBuild build)
+    {
+        build.SetPlayer(_player);
+        _buildingObj = _currObj;
+        _buildingObj.transform.parent = _playerBuilds; //sets the player 1 parent          
+        _buildingObj.gameObject.layer = Global.DEFAULT_LAYER;
+        yield return new WaitForSeconds(build.GetConstructionTime());
+        PlayerCollision(false);
+        _buildingObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;                        
+        yield return null;
     }
 
     private void PlayerCollision(bool collide)

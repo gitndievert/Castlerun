@@ -30,18 +30,11 @@ public class Plans : MonoBehaviour
     public GameObject MetalFloor;
     public GameObject MetalRamp;
 
+    //Remove after testing
     [Header("Player Source Models")]
-    [Space(5)]
-    public GameObject ResourceDepot;
+    [Space(5)]    
     public GameObject Barracks;
-    public GameObject WizardSpire;
-    public GameObject ArcherRange;
-
-
-    [Header("Offensive Build Models")]
-    [Space(5)]
-    public GameObject Cannon;
-    public GameObject Catapult;
+    
 
 
     public GameObject GetPlans(ResourceType resource, string build)

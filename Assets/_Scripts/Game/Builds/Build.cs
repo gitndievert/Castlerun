@@ -19,26 +19,26 @@ using UnityEngine.AI;
 public abstract class Build : BasePrefab, IBuild, ISelectable
 { 
     public int PlacementCost { get; set; }
-
     public bool IsBasic { get; set; }
 
     [Space(5)]
     public GameObject BuildEffect;
 
+    //public float GridSnap = 0.5f;     
+    
+    public bool IsSelected { get; set; }
+    public GameObject GameObject => gameObject;
+    public string DisplayName { get; set; }
+        
+    /// <summary>
+    /// Time it takes to build this building
+    /// </summary>
+    public float ConstructionTime = 0f;
+
     protected bool isPlaced = false;
     protected Player Player = null;
 
     private Vector3 _offset;
-    
-
-    //public float GridSnap = 0.5f;  
-    protected abstract float BuildTime { get; }
-    protected abstract ResourceType ResourceType { get; }
-    public bool IsSelected { get; set; }
-
-    public GameObject GameObject => gameObject;
-
-    public string DisplayName { get; set; } 
 
     protected virtual void Start()
     {                    
@@ -48,6 +48,11 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         DisplayName = name;
         if (Costs.CostFactors.Length == 0)
             throw new System.Exception("Please add a cost");
+    }
+
+    public float GetConstructionTime()
+    {
+        return ConstructionTime;
     }
 
     public virtual bool ConfirmPlacement()

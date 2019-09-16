@@ -204,19 +204,19 @@ public class Player : BasePrefab, IPlayer
             }
             else if (Input.GetKeyDown(KeyCode.H))
             {
-                _placementController.LoadObject(_plans.ResourceDepot, true);
+                //_placementController.LoadObject(_plans.ResourceDepot, true);
             }
             else if (Input.GetKeyDown(KeyCode.T))
             {
-                _placementController.LoadObject(_plans.WizardSpire, true);
+                //_placementController.LoadObject(_plans.WizardSpire, true);
             }
             else if (Input.GetKeyDown(KeyCode.U))
             {
-                _placementController.LoadObject(_plans.Cannon, true);
+                //_placementController.LoadObject(_plans.Cannon, true);
             }
             else if (Input.GetKeyDown(KeyCode.I))
             {
-                _placementController.LoadObject(_plans.Catapult, true);
+                //_placementController.LoadObject(_plans.Catapult, true);
             }
         }
 
