@@ -28,7 +28,13 @@ public class BuildManager : DSingle<BuildManager>
     [Header("Buildings")]
     public List<Build> Builds;
 
-    public PlacementController Placements { get; private set; }    
+    public PlacementController Placements { get; private set; }
+
+    public static ResourceType[] ResourceIndex = {
+        ResourceType.Wood,
+        ResourceType.Rock,
+        ResourceType.Metal
+    };
 
     protected override void PAwake()
     {

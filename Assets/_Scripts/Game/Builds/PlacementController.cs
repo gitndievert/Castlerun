@@ -13,6 +13,7 @@
 // ********************************************************************
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlacementController : MonoBehaviour
@@ -32,13 +33,7 @@ public class PlacementController : MonoBehaviour
     public bool BuildMode;
     public float RotateAmount = 90f;    
     public float SnapSize = 1f;        
-
-    public static ResourceType[] ResourceIndex = {
-        ResourceType.Wood,
-        ResourceType.Rock,
-        ResourceType.Metal
-    };
-
+       
     [SerializeField]
     private MeshRenderer _placeObjectMeshRend;
 
@@ -47,7 +42,7 @@ public class PlacementController : MonoBehaviour
     private GameObject _buildingObj;
 
     private Material[] _saveMaterial;
-    //private ResourceType _selectedResource;
+    private Dictionary<GameObject, Material[]> _modelQueue = new Dictionary<GameObject, Material[]>();
 
     private float mouseWheelRotation;
     private bool _triggerBuild = false;
@@ -102,14 +97,14 @@ public class PlacementController : MonoBehaviour
         //Hide 
         if (_currObj != null)
         { 
-            if (Global.MouseLook)
+            /*if (Global.MouseLook)
             {
                 _currObj.SetActive(false);
             }
             else if (!Global.MouseLook && !_currObj.activeInHierarchy)
             {
                 _currObj.SetActive(true);
-            }
+            }*/
 
             if (!_rotating)
             {
@@ -212,15 +207,17 @@ public class PlacementController : MonoBehaviour
 
     private IEnumerator CorLoadBuilding(IBuild build)
     {
-        build.SetPlayer(Player);
-        _buildingObj = _currObj;        
+        build.SetPlayer(Player);        
+        _buildingObj = _currObj;
+        _modelQueue[_buildingObj] = _saveMaterial;
         //COME BACK, NEED A DUMPER FOR THESE
         //_buildingObj.transform.parent = _playerBuilds;
         _buildingObj.gameObject.layer = Global.DEFAULT_LAYER;
         yield return new WaitForSeconds(build.GetConstructionTime());
         PlayerCollision(_buildingObj,false);
-        _buildingObj.transform.GetComponentInChildren<Renderer>().materials = _saveMaterial;
-        build.FinishBuild();        
+        _buildingObj.transform.GetComponentInChildren<Renderer>().materials = _modelQueue[_buildingObj];
+        build.FinishBuild();
+        _modelQueue.Remove(_buildingObj);
         yield return null;
     }
 
