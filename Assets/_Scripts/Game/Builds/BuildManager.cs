@@ -26,7 +26,7 @@ public class BuildManager : DSingle<BuildManager>
     public GameObject BasicRamp;
 
     [Header("Buildings")]
-    public List<Build> Builds;
+    public List<Build> Builds;    
 
     public PlacementController Placements { get; private set; }
 

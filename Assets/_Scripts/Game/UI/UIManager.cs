@@ -32,7 +32,12 @@ public partial class UIManager : PSingle<UIManager>
     /// Player Panel
     /// </summary>
     public PlayerUI PlayerUIPanel;
-    
+
+    /// <summary>
+    /// Panel for selecting Buildings and Troops
+    /// </summary>
+    public BuildUI BuildingUIPanel;
+
     /// <summary>
     /// Target Panel
     /// </summary>
@@ -59,6 +64,7 @@ public partial class UIManager : PSingle<UIManager>
     /// Enemy Target Box (Single Selection)
     /// </summary>    
     public SingleTargetBox EnemyTargetBox;
+
 
 
     protected override void PAwake()

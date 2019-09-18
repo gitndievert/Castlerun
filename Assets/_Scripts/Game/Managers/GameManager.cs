@@ -39,7 +39,8 @@ public class GameManager : DSingle<GameManager>
     void Start()
     {
         PlayerList.Clear();
-        StartPlayersTest();
+        //Commented out for networking test
+        //StartPlayersTest();
         //StartMusic();
     }    
 

@@ -15,18 +15,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum BuildingLabelTypes
-{
-    None,
-    Wall,
-    Floor,
-    Ramp,
-    Barracks,
-    ResourceDepot,
-    Tower
-}
-
-
 [RequireComponent(typeof(NavMeshObstacle))]
 public abstract class Build : BasePrefab, IBuild, ISelectable
 {
@@ -101,9 +89,10 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     public void FinishBuild()
     {
         _isFinished = true;
+        SoundManager.PlaySound(SoundList.Instance.BuildSound);
     }
 
-    public void OnMouseDown()
+    public virtual void OnMouseDown()
     {
         if (!_isFinished) return;
         switch (GetTag)
@@ -120,9 +109,9 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         }
     }
 
-    public void OnMouseExit()
+    public virtual void OnMouseExit()
     {
-        //SelectionUI.ClearSingleTarget();
+        
     }
     
     protected virtual void OnCollisionEnter(Collision col)

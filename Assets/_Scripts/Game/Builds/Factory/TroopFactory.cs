@@ -78,21 +78,9 @@ public class TroopFactory : Build
 
         return true;
     }
-
-    //Come back
-    /*protected IEnumerator RunBuild()
-    {
-        Debug.Log("Start Build");
-        Global.BuildMode = false;
-        yield return new WaitForSeconds(BuildTime);
-        SoundManager.PlaySound(SoundList.Instance.BuildSound);
-        Debug.Log("Finish Build");
-        Global.BuildMode = true;
-        EnableTroopBuilder = true;
-    }*/
-
+       
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         if (!_IsBuilding && _trainedCounter != MaxTrained)
         {
@@ -106,6 +94,18 @@ public class TroopFactory : Build
         }        
     }
 
+    public override void OnMouseDown()
+    {
+        base.OnMouseDown();
+        //Add in selection menu
+    }
+
+    public override void OnMouseExit()
+    {
+        base.OnMouseExit();
+    }
+
+    //Come back later
     public void BuildTroops()
     {
         if (Troops == null) return;

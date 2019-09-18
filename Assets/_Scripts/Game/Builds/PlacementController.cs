@@ -27,6 +27,9 @@ public class PlacementController : MonoBehaviour
     [Tooltip("This is the transparent lay material if you cannot build in a zone")]
     public Material ErrorMaterial;
 
+    /// <summary>
+    /// Player attached to this controller
+    /// </summary>
     public Player Player { get; set; }
 
     [Header("Build Properties")]
@@ -40,8 +43,7 @@ public class PlacementController : MonoBehaviour
     //TODO MOVE TO QUEUES
     private GameObject _currObj;
     private GameObject _buildingObj;
-
-    private Material[] _saveMaterial;
+        
     private Dictionary<GameObject, Material[]> _modelQueue = new Dictionary<GameObject, Material[]>();
 
     private float mouseWheelRotation;
@@ -68,7 +70,8 @@ public class PlacementController : MonoBehaviour
         _triggerBuild = true;
         _outsideGrid = outsidegrid;
         _isBasic = isbasic;
-        CameraRotate.BuildCamMode = outsidegrid;
+        CameraRotate.BuildCamMode = !isbasic;
+        Global.BuildMode = isbasic;
     }    
         
     public void ClearObject()
@@ -97,6 +100,7 @@ public class PlacementController : MonoBehaviour
         //Hide 
         if (_currObj != null)
         { 
+            //Make basic builds choppy, leave it out for now
             /*if (Global.MouseLook)
             {
                 _currObj.SetActive(false);
@@ -178,7 +182,7 @@ public class PlacementController : MonoBehaviour
                         
             _currObj = null;
             if(_isBasic)
-                LoadObject(PlaceableObjectPrefab, _outsideGrid);
+                LoadObject(PlaceableObjectPrefab, _isBasic, _outsideGrid);
             return;
         }
 
@@ -187,12 +191,13 @@ public class PlacementController : MonoBehaviour
             if (_currObj != null) KillBuild();
 
             _currObj = Instantiate(PlaceableObjectPrefab, Player.transform.position * 2,Quaternion.identity);            
-            _saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().materials;
-                                    
+            var saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().materials;
+            _modelQueue[_currObj] = saveMaterial;
+
             PlayerCollision(_currObj, true);
 
             //_currObj.transform.GetComponentInChildren<Renderer>().material = LayMaterial;
-            var mats = _saveMaterial;
+            var mats = saveMaterial;
             Material[] laymats = new Material[mats.Length];
             for(int i = 0; i < mats.Length; i++)
             {
@@ -209,7 +214,7 @@ public class PlacementController : MonoBehaviour
     {
         build.SetPlayer(Player);        
         _buildingObj = _currObj;
-        _modelQueue[_buildingObj] = _saveMaterial;
+        //_modelQueue[_buildingObj] = _saveMaterial;
         //COME BACK, NEED A DUMPER FOR THESE
         //_buildingObj.transform.parent = _playerBuilds;
         _buildingObj.gameObject.layer = Global.DEFAULT_LAYER;
