@@ -37,9 +37,12 @@ public class BuildManager : DSingle<BuildManager>
         ResourceType.Metal
     };
 
-    protected List<Transform> BuilderIcons = new List<Transform>();
+    public BuildUI BuildUI
+    {
+        get { return UIManager.Instance.BuildingUIPanel; }
+    }
 
-    protected List<Transform> TroopIcons = new List<Transform>();
+    protected List<Transform> BuilderIcons = new List<Transform>();    
 
     protected override void PAwake()
     {
@@ -54,28 +57,47 @@ public class BuildManager : DSingle<BuildManager>
     // Start is called before the first frame update
     void Start()
     {
-        var ui = UIManager.Instance.BuildingUIPanel;
-
-        if (BuilderIcons.Count == 0)
-        {
-            int i = 0;
-            int buildcount = Builds.Count;
-
-            foreach (Transform trans in ui.BuildingsPanel.transform)
-            {
-                if (i >= buildcount) break;
-                var build = Builds[i];                
-                trans.GetComponent<Image>().sprite = build.GetIcon();
-                trans.GetComponent<Button>().onClick.AddListener(() => LoadByType(build.BuildingLabelType));                
-                i++;
-            }
-        }        
+        RefreshBuilds();               
     }
 
     private void Update()
     {
         
         
+    }
+
+    public void RefreshBuilds()
+    {
+        if (BuilderIcons.Count == 0)
+        {
+            int i = 0;
+            int buildcount = Builds.Count;
+
+            foreach (Transform trans in BuildUI.BuildingsPanel.transform)
+            {
+                if (i >= buildcount) break;
+                var build = Builds[i];
+
+                var image = trans.GetComponent<Image>();
+                image.sprite = build.GetIcon();
+
+                if (!build.EnableFromBuilder)
+                {
+                    var color = image.color;
+                    color.r = 61f;
+                    color.g = 61f;
+                    color.b = 61f;
+                    color.a = 0.5f;
+                    image.color = color;
+                }
+                else
+                {
+                    trans.GetComponent<Button>().onClick.AddListener(() => LoadByType(build.BuildingLabelType));
+                }
+
+                i++;
+            }
+        }
     }
 
     public void SetStatusEnabled(BuildingLabelTypes type, bool status)
