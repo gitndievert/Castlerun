@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3073404104925539056}
   - component: {fileID: 1536205532499314168}
   - component: {fileID: -6725061357423293409}
+  - component: {fileID: -2607346246224006823}
   m_Layer: 2
   m_Name: Ramp
   m_TagString: Build
@@ -109,6 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3145189b735dbe41a7154314dc29656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   Health: 0
   CanExplode: 1
   DestroySound: {fileID: 0}
@@ -154,3 +157,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.069000006, y: 0.36900002, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &-2607346246224006823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436822143744326069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverOnly: 1
+  localPlayerAuthority: 0
+  m_AssetId: 
+  m_SceneId: 341139210

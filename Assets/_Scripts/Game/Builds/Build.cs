@@ -12,9 +12,11 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using Mirror;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NetworkIdentity))]
 [RequireComponent(typeof(NavMeshObstacle))]
 public abstract class Build : BasePrefab, IBuild, ISelectable
 {
@@ -53,6 +55,8 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         DisplayName = BuildingLabelType.ToString();
         if (Costs.CostFactors.Length == 0)
             throw new System.Exception("Please add a cost");
+        var net = GetComponent<NetworkIdentity>();
+        net.serverOnly = true;
     }
 
     protected virtual void Update()
