@@ -10,7 +10,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{87BAD694-22AB-FDEE-852A-0A627AAF5DA2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -129,7 +130,6 @@
     <Compile Include="Assets\_Scripts\Game\Builds\Basic\SnapPoints.cs" />
     <Compile Include="Assets\_Scripts\Game\Builds\Build.cs" />
     <Compile Include="Assets\_Scripts\Game\Builds\BuildArea.cs" />
-    <Compile Include="Assets\_Scripts\Game\Builds\BuildManager.cs" />
     <Compile Include="Assets\_Scripts\Game\Builds\Factory\TroopFactory.cs" />
     <Compile Include="Assets\_Scripts\Game\Builds\IBuild.cs" />
     <Compile Include="Assets\_Scripts\Game\Builds\Offense\OffensiveBuild.cs" />
@@ -161,6 +161,7 @@
     <Compile Include="Assets\_Scripts\Game\Helpers\Extensions.TransformHelpers.cs" />
     <Compile Include="Assets\_Scripts\Game\Helpers\FlyCamera.cs" />
     <Compile Include="Assets\_Scripts\Game\IBase.cs" />
+    <Compile Include="Assets\_Scripts\Game\Managers\BuildManager.cs" />
     <Compile Include="Assets\_Scripts\Game\Managers\EventManager.cs" />
     <Compile Include="Assets\_Scripts\Game\Managers\GameManager.cs" />
     <Compile Include="Assets\_Scripts\Game\Managers\MenuManager.cs" />
@@ -173,7 +174,7 @@
     <Compile Include="Assets\_Scripts\Game\Npc\Army\Wizard.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\Formation.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\ISelectable.cs" />
-    <Compile Include="Assets\_Scripts\Game\Npc\Ranged.cs" />
+    <Compile Include="Assets\_Scripts\Game\Npc\RangedTroop.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\Selection.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\Troop.cs" />
     <Compile Include="Assets\_Scripts\Game\Npc\Workers\Gatherer.cs" />

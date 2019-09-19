@@ -20,7 +20,7 @@ public enum NecroSpawnType
     Zombie
 }
 
-public class Necromancer : Ranged<Troop>
+public class Necromancer : RangedTroop
 {
     /// <summary>
     /// Number of Skeletons You Can Spawn

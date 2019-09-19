@@ -16,7 +16,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class Ranged<T> : Troop where T : BasePrefab
+public abstract class RangedTroop : Troop
 {
     const float MAXIMUM_BO_POWER = 2000f;
 

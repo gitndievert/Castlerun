@@ -36,6 +36,10 @@ public class BuildManager : DSingle<BuildManager>
         ResourceType.Metal
     };
 
+    protected List<Transform> BuilderIcons = new List<Transform>();
+
+    protected List<Transform> TroopIcons = new List<Transform>();
+
     protected override void PAwake()
     {
         Placements = GetComponent<PlacementController>();
@@ -49,7 +53,20 @@ public class BuildManager : DSingle<BuildManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        var ui = UIManager.Instance.BuildingUIPanel;
+
+        if (BuilderIcons.Count == 0)
+        {
+            foreach(Transform trans in ui.BuildingsPanel.transform)
+            {
+                Debug.Log($"Building Transform Objects {trans.name}");
+            }
+        }
+
+        if(TroopIcons.Count == 0)
+        {
+
+        }
     }
 
     private void Update()
