@@ -66,15 +66,10 @@ public class BuildManager : DSingle<BuildManager>
                 if (i >= buildcount) break;
                 var build = Builds[i];                
                 trans.GetComponent<Image>().sprite = build.GetIcon();
-                trans.GetComponent<Button>().onClick.AddListener(() => LoadByType(build.BuildingLabelType));
+                trans.GetComponent<Button>().onClick.AddListener(() => LoadByType(build.BuildingLabelType));                
                 i++;
             }
-        }
-
-        if(TroopIcons.Count == 0)
-        {
-
-        }
+        }        
     }
 
     private void Update()
