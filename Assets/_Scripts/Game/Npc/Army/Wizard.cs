@@ -16,7 +16,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wizard : Ranged<Troop>
+public class Wizard : RangedTroop
 {
     public override string DisplayName => "Wizard";
 
