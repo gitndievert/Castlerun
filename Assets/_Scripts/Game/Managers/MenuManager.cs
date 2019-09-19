@@ -28,9 +28,9 @@ public class MenuManager : MonoBehaviour
         get { return SceneManager.GetActiveScene().name; }
     }
 
-    public void OnClick_Main_LoadGame()
+    public void OnClick_Main_LoadGame(string scenename)
     {
-        SceneManager.LoadSceneAsync("Demo_1");        
+        SceneManager.LoadSceneAsync(scenename);
     }
 
 

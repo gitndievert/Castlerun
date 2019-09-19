@@ -15,9 +15,10 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using Mirror;
 
 [RequireComponent(typeof(Rigidbody))]
-public abstract class BasePrefab : MonoBehaviour, IBase
+public abstract class BasePrefab : NetworkBehaviour, IBase
 {
     #region Base Stats
     /// <summary>

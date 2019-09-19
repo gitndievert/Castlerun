@@ -12,6 +12,7 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using Mirror;
 using SBK.Unity;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,12 +20,15 @@ using UnityEngine;
 public class GameManager : DSingle<GameManager>
 {    
     public GameObject PlayerInstance;
-    public List<PlayerPad> PlayerPads;    
+    public List<PlayerPad> PlayerPads;
+    public NetworkManager NetworkManager;
     
     public Dictionary<int, Player> PlayerList = new Dictionary<int, Player>();
 
     [SerializeField]
     private readonly int _numOfPlayer = 2;    
+
+
     
     protected override void PAwake()
     {
@@ -43,6 +47,16 @@ public class GameManager : DSingle<GameManager>
         //StartPlayersTest();
         //StartMusic();
     }    
+
+    public void OnClickQuit()
+    {
+        if (NetworkClient.isConnected)
+        {
+            NetworkManager.StopHost();
+            NetworkManager.StopServer();
+        }
+        Application.Quit();
+    }
 
     private void StartMusic()
     {

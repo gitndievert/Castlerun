@@ -92,6 +92,9 @@ public class Player : BasePrefab, IPlayer
         _movement = GetComponent<MovementInput>();
         PlayerWorldItems = new GameObject("PlayerWorldItems");
         _battleCursor = GetComponent<BattleCursor>();
+
+        MiniMapControls.PlayerTransform = transform;
+        PlayerName = "Player";
     }
 
     // Start is called before the first frame update
@@ -124,8 +127,7 @@ public class Player : BasePrefab, IPlayer
     {
         PlayerName = name;
         PlayerNumber = playernum;
-        //Global.BattleMode = false;
-        MiniMapControls.PlayerTransform = transform;        
+        //Global.BattleMode = false;        
     }
  
     private void SetBasicPlayerStats()
