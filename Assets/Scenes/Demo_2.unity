@@ -505,7 +505,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &11786826
 PrefabInstance:
@@ -567,7 +567,7 @@ PrefabInstance:
     - target: {fileID: 242410134351857708, guid: 21556eb92aa57a048a970b695bdbde41,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 242410134351857708, guid: 21556eb92aa57a048a970b695bdbde41,
         type: 3}
@@ -1122,7 +1122,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &48497231
 PrefabInstance:
@@ -1295,6 +1295,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 950c0a0cf14577549b026c95956a3c99, type: 3}
+--- !u!4 &69626711 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 408394, guid: 7ad6b1ce5f610d541a2352f21ee926ce,
+    type: 3}
+  m_PrefabInstance: {fileID: 672797342}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &70431577
 GameObject:
   m_ObjectHideFlags: 0
@@ -2266,7 +2272,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &197753077
 GameObject:
@@ -2489,7 +2495,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ef4cb8d92b28afd4a91dca6400dd9a55, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2891,8 +2897,11 @@ Transform:
   - {fileID: 640197753}
   - {fileID: 590779150}
   - {fileID: 129340969}
+  - {fileID: 69626711}
+  - {fileID: 352681266}
+  - {fileID: 555107239}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &221251716
 PrefabInstance:
@@ -2997,7 +3006,7 @@ Transform:
   - {fileID: 1927245851}
   - {fileID: 1386967750}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &237859811 stripped
 Transform:
@@ -3897,7 +3906,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 210445562}
     m_Modifications:
     - target: {fileID: 172268, guid: 75450dad01decb44b867e81c5a1fd604, type: 3}
       propertyPath: m_Name
@@ -3905,15 +3914,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.397
+      value: 2.4737616
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.074
+      value: 10.118321
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 570.173
+      value: 556.60754
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 3}
       propertyPath: m_LocalRotation.x
@@ -3933,7 +3942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3949,15 +3958,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.83016
+      value: 0.8301605
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.83016
+      value: 0.83016074
       objectReference: {fileID: 0}
     - target: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.83016
+      value: 0.8301605
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75450dad01decb44b867e81c5a1fd604, type: 3}
@@ -4052,6 +4061,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ac3b50a182b0764984c5eee6b04254d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &352681266 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 442798, guid: b2e876bb6e0ba0a42b628002c60efe3b,
+    type: 3}
+  m_PrefabInstance: {fileID: 861706496}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &355241771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4547,7 +4562,7 @@ Transform:
   - {fileID: 477389443}
   - {fileID: 1415007609}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &438502406
 GameObject:
@@ -4652,7 +4667,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4e129d856de6dcb4d9283e0995c1cfeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4917,7 +4932,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 6fb0765d7429a3c48b90d4ceee560160, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -5319,7 +5334,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &526896794 stripped
 Transform:
@@ -5441,7 +5456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 429866, guid: c7c82f5d05e44f941b1d12a22612ef20, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 429866, guid: c7c82f5d05e44f941b1d12a22612ef20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5540,6 +5555,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: ce543ab43d040eb47918891a145c4432, type: 3}
+--- !u!4 &555107239 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 461212, guid: 75450dad01decb44b867e81c5a1fd604,
+    type: 3}
+  m_PrefabInstance: {fileID: 330623889}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &562341184
 GameObject:
   m_ObjectHideFlags: 0
@@ -5569,7 +5590,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &562341186
 MonoBehaviour:
@@ -6042,7 +6063,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300006, guid: da996d03cf176ea4ca2b2428ff6a1b7f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -6626,7 +6647,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2c249046f3304cd42a5731c8ea26adcd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -6717,7 +6738,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &655083717
 PrefabInstance:
@@ -6760,7 +6781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 475792, guid: b0fb05c3b06270f48b52cd2165bd9772, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 475792, guid: b0fb05c3b06270f48b52cd2165bd9772, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6919,7 +6940,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 210445562}
     m_Modifications:
     - target: {fileID: 152882, guid: 7ad6b1ce5f610d541a2352f21ee926ce, type: 3}
       propertyPath: m_Name
@@ -6927,15 +6948,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408394, guid: 7ad6b1ce5f610d541a2352f21ee926ce, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.189
+      value: 7.2657614
       objectReference: {fileID: 0}
     - target: {fileID: 408394, guid: 7ad6b1ce5f610d541a2352f21ee926ce, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.427988
+      value: 10.472309
       objectReference: {fileID: 0}
     - target: {fileID: 408394, guid: 7ad6b1ce5f610d541a2352f21ee926ce, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 582.319
+      value: 568.75354
       objectReference: {fileID: 0}
     - target: {fileID: 408394, guid: 7ad6b1ce5f610d541a2352f21ee926ce, type: 3}
       propertyPath: m_LocalRotation.x
@@ -6955,7 +6976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408394, guid: 7ad6b1ce5f610d541a2352f21ee926ce, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 408394, guid: 7ad6b1ce5f610d541a2352f21ee926ce, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6971,7 +6992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408394, guid: 7ad6b1ce5f610d541a2352f21ee926ce, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1.5000005
       objectReference: {fileID: 0}
     - target: {fileID: 408394, guid: 7ad6b1ce5f610d541a2352f21ee926ce, type: 3}
       propertyPath: m_LocalScale.y
@@ -6979,7 +7000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408394, guid: 7ad6b1ce5f610d541a2352f21ee926ce, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 1.5000001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ad6b1ce5f610d541a2352f21ee926ce, type: 3}
@@ -7180,7 +7201,7 @@ Transform:
   - {fileID: 1730822417}
   - {fileID: 1519182936}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &679992795 stripped
 MonoBehaviour:
@@ -7833,7 +7854,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300006, guid: da996d03cf176ea4ca2b2428ff6a1b7f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -8313,7 +8334,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &826297889
 PrefabInstance:
@@ -8539,7 +8560,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 210445562}
     m_Modifications:
     - target: {fileID: 131126, guid: b2e876bb6e0ba0a42b628002c60efe3b, type: 3}
       propertyPath: m_Name
@@ -8547,15 +8568,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 442798, guid: b2e876bb6e0ba0a42b628002c60efe3b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.8
+      value: 11.876761
       objectReference: {fileID: 0}
     - target: {fileID: 442798, guid: b2e876bb6e0ba0a42b628002c60efe3b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.62
+      value: 9.664321
       objectReference: {fileID: 0}
     - target: {fileID: 442798, guid: b2e876bb6e0ba0a42b628002c60efe3b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 558.02
+      value: 544.4546
       objectReference: {fileID: 0}
     - target: {fileID: 442798, guid: b2e876bb6e0ba0a42b628002c60efe3b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -8563,7 +8584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 442798, guid: b2e876bb6e0ba0a42b628002c60efe3b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 442798, guid: b2e876bb6e0ba0a42b628002c60efe3b, type: 3}
       propertyPath: m_LocalRotation.z
@@ -8575,7 +8596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 442798, guid: b2e876bb6e0ba0a42b628002c60efe3b, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 442798, guid: b2e876bb6e0ba0a42b628002c60efe3b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9299,7 +9320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010653347892, guid: d7ba4fe833670a140b9b6085652f0e26, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4000010653347892, guid: d7ba4fe833670a140b9b6085652f0e26, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9518,7 +9539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010968662070, guid: 30b99e7dc1382e346a7f9789de00de5e, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4000010968662070, guid: 30b99e7dc1382e346a7f9789de00de5e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9797,7 +9818,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1023035610 stripped
 Transform:
@@ -10118,7 +10139,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f092a43168407904f8e2f74b1b187f9f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -10649,7 +10670,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1144891276 stripped
 Transform:
@@ -10835,7 +10856,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 510903799e6f71a48bba67d32a6b5f7c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -11056,7 +11077,7 @@ Transform:
   - {fileID: 487899818}
   - {fileID: 1717505649}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1185619466
 PrefabInstance:
@@ -11470,7 +11491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 446946, guid: 64e8380534d16ad4b99db3629f33ae55, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 446946, guid: 64e8380534d16ad4b99db3629f33ae55, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11635,7 +11656,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 50c059d539d63164da19baccaf2a0ea8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -11864,7 +11885,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300006, guid: da996d03cf176ea4ca2b2428ff6a1b7f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -12259,7 +12280,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300006, guid: da996d03cf176ea4ca2b2428ff6a1b7f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -12537,7 +12558,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300006, guid: da996d03cf176ea4ca2b2428ff6a1b7f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -14256,7 +14277,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0d45641a94b0b1a4a9429646d08e365c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -14479,7 +14500,7 @@ RectTransform:
   - {fileID: 1346822574}
   - {fileID: 350605536}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -14882,7 +14903,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300006, guid: da996d03cf176ea4ca2b2428ff6a1b7f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -15040,7 +15061,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1488599533
 MonoBehaviour:
@@ -15276,7 +15297,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d1a75ca8113efef40b98536014e629af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -15336,18 +15357,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1501442125}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 609087163}
-        m_MethodName: LoadByString
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Barracks
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1502769383
@@ -16319,7 +16329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013213224824, guid: a649302f8407dd9469e2c5b67b4a0674, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4000013213224824, guid: a649302f8407dd9469e2c5b67b4a0674, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17257,7 +17267,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c65a83b5170ee9f4da36b66f0ea6c4db, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -18263,7 +18273,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1850957451
 PrefabInstance:
@@ -18941,7 +18951,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1919303800 stripped
 Transform:
@@ -19280,7 +19290,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 7bbd0ccb8c4f23c45a913f77f179a736, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -19340,18 +19350,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1927686122}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 609087163}
-        m_MethodName: LoadByString
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: ResourceDepot
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1938777310
@@ -19468,7 +19467,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ce52d0989a2c8ff439b68f3525367aad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -20330,7 +20329,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2049878786 stripped
 Transform:
@@ -20752,7 +20751,12 @@ MonoBehaviour:
   playerPrefab: {fileID: 1507808357, guid: 47c4c30cb31bfbb47bf369cc29485702, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 2543357986072876719, guid: 026efacea9dda6747b5e03af1bc8e39e, type: 3}
+  - {fileID: 5436822143744326069, guid: 347f0c6a657386e45a71938d5169fd61, type: 3}
+  - {fileID: 4521198004532978720, guid: 0856799f15ad9cb4487f86f0d99bbdf6, type: 3}
+  - {fileID: 1516178438436275324, guid: 54672a048a056214aae7a6e4dae17ef5, type: 3}
+  - {fileID: 1547467594100615071, guid: eaf132c037746644588252e091f4b8f3, type: 3}
 --- !u!4 &2070259105
 Transform:
   m_ObjectHideFlags: 0
@@ -20765,7 +20769,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2100879543 stripped
 Transform:
@@ -20844,7 +20848,7 @@ PrefabInstance:
     - target: {fileID: 3432588045173631719, guid: d3623546911d1e949823c67f53407132,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3432588045173631719, guid: d3623546911d1e949823c67f53407132,
         type: 3}

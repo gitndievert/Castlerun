@@ -16,6 +16,7 @@ using SBK.Unity;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(PlacementController))]
 public class BuildManager : DSingle<BuildManager>
@@ -57,9 +58,16 @@ public class BuildManager : DSingle<BuildManager>
 
         if (BuilderIcons.Count == 0)
         {
-            foreach(Transform trans in ui.BuildingsPanel.transform)
+            int i = 0;
+            int buildcount = Builds.Count;
+
+            foreach (Transform trans in ui.BuildingsPanel.transform)
             {
-                Debug.Log($"Building Transform Objects {trans.name}");
+                if (i >= buildcount) break;
+                var build = Builds[i];                
+                trans.GetComponent<Image>().sprite = build.GetIcon();
+                trans.GetComponent<Button>().onClick.AddListener(() => LoadByType(build.BuildingLabelType));
+                i++;
             }
         }
 

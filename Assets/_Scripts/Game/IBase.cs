@@ -12,10 +12,13 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using UnityEngine;
+
 public interface IBase
 {
     void SetHit(int amount);
     void Die();
     Costs GetCosts();
+    Sprite GetIcon();
 }
     
