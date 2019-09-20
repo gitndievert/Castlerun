@@ -641,6 +641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7518b51d21be2d640800439d7f10303b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   Health: 100
   CanExplode: 0
   DestroySound: {fileID: 0}
@@ -698,7 +700,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 32
   m_CollisionDetection: 0
 --- !u!195 &2197402741631013300
 NavMeshAgent:
@@ -710,13 +712,13 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 5
-  m_Acceleration: 25
+  m_Speed: 3.5
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
@@ -1833,6 +1835,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3432588045173631719}
     m_Modifications:
+    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
+        type: 3}
+      propertyPath: m_Name
+      value: MiniMapIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8547001551414770055, guid: ed262e909d070aa41915329ff5d1b7ae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1902,16 +1914,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
-        type: 3}
-      propertyPath: m_Name
-      value: MiniMapIcon
-      objectReference: {fileID: 0}
-    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed262e909d070aa41915329ff5d1b7ae, type: 3}

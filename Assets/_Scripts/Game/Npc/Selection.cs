@@ -121,7 +121,7 @@ public class Selection : DSingle<Selection>
                         else if (hit.transform.gameObject.layer == Global.GROUND_LAYER
                             || ((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
                         {
-                            ClearAll();
+                            ClearAll();                            
 
                             if (SingleTargetSelected != null)
                             {

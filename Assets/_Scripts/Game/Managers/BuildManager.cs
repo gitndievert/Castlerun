@@ -41,8 +41,47 @@ public class BuildManager : DSingle<BuildManager>
     {
         get { return UIManager.Instance.BuildingUIPanel; }
     }
+    
+    private bool _buildPanelEnabled = false;
+    private bool _troopPanelEnabled = false;
 
-    protected List<Transform> BuilderIcons = new List<Transform>();    
+    /// <summary>
+    /// Set the Build Panel On/Off
+    /// </summary>
+    public bool BuildPanelEnabled
+    {
+        get { return _buildPanelEnabled; }
+        set
+        {
+            _buildPanelEnabled = value;
+            BuildUI.BuildingsPanel.SetActive(_buildPanelEnabled);            
+        }
+    }
+
+    /// <summary>
+    /// Set the Troop Panel On/Off
+    /// </summary>
+    public bool TroopPanelEnabled
+    {
+        get { return _troopPanelEnabled; }
+        set
+        {
+            _troopPanelEnabled = value;
+            BuildUI.TroopsPanel.SetActive(_troopPanelEnabled);
+        }
+    }
+
+    public void ShowTroopPanel()
+    {
+        BuildPanelEnabled = false;
+        TroopPanelEnabled = true;
+    }
+
+    public void ShowBuildPanel()
+    {
+        BuildPanelEnabled = true;
+        TroopPanelEnabled = false;
+    }
 
     protected override void PAwake()
     {
@@ -57,6 +96,8 @@ public class BuildManager : DSingle<BuildManager>
     // Start is called before the first frame update
     void Start()
     {
+        BuildPanelEnabled = true;
+        TroopPanelEnabled = false;
         RefreshBuilds();               
     }
 
@@ -68,38 +109,35 @@ public class BuildManager : DSingle<BuildManager>
 
     public void RefreshBuilds()
     {
-        if (BuilderIcons.Count == 0)
+        int i = 0;
+        int buildcount = Builds.Count;
+
+        foreach (Transform trans in BuildUI.BuildingsPanel.transform)
         {
-            int i = 0;
-            int buildcount = Builds.Count;
+            if (i >= buildcount) break;
+            var build = Builds[i];
 
-            foreach (Transform trans in BuildUI.BuildingsPanel.transform)
+            var image = trans.GetComponent<Image>();
+            image.sprite = build.GetIcon();
+
+            if (!build.EnableFromBuilder)
             {
-                if (i >= buildcount) break;
-                var build = Builds[i];
-
-                var image = trans.GetComponent<Image>();
-                image.sprite = build.GetIcon();
-
-                if (!build.EnableFromBuilder)
-                {
-                    var color = image.color;
-                    color.r = 61f;
-                    color.g = 61f;
-                    color.b = 61f;
-                    color.a = 0.5f;
-                    image.color = color;
-                }
-                else
-                {
-                    trans.GetComponent<Button>().onClick.AddListener(() => LoadByType(build.BuildingLabelType));
-                }
-
-                i++;
+                var color = image.color;
+                color.r = 61f;
+                color.g = 61f;
+                color.b = 61f;
+                color.a = 0.5f;
+                image.color = color;
             }
-        }
-    }
+            else
+            {
+                trans.GetComponent<Button>().onClick.AddListener(() => LoadByType(build.BuildingLabelType));
+            }
 
+            i++;
+        }        
+    }
+    
     public void SetStatusEnabled(BuildingLabelTypes type, bool status)
     {
         foreach(var build in Builds)

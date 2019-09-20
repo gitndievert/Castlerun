@@ -13,6 +13,7 @@
 // ********************************************************************
 
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
  * !! Note About This!!!
@@ -83,49 +84,51 @@ public class TroopFactory : Build
     protected override void Update()
     {
         if (!_IsBuilding && _trainedCounter != MaxTrained)
-        {
-            //BuildTroops();
+        {            
             _IsBuilding = true;            
         }
         else if (_IsBuilding && _trainedCounter == MaxTrained)
         {
-            StopBuild();
+            StopTraining();
             Debug.Log("Max Number of Harvesters Made");
         }        
     }
 
     public override void OnMouseDown()
     {
-        base.OnMouseDown();
-        //Add in selection menu
+        base.OnMouseDown();        
+        RefreshTroopPanel();
+        BuildManager.Instance.ShowTroopPanel();
     }
-
-    public override void OnMouseExit()
+    
+    public void RefreshTroopPanel()
     {
-        base.OnMouseExit();
-    }
+        int i = 0;
+        int troopcount = Troops.Length;
 
-    //Come back later
-    public void BuildTroops()
-    {
-        if (Troops == null) return;
-        InvokeRepeating("Build", StartTime, TrainingTime);
-    }
+        foreach (Transform trans in BuildManager.Instance.BuildUI.TroopsPanel.transform)
+        {
+            if (i >= troopcount) break;
+            var troop = Troops[i];
 
-    public void StopBuild()
+            var image = trans.GetComponent<Image>();
+            image.sprite = troop.GetIcon();
+            trans.GetComponent<Button>().onClick.AddListener(() => Train(troop));           
+
+            i++;
+        }
+    }
+    
+    public void StopTraining()
     {
         CancelInvoke();
         _IsBuilding = false;
     }
 
 
-    private void Build()
-    {
-        for (int i = 0; i < NumberToTrain; i++)
-        {
-            var randTroop = Troops[Random.Range(0, Troops.Length - 1)];                        
-            var makeTroop = Instantiate(randTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);
-                                  
+    public void Train(Troop selectedTroop)
+    {                                
+            var makeTroop = Instantiate(selectedTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);                                  
 
             if (Player != null)
             {                
@@ -156,7 +159,6 @@ public class TroopFactory : Build
                 }                
             }
 
-            _trainedCounter++;
-        }
+            _trainedCounter++;        
     }   
 }

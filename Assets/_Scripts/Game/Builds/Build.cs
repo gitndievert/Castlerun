@@ -112,11 +112,6 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
                 break;
         }
     }
-
-    public virtual void OnMouseExit()
-    {
-        
-    }
     
     protected virtual void OnCollisionEnter(Collision col)
     {
@@ -160,6 +155,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         if (IsSelected)
         {
             IsSelected = false;
+            BuildManager.Instance.ShowBuildPanel();
         }
     }
 }

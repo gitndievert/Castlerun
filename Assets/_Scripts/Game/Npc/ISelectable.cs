@@ -24,10 +24,8 @@ public interface ISelectable : IBase
     /// Gets all Properties on this Selectable Object
     /// </summary>
     GameObject GameObject { get; }
-    void OnMouseDown();
-    void OnMouseExit();
-    string DisplayName { get; }
-    Sprite GetIcon();
+    void OnMouseDown();    
+    string DisplayName { get; }    
     int GetCurrentHealth();
     int GetMaxHealth();
     HashSet<Troop> TargetingMe { get; set; }
