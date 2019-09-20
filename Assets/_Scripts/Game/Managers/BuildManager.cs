@@ -174,7 +174,11 @@ public class BuildManager : DSingle<BuildManager>
         if (build != null)
         {            
             Placements.LoadObject(build.GameObject, build.IsBasic, true);
-        }        
+        }   
+        else
+        {
+            Global.Message($"Could not place building: {building.ToString()}");
+        }
     }
 
     public void LoadBasicWall()

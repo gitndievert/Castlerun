@@ -117,7 +117,7 @@ public class CameraRotate : MonoBehaviour
         {
             //This will enable both middle and right buttons. Right will assist in camera changes, 
             //and middle will allow freelook
-            if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) || Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
+            if (Input.GetMouseButton(KeyBindings.MIDDLE_MOUSE_BUTTON) || Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
             {
                 _xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
                 _yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;

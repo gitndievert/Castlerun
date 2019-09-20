@@ -12,6 +12,7 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -124,41 +125,54 @@ public class TroopFactory : Build
         CancelInvoke();
         _IsBuilding = false;
     }
-
-
+    
     public void Train(Troop selectedTroop)
-    {                                
-            var makeTroop = Instantiate(selectedTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);                                  
+    {
+        if (_trainedCounter == MaxTrained)
+        {
+            //Cannot train anymore troops message
+            return;
+        }
+        StartCoroutine(QueueTroop(selectedTroop));
+    }   
 
-            if (Player != null)
-            {                
-                //Parent to Player Builds
-                makeTroop.transform.parent = Player.PlayerWorldItems.transform;
+    private IEnumerator QueueTroop(Troop selectedTroop)
+    {
+        yield return new WaitForSeconds(TrainingTime);
 
-                //Access Troop Component
-                var troop = makeTroop.GetComponent<Troop>();
-                //Add Player to Troop
-                troop.TroopPlayer = Player;
+        var makeTroop = Instantiate(selectedTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);
 
-                //Play Spawning Sound FX
-                if (troop.FreshTroop != null)
-                {
-                    SoundManager.PlaySound(troop.FreshTroop);                  
-                }
+        if (Player != null)
+        {
+            //Parent to Player Builds
+            makeTroop.transform.parent = Player.PlayerWorldItems.transform;
 
-                Gatherer gatherer = makeTroop.GetComponent<Gatherer>();
-                //If Troop is a Gatherer
-                if (gatherer != null)
-                {                    
-                    gatherer.SetFactory(this);
-                    gatherer.HarvestingSelection = ResourceType.Wood;
-                    for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
-                    {
-                        gatherer.points.Add(p, Player.PlayerPad.ResourcePoints[p]);
-                    }
-                }                
+            //Access Troop Component
+            var troop = makeTroop.GetComponent<Troop>();
+            //Add Player to Troop
+            troop.TroopPlayer = Player;
+
+            //Play Spawning Sound FX
+            if (troop.FreshTroop != null)
+            {
+                SoundManager.PlaySound(troop.FreshTroop);
             }
 
-            _trainedCounter++;        
-    }   
+            Gatherer gatherer = makeTroop.GetComponent<Gatherer>();
+            //If Troop is a Gatherer
+            if (gatherer != null)
+            {
+                gatherer.SetFactory(this);
+                gatherer.HarvestingSelection = ResourceType.Wood;
+                for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
+                {
+                    gatherer.points.Add(p, Player.PlayerPad.ResourcePoints[p]);
+                }
+            }
+        }
+
+        _trainedCounter++;
+
+        yield return null;
+    }
 }

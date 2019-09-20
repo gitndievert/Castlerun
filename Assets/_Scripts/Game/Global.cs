@@ -76,4 +76,9 @@ public static class Global
     //public static bool BattleMode = false;
     public static bool InsideCastle = false;
     #endregion
+
+    public static void Message(string message)
+    {
+        UIManager.Instance.Messages.text = message;
+    }
 }

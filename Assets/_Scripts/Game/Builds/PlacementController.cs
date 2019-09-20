@@ -91,7 +91,7 @@ public class PlacementController : MonoBehaviour
         set
         {                
             string status = value ? "ON" : "OFF";
-            UIManager.Instance.Messages.text = $"Build Mode {status}";            
+            Global.Message($"Build Mode {status}");
         }
     }
     
@@ -153,7 +153,7 @@ public class PlacementController : MonoBehaviour
                     if (!build.ConfirmPlacement())
                     {
                         cancelBuild = true;
-                        UIManager.Instance.Messages.text = "You cannot build here, try again";
+                        Global.Message("You cannot build here, try again");
                     }
                     else
                     {
@@ -168,7 +168,7 @@ public class PlacementController : MonoBehaviour
                     _currObj.transform.GetComponentInChildren<Renderer>().material = ErrorMaterial;
                     //Come Back... Get Messages for Resource Types
                     //UIManager.Instance.Messages.text = $"You will need to gather more {rt.ToString()}";
-                    UIManager.Instance.Messages.text = "You will need to gather more Resources";                    
+                    Global.Message("You will need to gather more resources");
                 }                
                 
 

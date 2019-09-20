@@ -76,6 +76,6 @@ public partial class UIManager : PSingle<UIManager>
     protected override void PDestroy()
     {
         
-    }
+    }   
     
 }

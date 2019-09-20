@@ -200,5 +200,6 @@ public abstract class BasePrefab : NetworkBehaviour, IBase
         }
 
         Destroy(gameObject, timer);               
-    }
+    }    
+
 }
