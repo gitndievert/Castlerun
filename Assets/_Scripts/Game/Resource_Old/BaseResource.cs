@@ -18,7 +18,6 @@ public abstract class BaseResource : BasePrefab, IResource
 {
     public ResourceType ResourceType;
     public GameObject BustResourceObj;
-    public AudioClip[] HitSounds;
     public AudioClip BustSound;
     public int Value = 10;    
 
