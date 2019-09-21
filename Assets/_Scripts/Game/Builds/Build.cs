@@ -43,9 +43,10 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
 
     protected bool isPlaced = false;
     protected Player Player = null;
+    protected bool isFinished = false;
 
     private Vector3 _offset;
-    private bool _isFinished = false;
+    
 
     protected virtual void Start()
     {                    
@@ -92,13 +93,13 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
 
     public void FinishBuild()
     {
-        _isFinished = true;
+        isFinished = true;
         SoundManager.PlaySound(SoundList.Instance.BuildSound);
     }
 
     public virtual void OnMouseDown()
     {
-        if (!_isFinished) return;
+        if (!isFinished) return;
         switch (GetTag)
         {
             case Global.ARMY_TAG:
@@ -116,7 +117,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     protected virtual void OnCollisionEnter(Collision col)
     {
         var colObj = col.gameObject;
-        if (!_isFinished) return;
+        if (!isFinished) return;
         switch (colObj.tag)
         {
             default:
@@ -141,7 +142,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     /// </summary>
     public void Select()
     {
-        if (!IsSelected && _isFinished)
+        if (!IsSelected && isFinished)
         {
             IsSelected = true;
         }

@@ -97,9 +97,12 @@ public class TroopFactory : Build
 
     public override void OnMouseDown()
     {
-        base.OnMouseDown();        
-        RefreshTroopPanel();
-        BuildManager.Instance.ShowTroopPanel();
+        base.OnMouseDown();
+        if (isFinished)
+        {
+            RefreshTroopPanel();
+            BuildManager.Instance.ShowTroopPanel();
+        }
     }
     
     public void RefreshTroopPanel()
@@ -140,7 +143,7 @@ public class TroopFactory : Build
     {
         yield return new WaitForSeconds(TrainingTime);
 
-        var makeTroop = Instantiate(selectedTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);
+        var makeTroop = Instantiate(selectedTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);        
 
         if (Player != null)
         {
@@ -151,6 +154,8 @@ public class TroopFactory : Build
             var troop = makeTroop.GetComponent<Troop>();
             //Add Player to Troop
             troop.TroopPlayer = Player;
+            //Move up the troop
+            troop.Move(makeTroop.transform.position + (Vector3.forward * 3 * PlacementDistance));
 
             //Play Spawning Sound FX
             if (troop.FreshTroop != null)
