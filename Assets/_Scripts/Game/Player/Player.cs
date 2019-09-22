@@ -239,6 +239,10 @@ public class Player : BasePrefab, IPlayer
             CamShake.Shake(1f, 0.5f);
         }    
                
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            _movement.Dance();
+        }
         
     }   
 

@@ -23,12 +23,15 @@ public abstract class BasePrefab : NetworkBehaviour, IBase
     #region Base Stats
     /// <summary>
     /// Health Tracker for all Base Prefabs
-    /// </summary>
+    /// </summary>    
+    [SyncVar]
     public int Health;
+    
     public bool CanExplode = true;
     public AudioClip DestroySound;
     public AudioClip[] HitSounds;
     public TextMeshPro HealthText;
+    
     public bool IsDying { get; set; }
 
     /// <summary>
