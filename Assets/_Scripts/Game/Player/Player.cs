@@ -145,6 +145,10 @@ public class Player : BasePrefab, IPlayer
     private void Update()
     {
 
+        // movement for local player
+        if (!isLocalPlayer) return;
+
+
         /////// ATTACK
         if (!Global.BuildMode && Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON))
         {

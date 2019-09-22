@@ -20971,7 +20971,7 @@ MonoBehaviour:
   onlineScene: 
   transport: {fileID: 2070259103}
   networkAddress: localhost
-  maxConnections: 16
+  maxConnections: 4
   playerPrefab: {fileID: 1507808357, guid: 47c4c30cb31bfbb47bf369cc29485702, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
@@ -22026,11 +22026,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 210445562}
     m_Modifications:
-    - target: {fileID: 4080848771998264260, guid: ca7b7af670d8c4b40a758b323adaa055,
-        type: 3}
-      propertyPath: m_Name
-      value: cannon
-      objectReference: {fileID: 0}
     - target: {fileID: 4080848771998300132, guid: ca7b7af670d8c4b40a758b323adaa055,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22085,6 +22080,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 347.167
+      objectReference: {fileID: 0}
+    - target: {fileID: 4080848771998264260, guid: ca7b7af670d8c4b40a758b323adaa055,
+        type: 3}
+      propertyPath: m_Name
+      value: cannon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca7b7af670d8c4b40a758b323adaa055, type: 3}
