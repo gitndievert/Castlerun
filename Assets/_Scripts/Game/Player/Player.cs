@@ -59,9 +59,10 @@ public class Player : BasePrefab, IPlayer
             else
                 _playerName = value;
         }
-    }    
-   
-    #region Player Components      
+    }
+
+    #region Player Components  
+    //Camera Rig    
     public Inventory Inventory { get; private set; }    
     public int ActorNumber { get; internal set; }
     public GameObject PlayerWorldItems { get; internal set; }    
@@ -72,40 +73,36 @@ public class Player : BasePrefab, IPlayer
     private GameObject _offHand;                 
     private string _playerName;
     private BattleCursor _battleCursor;    
-    
        
-    private MovementInput _movement;
-       
+    private MovementInput _movement;     
 
-    //Camera Rig
-    private GameObject _camRig;
+    
+    
     #endregion
     
 
     protected override void Awake()
-    {   
-        base.Awake();
-        Inventory = GetComponent<Inventory>();                    
-               
-        
-        _camRig = GameObject.FindGameObjectWithTag(Global.CAM_RIG_TAG);
-        _movement = GetComponent<MovementInput>();
+    {        
         PlayerWorldItems = new GameObject("PlayerWorldItems");
-        _battleCursor = GetComponent<BattleCursor>();
-
-        MiniMapControls.PlayerTransform = transform;
-        PlayerName = "Player";
+        base.Awake();
     }
 
     // Start is called before the first frame update
     protected void Start()
     {
-        PlayerUI.PlayerName.text = _playerName;
+        // local player
+        if (!isLocalPlayer) return;
 
-        //Initialize the object dumps for the world       
-        
-        //Set player camera
-        _camRig.GetComponent<CameraRotate>().target = transform;
+        Inventory = GetComponent<Inventory>();
+        _movement = GetComponent<MovementInput>();        
+        _battleCursor = GetComponent<BattleCursor>();
+        PlayerName = "Player";
+
+        //Set Cameras
+        CameraRotate.target = transform;
+        MiniMapControls.target = transform;
+
+        PlayerUI.PlayerName.text = _playerName;
 
         //Player stats
         SetBasicPlayerStats();        
@@ -120,16 +117,10 @@ public class Player : BasePrefab, IPlayer
             SetCompanion(CompanionType);
         }
 
+        
         BuildManager.Instance.Placements.Player = this;
     }
     
-    public void Init(string name, int playernum)
-    {
-        PlayerName = name;
-        PlayerNumber = playernum;
-        //Global.BattleMode = false;        
-    }
- 
     private void SetBasicPlayerStats()
     {
         Health = 100;
@@ -139,11 +130,13 @@ public class Player : BasePrefab, IPlayer
         UIManager.Instance.StaminaBar.BarValue = 100f;
 
         MoveSpeed = 10f;
-        BuildSpeed = 10f;        
+        BuildSpeed = 10f;
+
     }
         
     private void Update()
     {
+        if (!isLocalPlayer) return;
 
         // movement for local player
         if (!isLocalPlayer) return;

@@ -46,10 +46,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     }
 
     protected Animator anim;
-    protected NavMeshAgent nav;    
-
-    private Vector3 _lockPoint;
-    private bool _isMoving = false;
+    protected NavMeshAgent nav;        
 
     private const float SmoothingCoefficient = .15f;
     private float _velocityDenominatorMultiplier = .5f;
@@ -58,6 +55,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     private float _minVely = -2.33254f;
     private float _maxVely = 3.70712f;
     private Vector2 _smoothDeltaPosition;
+    private bool _moving;
     
     #endregion
 
@@ -112,16 +110,20 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     }
 
     // Update is called once per frame
-    protected virtual void FixedUpdate()
+    protected virtual void Update()
     {
         if (GetTag == Global.ARMY_TAG)
         {
+            //For Selectable Troops
+            if (UIManager.Instance.SelectableComponent.IsWithinSelectionBounds(gameObject) && !IsSelected)
+                SelectMany();
+
             if (CanAttack && !IsAttacking)
             {
                 IsAttacking = true;
                 Attack();
             }
-            else
+            else if(!CanAttack && _moving)
             {
                 var worldDeltaPosition = nav.nextPosition - transform.position;
                 var dx = Vector3.Dot(transform.right, worldDeltaPosition);
@@ -151,8 +153,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         
     public void OnAnimatorMove()
     {
+        if (!_moving) return;
         var position = anim.rootPosition;
-
         position.y = nav.nextPosition.y;
         transform.position = position;
     }    
@@ -174,18 +176,6 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         if(!IsSelected)
             Select();
     }
-
-    //No Idea what to do, maybe create another BasePrefab class for this???
-    protected virtual void Update()
-    {
-        //For Selectable Troops
-        if (UIManager.Instance.SelectableComponent.IsWithinSelectionBounds(gameObject) && !IsSelected)
-            SelectMany();
-        //Keep Grounded
-        //Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit);
-        //transform.up -= (transform.up - hit.normal) * 0.1f;  
-    }
-
     
     public void SelectMany()
     {
@@ -260,8 +250,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     private void OnCollisionEnter(Collision collision)
     {
         //Come Back here!
-        if (collision.transform.tag == Global.ARMY_TAG ||
-            collision.transform.tag == Global.ENEMY_TAG)
+        if (collision.transform.tag == Global.ARMY_TAG)
         {
             MoveStop();            
         }
@@ -308,22 +297,24 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     }
 
     public void Move(Vector3 point)
-    {     
-        _lockPoint = point;
-        nav.SetDestination(_lockPoint);
-        transform.LookAt(_lockPoint);
-        _isMoving = true;
+    {
+        _moving = true;
+
+        nav.isStopped = false;
+        nav.SetDestination(point);
+        transform.LookAt(point);        
         if(AttackBattleCryClips.Length > 0)
             SoundManager.PlaySound(AttackBattleCryClips);
     }
 
     public void MoveStop()
     {
-        _isMoving = false;
+        _moving = false;
+        //nav.SetDestination(transform.position);
         nav.velocity = Vector3.zero;
-        anim.SetBool("move", false);
-        _lockPoint = transform.position;
         nav.isStopped = true;
+        nav.ResetPath();                      
+        anim.SetBool("move", false);                           
     }
 
     public override void SetHit(int amount)

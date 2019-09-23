@@ -13,7 +13,6 @@
 // ********************************************************************
 
 public interface IPlayer : ICharacter
-{
-    void Init(string name, int playernum);
+{    
     void Swing();
 }

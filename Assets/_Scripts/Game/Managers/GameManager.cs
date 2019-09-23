@@ -75,8 +75,8 @@ public class GameManager : DSingle<GameManager>
 
         var character = Instantiate(PlayerInstance, pad.PlayerSpawnPosition, Quaternion.identity);
         var player = character.GetComponent<Player>();
-        
-        player.Init("Krunchy", playerNum); //Player number is a hack until things are setup            
+        player.PlayerName = "Krunchy";
+        player.PlayerNumber = playerNum;        
         player.PlayerPad = pad;
         PlayerList.Add(playerNum, player);
 

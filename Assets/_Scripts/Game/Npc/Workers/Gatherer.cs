@@ -48,7 +48,7 @@ public class Gatherer : Troop
     }
 
     // Update is called once per frame
-    protected override void FixedUpdate()
+    protected override void Update()
     {
         if (!IsHarvesting)
         {

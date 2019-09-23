@@ -131,52 +131,69 @@ public class TroopFactory : Build
     
     public void Train(Troop selectedTroop)
     {
-        if (_trainedCounter == MaxTrained)
+        bool metCosts = false;
+        var costs = selectedTroop.GetCosts();
+        foreach (var cost in costs.CostFactors)
         {
-            //Cannot train anymore troops message
-            return;
+            int invcount = Player.Inventory.GetCount(cost.Resource);
+            metCosts = invcount > 0 && (invcount - cost.Amount >= 0);
         }
-        StartCoroutine(QueueTroop(selectedTroop));
+
+        if (metCosts)
+        {
+            if (_trainedCounter == MaxTrained)
+            {
+                //Cannot train anymore troops message
+                return;
+            }
+
+            Player.Inventory.Set(costs);
+            _trainedCounter++;
+            StartCoroutine(QueueTroop(selectedTroop));
+        }
     }   
 
     private IEnumerator QueueTroop(Troop selectedTroop)
     {
         yield return new WaitForSeconds(TrainingTime);
 
-        var makeTroop = Instantiate(selectedTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);        
-
-        if (Player != null)
+        for (int i = 0; i < NumberToTrain; i++)
         {
-            //Parent to Player Builds
-            makeTroop.transform.parent = Player.PlayerWorldItems.transform;
+            var makeTroop = Instantiate(selectedTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);
 
-            //Access Troop Component
-            var troop = makeTroop.GetComponent<Troop>();
-            //Add Player to Troop
-            troop.TroopPlayer = Player;
-            //Move up the troop
-            troop.Move(makeTroop.transform.position + (Vector3.forward * 3 * PlacementDistance));
-
-            //Play Spawning Sound FX
-            if (troop.FreshTroop != null)
+            if (Player != null)
             {
-                SoundManager.PlaySound(troop.FreshTroop);
-            }
+                //Parent to Player Builds
+                makeTroop.transform.parent = Player.PlayerWorldItems.transform;
 
-            Gatherer gatherer = makeTroop.GetComponent<Gatherer>();
-            //If Troop is a Gatherer
-            if (gatherer != null)
-            {
-                gatherer.SetFactory(this);
-                gatherer.HarvestingSelection = ResourceType.Wood;
-                for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
+                //Access Troop Component
+                var troop = makeTroop.GetComponent<Troop>();
+                //Add Player to Troop
+                troop.TroopPlayer = Player;
+                //Move up the troop
+                troop.Move(makeTroop.transform.position + (Vector3.forward * 3 * PlacementDistance));
+
+                //Play Spawning Sound FX
+                if (troop.FreshTroop != null && i == NumberToTrain - 1)
                 {
-                    gatherer.points.Add(p, Player.PlayerPad.ResourcePoints[p]);
+                    SoundManager.PlaySound(troop.FreshTroop);
                 }
+
+                Gatherer gatherer = makeTroop.GetComponent<Gatherer>();
+                //If Troop is a Gatherer
+                if (gatherer != null)
+                {
+                    gatherer.SetFactory(this);
+                    gatherer.HarvestingSelection = ResourceType.Wood;
+                    for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
+                    {
+                        gatherer.points.Add(p, Player.PlayerPad.ResourcePoints[p]);
+                    }
+                }
+
+                _trainedCounter--;
             }
         }
-
-        _trainedCounter++;
 
         yield return null;
     }

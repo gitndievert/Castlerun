@@ -17,7 +17,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CameraRotate : MonoBehaviour
 {
-    public Transform target;
+    public static Transform target;
         
     //Camera Settings
     public float targetHeight = 1.7f;

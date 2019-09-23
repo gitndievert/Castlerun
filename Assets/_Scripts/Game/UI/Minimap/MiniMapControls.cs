@@ -51,7 +51,7 @@ public class MiniMapControls : PSingle<MiniMapControls>
     private Transform _cameraTransformParent;
     private Vector3 _velocity = Vector3.zero;
 
-    public static Transform PlayerTransform;
+    public static Transform target;
 
     public float SetZoomFactor
     {
@@ -92,11 +92,11 @@ public class MiniMapControls : PSingle<MiniMapControls>
         {            
             if(!MiniMapCamera.gameObject.activeSelf) MiniMapCamera.gameObject.SetActive(true);
             
-            if (PlayerTransform != null)
+            if (target != null)
             {
                 MiniMapCamera.transform.rotation = Quaternion.Euler(90, 0, 0);
-                Vector3 point = MiniMapCamera.WorldToViewportPoint(PlayerTransform.position);
-                var delta = PlayerTransform.position - MiniMapCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
+                Vector3 point = MiniMapCamera.WorldToViewportPoint(target.position);
+                var delta = target.position - MiniMapCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
                 var destination = MiniMapCamera.transform.position + delta;
                 MiniMapCamera.transform.position = Vector3.SmoothDamp(MiniMapCamera.transform.position, destination, ref _velocity, CAMERA_DAMPENING);
             }
