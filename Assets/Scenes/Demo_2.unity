@@ -20966,7 +20966,7 @@ MonoBehaviour:
   runInBackground: 1
   startOnHeadless: 1
   serverTickRate: 30
-  showDebugMessages: 1
+  showDebugMessages: 0
   offlineScene: 
   onlineScene: 
   transport: {fileID: 2070259103}
@@ -20975,12 +20975,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 1507808357, guid: 47c4c30cb31bfbb47bf369cc29485702, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
-  spawnPrefabs:
-  - {fileID: 2543357986072876719, guid: 026efacea9dda6747b5e03af1bc8e39e, type: 3}
-  - {fileID: 5436822143744326069, guid: 347f0c6a657386e45a71938d5169fd61, type: 3}
-  - {fileID: 4521198004532978720, guid: 0856799f15ad9cb4487f86f0d99bbdf6, type: 3}
-  - {fileID: 1516178438436275324, guid: 54672a048a056214aae7a6e4dae17ef5, type: 3}
-  - {fileID: 1547467594100615071, guid: eaf132c037746644588252e091f4b8f3, type: 3}
+  spawnPrefabs: []
 --- !u!4 &2070259105
 Transform:
   m_ObjectHideFlags: 0
@@ -22026,6 +22021,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 210445562}
     m_Modifications:
+    - target: {fileID: 4080848771998264260, guid: ca7b7af670d8c4b40a758b323adaa055,
+        type: 3}
+      propertyPath: m_Name
+      value: cannon
+      objectReference: {fileID: 0}
     - target: {fileID: 4080848771998300132, guid: ca7b7af670d8c4b40a758b323adaa055,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22080,11 +22080,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 347.167
-      objectReference: {fileID: 0}
-    - target: {fileID: 4080848771998264260, guid: ca7b7af670d8c4b40a758b323adaa055,
-        type: 3}
-      propertyPath: m_Name
-      value: cannon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca7b7af670d8c4b40a758b323adaa055, type: 3}

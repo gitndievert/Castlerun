@@ -12,13 +12,16 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using Mirror;
 using UnityEngine;
 
-public class MovementInput : MonoBehaviour
+public class MovementInput : NetworkBehaviour
 {
     public static bool Lock;
 
+    [SyncVar]
     public float InputX;
+    [SyncVar]
     public float InputZ;
     public Vector3 DesiredMoveDirection;
     public bool BlockRotationPlayer;
@@ -114,8 +117,10 @@ public class MovementInput : MonoBehaviour
     }
 
     //NOTE: Come back here to add the strafe on X
+    [ClientCallback]
     private void InputMagnitude()
     {
+        if (!isLocalPlayer) return;
         //Calc input vectors
         InputX = Input.GetAxis("Horizontal");
         InputZ = Input.GetAxis("Vertical");            
