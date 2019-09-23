@@ -106,7 +106,9 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         
         
         _smoothDeltaPosition = default;
-        //StopPoint = transform.position;        
+        _moving = true;
+        //StopPoint = transform.position;   
+        nav.destination = transform.position;
     }
 
     // Update is called once per frame
@@ -123,29 +125,46 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
                 IsAttacking = true;
                 Attack();
             }
-            else if(!CanAttack && _moving)
+            else if(!CanAttack)
             {
-                var worldDeltaPosition = nav.nextPosition - transform.position;
-                var dx = Vector3.Dot(transform.right, worldDeltaPosition);
-                var dy = Vector3.Dot(transform.forward, worldDeltaPosition);
-                var deltaPosition = new Vector2(dx, dy);
-                var smooth = Time.fixedDeltaTime / SmoothingCoefficient;
-
-                _smoothDeltaPosition = Vector2.Lerp(_smoothDeltaPosition, deltaPosition, smooth);
-
-                var velocity = _smoothDeltaPosition / (Time.fixedDeltaTime * _velocityDenominatorMultiplier);
-                
-                var x = Mathf.Clamp(Mathf.Round(velocity.x * 1000) / 1000, _minVelx, _maxVelx);
-                var y = Mathf.Clamp(Mathf.Round(velocity.y * 1000) / 1000, _minVely, _maxVely);
-
-                anim.SetBool("move", nav.remainingDistance >= nav.stoppingDistance);
-                anim.SetFloat("velx", x);
-                anim.SetFloat("vely", y);
-
-                if (worldDeltaPosition.magnitude > nav.radius / 16)
+                if (_moving)
                 {
-                    nav.nextPosition = transform.position + 0.1f * worldDeltaPosition;
+                    var worldDeltaPosition = nav.nextPosition - transform.position;
+                    var dx = Vector3.Dot(transform.right, worldDeltaPosition);
+                    var dy = Vector3.Dot(transform.forward, worldDeltaPosition);
+                    var deltaPosition = new Vector2(dx, dy);
+                    var smooth = Time.fixedDeltaTime / SmoothingCoefficient;
+
+                    _smoothDeltaPosition = Vector2.Lerp(_smoothDeltaPosition, deltaPosition, smooth);
+
+                    var velocity = _smoothDeltaPosition / (Time.fixedDeltaTime * _velocityDenominatorMultiplier);
+
+                    var x = Mathf.Clamp(Mathf.Round(velocity.x * 1000) / 1000, _minVelx, _maxVelx);
+                    var y = Mathf.Clamp(Mathf.Round(velocity.y * 1000) / 1000, _minVely, _maxVely);
+
+                    if (nav.remainingDistance >= nav.stoppingDistance)
+                    {
+
+                        anim.SetBool("move", true);
+                        anim.SetFloat("velx", x);
+                        anim.SetFloat("vely", y);
+
+                        if (worldDeltaPosition.magnitude > nav.radius / 16)
+                        {
+                            nav.nextPosition = transform.position + 0.1f * worldDeltaPosition;
+                        }
+                        Debug.Log("Moving Troop");
+                    }
+                    else
+                    {
+                        MoveStop();
+                    }                    
                 }
+                else
+                {
+                    Debug.Log("No Movement");
+                }
+
             }
 
         }
@@ -251,7 +270,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     {
         //Come Back here!
         if (collision.transform.tag == Global.ARMY_TAG)
-        {
+        {            
             MoveStop();            
         }
     }
@@ -298,23 +317,23 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public void Move(Vector3 point)
     {
-        _moving = true;
-
+        nav.ResetPath();
         nav.isStopped = false;
         nav.SetDestination(point);
         transform.LookAt(point);        
         if(AttackBattleCryClips.Length > 0)
             SoundManager.PlaySound(AttackBattleCryClips);
+        _moving = true;
     }
 
     public void MoveStop()
     {
         _moving = false;
         //nav.SetDestination(transform.position);
+        //nav.destination = transform.position;
+        anim.SetBool("move", false);
         nav.velocity = Vector3.zero;
-        nav.isStopped = true;
-        nav.ResetPath();                      
-        anim.SetBool("move", false);                           
+        nav.isStopped = true;        
     }
 
     public override void SetHit(int amount)
