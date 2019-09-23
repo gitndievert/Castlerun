@@ -107,8 +107,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         
         _smoothDeltaPosition = default;
         _moving = true;
-        //StopPoint = transform.position;   
-        nav.destination = transform.position;
+        //StopPoint = transform.position;           
     }
 
     // Update is called once per frame
@@ -280,6 +279,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     /// </summary>
     public virtual void Attack()
     {
+        MoveStop();
         InvokeRepeating("Fire", 0, AttackDelaySec);
     }
 
@@ -317,7 +317,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public void Move(Vector3 point)
     {
-        nav.ResetPath();
+        //nav.ResetPath();
         nav.isStopped = false;
         nav.SetDestination(point);
         transform.LookAt(point);        
@@ -344,7 +344,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         {
             Health -= amount;
 
-            if (_hitCounter >= 5)
+            if (_hitCounter >= 3)
             {
                 if (HitSounds.Length > 0)
                     SoundManager.PlaySound(HitSounds);
