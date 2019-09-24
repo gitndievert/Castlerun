@@ -89,9 +89,7 @@ public class Player : BasePrefab, IPlayer
 
     // Start is called before the first frame update
     protected void Start()
-    {
-        // local player
-        if (!isLocalPlayer) return;
+    {        
 
         Inventory = GetComponent<Inventory>();
         _movement = GetComponent<MovementInput>();        
@@ -136,12 +134,6 @@ public class Player : BasePrefab, IPlayer
         
     private void Update()
     {
-        if (!isLocalPlayer) return;
-
-        // movement for local player
-        if (!isLocalPlayer) return;
-
-
         /////// ATTACK
         if (!Global.BuildMode && Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON))
         {

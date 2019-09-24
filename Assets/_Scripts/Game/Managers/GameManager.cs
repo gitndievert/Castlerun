@@ -12,7 +12,6 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-using Mirror;
 using SBK.Unity;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,8 +19,7 @@ using UnityEngine;
 public class GameManager : DSingle<GameManager>
 {    
     public GameObject PlayerInstance;
-    public List<PlayerPad> PlayerPads;
-    public NetworkManager NetworkManager;
+    public List<PlayerPad> PlayerPads;    
     
     public Dictionary<int, Player> PlayerList = new Dictionary<int, Player>();
 
@@ -44,17 +42,12 @@ public class GameManager : DSingle<GameManager>
     {
         PlayerList.Clear();
         //Commented out for networking test
-        //StartPlayersTest();
+        StartPlayersTest();
         //StartMusic();
     }    
 
     public void OnClickQuit()
     {
-        if (NetworkClient.isConnected)
-        {
-            NetworkManager.StopHost();
-            NetworkManager.StopServer();
-        }
         Application.Quit();
     }
 

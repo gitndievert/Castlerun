@@ -85,6 +85,17 @@
     <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\SuperCharacterController\DebugDraw.cs" />
     <Compile Include="Assets\_Assets\Characters\RPG Character Animation Pack FREE\SuperCharacterController\SuperCharacterController\Math3d.cs" />
     <Compile Include="Assets\_Assets\General Models\Castles\Medieval castle kit\Features\FreeCamera\FreeCamera.cs" />
+    <Compile Include="Assets\_Assets\Networking\Photon\PhotonChat\Demos\Common\EventSystemSpawner.cs" />
+    <Compile Include="Assets\_Assets\Networking\Photon\PhotonChat\Demos\Common\OnStartDelete.cs" />
+    <Compile Include="Assets\_Assets\Networking\Photon\PhotonChat\Demos\Common\TextButtonTransition.cs" />
+    <Compile Include="Assets\_Assets\Networking\Photon\PhotonChat\Demos\Common\TextToggleIsOnTransition.cs" />
+    <Compile Include="Assets\_Assets\Networking\Photon\PhotonChat\Demos\DemoChat\ChannelSelector.cs" />
+    <Compile Include="Assets\_Assets\Networking\Photon\PhotonChat\Demos\DemoChat\ChatAppIdCheckerUI.cs" />
+    <Compile Include="Assets\_Assets\Networking\Photon\PhotonChat\Demos\DemoChat\ChatGui.cs" />
+    <Compile Include="Assets\_Assets\Networking\Photon\PhotonChat\Demos\DemoChat\FriendItem.cs" />
+    <Compile Include="Assets\_Assets\Networking\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs" />
+    <Compile Include="Assets\_Assets\Networking\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
+    <Compile Include="Assets\_Assets\Networking\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
     <Compile Include="Assets\_Assets\Particles\LightningBolt\LightningBoltScript.cs" />
     <Compile Include="Assets\_Assets\Particles\Tazo_fx\Script\BillBoard.cs" />
     <Compile Include="Assets\_Assets\Particles\Tazo_fx\Script\button_target.cs" />
@@ -198,6 +209,7 @@
     <Compile Include="Assets\_Scripts\Game\UI\CombatSelection\SingleTargetBox.cs" />
     <Compile Include="Assets\_Scripts\Game\UI\InventoryUI.cs" />
     <Compile Include="Assets\_Scripts\Game\UI\Minimap\MiniMapControls.cs" />
+    <Compile Include="Assets\_Scripts\Game\UI\Networking\LobbyPanel.cs" />
     <Compile Include="Assets\_Scripts\Game\UI\PlayerUI.cs" />
     <Compile Include="Assets\_Scripts\Game\UI\TargetUI.cs" />
     <Compile Include="Assets\_Scripts\Game\UI\TroopUI.cs" />
@@ -399,8 +411,6 @@
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
-    <None Include="Assets\_Assets\Networking\Mirror\Readme.txt" />
-    <None Include="Assets\_Assets\Networking\Mirror\License.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\ShowAlphaChannel.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
@@ -411,6 +421,7 @@
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurves.shader" />
     <None Include="Assets\_Assets\General Models\Castles\Medieval Castle pack volume 1\Old version\Shaders\Flag.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\ScreenSpaceAmbientObscurance.shader" />
+    <None Include="Assets\_Assets\Networking\Photon\PhotonUnityNetworking\link.xml" />
     <None Include="Assets\UnityAssets\Standard Assets\Environment\Water (Basic)\DO_NOT_WORK_IN_VR.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\NFAA.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\TiltShiftHdrLensBlur.shader" />
@@ -436,6 +447,7 @@
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\ContrastComposite.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset3.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
+    <None Include="Assets\_Assets\Networking\Photon\PhotonLibs\Photon3Unity3D.xml" />
     <None Include="Assets\_Assets\Sounds\Fantasy Arcade RPG Freedom World Sounds - Free Package\assetexplain.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Vehicles\Car\Shaders\DiffuseReflectiveShader.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
@@ -470,6 +482,7 @@
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\CreaseApply.shader" />
     <None Include="Assets\_Assets\Sounds\MusicManager\TestScene\Resources\Music_Licence.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\_Assets\Networking\Photon\PhotonLibs\changes-library.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Fonts\OpenSans\License!.txt" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
@@ -522,6 +535,7 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\NoiseAndGrain.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Vehicles\Car\CarGuidelines.txt" />
+    <None Include="Assets\_Assets\Networking\Photon\PhotonUnityNetworking\readme.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\Projectors\Shaders\ProjectorMultiply.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\VignettingShader.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
@@ -556,6 +570,7 @@
     <None Include="Assets\_Assets\General Models\Castles\3DForge\Fantasy_Interiors\Villages_&amp;_Towns\Documents\Village Interiors User Guide v1.9.txt" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAA3Console.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\_Assets\Networking\Photon\PhotonUnityNetworking\changelog.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\UnityAssets\SampleScenes\Shaders\Skybox-Procedural.shader" />
     <None Include="Assets\UnityAssets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
@@ -795,20 +810,11 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.CecilX">
-      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Networking/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
+    <Reference Include="Photon3Unity3D">
+      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Networking/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.CecilX.Mdb">
-      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Networking/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Pdb">
-      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Networking/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.CecilX.Rocks">
-      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Networking/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Telepathy">
-      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Networking/Mirror/Runtime/Transport/Telepathy/Telepathy.dll</HintPath>
+    <Reference Include="websocket-sharp">
+      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Networking/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
@@ -1175,25 +1181,49 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Mirror.Weaver.csproj">
-      <Project>{EE80F2A2-2B7F-D6C7-D08A-AA8085F65A1B}</Project>
-      <Name>Mirror.Weaver</Name>
+    <ProjectReference Include="PhotonUnityNetworking.Utilities.PhotonPlayer.Editor.csproj">
+      <Project>{EC1EA3E0-D9D5-C873-2A47-8AA6F347D649}</Project>
+      <Name>PhotonUnityNetworking.Utilities.PhotonPlayer.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Mirror.Components.csproj">
-      <Project>{B82457CA-D2F8-627E-68DC-F9327A747E74}</Project>
-      <Name>Mirror.Components</Name>
+    <ProjectReference Include="PunDemos.DemoHubEditor.csproj">
+      <Project>{CF12FAB2-4852-9197-139E-9C1FE7A05346}</Project>
+      <Name>PunDemos.DemoHubEditor</Name>
     </ProjectReference>
-    <ProjectReference Include="Mirror.Examples.csproj">
-      <Project>{6C0B5AFD-571A-B3A0-E272-1F40E6B2D2CA}</Project>
-      <Name>Mirror.Examples</Name>
+    <ProjectReference Include="PunDemos.DemoSlotcarEditor.csproj">
+      <Project>{3B596503-CE6D-A0D1-0D1B-C92A8B16299E}</Project>
+      <Name>PunDemos.DemoSlotcarEditor</Name>
     </ProjectReference>
-    <ProjectReference Include="Mirror.csproj">
-      <Project>{9C61747F-4DB9-AF72-7B05-EEE3E466EACE}</Project>
-      <Name>Mirror</Name>
+    <ProjectReference Include="PhotonUnityNetworking.Demos.csproj">
+      <Project>{E2F20AFA-C414-1255-F142-7A8650ED0F20}</Project>
+      <Name>PhotonUnityNetworking.Demos</Name>
     </ProjectReference>
-    <ProjectReference Include="Mirror.Editor.csproj">
-      <Project>{D81AD4AC-3F9C-91A2-12E8-10C451F041D8}</Project>
-      <Name>Mirror.Editor</Name>
+    <ProjectReference Include="PhotonUnityNetworking.Utilities.csproj">
+      <Project>{F25AF8B9-336F-118C-267D-BA45F3DC959E}</Project>
+      <Name>PhotonUnityNetworking.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonWebSocket.csproj">
+      <Project>{BC2D37D6-1785-B8BB-8446-F77F3C93FFB6}</Project>
+      <Name>PhotonWebSocket</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonRealtime.csproj">
+      <Project>{73733CED-1292-9C3E-3EB2-9451C2A2833C}</Project>
+      <Name>PhotonRealtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.csproj">
+      <Project>{1B4B0155-62C4-D337-617F-E2ABD0208112}</Project>
+      <Name>PhotonUnityNetworking</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonChat.csproj">
+      <Project>{975989A6-B038-403E-2397-978EE0EA84DF}</Project>
+      <Name>PhotonChat</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Utilities.Culling.Editor.csproj">
+      <Project>{75705F09-3DCE-8937-FD12-673BBF4FBFE4}</Project>
+      <Name>PhotonUnityNetworking.Utilities.Culling.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Editor.csproj">
+      <Project>{B2C4CCEF-F973-F590-30CF-24CF2096BA14}</Project>
+      <Name>PhotonUnityNetworking.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

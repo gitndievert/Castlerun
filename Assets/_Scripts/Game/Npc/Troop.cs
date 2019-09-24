@@ -268,6 +268,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     private void OnCollisionEnter(Collision collision)
     {
         //Come Back here!
+        if (collision.transform.tag == "Player") return;
         if (collision.transform.tag == Global.ARMY_TAG)
         {            
             MoveStop();            

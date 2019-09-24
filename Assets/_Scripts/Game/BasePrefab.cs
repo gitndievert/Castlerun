@@ -15,16 +15,14 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
-using Mirror;
 
 [RequireComponent(typeof(Rigidbody))]
-public abstract class BasePrefab : NetworkBehaviour, IBase
+public abstract class BasePrefab : MonoBehaviour, IBase
 {
     #region Base Stats
     /// <summary>
     /// Health Tracker for all Base Prefabs
-    /// </summary>    
-    [SyncVar]
+    /// </summary>        
     public int Health;
     
     public bool CanExplode = true;
