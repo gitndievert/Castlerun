@@ -15,9 +15,10 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using Photon.Pun;
 
 [RequireComponent(typeof(Rigidbody))]
-public abstract class BasePrefab : MonoBehaviour, IBase
+public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
 {
     #region Base Stats
     /// <summary>

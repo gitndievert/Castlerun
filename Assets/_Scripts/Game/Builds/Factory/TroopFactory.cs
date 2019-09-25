@@ -185,10 +185,11 @@ public class TroopFactory : Build
                 {
                     gatherer.SetFactory(this);
                     gatherer.HarvestingSelection = ResourceType.Wood;
-                    for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
+                    //Come Back for Pathing
+                    /*for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
                     {
                         gatherer.points.Add(p, Player.PlayerPad.ResourcePoints[p]);
-                    }
+                    }*/
                 }
 
                 _trainedCounter--;

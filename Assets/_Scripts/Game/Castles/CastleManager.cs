@@ -43,22 +43,6 @@ public class CastleManager : PSingle<CastleManager>
     {
         
     }
-  
-    public PlayerPad GetSpawnPad(int playerNumber)
-    {
-        if (SpawnPads.Count > 0)
-        {
-            foreach (var pad in SpawnPads)
-            {                
-                if (!pad.gameObject.activeSelf) continue;
-                var id = pad.name.Last();
-                int t_num = int.Parse(id.ToString());
-                if (t_num == playerNumber) return pad;                
-            }
-        }
-
-        return null;
-    }
 
     public Castle GetCastlebyName(string name)
     {
@@ -84,9 +68,10 @@ public class CastleManager : PSingle<CastleManager>
 
     public void SpawnCastle(CastleType type, Player player)
     {
-        SpawnCastle(GetCastleByType(type), player);
+        //SpawnCastle(GetCastleByType(type), player);
     }
     
+    /*
     public void SpawnCastle(Castle castle, Player player)
     {        
         var playerPad = GetSpawnPad(player.PlayerNumber);
@@ -107,5 +92,5 @@ public class CastleManager : PSingle<CastleManager>
             castleObj.transform.rotation = playerPad.CastleRotation;
         }
 
-    }
+    }*/
 }

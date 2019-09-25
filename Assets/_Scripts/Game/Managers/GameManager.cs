@@ -12,41 +12,81 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-using SBK.Unity;
+using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : DSingle<GameManager>
-{    
-    public GameObject PlayerInstance;
-    public List<PlayerPad> PlayerPads;    
+public class GameManager : MonoBehaviourPunCallbacks
+{
+    /// <summary>
+    /// Player Prefab
+    /// </summary>
+    [Tooltip("The prefab to use for representing the player")]
+    public GameObject PlayerInstance;     
     
     public Dictionary<int, Player> PlayerList = new Dictionary<int, Player>();
 
     [SerializeField]
-    private readonly int _numOfPlayer = 2;    
+    private readonly int _numOfPlayer = 2;
 
-
-    
-    protected override void PAwake()
-    {
-        
-    }
-
-    protected override void PDestroy()
-    {
-     
-    }   
+    public Transform Player1SpawnPoint;
+    public Transform Player2SpawnPoint;
+    //public Transform Player3SpawnPoint;
+    //public Transform Player4SpawnPoint;
 
     void Start()
     {
         PlayerList.Clear();
-        //Commented out for networking test
-        StartPlayersTest();
-        //StartMusic();
-    }    
+        
+        // in case we started this demo with the wrong scene being active, simply load the menu scene
+        if (!PhotonNetwork.IsConnected)
+        {
+            SceneManager.LoadScene("Menu2");
+            return;
+        }
 
-    public void OnClickQuit()
+        if (PlayerInstance != null)
+        {
+            if (Player.LocalPlayerInstance == null)
+            {
+                Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
+
+                var spawnPos = PhotonNetwork.IsMasterClient ? Player1SpawnPoint.position : Player2SpawnPoint.position;                
+
+                // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+                var character = PhotonNetwork.Instantiate(PlayerInstance.name, spawnPos, Quaternion.identity, 0);
+                var player = character.GetComponent<Player>();
+                player.PlayerName = PhotonNetwork.LocalPlayer.NickName;
+                //PlayerList.Add(1, player);
+            }
+            else
+            {
+
+                Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+            }
+        }
+
+        //Old Init code
+
+        //StartPlayersTest();
+        //StartMusic();
+    }
+
+    private void Update()
+    {        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OnClick_Quit();
+        }
+    }
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public void OnClick_Quit()
     {
         Application.Quit();
     }
@@ -56,21 +96,66 @@ public class GameManager : DSingle<GameManager>
         Music.Instance.PlayMusicTrack(1);
     }
 
+    void LoadArena()
+    {
+        PhotonNetwork.LoadLevel("Demo_2");
+    }
+
+    #region Photon Callbacks
+
+    /// <summary>
+    /// Called when a Photon Player got connected. We need to then load a bigger scene.
+    /// </summary>
+    /// <param name="other">Other.</param>
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player other)
+    {
+        Debug.Log("OnPlayerEnteredRoom() " + other.NickName); // not seen if you're the player connecting
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
+
+            LoadArena();
+        }
+    }
+    
+    /// <summary>
+    /// Called when a Photon Player got disconnected. We need to load a smaller scene.
+    /// </summary>
+    /// <param name="other">Other.</param>
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player other)
+    {
+        Debug.Log("OnPlayerLeftRoom() " + other.NickName); // seen when other disconnects
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
+
+            LoadArena();
+        }
+    }
+
+    /// <summary>
+    /// Called when the local player left the room. We need to load the launcher scene.
+    /// </summary>
+    public override void OnLeftRoom()
+    {
+        SceneManager.LoadScene("Menu2");
+    }
+
+    #endregion
+
+    //Hacked up
     private void StartPlayersTest()
     {
         //PUN Networking pieces
         int spawnIndex = 0;
-        int playerNum = spawnIndex + 1;
-        var pad = PlayerPads[spawnIndex];
+        int playerNum = spawnIndex + 1;        
 
-        if (!pad.gameObject.activeSelf)
-            throw new System.Exception($"Player Pad is not active for player {playerNum}");
-
-        var character = Instantiate(PlayerInstance, pad.PlayerSpawnPosition, Quaternion.identity);
+        var character = Instantiate(PlayerInstance, Player1SpawnPoint.position, Quaternion.identity);
         var player = character.GetComponent<Player>();
         player.PlayerName = "Krunchy";
-        player.PlayerNumber = playerNum;        
-        player.PlayerPad = pad;
+        player.PlayerNumber = playerNum;                
         PlayerList.Add(playerNum, player);
 
         /*for (int i = 1; i < _numOfPlayer; i++)

@@ -13,8 +13,9 @@
 // ********************************************************************
 
 using UnityEngine;
+using Photon.Pun;
 
-public class MovementInput : MonoBehaviour
+public class MovementInput : MonoBehaviourPun
 {
     public static bool Lock;
         
@@ -47,8 +48,7 @@ public class MovementInput : MonoBehaviour
             }
         }
     }
-
-    private Camera _camera;
+        
     private Animator _anim;    
     private Vector3 _moveVector;
     private Animator _companionAnim;    
@@ -60,8 +60,7 @@ public class MovementInput : MonoBehaviour
 
     private void Awake()
     {
-        _anim = GetComponent<Animator>();
-        _camera = Camera.main;
+        _anim = GetComponent<Animator>();        
         CharacterController = GetComponent<CharacterController>();
         Global.MouseLook = false;        
     }
@@ -76,7 +75,7 @@ public class MovementInput : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Lock) return;
+        if (Lock || !photonView.IsMine) return;
         InputMagnitude();
         _moveVector = Vector3.zero;
         CharacterController.Move(_moveVector);
@@ -132,7 +131,7 @@ public class MovementInput : MonoBehaviour
         Speed = new Vector2(InputX, InputZ).sqrMagnitude * 5;
 
         _anim.SetFloat("Speed", Speed, 0.0f, Time.deltaTime);
-    }
+    }   
 
     public void Jump()
     {

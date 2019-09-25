@@ -12,9 +12,10 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using Photon.Pun;
 using UnityEngine;
 
-public class BattleCursor : MonoBehaviour
+public class BattleCursor : MonoBehaviourPun
 {
     public GameObject BattleCursorObj;
     public float Distance = 0f;
@@ -26,9 +27,12 @@ public class BattleCursor : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
-    {
+    {        
         CursorOn = false;
-        _cursor = Instantiate(BattleCursorObj);        
+        if (photonView.IsMine)
+        {
+            _cursor = Instantiate(BattleCursorObj);
+        }
     }
 
     // Update is called once per frame

@@ -12,13 +12,16 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class Player : BasePrefab, IPlayer
+public class Player : BasePrefab, IPlayer, IPunObservable
 {
+    public static GameObject LocalPlayerInstance;
+
     [Header("Basic Player Properties")]
     public float MoveSpeed;
     public float BuildSpeed;
@@ -40,11 +43,6 @@ public class Player : BasePrefab, IPlayer
     /// Returns the current castle being used by the player
     /// </summary>
     public Castle PlayerCastle { get; set; }
-
-    /// <summary>
-    /// Placement Pad for this player
-    /// </summary>
-    public PlayerPad PlayerPad { get; set; }
 
     [Range(1, Global.PLAYER_MAX_SLOTS)]
     public int PlayerNumber = 1;
@@ -74,51 +72,134 @@ public class Player : BasePrefab, IPlayer
     private string _playerName;
     private BattleCursor _battleCursor;    
        
-    private MovementInput _movement;     
+    private MovementInput _movement;
 
-    
-    
+
+
     #endregion
-    
+
+    [Tooltip("The Player's UI GameObject Prefab")]
+    [SerializeField]
+    private GameObject playerUiPrefab;
 
     protected override void Awake()
-    {        
+    {
+        // #Important
+        // used in GameManager.cs: we keep track of the localPlayer instance to prevent instanciation when levels are synchronized
+        if (photonView.IsMine)
+        {
+            LocalPlayerInstance = gameObject;
+        }
+
+        // #Critical
+        // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
+        DontDestroyOnLoad(gameObject);
+
         PlayerWorldItems = new GameObject("PlayerWorldItems");
         base.Awake();
     }
 
     // Start is called before the first frame update
     protected void Start()
-    {        
-
-        Inventory = GetComponent<Inventory>();
-        _movement = GetComponent<MovementInput>();        
-        _battleCursor = GetComponent<BattleCursor>();
-        PlayerName = "Player";
+    {     
 
         //Set Cameras
-        CameraRotate.target = transform;
-        MiniMapControls.target = transform;
-
-        PlayerUI.PlayerName.text = _playerName;
-
-        //Player stats
-        SetBasicPlayerStats();        
-
-        //NOTE
-        //Quick test for two types of castles        
-        //CastleType = PlayerNumber == 1 ? CastleType.Default : CastleType.FortressOfDoom;
-        CastleManager.Instance.SpawnCastle(CastleType.FortressOfDoom, this);             
-
-        if (CompanionOut && CompanionType != CompanionType.None)
+        if (photonView.IsMine)
         {
-            SetCompanion(CompanionType);
+
+            Inventory = GetComponent<Inventory>();
+            _movement = GetComponent<MovementInput>();
+            _battleCursor = GetComponent<BattleCursor>();
+            PlayerName = "Player";
+
+            CameraRotate.target = transform;
+            MiniMapControls.target = transform;
+
+            PlayerUI.PlayerName.text = _playerName;
+
+            //Player stats
+            SetBasicPlayerStats();
+
+            //NOTE
+            //Quick test for two types of castles        
+            //CastleType = PlayerNumber == 1 ? CastleType.Default : CastleType.FortressOfDoom;
+            CastleManager.Instance.SpawnCastle(CastleType.FortressOfDoom, this);
+
+            if (CompanionOut && CompanionType != CompanionType.None)
+            {
+                SetCompanion(CompanionType);
+            }
+
+            BuildManager.Instance.Placements.Player = this;
         }
 
-        
-        BuildManager.Instance.Placements.Player = this;
+        // Create the UI
+        if (this.playerUiPrefab != null)
+        {
+            GameObject _uiGo = Instantiate(playerUiPrefab);
+            _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+        }
+        else
+        {
+            Debug.LogWarning("<Color=Red><b>Missing</b></Color> PlayerUiPrefab reference on player Prefab.", this);
+        }
     }
-    
+
+    public override void OnDisable()
+    {
+        // Always call the base to remove callbacks
+        base.OnDisable();
+
+        #if UNITY_5_4_OR_NEWER
+                UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        #endif
+    }
+
+
+#if UNITY_5_4_OR_NEWER
+    void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
+    {
+        this.CalledOnLevelWasLoaded(scene.buildIndex);
+    }
+#endif
+
+    /// <summary>
+    /// MonoBehaviour method called after a new level of index 'level' was loaded.
+    /// We recreate the Player UI because it was destroy when we switched level.
+    /// Also reposition the player if outside the current arena.
+    /// </summary>
+    /// <param name="level">Level index loaded</param>
+    void CalledOnLevelWasLoaded(int level)
+    {
+        // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
+        if (!Physics.Raycast(transform.position, -Vector3.up, 5f))
+        {
+            transform.position = new Vector3(0f, 5f, 0f);
+        }
+
+        GameObject _uiGo = Instantiate(this.playerUiPrefab);
+        _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+    }
+
+    //COME BACK TO THIS SHIT!!!
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            
+            //stream.SendNext(this.IsFiring);
+            //stream.SendNext(this.Health);
+        }
+        else
+        {
+            // Network player, receive data
+
+            //this.IsFiring = (bool)stream.ReceiveNext();
+            //this.Health = (float)stream.ReceiveNext();
+        }
+    }
+
     private void SetBasicPlayerStats()
     {
         Health = 100;

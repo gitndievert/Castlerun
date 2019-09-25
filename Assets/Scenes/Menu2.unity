@@ -448,6 +448,7 @@ MonoBehaviour:
   PlayerNameInput: {fileID: 1291930293}
   RoomNameInputField: {fileID: 965098667901427237}
   MaxPlayersInputField: {fileID: 7467149937710287401}
+  StartGameButton: {fileID: 0}
   UIPanels:
   - {fileID: 1032476261}
   - {fileID: 6115673845062695227}
@@ -1344,6 +1345,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameSelection
       objectReference: {fileID: 0}
+    - target: {fileID: 490013628105601245, guid: ea0f916209e31ee4d82f8c8751d91c65,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 490013628105601246, guid: ea0f916209e31ee4d82f8c8751d91c65,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1652,6 +1658,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerName
       objectReference: {fileID: 0}
+    - target: {fileID: 3868041673434119838, guid: d9a17a67ef95bd240b839ab64bef97b8,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7021454443466460435, guid: d9a17a67ef95bd240b839ab64bef97b8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1762,15 +1773,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 818596243}
+    - target: {fileID: 7021454443242367749, guid: d9a17a67ef95bd240b839ab64bef97b8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Connect
+      objectReference: {fileID: 0}
     - target: {fileID: 7021454443503556937, guid: d9a17a67ef95bd240b839ab64bef97b8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 818596243}
-    - target: {fileID: 3868041673434119838, guid: d9a17a67ef95bd240b839ab64bef97b8,
+    - target: {fileID: 7021454443088483139, guid: d9a17a67ef95bd240b839ab64bef97b8,
         type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
+      propertyPath: m_text
+      value: Join
+      objectReference: {fileID: 0}
+    - target: {fileID: 7021454443088483139, guid: d9a17a67ef95bd240b839ab64bef97b8,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9a17a67ef95bd240b839ab64bef97b8, type: 3}
@@ -1809,6 +1830,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CreateRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475207607490996099, guid: 0649c547c4299da43875e8f3007160ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4475207607490996096, guid: 0649c547c4299da43875e8f3007160ca,
         type: 3}
