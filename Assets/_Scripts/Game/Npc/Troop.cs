@@ -151,21 +151,14 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
                         if (worldDeltaPosition.magnitude > nav.radius / 16)
                         {
                             nav.nextPosition = transform.position + 0.1f * worldDeltaPosition;
-                        }
-                        Debug.Log("Moving Troop");
+                        }                        
                     }
                     else
                     {
                         MoveStop();
                     }                    
                 }
-                else
-                {
-                    Debug.Log("No Movement");
-                }
-
             }
-
         }
     }
         
@@ -191,7 +184,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public void OnMouseDown()
     {
-        if(!IsSelected)
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (!IsSelected)
             Select();
     }
     

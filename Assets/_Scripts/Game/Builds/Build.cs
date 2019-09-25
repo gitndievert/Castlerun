@@ -14,6 +14,7 @@
 
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(NavMeshObstacle))]
 public abstract class Build : BasePrefab, IBuild, ISelectable
@@ -90,12 +91,16 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     public void FinishBuild()
     {
         isFinished = true;
-        SoundManager.PlaySound(SoundList.Instance.BuildSound);
+        //SoundManager.PlaySound(SoundList.Instance.BuildSound);
     }
 
     public virtual void OnMouseDown()
     {
         if (!isFinished) return;
+        //Ignore all UI targets
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
+        IsSelected = true;
         switch (GetTag)
         {
             case Global.ARMY_TAG:

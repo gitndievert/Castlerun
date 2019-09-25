@@ -70,25 +70,15 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
     {        
         Lock = false;
         _origGroundCheckDistance = _groundCheckDistance;
-    }
+    }   
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
         if (Lock || !photonView.IsMine) return;
         InputMagnitude();
         _moveVector = Vector3.zero;
         CharacterController.Move(_moveVector);
 
-        //Dont Allow Right Mouse if Running
-        Global.MouseLook = Speed > 0;
-
-        //Add Grounding
-
-    }
-
-    private void Update()
-    {
         //Make sure character is grounded
         IsGrounded = CharacterController.isGrounded;
          _verticalVelocity -= IsGrounded ? 0 : 1;
@@ -96,7 +86,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         CharacterController.Move(moveVector);
 
         //Allowed the Mouse Look on Right Mouse Button
-        if (Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
+        if (Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON) && Speed > 0)
         {
             float mouseInput = Input.GetAxis("Mouse X");
             Vector3 lookhere = new Vector3(0, mouseInput, 0);
@@ -108,19 +98,19 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
             Global.MouseLook = false;
         }
 
-
+        //Experiment with jumps
         if (Input.GetKeyDown(KeyBindings.Jump))
         {
             if (!_isJumping)
                 _isJumping = true;
             Jump();
-
         }
         if(Input.GetKeyUp(KeyBindings.Jump))
         {
             if (_isJumping)
                 _isJumping = false;
         }
+
         if (Input.GetKeyDown(KeyBindings.Dance1)) Dance();
     }
 

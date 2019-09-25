@@ -144,7 +144,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
         if (!playerName.Equals(""))
         {
-            PhotonNetwork.LocalPlayer.NickName = playerName;
+            PhotonNetwork.LocalPlayer.NickName = playerName;            
             PhotonNetwork.ConnectUsingSettings();            
         }
         else

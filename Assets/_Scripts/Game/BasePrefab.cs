@@ -181,7 +181,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
 
     public Costs GetCosts()
     {
-        return Costs;
+        return Costs ?? null;
     }
 
     public override string ToString()

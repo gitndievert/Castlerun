@@ -23,9 +23,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     /// Player Prefab
     /// </summary>
     [Tooltip("The prefab to use for representing the player")]
-    public GameObject PlayerInstance;     
+    public GameObject PlayerInstance;        
     
-    public Dictionary<int, Player> PlayerList = new Dictionary<int, Player>();
 
     [SerializeField]
     private readonly int _numOfPlayer = 2;
@@ -36,9 +35,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     //public Transform Player4SpawnPoint;
 
     void Start()
-    {
-        PlayerList.Clear();
-        
+    {   
         // in case we started this demo with the wrong scene being active, simply load the menu scene
         if (!PhotonNetwork.IsConnected)
         {
@@ -55,10 +52,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 var spawnPos = PhotonNetwork.IsMasterClient ? Player1SpawnPoint.position : Player2SpawnPoint.position;                
 
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                var character = PhotonNetwork.Instantiate(PlayerInstance.name, spawnPos, Quaternion.identity, 0);
-                var player = character.GetComponent<Player>();
-                player.PlayerName = PhotonNetwork.LocalPlayer.NickName;
-                //PlayerList.Add(1, player);
+                var character = PhotonNetwork.Instantiate(PlayerInstance.name, spawnPos, Quaternion.identity, 0);                
             }
             else
             {
@@ -155,8 +149,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         var character = Instantiate(PlayerInstance, Player1SpawnPoint.position, Quaternion.identity);
         var player = character.GetComponent<Player>();
         player.PlayerName = "Krunchy";
-        player.PlayerNumber = playerNum;                
-        PlayerList.Add(playerNum, player);
+        player.PlayerNumber = playerNum;                        
 
         /*for (int i = 1; i < _numOfPlayer; i++)
         {

@@ -13,6 +13,7 @@
 // ********************************************************************
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -47,6 +48,9 @@ public class TroopFactory : Build
     public int NumberToTrain = 1;
 
     private int _trainedCounter = 0;
+    private bool _isQueued;
+
+    private Queue<Troop> _troopQueue = new Queue<Troop>();
 
 
     /// <summary>
@@ -84,6 +88,17 @@ public class TroopFactory : Build
     // Update is called once per frame
     protected override void Update()
     {
+        if (_troopQueue.Count > 0 && _isQueued)
+        {
+            foreach(var troop in _troopQueue)
+            {
+                StartCoroutine(QueueTroop(troop));
+            }
+
+            _troopQueue.Dequeue();
+            _isQueued = false;
+        }
+
         if (!_IsBuilding && _trainedCounter != MaxTrained)
         {            
             _IsBuilding = true;            
@@ -143,13 +158,14 @@ public class TroopFactory : Build
         {
             if (_trainedCounter == MaxTrained)
             {
-                //Cannot train anymore troops message
+                //Cannot train anymore troops message                
                 return;
             }
 
             Player.Inventory.Set(costs);
-            _trainedCounter++;
-            StartCoroutine(QueueTroop(selectedTroop));
+            //_trainedCounter++;
+            _isQueued = true;
+            _troopQueue.Enqueue(selectedTroop);            
         }
     }   
 
@@ -157,44 +173,42 @@ public class TroopFactory : Build
     {
         yield return new WaitForSeconds(TrainingTime);
 
-        for (int i = 0; i < NumberToTrain; i++)
+        var makeTroop = Instantiate(selectedTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);
+
+        if (Player != null)
         {
-            var makeTroop = Instantiate(selectedTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);
+            //Parent to Player Builds
+            makeTroop.transform.parent = Player.PlayerWorldItems.transform;
 
-            if (Player != null)
+            //Access Troop Component
+            var troop = makeTroop.GetComponent<Troop>();
+            //Add Player to Troop
+            troop.TroopPlayer = Player;
+            //Move up the troop
+            troop.Move(makeTroop.transform.position + (Vector3.forward * 3 * PlacementDistance));
+
+            //Play Spawning Sound FX
+            if (troop.FreshTroop != null /*&& i == NumberToTrain - 1*/)
             {
-                //Parent to Player Builds
-                makeTroop.transform.parent = Player.PlayerWorldItems.transform;
-
-                //Access Troop Component
-                var troop = makeTroop.GetComponent<Troop>();
-                //Add Player to Troop
-                troop.TroopPlayer = Player;
-                //Move up the troop
-                troop.Move(makeTroop.transform.position + (Vector3.forward * 3 * PlacementDistance));
-
-                //Play Spawning Sound FX
-                if (troop.FreshTroop != null && i == NumberToTrain - 1)
-                {
-                    SoundManager.PlaySound(troop.FreshTroop);
-                }
-
-                Gatherer gatherer = makeTroop.GetComponent<Gatherer>();
-                //If Troop is a Gatherer
-                if (gatherer != null)
-                {
-                    gatherer.SetFactory(this);
-                    gatherer.HarvestingSelection = ResourceType.Wood;
-                    //Come Back for Pathing
-                    /*for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
-                    {
-                        gatherer.points.Add(p, Player.PlayerPad.ResourcePoints[p]);
-                    }*/
-                }
-
-                _trainedCounter--;
+                SoundManager.PlaySound(troop.FreshTroop);
             }
+
+            Gatherer gatherer = makeTroop.GetComponent<Gatherer>();
+            //If Troop is a Gatherer
+            if (gatherer != null)
+            {
+                gatherer.SetFactory(this);
+                gatherer.HarvestingSelection = ResourceType.Wood;
+                //Come Back for Pathing
+                /*for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
+                {
+                    gatherer.points.Add(p, Player.PlayerPad.ResourcePoints[p]);
+                }*/
+            }
+
+            //_trainedCounter--;
         }
+        
 
         yield return null;
     }

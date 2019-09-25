@@ -15,16 +15,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Door : BasePrefab
-{    
+public class DestructibleWall : BasePrefab, ISelectable
+{
+    #region ISelectable Properties
+    public bool IsSelected { get; set; }
+    public GameObject GameObject => gameObject;
+    public string DisplayName { get; set; }
+    #endregion
+
     protected override void Awake()
     {
         base.Awake();
-        var castle = transform.GetComponentInParent<Castle>();
-        if(castle != null && castle.DoorBustHealth > 0)
-        {
-            SetStartHealth(castle.DoorBustHealth);
-        }
     }
+
+    protected void Start()
+    {
+        CanExplode = true;
+    }
+
+    public void OnMouseDown()
+    {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+        throw new System.NotImplementedException();
+    }
+
+    public void Select()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void UnSelect()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    
 }

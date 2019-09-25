@@ -93,7 +93,7 @@ public class Selection : DSingle<Selection>
     {
         //Selection mouse events
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
-        {
+        {           
             IsSelecting = true;
             mousePosition1 = Input.mousePosition;            
 
@@ -104,7 +104,7 @@ public class Selection : DSingle<Selection>
                 {
                     //Multi Single Target Selections with CTRL
                     if (hit.transform.tag == Global.ARMY_TAG && SingleTargetSelected != null
-                        && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                    && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
                     {
                         UpdateMassList(hit.transform.GetComponent<ISelectable>());
                     }

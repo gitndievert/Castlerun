@@ -14,7 +14,6 @@
 
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class LobbyPanel : MonoBehaviour
