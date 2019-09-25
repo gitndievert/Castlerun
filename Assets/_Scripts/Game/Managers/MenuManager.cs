@@ -255,6 +255,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
         {
             // #Critical
             // Load the Room Level. 
+            MusicManager.stop(2f);
             PhotonNetwork.LoadLevel("Demo_2");
 
         }
