@@ -276,14 +276,14 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         /////// TEST CAM SHAKER
         if (Input.GetKeyDown(KeyCode.O))
         {
-            CamShake.Shake();
+            CamShake.Instance.Shake();
         }
         if(Input.GetKeyDown(KeyCode.P))
         {
-            CamShake.Shake(1f, 0.5f);
+            CamShake.Instance.Shake(0.3f, 0.5f);
         }    
                
-        if(Input.GetKeyDown(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.D))
         {
             _movement.Dance();
         }

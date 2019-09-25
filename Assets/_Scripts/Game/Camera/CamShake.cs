@@ -12,68 +12,56 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using SBK.Unity;
 using System.Collections;
 using UnityEngine;
 
-public class CamShake : MonoBehaviour
-{
+public class CamShake : DSingle<CamShake>
+{    
     public const float DefaultDuration = 1f;
     public const float DefaultIntensity = 2f;
 
-    private static CamShake _instance;    
-
-    private void Awake()
+    protected override void PAwake()
     {
-        _instance = this;       
+        
     }
 
-    private void OnDestroy()
+    protected override void PDestroy()
     {
         StopAll();
+    }    
+    
+    public void StopAll()
+    {
+        StopAllCoroutines();
     }
 
-    private void OnApplicationQuit()
+    public void Shake()
     {
-        StopAll();
+        StartCoroutine(ShakeCamera(DefaultIntensity, DefaultDuration));
     }
     
-    public static void StopAll()
+    public void Shake(float intensity)
     {
-        _instance.StopAllCoroutines();
+        StartCoroutine(ShakeCamera(intensity, DefaultDuration));
     }
 
-    public static void Shake()
+    public void Shake(float intensity, float duration)
     {
-        _instance.StartCoroutine(ShakeCamera(DefaultIntensity, DefaultDuration));
+        StartCoroutine(ShakeCamera(intensity, duration));
     }
 
-    public static void Shake(float intensity)
+    private IEnumerator ShakeCamera(float intensity, float duration)
     {
-        _instance.StartCoroutine(ShakeCamera(intensity, DefaultDuration));
-    }
-
-    public static void Shake(float intensity, float duration)
-    {
-        _instance.StartCoroutine(ShakeCamera(intensity, duration));
-    }
-
-    private static IEnumerator ShakeCamera(float intensity, float duration)
-    {
-        Transform cam = Camera.main.transform;
-        Vector2 origPos = cam.position;
+        Vector2 origPos = transform.localPosition;
 
         for (float t = 0.0f; t < duration; t += Time.deltaTime * intensity)
         {            
             Vector2 tempVec = origPos + Random.insideUnitCircle;            
-            cam.position = tempVec;            
+            transform.localPosition = tempVec;            
             yield return null;
         }
         
-        //cam.position = origPos;
-    }
-
-
-
-
-
+        transform.localPosition = origPos;
+    }    
 }

@@ -62,7 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ddfb072546c4e43adc97921a6db414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   targetHeight: 2.5
   distance: 0
   offsetFromWall: 0.1
@@ -109,7 +108,6 @@ GameObject:
   - component: {fileID: 666563088013293551}
   - component: {fileID: 666563088019408623}
   - component: {fileID: 666563088007195599}
-  - component: {fileID: 666563088767290550}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -190,18 +188,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 666563088013882829}
   m_Enabled: 1
---- !u!114 &666563088767290550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666563088013882829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0e80205d92b09e40942b3811fed3038, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &666563088013882831
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 666563088013847023}
+  - component: {fileID: 6999343031175449298}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
@@ -233,3 +220,15 @@ Transform:
   m_Father: {fileID: 666563088013847019}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6999343031175449298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666563088013882831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0e80205d92b09e40942b3811fed3038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
