@@ -101,8 +101,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
     // Start is called before the first frame update
     protected void Start()
-    {     
-
+    {
         //Set Cameras
         if (photonView.IsMine)
         {
@@ -148,20 +147,14 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     public override void OnDisable()
     {
         // Always call the base to remove callbacks
-        base.OnDisable();
-
-        #if UNITY_5_4_OR_NEWER
-                UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
-        #endif
+        base.OnDisable();        
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;        
     }
-
-
-#if UNITY_5_4_OR_NEWER
-    void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
+        
+    protected void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
     {
-        this.CalledOnLevelWasLoaded(scene.buildIndex);
-    }
-#endif
+        CalledOnLevelWasLoaded(scene.buildIndex);
+    }    
 
     /// <summary>
     /// MonoBehaviour method called after a new level of index 'level' was loaded.
@@ -169,7 +162,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     /// Also reposition the player if outside the current arena.
     /// </summary>
     /// <param name="level">Level index loaded</param>
-    void CalledOnLevelWasLoaded(int level)
+    protected void CalledOnLevelWasLoaded(int level)
     {
         // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
         if (!Physics.Raycast(transform.position, -Vector3.up, 5f))
@@ -179,25 +172,6 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
         GameObject _uiGo = Instantiate(this.playerUiPrefab);
         _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
-    }
-
-    //COME BACK TO THIS SHIT!!!
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            // We own this player: send the others our data
-            
-            //stream.SendNext(this.IsFiring);
-            //stream.SendNext(this.Health);
-        }
-        else
-        {
-            // Network player, receive data
-
-            //this.IsFiring = (bool)stream.ReceiveNext();
-            //this.Health = (float)stream.ReceiveNext();
-        }
     }
 
     private void SetBasicPlayerStats()
@@ -314,7 +288,26 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             _movement.Dance();
         }
         
-    }   
+    }
+
+    //Main method for serialization on Player actions
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+
+            //stream.SendNext(this.IsFiring);
+            //stream.SendNext(this.Health);
+        }
+        else
+        {
+            // Network player, receive data
+
+            //this.IsFiring = (bool)stream.ReceiveNext();
+            //this.Health = (float)stream.ReceiveNext();
+        }
+    }
 
     //These three methods probably need their own class
     public void SetCompanion(CompanionType companion)

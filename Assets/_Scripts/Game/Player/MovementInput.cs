@@ -15,7 +15,7 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class MovementInput : MonoBehaviourPun
+public class MovementInput : MonoBehaviourPun, IPunObservable
 {
     public static bool Lock;
         
@@ -30,7 +30,7 @@ public class MovementInput : MonoBehaviourPun
     public float RotateOverload = 2f;
 
     private float _verticalVelocity;
-
+    private bool _isJumping;
 
     public CharacterController CharacterController;
 
@@ -85,13 +85,10 @@ public class MovementInput : MonoBehaviourPun
 
         //Add Grounding
 
-        if (Input.GetKeyDown(KeyBindings.Jump)) Jump();
-        if (Input.GetKeyDown(KeyBindings.Dance1)) Dance();
     }
 
     private void Update()
     {
-
         //Make sure character is grounded
         IsGrounded = CharacterController.isGrounded;
          _verticalVelocity -= IsGrounded ? 0 : 1;
@@ -110,6 +107,21 @@ public class MovementInput : MonoBehaviourPun
         {
             Global.MouseLook = false;
         }
+
+
+        if (Input.GetKeyDown(KeyBindings.Jump))
+        {
+            if (!_isJumping)
+                _isJumping = true;
+            Jump();
+
+        }
+        if(Input.GetKeyUp(KeyBindings.Jump))
+        {
+            if (_isJumping)
+                _isJumping = false;
+        }
+        if (Input.GetKeyDown(KeyBindings.Dance1)) Dance();
     }
 
     //NOTE: Come back here to add the strafe on X    
@@ -131,7 +143,24 @@ public class MovementInput : MonoBehaviourPun
         Speed = new Vector2(InputX, InputZ).sqrMagnitude * 5;
 
         _anim.SetFloat("Speed", Speed, 0.0f, Time.deltaTime);
-    }   
+    }
+
+    //Main method for serialization on Player actions
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(_isJumping);
+            //stream.SendNext(this.Health);
+        }
+        else
+        {
+            // Network player, receive data
+            _isJumping = (bool)stream.ReceiveNext();
+            //this.Health = (float)stream.ReceiveNext();
+        }
+    }
 
     public void Jump()
     {
