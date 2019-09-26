@@ -149,8 +149,11 @@ public class TroopFactory : Build
     public void Train(Troop selectedTroop)
     {
         //Keep Factory selected
+        //TODO: Here
+        //BUGGY SHIT CODE NEED TO FIX
         IsSelected = true;
         SelectionUI.UpdateSingleTarget(this);
+        //END SHIT CODE
 
         bool metCosts = false;
         var costs = selectedTroop.GetCosts();
