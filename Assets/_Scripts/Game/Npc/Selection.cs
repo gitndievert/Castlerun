@@ -101,7 +101,7 @@ public class Selection : DSingle<Selection>
             {
                 //Deselect on ground on building selection
                 if (hit.point != null)
-                {
+                {   
                     //Multi Single Target Selections with CTRL
                     if (hit.transform.tag == Global.ARMY_TAG && SingleTargetSelected != null
                     && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
@@ -126,7 +126,7 @@ public class Selection : DSingle<Selection>
                             if (SingleTargetSelected != null)
                             {
                                 SingleTargetSelected.UnSelect();
-                                ClearSingleTarget();
+                                ClearSingleTarget();                                
                             }
 
                             if (EnemyTargetSelected != null)

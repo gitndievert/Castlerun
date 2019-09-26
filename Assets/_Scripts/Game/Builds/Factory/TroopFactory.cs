@@ -15,6 +15,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /*
@@ -48,7 +49,7 @@ public class TroopFactory : Build
     public int NumberToTrain = 1;
 
     private int _trainedCounter = 0;
-    private bool _isQueued;
+    private bool _isQueued;    
 
     private Queue<Troop> _troopQueue = new Queue<Troop>();
 
@@ -132,7 +133,7 @@ public class TroopFactory : Build
             var troop = Troops[i];
 
             var image = trans.GetComponent<Image>();
-            image.sprite = troop.GetIcon();
+            image.sprite = troop.GetIcon();            
             trans.GetComponent<Button>().onClick.AddListener(() => Train(troop));           
 
             i++;
@@ -147,6 +148,10 @@ public class TroopFactory : Build
     
     public void Train(Troop selectedTroop)
     {
+        //Keep Factory selected
+        IsSelected = true;
+        SelectionUI.UpdateSingleTarget(this);
+
         bool metCosts = false;
         var costs = selectedTroop.GetCosts();
         foreach (var cost in costs.CostFactors)
@@ -168,10 +173,12 @@ public class TroopFactory : Build
             _isQueued = true;
             _troopQueue.Enqueue(selectedTroop);            
         }
+
+        RefreshTroopPanel();
     }   
 
     private IEnumerator QueueTroop(Troop selectedTroop)
-    {
+    {        
         yield return new WaitForSeconds(TrainingTime);
 
         var makeTroop = Instantiate(selectedTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);
@@ -208,15 +215,14 @@ public class TroopFactory : Build
             }
 
             //_trainedCounter--;
-        }
-        
+        }        
 
         yield return null;
     }
 
     public override void UnSelect()
     {
+        if(EventSystem.current.IsPointerOverGameObject()) return;
         base.UnSelect();
-        if(Cor)
     }
 }

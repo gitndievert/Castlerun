@@ -63,6 +63,7 @@ public static class Global
     public const int GROUND_LAYER = 8;
     public const int ARMY_LAYER = 12;
     public const int PROJECTILE_LAYER = 12;
+    public const int UI_LAYER = 5;
 
     public const float STRIKE_DIST = 3f;
     public const float CASTER_STRIKE_DIST = 7f;
