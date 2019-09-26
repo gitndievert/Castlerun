@@ -247,16 +247,6 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         }
 
 
-        /////// TEST DAMAGE
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (!IsDead)
-            {
-                Debug.Log("Doing damage to player!");
-                SetHit(HitAmount);
-            }
-        }
-
         /////// TEST TROOP EXPLODER
         if(Input.GetKeyDown(KeyCode.K))
         {

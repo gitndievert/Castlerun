@@ -28,8 +28,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public Dictionary<int, Transform> points = new Dictionary<int, Transform>();
 
     public Light SelectionTarget;
-    public bool IsSelected { get; set; }
-    public Player TroopPlayer { get; set; }
+    public bool IsSelected { get; set; }    
     public GameObject GameObject => gameObject;
     #endregion
 

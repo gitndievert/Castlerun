@@ -192,7 +192,7 @@ public class TroopFactory : Build
             //Access Troop Component
             var troop = makeTroop.GetComponent<Troop>();
             //Add Player to Troop
-            troop.TroopPlayer = Player;
+            troop.SetPlayer(Player);
             //Move up the troop
             troop.Move(makeTroop.transform.position + (Vector3.forward * 3 * PlacementDistance));
 

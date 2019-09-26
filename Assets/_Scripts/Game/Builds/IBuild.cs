@@ -14,8 +14,7 @@
 
 public interface IBuild : IBase
 {
-    bool ConfirmPlacement();    
-    void SetPlayer(Player player);    
+    bool ConfirmPlacement();        
     bool IsBasic { get; set; }
     float GetConstructionTime();
     void FinishBuild(); 

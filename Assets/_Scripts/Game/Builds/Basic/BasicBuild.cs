@@ -44,26 +44,6 @@ public class BasicBuild : Build
         get { return SnapPoints.Select(a => a.transform.position).ToArray(); }
     }*/
 
-    //Old code
-    /*protected override void OnCollisionEnter(Collision col)
-    {
-        var colObj = col.gameObject;
-        switch (colObj.tag)
-        {
-            default:
-                return;            
-            case "Projectile":
-            case "Smasher":
-                //Random change on damage??
-                int damage = col.gameObject.GetComponent<IDamager>().GetDamage();
-                SetHit(damage);
-                break;
-            case "Player":
-                if (!_isPlaced) return;
-                break;
-        }
-    }*/
-
     /*public Transform GetCloseSnapByBuild(BasicBuild collidingbuild)
     {
         foreach (SnapPoints point in SnapPoints)

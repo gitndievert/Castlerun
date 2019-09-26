@@ -20,5 +20,6 @@ public interface IBase
     void Die();
     Costs GetCosts();
     Sprite GetIcon();
+    void SetPlayer(Player player);
 }
     

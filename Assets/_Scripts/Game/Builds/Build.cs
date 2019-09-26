@@ -45,8 +45,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     /// </summary>
     public float ConstructionTime = 0f;
 
-    protected bool isPlaced = false;
-    protected Player Player = null;
+    protected bool isPlaced = false;    
     protected bool isFinished = false;
 
     private Vector3 _offset;
@@ -87,11 +86,6 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         isPlaced = true;
         TagPrefab("Build");
         return isPlaced;
-    }
-    
-    public void SetPlayer(Player player)
-    {
-        Player = player;
     }
 
     /*public void StartBuildEffect()
@@ -140,29 +134,6 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         }
     }
     
-    /*protected virtual void OnCollisionEnter(Collision col)
-    {
-        var colObj = col.gameObject;
-        if (!isFinished) return;
-        switch (colObj.tag)
-        {
-            default:
-                return;
-            case "Build":
-                Debug.Log("Hitting the Target");                
-                break;
-            case "Projectile":
-            case "Smasher":
-                //Random change on damage??
-                int damage = col.gameObject.GetComponent<IDamager>().GetDamage();
-                SetHit(damage);
-                break;
-            case "Player":
-                if (!isPlaced) return;
-                break;
-        }        
-    }*/
-
     /// <summary>
     /// Called Method on Target Selection
     /// </summary>

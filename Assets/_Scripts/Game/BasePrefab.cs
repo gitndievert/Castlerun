@@ -53,6 +53,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
 
     protected int MaxHealth;
     protected float DestroyTimer = 2f;
+    protected Player Player = null;
 
     //Colors
     protected static readonly Color SelectedColor = Color.green;
@@ -140,7 +141,13 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
         Health = value;
         MaxHealth = value;        
     }
-    
+
+    public void SetPlayer(Player player)
+    {
+        Player = player;
+        transform.parent = player.PlayerWorldItems.transform;
+    }
+
     public virtual void SetHit(int amount)
     {
         if (Health - amount > 0)
