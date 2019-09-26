@@ -74,7 +74,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
 
     private void Update()
     {
-        if (Lock || !photonView.IsMine) return;
+        if (Lock && (!photonView.IsMine || !Global.DeveloperMode)) return;
         InputMagnitude();
         _moveVector = Vector3.zero;
         CharacterController.Move(_moveVector);

@@ -86,7 +86,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     {
         // #Important
         // used in GameManager.cs: we keep track of the localPlayer instance to prevent instanciation when levels are synchronized
-        if (photonView.IsMine)
+        if (photonView.IsMine || Global.DeveloperMode)
         {
             LocalPlayerInstance = gameObject;
         }
@@ -103,13 +103,16 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     protected void Start()
     {
         //Set Cameras
-        if (photonView.IsMine)
+        if (photonView.IsMine || Global.DeveloperMode)
         {
 
             Inventory = GetComponent<Inventory>();
             _movement = GetComponent<MovementInput>();
             _battleCursor = GetComponent<BattleCursor>();
-            PlayerName = photonView.Owner.NickName;
+            if (photonView.Owner != null)
+            {
+                PlayerName = photonView.Owner.NickName;
+            }
 
             CameraRotate.target = transform;
             MiniMapControls.target = transform;
@@ -280,10 +283,10 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         }
         if(Input.GetKeyDown(KeyCode.P))
         {
-            CamShake.Instance.Shake(0.3f, 0.5f);
+            CamShake.Instance.Shake(1f, .5f);
         }    
                
-        if(Input.GetKeyDown(KeyCode.D))
+        if(Input.GetKeyDown(KeyCode.I))
         {
             _movement.Dance();
         }

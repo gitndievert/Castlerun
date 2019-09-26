@@ -18,13 +18,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
-{
+{   
     /// <summary>
     /// Player Prefab
     /// </summary>
     [Tooltip("The prefab to use for representing the player")]
-    public GameObject PlayerInstance;        
-    
+    public GameObject PlayerInstance;            
 
     [SerializeField]
     private readonly int _numOfPlayer = 2;
@@ -36,6 +35,14 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {   
+        
+        if(Global.DeveloperMode)
+        {
+            StartPlayersTest();
+            //StartMusic();
+            return;
+        }
+        
         // in case we started this demo with the wrong scene being active, simply load the menu scene
         if (!PhotonNetwork.IsConnected)
         {
@@ -60,11 +67,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
         }
-
-        //Old Init code
-
-        //StartPlayersTest();
-        //StartMusic();
     }
 
     private void Update()

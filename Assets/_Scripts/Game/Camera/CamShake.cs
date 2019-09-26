@@ -57,7 +57,7 @@ public class CamShake : DSingle<CamShake>
 
         for (float t = 0.0f; t < duration; t += Time.deltaTime * intensity)
         {            
-            Vector2 tempVec = origPos + Random.insideUnitCircle;            
+            Vector2 tempVec = origPos + Random.insideUnitCircle / intensity;            
             transform.localPosition = tempVec;            
             yield return null;
         }

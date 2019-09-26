@@ -14,6 +14,8 @@
 
 public static class Global
 {
+    public static bool DeveloperMode = true;
+
     #region Game Objects
     /// <summary>
     /// Global Tag for MultiCamRig
