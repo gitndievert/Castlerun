@@ -35,17 +35,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     #region Visual Troop Control        
     public abstract string DisplayName { get; }
-
-    public Vector3 StopPoint
-    {
-        get { return nav.destination; }
-        set
-        {
-            nav.destination = value;
-            _smoothDeltaPosition = Vector2.zero;
-        }
-    }
-
+   
     protected Animator anim;
     protected NavMeshAgent nav;        
 
@@ -57,7 +47,9 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     private float _maxVely = 3.70712f;
     private Vector2 _smoothDeltaPosition;
     private bool _moving;
-    
+    private int _destPoint;
+    private Vector2 _velocity = Vector2.zero;
+
     #endregion
 
     #region AudioClips For Troops
@@ -69,20 +61,20 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public AudioClip[] AttackBattleCryClips;
     #endregion
 
-    private int _destPoint;    
-    private Vector2 _velocity = Vector2.zero;
-
-    #region Targeting Systems
+    #region Combat Systems
     [Header("Combat")]
     public float AttackDelaySec = 3f;
+
     [HideInInspector]
     public bool CanAttack = false;
+    public bool IsAttacking;
+    public bool UnderAttack;
+
     protected ISelectable EnemyTarget { get; set; }
-    protected Transform EnemyTargetTransform { get; set; }  
-    public bool IsAttacking { get; set; }
-    #endregion
+    protected Transform EnemyTargetTransform { get; set; }
 
     private int _hitCounter = 1;
+    #endregion    
 
     protected override void Awake()
     {
@@ -107,8 +99,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         
         
         _smoothDeltaPosition = default;
-        _moving = true;
-        //StopPoint = transform.position;           
+        _moving = true;              
     }
 
     // Update is called once per frame
@@ -185,7 +176,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public void OnMouseDown()
     {
-        if (EventSystem.current.IsPointerOverGameObject()) return;
+        //if (EventSystem.current.IsPointerOverGameObject()) return;
         if (!IsSelected)
             Select();
     }

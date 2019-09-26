@@ -199,6 +199,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             {
                 //COME BACK!!!! Attack Methods go here
                 _movement.SwingPlayer();
+                Swing();
             }
         }
 
@@ -341,16 +342,18 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         var target = SwingEnemyTargetSelected();
 
         switch (target.GameObject.tag)
-        {
-            case Global.BUILD_TAG:
+        {            
             case Global.ENEMY_TAG:                
-                target.SetHit(HitAmount);
+                Damage.ApplyDamage(target, 5, 25, true);
                 break;
+            case Global.BUILD_TAG:
             case "Player":
             case Global.ARMY_TAG:
             default:
                 return;
-        }        
+        }
+
+        _movement.SwingStop();
     }
     
     private ISelectable SwingEnemyTargetSelected()
@@ -358,7 +361,8 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         var enemytarget = UIManager.Instance.SelectableComponent.EnemyTargetSelected;
         if (enemytarget == null) return null;
         GameObject target = enemytarget.GameObject;
-        if (!Extensions.DistanceLess(transform, target.transform, Global.STRIKE_DIST)) return null;
+        //Removed for testing
+        //if (!Extensions.DistanceLess(transform, target.transform, Global.STRIKE_DIST)) return null;
         return enemytarget;
     }
   

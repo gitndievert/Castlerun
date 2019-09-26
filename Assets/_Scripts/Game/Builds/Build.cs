@@ -123,7 +123,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     {
         if (!isFinished) return;        
         //Ignore all UI targets
-        if (EventSystem.current.IsPointerOverGameObject()) return;
+        //if (EventSystem.current.IsPointerOverGameObject()) return;
 
         IsSelected = true;
         switch (GetTag)
@@ -140,7 +140,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         }
     }
     
-    protected virtual void OnCollisionEnter(Collision col)
+    /*protected virtual void OnCollisionEnter(Collision col)
     {
         var colObj = col.gameObject;
         if (!isFinished) return;
@@ -161,7 +161,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
                 if (!isPlaced) return;
                 break;
         }        
-    }
+    }*/
 
     /// <summary>
     /// Called Method on Target Selection

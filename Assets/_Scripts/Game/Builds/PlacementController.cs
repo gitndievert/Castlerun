@@ -91,16 +91,6 @@ public class PlacementController : MonoBehaviour
         //Hide 
         if (_currObj != null)
         { 
-            //Make basic builds choppy, leave it out for now
-            /*if (Global.MouseLook)
-            {
-                _currObj.SetActive(false);
-            }
-            else if (!Global.MouseLook && !_currObj.activeInHierarchy)
-            {
-                _currObj.SetActive(true);
-            }*/
-
             if (!_rotating)
             {
                 BuildMode = true;                
@@ -124,8 +114,7 @@ public class PlacementController : MonoBehaviour
             {
                 if (Vector3.Distance(_currObj.transform.position, Player.transform.position) > 20f && !_outsideGrid) return;
 
-                var build = _currObj.transform.GetComponent<IBuild>();
-                
+                var build = _currObj.transform.GetComponent<IBuild>();               
                 
                 bool cancelBuild = false;
                 Inventory inv = Player.Inventory;

@@ -30,8 +30,7 @@ public class TroopFactory : Build
 {    
     public float PlacementDistance = 2f;
 
-    public Troop[] Troops;
-    public BuildArea BuildArea;
+    public Troop[] Troops;    
 
     /// <summary>
     /// This is the start timer for the initial Troops. Hi Jessia
@@ -50,9 +49,8 @@ public class TroopFactory : Build
 
     private int _trainedCounter = 0;
     private bool _isQueued;    
-
+    private BuildArea _buildArea;
     private Queue<Troop> _troopQueue = new Queue<Troop>();
-
 
     /// <summary>
     /// The number of troops trained on each training pass
@@ -67,17 +65,17 @@ public class TroopFactory : Build
     protected override void Start()
     {
         base.Start();
-        if (BuildArea == null)
+        if (_buildArea == null)
         {
-            BuildArea = GetComponentInChildren<BuildArea>();
+            _buildArea = GetComponentInChildren<BuildArea>();
         }        
     }    
 
     public override bool ConfirmPlacement()
     {
-        if (!BuildArea.CanBuild) return false;
+        if (!_buildArea.CanBuild) return false;
         base.ConfirmPlacement();
-        BuildArea.ShowPlane(false);        
+        _buildArea.ShowPlane(false);        
         /*if (BuildTime > 0)
         {
             StartCoroutine(RunBuild());            

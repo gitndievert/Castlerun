@@ -20,5 +20,6 @@ public enum BuildingLabelTypes
     Ramp,
     Barracks,
     ResourceDepot,
-    Tower
+    Tower,
+    Stables
 }

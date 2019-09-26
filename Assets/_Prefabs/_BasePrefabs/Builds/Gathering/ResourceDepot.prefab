@@ -138,8 +138,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 3125672857705476607}
+  m_Children: []
   m_Father: {fileID: 2488779380433943169}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -221,6 +220,7 @@ Transform:
   m_Children:
   - {fileID: 2293853057363095530}
   - {fileID: 4504566212377833874}
+  - {fileID: 3125672857705476607}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -235,8 +235,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16.338875, y: 19.843637, z: 15.582697}
-  m_Center: {x: 0.88002014, y: 1.6256227, z: 1.2763205}
+  m_Size: {x: 16.338875, y: 16.79588, z: 15.582697}
+  m_Center: {x: 0.88002014, y: 3.1495018, z: 1.2763205}
 --- !u!54 &8921432873822021348
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -283,7 +283,6 @@ MonoBehaviour:
   PlacementDistance: 2
   Troops:
   - {fileID: 3710154189911815501, guid: b721e89ab386bd044ae686c19cccd397, type: 3}
-  BuildArea: {fileID: 0}
   StartTime: 0
   TrainingTime: 5
   NumberToTrain: 1
@@ -319,8 +318,8 @@ Transform:
   m_LocalPosition: {x: 0.5, y: -6.2, z: 2}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
-  m_Father: {fileID: 4504566212377833874}
-  m_RootOrder: 0
+  m_Father: {fileID: 2488779380433943169}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1324530584369021244
 MeshFilter:

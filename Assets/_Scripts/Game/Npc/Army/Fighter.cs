@@ -59,8 +59,7 @@ public class Fighter : Troop
         Debug.Log("Attacking " + EnemyTargetTransform.name.ToString() + "!");
         anim.Play("Attack");
         var enemypos = EnemyTargetTransform.transform.position;
-        transform.LookAt(new Vector3(enemypos.x, transform.position.y, enemypos.z));
-        //EnemyTarget.SetHit(Hit)
+        transform.LookAt(new Vector3(enemypos.x, transform.position.y, enemypos.z));        
         Damage.ApplyDamage(EnemyTarget, MinDamage, MaxDamage, true);
     }
 }
