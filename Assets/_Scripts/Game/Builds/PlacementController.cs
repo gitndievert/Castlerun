@@ -21,12 +21,6 @@ public class PlacementController : MonoBehaviour
     [Tooltip("Loaded Prefab for Placement")]
     public GameObject PlaceableObjectPrefab = null;    
 
-    [Header("Materials for Placements")]
-    [Tooltip("This is the transparent lay material")]
-    public Material LayMaterial;
-    [Tooltip("This is the transparent lay material if you cannot build in a zone")]
-    public Material ErrorMaterial;
-
     /// <summary>
     /// Player attached to this controller
     /// </summary>
@@ -42,9 +36,6 @@ public class PlacementController : MonoBehaviour
 
     //TODO MOVE TO QUEUES
     private GameObject _currObj;
-    private GameObject _buildingObj;
-        
-    private Dictionary<GameObject, Material[]> _modelQueue = new Dictionary<GameObject, Material[]>();
 
     private float mouseWheelRotation;
     private bool _triggerBuild = false;
@@ -66,7 +57,7 @@ public class PlacementController : MonoBehaviour
     public void LoadObject(GameObject obj, bool isbasic, bool outsidegrid = false)
     {       
         PlaceableObjectPrefab = obj;
-        _placeObjectMeshRend = PlaceableObjectPrefab.GetComponentInChildren<MeshRenderer>();        
+        _placeObjectMeshRend = PlaceableObjectPrefab.GetComponentInChildren<MeshRenderer>();
         _triggerBuild = true;
         _outsideGrid = outsidegrid;
         _isBasic = isbasic;
@@ -95,7 +86,7 @@ public class PlacementController : MonoBehaviour
         }
     }
     
-    void Update()
+    void FixedUpdate()
     {
         //Hide 
         if (_currObj != null)
@@ -164,8 +155,7 @@ public class PlacementController : MonoBehaviour
                 }
                 else
                 {
-                    cancelBuild = true;
-                    _currObj.transform.GetComponentInChildren<Renderer>().material = ErrorMaterial;
+                    cancelBuild = true;                    
                     //Come Back... Get Messages for Resource Types
                     //UIManager.Instance.Messages.text = $"You will need to gather more {rt.ToString()}";
                     Global.Message("You will need to gather more resources");
@@ -189,48 +179,19 @@ public class PlacementController : MonoBehaviour
         if (_triggerBuild)
         {
             if (_currObj != null) KillBuild();
-
             _currObj = Instantiate(PlaceableObjectPrefab, Player.transform.position * 2,Quaternion.identity);            
-            var saveMaterial = _currObj.transform.GetComponentInChildren<Renderer>().materials;
-            _modelQueue[_currObj] = saveMaterial;
-
-            PlayerCollision(_currObj, true);
-
-            //_currObj.transform.GetComponentInChildren<Renderer>().material = LayMaterial;
-            var mats = saveMaterial;
-            Material[] laymats = new Material[mats.Length];
-            for(int i = 0; i < mats.Length; i++)
-            {
-                laymats[i] = LayMaterial;
-            }
-            _currObj.transform.GetComponentInChildren<Renderer>().materials = laymats;               
-            _currObj.gameObject.layer = Global.IGNORE_LAYER;                      
-
             _triggerBuild = false;
         }       
     }
 
     private IEnumerator CorLoadBuilding(IBuild build)
     {
-        build.SetPlayer(Player);        
-        _buildingObj = _currObj;
-        //_modelQueue[_buildingObj] = _saveMaterial;
-        //COME BACK, NEED A DUMPER FOR THESE
-        //_buildingObj.transform.parent = _playerBuilds;
-        _buildingObj.gameObject.layer = Global.DEFAULT_LAYER;
-        yield return new WaitForSeconds(build.GetConstructionTime());
-        PlayerCollision(_buildingObj,false);
-        _buildingObj.transform.GetComponentInChildren<Renderer>().materials = _modelQueue[_buildingObj];
-        build.FinishBuild();
-        _modelQueue.Remove(_buildingObj);
+        build.SetPlayer(Player);                
+        yield return new WaitForSeconds(build.GetConstructionTime());        
+        build.FinishBuild();        
         yield return null;
     }
-
-    private void PlayerCollision(GameObject obj, bool collide)
-    {        
-        Physics.IgnoreCollision(obj.GetComponent<Collider>(), Player.GetComponent<Collider>(), collide);
-    }
-
+    
     private float GetDistToGround()
     {
         return (_placeObjectMeshRend != null) ? _placeObjectMeshRend.bounds.extents.y : 0f;

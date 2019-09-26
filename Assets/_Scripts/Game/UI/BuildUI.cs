@@ -18,7 +18,6 @@ using UnityEngine;
 [Serializable]
 public class BuildUI
 {
-    public GameObject BuildingsPanel;
-    public GameObject TroopsPanel;
+    public GameObject SelectionsPanel;
 }
 

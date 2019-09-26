@@ -115,8 +115,7 @@ public class TroopFactory : Build
         base.OnMouseDown();
         if (isFinished)
         {
-            RefreshTroopPanel();
-            BuildManager.Instance.ShowTroopPanel();
+            RefreshTroopPanel();            
         }
     }
     
@@ -125,7 +124,9 @@ public class TroopFactory : Build
         int i = 0;
         int troopcount = Troops.Length;
 
-        foreach (Transform trans in BuildManager.Instance.BuildUI.TroopsPanel.transform)
+        BuildManager.Instance.RefreshSelections();
+
+        foreach (Transform trans in BuildManager.Instance.BuildUI.SelectionsPanel.transform)
         {
             if (i >= troopcount) break;
             var troop = Troops[i];
@@ -211,5 +212,11 @@ public class TroopFactory : Build
         
 
         yield return null;
+    }
+
+    public override void UnSelect()
+    {
+        base.UnSelect();
+        if(Cor)
     }
 }

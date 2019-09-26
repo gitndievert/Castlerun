@@ -31,6 +31,8 @@ public class BuildManager : DSingle<BuildManager>
 
     public PlacementController Placements { get; private set; }
 
+    public Sprite EmptyIcon;
+
     public static ResourceType[] ResourceIndex = {
         ResourceType.Wood,
         ResourceType.Rock,
@@ -42,47 +44,6 @@ public class BuildManager : DSingle<BuildManager>
         get { return UIManager.Instance.BuildingUIPanel; }
     }
     
-    private bool _buildPanelEnabled = false;
-    private bool _troopPanelEnabled = false;
-
-    /// <summary>
-    /// Set the Build Panel On/Off
-    /// </summary>
-    public bool BuildPanelEnabled
-    {
-        get { return _buildPanelEnabled; }
-        set
-        {
-            _buildPanelEnabled = value;
-            BuildUI.BuildingsPanel.SetActive(_buildPanelEnabled);            
-        }
-    }
-
-    /// <summary>
-    /// Set the Troop Panel On/Off
-    /// </summary>
-    public bool TroopPanelEnabled
-    {
-        get { return _troopPanelEnabled; }
-        set
-        {
-            _troopPanelEnabled = value;
-            BuildUI.TroopsPanel.SetActive(_troopPanelEnabled);
-        }
-    }
-
-    public void ShowTroopPanel()
-    {
-        BuildPanelEnabled = false;
-        TroopPanelEnabled = true;
-    }
-
-    public void ShowBuildPanel()
-    {
-        BuildPanelEnabled = true;
-        TroopPanelEnabled = false;
-    }
-
     protected override void PAwake()
     {
         Placements = GetComponent<PlacementController>();
@@ -95,9 +56,7 @@ public class BuildManager : DSingle<BuildManager>
 
     // Start is called before the first frame update
     void Start()
-    {
-        BuildPanelEnabled = true;
-        TroopPanelEnabled = false;
+    {        
         RefreshBuilds();               
     }
 
@@ -107,12 +66,24 @@ public class BuildManager : DSingle<BuildManager>
         
     }
 
+    public void RefreshSelections()
+    {
+        foreach (Transform trans in BuildUI.SelectionsPanel.transform)
+        {
+            var image = trans.GetComponent<Image>();
+            image.sprite = EmptyIcon;
+            trans.GetComponent<Button>().onClick.RemoveAllListeners();
+        }
+    }
+
     public void RefreshBuilds()
     {
         int i = 0;
         int buildcount = Builds.Count;
 
-        foreach (Transform trans in BuildUI.BuildingsPanel.transform)
+        RefreshSelections();
+
+        foreach (Transform trans in BuildUI.SelectionsPanel.transform)
         {
             if (i >= buildcount) break;
             var build = Builds[i];

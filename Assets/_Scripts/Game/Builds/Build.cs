@@ -16,13 +16,18 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(NavMeshObstacle))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(BoxCollider))]
 public abstract class Build : BasePrefab, IBuild, ISelectable
 {
     public BuildingLabelTypes BuildingLabelType = BuildingLabelTypes.None;
 
     public int PlacementCost { get; set; }
     public bool IsBasic { get; set; }
+
+    //Transparent and Final Objects 
+    public GameObject TransparentModel;
+    public GameObject FinalModel;
 
     /// <summary>
     /// This shows it being selectable or not to player
@@ -45,16 +50,23 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     protected bool isFinished = false;
 
     private Vector3 _offset;
-    
+
+    protected override void Awake()
+    {
+        base.Awake();
+        EnableLayModel();
+        GetComponent<BoxCollider>().isTrigger = true;
+    }
 
     protected virtual void Start()
-    {                    
+    {
+        RigidBody.isKinematic = true;
         if (Health == 0) Health = 20;        
         MaxHealth = Health;
         IsBasic = false;
         DisplayName = BuildingLabelType.ToString();
         if (Costs.CostFactors.Length == 0)
-            throw new System.Exception("Please add a cost");        
+            throw new System.Exception("Please add a cost");
     }
 
     protected virtual void Update()
@@ -88,15 +100,28 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
             BuildEffect.SetActive(true);
     }*/
 
+    public void EnableLayModel()
+    {
+        TransparentModel.SetActive(true);
+        FinalModel.SetActive(false);
+    }
+
+    public void EnableFinalModel()
+    {
+        TransparentModel.SetActive(false);
+        FinalModel.SetActive(true);
+    }
+
     public void FinishBuild()
     {
         isFinished = true;
+        EnableFinalModel();
         //SoundManager.PlaySound(SoundList.Instance.BuildSound);
     }
 
     public virtual void OnMouseDown()
     {
-        if (!isFinished) return;
+        if (!isFinished) return;        
         //Ignore all UI targets
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
@@ -141,7 +166,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     /// <summary>
     /// Called Method on Target Selection
     /// </summary>
-    public void Select()
+    public virtual void Select()
     {
         if (!IsSelected && isFinished)
         {
@@ -152,12 +177,12 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     /// <summary>
     /// Called Method on Target UnSelection
     /// </summary>
-    public void UnSelect()
+    public virtual void UnSelect()
     {
         if (IsSelected)
         {
             IsSelected = false;
-            BuildManager.Instance.ShowBuildPanel();
+            //BuildManager.Instance.RefreshBuilds();
         }
     }
 }

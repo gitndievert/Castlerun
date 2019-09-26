@@ -20,14 +20,12 @@ public class BasicBuild : Build
 {
     //public List<SnapPoints> SnapPoints = new List<SnapPoints>();
 
-    private ResourceType _pickType;
-    private Animator _anim;
+    private ResourceType _pickType;    
 
     protected override void Awake()
     {
         base.Awake();
-        //SnapPoints = GetComponents<SnapPoints>().ToList();
-        _anim = GetComponentInChildren<Animator>();        
+        //SnapPoints = GetComponents<SnapPoints>().ToList();        
     }
 
     protected override void Start()
@@ -35,10 +33,9 @@ public class BasicBuild : Build
         base.Start();        
         IsBasic = true;        
     }
-
+    
     public override bool ConfirmPlacement()
-    {
-        _anim.Play("Basic");
+    {        
         return base.ConfirmPlacement();
     }   
 

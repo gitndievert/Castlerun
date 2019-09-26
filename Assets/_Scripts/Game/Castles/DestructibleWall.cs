@@ -38,7 +38,7 @@ public class DestructibleWall : BasePrefab, ISelectable
     public void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public void Select()
