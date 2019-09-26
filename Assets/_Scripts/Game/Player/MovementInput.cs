@@ -86,7 +86,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         CharacterController.Move(moveVector);
 
         //Allowed the Mouse Look on Right Mouse Button
-        if (Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON) && Speed > 0)
+        if (Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON)/* && Speed > 0*/)
         {
             float mouseInput = Input.GetAxis("Mouse X");
             Vector3 lookhere = new Vector3(0, mouseInput, 0);
