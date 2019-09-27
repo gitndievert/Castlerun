@@ -179,7 +179,17 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         if (!IsSelected)
             Select();
     }
-    
+
+    /// <summary>
+    /// Simulate a right click on a mouse down event
+    /// </summary>
+    public void OnMouseOver()
+    {
+        if(Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON)){
+            OnMouseDown();
+        }
+    }
+
     public void SelectMany()
     {
         if (GetTag != Global.ARMY_TAG) return;
