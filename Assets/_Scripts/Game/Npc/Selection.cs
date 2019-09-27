@@ -141,7 +141,8 @@ public class Selection : DSingle<Selection>
         }
         //Select on the ground if not mouselooking and there are selections in queue
         else if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) 
-            && !Global.MouseLook && SelectionListCount > 0)
+            && !Global.MouseLook && SelectionListCount > 0 
+            && SingleTargetSelected.GameObject.tag != Global.BUILD_TAG)
         {
             IsSelecting = true;
 
