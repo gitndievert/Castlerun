@@ -12,6 +12,8 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using System.Collections;
+
 public interface IPlayer : ICharacter
 {    
     void Swing();

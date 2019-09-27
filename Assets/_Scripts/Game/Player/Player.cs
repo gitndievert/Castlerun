@@ -70,8 +70,10 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     private GameObject _mainHand;
     private GameObject _offHand;                 
     private string _playerName;
-    private BattleCursor _battleCursor;    
-       
+    private BattleCursor _battleCursor;
+    private bool _swinging = false;
+
+
     private MovementInput _movement;
 
 
@@ -193,13 +195,15 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     private void Update()
     {
         /////// ATTACK
-        if (!Global.BuildMode && Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON))
+        if (!Global.BuildMode && Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
         {
             if (SwingEnemyTargetSelected() != null)
             {
-                //COME BACK!!!! Attack Methods go here
-                _movement.SwingPlayer();
-                Swing();
+                //COME BACK!!!! Attack Methods go here                
+                if (!_swinging)
+                {
+                    Swing();
+                }                
             }
         }
 
@@ -328,21 +332,21 @@ public class Player : BasePrefab, IPlayer, IPunObservable
           
     public void Swing()
     {
-        if (SwingEnemyTargetSelected() == null) return;
-        var target = SwingEnemyTargetSelected();
+        _swinging = true;
+        if (SwingEnemyTargetSelected() != null)
+        {
+            _movement.SwingPlayer();
+            var target = SwingEnemyTargetSelected();
 
-        switch (target.GameObject.tag)
-        {            
-            case Global.ENEMY_TAG:                
-                Damage.ApplyDamage(target, 5, 25, true);
-                break;
-            case Global.BUILD_TAG:
-            case "Player":
-            case Global.ARMY_TAG:
-            default:
-                return;
+            switch (target.GameObject.tag)
+            {
+                case Global.ENEMY_TAG:
+                    Damage.ApplyDamage(target, 5, 25, true);
+                    break;
+            }                      
         }
 
+        _swinging = false;
         _movement.SwingStop();
     }
     

@@ -45,7 +45,7 @@ public class CameraRotate : MonoBehaviour
     private Rigidbody _targetRigidbody;
 
     //Fixed Build Cam
-    private float b_dist_y = 15f;
+    private float b_dist_y = 25f;
     private float b_rotation_x = 64.6f;
       
     //Auto Cam

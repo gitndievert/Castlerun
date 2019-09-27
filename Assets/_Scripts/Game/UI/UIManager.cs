@@ -18,16 +18,22 @@ using TMPro;
 
 public partial class UIManager : PSingle<UIManager>
 {
-    public ProgressBar HealthBar;
-    public ProgressBar StaminaBar;
+
 
     public Sprite DefaultIcon;
+
+    public TextMeshProUGUI Messages;
 
     /// <summary>
     /// Inventory Panel
     /// </summary>
+    [Header("Inventory")]
     public InventoryUI InventoryUIPanel;
 
+    [Header("Player")]
+    public ProgressBar HealthBar;
+
+    public ProgressBar StaminaBar;
     /// <summary>
     /// Player Panel
     /// </summary>
@@ -36,14 +42,16 @@ public partial class UIManager : PSingle<UIManager>
     /// <summary>
     /// Panel for selecting Buildings and Troops
     /// </summary>
+    [Header("Building")]
     public BuildUI BuildingUIPanel;
+
+ 
+    [Header("Selection System")]
 
     /// <summary>
     /// Target Panel
     /// </summary>
     public Transform TargetPanel;
-
-    public TextMeshProUGUI Messages;
 
     /// <summary>
     /// Selection Controller for all In Game Mouse Selections

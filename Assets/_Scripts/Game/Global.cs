@@ -58,6 +58,12 @@ public static class Global
     #endregion
 
     #region Game Constants
+
+    /// <summary>
+    /// Default layer for all players
+    /// </summary>
+    public const int PLAYER_LAYER = 14;
+
     public const int DEFAULT_LAYER = 0;
     public const int IGNORE_LAYER = 2;
     public const int GROUND_LAYER = 8;

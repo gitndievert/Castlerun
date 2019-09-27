@@ -143,6 +143,8 @@ public class Selection : DSingle<Selection>
         else if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) 
             && !Global.MouseLook && SelectionListCount > 0)
         {
+            IsSelecting = true;
+
             StartCoroutine("SelectionCursor");
 
             if (Physics.Raycast(SelectionRayHit, out RaycastHit hit))

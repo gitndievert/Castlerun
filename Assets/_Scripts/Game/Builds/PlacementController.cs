@@ -86,7 +86,7 @@ public class PlacementController : MonoBehaviour
         }
     }
     
-    void FixedUpdate()
+    void Update()
     {
         //Hide 
         if (_currObj != null)
@@ -205,21 +205,13 @@ public class PlacementController : MonoBehaviour
     private void MoveCurrentObjectToMouse()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        int layerMask = (1 << Global.GROUND_LAYER);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 200f, layerMask))
         {
-            if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
-            {
-                //Debug.Log($"Hit point y {hit.point.y}");
-                //Debug.Log($"Dist to ground{GetDistToGround()}");
-
-                //EXPIRIMENT - Get render bounds from mesh rather than collider
-                float halfHeight = _currObj.GetComponent<Collider>().bounds.size.y / 2;
-                //Don't need to put in the halfheight
-                //float halfHeight = 0f;
-
-                _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, Mathf.Round(hit.point.y) + halfHeight, Mathf.Round(hit.point.z) * SnapSize);
-            }
+            Debug.DrawLine(ray.origin, hit.point);
+            float halfHeight = _currObj.GetComponent<Collider>().bounds.size.y / 2;            
+            _currObj.transform.position = new Vector3(Mathf.Round(hit.point.x) * SnapSize, Mathf.Round(hit.point.y) + halfHeight, Mathf.Round(hit.point.z) * SnapSize);
         }
     }
   
