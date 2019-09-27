@@ -144,7 +144,6 @@ public class Selection : DSingle<Selection>
             && !Global.MouseLook && SelectionListCount > 0 
             && SingleTargetSelected.GameObject.tag != Global.BUILD_TAG)
         {
-            IsSelecting = true;
 
             StartCoroutine("SelectionCursor");
 
