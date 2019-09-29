@@ -56,6 +56,8 @@ public class TroopFactory : Build
     /// The number of troops trained on each training pass
     /// </summary>
     public int MaxTrained = 5;
+
+    public Transform SpawnPoint;
        
 
     private ResourceType _pickType;
@@ -199,7 +201,7 @@ public class TroopFactory : Build
             //Add Player to Troop
             troop.SetPlayer(Player);
             //Move up the troop
-            troop.Move(makeTroop.transform.position + (Vector3.forward * 3 * PlacementDistance));
+            troop.Move(SpawnPoint.position);
 
             //Play Spawning Sound FX
             if (troop.FreshTroop != null /*&& i == NumberToTrain - 1*/)

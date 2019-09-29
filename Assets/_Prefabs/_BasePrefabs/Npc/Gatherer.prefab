@@ -911,8 +911,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18e5fcef21af3d45b7f728cfd274ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
   Health: 200
   CanExplode: 1
   DestroySound: {fileID: 0}
@@ -930,8 +928,10 @@ MonoBehaviour:
   AttackBattleCryClips: []
   AttackDelaySec: 3
   CanAttack: 0
+  IsAttacking: 0
+  UnderAttack: 0
   HarvestingSelection: 0
-  HarvestTime: 0
+  HarvestTime: 5
   IsHarvesting: 0
   HarvestTrips: 1
 --- !u!195 &8462511514284035109

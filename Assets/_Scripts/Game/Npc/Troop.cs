@@ -252,7 +252,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         SelectionTarget.color = color;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         //Come Back here!
         if (collision.transform.tag == "Player") return;

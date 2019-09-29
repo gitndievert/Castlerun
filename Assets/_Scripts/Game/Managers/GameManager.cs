@@ -18,7 +18,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
-{   
+{
+    public static GameManager LocalGameManagerInstance;
+    
     /// <summary>
     /// Player Prefab
     /// </summary>
@@ -40,8 +42,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     //public Transform Player3ResourcePoints;
     //public Transform Player4ResourcePoints;
 
+    private void Awake()
+    {
+        //Flip to Singleton
+        LocalGameManagerInstance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
-    void Start()
+    private void Start()
     {   
         
         if(Global.DeveloperMode)

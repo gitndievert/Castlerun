@@ -64,7 +64,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
 
     protected Rigidbody RigidBody;
 
-    private List<MeshExploder> _explodables = new List<MeshExploder>();
+    //private List<MeshExploder> _explodables = new List<MeshExploder>();
     
     protected PlayerUI PlayerUI
     {
@@ -92,7 +92,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     
     protected virtual void Awake()
     {
-        var renders = gameObject.GetComponentsInChildren<Renderer>();
+        /*var renders = gameObject.GetComponentsInChildren<Renderer>();
         foreach(var render in renders)
         {
             var T = render.GetType();
@@ -111,8 +111,8 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
             {
                 _explodables.Add(render.gameObject.GetComponent<MeshExploder>());                
             }            
-        }
-
+        }*/
+        
         TargetingMe = new HashSet<Troop>();
         IsDying = false;
 
@@ -122,7 +122,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
         RigidBody = GetComponent<Rigidbody>();
 
         //Set the GameManager
-        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameManager = GameManager.LocalGameManagerInstance;
     }   
 
     protected void TagPrefab(string tag)
@@ -132,13 +132,13 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     
     protected void Explode()
     {
-        if(_explodables.Count > 0)
+        /*if(_explodables.Count > 0)
         {
             foreach(var boom in _explodables)
             {
                 boom.Explode();
             }
-        }
+        }*/
     }
 
     protected void SetStartHealth(int value)

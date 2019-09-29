@@ -22,7 +22,19 @@ public class Gatherer : Troop
     public const int MetalQuantity = 20;
 
     public ResourceType HarvestingSelection;
-    public float HarvestTime;
+
+    /// <summary>
+    /// 9 Second Harvest Time
+    /// </summary>
+    public const float HarvestTimeWood = 9f;
+    /// <summary>
+    /// 16 Second Harvest Time
+    /// </summary>
+    public const float HarvestTimeRock = 16f;
+    /// <summary>
+    /// 20 Second Harvest Time
+    /// </summary>
+    public const float HarvestTimeMetal = 20f;
 
     [Space(5)]
     public bool IsHarvesting = false;
@@ -46,6 +58,8 @@ public class Gatherer : Troop
         base.Start();
         SelectionTargetStatus(true);        
         anim.Play("Walk");
+        if (points.Count == 0) return;
+        nav.SetDestination(RandomNavPoint());
     }
 
     // Update is called once per frame
@@ -55,8 +69,8 @@ public class Gatherer : Troop
         {
             if (!nav.pathPending && nav.remainingDistance < 0.5f)
             {
-                GoToNextPoint();
-            }
+                StartCoroutine(HarvestWait());                
+            }            
         }
     }
 
@@ -65,13 +79,40 @@ public class Gatherer : Troop
         AssociatedFactory = factory;
     }
     
-    private IEnumerator Wait()
+
+    private IEnumerator HarvestWait()
     {
+        IsHarvesting = true;            
+        nav.isStopped = true;
+        nav.velocity = Vector3.zero;
 
-        //For Harvesting....
-        //TroopPlayer.Inventory.Set(ResourceType.Wood, 15);
+        int qty;
+        float hTime;
 
-        yield return new WaitForSeconds(3f);
+        switch (HarvestingSelection)
+        {
+            default:
+            case ResourceType.Wood:
+                qty = WoodQuantity;
+                hTime = HarvestTimeWood;
+                break;
+            case ResourceType.Rock:
+                qty = RockQuantity;
+                hTime = HarvestTimeRock;
+                break;
+            case ResourceType.Metal:
+                qty = MetalQuantity;
+                hTime = HarvestTimeMetal;
+                break;
+        }
+
+        anim.Play("Swing");
+        yield return new WaitForSeconds(hTime);        
+        Player.Inventory.Set(HarvestingSelection, qty);        
+        IsHarvesting = false;
+        nav.isStopped = false;
+        anim.Play("Walk");
+        GoToNextPoint();
     }
 
     public override void Fire()
@@ -82,9 +123,26 @@ public class Gatherer : Troop
     protected void GoToNextPoint()
     {
         if (points.Count == 0) return;
-        nav.destination = points[DestPoint].position;
-        //DestPoint = (DestPoint + 1) % points.Count;
-        int newpoint = Random.Range(0, points.Count);
-        DestPoint = newpoint == DestPoint ? (DestPoint + 1) % points.Count : newpoint;        
+
+        Vector3 p = RandomNavPoint();
+
+        while (p == nav.destination)
+        {
+            p = RandomNavPoint();            
+        }
+
+        nav.destination = p;
+    }
+
+    private Vector3 RandomNavPoint()
+    {
+        if (points.Count <= 0) return Vector3.zero;
+        int rPoint = Random.Range(0, points.Count);
+        return points[rPoint].position;
+    }
+
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        
     }
 }
