@@ -46,23 +46,14 @@ public class MultiTargetBox : DSingle<MultiTargetBox>
     protected override void PDestroy()
     {
         //
-    }
-
-    public void UpdateList(ISelectable selection)
-    {
-        int count = _selections.Count;
-        _selections[count].TargetText.text = selection.DisplayName;
-        _selections[count].TargetIcon.sprite = selection.GetIcon();
-        _selections[count].HealthBar.BarValue = selection.GetCurrentHealth();
-        _selections[count].gameObject.SetActive(true);
-    }
+    }   
 
     public void UpdateList(List<ISelectable> list)
     {
         ClearList();
         for (int i = 0; i < list.Count; i++)
         {
-            _selections[i].TargetText.text = list[i].DisplayName;
+            //_selections[i].TargetText.text = list[i].DisplayName;
             _selections[i].TargetIcon.sprite = list[i].GetIcon();
             _selections[i].HealthBar.BarValue = list[i].GetCurrentHealth();
             _selections[i].gameObject.SetActive(true);

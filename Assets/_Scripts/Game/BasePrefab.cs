@@ -54,11 +54,13 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     protected int MaxHealth;
     protected float DestroyTimer = 2f;
     protected Player Player = null;
+    protected GameManager GameManager;
 
     //Colors
     protected static readonly Color SelectedColor = Color.green;
     protected static readonly Color DamageColor = Color.red;
     protected static readonly Color PassiveColor = Color.yellow;
+    
 
     protected Rigidbody RigidBody;
 
@@ -118,6 +120,9 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
             gameObject.AddComponent<Rigidbody>();
 
         RigidBody = GetComponent<Rigidbody>();
+
+        //Set the GameManager
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }   
 
     protected void TagPrefab(string tag)

@@ -45,8 +45,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     private float _minVely = -2.33254f;
     private float _maxVely = 3.70712f;
     private Vector2 _smoothDeltaPosition;
-    private bool _moving;
-    private int _destPoint;
+    private bool _moving;    
     private Vector2 _velocity = Vector2.zero;
 
     #endregion
@@ -164,18 +163,11 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public void OnMouseExit()
     {
         //SelectionUI.ClearSingleTarget();
-    }
-
-    protected void GoToNextPoint()
-    {
-        if (points.Count == 0) return;               
-        nav.destination = points[_destPoint].position;
-        _destPoint = (_destPoint + 1) % points.Count;
-    }
-
+    }   
+        
     public void OnMouseDown()
     {
-        //if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         if (!IsSelected)
             Select();
     }

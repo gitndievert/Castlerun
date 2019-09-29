@@ -131,7 +131,12 @@ public class TroopFactory : Build
             var troop = Troops[i];
 
             var image = trans.GetComponent<Image>();
-            image.sprite = troop.GetIcon();            
+            image.sprite = troop.GetIcon();
+            //Shift Alpha
+            var color = image.color;
+            color.a = 0.85f;
+            image.color = color;
+
             trans.GetComponent<Button>().onClick.AddListener(() => Train(troop));           
 
             i++;
@@ -208,11 +213,14 @@ public class TroopFactory : Build
             {
                 gatherer.SetFactory(this);
                 gatherer.HarvestingSelection = ResourceType.Wood;
-                //Come Back for Pathing
-                /*for (int p = 0; p < Player.PlayerPad.ResourcePoints.Length; p++)
+                //TODO: Come Back for Pathing
+                //Using one spawnpoint for now                
+                int i = 0;
+                foreach(Transform points in GameManager.Player1ResourcePoints)
                 {
-                    gatherer.points.Add(p, Player.PlayerPad.ResourcePoints[p]);
-                }*/
+                    gatherer.points.Add(i, points);
+                    i++;
+                }
             }
 
             //_trainedCounter--;

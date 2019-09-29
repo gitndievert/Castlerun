@@ -29,9 +29,7 @@ public class BuildManager : DSingle<BuildManager>
     [Header("Buildings")]
     public List<Build> Builds;    
 
-    public PlacementController Placements { get; private set; }
-
-    public Sprite EmptyIcon;
+    public PlacementController Placements { get; private set; }    
 
     public static ResourceType[] ResourceIndex = {
         ResourceType.Wood,
@@ -71,7 +69,10 @@ public class BuildManager : DSingle<BuildManager>
         foreach (Transform trans in BuildUI.SelectionsPanel.transform)
         {
             var image = trans.GetComponent<Image>();
-            image.sprite = EmptyIcon;
+            image.sprite = null;
+            var color = image.color;
+            color.a = 0f;
+            image.color = color;
             trans.GetComponent<Button>().onClick.RemoveAllListeners();
         }
     }
@@ -90,20 +91,22 @@ public class BuildManager : DSingle<BuildManager>
 
             var image = trans.GetComponent<Image>();
             image.sprite = build.GetIcon();
+            var color = image.color;
 
             if (!build.EnableFromBuilder)
-            {
-                var color = image.color;
+            {                
                 color.r = 61f;
                 color.g = 61f;
                 color.b = 61f;
-                color.a = 0.5f;
-                image.color = color;
+                color.a = 0.5f;                
             }
             else
             {
                 trans.GetComponent<Button>().onClick.AddListener(() => LoadByType(build.BuildingLabelType));
+                color.a = 0.85f;
             }
+
+            image.color = color;
 
             i++;
         }        

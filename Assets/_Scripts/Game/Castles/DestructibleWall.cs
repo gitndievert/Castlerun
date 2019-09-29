@@ -37,7 +37,7 @@ public class DestructibleWall : BasePrefab, ISelectable
 
     public void OnMouseDown()
     {
-        IsSelected = true;
+        /*IsSelected = true;
         switch (GetTag)
         {
             case Global.BUILD_TAG:
@@ -46,7 +46,7 @@ public class DestructibleWall : BasePrefab, ISelectable
             case Global.ENEMY_TAG:
                 SelectionUI.UpdateEnemyTarget(this);
                 break;
-        }
+        }*/
     }
 
     public void Select()

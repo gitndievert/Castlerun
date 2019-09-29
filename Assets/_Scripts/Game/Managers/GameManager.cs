@@ -28,10 +28,18 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private readonly int _numOfPlayer = 2;
 
+    [Header("Spawn Points")]
     public Transform Player1SpawnPoint;
     public Transform Player2SpawnPoint;
     //public Transform Player3SpawnPoint;
     //public Transform Player4SpawnPoint;
+
+    [Header("Resource Points")]
+    public Transform Player1ResourcePoints;
+    public Transform Player2ResourcePoints;
+    //public Transform Player3ResourcePoints;
+    //public Transform Player4ResourcePoints;
+
 
     void Start()
     {   

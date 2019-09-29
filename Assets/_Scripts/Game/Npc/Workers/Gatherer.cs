@@ -37,8 +37,9 @@ public class Gatherer : Troop
     [Space(5)]
     [Header("# of trips (random)")]
     public int HarvestTrips = 1;
-         
-    
+
+    protected int DestPoint;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -76,5 +77,14 @@ public class Gatherer : Troop
     public override void Fire()
     {
         throw new System.NotImplementedException();
+    }
+
+    protected void GoToNextPoint()
+    {
+        if (points.Count == 0) return;
+        nav.destination = points[DestPoint].position;
+        //DestPoint = (DestPoint + 1) % points.Count;
+        int newpoint = Random.Range(0, points.Count);
+        DestPoint = newpoint == DestPoint ? (DestPoint + 1) % points.Count : newpoint;        
     }
 }

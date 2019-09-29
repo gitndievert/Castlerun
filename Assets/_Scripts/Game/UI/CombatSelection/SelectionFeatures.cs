@@ -19,8 +19,7 @@ using UnityEngine.UI;
 
 [Serializable]
 public class SelectionFeatures : MonoBehaviour
-{
-    public TextMeshProUGUI TargetText;
+{    
     public Image TargetIcon;
     public ProgressBar HealthBar;
 }

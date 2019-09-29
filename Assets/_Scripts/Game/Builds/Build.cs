@@ -117,21 +117,9 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     {
         if (!isFinished) return;        
         //Ignore all UI targets
-        //if (EventSystem.current.IsPointerOverGameObject()) return;
-
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         IsSelected = true;
-        switch (GetTag)
-        {
-            case Global.ARMY_TAG:
-                SelectionUI.UpdateSingleTarget(this);
-                break;
-            case Global.BUILD_TAG:
-                SelectionUI.UpdateSingleTarget(this);
-                break;
-            case Global.ENEMY_TAG:
-                SelectionUI.UpdateEnemyTarget(this);
-                break;
-        }
+        SelectionUI.UpdateSingleTarget(this);        
     }
     
     /// <summary>

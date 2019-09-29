@@ -207,7 +207,7 @@ public class Selection : DSingle<Selection>
 
         bool insideBox = viewportBounds.Contains(camera.WorldToViewportPoint(gameObject.transform.position));        
 
-        return insideBox && gameObject.GetComponent<ISelectable>() != null;        
+        return insideBox && gameObject.GetComponent<ISelectable>() != null && gameObject.tag == Global.ARMY_TAG;        
     }
 
     public void UpdateMassList(ISelectable selection)
@@ -231,7 +231,8 @@ public class Selection : DSingle<Selection>
         SingleTargetSelected = selection;
         _ui.SingleTargetBox.SetTarget(SingleTargetSelected);
         ClearAll();
-        UpdateMassList(SingleTargetSelected);       
+        if(selection.GameObject.tag == Global.ARMY_TAG)
+            UpdateMassList(SingleTargetSelected);       
     }
        
     public void UpdateEnemyTarget(ISelectable selection)
