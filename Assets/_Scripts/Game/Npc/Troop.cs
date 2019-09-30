@@ -30,6 +30,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public Light SelectionTarget;
     public bool IsSelected { get; set; }    
     public GameObject GameObject => gameObject;
+
+    public TroopFactory AssociatedFactory { get; private set; }
     #endregion
 
     #region Visual Troop Control        
@@ -198,6 +200,11 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         }
     }
 
+    public void SetFactory(TroopFactory factory)
+    {
+        AssociatedFactory = factory;
+    }
+
     /// <summary>
     /// Called Method on Target Selection
     /// </summary>
@@ -355,6 +362,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     public override void Die()
     {
         anim.Play("Death1");
+        AssociatedFactory.UnListTroop();
         base.Die();
     }
 

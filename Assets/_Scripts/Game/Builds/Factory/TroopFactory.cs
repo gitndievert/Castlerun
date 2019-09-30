@@ -42,7 +42,9 @@ public class TroopFactory : Build
     /// </summary>
     public int NumberToTrain = 1;
 
+    [SerializeField]
     private int _trainedCounter = 0;
+
     private bool _isQueued;    
     private BuildArea _buildArea;
     private Queue<Troop> _troopQueue = new Queue<Troop>();
@@ -52,11 +54,8 @@ public class TroopFactory : Build
     /// </summary>
     public int MaxTrained = 5;
 
-    public Transform SpawnPoint;
-       
-
-    private ResourceType _pickType;
-    private bool _IsBuilding = false;        
+    public Transform SpawnPoint;          
+      
 
     // Start is called before the first frame update
     protected override void Start()
@@ -86,24 +85,18 @@ public class TroopFactory : Build
     {
         if (_troopQueue.Count > 0 && _isQueued)
         {
-            foreach(var troop in _troopQueue)
+            if (_trainedCounter <= MaxTrained)
             {
-                StartCoroutine(QueueTroop(troop));
+                foreach (var troop in _troopQueue)
+                {
+                    StartCoroutine(QueueTroop(troop));
+                    Player.Inventory.Set(troop.Costs);                    
+                }
             }
 
             _troopQueue.Dequeue();
             _isQueued = false;
-        }
-
-        if (!_IsBuilding && _trainedCounter != MaxTrained)
-        {            
-            _IsBuilding = true;            
-        }
-        else if (_IsBuilding && _trainedCounter == MaxTrained)
-        {
-            StopTraining();
-            Debug.Log("Max Number of Harvesters Made");
-        }        
+        }                   
     }
 
     public override void OnMouseDown()
@@ -138,16 +131,22 @@ public class TroopFactory : Build
 
             i++;
         }
-    }
-    
-    public void StopTraining()
+    }  
+
+    public void UnListTroop()
     {
-        CancelInvoke();
-        _IsBuilding = false;
+        if(_trainedCounter > 1)
+            _trainedCounter--;
     }
     
     public void Train(Troop selectedTroop)
     {
+        if(_trainedCounter >= MaxTrained)
+        {
+            Global.Message("Cannot Train anymore troops");
+            return;
+        }
+        
         //Keep Factory selected
         //TODO: Here
         //BUGGY SHIT CODE NEED TO FIX
@@ -164,17 +163,14 @@ public class TroopFactory : Build
         }
 
         if (metCosts)
-        {
-            if (_trainedCounter == MaxTrained)
-            {
-                //Cannot train anymore troops message                
-                return;
-            }
-
-            Player.Inventory.Set(costs);
-            //_trainedCounter++;
+        {   
+            _trainedCounter++;
             _isQueued = true;
             _troopQueue.Enqueue(selectedTroop);            
+        }
+        else
+        {
+            Global.Message("Not enough resources to make troop");
         }
 
         RefreshTroopPanel();
@@ -195,6 +191,7 @@ public class TroopFactory : Build
             var troop = makeTroop.GetComponent<Troop>();
             //Add Player to Troop
             troop.SetPlayer(Player);
+            troop.SetFactory(this);
 
             //Move up the troop (GOING TO TABLE FOR NOW)
             //troop.Move(SpawnPoint.position + (Vector3.forward * PlacementDistance));
@@ -205,23 +202,17 @@ public class TroopFactory : Build
                 SoundManager.PlaySound(troop.FreshTroop);
             }
 
-            Gatherer gatherer = makeTroop.GetComponent<Gatherer>();
             //If Troop is a Gatherer
+            Gatherer gatherer = makeTroop.GetComponent<Gatherer>();            
             if (gatherer != null)
-            {
-                gatherer.SetFactory(this);
-                gatherer.HarvestingSelection = ResourceType.Wood;
-                //TODO: Come Back for Pathing
-                //Using one spawnpoint for now                
+            {                                                     
                 int i = 0;
                 foreach(Transform points in GameManager.Player1ResourcePoints)
                 {
                     gatherer.points.Add(i, points);
                     i++;
                 }
-            }
-
-            //_trainedCounter--;
+            }            
         }        
 
         yield return null;

@@ -38,9 +38,7 @@ public class Gatherer : Troop
     public ResourceType HarvestingSelection;
         
     [HideInInspector]
-    public bool IsHarvesting = false;
-
-    public TroopFactory AssociatedFactory { get; private set; }
+    public bool IsHarvesting = false;    
 
     public override string DisplayName => "Gatherer";
 
@@ -68,12 +66,6 @@ public class Gatherer : Troop
             }            
         }
     }
-
-    public void SetFactory(TroopFactory factory)
-    {
-        AssociatedFactory = factory;
-    }
-    
 
     private IEnumerator HarvestWait()
     {
