@@ -33,11 +33,6 @@ public class TroopFactory : Build
     public Troop[] Troops;    
 
     /// <summary>
-    /// This is the start timer for the initial Troops. Hi Jessia
-    /// </summary>
-    public float StartTime;
-
-    /// <summary>
     /// Time to train each troop
     /// </summary>
     public float TrainingTime;
@@ -189,7 +184,7 @@ public class TroopFactory : Build
     {        
         yield return new WaitForSeconds(TrainingTime);
 
-        var makeTroop = Instantiate(selectedTroop.gameObject, transform.position + (Vector3.forward * 2 * PlacementDistance), Quaternion.identity);
+        var makeTroop = Instantiate(selectedTroop.gameObject, SpawnPoint.position, Quaternion.identity);
 
         if (Player != null)
         {
@@ -200,8 +195,9 @@ public class TroopFactory : Build
             var troop = makeTroop.GetComponent<Troop>();
             //Add Player to Troop
             troop.SetPlayer(Player);
-            //Move up the troop
-            troop.Move(SpawnPoint.position);
+
+            //Move up the troop (GOING TO TABLE FOR NOW)
+            //troop.Move(SpawnPoint.position + (Vector3.forward * PlacementDistance));
 
             //Play Spawning Sound FX
             if (troop.FreshTroop != null /*&& i == NumberToTrain - 1*/)

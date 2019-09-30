@@ -131,9 +131,11 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
                     var x = Mathf.Clamp(Mathf.Round(velocity.x * 1000) / 1000, _minVelx, _maxVelx);
                     var y = Mathf.Clamp(Mathf.Round(velocity.y * 1000) / 1000, _minVely, _maxVely);
 
-                    if (nav.remainingDistance >= nav.stoppingDistance)
-                    {
+                    Debug.Log("Remaining Dist " + nav.remainingDistance);
+                    Debug.Log("Stopping Dist " + nav.stoppingDistance);
 
+                    if (nav.remainingDistance >= nav.stoppingDistance)
+                    {                        
                         anim.SetBool("move", true);
                         anim.SetFloat("velx", x);
                         anim.SetFloat("vely", y);
@@ -316,9 +318,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
 
     public void MoveStop()
     {
-        _moving = false;
-        //nav.SetDestination(transform.position);
-        //nav.destination = transform.position;
+        _moving = false;        
         anim.SetBool("move", false);
         nav.velocity = Vector3.zero;
         nav.isStopped = true;        

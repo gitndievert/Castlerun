@@ -86,6 +86,18 @@ public static class Global
     public static bool InsideCastle = false;
     #endregion
 
+    #region Gameplay Stats
+    //Player
+    public static int PlayerMoveSpeedBonus = 0;
+    public static int PlayerHealthBonus = 0;
+
+    //Troop
+    public static float ConstructionSpeedBonus = 1f;
+    public static int TroopHealthBonus = 0;
+    public static int TroopAttackBonus = 0;
+    #endregion
+
+
     public static void Message(string message)
     {
         UIManager.Instance.Messages.text = message;

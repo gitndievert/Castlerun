@@ -21,8 +21,6 @@ public class Gatherer : Troop
     public const int RockQuantity = 20;
     public const int MetalQuantity = 20;
 
-    public ResourceType HarvestingSelection;
-
     /// <summary>
     /// 9 Second Harvest Time
     /// </summary>
@@ -36,19 +34,16 @@ public class Gatherer : Troop
     /// </summary>
     public const float HarvestTimeMetal = 20f;
 
-    [Space(5)]
+    [Header("Harvesting Properties")]
+    public ResourceType HarvestingSelection;
+        
+    [HideInInspector]
     public bool IsHarvesting = false;
 
     public TroopFactory AssociatedFactory { get; private set; }
 
     public override string DisplayName => "Gatherer";
 
-    /// <summary>
-    /// Random set of trips
-    /// </summary>
-    [Space(5)]
-    [Header("# of trips (random)")]
-    public int HarvestTrips = 1;
 
     protected int DestPoint;
 

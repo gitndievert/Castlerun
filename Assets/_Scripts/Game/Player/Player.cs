@@ -195,16 +195,14 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     private void Update()
     {
         /////// ATTACK
-        if (!Global.BuildMode && Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
-        {
-            if (SwingEnemyTargetSelected() != null)
+        if (!Global.BuildMode && (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON)
+            || Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON)))
+        {   
+            //COME BACK!!!! Attack Methods go here                
+            /*if (!_swinging)
             {
-                //COME BACK!!!! Attack Methods go here                
-                if (!_swinging)
-                {
-                    Swing();
-                }                
-            }
+                Swing();
+            }       */                     
         }
 
         //Temporary, work out the details for build mappings later
@@ -343,11 +341,14 @@ public class Player : BasePrefab, IPlayer, IPunObservable
                 case Global.ENEMY_TAG:
                     Damage.ApplyDamage(target, 5, 25, true);
                     break;
-            }                      
+            }
+        }
+        else
+        {
+            _movement.SwingPlayer();
         }
 
-        _swinging = false;
-        _movement.SwingStop();
+        _swinging = false;        
     }
     
     private ISelectable SwingEnemyTargetSelected()
