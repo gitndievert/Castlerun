@@ -15,6 +15,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlacementController : MonoBehaviour
 {
@@ -168,7 +169,14 @@ public class PlacementController : MonoBehaviour
         if (_triggerBuild)
         {
             if (_currObj != null) KillBuild();
-            _currObj = Instantiate(PlaceableObjectPrefab, Player.transform.position * 2,Quaternion.identity);            
+            if (Global.DeveloperMode)
+            {
+                _currObj = Instantiate(PlaceableObjectPrefab, Player.transform.position * 2, Quaternion.identity);
+            }
+            else
+            {
+                _currObj = PhotonNetwork.Instantiate(PlaceableObjectPrefab.name, Player.transform.position * 2, Quaternion.identity);
+            }
             _triggerBuild = false;
         }       
     }
