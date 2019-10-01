@@ -98,8 +98,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             throw new System.Exception("Please add a cost");
         
         
-        _smoothDeltaPosition = default;
-        _moving = true;              
+        _smoothDeltaPosition = default;                   
     }
 
     // Update is called once per frame
@@ -136,7 +135,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
                     Debug.Log("Remaining Dist " + nav.remainingDistance);
                     Debug.Log("Stopping Dist " + nav.stoppingDistance);
 
-                    if (nav.remainingDistance >= nav.stoppingDistance)
+                    if ((nav.remainingDistance + nav.stoppingDistance) > nav.stoppingDistance)
                     {                        
                         anim.SetBool("move", true);
                         anim.SetFloat("velx", x);
@@ -264,6 +263,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
     protected virtual void OnCollisionEnter(Collision collision)
     {
         //Come Back here!
+        if (!_moving) return;
         if (collision.transform.tag == "Player") return;
         if (collision.transform.tag == Global.ARMY_TAG)
         {            
@@ -328,7 +328,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
         _moving = false;        
         anim.SetBool("move", false);
         nav.velocity = Vector3.zero;
-        nav.isStopped = true;        
+        nav.isStopped = true;
+        nav.ResetPath();
     }
 
     public override void SetHit(int amount)

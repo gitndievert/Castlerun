@@ -26,7 +26,6 @@ using UnityEngine.UI;
  * troops, either Army or Gathering, etc. 
  * 
  */
-[RequireComponent(typeof(PhotonTransformView))]
 public class TroopFactory : Build, IPunObservable
 {    
     public float PlacementDistance = 2f;
@@ -72,11 +71,12 @@ public class TroopFactory : Build, IPunObservable
     {
         if (!_buildArea.CanBuild) return false;
         base.ConfirmPlacement();
-        _buildArea.ShowPlane(false);        
+        _buildArea.ShowPlane(false);
+        CamShake.Instance.Shake(1f, .5f);
         /*if (BuildTime > 0)
         {
             StartCoroutine(RunBuild());            
-        }*/        
+        }*/
 
         return true;
     }
