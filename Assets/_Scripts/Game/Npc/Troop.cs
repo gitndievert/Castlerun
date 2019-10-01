@@ -156,6 +156,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         }
     }
 
+    #region PUN Callbacks
     //Main method for serialization on Player actions
     public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -175,6 +176,12 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         }
     }
 
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        object[] instantiationData = info.photonView.InstantiationData;
+    }
+
+    #endregion
 
     public void OnAnimatorMove()
     {

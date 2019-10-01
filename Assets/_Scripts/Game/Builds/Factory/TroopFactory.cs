@@ -97,7 +97,7 @@ public class TroopFactory : Build, IPunObservable
 
             _troopQueue.Dequeue();
             _isQueued = false;
-        }                   
+        }                         
     }
 
     public override void OnMouseDown()
@@ -181,7 +181,16 @@ public class TroopFactory : Build, IPunObservable
     {        
         yield return new WaitForSeconds(TrainingTime);
 
-        var makeTroop = Instantiate(selectedTroop.gameObject, SpawnPoint.position, Quaternion.identity);
+        GameObject makeTroop = null;
+
+        if (Global.DeveloperMode)
+        {
+            makeTroop = Instantiate(selectedTroop.gameObject, SpawnPoint.position, Quaternion.identity);
+        }
+        else
+        {
+            makeTroop = PhotonNetwork.Instantiate(selectedTroop.gameObject.name, SpawnPoint.position, Quaternion.identity);
+        }
 
         if (Player != null)
         {
@@ -232,6 +241,19 @@ public class TroopFactory : Build, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+
+            //stream.SendNext(this.IsFiring);
+            //stream.SendNext(this.Health);
+        }
+        else
+        {
+            // Network player, receive data
+
+            //this.IsFiring = (bool)stream.ReceiveNext();
+            //this.Health = (float)stream.ReceiveNext();
+        }
     }
 }

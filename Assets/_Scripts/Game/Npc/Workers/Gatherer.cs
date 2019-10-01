@@ -13,6 +13,7 @@
 // ********************************************************************
 
 using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 
 public class Gatherer : Troop
@@ -129,6 +130,11 @@ public class Gatherer : Troop
     }
 
     protected override void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
+    public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         
     }
