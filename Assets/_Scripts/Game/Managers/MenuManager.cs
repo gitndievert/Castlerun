@@ -138,7 +138,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
         SceneManager.LoadSceneAsync(scenename);
     }
 
-    /*public void OnClick_PUN_Login()
+    public void OnClick_PUN_Login()
     {
         string playerName = PlayerNameInput.text;
         
@@ -151,7 +151,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
         {
             Debug.LogError("Player Name is invalid.");
         }
-    }*/
+    }
 
     public void OnClick_Main_Quit()
     {

@@ -12,6 +12,7 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -19,7 +20,7 @@ using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CapsuleCollider))]
-public abstract class Troop : BasePrefab, ICharacter, ISelectable
+public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservable
 {
     const float TROOP_DESTROY_TIMER = 4f;
     
@@ -154,7 +155,27 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable
             }
         }
     }
-        
+
+    //Main method for serialization on Player actions
+    public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+
+            //stream.SendNext(this.IsFiring);
+            //stream.SendNext(this.Health);
+        }
+        else
+        {
+            // Network player, receive data
+
+            //this.IsFiring = (bool)stream.ReceiveNext();
+            //this.Health = (float)stream.ReceiveNext();
+        }
+    }
+
+
     public void OnAnimatorMove()
     {
         if (!_moving) return;
