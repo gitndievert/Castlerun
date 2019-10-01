@@ -109,7 +109,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
         string playerName = PlayerNameInput.text;
 
-        if (!playerName.Equals(""))
+        if (!string.IsNullOrEmpty(playerName))
         {
             PhotonNetwork.LocalPlayer.NickName = playerName;            
         }
@@ -127,7 +127,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
         else
         {            
             // #Critical, we must first and foremost connect to Photon Online Server.
-            PhotonNetwork.GameVersion = this.gameVersion;
+            PhotonNetwork.GameVersion = gameVersion;
             PhotonNetwork.ConnectUsingSettings();
         }
     }
@@ -138,11 +138,11 @@ public class MenuManager : MonoBehaviourPunCallbacks
         SceneManager.LoadSceneAsync(scenename);
     }
 
-    public void OnClick_PUN_Login()
+    /*public void OnClick_PUN_Login()
     {
         string playerName = PlayerNameInput.text;
-
-        if (!playerName.Equals(""))
+        
+        if(!string.IsNullOrEmpty(playerName))
         {
             PhotonNetwork.LocalPlayer.NickName = playerName;            
             PhotonNetwork.ConnectUsingSettings();            
@@ -151,7 +151,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
         {
             Debug.LogError("Player Name is invalid.");
         }
-    }
+    }*/
 
     public void OnClick_Main_Quit()
     {

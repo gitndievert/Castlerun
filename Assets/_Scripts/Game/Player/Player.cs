@@ -111,10 +111,9 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             Inventory = GetComponent<Inventory>();
             _movement = GetComponent<MovementInput>();
             _battleCursor = GetComponent<BattleCursor>();
-            if (photonView.Owner != null)
-            {
-                PlayerName = photonView.Owner.NickName;
-            }
+
+
+            PlayerName = PhotonNetwork.LocalPlayer.NickName;            
 
             CameraRotate.target = transform;
             MiniMapControls.target = transform;

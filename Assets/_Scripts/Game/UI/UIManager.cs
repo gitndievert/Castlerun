@@ -18,11 +18,9 @@ using TMPro;
 
 public partial class UIManager : PSingle<UIManager>
 {
-
-
     public Sprite DefaultIcon;
 
-    public TextMeshProUGUI Messages;
+    public TextMeshProUGUI Messages;    
 
     /// <summary>
     /// Inventory Panel

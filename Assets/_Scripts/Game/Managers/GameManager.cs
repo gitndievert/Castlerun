@@ -14,6 +14,7 @@
 
 using Photon.Pun;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Transform Player2ResourcePoints;
     //public Transform Player3ResourcePoints;
     //public Transform Player4ResourcePoints;
+    public TextMeshProUGUI Messages;
+    public TextMeshProUGUI PlayersConnected;
 
     private void Awake()
     {
@@ -67,22 +70,26 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (Player.LocalPlayerInstance == null)
             {
-                Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
+                Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);                
 
                 var spawnPos = PhotonNetwork.IsMasterClient ? Player1SpawnPoint.position : Player2SpawnPoint.position;                
 
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                 var character = PhotonNetwork.Instantiate(PlayerInstance.name, spawnPos, Quaternion.identity, 0);
 
+                if(PhotonNetwork.IsMasterClient)
+                {
+                    PlayersConnected.text += PlayerInstance.name;
+                }
+                
                 //Kill music for now
                 MusicManager.stop(3f);
             }
             else
             {
-
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
-        }
+        }       
     }
 
     private void Update()
@@ -122,12 +129,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player other)
     {
         Debug.Log("OnPlayerEnteredRoom() " + other.NickName); // not seen if you're the player connecting
-        Global.Message($"Player {other.NickName} entered the game");
+        Messages.text = $"Player {other.NickName} entered the game";
+
+        PlayersConnected.text += other.NickName;
 
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-            LoadArena();
+            //LoadArena();
         }
     }
     
@@ -138,13 +147,19 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Photon.Realtime.Player other)
     {
         Debug.Log("OnPlayerLeftRoom() " + other.NickName); // seen when other disconnects
-        Global.Message($"Player {other.NickName} left the game");
+        Messages.text = $"Player {other.NickName} left the game";
+
+        PlayersConnected.text = "";
+
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            PlayersConnected.text += player.NickName;
+        }
 
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-
-            LoadArena();
+            //LoadArena();
         }
     }
 
