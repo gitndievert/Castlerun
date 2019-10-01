@@ -155,6 +155,10 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
     public void OnClick_Main_Quit()
     {
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.LeaveRoom();
+        }
         Application.Quit();
     }
 
@@ -210,6 +214,14 @@ public class MenuManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public void CreateRoom()
+    {
+        int randomRoom = Random.Range(0, 10000);
+        PhotonNetwork.CreateRoom("Room" + randomRoom, new RoomOptions {
+            MaxPlayers = this.maxPlayersPerRoom
+        });
+    }
+
     /// <summary>
     /// Called when a JoinRandom() call failed. The parameter provides ErrorCode and message.
     /// </summary>
@@ -221,7 +233,12 @@ public class MenuManager : MonoBehaviourPunCallbacks
         Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
 
         // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = this.maxPlayersPerRoom });
+        CreateRoom();
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        CreateRoom();
     }
 
 
@@ -260,256 +277,5 @@ public class MenuManager : MonoBehaviourPunCallbacks
         }
     }
 
-
-
-
-    #endregion
-
-    #region PUN Lobby/Room Code (Commented Out)
-
-    /*
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    {
-        ClearRoomListView();
-
-        UpdateCachedRoomList(roomList);
-        UpdateRoomListView();
-    }
-
-    public override void OnLeftLobby()
-    {
-        cachedRoomList.Clear();
-
-        ClearRoomListView();
-    }
-
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        OnClick_LoadPanelsByName("MainMenuPanel");
-    }
-
-    public override void OnJoinRoomFailed(short returnCode, string message)
-    {
-        OnClick_LoadPanelsByName("MainMenuPanel");
-    }
-    
-    public override void OnConnectedToMaster()
-    {
-        OnClick_LoadPanelsByName("GameSelection");
-    }
-
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        string roomName = "Room " + Random.Range(1000, 10000);
-
-        RoomOptions options = new RoomOptions { MaxPlayers = 8 };
-
-        PhotonNetwork.CreateRoom(roomName, options, null);
-    }
-
-    public override void OnJoinedRoom()
-    {
-        SetActivePanel(InsideRoomPanel.name);
-
-        if (playerListEntries == null)
-        {
-            playerListEntries = new Dictionary<int, GameObject>();
-        }
-
-        foreach (Player p in PhotonNetwork.PlayerList)
-        {
-            GameObject entry = Instantiate(PlayerListEntryPrefab);
-            entry.transform.SetParent(InsideRoomPanel.transform);
-            entry.transform.localScale = Vector3.one;
-            entry.GetComponent<PlayerListEntry>().Initialize(p.ActorNumber, p.NickName);
-
-            object isPlayerReady;
-            if (p.CustomProperties.TryGetValue(AsteroidsGame.PLAYER_READY, out isPlayerReady))
-            {
-                entry.GetComponent<PlayerListEntry>().SetPlayerReady((bool)isPlayerReady);
-            }
-
-            playerListEntries.Add(p.ActorNumber, entry);
-        }
-
-        StartGameButton.gameObject.SetActive(CheckPlayersReady());
-
-        Hashtable props = new Hashtable
-            {
-                {AsteroidsGame.PLAYER_LOADED_LEVEL, false}
-            };
-        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-    }
-
-    public override void OnLeftRoom()
-    {
-        OnClick_LoadPanelsByName("MainMenuPanel");
-
-        foreach (GameObject entry in playerListEntries.Values)
-        {
-            Destroy(entry.gameObject);
-        }
-
-        playerListEntries.Clear();
-        playerListEntries = null;
-    }
-
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        GameObject entry = Instantiate(PlayerListEntryPrefab);
-        entry.transform.SetParent(InsideRoomPanel.transform);
-        entry.transform.localScale = Vector3.one;
-        entry.GetComponent<PlayerListEntry>().Initialize(newPlayer.ActorNumber, newPlayer.NickName);
-
-        playerListEntries.Add(newPlayer.ActorNumber, entry);
-
-        StartGameButton.gameObject.SetActive(CheckPlayersReady());
-    }
-
-    public override void OnPlayerLeftRoom(Player otherPlayer)
-    {
-        Destroy(playerListEntries[otherPlayer.ActorNumber].gameObject);
-        playerListEntries.Remove(otherPlayer.ActorNumber);
-
-        StartGameButton.gameObject.SetActive(CheckPlayersReady());
-    }
-
-    public override void OnMasterClientSwitched(Player newMasterClient)
-    {
-        if (PhotonNetwork.LocalPlayer.ActorNumber == newMasterClient.ActorNumber)
-        {
-            StartGameButton.gameObject.SetActive(CheckPlayersReady());
-        }
-    }
-
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
-    {
-        if (playerListEntries == null)
-        {
-            playerListEntries = new Dictionary<int, GameObject>();
-        }
-
-        GameObject entry;
-        if (playerListEntries.TryGetValue(targetPlayer.ActorNumber, out entry))
-        {
-            object isPlayerReady;
-            if (changedProps.TryGetValue(AsteroidsGame.PLAYER_READY, out isPlayerReady))
-            {
-                entry.GetComponent<PlayerListEntry>().SetPlayerReady((bool)isPlayerReady);
-            }
-        }
-
-        StartGameButton.gameObject.SetActive(CheckPlayersReady());
-    }
-
-    public void OnClick_CreateGame()
-    {
-        string roomName = RoomNameInputField.text;
-        roomName = (roomName.Equals(string.Empty)) ? "Room " + Random.Range(1000, 10000) : roomName;
-
-        byte.TryParse(MaxPlayersInputField.text, out byte maxPlayers);
-        maxPlayers = (byte)Mathf.Clamp(maxPlayers, 2, 8);
-
-        RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers };
-
-        PhotonNetwork.CreateRoom(roomName, options, null);
-    }  
-
-    public void OnClick_JoinRandomGame()
-    {
-        SetActivePanel(JoinRandomRoomPanel.name);
-
-        PhotonNetwork.JoinRandomRoom();
-    }
-
-
-
-    public void OnClick_RoomListButton()
-    {
-        if (!PhotonNetwork.InLobby)
-        {
-            PhotonNetwork.JoinLobby();
-        }
-
-        SetActivePanel(RoomListPanel.name);
-    }
-    
-    private void ClearRoomListView()
-    {
-        foreach (GameObject entry in roomListEntries.Values)
-        {
-            Destroy(entry.gameObject);
-        }
-
-        roomListEntries.Clear();
-    }
-
-    private bool CheckPlayersReady()
-    {
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            return false;
-        }
-
-        foreach (Player p in PhotonNetwork.PlayerList)
-        {
-            object isPlayerReady;
-            if (p.TryGetValue(AsteroidsGame.PLAYER_READY, out isPlayerReady))
-            {
-                if (!(bool)isPlayerReady)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private void UpdateCachedRoomList(List<RoomInfo> roomList)
-    {
-        foreach (RoomInfo info in roomList)
-        {
-            // Remove room from cached room list if it got closed, became invisible or was marked as removed
-            if (!info.IsOpen || !info.IsVisible || info.RemovedFromList)
-            {
-                if (cachedRoomList.ContainsKey(info.Name))
-                {
-                    cachedRoomList.Remove(info.Name);
-                }
-
-                continue;
-            }
-
-            // Update cached room info
-            if (cachedRoomList.ContainsKey(info.Name))
-            {
-                cachedRoomList[info.Name] = info;
-            }
-            // Add new room info to cache
-            else
-            {
-                cachedRoomList.Add(info.Name, info);
-            }
-        }
-
-        private void UpdateRoomListView()
-        {
-            foreach (RoomInfo info in cachedRoomList.Values)
-            {
-                GameObject entry = Instantiate(RoomListEntryPrefab);
-                entry.transform.SetParent(RoomListContent.transform);
-                entry.transform.localScale = Vector3.one;
-                entry.GetComponent<RoomListEntry>().Initialize(info.Name, (byte)info.PlayerCount, info.MaxPlayers);
-
-                roomListEntries.Add(info.Name, entry);
-            }
-        }
-        */
-
-    #endregion
+    #endregion   
 }
