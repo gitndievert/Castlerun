@@ -3072,7 +3072,7 @@ GameObject:
   m_Component:
   - component: {fileID: 235755484}
   m_Layer: 0
-  m_Name: Managers
+  m_Name: Managers (Base)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5429,7 +5429,7 @@ MonoBehaviour:
     type: 3}
   Builds:
   - {fileID: 4708475030159735913, guid: eaf132c037746644588252e091f4b8f3, type: 3}
-  - {fileID: 5094614312082418547, guid: 54672a048a056214aae7a6e4dae17ef5, type: 3}
+  - {fileID: 5094614312082418547, guid: 590bc15705e4aa746a9f5389937b1c8e, type: 3}
   - {fileID: 6854099731230021014, guid: 0a1921658c5eece48883559500f71306, type: 3}
 --- !u!114 &609087164
 MonoBehaviour:
@@ -19337,6 +19337,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027255149173426388, guid: 203dad0aba3e50a45ac10f1873da4f03,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 15.899963
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838747099017877483, guid: 203dad0aba3e50a45ac10f1873da4f03,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 15.899963
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 203dad0aba3e50a45ac10f1873da4f03, type: 3}

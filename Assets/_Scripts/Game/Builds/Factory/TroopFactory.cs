@@ -26,7 +26,7 @@ using UnityEngine.UI;
  * troops, either Army or Gathering, etc. 
  * 
  */
-
+[RequireComponent(typeof(PhotonTransformView))]
 public class TroopFactory : Build, IPunObservable
 {    
     public float PlacementDistance = 2f;

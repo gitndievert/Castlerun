@@ -27,9 +27,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     [Tooltip("The prefab to use for representing the player")]
     public GameObject PlayerInstance;            
 
-    [SerializeField]
-    private readonly int _numOfPlayer = 2;
-
     [Header("Spawn Points")]
     public Transform Player1SpawnPoint;
     public Transform Player2SpawnPoint;
@@ -125,11 +122,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player other)
     {
         Debug.Log("OnPlayerEnteredRoom() " + other.NickName); // not seen if you're the player connecting
+        Global.Message($"Player {other.NickName} entered the game");
 
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-
             LoadArena();
         }
     }
@@ -141,6 +138,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Photon.Realtime.Player other)
     {
         Debug.Log("OnPlayerLeftRoom() " + other.NickName); // seen when other disconnects
+        Global.Message($"Player {other.NickName} left the game");
 
         if (PhotonNetwork.IsMasterClient)
         {

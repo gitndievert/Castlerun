@@ -355,9 +355,10 @@ GameObject:
   - component: {fileID: 5094614312082418557}
   - component: {fileID: 5094614312082418546}
   - component: {fileID: 5094614312082418547}
-  - component: {fileID: 5333281869029399293}
+  - component: {fileID: -684869643655694386}
+  - component: {fileID: 8435005005205980577}
   m_Layer: 2
-  m_Name: Barracks
+  m_Name: P_Barracks
   m_TagString: Build
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -449,7 +450,7 @@ MonoBehaviour:
   _trainedCounter: 0
   MaxTrained: 5
   SpawnPoint: {fileID: 5130091359838991442}
---- !u!114 &5333281869029399293
+--- !u!114 &-684869643655694386
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -467,10 +468,26 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
+  - {fileID: 8435005005205980577}
   - {fileID: 5094614312082418547}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8435005005205980577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5094614312082418545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1001 &3040507933647252820
 PrefabInstance:
   m_ObjectHideFlags: 0
