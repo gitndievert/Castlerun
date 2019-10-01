@@ -12,6 +12,7 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +27,7 @@ using UnityEngine.UI;
  * 
  */
 
-public class TroopFactory : Build
+public class TroopFactory : Build, IPunObservable
 {    
     public float PlacementDistance = 2f;
 
@@ -222,5 +223,15 @@ public class TroopFactory : Build
     {
         if(EventSystem.current.IsPointerOverGameObject()) return;
         base.UnSelect();
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        object[] instantiationData = info.photonView.InstantiationData;        
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        
     }
 }

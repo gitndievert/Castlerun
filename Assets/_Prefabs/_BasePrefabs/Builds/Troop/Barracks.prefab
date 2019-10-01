@@ -355,7 +355,6 @@ GameObject:
   - component: {fileID: 5094614312082418557}
   - component: {fileID: 5094614312082418546}
   - component: {fileID: 5094614312082418547}
-  - component: {fileID: -7118450778286170725}
   m_Layer: 2
   m_Name: Barracks
   m_TagString: Build
@@ -449,27 +448,6 @@ MonoBehaviour:
   _trainedCounter: 0
   MaxTrained: 5
   SpawnPoint: {fileID: 5130091359838991442}
---- !u!114 &-7118450778286170725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5094614312082418545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1001 &3040507933647252820
 PrefabInstance:
   m_ObjectHideFlags: 0

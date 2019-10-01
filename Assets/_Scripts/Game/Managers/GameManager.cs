@@ -75,7 +75,10 @@ public class GameManager : MonoBehaviourPunCallbacks
                 var spawnPos = PhotonNetwork.IsMasterClient ? Player1SpawnPoint.position : Player2SpawnPoint.position;                
 
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                var character = PhotonNetwork.Instantiate(PlayerInstance.name, spawnPos, Quaternion.identity, 0);                
+                var character = PhotonNetwork.Instantiate(PlayerInstance.name, spawnPos, Quaternion.identity, 0);
+
+                //Kill music for now
+                MusicManager.stop(3f);
             }
             else
             {

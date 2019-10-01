@@ -13,11 +13,10 @@
 // ********************************************************************
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlacementController : MonoBehaviour
+public class PlacementController : MonoBehaviourPun
 {
     [Tooltip("Loaded Prefab for Placement")]
     public GameObject PlaceableObjectPrefab = null;    
@@ -174,8 +173,8 @@ public class PlacementController : MonoBehaviour
                 _currObj = Instantiate(PlaceableObjectPrefab, Player.transform.position * 2, Quaternion.identity);
             }
             else
-            {
-                _currObj = PhotonNetwork.Instantiate(PlaceableObjectPrefab.name, Player.transform.position * 2, Quaternion.identity);
+            {                 
+                _currObj = PhotonNetwork.Instantiate(PlaceableObjectPrefab.name, Player.transform.position * 2, Quaternion.identity);                
             }
             _triggerBuild = false;
         }       
