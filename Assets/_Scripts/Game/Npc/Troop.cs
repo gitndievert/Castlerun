@@ -75,6 +75,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
     protected Transform EnemyTargetTransform { get; set; }
 
     private int _hitCounter = 1;
+    private bool _moveTriggerPoint;
     #endregion    
 
     protected override void Awake()
@@ -132,12 +133,16 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
 
                     var x = Mathf.Clamp(Mathf.Round(velocity.x * 1000) / 1000, _minVelx, _maxVelx);
                     var y = Mathf.Clamp(Mathf.Round(velocity.y * 1000) / 1000, _minVely, _maxVely);
-
+                                        
                     Debug.Log("Remaining Dist " + nav.remainingDistance);
                     Debug.Log("Stopping Dist " + nav.stoppingDistance);
 
-                    if ((nav.remainingDistance + nav.stoppingDistance) > nav.stoppingDistance)
-                    {                        
+                    //Stop with offset
+
+                    if (nav.remainingDistance >= nav.stoppingDistance || _moveTriggerPoint)
+                    {
+                        _moveTriggerPoint = false;
+
                         anim.SetBool("move", true);
                         anim.SetFloat("velx", x);
                         anim.SetFloat("vely", y);
@@ -349,6 +354,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         if(AttackBattleCryClips.Length > 0)
             SoundManager.PlaySound(AttackBattleCryClips);
         _moving = true;
+        _moveTriggerPoint = true;
     }
 
     public void MoveStop()
@@ -357,7 +363,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         anim.SetBool("move", false);
         nav.velocity = Vector3.zero;
         nav.isStopped = true;
-        nav.ResetPath();
+        _moveTriggerPoint = false;        
     }
 
     public override void SetHit(int amount)
@@ -391,7 +397,10 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
     public override void Die()
     {
         anim.Play("Death1");
-        AssociatedFactory.UnListTroop();
+        if (GetTag == Global.ARMY_TAG)
+        {
+            AssociatedFactory.UnListTroop();
+        }
         base.Die();
     }
 
