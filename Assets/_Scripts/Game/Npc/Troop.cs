@@ -198,7 +198,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
 
     public void OnMouseExit()
     {
-        //SelectionUI.ClearSingleTarget();
+        if (!IsSelected)
+            SelectionUI.ClearEnemyTarget();
     }   
         
     public void OnMouseDown()
@@ -216,8 +217,12 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         if(Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON)){
             OnMouseDown();
         }
+        if (GetTag == Global.ENEMY_TAG && !IsSelected)
+        {            
+            SelectionUI.UpdateEnemyTarget(this);
+        }
     }
-
+    
     public void SelectMany()
     {
         if (GetTag != Global.ARMY_TAG) return;

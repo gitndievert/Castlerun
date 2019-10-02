@@ -1860,6 +1860,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5785308593239815809}
     m_Modifications:
+    - target: {fileID: 4812348492574857722, guid: c8074b9f184b95c459f53fbafb9ce2e4,
+        type: 3}
+      propertyPath: m_SpotAngle
+      value: 14.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4812348492574857604, guid: c8074b9f184b95c459f53fbafb9ce2e4,
         type: 3}
       propertyPath: m_Name
@@ -1946,16 +1951,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5785308593239815809}
     m_Modifications:
-    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
-        type: 3}
-      propertyPath: m_Name
-      value: MiniMapIcon
-      objectReference: {fileID: 0}
-    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8547001551414770055, guid: ed262e909d070aa41915329ff5d1b7ae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2025,6 +2020,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
+        type: 3}
+      propertyPath: m_Name
+      value: MiniMapIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed262e909d070aa41915329ff5d1b7ae, type: 3}
