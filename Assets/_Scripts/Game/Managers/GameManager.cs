@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         //Flip to Singleton
         LocalGameManagerInstance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -84,7 +84,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
-        }       
+        }
+
+        UpdatePlayersList();
     }
 
     private void Update()
@@ -124,7 +126,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player other)
     {
         Debug.Log("OnPlayerEnteredRoom() " + other.NickName); // not seen if you're the player connecting
-        Messages.text = $"Player {other.NickName} entered the game";
+        Messages.text = $"{other.NickName} entered the game";
 
         PlayersConnected.text += other.NickName;
 
@@ -134,7 +136,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             //LoadArena();
         }
     }
-    
+
     /// <summary>
     /// Called when a Photon Player got disconnected. We need to load a smaller scene.
     /// </summary>
@@ -142,19 +144,24 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Photon.Realtime.Player other)
     {
         Debug.Log("OnPlayerLeftRoom() " + other.NickName); // seen when other disconnects
-        Messages.text = $"Player {other.NickName} left the game";
+        Messages.text = $"{other.NickName} left the game";
 
-        PlayersConnected.text = "";
-
-        foreach (var player in PhotonNetwork.PlayerList)
-        {
-            PlayersConnected.text += player.NickName;
-        }
+        UpdatePlayersList();
 
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
             //LoadArena();
+        }
+    }
+
+    public void UpdatePlayersList()
+    {
+        PlayersConnected.text = "";
+
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            PlayersConnected.text += player.NickName+"\n";
         }
     }
 

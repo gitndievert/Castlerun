@@ -130,9 +130,9 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         }
 
         //Calc the Input Magnitude
-        Speed = new Vector2(InputX, InputZ).sqrMagnitude * 5;
+        //Speed = new Vector2(InputX, InputZ).sqrMagnitude * 5;
 
-        _anim.SetFloat("Speed", Speed, 0.0f, Time.deltaTime);
+        //_anim.SetFloat("Speed", Speed, 0.0f, Time.deltaTime);
     }
 
     //Main method for serialization on Player actions

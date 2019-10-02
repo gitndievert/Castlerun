@@ -158,15 +158,15 @@ public class Selection : DSingle<Selection>
                             var character = select.GameObject.GetComponent<Troop>();
                             if (character != null)
                             {                                
-                                character.Move(hit.point);                                
+                                character.Move(hit.point);
 
-                                if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
+                                /*if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
                                 {
                                     character.ClearEnemyTargets();                                    
                                 }
-                                else if (hit.transform.tag == Global.ENEMY_TAG /*&& !character.IsAttacking*/)
-                                {
-                                    Debug.Log("Attacking!");
+                                else */
+                                if (hit.transform.tag == Global.ENEMY_TAG)
+                                {                                 
                                     var enemy = hit.transform.GetComponent<ISelectable>();
                                     EnemyTargetSelected = enemy;
                                     _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);

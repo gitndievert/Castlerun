@@ -78,11 +78,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
 
 
-    #endregion
-
-    [Tooltip("The Player's UI GameObject Prefab")]
-    [SerializeField]
-    private GameObject playerUiPrefab;
+    #endregion    
 
     protected override void Awake()
     {
@@ -134,18 +130,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             }
 
             BuildManager.Instance.Placements.Player = this;
-        }
-
-        // Create the UI
-        if (this.playerUiPrefab != null)
-        {
-            GameObject _uiGo = Instantiate(playerUiPrefab);
-            _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
-        }
-        else
-        {
-            Debug.LogWarning("<Color=Red><b>Missing</b></Color> PlayerUiPrefab reference on player Prefab.", this);
-        }
+        }        
     }
 
     public override void OnDisable()
@@ -172,10 +157,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         if (!Physics.Raycast(transform.position, -Vector3.up, 5f))
         {
             transform.position = new Vector3(0f, 5f, 0f);
-        }
-
-        GameObject _uiGo = Instantiate(this.playerUiPrefab);
-        _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+        }                
     }
 
     private void SetBasicPlayerStats()
