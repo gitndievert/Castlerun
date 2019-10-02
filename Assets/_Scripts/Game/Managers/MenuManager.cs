@@ -24,6 +24,7 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviourPunCallbacks
 {
+    const byte MAX_PLAYER_PER_ROOM = 4;
 
     public TMP_InputField PlayerNameInput;
     public TMP_InputField RoomNameInputField;
@@ -34,8 +35,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
     private Dictionary<string, RoomInfo> cachedRoomList;
     private Dictionary<string, GameObject> roomListEntries;
-    private Dictionary<int, GameObject> playerListEntries;
-    private byte maxPlayersPerRoom = 4;
+    private Dictionary<int, GameObject> playerListEntries;    
     private GameObject _activePanel = null;
 
     /// <summary>
@@ -218,7 +218,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
     {
         int randomRoom = Random.Range(0, 10000);
         PhotonNetwork.CreateRoom("Room" + randomRoom, new RoomOptions {
-            MaxPlayers = this.maxPlayersPerRoom
+            MaxPlayers = MAX_PLAYER_PER_ROOM
         });
     }
 

@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     [Header("Spawn Points")]
     public Transform Player1SpawnPoint;
     public Transform Player2SpawnPoint;
-    //public Transform Player3SpawnPoint;
-    //public Transform Player4SpawnPoint;
+    public Transform Player3SpawnPoint;
+    public Transform Player4SpawnPoint;
 
     [Header("Resource Points")]
     public Transform Player1ResourcePoints;
@@ -70,9 +70,22 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (Player.LocalPlayerInstance == null)
             {
-                Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);                
+                Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
 
-                var spawnPos = PhotonNetwork.IsMasterClient ? Player1SpawnPoint.position : Player2SpawnPoint.position;                
+                Vector3 spawnPos = Player1SpawnPoint.position;
+
+                switch(PhotonNetwork.CurrentRoom.PlayerCount)
+                {
+                    case 2:
+                        spawnPos = Player2SpawnPoint.position;
+                        break;
+                    case 3:
+                        spawnPos = Player3SpawnPoint.position;
+                        break;
+                    case 4:
+                        spawnPos = Player4SpawnPoint.position;
+                        break;
+                }                
 
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                 var character = PhotonNetwork.Instantiate(PlayerInstance.name, spawnPos, Quaternion.identity, 0);              
