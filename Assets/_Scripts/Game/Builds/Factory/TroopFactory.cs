@@ -54,8 +54,10 @@ public class TroopFactory : Build, IPunObservable
     /// </summary>
     public int MaxTrained = 5;
 
-    public Transform SpawnPoint;          
-      
+    [Header("Spawn and Waypoint Positions")]
+    public Transform SpawnPointPosition;
+    public Transform WayPointPosition;  
+
 
     // Start is called before the first frame update
     protected override void Start()
@@ -185,11 +187,11 @@ public class TroopFactory : Build, IPunObservable
 
         if (Global.DeveloperMode)
         {
-            makeTroop = Instantiate(selectedTroop.gameObject, SpawnPoint.position, Quaternion.identity);
+            makeTroop = Instantiate(selectedTroop.gameObject, SpawnPointPosition.position, Quaternion.identity);
         }
         else
         {
-            makeTroop = PhotonNetwork.Instantiate(selectedTroop.gameObject.name, SpawnPoint.position, Quaternion.identity);
+            makeTroop = PhotonNetwork.Instantiate(selectedTroop.gameObject.name, SpawnPointPosition.position, Quaternion.identity);
         }
 
         if (Player != null)
@@ -204,7 +206,8 @@ public class TroopFactory : Build, IPunObservable
             troop.SetFactory(this);
 
             //Move up the troop (GOING TO TABLE FOR NOW)
-            //troop.Move(SpawnPoint.position + (Vector3.forward * PlacementDistance));
+            WayPointPosition = SpawnPointPosition; //temp stuff
+            troop.Move(WayPointPosition.position);
 
             //Play Spawning Sound FX
             if (troop.FreshTroop != null /*&& i == NumberToTrain - 1*/)

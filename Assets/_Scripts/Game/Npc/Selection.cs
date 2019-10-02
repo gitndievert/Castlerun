@@ -17,7 +17,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SBK.Unity;
-using TMPro;
 
 public class Selection : DSingle<Selection>
 {
@@ -140,11 +139,12 @@ public class Selection : DSingle<Selection>
             }
         }
         //Select on the ground if not mouselooking and there are selections in queue
-        else if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) 
+        //FOR NOW - Removing the right click for attack
+        //else if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) 
+        else if(Input.GetKeyDown(KeyCode.E)
             && !Global.MouseLook && SelectionListCount > 0 
             && SingleTargetSelected.GameObject.tag != Global.BUILD_TAG)
         {
-
             StartCoroutine("SelectionCursor");
 
             if (Physics.Raycast(SelectionRayHit, out RaycastHit hit))
@@ -249,18 +249,24 @@ public class Selection : DSingle<Selection>
         
     public void ClearSingleTarget()
     {
-        SingleTargetSelected.UnSelect();
-        ClearList(SingleTargetSelected);
-        SingleTargetSelected = null;
-        _ui.SingleTargetBox.ClearTarget();
+        if (SingleTargetSelected != null)
+        {
+            SingleTargetSelected.UnSelect();
+            ClearList(SingleTargetSelected);
+            SingleTargetSelected = null;
+            _ui.SingleTargetBox.ClearTarget();
+        }
     }
 
     public void ClearEnemyTarget()
     {
-        EnemyTargetSelected.UnSelect();
-        EnemyTargetSelected = null;
-        _ui.EnemyTargetBox.ClearTarget();
-        SelectionCursorOff();
+        if (EnemyTargetSelected != null)
+        {
+            EnemyTargetSelected.UnSelect();
+            EnemyTargetSelected = null;
+            _ui.EnemyTargetBox.ClearTarget();
+            SelectionCursorOff();
+        }
     }
 
     public void ClearList()
