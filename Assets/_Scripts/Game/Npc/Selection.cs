@@ -92,94 +92,20 @@ public class Selection : DSingle<Selection>
     {
         //Selection mouse events
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
-        {           
-            IsSelecting = true;
-            mousePosition1 = Input.mousePosition;            
-
-            if (Physics.Raycast(SelectionRayHit, out RaycastHit hit))
-            {
-                //Deselect on ground on building selection
-                if (hit.point != null)
-                {   
-                    //Multi Single Target Selections with CTRL
-                    if (hit.transform.tag == Global.ARMY_TAG && SingleTargetSelected != null
-                    && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
-                    {
-                        UpdateMassList(hit.transform.GetComponent<ISelectable>());
-                    }
-                    else
-                    {
-                        if (hit.transform.tag == Global.ARMY_TAG && SingleTargetSelected != null)
-                        {
-                            UpdateSingleTarget(hit.transform.GetComponent<ISelectable>());
-                        }
-                        else if (hit.transform.tag == Global.ENEMY_TAG && EnemyTargetSelected != null)
-                        {
-                            UpdateEnemyTarget(hit.transform.GetComponent<ISelectable>());
-                        }
-                        else if (hit.transform.gameObject.layer == Global.GROUND_LAYER
-                            || ((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
-                        {
-                            ClearAll();                            
-
-                            if (SingleTargetSelected != null)
-                            {
-                                SingleTargetSelected.UnSelect();
-                                ClearSingleTarget();                                
-                            }
-
-                            if (EnemyTargetSelected != null)
-                            {
-                                EnemyTargetSelected.UnSelect();
-                                ClearEnemyTarget();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        //Select on the ground if not mouselooking and there are selections in queue
-        //FOR NOW - Removing the right click for attack
-        //else if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) 
-        else if(Input.GetKeyDown(KeyCode.E)
-            && !Global.MouseLook && SelectionListCount > 0 
-            && SingleTargetSelected.GameObject.tag != Global.BUILD_TAG)
         {
-            StartCoroutine("SelectionCursor");
-
-            if (Physics.Raycast(SelectionRayHit, out RaycastHit hit))
-            {
-                if (hit.transform != null)
-                {
-                    if (hit.transform.gameObject.layer == Global.GROUND_LAYER || hit.transform.tag == Global.ENEMY_TAG)
-                    {
-                        foreach (var select in MassSelectionList)
-                        {
-                            var character = select.GameObject.GetComponent<Troop>();
-                            if (character != null)
-                            {                                
-                                character.Move(hit.point);
-
-                                /*if (hit.transform.gameObject.layer == Global.GROUND_LAYER)
-                                {
-                                    character.ClearEnemyTargets();                                    
-                                }
-                                else */
-                                if (hit.transform.tag == Global.ENEMY_TAG)
-                                {                                 
-                                    var enemy = hit.transform.GetComponent<ISelectable>();
-                                    EnemyTargetSelected = enemy;
-                                    _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);
-                                    UpdateEnemyTarget(EnemyTargetSelected);                                    
-                                    enemy.TargetingMe.Add(character);
-                                    character.Target(EnemyTargetSelected);
-                                }
-                            }
-                        }
-                    }                   
-                }
-            }            
+            IsSelecting = true;
+            mousePosition1 = Input.mousePosition;
+            LeftClickActions();
+        }        
+        else if(Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) && !Global.MouseLook)
+        {
+            RightClickActions();
         }
+        else if(Input.GetKeyDown(KeyCode.E) && !Global.MouseLook)
+        {
+            SecondaryClickActions();
+        }
+        
 
         //Stop Selection
         if (Input.GetMouseButtonUp(KeyBindings.LEFT_MOUSE_BUTTON))
@@ -196,6 +122,96 @@ public class Selection : DSingle<Selection>
         SelectionBoxRect.DrawScreenRect(rect, SelectionBoxColor);        
         SelectionBoxRect.DrawScreenRectBorder(rect, 2, BorderColor);
     }
+
+    private void LeftClickActions()
+    {
+        if (Physics.Raycast(SelectionRayHit, out RaycastHit hit))
+        {
+            //Deselect on ground on building selection
+            if (hit.point != null)
+            {
+                //Multi Single Target Selections with CTRL
+                if (hit.transform.tag == Global.ARMY_TAG && SingleTargetSelected != null
+                && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                {
+                    UpdateMassList(hit.transform.GetComponent<ISelectable>());
+                }
+                else
+                {
+                    if (hit.transform.tag == Global.ARMY_TAG)
+                    {
+                        UpdateSingleTarget(hit.transform.GetComponent<ISelectable>());
+                    }
+                    else if (hit.transform.tag == Global.ENEMY_TAG)
+                    {
+                        UpdateEnemyTarget(hit.transform.GetComponent<ISelectable>());
+                    }
+                    else if (hit.transform.gameObject.layer == Global.GROUND_LAYER
+                        || ((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
+                    {
+                        ClearAll();
+
+                        if (SingleTargetSelected != null)
+                        {
+                            SingleTargetSelected.UnSelect();
+                            ClearSingleTarget();
+                        }
+
+                        if (EnemyTargetSelected != null)
+                        {
+                            EnemyTargetSelected.UnSelect();                            
+                            ClearEnemyTarget();
+                        }
+                    }
+                }
+            }
+        }
+    }
+       
+    private void RightClickActions()
+    {
+        //Merge into left click for now
+        SecondaryClickActions();
+    }
+
+    private void SecondaryClickActions()
+    {
+        if (Physics.Raycast(SelectionRayHit, out RaycastHit hit))
+        {
+            if (hit.transform != null)
+            {
+                if (hit.transform.tag == Global.BUILD_TAG) return;
+
+                if ((hit.transform.gameObject.layer == Global.GROUND_LAYER && MassSelectionList.Count > 0)
+                    || hit.transform.tag == Global.ENEMY_TAG)
+                {
+                    StartCoroutine("SelectionCursor");
+
+                    foreach (var select in MassSelectionList)
+                    {
+                        var character = select.GameObject.GetComponent<Troop>();
+                        if (character != null)
+                        {
+                            character.Move(hit.point);
+                           
+                            if (hit.transform.tag == Global.ENEMY_TAG)
+                            {
+                                var enemy = hit.transform.GetComponent<ISelectable>();
+                                EnemyTargetSelected = enemy;
+                                _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);
+                                UpdateEnemyTarget(EnemyTargetSelected);
+                                enemy.TargetingMe.Add(character);
+                                character.Target(EnemyTargetSelected);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+
         
     public bool IsWithinSelectionBounds(GameObject gameObject)
     {

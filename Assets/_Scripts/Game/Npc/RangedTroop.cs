@@ -54,7 +54,8 @@ public abstract class RangedTroop : Troop
         anim.Play("Attack");
         var enemypos = EnemyTargetTransform.transform.position;
         transform.LookAt(new Vector3(enemypos.x, transform.position.y,enemypos.z));        
-        var project = Instantiate(Projectile, SpawnPoint.transform.position, Quaternion.identity);        
+        var project = Instantiate(Projectile, SpawnPoint.transform.position, Quaternion.identity);
+        project.TargetTag = EnemyTargetTransform.tag;
         project.GetComponent<Rigidbody>().AddForce(SpawnPoint.transform.forward * FirePower);        
     }
        

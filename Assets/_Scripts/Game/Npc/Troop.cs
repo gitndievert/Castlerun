@@ -76,6 +76,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
 
     private int _hitCounter = 1;
     private bool _moveTriggerPoint;
+
+    private Troop _myAttacker = null;
     #endregion    
 
     protected override void Awake()
@@ -159,6 +161,25 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
                 }
             }
         }
+        else if (GetTag == Global.ENEMY_TAG)
+        {
+            //Return attack
+            if (TargetingMe.Count > 0 && _myAttacker == null)
+            {
+                foreach(var attacker in TargetingMe)
+                {
+                    //Do within 8 meters for now
+                    if (Extensions.DistanceLess(attacker.transform,transform, 8f))
+                    {
+                        _myAttacker = attacker;
+                        Target(attacker);                        
+                        Attack();
+                        break;
+                    }
+
+                }
+            }
+        }
     }
 
     #region PUN Callbacks
@@ -194,19 +215,23 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         var position = anim.rootPosition;
         position.y = nav.nextPosition.y;
         transform.position = position;
-    }    
+    }
+
+    #region Mouseover Callbacks
 
     public void OnMouseExit()
     {
-        if (!IsSelected)
+        if (GetTag == Global.ENEMY_TAG)
+        {            
             SelectionUI.ClearEnemyTarget();
+            SelectionTargetStatus(false);
+        }
     }   
         
     public void OnMouseDown()
     {
-        if (EventSystem.current.IsPointerOverGameObject()) return;
-        if (!IsSelected)
-            Select();
+        if (EventSystem.current.IsPointerOverGameObject()) return;        
+        Select();
     }
 
     /// <summary>
@@ -214,15 +239,18 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
     /// </summary>
     public void OnMouseOver()
     {
-        if(Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON)){
-            OnMouseDown();
-        }
-        if (GetTag == Global.ENEMY_TAG && !IsSelected)
-        {            
+        if(Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON))
+            OnMouseDown();        
+        if (GetTag == Global.ENEMY_TAG)
+        {
             SelectionUI.UpdateEnemyTarget(this);
+            SelectionTargetStatus(true, DamageColor);
         }
+            
     }
-    
+
+    #endregion
+
     public void SelectMany()
     {
         if (GetTag != Global.ARMY_TAG) return;
@@ -282,6 +310,11 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
             IsSelected = false;
             SelectionTargetStatus(false);
             points.Clear();
+            if(GetTag == Global.ENEMY_TAG)
+            {
+                TargetingMe.Clear();
+                _myAttacker = null;
+            }
         }
     }
 
@@ -331,7 +364,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         IsAttacking = false;
         ClearEnemyTargets();
         CancelInvoke(); //Stop Combat        
-        //anim.Play("Grounded");
+        anim.Play("Idle");
     }
 
     /// <summary>

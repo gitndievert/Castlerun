@@ -33,13 +33,14 @@ public class Projectile : BasePrefab
     public int MaxDamage;   
     #endregion
 
+    public string TargetTag { get; set; }
 
     private void Start()
     {        
         TagPrefab("Projectile");
         gameObject.layer = Global.PROJECTILE_LAYER;
         SoundManager.PlaySound(FireSounds);
-        Physics.IgnoreLayerCollision(Global.PROJECTILE_LAYER, Global.ARMY_LAYER, true);
+        //Physics.IgnoreLayerCollision(Global.PROJECTILE_LAYER, Global.ARMY_LAYER, true);
         //Default destruction timer
         //Projectiles should not take longer than 10 seconds to hit a target
         Destroy(gameObject, 10f);
@@ -72,13 +73,12 @@ public class Projectile : BasePrefab
     }
 
     private void OnCollisionEnter(Collision col)
-    {        
-        PlayHitSound();      
-        if(col.transform.tag == Global.ENEMY_TAG)
-        {
-            Damage.ApplyDamage(col, MinDamage, MaxDamage, true);
-            //Tuck away, don't destroy            
-            Destroy(gameObject);           
-        }        
+    {
+        //Only hit the target enemy        
+        if (col.transform.tag != TargetTag) return;        
+        PlayHitSound();
+        Damage.ApplyDamage(col, MinDamage, MaxDamage, true);
+        //Tuck away, don't destroy            
+        Destroy(gameObject);                           
     }
 }   

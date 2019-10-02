@@ -14,7 +14,7 @@
 
 public static class Global
 {
-    public static bool DeveloperMode = false;
+    public static bool DeveloperMode = true;
 
     #region Game Objects
     /// <summary>
@@ -71,7 +71,7 @@ public static class Global
     public const int PROJECTILE_LAYER = 12;
     public const int UI_LAYER = 5;
 
-    public const float STRIKE_DIST = 5f;
+    public const float STRIKE_DIST = 2.3f;
     public const float CASTER_STRIKE_DIST = 7f;
     public const float ARCHER_STRIKE_DIST = 10f;
     public const int BUILD_GRID_LAYER = 9;
