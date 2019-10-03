@@ -58,23 +58,5 @@ public abstract class RangedTroop : Troop
         project.TargetTag = EnemyTargetTransform.tag;
         project.GetComponent<Rigidbody>().AddForce(SpawnPoint.transform.forward * FirePower);        
     }
-       
-
-    /// <summary>
-    /// Could use this for random firing on cannon/catapult
-    /// </summary>
-    /// <returns></returns>
-    /*protected static Vector3 RandomFire()
-    {
-        int random = Random.Range(0, 100);
-        if (random >= 0 && random < 25)
-            return Vector3.left;
-        else if (random > 25 && random <= 50)
-            return Vector3.right;
-        else if (random > 50 && random <= 75)
-            return Vector3.forward;
-        else
-            return Vector3.down;
-    }*/
 
 }

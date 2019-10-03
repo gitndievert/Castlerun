@@ -19,7 +19,6 @@ using System.Linq;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
-using ExitGames.Client.Photon;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviourPunCallbacks

@@ -47,6 +47,9 @@ public class CameraRotate : MonoBehaviour
     //Fixed Build Cam
     private float b_dist_y = 25f;
     private float b_rotation_x = 64.6f;
+
+    private float c_dist_y = 0f;
+    private float c_rotation_x = 0f;
       
     //Auto Cam
     // How fast the rig will move to keep up with target's position
@@ -99,6 +102,7 @@ public class CameraRotate : MonoBehaviour
     }
 
     public static bool BuildCamMode = false;
+    public static bool BattleFieldMode = false;
     
     /**
      * Camera logic on LateUpdate to only update after all character movement logic has been handled.

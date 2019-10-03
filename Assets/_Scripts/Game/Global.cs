@@ -14,7 +14,7 @@
 
 public static class Global
 {
-    public static bool DeveloperMode = false;
+    public static bool DeveloperMode = true;
 
     #region Game Objects
     /// <summary>
