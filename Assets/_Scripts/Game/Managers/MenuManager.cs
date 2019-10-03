@@ -215,11 +215,8 @@ public class MenuManager : MonoBehaviourPunCallbacks
     }
 
     public void CreateRoom()
-    {
-        int randomRoom = Random.Range(0, 10000);
-        PhotonNetwork.CreateRoom("Room" + randomRoom, new RoomOptions {
-            MaxPlayers = MAX_PLAYER_PER_ROOM
-        });
+    {        
+        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = MAX_PLAYER_PER_ROOM });
     }
 
     /// <summary>
@@ -236,10 +233,10 @@ public class MenuManager : MonoBehaviourPunCallbacks
         CreateRoom();
     }
 
-    public override void OnCreateRoomFailed(short returnCode, string message)
+    /*public override void OnCreateRoomFailed(short returnCode, string message)
     {
         CreateRoom();
-    }
+    }*/
 
 
     /// <summary>
