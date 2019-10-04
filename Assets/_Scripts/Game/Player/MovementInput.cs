@@ -32,6 +32,8 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
     private float _verticalVelocity;
     private bool _isJumping;
 
+    [SerializeField] float m_JumpPower = 12f;
+
     public CharacterController CharacterController;
 
     public Companion SetPlayerCompanion
@@ -51,7 +53,8 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         
     private Animator _anim;    
     private Vector3 _moveVector;
-    private Animator _companionAnim;    
+    private Animator _companionAnim;
+    private Rigidbody _rb;
 
     [SerializeField]
     private float _groundCheckDistance = 0.1f;
@@ -62,7 +65,8 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
     {
         _anim = GetComponent<Animator>();        
         CharacterController = GetComponent<CharacterController>();
-        Global.MouseLook = false;        
+        Global.MouseLook = false;
+        _rb = GetComponent<Rigidbody>();
     }
 
     // Start is called before the first frame update
@@ -85,6 +89,23 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         Vector3 moveVector = new Vector3(0, _verticalVelocity, 0);
         CharacterController.Move(moveVector);
 
+        /*if (!IsGrounded)
+        {
+            _anim.SetFloat("Jump", _rb.velocity.y);
+        }*/
+
+        // calculate which leg is behind, so as to leave that leg trailing in the jump animation
+        // (This code is reliant on the specific run cycle offset in our animations,
+        // and assumes one leg passes the other at the normalized clip times of 0.0 and 0.5)
+        /*float runCycle =
+            Mathf.Repeat(
+                _anim.GetCurrentAnimatorStateInfo(0).normalizedTime + 0.2f, 1);
+        float jumpLeg = (runCycle < .5f ? 1 : -1) * moveVector.z;
+        if (IsGrounded)
+        {
+            _anim.SetFloat("JumpLeg", jumpLeg);
+        }*/
+
         //Allowed the Mouse Look on Right Mouse Button
         if (Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON)/* && Speed > 0*/)
         {
@@ -99,17 +120,18 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         }
 
         //Experiment with jumps
-        if (Input.GetKeyDown(KeyBindings.Jump))
+        /*if (Input.GetKeyDown(KeyBindings.Jump))
         {
             if (!_isJumping)
                 _isJumping = true;
-            Jump();
+            _anim.SetBool("OnGround", false);
         }
         if(Input.GetKeyUp(KeyBindings.Jump))
         {
             if (_isJumping)
                 _isJumping = false;
-        }
+            _anim.SetBool("OnGround", true);
+        }*/
 
         if (Input.GetKeyDown(KeyBindings.Dance1)) Dance();
     }
@@ -152,10 +174,10 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         }
     }
 
-    public void Jump()
+    /*public void Jump()
     {
         _anim.Play("Jump");
-    }
+    }*/
 
     public void Dance()
     {

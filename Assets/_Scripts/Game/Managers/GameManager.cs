@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
 
-                Vector3 spawnPos = Player1SpawnPoint.position;
+                Vector3 spawnPos = Player1SpawnPoint.position;                
 
                 switch(PhotonNetwork.CurrentRoom.PlayerCount)
                 {

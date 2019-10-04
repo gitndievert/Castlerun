@@ -22,8 +22,7 @@ using TMPro;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviourPunCallbacks
-{
-    const byte MAX_PLAYER_PER_ROOM = 4;
+{   
 
     public TMP_InputField PlayerNameInput;
     public TMP_InputField RoomNameInputField;
@@ -48,6 +47,11 @@ public class MenuManager : MonoBehaviourPunCallbacks
     /// This client's version number. Users are separated from each other by gameVersion (which allows you to make breaking changes).
     /// </summary>
     private string gameVersion = "1";
+
+    /// <summary>
+    /// Set Max Number of Players
+    /// </summary>
+    private byte _maxPlayersPerRoom = 4;
 
 
     public string Scenename
@@ -119,7 +123,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
         // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
         if (PhotonNetwork.IsConnected)
-        {            
+        {
             // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
             PhotonNetwork.JoinRandomRoom();
         }
@@ -215,7 +219,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {        
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = MAX_PLAYER_PER_ROOM });
+        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = _maxPlayersPerRoom, IsOpen = true, IsVisible = true });
     }
 
     /// <summary>
