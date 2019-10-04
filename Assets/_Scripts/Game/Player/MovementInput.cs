@@ -56,6 +56,8 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
     private Animator _companionAnim;
     private Rigidbody _rb;
 
+    private int _attackCounter;    
+
     [SerializeField]
     private float _groundCheckDistance = 0.1f;
 
@@ -74,6 +76,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
     {        
         Lock = false;
         _origGroundCheckDistance = _groundCheckDistance;
+        _attackCounter = 0;
     }   
 
     private void Update()
@@ -157,6 +160,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         //_anim.SetFloat("Speed", Speed, 0.0f, Time.deltaTime);
     }
 
+    #region PUN Callbacks
     //Main method for serialization on Player actions
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -174,6 +178,8 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         }
     }
 
+    #endregion
+
     /*public void Jump()
     {
         _anim.Play("Jump");
@@ -189,14 +195,32 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         //_anim.
     }
 
-    public void SwingPlayer()
-    {        
-        _anim.SetBool("Swing", true);
-    }
-
-    public void SwingStop()
+    public void AttackPlayer()
     {
-        _anim.SetBool("Swing", false);
+        Debug.Log(_attackCounter);
+        if (_attackCounter == 0)
+        {
+            Debug.Log("Attack1");
+            Attack("Attack");
+            _attackCounter = 1;
+        }
+        else if (_attackCounter == 1)
+        {
+            Debug.Log("Attack2");
+            Attack("Attack2");
+            _attackCounter = 2;
+        }
+        else if (_attackCounter == 2)
+        {
+            Debug.Log("Attack3");
+            Attack("Attack3");
+            _attackCounter = 0;
+        }        
+    }
+        
+    public void Attack(string animation)
+    {
+        _anim.SetBool(animation, true);
     }
 
     public void Hit()

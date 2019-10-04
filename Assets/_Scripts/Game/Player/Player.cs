@@ -25,7 +25,12 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     [Header("Basic Player Properties")]
     public float MoveSpeed;
     public float BuildSpeed;
-    public int HitAmount = 50;
+
+    [Range(15,50)]
+    public int HitAmountMin = 30;
+    [Range(25, 150)]
+    public int HitAmountMax = 75;
+
     public bool CompanionOut = false;
     public bool IsDead = false;
 
@@ -71,8 +76,9 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     private GameObject _offHand;                 
     private string _playerName;
     private BattleCursor _battleCursor;
-    private bool _swinging = false;
-
+        
+    private float _attackDelay = 50f;
+    private float _lastAttacked = -9999f;
 
     private MovementInput _movement;
 
@@ -176,15 +182,27 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     private void Update()
     {
         /////// ATTACK
-        if (!Global.BuildMode && (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON)
-            || Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON)))
-        {   
-            //COME BACK!!!! Attack Methods go here                
-            /*if (!_swinging)
+        //Debug.Log(Time.time);
+        //Debug.Log(_lastAttacked+_attackDelay);
+        //if (Time.time > _lastAttacked + _attackDelay)
+        //{
+            if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON))
             {
-                Swing();
-            }       */                     
-        }
+                if (!Global.BuildMode)
+                {
+                    Swing();
+                }
+            }
+            else if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
+            {
+                if (!Global.BuildMode)
+                {
+                    Swing();
+                }
+            }
+
+        //    _lastAttacked = Time.time;        
+        //}
 
         //Temporary, work out the details for build mappings later
         //Disallow movements if player is DEAD
@@ -307,29 +325,29 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             _movement.SetPlayerCompanion = null;
         PlayerCompanion = null;
         CompanionOut = false;
-    }   
-          
+    }
+
     public void Swing()
     {
-        _swinging = true;
+        Debug.Log("Swinging");
+
         if (SwingEnemyTargetSelected() != null)
         {
-            _movement.SwingPlayer();
+            _movement.AttackPlayer();
             var target = SwingEnemyTargetSelected();
 
+            //May need to manage PUN tags
             switch (target.GameObject.tag)
             {
                 case Global.ENEMY_TAG:
-                    Damage.ApplyDamage(target, 5, 25, true);
+                    Damage.ApplyDamage(target, HitAmountMin, HitAmountMax, true);
                     break;
             }
         }
         else
         {
-            _movement.SwingPlayer();
+            _movement.AttackPlayer();
         }
-
-        _swinging = false;        
     }
     
     private ISelectable SwingEnemyTargetSelected()
