@@ -13,12 +13,13 @@
 // ********************************************************************
 
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviourPunCallbacks
+public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
     public static GameManager LocalGameManagerInstance;
     
@@ -42,11 +43,46 @@ public class GameManager : MonoBehaviourPunCallbacks
     public TextMeshProUGUI Messages;
     public TextMeshProUGUI PlayersConnected;
 
+    [Header("PUN Network Variables")]
+    /// <summary>
+    /// Total Players in Room
+    /// </summary>
+    public int PlayersInRoom;
+
+    /// <summary>
+    /// My Players Number in Room
+    /// </summary>
+    public int MyPlayerNumber;
+
+    public float StartingTime;
+
+    //PUN Variables
+    private Photon.Realtime.Player[] _photonPlayers;
+    private PhotonView _pv;
+
+    //Game Variables
+    private bool _readyToCount;
+    private bool _readyToStart;
+
+
+
     private void Awake()
     {
         //Flip to Singleton
-        LocalGameManagerInstance = this;
-        //DontDestroyOnLoad(gameObject);
+        if (LocalGameManagerInstance == null)
+        {
+            LocalGameManagerInstance = this;
+        }
+        else
+        {
+            if(LocalGameManagerInstance != this)
+            {
+                Destroy(LocalGameManagerInstance);
+                LocalGameManagerInstance = this;
+            }
+        }
+
+        DontDestroyOnLoad(gameObject);        
     }
 
     private void Start()
@@ -108,6 +144,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             OnClick_Quit();
         }
+
+
     }
 
     public void LeaveRoom()
@@ -125,7 +163,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         Music.Instance.PlayMusicTrack(1);
     }
 
-    void LoadArena()
+    private void LoadArena()
     {
         PhotonNetwork.LoadLevel("Demo_2");
     }

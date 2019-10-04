@@ -133,7 +133,7 @@ public class Inventory : MonoBehaviour
     }
         
     /// <summary>
-    /// Set the cost for build or troop
+    /// Add or subtract amount in Inventory
     /// </summary>
     /// <param name="type">Resouce Type</param>
     /// <param name="amount">Amount of Resource</param>
