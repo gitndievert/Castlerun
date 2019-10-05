@@ -14,9 +14,9 @@
 
 using Photon.Pun;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : BasePrefab, IPlayer, IPunObservable
 {
@@ -30,6 +30,8 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     public int HitAmountMin = 30;
     [Range(25, 150)]
     public int HitAmountMax = 75;
+
+    public TextMeshPro FloatingPlayerText;
 
     public bool CompanionOut = false;
     public bool IsDead = false;    
@@ -76,9 +78,11 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     private GameObject _offHand;                 
     private string _playerName;
     private BattleCursor _battleCursor;
+    private Vector3 _respawnPos;
         
     private float _attackDelay = 1f;
-    private float _lastAttacked;
+    private float _lastAttacked;    
+
 
     private MovementInput _movement;
 
@@ -104,6 +108,9 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
         PlayerWorldItems = new GameObject("PlayerWorldItems");
         base.Awake();
+
+        //Set Respawn Point
+        _respawnPos = transform.position;
     }
 
     // Start is called before the first frame update
@@ -139,17 +146,25 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             }
 
             BuildManager.Instance.Placements.Player = this;
+
+            if(FloatingPlayerText != null)
+            {
+                FloatingPlayerText.gameObject.SetActive(false);
+
+            }            
+
         }        
+        
     }
 
     public override void OnDisable()
     {
         // Always call the base to remove callbacks
         base.OnDisable();        
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;        
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-        
-    protected void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
+  
+    protected void OnSceneLoaded(Scene scene, LoadSceneMode loadingMode)
     {
         CalledOnLevelWasLoaded(scene.buildIndex);
     }    
@@ -172,13 +187,14 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     private void SetBasicPlayerStats()
     {
         Health = 100;
-        
-        //Figure out later        
-        UIManager.Instance.HealthBar.BarValue = 100f;
-        UIManager.Instance.StaminaBar.BarValue = 100f;
+
+        //Figure out later                
+        UIManager.Instance.HealthBar.BarValue = Health;
+        UIManager.Instance.StaminaBar.BarValue = Health;
+        PlayerUI.HealthText.text = $"{Health}/100";
 
         MoveSpeed = 10f;
-        BuildSpeed = 10f;
+        BuildSpeed = 10f;        
 
     }
            
@@ -280,6 +296,26 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         {
             _movement.Dance();
         }
+
+        //Hit my face
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (!IsDead)
+            {
+                Debug.Log("Doing damage to player!");
+                SetHit(HitAmountMin);                
+            }
+        }
+
+
+        //Face player labels toward camera
+        if (FloatingPlayerText != null && FloatingPlayerText.text.Length > 0)
+        {
+            //var camVector = Camera.main.transform.position;
+            FloatingPlayerText.rectTransform.LookAt(Camera.main.transform);
+            FloatingPlayerText.rectTransform.Rotate(Vector3.up - new Vector3(0, 180, 0));
+        }           
+
         
     }
 
@@ -290,15 +326,20 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         {
             // We own this player: send the others our data            
             //stream.SendNext(this.Health);
-            stream.SendNext("My name is mr fancy pants");
-            Debug.Log($"I am the local client {photonView.ViewID}");
+            //stream.SendNext("My name is mr fancy pants");            
+            if (FloatingPlayerText != null)
+            {
+                stream.SendNext(PlayerName);                
+            }
         }
         else
         {
             // Network player, receive data            
             //this.IsFiring = (bool)stream.ReceiveNext();
             //this.Health = (float)stream.ReceiveNext();
-            Debug.Log($"This is from the remote client {(string)stream.ReceiveNext()}");
+            
+            //Debug.Log($"This is from the remote client {(string)stream.ReceiveNext()}");
+            FloatingPlayerText.text = (string)stream.ReceiveNext();
         }
     }
 
@@ -397,16 +438,25 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         PlayerUI.HealthText.text = $"0/100";
         UIManager.Instance.HealthBar.BarValue = 0;
         Debug.Log("I am DEAD!");
-        _movement.Die();
+        StartCoroutine(DeathSequence());
     }
 
     public void Target(ISelectable target)
     {
         throw new System.NotImplementedException();
     }
-       
-    public void Move(Vector3 point)
+   
+    private IEnumerator DeathSequence()
     {
-        
-    }
+        _movement.Die();
+        Global.Message("YOU DIED, Respawn in 5 seconds...");
+        Broadcast($"{PlayerName} has DIED!");
+        yield return new WaitForSeconds(5f);
+        transform.position = _respawnPos;
+        SetBasicPlayerStats();
+        _movement.RestartAnimator();
+        IsDead = false;
+        yield return null;
+    }    
+   
 }

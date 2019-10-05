@@ -81,7 +81,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
 
     private void Update()
     {
-        if (Lock && (!photonView.IsMine || !Global.DeveloperMode)) return;
+        if (Lock && (!photonView.IsMine || !Global.DeveloperMode)) return;        
         InputMagnitude();
         _moveVector = Vector3.zero;
         CharacterController.Move(_moveVector);
@@ -245,4 +245,8 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         _anim.Play("Death1");
     }
     
+    public void RestartAnimator()
+    {
+        _anim.Rebind();
+    }
 }

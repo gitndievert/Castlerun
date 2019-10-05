@@ -12,6 +12,8 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using UnityEngine;
+
 public static class Global
 {
     public static bool DeveloperMode = false;
@@ -100,6 +102,16 @@ public static class Global
 
     public static void Message(string message)
     {
+        UIManager.Instance.Messages.color = Color.white;
+        UIManager.Instance.Messages.text = message;        
+    }    
+
+    public static void Message(string message, Color color)
+    {
+        UIManager.Instance.Messages.color = color;
         UIManager.Instance.Messages.text = message;
     }
+    
 }
+
+

@@ -16,6 +16,5 @@ using UnityEngine;
 
 public interface ICharacter : IBase
 {    
-    void Target(ISelectable target);
-    void Move(Vector3 point); 
+    void Target(ISelectable target);    
 }

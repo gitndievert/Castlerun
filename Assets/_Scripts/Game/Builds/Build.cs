@@ -19,7 +19,7 @@ using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
-public abstract class Build : BasePrefab, IBuild, ISelectable
+public abstract class Build : BasePrefab, IBuild, ISelectable, IPunObservable
 {
     public BuildingLabelTypes BuildingLabelType = BuildingLabelTypes.None;
 
@@ -143,6 +143,23 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         {
             IsSelected = false;
             BuildManager.Instance.RefreshBuilds();
+        }
+    }
+
+    /// <summary>
+    /// Pushes data back and forth in stream
+    /// </summary>
+    /// <param name="stream"></param>
+    /// <param name="info"></param>
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting)
+        {
+
+        }
+        else
+        {
+
         }
     }
 }
