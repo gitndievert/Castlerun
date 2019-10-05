@@ -290,12 +290,15 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         {
             // We own this player: send the others our data            
             //stream.SendNext(this.Health);
+            stream.SendNext("My name is mr fancy pants");
+            Debug.Log($"I am the local client {photonView.ViewID}");
         }
         else
         {
             // Network player, receive data            
             //this.IsFiring = (bool)stream.ReceiveNext();
             //this.Health = (float)stream.ReceiveNext();
+            Debug.Log($"This is from the remote client {(string)stream.ReceiveNext()}");
         }
     }
 
