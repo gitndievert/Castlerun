@@ -32,7 +32,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     public int HitAmountMax = 75;
 
     public bool CompanionOut = false;
-    public bool IsDead = false;
+    public bool IsDead = false;    
 
     [Header("Custom Additions to Player")]
     [Tooltip("For changing the companion on the player")]
@@ -77,14 +77,17 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     private string _playerName;
     private BattleCursor _battleCursor;
         
-    private float _attackDelay = 50f;
-    private float _lastAttacked = -9999f;
+    private float _attackDelay = 1f;
+    private float _lastAttacked;
 
     private MovementInput _movement;
 
+    #region PUN Triggers    
+
+    #endregion
 
 
-    #endregion    
+    #endregion
 
     protected override void Awake()
     {
@@ -178,31 +181,26 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         BuildSpeed = 10f;
 
     }
-        
+           
     private void Update()
     {
-        /////// ATTACK
-        //Debug.Log(Time.time);
-        //Debug.Log(_lastAttacked+_attackDelay);
-        //if (Time.time > _lastAttacked + _attackDelay)
-        //{
-            if (Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON))
+        //Attack 
+        if (photonView.IsMine)
+        {
+            if (Time.time > _lastAttacked)
             {
-                if (!Global.BuildMode)
+                if ((Input.GetMouseButton(KeyBindings.LEFT_MOUSE_BUTTON) ||
+                    Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
+                    && !Selection.IsSelecting)
                 {
-                    Swing();
+                    if (!Global.BuildMode)
+                    {                        
+                        ResetAttackTimer();
+                        Swing();
+                    }
                 }
             }
-            else if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
-            {
-                if (!Global.BuildMode)
-                {
-                    Swing();
-                }
-            }
-
-        //    _lastAttacked = Time.time;        
-        //}
+        }        
 
         //Temporary, work out the details for build mappings later
         //Disallow movements if player is DEAD
@@ -290,15 +288,12 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     {
         if (stream.IsWriting)
         {
-            // We own this player: send the others our data
-
-            //stream.SendNext(this.IsFiring);
+            // We own this player: send the others our data            
             //stream.SendNext(this.Health);
         }
         else
         {
-            // Network player, receive data
-
+            // Network player, receive data            
             //this.IsFiring = (bool)stream.ReceiveNext();
             //this.Health = (float)stream.ReceiveNext();
         }
@@ -328,9 +323,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     }
 
     public void Swing()
-    {
-        Debug.Log("Swinging");
-
+    {         
         if (SwingEnemyTargetSelected() != null)
         {
             _movement.AttackPlayer();
@@ -346,8 +339,24 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         }
         else
         {
-            _movement.AttackPlayer();
-        }
+            if (Physics.Raycast(Selection.SelectionRayHit, out RaycastHit hit))
+            {
+                if (hit.point != null)
+                { 
+                    if (hit.transform.tag != Global.ARMY_TAG 
+                        && hit.transform.tag != Global.BUILD_TAG 
+                        && hit.GetLayer() != Global.UI_LAYER)
+                    {
+                        _movement.AttackPlayer();
+                    }
+                }
+            }
+        }        
+    }
+
+    private void ResetAttackTimer()
+    {
+        _lastAttacked = Time.time + _attackDelay;
     }
     
     private ISelectable SwingEnemyTargetSelected()

@@ -197,30 +197,42 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
 
     public void AttackPlayer()
     {
-        Debug.Log(_attackCounter);
-        if (_attackCounter == 0)
+        if (_attackCounter <= 2)
+        {         
+            Attack("Attack");            
+        }
+        else if (_attackCounter == 3)
+        {            
+            Attack("Attack2");            
+        }
+        else if (_attackCounter <= 5)
         {
-            Debug.Log("Attack1");
             Attack("Attack");
-            _attackCounter = 1;
         }
-        else if (_attackCounter == 1)
-        {
-            Debug.Log("Attack2");
-            Attack("Attack2");
-            _attackCounter = 2;
+        else if (_attackCounter == 6)
+        {            
+            Attack("Attack3");                        
         }
-        else if (_attackCounter == 2)
+        else if (_attackCounter == 7)
         {
-            Debug.Log("Attack3");
-            Attack("Attack3");
+            Attack("Attack4");
             _attackCounter = 0;
-        }        
+            return;
+        }
+
+        _attackCounter++;
     }
         
     public void Attack(string animation)
     {
-        _anim.SetBool(animation, true);
+        _anim.SetBool("Attacking", true);
+        _anim.Play(animation);
+        AttackStop();
+    }
+
+    public void AttackStop()
+    {
+        _anim.SetBool("Attacking", false);
     }
 
     public void Hit()

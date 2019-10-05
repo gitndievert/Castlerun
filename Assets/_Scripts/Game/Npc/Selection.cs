@@ -37,7 +37,8 @@ public class Selection : DSingle<Selection>
 
     public Color SelectionBoxColor;
     public Color BorderColor;
-    public static bool IsSelecting = false;
+
+    public static bool IsSelecting = false;    
 
     /// <summary>
     /// Selection target ground visual
@@ -93,8 +94,12 @@ public class Selection : DSingle<Selection>
         //Selection mouse events
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
         {
-            IsSelecting = true;
-            mousePosition1 = Input.mousePosition;
+            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+            {
+                IsSelecting = true;
+                mousePosition1 = Input.mousePosition;
+            }
+
             LeftClickActions();
         }        
         else if(Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) && !Global.MouseLook)
@@ -117,10 +122,12 @@ public class Selection : DSingle<Selection>
 
     private void OnGUI()
     {
-        if (!IsSelecting) return;               
-        var rect = SelectionBoxRect.GetScreenRect(mousePosition1, Input.mousePosition);        
-        SelectionBoxRect.DrawScreenRect(rect, SelectionBoxColor);        
+        if (!IsSelecting) return;
+        //Need to hold down ctrl for mass selector        
+        var rect = SelectionBoxRect.GetScreenRect(mousePosition1, Input.mousePosition);
+        SelectionBoxRect.DrawScreenRect(rect, SelectionBoxColor);
         SelectionBoxRect.DrawScreenRectBorder(rect, 2, BorderColor);
+        
     }
 
     private void LeftClickActions()
@@ -146,7 +153,7 @@ public class Selection : DSingle<Selection>
                     {
                         UpdateEnemyTarget(hit.transform.GetComponent<ISelectable>());
                     }
-                    else if (hit.transform.gameObject.layer == Global.GROUND_LAYER
+                    else if (hit.GetLayer() == Global.GROUND_LAYER
                         || ((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
                     {
                         ClearAll();
