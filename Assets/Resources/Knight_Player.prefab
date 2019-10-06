@@ -349,6 +349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 475044054}
+  - component: {fileID: 7903380972101348792}
   m_Layer: 14
   m_Name: RigRPalm
   m_TagString: Untagged
@@ -373,6 +374,31 @@ Transform:
   m_Father: {fileID: 1079487478}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7903380972101348792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475044053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ceb339997c8304e9354d4ce5ddc9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emit: 1
+  _emitTime: 0
+  _material: {fileID: 2100000, guid: 5f402d1520e5fa74fa21e08f85b71370, type: 2}
+  _lifeTime: 1
+  _colors: []
+  _sizes: []
+  _minVertexDistance: 0.1
+  _maxVertexDistance: 10
+  _maxAngle: 3
+  _autoDestruct: 0
+  subdivisions: 4
+  _base: {fileID: 6741811090506977478}
+  _tip: {fileID: 7623906894351987332}
 --- !u!1 &477903125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,7 +1640,9 @@ Transform:
   m_LocalRotation: {x: 0.7434084, y: 0.009255307, z: -0.013653058, w: -0.6686344}
   m_LocalPosition: {x: -0.131, y: -0.048, z: -0.004}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6741811090506977478}
+  - {fileID: 7623906894351987332}
   m_Father: {fileID: 475044054}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 263.66, y: 17.21199, z: -16.85498}
@@ -2002,6 +2030,36 @@ Transform:
   m_Father: {fileID: 475044054}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &566682330509559177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7623906894351987332}
+  m_Layer: 14
+  m_Name: SwordTip
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7623906894351987332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566682330509559177}
+  m_LocalRotation: {x: -0.74340844, y: -0.009255297, z: 0.013653091, w: -0.66863436}
+  m_LocalPosition: {x: 0.022, y: 1.238, z: 0.007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1618773105}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &957191558803943490
 GameObject:
   m_ObjectHideFlags: 0
@@ -2240,6 +2298,36 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_maskType: 0
+--- !u!1 &3097254518177985362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6741811090506977478}
+  m_Layer: 14
+  m_Name: SwordBase
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6741811090506977478
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3097254518177985362}
+  m_LocalRotation: {x: -0.74340844, y: -0.009255297, z: 0.013653091, w: -0.66863436}
+  m_LocalPosition: {x: -0.002, y: 0.214, z: -0.011}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1618773105}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5745686231619295417
 GameObject:
   m_ObjectHideFlags: 0

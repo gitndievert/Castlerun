@@ -202,7 +202,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     private void Update()
     {
         //Attack 
-        if (photonView.IsMine)
+        if (photonView.IsMine || Global.DeveloperMode)
         {
             if (Time.time > _lastAttacked)
             {

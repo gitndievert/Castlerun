@@ -18,7 +18,11 @@ using Photon.Pun;
 public class MovementInput : MonoBehaviourPun, IPunObservable
 {
     public static bool Lock;
-        
+
+
+    public MeleeWeaponTrail WeaponTrail;
+
+
     public float InputX;    
     public float InputZ;
     public Vector3 DesiredMoveDirection;
