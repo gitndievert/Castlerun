@@ -61,7 +61,23 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.07706094
+        functionName: WepTrailEnable
+        data: 
+        objectReferenceParameter: {fileID: 1507808357, guid: 47c4c30cb31bfbb47bf369cc29485702,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9610169
+        functionName: WepTrailDisable
+        data: 
+        objectReferenceParameter: {fileID: 1507808357, guid: 47c4c30cb31bfbb47bf369cc29485702,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

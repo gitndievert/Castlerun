@@ -31,6 +31,8 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     [Range(25, 150)]
     public int HitAmountMax = 75;
 
+    public MeleeWeaponTrail WeaponTrail;
+
     public TextMeshPro FloatingPlayerText;
 
     public bool CompanionOut = false;
@@ -155,8 +157,10 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
             }            
 
-        }        
-        
+        }
+
+        WepTrailDisable();
+
     }
 
     public override void OnDisable()
@@ -367,8 +371,20 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         CompanionOut = false;
     }
 
+    public void WepTrailEnable()
+    {
+        if (WeaponTrail == null) return;
+        WeaponTrail.Emit = true;
+    }
+
+    public void WepTrailDisable()
+    {
+        if (WeaponTrail == null) return;
+        WeaponTrail.Emit = false;
+    }
+
     public void Swing()
-    {         
+    {
         if (SwingEnemyTargetSelected() != null)
         {
             _movement.AttackPlayer();

@@ -19,10 +19,6 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
 {
     public static bool Lock;
 
-
-    public MeleeWeaponTrail WeaponTrail;
-
-
     public float InputX;    
     public float InputZ;
     public Vector3 DesiredMoveDirection;
@@ -215,11 +211,11 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         }
         else if (_attackCounter == 6)
         {            
-            Attack("Attack3");                        
+            Attack("Attack4");                        
         }
         else if (_attackCounter == 7)
         {
-            Attack("Attack4");
+            Attack("Attack3");
             _attackCounter = 0;
             return;
         }

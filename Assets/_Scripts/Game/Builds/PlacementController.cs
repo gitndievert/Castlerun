@@ -16,7 +16,7 @@ using System.Collections;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlacementController : MonoBehaviourPun
+public class PlacementController : MonoBehaviourPun, IPunObservable
 {
     [Tooltip("Loaded Prefab for Placement")]
     public GameObject PlaceableObjectPrefab = null;    
@@ -235,7 +235,17 @@ public class PlacementController : MonoBehaviourPun
         }
 
         return false;
-    }   
-   
+    }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
 }
