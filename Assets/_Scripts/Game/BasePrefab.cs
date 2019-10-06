@@ -214,18 +214,6 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
         }
 
         Destroy(gameObject, timer);               
-    }    
-
-    [PunRPC]
-    protected void Broadcast(string message)
-    {
-        Global.Message(" " + message, Color.red);
-        Invoke("ClearBroadCast", 3f);
-    }
-
-    private void ClearBroadCast()
-    {
-        Global.Message("");
-    }
+    }        
 
 }

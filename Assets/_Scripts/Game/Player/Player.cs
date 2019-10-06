@@ -51,6 +51,8 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     /// </summary>
     public Castle PlayerCastle { get; set; }
 
+    public Vector3 RespawnPos { get; set; }
+
     [Range(1, Global.PLAYER_MAX_SLOTS)]
     public int PlayerNumber = 1;
 
@@ -77,8 +79,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     private GameObject _mainHand;
     private GameObject _offHand;                 
     private string _playerName;
-    private BattleCursor _battleCursor;
-    private Vector3 _respawnPos;
+    private BattleCursor _battleCursor;    
         
     private float _attackDelay = 1f;
     private float _lastAttacked;    
@@ -109,8 +110,9 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         PlayerWorldItems = new GameObject("PlayerWorldItems");
         base.Awake();
 
-        //Set Respawn Point
-        _respawnPos = transform.position;
+        //Sets the transform respawn point
+        RespawnPos = transform.position;
+
     }
 
     // Start is called before the first frame update
@@ -194,8 +196,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         PlayerUI.HealthText.text = $"{Health}/100";
 
         MoveSpeed = 10f;
-        BuildSpeed = 10f;        
-
+        BuildSpeed = 10f;
     }
            
     private void Update()
@@ -434,10 +435,6 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
     public override void Die()
     {
-        Health = 0;
-        PlayerUI.HealthText.text = $"0/100";
-        UIManager.Instance.HealthBar.BarValue = 0;
-        Debug.Log("I am DEAD!");
         StartCoroutine(DeathSequence());
     }
 
@@ -448,14 +445,17 @@ public class Player : BasePrefab, IPlayer, IPunObservable
    
     private IEnumerator DeathSequence()
     {
+        Health = 0;
+        PlayerUI.HealthText.text = $"0/100";
+        UIManager.Instance.HealthBar.BarValue = 0;
+        Debug.Log("I am DEAD!");
         _movement.Die();
         Global.Message("YOU DIED, Respawn in 5 seconds...");
-        Broadcast($"{PlayerName} has DIED!");
-        yield return new WaitForSeconds(5f);
-        transform.position = _respawnPos;
+        //Broadcast($"{PlayerName} has DIED!");
+        yield return new WaitForSeconds(5f);        
         SetBasicPlayerStats();
-        _movement.RestartAnimator();
-        IsDead = false;
+        _movement.RestartAnimator();        
+        IsDead = false;        
         yield return null;
     }    
    
