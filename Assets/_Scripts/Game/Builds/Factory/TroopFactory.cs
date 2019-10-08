@@ -255,9 +255,9 @@ public class TroopFactory : Build
             var place = (bool)stream.ReceiveNext();
             if(place)
             {
-                GameManager.PlayersByActor.TryGetValue(photonView.Owner.ActorNumber, out Player player);
+                GameManager.PlayersByActor.TryGetValue(GameManager.MyPlayerNumber, out Player player);
                 if (player != null)
-                {
+                { 
                     SetPlayer(player);
                     EnableFinalModel();
                     _buildArea.ShowPlane(false);

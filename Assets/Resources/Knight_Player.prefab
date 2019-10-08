@@ -1236,7 +1236,6 @@ GameObject:
   - component: {fileID: 706162164831775572}
   - component: {fileID: -2392940468147617419}
   - component: {fileID: 7703449772116736736}
-  - component: {fileID: 1129506751932856061}
   - component: {fileID: 2646122212636673104}
   - component: {fileID: 2142698744836035443}
   - component: {fileID: 696516307416291525}
@@ -1325,6 +1324,10 @@ MonoBehaviour:
   AllowPlayerRotation: 0
   IsGrounded: 0
   RotateOverload: 2.5
+  isAttacking: 0
+  AttackSounds:
+  - {fileID: 8300000, guid: 9cca06694e70343d3a39f395667c9651, type: 3}
+  - {fileID: 8300000, guid: cdbbe496ac59f429d86f8013a321e038, type: 3}
   m_JumpPower: 12
   CharacterController: {fileID: 0}
   _groundCheckDistance: 1
@@ -1427,19 +1430,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.9152814, z: 1}
   m_Center: {x: 0, y: 0.97498214, z: 0}
---- !u!114 &1129506751932856061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1507808357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 507e5741cec8a42dc964c8e0a4b55bd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  directionDampTime: 0.25
 --- !u!114 &2646122212636673104
 MonoBehaviour:
   m_ObjectHideFlags: 0

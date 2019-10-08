@@ -10605,6 +10605,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5790861444675634229, guid: 4424976e64c5223418767f18424d8b86,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5785308593239815809, guid: 4424976e64c5223418767f18424d8b86,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12023,6 +12028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1378269407}
   - component: {fileID: 1378269409}
+  - component: {fileID: 1378269408}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -12044,6 +12050,18 @@ Transform:
   m_Father: {fileID: 235755484}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1378269408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378269406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cbe6ea8b22bc184dbea14e9eb2b263b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1378269409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14993,6 +15011,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5790861444675634229, guid: 4424976e64c5223418767f18424d8b86,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5785308593239815809, guid: 4424976e64c5223418767f18424d8b86,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15089,6 +15112,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750229220499736087, guid: d3623546911d1e949823c67f53407132,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6995137531866528725, guid: d3623546911d1e949823c67f53407132,
         type: 3}
@@ -15909,6 +15937,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750229220499736087, guid: d3623546911d1e949823c67f53407132,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6995137531866528725, guid: d3623546911d1e949823c67f53407132,
         type: 3}
@@ -19301,6 +19334,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750229220499736087, guid: d3623546911d1e949823c67f53407132,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6995137531866528725, guid: d3623546911d1e949823c67f53407132,
         type: 3}
