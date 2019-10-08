@@ -61,7 +61,6 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     protected static readonly Color DamageColor = Color.red;
     protected static readonly Color PassiveColor = Color.yellow;
     
-
     protected Rigidbody RigidBody;
 
     //private List<MeshExploder> _explodables = new List<MeshExploder>();
@@ -91,28 +90,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     }
     
     protected virtual void Awake()
-    {
-        /*var renders = gameObject.GetComponentsInChildren<Renderer>();
-        foreach(var render in renders)
-        {
-            var T = render.GetType();
-            if (T != typeof(MeshRenderer) && T != typeof(SkinnedMeshRenderer))
-                continue;
-
-            if (render.gameObject.GetComponent<MeshExploder>() == null)
-            {
-                var exploder = render.gameObject.AddComponent<MeshExploder>();
-                //Set Defaults on Exploder     
-                exploder.useGravity = true;
-
-                _explodables.Add(exploder);
-            }
-            else
-            {
-                _explodables.Add(render.gameObject.GetComponent<MeshExploder>());                
-            }            
-        }*/
-        
+    {       
         TargetingMe = new HashSet<Troop>();
         IsDying = false;
 
@@ -139,6 +117,14 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
                 boom.Explode();
             }
         }*/
+    }
+
+    protected virtual void Start()
+    {
+        if (!photonView.IsMine && !Global.DeveloperMode)
+        {          
+            TagPrefab(Global.ENEMY_TAG);
+        }
     }
 
     protected void SetStartHealth(int value)

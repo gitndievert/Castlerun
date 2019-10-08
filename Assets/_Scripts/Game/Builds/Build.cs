@@ -59,8 +59,9 @@ public abstract class Build : BasePrefab, IBuild, ISelectable, IPunObservable
         GetComponent<BoxCollider>().isTrigger = true;
     }
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         RigidBody.isKinematic = true;
         if (Health == 0) Health = 20;        
         MaxHealth = Health;

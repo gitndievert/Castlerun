@@ -88,8 +88,9 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         nav = GetComponent<NavMeshAgent>();        
     }
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         SelectionTargetStatus(false);
         MaxHealth = Health;    
 
@@ -102,12 +103,8 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
             throw new System.Exception("Please add a cost");
         
         
-        _smoothDeltaPosition = default;             
-        
-        if(!photonView.IsMine && !Global.DeveloperMode)
-        {
-            tag = Global.ENEMY_TAG;
-        }
+        _smoothDeltaPosition = default;
+       
     }
 
     // Update is called once per frame
