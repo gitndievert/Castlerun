@@ -154,7 +154,6 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             if(FloatingPlayerText != null)
             {
                 FloatingPlayerText.gameObject.SetActive(false);
-
             }            
 
         }
@@ -221,97 +220,96 @@ public class Player : BasePrefab, IPlayer, IPunObservable
                     }
                 }
             }
-        }        
 
-        //Temporary, work out the details for build mappings later
-        //Disallow movements if player is DEAD
-        MovementInput.Lock = IsDead;
+            //Temporary, work out the details for build mappings later
+            //Disallow movements if player is DEAD
+            MovementInput.Lock = IsDead;
 
-        /////// BUILD MODE ACTIVATION
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Global.BuildMode = !Global.BuildMode;
-            _battleCursor.Off();
+            /////// BUILD MODE ACTIVATION
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Global.BuildMode = !Global.BuildMode;
+                _battleCursor.Off();
 
+                if (Global.BuildMode)
+                {
+                    //Announce build mode on                                
+                    BuildManager.Instance.Placements.SetGrid = true;
+                    BuildManager.Instance.LoadBasicWall();
+                }
+                else
+                {
+                    //Announce build mode off                
+                    CameraRotate.BuildCamMode = false;
+                    BuildManager.Instance.Placements.SetGrid = false;
+                    BuildManager.Instance.Placements.ClearObject();
+                }
+
+            }
+
+            /////// BUILD MODE OPTIONS
             if (Global.BuildMode)
             {
-                //Announce build mode on                                
-                BuildManager.Instance.Placements.SetGrid = true;
-                BuildManager.Instance.LoadBasicWall();
+                if (Input.GetKeyDown(KeyBindings.BuildKey1))
+                {
+                    BuildManager.Instance.LoadBasicWall();
+                }
+                else if (Input.GetKeyDown(KeyBindings.BuildKey2))
+                {
+                    BuildManager.Instance.LoadBasicFloor();
+                }
+                else if (Input.GetKeyDown(KeyBindings.BuildKey3))
+                {
+                    BuildManager.Instance.LoadBasicRamp();
+                }
             }
-            else
+
+
+            /////// TEST TROOP EXPLODER
+            if (Input.GetKeyDown(KeyCode.K))
             {
-                //Announce build mode off                
-                CameraRotate.BuildCamMode = false;
-                BuildManager.Instance.Placements.SetGrid = false;                
-                BuildManager.Instance.Placements.ClearObject();                
+                Selection.Instance.SingleTargetSelected.GameObject.GetComponent<Troop>().AddExplosionForce(10f);
             }
 
-        }
-
-        /////// BUILD MODE OPTIONS
-        if (Global.BuildMode)
-        {                       
-            if (Input.GetKeyDown(KeyBindings.BuildKey1))
+            /////// TEST COMPANIONS
+            if (Input.GetKeyDown(KeyCode.C))
             {
-                BuildManager.Instance.LoadBasicWall();
+                SetCompanion(CompanionType.Fox);
             }
-            else if (Input.GetKeyDown(KeyBindings.BuildKey2))
+            if (Input.GetKeyDown(KeyCode.V))
             {
-                BuildManager.Instance.LoadBasicFloor();
+                SetCompanion(CompanionType.Fox_S);
             }
-            else if (Input.GetKeyDown(KeyBindings.BuildKey3))
+            if (Input.GetKeyDown(KeyCode.B))
             {
-                BuildManager.Instance.LoadBasicRamp();
-            }            
-        }
-
-
-        /////// TEST TROOP EXPLODER
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            Selection.Instance.SingleTargetSelected.GameObject.GetComponent<Troop>().AddExplosionForce(10f);
-        }
-
-        /////// TEST COMPANIONS
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            SetCompanion(CompanionType.Fox);
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            SetCompanion(CompanionType.Fox_S);
-        }
-        if(Input.GetKeyDown(KeyCode.B))
-        {
-            ReleaseCompanion();
-        }
-
-        /////// TEST CAM SHAKER
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            CamShake.Instance.Shake();
-        }
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            CamShake.Instance.Shake(1f, .5f);
-        }    
-               
-        if(Input.GetKeyDown(KeyCode.I))
-        {
-            _movement.Dance();
-        }
-
-        //Hit my face
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (!IsDead)
-            {
-                Debug.Log("Doing damage to player!");
-                SetHit(HitAmountMin);                
+                ReleaseCompanion();
             }
-        }
 
+            /////// TEST CAM SHAKER
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                CamShake.Instance.Shake();
+            }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                CamShake.Instance.Shake(1f, .5f);
+            }
+
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                _movement.Dance();
+            }
+
+            //Hit my face
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if (!IsDead)
+                {
+                    Debug.Log("Doing damage to player!");
+                    SetHit(HitAmountMin);
+                }
+            }
+        }                
 
         //Face player labels toward camera
         if (FloatingPlayerText != null && FloatingPlayerText.text.Length > 0)
@@ -319,8 +317,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             //var camVector = Camera.main.transform.position;
             FloatingPlayerText.rectTransform.LookAt(Camera.main.transform);
             FloatingPlayerText.rectTransform.Rotate(Vector3.up - new Vector3(0, 180, 0));
-        }           
-
+        }        
         
     }
 
@@ -331,11 +328,10 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         {
             // We own this player: send the others our data            
             //stream.SendNext(this.Health);
-            //stream.SendNext("My name is mr fancy pants");            
-            if (FloatingPlayerText != null)
-            {
-                stream.SendNext(PlayerName);                
-            }
+            //stream.SendNext("My name is mr fancy pants");         
+            stream.SendNext(PlayerName);                
+            stream.SendNext(_movement.isAttacking);
+            
         }
         else
         {
@@ -343,8 +339,13 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             //this.IsFiring = (bool)stream.ReceiveNext();
             //this.Health = (float)stream.ReceiveNext();
             
-            //Debug.Log($"This is from the remote client {(string)stream.ReceiveNext()}");
+            //Debug.Log($"This is from the remote client {(string)stream.ReceiveNext()}");            
             FloatingPlayerText.text = (string)stream.ReceiveNext();
+            var attacking = (bool)stream.ReceiveNext();
+            if(attacking)
+            {
+                _movement.AttackPlayer();
+            }
         }
     }
 

@@ -139,7 +139,7 @@ public class PlacementController : MonoBehaviourPun, IPunObservable
                     {
                         inv.Set(costs);
                         CameraRotate.BuildCamMode = false;
-                        StartCoroutine(CorLoadBuilding(build));
+                        StartCoroutine(CorLoadBuilding(build));                        
                     }
                 }
                 else
@@ -179,7 +179,7 @@ public class PlacementController : MonoBehaviourPun, IPunObservable
             _triggerBuild = false;
         }       
     }
-
+    
     private IEnumerator CorLoadBuilding(IBuild build)
     {
         build.SetPlayer(Player);                

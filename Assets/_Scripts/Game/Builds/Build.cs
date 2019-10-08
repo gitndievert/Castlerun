@@ -48,6 +48,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable, IPunObservable
 
     protected bool isPlaced = false;    
     protected bool isFinished = false;
+    protected bool p_Finished = false;
 
     private Vector3 _offset;
 
@@ -111,6 +112,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable, IPunObservable
     {
         isFinished = true;
         EnableFinalModel();
+        p_Finished = true;
         //SoundManager.PlaySound(SoundList.Instance.BuildSound);
     }
 
@@ -151,15 +153,6 @@ public abstract class Build : BasePrefab, IBuild, ISelectable, IPunObservable
     /// </summary>
     /// <param name="stream"></param>
     /// <param name="info"></param>
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if(stream.IsWriting)
-        {
-
-        }
-        else
-        {
-
-        }
-    }
+    public abstract void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info);
+    
 }

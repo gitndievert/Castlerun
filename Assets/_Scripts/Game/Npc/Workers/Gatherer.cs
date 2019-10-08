@@ -95,8 +95,11 @@ public class Gatherer : Troop
         }
 
         anim.Play("Swing");
-        yield return new WaitForSeconds(hTime);        
-        Player.Inventory.Set(HarvestingSelection, qty);        
+        yield return new WaitForSeconds(hTime);
+        if (photonView.IsMine)
+        {
+            Player.Inventory.Set(HarvestingSelection, qty);
+        }
         IsHarvesting = false;
         nav.isStopped = false;
         anim.Play("Walk");

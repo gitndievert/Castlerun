@@ -43,27 +43,20 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public TextMeshProUGUI Messages;
     public TextMeshProUGUI PlayersConnected;
 
+    public static Dictionary<int, Player> PlayersByActor = new Dictionary<int, Player>();
+
     [Header("PUN Network Variables")]
     /// <summary>
     /// Total Players in Room
     /// </summary>
-    public int PlayersInRoom;
+    public static int PlayersInRoom;
 
     /// <summary>
     /// My Players Number in Room
     /// </summary>
-    public int MyPlayerNumber;
+    public static int MyPlayerNumber;
 
-    public float StartingTime;
-
-    //PUN Variables
-    private Photon.Realtime.Player[] _photonPlayers;
-    private PhotonView _pv;
-
-    //Game Variables
-    private bool _readyToCount;
-    private bool _readyToStart;
-
+    public float StartingTime;    
 
 
     private void Awake()
@@ -129,6 +122,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
                 character.layer = Global.IGNORE_LAYER;
 
                 MyPlayerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
+
+                PlayersByActor.Add(MyPlayerNumber, character.GetComponent<Player>());
 
                 Debug.Log($"Current actor number: {MyPlayerNumber}");
                 //Kill music for now

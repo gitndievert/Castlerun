@@ -84,7 +84,8 @@ public class MenuManager : MonoBehaviourPunCallbacks
         //Current Menu Scene
         if (Scenename == "Menu2")
         {
-            Music.Instance.PlayMusicTrack(0);
+            //Dont play now
+            //Music.Instance.PlayMusicTrack(0);
         }
 
         _activePanel = UIPanels.Where(p => p.name == "MainMenuPanel").First();

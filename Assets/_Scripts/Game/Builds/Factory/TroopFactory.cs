@@ -26,7 +26,7 @@ using UnityEngine.UI;
  * troops, either Army or Gathering, etc. 
  * 
  */
-public class TroopFactory : Build, IPunObservable
+public class TroopFactory : Build
 {    
     public float PlacementDistance = 2f;
 
@@ -242,21 +242,29 @@ public class TroopFactory : Build, IPunObservable
         object[] instantiationData = info.photonView.InstantiationData;        
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            // We own this player: send the others our data
-
-            //stream.SendNext(this.IsFiring);
-            //stream.SendNext(this.Health);
+            // We own this player: send the others our data            
+            stream.SendNext(p_Finished);
         }
         else
         {
             // Network player, receive data
-
-            //this.IsFiring = (bool)stream.ReceiveNext();
-            //this.Health = (float)stream.ReceiveNext();
+            var place = (bool)stream.ReceiveNext();
+            if(place)
+            {
+                GameManager.PlayersByActor.TryGetValue(photonView.Owner.ActorNumber, out Player player);
+                if (player != null)
+                {
+                    SetPlayer(player);
+                    EnableFinalModel();
+                    _buildArea.ShowPlane(false);
+                    tag = Global.ENEMY_TAG;
+                    p_Finished = false;
+                }
+            }
         }
     }
 }

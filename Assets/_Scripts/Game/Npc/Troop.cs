@@ -102,7 +102,12 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
             throw new System.Exception("Please add a cost");
         
         
-        _smoothDeltaPosition = default;                   
+        _smoothDeltaPosition = default;             
+        
+        if(!photonView.IsMine && !Global.DeveloperMode)
+        {
+            tag = Global.ENEMY_TAG;
+        }
     }
 
     // Update is called once per frame
@@ -183,19 +188,27 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
     }
 
     #region PUN Callbacks
-    //Main method for serialization on Player actions
+    //Main method for serialization on Player actions   
     public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            // We own this player: send the others our data
-
-            //stream.SendNext(this.IsFiring);
+            // We own this player: send the others our data            
+            stream.SendNext(Health);
             //stream.SendNext(this.Health);
         }
         else
         {
             // Network player, receive data
+            //var place = (bool)stream.ReceiveNext();
+            //if (place)
+            //{
+            //    EnableFinalModel();
+            //   _buildArea.ShowPlane(false);
+            //    tag = Global.ENEMY_TAG;
+            //    p_Finished = false;
+            // }
+            Health = (int)stream.ReceiveNext();
 
             //this.IsFiring = (bool)stream.ReceiveNext();
             //this.Health = (float)stream.ReceiveNext();
@@ -441,5 +454,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         }
         base.Die();
     }
+
+
 
 }

@@ -28,11 +28,16 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
     public float AllowPlayerRotation;
     public bool IsGrounded;
     public float RotateOverload = 2f;
+    public bool isAttacking;
+
+    [Header("Sounds")]
+    public AudioClip[] AttackSounds;
 
     private float _verticalVelocity;
     private bool _isJumping;
 
-    [SerializeField] float m_JumpPower = 12f;
+    [SerializeField]
+    float m_JumpPower = 12f;
 
     public CharacterController CharacterController;
 
@@ -225,14 +230,18 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         
     public void Attack(string animation)
     {
-        _anim.SetBool("Attacking", true);
+        isAttacking = true;
+        _anim.SetBool("Attacking", isAttacking);
         _anim.Play(animation);
+        if(AttackSounds.Length > 0)
+            SoundManager.PlaySound(AttackSounds);
         AttackStop();
     }
 
     public void AttackStop()
     {
-        _anim.SetBool("Attacking", false);
+        isAttacking = false;
+        _anim.SetBool("Attacking", isAttacking);
     }
 
     public void Hit()

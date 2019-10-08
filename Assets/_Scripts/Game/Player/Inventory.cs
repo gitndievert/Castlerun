@@ -12,6 +12,7 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using Photon.Pun;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -48,6 +49,7 @@ public class Inventory : MonoBehaviour
     public bool IsGoldFull { get { return GoldCount >= MAX_GOLD; } }
 
     private InventoryUI _ui;    
+    private PhotonView _pv;
     
 
     // Start is called before the first frame update
@@ -57,6 +59,7 @@ public class Inventory : MonoBehaviour
         if(ResetOnStart) ResetAll();
         //Set up hands
         ResetHands();
+        _pv = GetComponent<PhotonView>();
 
         //To Trigger Events
         //EventManager.StartListening("Resource", ResourceMessage);
@@ -139,6 +142,7 @@ public class Inventory : MonoBehaviour
     /// <param name="amount">Amount of Resource</param>
     public void Set(ResourceType type, int amount = 0)
     {
+        if (!_pv.IsMine && !Global.DeveloperMode) return;
         switch (type)
         {
             case ResourceType.Wood:

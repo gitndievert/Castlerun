@@ -15,6 +15,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Photon.Pun;
 
 public class BasicBuild : Build
 {
@@ -37,8 +38,29 @@ public class BasicBuild : Build
     public override bool ConfirmPlacement()
     {        
         return base.ConfirmPlacement();
-    }   
+    }
 
+    public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data            
+            stream.SendNext(p_Finished);            
+        }
+        else
+        {
+            // Network player, receive data
+            var place = (bool)stream.ReceiveNext();
+            if (place)
+            {
+                EnableFinalModel();                
+                tag = Global.ENEMY_TAG;
+                p_Finished = false;
+            }
+
+        }
+    }
+  
     /*public Vector3[] SnapPointPos
     {
         get { return SnapPoints.Select(a => a.transform.position).ToArray(); }
