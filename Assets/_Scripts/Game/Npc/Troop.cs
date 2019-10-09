@@ -187,28 +187,22 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
     #region PUN Callbacks
     //Main method for serialization on Player actions   
     public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
+    {        
         if (stream.IsWriting)
         {
             // We own this player: send the others our data            
             stream.SendNext(Health);
-            //stream.SendNext(this.Health);
+            stream.SendNext(IsDying);            
         }
         else
-        {
-            // Network player, receive data
-            //var place = (bool)stream.ReceiveNext();
-            //if (place)
-            //{
-            //    EnableFinalModel();
-            //   _buildArea.ShowPlane(false);
-            //    tag = Global.ENEMY_TAG;
-            //    p_Finished = false;
-            // }
+        {            
             Health = (int)stream.ReceiveNext();
-
-            //this.IsFiring = (bool)stream.ReceiveNext();
-            //this.Health = (float)stream.ReceiveNext();
+            IsDying = (bool)stream.ReceiveNext();
+            if(IsDying)
+            {
+                Die();
+                IsDying = false;
+            }            
         }
     }
 

@@ -52,10 +52,10 @@ public class BasicBuild : Build
             // Network player, receive data
             var place = (bool)stream.ReceiveNext();
             if (place)
-            {
+            {                
                 EnableFinalModel();                
                 tag = Global.ENEMY_TAG;
-                p_Finished = false;
+                p_Finished = false;                
             }
 
         }

@@ -257,7 +257,7 @@ public class TroopFactory : Build
             {
                 GameManager.PlayersByActor.TryGetValue(GameManager.MyPlayerNumber, out Player player);
                 if (player != null)
-                { 
+                {                    
                     SetPlayer(player);
                     EnableFinalModel();
                     _buildArea.ShowPlane(false);

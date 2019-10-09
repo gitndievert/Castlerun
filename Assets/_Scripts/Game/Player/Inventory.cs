@@ -142,7 +142,7 @@ public class Inventory : MonoBehaviour
     /// <param name="amount">Amount of Resource</param>
     public void Set(ResourceType type, int amount = 0)
     {
-        if (!_pv.IsMine && !Global.DeveloperMode) return;
+        if (!_pv.IsMine || Global.DeveloperMode) return;
         switch (type)
         {
             case ResourceType.Wood:

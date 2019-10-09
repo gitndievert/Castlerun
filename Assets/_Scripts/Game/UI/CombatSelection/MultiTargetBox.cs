@@ -54,8 +54,8 @@ public class MultiTargetBox : DSingle<MultiTargetBox>
         for (int i = 0; i < list.Count; i++)
         {
             //_selections[i].TargetText.text = list[i].DisplayName;
-            _selections[i].TargetIcon.sprite = list[i].GetIcon();
-            _selections[i].HealthBar.BarValue = list[i].GetCurrentHealth();
+            _selections[i].TargetIcon.sprite = list[i].GetIcon();            
+            _selections[i].HealthBar.BarValue = Mathf.RoundToInt(((float)list[i].GetCurrentHealth() / list[i].GetMaxHealth()) * 100);
             _selections[i].gameObject.SetActive(true);
         }
     }

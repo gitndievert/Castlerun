@@ -42,6 +42,7 @@ public class PlacementController : MonoBehaviourPun, IPunObservable
     private bool _rotating = false;    
     private bool _outsideGrid;
     private bool _isBasic;
+    private bool _punShow;
         
 
     private void Awake()
@@ -174,8 +175,10 @@ public class PlacementController : MonoBehaviourPun, IPunObservable
             }
             else
             {                 
-                _currObj = PhotonNetwork.Instantiate(PlaceableObjectPrefab.name, Player.transform.position * 2, Quaternion.identity);                
+                _currObj = PhotonNetwork.Instantiate(PlaceableObjectPrefab.name, Player.transform.position * 2, Quaternion.identity);
+                _punShow = !photonView.IsMine;                
             }
+
             _triggerBuild = false;
         }       
     }
@@ -241,11 +244,12 @@ public class PlacementController : MonoBehaviourPun, IPunObservable
     {
         if(stream.IsWriting)
         {
-
+            stream.SendNext(_punShow);
         }
         else
         {
-
+            var showHidden = (bool)stream.ReceiveNext();
+            _currObj.SetActive(showHidden);
         }
     }
 }

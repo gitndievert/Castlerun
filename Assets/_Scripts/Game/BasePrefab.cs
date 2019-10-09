@@ -121,9 +121,12 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
 
     protected virtual void Start()
     {
-        if (!photonView.IsMine && !Global.DeveloperMode)
-        {          
-            TagPrefab(Global.ENEMY_TAG);
+        if (!Global.DeveloperMode)
+        {
+            if (photonView != null && !photonView.IsMine)
+            {
+                TagPrefab(Global.ENEMY_TAG);
+            }
         }
     }
 
