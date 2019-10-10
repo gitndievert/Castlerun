@@ -191,18 +191,18 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         if (stream.IsWriting)
         {
             // We own this player: send the others our data            
-            stream.SendNext(Health);
-            stream.SendNext(IsDying);            
+            //stream.SendNext(Health);
+            //stream.SendNext(IsDying);            
         }
         else
         {            
-            Health = (int)stream.ReceiveNext();
+            /*Health = (int)stream.ReceiveNext();
             IsDying = (bool)stream.ReceiveNext();
             if(IsDying)
             {
                 Die();
                 IsDying = false;
-            }            
+            } */           
         }
     }
 

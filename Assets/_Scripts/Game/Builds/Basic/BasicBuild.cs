@@ -48,7 +48,7 @@ public class BasicBuild : Build
         {
             // We own this player: send the others our data     
             stream.SendNext(p_Finished);
-            stream.SendNext(Health);            
+            //stream.SendNext(Health);            
         }
         else
         {
@@ -62,7 +62,7 @@ public class BasicBuild : Build
                 p_Finished = false;
             }
 
-            Health = (int)stream.ReceiveNext();           
+            //Health = (int)stream.ReceiveNext();           
         }
     }   
 

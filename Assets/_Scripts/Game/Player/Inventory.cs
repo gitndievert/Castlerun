@@ -142,63 +142,65 @@ public class Inventory : MonoBehaviour
     /// <param name="amount">Amount of Resource</param>
     public void Set(ResourceType type, int amount = 0)
     {
-        if (!_pv.IsMine || Global.DeveloperMode) return;
-        switch (type)
+        if ((_pv != null && !_pv.IsMine) || Global.DeveloperMode)
         {
-            case ResourceType.Wood:
-                if ((amount + WoodCount) <= MAX_WOOD)
-                {
-                    WoodCount += amount;                    
-                }
-                else
-                {
-                    UIManager.Instance.Messages.text = "You cannot store anymore wood";
-                    return;
-                }                
-                break;
-            case ResourceType.Rock:
-                if ((amount + RockCount) <= MAX_ROCK)
-                {
-                    RockCount += amount;                    
-                }
-                else
-                {
-                    UIManager.Instance.Messages.text = "You cannot store anymore rock";
-                    return;
-                }                
-                break;
-            case ResourceType.Metal:
-                if ((amount + MetalCount) <= MAX_METAL)
-                {
-                    MetalCount += amount;                    
-                }
-                else
-                {
-                    UIManager.Instance.Messages.text = "You cannot store anymore metal";
-                    return;
-                }                
-                break;
-            case ResourceType.Gold:
-                if ((amount + GoldCount) <= MAX_GOLD)
-                {
-                    GoldCount += amount;                    
-                }
-                else
-                {
-                    UIManager.Instance.Messages.text = "You cannot store anymore gems";
-                    return;
+            switch (type)
+            {
+                case ResourceType.Wood:
+                    if ((amount + WoodCount) <= MAX_WOOD)
+                    {
+                        WoodCount += amount;
+                    }
+                    else
+                    {
+                        UIManager.Instance.Messages.text = "You cannot store anymore wood";
+                        return;
+                    }
+                    break;
+                case ResourceType.Rock:
+                    if ((amount + RockCount) <= MAX_ROCK)
+                    {
+                        RockCount += amount;
+                    }
+                    else
+                    {
+                        UIManager.Instance.Messages.text = "You cannot store anymore rock";
+                        return;
+                    }
+                    break;
+                case ResourceType.Metal:
+                    if ((amount + MetalCount) <= MAX_METAL)
+                    {
+                        MetalCount += amount;
+                    }
+                    else
+                    {
+                        UIManager.Instance.Messages.text = "You cannot store anymore metal";
+                        return;
+                    }
+                    break;
+                case ResourceType.Gold:
+                    if ((amount + GoldCount) <= MAX_GOLD)
+                    {
+                        GoldCount += amount;
+                    }
+                    else
+                    {
+                        UIManager.Instance.Messages.text = "You cannot store anymore gems";
+                        return;
 
-                }                
-                break;
-        }
+                    }
+                    break;
+            }
 
-        if (amount > 0)
-        {
-            UIManager.Instance.Messages.text = $"You gathered {amount} {type.ToString()}";
-        }
-        else
-        {
-            UIManager.Instance.Messages.text = $"You used {Mathf.Abs(amount)} {type.ToString()}";
+            if (amount > 0)
+            {
+                UIManager.Instance.Messages.text = $"You gathered {amount} {type.ToString()}";
+            }
+            else
+            {
+                UIManager.Instance.Messages.text = $"You used {Mathf.Abs(amount)} {type.ToString()}";
+            }
         }
     }   
 

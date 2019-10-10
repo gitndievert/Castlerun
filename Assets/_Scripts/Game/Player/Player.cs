@@ -142,6 +142,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         //Set Cameras
         if (photonView.IsMine || Global.DeveloperMode)
         {
+            SelectionTarget.gameObject.SetActive(false);
 
             Inventory = GetComponent<Inventory>();
             _movement = GetComponent<MovementInput>();
@@ -507,14 +508,14 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
     public void Select()
     {
-        if (GetTag == Global.NPC_TAG) return;
+        if (GetTag != Global.ENEMY_TAG) return;
         if (!IsSelected)
         {
             IsSelected = true;
             Selection selection = UIManager.Instance.SelectableComponent;
             //Single Target Selection Panel
             SelectionUI.UpdateEnemyTarget(this);
-            SelectionTargetStatus(true, Color.yellow);
+            SelectionTargetStatus(true, DamageColor);
         }
     }
 
