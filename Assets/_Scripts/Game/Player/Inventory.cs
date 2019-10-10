@@ -15,7 +15,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviourPun
 {   
     const int MAX_WOOD = 500;
     const int MAX_ROCK = 500;
@@ -153,7 +153,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        UIManager.Instance.Messages.text = "You cannot store anymore wood";
+                        Global.Message("You cannot store anymore wood");
                         return;
                     }
                     break;
@@ -164,7 +164,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        UIManager.Instance.Messages.text = "You cannot store anymore rock";
+                        Global.Message("You cannot store anymore rock");
                         return;
                     }
                     break;
@@ -175,7 +175,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        UIManager.Instance.Messages.text = "You cannot store anymore metal";
+                        Global.Message("You cannot store anymore metal");
                         return;
                     }
                     break;
@@ -186,7 +186,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        UIManager.Instance.Messages.text = "You cannot store anymore gems";
+                        Global.Message("You cannot store anymore gems");
                         return;
 
                     }
@@ -195,11 +195,11 @@ public class Inventory : MonoBehaviour
 
             if (amount > 0)
             {
-                UIManager.Instance.Messages.text = $"You gathered {amount} {type.ToString()}";
+                Global.Message($"You gathered {amount} {type.ToString()}");
             }
             else
             {
-                UIManager.Instance.Messages.text = $"You used {Mathf.Abs(amount)} {type.ToString()}";
+                Global.Message($"You used {Mathf.Abs(amount)} {type.ToString()}");
             }
         }
     }   
