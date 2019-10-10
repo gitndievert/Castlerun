@@ -48,9 +48,20 @@ public class CameraRotate : MonoBehaviour
     private float b_dist_y = 25f;
     private float b_rotation_x = 64.6f;
 
-    private float c_dist_y = 0f;
-    private float c_rotation_x = 0f;
-      
+    [Header("Battle Camera Offsets")]
+    [SerializeField]
+    private float c_dist_x = 0f;
+    [SerializeField]
+    private float c_dist_y = 25f;
+    [SerializeField]
+    private float c_dist_z = 0f;
+    [SerializeField]
+    private float c_rotation_x = 64.6f;
+    [SerializeField]
+    private float c_rotation_y = -35f;
+    [SerializeField]
+    private float c_rotation_z = 0f;
+
     //Auto Cam
     // How fast the rig will move to keep up with target's position
     private float m_MoveSpeed = 3;
@@ -142,8 +153,17 @@ public class CameraRotate : MonoBehaviour
 
         _yDeg = ClampAngle(_yDeg, yMinLimit, yMaxLimit);
 
+        Quaternion rotation = Quaternion.Euler(_yDeg, _xDeg, 0);
+
         // set camera rotation
-        Quaternion rotation = Quaternion.Euler(BuildCamMode ? b_rotation_x : _yDeg, _xDeg, 0);
+        if (BuildCamMode)
+        {
+            rotation = Quaternion.Euler(b_rotation_x, _xDeg, 0);
+        }
+        else if(BattleFieldMode)
+        {
+            rotation = Quaternion.Euler(c_rotation_x, c_rotation_y, c_rotation_z);            
+        }
         _correctedDistance = _desiredDistance;
 
         // calculate desired camera position
@@ -176,7 +196,18 @@ public class CameraRotate : MonoBehaviour
         position = target.position - (rotation * Vector3.forward * _currentDistance + vTargetOffset);
 
         transform.rotation = rotation;
-        transform.position = new Vector3(position.x, BuildCamMode ? b_dist_y + position.y : position.y,position.z);
+
+        transform.position = new Vector3(position.x, position.y, position.z);
+
+        // set camera rotation
+        if (BuildCamMode)
+        {            
+            transform.position = new Vector3(position.x, b_dist_y + position.y, position.z);
+        }
+        else if (BattleFieldMode)
+        {         
+            transform.position = new Vector3(c_dist_x + position.x, c_dist_y + position.y, c_dist_z + position.z);            
+        }
     }
 
     private static float ClampAngle(float angle, float min, float max)
@@ -263,5 +294,25 @@ public class CameraRotate : MonoBehaviour
         // and aligning with the target object's up direction (i.e. its 'roll')
         m_RollUp = m_RollSpeed > 0 ? Vector3.Slerp(m_RollUp, targetUp, m_RollSpeed * deltaTime) : Vector3.up;
         transform.rotation = Quaternion.Lerp(transform.rotation, rollRotation, m_TurnSpeed * m_CurrentTurnAmount * deltaTime);
+    }
+
+    public void SetCameraPosition(string angle)
+    {        
+        switch (angle.ToLower())
+        {
+            case "battle":
+                BattleFieldMode = true;
+                BuildCamMode = false;
+                break;
+            case "build":
+                BattleFieldMode = false;
+                BuildCamMode = true;
+                break;            
+            case "player":
+            default:
+                BattleFieldMode = false;
+                BuildCamMode = false;
+                break;
+        }       
     }
 }

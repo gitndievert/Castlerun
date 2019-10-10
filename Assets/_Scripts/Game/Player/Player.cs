@@ -329,6 +329,16 @@ public class Player : BasePrefab, IPlayer, IPunObservable
                     SetHit(HitAmountMin);
                 }
             }
+
+            //Camera Switch
+            if(Input.GetKeyDown(KeyCode.Z))
+            {
+                CameraRotate.BattleFieldMode = true;
+            }
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                CameraRotate.BattleFieldMode = false;
+            }
         }                
 
         //Face player labels toward camera

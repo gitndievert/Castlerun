@@ -86,6 +86,11 @@ public partial class UIManager : PSingle<UIManager>
         
     }   
 
+    /// <summary>
+    /// This keep the mouse on the UI and prevents raycasting from running through. 
+    /// Use this in a Physics.Raycast()
+    /// </summary>
+    /// <returns>bool</returns>
     public bool IsMouseOverUI()
     {
         var curPos = new PointerEventData(EventSystem.current)
