@@ -234,12 +234,7 @@ public class TroopFactory : Build
     {
         if(EventSystem.current.IsPointerOverGameObject()) return;
         base.UnSelect();
-    }
-
-    public void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        object[] instantiationData = info.photonView.InstantiationData;        
-    }
+    }    
 
     public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {

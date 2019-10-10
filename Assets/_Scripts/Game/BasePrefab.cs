@@ -39,6 +39,11 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     public HashSet<Troop> TargetingMe { get; set; }
 
     /// <summary>
+    /// Being Targeted by a Player
+    /// </summary>
+    public Player TargetByPlayer { get; set; }
+
+    /// <summary>
     /// This is the Icon Representing the Base Prefab
     /// </summary>
     public Sprite Icon;
@@ -142,8 +147,11 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
         transform.parent = player.PlayerWorldItems.transform;
     }
 
-    public virtual void SetHit(int amount)
+    public virtual void SetHit(int min, int max, bool hascritical = false)
     {
+        if (IsDying) return;
+        int amount = CalcDamage(min, max, hascritical);
+
         if (Health - amount > 0)
         {
             Health -= amount;
@@ -157,7 +165,14 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
             if (CanExplode) Explode();
             Die();
         }
-    }     
+    }
+
+    protected int CalcDamage(int min, int max, bool hascritical = false)
+    {
+        var dmg = Random.Range(min, max);
+        if (Random.Range(0, 20) > 17) dmg *= 2;
+        return dmg;
+    }
 
     public void AddExplosionForce(float power = 10.0f)
     {

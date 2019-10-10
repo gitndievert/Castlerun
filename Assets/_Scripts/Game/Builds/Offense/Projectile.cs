@@ -35,7 +35,7 @@ public class Projectile : BasePrefab
 
     public string TargetTag { get; set; }
 
-    private void Start()
+    protected override void Start()
     {        
         TagPrefab("Projectile");
         gameObject.layer = Global.PROJECTILE_LAYER;
@@ -77,7 +77,8 @@ public class Projectile : BasePrefab
         //Only hit the target enemy        
         if (col.transform.tag != TargetTag) return;        
         PlayHitSound();
-        Damage.ApplyDamage(col, MinDamage, MaxDamage, true);
+        var target = col.gameObject.GetComponent<BasePrefab>();
+        target.SetHit(MinDamage, MaxDamage, true);
         //Tuck away, don't destroy            
         Destroy(gameObject);                           
     }

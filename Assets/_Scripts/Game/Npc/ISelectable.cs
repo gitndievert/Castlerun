@@ -29,5 +29,7 @@ public interface ISelectable : IBase
     int GetCurrentHealth();
     int GetMaxHealth();
     HashSet<Troop> TargetingMe { get; set; }
+    Player TargetByPlayer { get; set; }
+    void SetTargetedByPlayer(Player player);
     bool IsDying { get; set; }
 }

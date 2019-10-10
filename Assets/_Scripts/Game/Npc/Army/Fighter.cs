@@ -60,6 +60,6 @@ public class Fighter : Troop
         anim.Play("Attack");
         var enemypos = EnemyTargetTransform.transform.position;
         transform.LookAt(new Vector3(enemypos.x, transform.position.y, enemypos.z));        
-        Damage.ApplyDamage(EnemyTarget, MinDamage, MaxDamage, true);
+        EnemyTarget.SetHit(MinDamage, MaxDamage, true);
     }
 }

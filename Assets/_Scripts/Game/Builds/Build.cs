@@ -160,4 +160,10 @@ public abstract class Build : BasePrefab, IBuild, ISelectable, IPunObservable
     {
         object[] instantiationData = info.photonView.InstantiationData;
     }
+
+    public void SetTargetedByPlayer(Player player)
+    {
+        TargetByPlayer = player;        
+    }
+
 }

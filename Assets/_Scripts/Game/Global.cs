@@ -97,6 +97,7 @@ public static class Global
     public static float ConstructionSpeedBonus = 1f;
     public static int TroopHealthBonus = 0;
     public static int TroopAttackBonus = 0;
+    public static float AgroDistance = 8f;
     #endregion
 
 

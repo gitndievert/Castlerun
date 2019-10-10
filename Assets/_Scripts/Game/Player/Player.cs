@@ -326,7 +326,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
                 if (!IsDead)
                 {
                     Debug.Log("Doing damage to player!");
-                    SetHit(HitAmountMin);
+                    SetHit(HitAmountMin,HitAmountMin,false);
                 }
             }
 
@@ -421,11 +421,14 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             _movement.AttackPlayer();
             var target = SwingEnemyTargetSelected();
 
+            if(target.TargetByPlayer == null || target.TargetByPlayer != this)
+                target.SetTargetedByPlayer(this);
+
             //May need to manage PUN tags
             switch (target.GameObject.tag)
             {
-                case Global.ENEMY_TAG:
-                    Damage.ApplyDamage(target, HitAmountMin, HitAmountMax, true);
+                case Global.ENEMY_TAG:                    
+                    target.SetHit(HitAmountMin, HitAmountMax, true);
                     break;
             }
         }
@@ -462,11 +465,11 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         return enemytarget;
     }
   
-    public override void SetHit(int amount)
+    public override void SetHit(int min, int max, bool hascritical = false)
     {
         //You're dead, go back
         if (Health <= 0 || IsDead) return;
-
+        int amount = CalcDamage(min, max, hascritical);
         if (Health - amount > 0)
         {
             Health -= amount;
@@ -505,6 +508,11 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         _movement.RestartAnimator();        
         IsDead = false;        
         yield return null;
+    }
+
+    public void SetTargetedByPlayer(Player player)
+    {
+        TargetByPlayer = player;
     }
 
     public void UnSelect()
@@ -556,4 +564,6 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     {
         object[] instantiationData = info.photonView.InstantiationData;
     }
+
+
 }

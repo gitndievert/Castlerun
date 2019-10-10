@@ -30,7 +30,7 @@ public class DestructibleWall : BasePrefab, ISelectable
         base.Awake();
     }
 
-    protected void Start()
+    protected override void Start()
     {
         CanExplode = true;
     }
@@ -65,5 +65,8 @@ public class DestructibleWall : BasePrefab, ISelectable
         }
     }
 
-    
+    public void SetTargetedByPlayer(Player player)
+    {
+        TargetByPlayer = player;
+    }
 }

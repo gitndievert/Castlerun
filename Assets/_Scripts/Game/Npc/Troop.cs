@@ -77,7 +77,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
     private int _hitCounter = 1;
     private bool _moveTriggerPoint;
 
-    private Troop _myAttacker = null;
+    private ISelectable _myAttacker = null;
     #endregion    
 
     protected override void Awake()
@@ -164,14 +164,25 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
             }
         }
         else if (GetTag == Global.ENEMY_TAG)
-        {
+        {            
             //Return attack
-            if (TargetingMe.Count > 0 && _myAttacker == null)
+            if (TargetByPlayer != null && _myAttacker == null)
+            {
+                TargetingMe.Clear();
+                //Add agro towards the player
+                //Do within 8 meters for now
+                if (Extensions.DistanceLess(TargetByPlayer.transform, transform, Global.AgroDistance))
+                {                    
+                    _myAttacker = TargetByPlayer;
+                    Attack();
+                }
+            }
+            else if (TargetingMe.Count > 0 && _myAttacker == null)
             {
                 foreach(var attacker in TargetingMe)
                 {
                     //Do within 8 meters for now
-                    if (Extensions.DistanceLess(attacker.transform,transform, 8f))
+                    if (Extensions.DistanceLess(attacker.transform,transform, Global.AgroDistance))
                     {
                         _myAttacker = attacker;
                         Target(attacker);                        
@@ -387,10 +398,18 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         EnemyTargetTransform = target.GameObject.transform;        
     }
 
+    public void SetTargetedByPlayer(Player player)
+    {
+        TargetByPlayer = player;
+        EnemyTarget = player;
+        EnemyTargetTransform = player.transform;
+    }
+
     public void ClearEnemyTargets()
     {
         EnemyTarget = null;
-        EnemyTargetTransform = null;        
+        EnemyTargetTransform = null;
+        TargetByPlayer = null;
     }
 
     public void Move(Vector3 point)
@@ -414,10 +433,12 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         _moveTriggerPoint = false;        
     }
 
-    public override void SetHit(int amount)
+    public override void SetHit(int min, int max, bool hascritical = false)
     {
         //Taking this out to test
         //if (!IsSelected) return;
+        if (IsDying) return;
+        int amount = CalcDamage(min, max, hascritical);
         if (Health - amount > 0)
         {
             Health -= amount;

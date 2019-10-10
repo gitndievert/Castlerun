@@ -169,11 +169,12 @@ public class Selection : DSingle<Selection>
                             ClearSingleTarget();
                         }
 
-                        if (EnemyTargetSelected != null)
+                        //Removed for now to test if we want enemy ALWAYS selected
+                        /*if (EnemyTargetSelected != null)
                         {
                             EnemyTargetSelected.UnSelect();                            
                             ClearEnemyTarget();
-                        }
+                        }*/
                     }
                 }
             }
