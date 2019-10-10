@@ -15,6 +15,8 @@
 using UnityEngine;
 using SBK.Unity;
 using TMPro;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public partial class UIManager : PSingle<UIManager>
 {
@@ -83,5 +85,16 @@ public partial class UIManager : PSingle<UIManager>
     {
         
     }   
+
+    public bool IsMouseOverUI()
+    {
+        var curPos = new PointerEventData(EventSystem.current)
+        {
+            position = new Vector2(Input.mousePosition.x, Input.mousePosition.y)
+        };
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(curPos, results);
+        return results.Count > 0;
+    }
     
 }

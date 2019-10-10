@@ -45,6 +45,11 @@ public class Selection : DSingle<Selection>
     /// </summary>
     public GameObject SelectionTargetObj;
 
+    /// <summary>
+    /// Selection target ground visual
+    /// </summary>
+    public GameObject BattleTargetObj;
+
     private Vector3 mousePosition1;
     private UIManager _ui;
     
@@ -327,15 +332,31 @@ public class Selection : DSingle<Selection>
         SelectionCursorOff();
     }
 
-    private void SelectionCursorOn()
+    public void SelectionCursorOn()
     {
-        SelectionTargetObj.SetActive(true);
-        SelectionTargetObj.transform.position = GroundPoint;
+        SelectionCursorOn(GroundPoint);
     }
 
-    private void SelectionCursorOff()
+    public void SelectionCursorOn(Vector3 point)
+    {
+        SelectionTargetObj.SetActive(true);
+        SelectionTargetObj.transform.position = point;
+    }    
+
+    public void SelectionCursorOff()
     {
         SelectionTargetObj.SetActive(false);
+    }
+
+    public void BattleCursorOn(Vector3 point)
+    {
+        BattleTargetObj.SetActive(true);
+        BattleTargetObj.transform.position = point;
+    }
+
+    public void BattleCursorOff()
+    {
+        BattleTargetObj.SetActive(false);
     }
 
     private void TargetPanel(bool show)

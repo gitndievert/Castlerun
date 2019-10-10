@@ -155,5 +155,9 @@ public abstract class Build : BasePrefab, IBuild, ISelectable, IPunObservable
     /// <param name="stream"></param>
     /// <param name="info"></param>
     public abstract void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info);
-    
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        object[] instantiationData = info.photonView.InstantiationData;
+    }
 }

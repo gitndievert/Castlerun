@@ -16,7 +16,7 @@ using System.Collections;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlacementController : MonoBehaviourPun, IPunObservable
+public class PlacementController : MonoBehaviourPun
 {
     [Tooltip("Loaded Prefab for Placement")]
     public GameObject PlaceableObjectPrefab = null;    
@@ -41,8 +41,7 @@ public class PlacementController : MonoBehaviourPun, IPunObservable
     private bool _triggerBuild = false;
     private bool _rotating = false;    
     private bool _outsideGrid;
-    private bool _isBasic;
-    private bool _punShow;
+    private bool _isBasic;    
         
 
     private void Awake()
@@ -175,8 +174,7 @@ public class PlacementController : MonoBehaviourPun, IPunObservable
             }
             else
             {                 
-                _currObj = PhotonNetwork.Instantiate(PlaceableObjectPrefab.name, Player.transform.position * 2, Quaternion.identity);
-                _punShow = !photonView.IsMine;                
+                _currObj = PhotonNetwork.Instantiate(PlaceableObjectPrefab.name, Player.transform.position * 2, Quaternion.identity);                         
             }
 
             _triggerBuild = false;
@@ -207,8 +205,7 @@ public class PlacementController : MonoBehaviourPun, IPunObservable
         if (Vector3.Distance(_currObj.transform.position, Player.transform.position) > 15f)
         {
             Vector3 playerP = Player.transform.position;
-            _currObj.transform.position = new Vector3(playerP.x,playerP.y + GetDistToGround(), playerP.z + 3f);
-            //_currObj.transform.position = _currObj.transform.position + Vector3.back;
+            _currObj.transform.position = new Vector3(playerP.x,playerP.y + GetDistToGround(), playerP.z + 3f);            
         }
     }   
  
@@ -239,17 +236,5 @@ public class PlacementController : MonoBehaviourPun, IPunObservable
 
         return false;
     }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if(stream.IsWriting)
-        {
-            stream.SendNext(_punShow);
-        }
-        else
-        {
-            var showHidden = (bool)stream.ReceiveNext();
-            _currObj.SetActive(showHidden);
-        }
-    }
+    
 }

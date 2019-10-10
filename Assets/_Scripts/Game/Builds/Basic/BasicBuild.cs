@@ -32,7 +32,9 @@ public class BasicBuild : Build
     protected override void Start()
     {
         base.Start();        
-        IsBasic = true;        
+        IsBasic = true;
+        if(!Global.DeveloperMode)
+            gameObject.SetActive(photonView.IsMine);
     }
     
     public override bool ConfirmPlacement()
@@ -44,23 +46,26 @@ public class BasicBuild : Build
     {
         if (stream.IsWriting)
         {
-            // We own this player: send the others our data            
-            stream.SendNext(p_Finished);            
+            // We own this player: send the others our data     
+            stream.SendNext(p_Finished);
+            stream.SendNext(Health);            
         }
         else
         {
-            // Network player, receive data
+            // Network player, receive data            
             var place = (bool)stream.ReceiveNext();
             if (place)
             {                
                 EnableFinalModel();                
                 tag = Global.ENEMY_TAG;
-                p_Finished = false;                
+                gameObject.SetActive(true);
+                p_Finished = false;
             }
 
+            Health = (int)stream.ReceiveNext();           
         }
-    }
-  
+    }   
+
     /*public Vector3[] SnapPointPos
     {
         get { return SnapPoints.Select(a => a.transform.position).ToArray(); }

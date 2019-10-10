@@ -16,6 +16,7 @@ using Photon.Pun;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class Player : BasePrefab, IPlayer, IPunObservable
@@ -70,6 +71,14 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         }
     }
 
+    #region ISelectables
+    [Space(15)]
+    public Light SelectionTarget;
+    public bool IsSelected { get; set; }
+    public GameObject GameObject => gameObject;
+    public string DisplayName { get { return PlayerName; } }
+    #endregion
+
     #region Player Components  
     //Camera Rig    
     public Inventory Inventory { get; private set; }    
@@ -118,8 +127,18 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     }
 
     // Start is called before the first frame update
-    protected void Start()
-    {
+    protected override void Start()
+    {        
+
+        if (!Global.DeveloperMode)
+        {
+            if (photonView != null && !photonView.IsMine)
+            {
+                TagPrefab(Global.ENEMY_TAG);
+                gameObject.layer = Global.PLAYER_LAYER;
+            }
+        }
+
         //Set Cameras
         if (photonView.IsMine || Global.DeveloperMode)
         {
@@ -403,6 +422,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         {
             if (Physics.Raycast(Selection.SelectionRayHit, out RaycastHit hit))
             {
+                if (UIManager.Instance.IsMouseOverUI()) return;
                 if (hit.point != null)
                 { 
                     if (hit.transform.tag != Global.ARMY_TAG 
@@ -474,6 +494,55 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         _movement.RestartAnimator();        
         IsDead = false;        
         yield return null;
-    }    
-   
+    }
+
+    public void UnSelect()
+    {
+        if (IsSelected)
+        {
+            IsSelected = false;
+            SelectionTargetStatus(false);                        
+        }
+    }
+
+    public void Select()
+    {
+        if (GetTag == Global.NPC_TAG) return;
+        if (!IsSelected)
+        {
+            IsSelected = true;
+            Selection selection = UIManager.Instance.SelectableComponent;
+            //Single Target Selection Panel
+            SelectionUI.UpdateEnemyTarget(this);
+            SelectionTargetStatus(true, Color.yellow);
+        }
+    }
+
+    public void OnMouseDown()
+    {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+        //if(Selection.Instance.SingleTargetSelected != null)
+        //    Selection.Instance.BattleCursorOff();
+        SelectionUI.ClearEnemyTarget();
+        SelectionTargetStatus(false);
+        Select();
+    }
+
+    private void SelectionTargetStatus(bool status)
+    {
+        if (SelectionTarget == null) return;
+        SelectionTarget.gameObject.SetActive(status);
+    }
+
+    private void SelectionTargetStatus(bool status, Color color)
+    {
+        if (SelectionTarget == null) return;
+        SelectionTargetStatus(status);
+        SelectionTarget.color = color;
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        object[] instantiationData = info.photonView.InstantiationData;
+    }
 }

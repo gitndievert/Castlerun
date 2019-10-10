@@ -66,19 +66,18 @@ public class TroopFactory : Build
         if (_buildArea == null)
         {
             _buildArea = GetComponentInChildren<BuildArea>();
-        }        
+        }
+        if (!Global.DeveloperMode)
+            gameObject.SetActive(photonView.IsMine);
     }    
 
     public override bool ConfirmPlacement()
     {
         if (!_buildArea.CanBuild) return false;
+        gameObject.SetActive(true);
         base.ConfirmPlacement();
         _buildArea.ShowPlane(false);
-        CamShake.Instance.Shake(1f, .5f);
-        /*if (BuildTime > 0)
-        {
-            StartCoroutine(RunBuild());            
-        }*/
+        CamShake.Instance.Shake(1f, .5f);      
 
         return true;
     }
@@ -144,7 +143,7 @@ public class TroopFactory : Build
     
     public void Train(Troop selectedTroop)
     {
-        if(_trainedCounter >= MaxTrained)
+        if (_trainedCounter >= MaxTrained)
         {
             Global.Message("Cannot Train anymore troops");
             return;
@@ -255,16 +254,17 @@ public class TroopFactory : Build
             var place = (bool)stream.ReceiveNext();
             if(place)
             {
+                gameObject.SetActive(true);
+                _buildArea.ShowPlane(false);
                 GameManager.PlayersByActor.TryGetValue(GameManager.MyPlayerNumber, out Player player);
                 if (player != null)
                 {                    
                     SetPlayer(player);
-                    EnableFinalModel();
-                    _buildArea.ShowPlane(false);
+                    EnableFinalModel();                    
                     tag = Global.ENEMY_TAG;
                     p_Finished = false;
                 }
-            }
+            }          
         }
     }
 }

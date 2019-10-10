@@ -14,7 +14,7 @@
 
 using System.Collections;
 
-public interface IPlayer : ICharacter
+public interface IPlayer : ICharacter, ISelectable
 {    
     void Swing();
 }

@@ -222,19 +222,14 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
     }
 
     #region Mouseover Callbacks
-
-    public void OnMouseExit()
-    {
-        if (GetTag == Global.ENEMY_TAG)
-        {            
-            SelectionUI.ClearEnemyTarget();
-            SelectionTargetStatus(false);
-        }
-    }   
-        
+   
     public void OnMouseDown()
     {
-        if (EventSystem.current.IsPointerOverGameObject()) return;        
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+        //if(Selection.Instance.SingleTargetSelected != null)
+        //    Selection.Instance.BattleCursorOff();
+        SelectionUI.ClearEnemyTarget();
+        SelectionTargetStatus(false);
         Select();
     }
 
@@ -245,12 +240,23 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
     {
         if(Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON))
             OnMouseDown();        
+        if (GetTag == Global.ENEMY_TAG && Selection.Instance.SingleTargetSelected == null)
+        {
+            float ySpot = Selection.Instance.SelectionTargetObj.transform.position.y;
+            var pos = new Vector3(transform.position.x, ySpot, transform.position.z);
+            Selection.Instance.BattleCursorOn(transform.position);
+            //SelectionUI.UpdateEnemyTarget(this);
+            //SelectionTargetStatus(true, DamageColor);
+        }       
+            
+    }
+
+    public void OnMouseExit()
+    {
         if (GetTag == Global.ENEMY_TAG)
         {
-            SelectionUI.UpdateEnemyTarget(this);
-            SelectionTargetStatus(true, DamageColor);
+            Selection.Instance.BattleCursorOff();            
         }
-            
     }
 
     #endregion

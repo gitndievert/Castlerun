@@ -53,10 +53,7 @@ public class SingleTargetBox : MonoBehaviour
                 ClearTarget();
             }
             else
-            {
-                Debug.Log($"Health {health}");
-                Debug.Log($"Max Health {_target.GetMaxHealth()}");
-                Debug.Log(Mathf.RoundToInt(((float)health / _target.GetMaxHealth()) * 100));
+            {                
                 HealthBar.BarValue = Mathf.RoundToInt(((float)health / _target.GetMaxHealth()) * 100);
             }            
         }
