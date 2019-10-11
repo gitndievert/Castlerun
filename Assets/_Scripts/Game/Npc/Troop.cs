@@ -68,11 +68,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
 
     [HideInInspector]
     public bool CanAttack = false;
-    public bool IsAttacking;
-    public bool UnderAttack;
-
-    protected ISelectable EnemyTarget { get; set; }
-    protected Transform EnemyTargetTransform { get; set; }
+    public bool IsAttacking;    
 
     private int _hitCounter = 1;
     private bool _moveTriggerPoint;
@@ -197,30 +193,10 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
 
     #region PUN Callbacks
     //Main method for serialization on Player actions   
-    public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {        
-        if (stream.IsWriting)
-        {
-            // We own this player: send the others our data            
-            //stream.SendNext(Health);
-            //stream.SendNext(IsDying);            
-        }
-        else
-        {            
-            /*Health = (int)stream.ReceiveNext();
-            IsDying = (bool)stream.ReceiveNext();
-            if(IsDying)
-            {
-                Die();
-                IsDying = false;
-            } */           
-        }
-    }
-
-    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        object[] instantiationData = info.photonView.InstantiationData;
-    }
+        base.OnPhotonSerializeView(stream, info);
+    }  
 
     #endregion
 
@@ -388,30 +364,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         anim.Play("Idle");
     }
 
-    /// <summary>
-    /// This Troops target for attack
-    /// </summary>
-    /// <param name="target"></param>
-    public virtual void Target(ISelectable target)
-    {        
-        EnemyTarget = target;
-        EnemyTargetTransform = target.GameObject.transform;        
-    }
-
-    public void SetTargetedByPlayer(Player player)
-    {
-        TargetByPlayer = player;
-        EnemyTarget = player;
-        EnemyTargetTransform = player.transform;
-    }
-
-    public void ClearEnemyTargets()
-    {
-        EnemyTarget = null;
-        EnemyTargetTransform = null;
-        TargetByPlayer = null;
-    }
-
+   
     public void Move(Vector3 point)
     {
         //nav.ResetPath();
@@ -437,7 +390,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
     {
         //Taking this out to test
         //if (!IsSelected) return;
-        if (IsDying) return;
+        if (IsDead) return;
         int amount = CalcDamage(min, max, hascritical);
         if (Health - amount > 0)
         {
@@ -464,7 +417,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
     }
 
     public override void Die()
-    {
+    {        
         anim.Play("Death1");
         if (GetTag == Global.ARMY_TAG)
         {

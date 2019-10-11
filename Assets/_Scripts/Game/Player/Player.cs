@@ -36,8 +36,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
     public TextMeshPro FloatingPlayerText;
 
-    public bool CompanionOut = false;
-    public bool IsDead = false;    
+    public bool CompanionOut = false;        
 
     [Header("Custom Additions to Player")]
     [Tooltip("For changing the companion on the player")]
@@ -93,7 +92,8 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     private BattleCursor _battleCursor;    
         
     private float _attackDelay = 1f;
-    private float _lastAttacked;    
+    private float _lastAttacked;
+    private int _hitCounter = 1;
 
 
     private MovementInput _movement;
@@ -352,8 +352,9 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     }
 
     //Main method for serialization on Player actions
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        base.OnPhotonSerializeView(stream, info);
         if (stream.IsWriting)
         {
             // We own this player: send the others our data            
@@ -475,11 +476,23 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             Health -= amount;
             PlayerUI.HealthText.text = $"{Health}/100";
             UIManager.Instance.HealthBar.BarValue = Health;
-            _movement.Hit();
+
+            if (_hitCounter >= 3)
+            {
+                if (HitSounds.Length > 0)
+                    SoundManager.PlaySound(HitSounds);
+
+                _movement.Hit();
+                _hitCounter = 1;
+            }
+
+            _hitCounter++;
+
         }
         else
         {
-            IsDead = true;
+            if (DestroySound != null)
+                SoundManager.PlaySound(DestroySound);            
             Die();            
         }
     }
@@ -487,19 +500,14 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     public override void Die()
     {
         StartCoroutine(DeathSequence());
-    }
-
-    public void Target(ISelectable target)
-    {
-        throw new System.NotImplementedException();
-    }
+    }   
    
     private IEnumerator DeathSequence()
     {
+        IsDead = true;
         Health = 0;
         PlayerUI.HealthText.text = $"0/100";
-        UIManager.Instance.HealthBar.BarValue = 0;
-        Debug.Log("I am DEAD!");
+        UIManager.Instance.HealthBar.BarValue = 0;        
         _movement.Die();
         Global.Message("YOU DIED, Respawn in 5 seconds...");
         //Broadcast($"{PlayerName} has DIED!");
@@ -508,12 +516,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         _movement.RestartAnimator();        
         IsDead = false;        
         yield return null;
-    }
-
-    public void SetTargetedByPlayer(Player player)
-    {
-        TargetByPlayer = player;
-    }
+    }  
 
     public void UnSelect()
     {
@@ -558,12 +561,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         if (SelectionTarget == null) return;
         SelectionTargetStatus(status);
         SelectionTarget.color = color;
-    }
-
-    public void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        object[] instantiationData = info.photonView.InstantiationData;
-    }
+    } 
 
 
 }

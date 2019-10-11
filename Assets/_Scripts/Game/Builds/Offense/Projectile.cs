@@ -45,17 +45,7 @@ public class Projectile : BasePrefab
         //Projectiles should not take longer than 10 seconds to hit a target
         Destroy(gameObject, 10f);
     }
-
-    private void OnDestroy()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
-
+    
     private void PlayTravelSound()
     {
         //NEED TO COME BACK

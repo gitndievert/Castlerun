@@ -147,23 +147,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable, IPunObservable
             IsSelected = false;
             BuildManager.Instance.RefreshBuilds();
         }
-    }
+    } 
 
-    /// <summary>
-    /// Pushes data back and forth in stream
-    /// </summary>
-    /// <param name="stream"></param>
-    /// <param name="info"></param>
-    public abstract void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info);
-
-    public void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        object[] instantiationData = info.photonView.InstantiationData;
-    }
-
-    public void SetTargetedByPlayer(Player player)
-    {
-        TargetByPlayer = player;        
-    }
-
+   
 }

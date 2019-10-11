@@ -31,7 +31,10 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     public AudioClip[] HitSounds;
     public TextMeshPro HealthText;
     
-    public bool IsDying { get; set; }
+    /// <summary>
+    /// Check to see if this object is DYING
+    /// </summary>
+    public bool IsDead { get; set; }
 
     /// <summary>
     /// All Troops targeting this gameObject
@@ -68,8 +71,11 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     
     protected Rigidbody RigidBody;
 
-    //private List<MeshExploder> _explodables = new List<MeshExploder>();
-    
+    //Targeting System
+    protected ISelectable EnemyTarget { get; set; }
+    protected Transform EnemyTargetTransform { get; set; }
+
+
     protected PlayerUI PlayerUI
     {
         get
@@ -97,7 +103,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     protected virtual void Awake()
     {       
         TargetingMe = new HashSet<Troop>();
-        IsDying = false;
+        IsDead = false;
 
         if (GetComponent<Rigidbody>() == null)
             gameObject.AddComponent<Rigidbody>();
@@ -111,17 +117,6 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     protected void TagPrefab(string tag)
     {
         transform.tag = tag;
-    }
-    
-    protected void Explode()
-    {
-        /*if(_explodables.Count > 0)
-        {
-            foreach(var boom in _explodables)
-            {
-                boom.Explode();
-            }
-        }*/
     }
 
     protected virtual void Start()
@@ -147,9 +142,10 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
         transform.parent = player.PlayerWorldItems.transform;
     }
 
+    //Damage and Death
     public virtual void SetHit(int min, int max, bool hascritical = false)
     {
-        if (IsDying) return;
+        if (Health <= 0 || IsDead) return;
         int amount = CalcDamage(min, max, hascritical);
 
         if (Health - amount > 0)
@@ -167,11 +163,30 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
         }
     }
 
+    public virtual void Die()
+    {
+        IsDead = true;
+        
+        //Stop Attacks
+        foreach (var targets in TargetingMe)
+        {
+            targets.StopAttack();
+        }
+
+        Destroy(gameObject, DestroyTimer);
+    }
+
+
     protected int CalcDamage(int min, int max, bool hascritical = false)
     {
         var dmg = Random.Range(min, max);
         if (Random.Range(0, 20) > 17) dmg *= 2;
         return dmg;
+    }
+
+    protected void Explode()
+    {
+
     }
 
     public void AddExplosionForce(float power = 10.0f)
@@ -205,19 +220,52 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
         return transform.name;
     }
 
-    public virtual void Die()
+    //Targeting System
+    /// <summary>
+    /// This Troops target for attack
+    /// </summary>
+    /// <param name="target"></param>
+    public virtual void Target(ISelectable target)
     {
-        IsDying = true;
+        EnemyTarget = target;
+        EnemyTargetTransform = target.GameObject.transform;
+    }
 
-        float timer = CanExplode ? 0 : DestroyTimer;
-        
-        //Stop Attacks
-        foreach (var targets in TargetingMe)
+    public void SetTargetedByPlayer(Player player)
+    {
+        TargetByPlayer = player;
+        EnemyTarget = player;
+        EnemyTargetTransform = player.transform;
+    }
+
+    public void ClearEnemyTargets()
+    {
+        EnemyTarget = null;
+        EnemyTargetTransform = null;
+        TargetByPlayer = null;
+    }
+
+    /// <summary>
+    /// Pushes data back and forth in stream
+    /// </summary>
+    /// <param name="stream"></param>
+    /// <param name="info"></param>
+    public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting)
         {
-            targets.StopAttack();
+            stream.SendNext(Health);
         }
+        else
+        {
+            Health = (int)stream.ReceiveNext();
+        }
+    }
 
-        Destroy(gameObject, timer);               
-    }        
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        object[] instantiationData = info.photonView.InstantiationData;
+    }
+
 
 }

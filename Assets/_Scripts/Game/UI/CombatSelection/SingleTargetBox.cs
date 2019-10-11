@@ -48,7 +48,7 @@ public class SingleTargetBox : MonoBehaviour
         if (HasSelection && HealthBar.isActiveAndEnabled)
         {
             int health = _target.GetCurrentHealth();
-            if (health <= 0 || _target.IsDying)
+            if (health <= 0 || _target.IsDead)
             {
                 ClearTarget();
             }
@@ -63,7 +63,7 @@ public class SingleTargetBox : MonoBehaviour
     {        
         _target = target;
         _targetObj = target.GameObject;
-        if (_targetObj && !target.IsDying)
+        if (_targetObj && !target.IsDead)
         {
             Process();
         }        

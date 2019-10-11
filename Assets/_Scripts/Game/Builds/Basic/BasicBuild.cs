@@ -44,6 +44,7 @@ public class BasicBuild : Build
 
     public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        base.OnPhotonSerializeView(stream, info);
         if (stream.IsWriting)
         {
             // We own this player: send the others our data     

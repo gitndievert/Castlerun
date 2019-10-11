@@ -3460,7 +3460,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1491915021}
+  - {fileID: 1063036420}
   - {fileID: 760997850}
+  - {fileID: 2084848551}
   m_Father: {fileID: 1602966035}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7511,10 +7513,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2084848551}
+  m_Children: []
   m_Father: {fileID: 279569719}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8235,7 +8236,7 @@ RectTransform:
   - {fileID: 134085429}
   - {fileID: 1452620287}
   m_Father: {fileID: 1462091506}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -10224,12 +10225,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1480442012}
-  m_Father: {fileID: 1491915021}
-  m_RootOrder: 0
+  m_Father: {fileID: 279569719}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.5, y: -7.5}
+  m_AnchoredPosition: {x: 90.30005, y: -25.00001}
   m_SizeDelta: {x: 30.179993, y: 32.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1063036421
@@ -13425,9 +13426,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 359217151}
-  - {fileID: 1602966035}
   - {fileID: 830463870}
   - {fileID: 1845711904}
+  - {fileID: 1602966035}
   - {fileID: 1636142385}
   - {fileID: 218996512}
   - {fileID: 482408392}
@@ -13862,8 +13863,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1063036420}
+  m_Children: []
   m_Father: {fileID: 279569719}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15134,11 +15134,11 @@ RectTransform:
   m_Children:
   - {fileID: 279569719}
   m_Father: {fileID: 1462091506}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 332.7, y: 152.6}
+  m_AnchoredPosition: {x: 332.7, y: 163.6}
   m_SizeDelta: {x: 159.93, y: 77.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1603140099
@@ -17532,7 +17532,7 @@ RectTransform:
   - {fileID: 44384909}
   - {fileID: 914342113}
   m_Father: {fileID: 1462091506}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -20208,12 +20208,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2017927768}
-  m_Father: {fileID: 760997850}
-  m_RootOrder: 0
+  m_Father: {fileID: 279569719}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -1.8999329, y: -8.599997}
+  m_AnchoredPosition: {x: 24.599941, y: -26.100006}
   m_SizeDelta: {x: 30.179993, y: 32.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2084848552
@@ -20926,6 +20926,26 @@ PrefabInstance:
         type: 3}
       propertyPath: targetHeight
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 666563088013980529, guid: 25f472b0db9f2c34ca4429e58c3d0321,
+        type: 3}
+      propertyPath: c_rotation_y
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 666563088013980529, guid: 25f472b0db9f2c34ca4429e58c3d0321,
+        type: 3}
+      propertyPath: c_dist_x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 666563088013980529, guid: 25f472b0db9f2c34ca4429e58c3d0321,
+        type: 3}
+      propertyPath: c_dist_z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 666563088013980529, guid: 25f472b0db9f2c34ca4429e58c3d0321,
+        type: 3}
+      propertyPath: c_rotation_x
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4508254555896372007, guid: 25f472b0db9f2c34ca4429e58c3d0321,
         type: 3}

@@ -241,7 +241,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
     public void AttackStop()
     {
         isAttacking = false;
-        _anim.SetBool("Attacking", isAttacking);
+        _anim.SetBool("Attacking", isAttacking);        
     }
 
     public void Hit()

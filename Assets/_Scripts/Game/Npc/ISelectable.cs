@@ -31,5 +31,5 @@ public interface ISelectable : IBase
     HashSet<Troop> TargetingMe { get; set; }
     Player TargetByPlayer { get; set; }
     void SetTargetedByPlayer(Player player);
-    bool IsDying { get; set; }
+    bool IsDead { get; set; }
 }
