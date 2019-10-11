@@ -19,13 +19,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-/*
- * !! Note About This!!!
- * 
- * Troop Factories are a generic term for any building that can produce
- * troops, either Army or Gathering, etc. 
- * 
- */
 public class TroopFactory : Build
 {    
     public float PlacementDistance = 2f;
