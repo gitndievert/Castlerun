@@ -17,9 +17,11 @@ using System.Collections;
 using UnityEngine;
 
 public class CamShake : DSingle<CamShake>
-{    
-    public const float DefaultDuration = 1f;
-    public const float DefaultIntensity = 2f;
+{
+    [SerializeField]
+    private readonly float _defaultDuration = 1f;
+    [SerializeField]
+    private readonly float _defaultIntensity = 2f;
 
     protected override void PAwake()
     {
@@ -38,12 +40,12 @@ public class CamShake : DSingle<CamShake>
 
     public void Shake()
     {
-        StartCoroutine(ShakeCamera(DefaultIntensity, DefaultDuration));
+        StartCoroutine(ShakeCamera(_defaultIntensity, _defaultDuration));
     }
     
     public void Shake(float intensity)
     {
-        StartCoroutine(ShakeCamera(intensity, DefaultDuration));
+        StartCoroutine(ShakeCamera(intensity, _defaultDuration));
     }
 
     public void Shake(float intensity, float duration)

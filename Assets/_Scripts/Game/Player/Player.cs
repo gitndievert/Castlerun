@@ -162,7 +162,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             //NOTE
             //Quick test for two types of castles        
             //CastleType = PlayerNumber == 1 ? CastleType.Default : CastleType.FortressOfDoom;
-            CastleManager.Instance.SpawnCastle(CastleType.FortressOfDoom, this);
+            //CastleManager.Instance.SpawnCastle(CastleType.FortressOfDoom, this);
 
             if (CompanionOut && CompanionType != CompanionType.None)
             {

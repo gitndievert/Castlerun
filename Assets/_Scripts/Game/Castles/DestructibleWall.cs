@@ -63,10 +63,5 @@ public class DestructibleWall : BasePrefab, ISelectable
         {
             IsSelected = false;
         }
-    }
-
-    public void SetTargetedByPlayer(Player player)
-    {
-        TargetByPlayer = player;
-    }
+    } 
 }
