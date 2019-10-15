@@ -27,6 +27,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     public int Health;
     
     public bool CanExplode = true;
+
     public AudioClip DestroySound;
     public AudioClip[] HitSounds;
     public TextMeshPro HealthText;
@@ -34,12 +35,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     /// <summary>
     /// Check to see if this object is DYING
     /// </summary>
-    public bool IsDead { get; set; }
-
-    /// <summary>
-    /// All Troops targeting this gameObject
-    /// </summary>
-    public HashSet<Troop> TargetingMe { get; set; }
+    public bool IsDead { get; set; }    
 
     /// <summary>
     /// Being Targeted by a Player
@@ -71,10 +67,6 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     
     protected Rigidbody RigidBody;
 
-    //Targeting System
-    protected ISelectable EnemyTarget { get; set; }
-    protected Transform EnemyTargetTransform { get; set; }
-
 
     protected PlayerUI PlayerUI
     {
@@ -101,8 +93,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     }
     
     protected virtual void Awake()
-    {       
-        TargetingMe = new HashSet<Troop>();
+    {   
         IsDead = false;
 
         if (GetComponent<Rigidbody>() == null)
@@ -136,6 +127,10 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
         MaxHealth = value;        
     }
 
+    /// <summary>
+    /// Player this belongs too
+    /// </summary>
+    /// <param name="player"></param>
     public void SetPlayer(Player player)
     {
         Player = player;
@@ -166,13 +161,6 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     public virtual void Die()
     {
         IsDead = true;
-        
-        //Stop Attacks
-        foreach (var targets in TargetingMe)
-        {
-            targets.StopAttack();
-        }
-
         Destroy(gameObject, DestroyTimer);
     }
 
@@ -218,32 +206,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     public override string ToString()
     {
         return transform.name;
-    }
-
-    //Targeting System
-    /// <summary>
-    /// This Troops target for attack
-    /// </summary>
-    /// <param name="target"></param>
-    public virtual void Target(ISelectable target)
-    {
-        EnemyTarget = target;
-        EnemyTargetTransform = target.GameObject.transform;
-    }
-
-    public void SetTargetedByPlayer(Player player)
-    {
-        TargetByPlayer = player;
-        EnemyTarget = player;
-        EnemyTargetTransform = player.transform;
-    }
-
-    public void ClearEnemyTargets()
-    {
-        EnemyTarget = null;
-        EnemyTargetTransform = null;
-        TargetByPlayer = null;
-    }
+    }   
 
     /// <summary>
     /// Pushes data back and forth in stream

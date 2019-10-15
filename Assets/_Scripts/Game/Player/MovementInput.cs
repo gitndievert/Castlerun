@@ -37,7 +37,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
     private bool _isJumping;
 
     [SerializeField]
-    float m_JumpPower = 12f;
+    private readonly float m_JumpPower = 12f;
 
     public CharacterController CharacterController;
 

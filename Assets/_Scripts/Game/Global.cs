@@ -71,13 +71,12 @@ public static class Global
     public const int GROUND_LAYER = 8;
     public const int ARMY_LAYER = 12;
     public const int PROJECTILE_LAYER = 12;
-    public const int UI_LAYER = 5;
-
-    public const float STRIKE_DIST = 4f;
-    public const float CASTER_STRIKE_DIST = 7f;
-    public const float ARCHER_STRIKE_DIST = 10f;
+    public const int UI_LAYER = 5;    
     public const int BUILD_GRID_LAYER = 9;
 
+    /// <summary>
+    /// Max Number of Player Slots per game
+    /// </summary>
     public const int PLAYER_MAX_SLOTS = 4;
     #endregion
 
@@ -96,8 +95,7 @@ public static class Global
     //Troop
     public static float ConstructionSpeedBonus = 1f;
     public static int TroopHealthBonus = 0;
-    public static int TroopAttackBonus = 0;
-    public static float AgroDistance = 8f;
+    public static int TroopAttackBonus = 0;    
     #endregion
 
 

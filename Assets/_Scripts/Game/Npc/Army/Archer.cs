@@ -19,5 +19,5 @@ using UnityEngine;
 public class Archer : RangedTroop
 {
     public override string DisplayName => "Archer";
-   
+    protected override float AttackDistance => 10f;
 }

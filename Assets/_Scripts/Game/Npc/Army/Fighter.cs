@@ -31,35 +31,19 @@ public class Fighter : Troop
     /// Maximum Damage Delt
     /// </summary>
     public int MaxDamage;
-    #endregion
-
-    /// <summary>
-    /// Distance between fighter and target
-    /// </summary>
-    protected virtual float StrikeDistance
-    {
-        get { return Global.STRIKE_DIST; }
-    }
+    #endregion   
 
     public override string DisplayName => "Soldier";
-
-    protected override void Update()
-    {
-        //Only attack if target is in distance
-        if (EnemyTargetTransform != null)
-        {
-            CanAttack = Vector3.Distance(transform.position, EnemyTargetTransform.position) < StrikeDistance;
-        }
-        base.Update();
-    }
+    protected override float AttackDistance => 2f;
+    protected override float AgroDistance => 10f;
 
     public override void Fire()
     {
-        if (EnemyTargetTransform == null) return;
+        /*if (EnemyTargetTransform == null) return;
         Debug.Log("Attacking " + EnemyTargetTransform.name.ToString() + "!");
         anim.Play("Attack");
         var enemypos = EnemyTargetTransform.transform.position;
         transform.LookAt(new Vector3(enemypos.x, transform.position.y, enemypos.z));        
-        EnemyTarget.SetHit(MinDamage, MaxDamage, true);
+        EnemyTarget.SetHit(MinDamage, MaxDamage, true);*/
     }
 }

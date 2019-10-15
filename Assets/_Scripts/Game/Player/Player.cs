@@ -26,6 +26,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     [Header("Basic Player Properties")]
     public float MoveSpeed;
     public float BuildSpeed;
+    public float AttackDistance = 1f;
 
     [Range(15,50)]
     public int HitAmountMin = 30;
@@ -421,10 +422,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         {
             _movement.AttackPlayer();
             var target = SwingEnemyTargetSelected();
-
-            if(target.TargetByPlayer == null || target.TargetByPlayer != this)
-                target.SetTargetedByPlayer(this);
-
+            
             //May need to manage PUN tags
             switch (target.GameObject.tag)
             {
@@ -462,7 +460,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         if (enemytarget == null) return null;
         GameObject target = enemytarget.GameObject;
         //Removed for testing
-        if (!Extensions.DistanceLess(transform, target.transform, Global.STRIKE_DIST)) return null;
+        if (!Extensions.DistanceLess(transform, target.transform, AttackDistance)) return null;
         return enemytarget;
     }
   

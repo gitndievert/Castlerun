@@ -20,33 +20,32 @@ using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CapsuleCollider))]
-public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservable
+public abstract class Troop : BasePrefab, ISelectable, IPunObservable
 {
     const float TROOP_DESTROY_TIMER = 4f;
     
-    #region Selectable properties
+    
     [Header("All the waypoints that this Troop will follow")]
     public Dictionary<int, Transform> points = new Dictionary<int, Transform>();
 
+    public TroopFactory AssociatedFactory { get; private set; }
+
+    #region Selection Properties
     public Light SelectionTarget;
     public bool IsSelected { get; set; }    
     public GameObject GameObject => gameObject;
-
-    public TroopFactory AssociatedFactory { get; private set; }
-    #endregion
+    #endregion    
+    
 
     #region Visual Troop Control        
     public abstract string DisplayName { get; }
-   
-    protected Animator anim;
-    protected NavMeshAgent nav;        
 
     private const float SmoothingCoefficient = .15f;
-    private float _velocityDenominatorMultiplier = .5f;
-    private float _minVelx = -2.240229f;
-    private float _maxVelx = 2.205063f;
-    private float _minVely = -2.33254f;
-    private float _maxVely = 3.70712f;
+    private readonly float _velocityDenominatorMultiplier = .5f;
+    private readonly float _minVelx = -2.240229f;
+    private readonly float _maxVelx = 2.205063f;
+    private readonly float _minVely = -2.33254f;
+    private readonly float _maxVely = 3.70712f;
     private Vector2 _smoothDeltaPosition;
     private bool _moving;    
     private Vector2 _velocity = Vector2.zero;
@@ -65,16 +64,21 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
     #region Combat Systems
     [Header("Combat")]
     public float AttackDelaySec = 3f;
-
     [HideInInspector]
     public bool CanAttack = false;
-    public bool IsAttacking;    
+    public bool IsAttacking;
+
+    protected abstract float AttackDistance { get; }
+    protected abstract float AgroDistance { get; }
 
     private int _hitCounter = 1;
-    private bool _moveTriggerPoint;
+    private bool _moveTriggerPoint;    
+    #endregion
 
-    private ISelectable _myAttacker = null;
-    #endregion    
+    //Components
+    protected Animator anim;
+    protected NavMeshAgent nav;
+
 
     protected override void Awake()
     {
@@ -106,20 +110,15 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
     // Update is called once per frame
     protected virtual void Update()
     {
+        //This troop is flagged as an army
         if (GetTag == Global.ARMY_TAG)
         {
             //For Selectable Troops
             if (UIManager.Instance.SelectableComponent.IsWithinSelectionBounds(gameObject) && !IsSelected)
                 SelectMany();
 
-            if (CanAttack && !IsAttacking)
-            {
-                IsAttacking = true;
-                Attack();
-            }
-            else if(!CanAttack)
-            {
-                if (_moving)
+          
+            if (_moving)
                 {
                     var worldDeltaPosition = nav.nextPosition - transform.position;
                     var dx = Vector3.Dot(transform.right, worldDeltaPosition);
@@ -157,17 +156,18 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
                         MoveStop();
                     }                    
                 }
-            }
+          
         }
+        //This troop is flagged as an enemy
         else if (GetTag == Global.ENEMY_TAG)
         {            
             //Return attack
-            if (TargetByPlayer != null && _myAttacker == null)
+            /*if (TargetByPlayer != null && _myAttacker == null)
             {
                 TargetingMe.Clear();
                 //Add agro towards the player
                 //Do within 8 meters for now
-                if (Extensions.DistanceLess(TargetByPlayer.transform, transform, Global.AgroDistance))
+                if (Extensions.DistanceLess(TargetByPlayer.transform, transform, AgroDistance))
                 {                    
                     _myAttacker = TargetByPlayer;
                     Attack();
@@ -178,7 +178,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
                 foreach(var attacker in TargetingMe)
                 {
                     //Do within 8 meters for now
-                    if (Extensions.DistanceLess(attacker.transform,transform, Global.AgroDistance))
+                    if (Extensions.DistanceLess(attacker.transform,transform, AgroDistance))
                     {
                         _myAttacker = attacker;
                         Target(attacker);                        
@@ -187,7 +187,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
                     }
 
                 }
-            }
+            }*/
         }
     }
 
@@ -275,8 +275,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         if (GetTag == Global.NPC_TAG) return;
         if (!IsSelected)
         {
-            IsSelected = true;
-            Selection selection = UIManager.Instance.SelectableComponent;
+            IsSelected = true;            
             
             if (GetTag == Global.ARMY_TAG)
             {
@@ -306,12 +305,7 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
         {
             IsSelected = false;
             SelectionTargetStatus(false);
-            points.Clear();
-            if(GetTag == Global.ENEMY_TAG)
-            {
-                TargetingMe.Clear();
-                _myAttacker = null;
-            }
+            points.Clear();            
         }
     }
 
@@ -359,7 +353,6 @@ public abstract class Troop : BasePrefab, ICharacter, ISelectable, IPunObservabl
     public virtual void StopAttack()
     {
         IsAttacking = false;
-        ClearEnemyTargets();
         CancelInvoke(); //Stop Combat        
         anim.Play("Idle");
     }

@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MultiTargetBox : DSingle<MultiTargetBox>
 {
@@ -57,6 +58,9 @@ public class MultiTargetBox : DSingle<MultiTargetBox>
             _selections[i].TargetIcon.sprite = list[i].GetIcon();            
             _selections[i].HealthBar.BarValue = Mathf.RoundToInt(((float)list[i].GetCurrentHealth() / list[i].GetMaxHealth()) * 100);
             _selections[i].gameObject.SetActive(true);
+
+            //Set button on Image
+            _selections[i].TargetIcon.transform.GetComponent<Button>().onClick.AddListener(() => Selection.Instance.UpdateSingleTarget(list[i]));
         }
     }
 

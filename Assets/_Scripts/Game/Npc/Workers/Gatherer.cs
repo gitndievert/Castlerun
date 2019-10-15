@@ -43,6 +43,14 @@ public class Gatherer : Troop
 
     public override string DisplayName => "Gatherer";
 
+    /// <summary>
+    /// For a Gatherer this is the distance to harvesting on a node (not really attacking)
+    /// </summary>
+    protected override float AttackDistance => 0.5f;
+    /// <summary>
+    /// If Gatherer gets attack, he needs to fight back but only if people get really close!
+    /// </summary>
+    protected override float AgroDistance => 1f;
 
     protected int DestPoint;
 
@@ -61,7 +69,7 @@ public class Gatherer : Troop
     {
         if (!IsHarvesting)
         {
-            if (!nav.pathPending && nav.remainingDistance < 0.5f)
+            if (!nav.pathPending && nav.remainingDistance < AttackDistance)
             {
                 StartCoroutine(HarvestWait());                
             }            
@@ -108,7 +116,7 @@ public class Gatherer : Troop
 
     public override void Fire()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     protected void GoToNextPoint()
@@ -135,10 +143,5 @@ public class Gatherer : Troop
     protected override void OnCollisionEnter(Collision collision)
     {
         
-    }
-
-    public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        
-    }
+    }    
 }

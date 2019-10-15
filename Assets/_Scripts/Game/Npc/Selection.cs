@@ -158,8 +158,9 @@ public class Selection : DSingle<Selection>
                     {
                         UpdateEnemyTarget(hit.transform.GetComponent<ISelectable>());
                     }
-                    else if (hit.GetLayer() == Global.GROUND_LAYER
-                        || ((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
+                    //Dont clear on ground layers
+                    else if (/*hit.GetLayer() == Global.GROUND_LAYER
+                        || */((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
                     {
                         ClearAll();
 
@@ -209,12 +210,12 @@ public class Selection : DSingle<Selection>
                            
                             if (hit.transform.tag == Global.ENEMY_TAG)
                             {
-                                var enemy = hit.transform.GetComponent<ISelectable>();
+                                /*var enemy = hit.transform.GetComponent<ISelectable>();
                                 EnemyTargetSelected = enemy;
                                 _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);
                                 UpdateEnemyTarget(EnemyTargetSelected);
                                 enemy.TargetingMe.Add(character);
-                                character.Target(EnemyTargetSelected);
+                                character.Target(EnemyTargetSelected);*/
                             }
                         }
                     }

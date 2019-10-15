@@ -27,7 +27,9 @@ public abstract class RangedTroop : Troop
     public float FirePower = 300f;
     public GameObject SpawnPoint;
     
-    protected Projectile CreatedProjectile;    
+    protected Projectile CreatedProjectile;
+
+    protected override float AgroDistance => AttackDistance;
 
     protected override void Awake()
     {
@@ -35,28 +37,18 @@ public abstract class RangedTroop : Troop
         if (Projectile == null)
             throw new System.Exception("Projectile Required");
     }
-
-    protected override void Update()
-    {        
-        //Only attack if target is in distance
-        if (EnemyTargetTransform != null)
-        {            
-            CanAttack = Vector3.Distance(transform.position, EnemyTargetTransform.position) < Global.CASTER_STRIKE_DIST;            
-        }
-
-        base.Update();
-    }  
-
+    
+    //Attack code
     public override void Fire()
     {
-        if (EnemyTargetTransform == null) return;
+        /*if (EnemyTargetTransform == null) return;
         Debug.Log("Attacking " + EnemyTargetTransform.name.ToString() + "!");
         anim.Play("Attack");
         var enemypos = EnemyTargetTransform.transform.position;
         transform.LookAt(new Vector3(enemypos.x, transform.position.y,enemypos.z));        
         var project = Instantiate(Projectile, SpawnPoint.transform.position, Quaternion.identity);
         project.TargetTag = EnemyTargetTransform.tag;
-        project.GetComponent<Rigidbody>().AddForce(SpawnPoint.transform.forward * FirePower);        
+        project.GetComponent<Rigidbody>().AddForce(SpawnPoint.transform.forward * FirePower); */   
     }
 
 }

@@ -12,10 +12,14 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using UnityEngine;
+
 public class ResourceFactory : TroopFactory
 {
-    private int _goldIncrementAmount = 500;
-    private float _goldIncrementSec = 90f;
+    [SerializeField]
+    private readonly int _goldIncrementAmount = 500;
+    [SerializeField]
+    private readonly float _goldIncrementSec = 90f;
 
     protected override void Start()
     {

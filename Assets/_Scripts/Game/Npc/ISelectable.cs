@@ -27,9 +27,6 @@ public interface ISelectable : IBase
     void OnMouseDown();    
     string DisplayName { get; }    
     int GetCurrentHealth();
-    int GetMaxHealth();
-    HashSet<Troop> TargetingMe { get; set; }
-    Player TargetByPlayer { get; set; }
-    void SetTargetedByPlayer(Player player);
+    int GetMaxHealth();    
     bool IsDead { get; set; }
 }
