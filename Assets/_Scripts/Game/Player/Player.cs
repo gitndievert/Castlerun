@@ -71,6 +71,11 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         }
     }
 
+    public ISelectable MyTarget
+    {
+        get { return UIManager.Instance.SelectableComponent.EnemyTargetSelected; }
+    }
+
     #region ISelectables
     [Space(15)]
     public Light SelectionTarget;
@@ -418,16 +423,17 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
     public void Swing()
     {
-        if (SwingEnemyTargetSelected() != null)
+        if (MyTarget != null)
         {
             _movement.AttackPlayer();
-            var target = SwingEnemyTargetSelected();
-            
+            if (MyTarget.IsDead) return;
+            if (!Extensions.DistanceLess(transform, MyTarget.GameObject.transform, AttackDistance)) return;
+
             //May need to manage PUN tags
-            switch (target.GameObject.tag)
+            switch (MyTarget.GameObject.tag)
             {
-                case Global.ENEMY_TAG:                    
-                    target.SetHit(HitAmountMin, HitAmountMax, true);
+                case Global.ENEMY_TAG:
+                    MyTarget.SetHit(HitAmountMin, HitAmountMax, true);
                     break;
             }
         }
@@ -454,7 +460,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         _lastAttacked = Time.time + _attackDelay;
     }
     
-    private ISelectable SwingEnemyTargetSelected()
+    /*private ISelectable SwingEnemyTargetSelected()
     {
         var enemytarget = UIManager.Instance.SelectableComponent.EnemyTargetSelected;
         if (enemytarget == null) return null;
@@ -462,7 +468,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         //Removed for testing
         if (!Extensions.DistanceLess(transform, target.transform, AttackDistance)) return null;
         return enemytarget;
-    }
+    }*/
   
     public override void SetHit(int min, int max, bool hascritical = false)
     {
