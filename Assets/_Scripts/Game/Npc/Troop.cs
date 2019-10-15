@@ -20,7 +20,7 @@ using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CapsuleCollider))]
-public abstract class Troop : BasePrefab, ISelectable, IPunObservable
+public abstract class Troop : BasePrefab, ISelectable
 {
     const float TROOP_DESTROY_TIMER = 4f;
     
@@ -64,15 +64,14 @@ public abstract class Troop : BasePrefab, ISelectable, IPunObservable
     #region Combat Systems
     [Header("Combat")]
     public float AttackDelaySec = 3f;
-    [HideInInspector]
-    public bool CanAttack = false;
-    public bool IsAttacking;
+    public bool IsAttacking = false;
 
     protected abstract float AttackDistance { get; }
     protected abstract float AgroDistance { get; }
 
     private int _hitCounter = 1;
-    private bool _moveTriggerPoint;    
+    private bool _moveTriggerPoint;
+    private ISelectable _attackTarget;
     #endregion
 
     //Components
@@ -117,50 +116,54 @@ public abstract class Troop : BasePrefab, ISelectable, IPunObservable
             if (UIManager.Instance.SelectableComponent.IsWithinSelectionBounds(gameObject) && !IsSelected)
                 SelectMany();
 
-          
-            if (_moving)
+            //So first get within range then do a MoveStop()
+            if (_attackTarget != null && IsAttacking)
+            {
+                if (Extensions.DistanceLess(_attackTarget.GameObject.transform, transform, AttackDistance))
                 {
-                    var worldDeltaPosition = nav.nextPosition - transform.position;
-                    var dx = Vector3.Dot(transform.right, worldDeltaPosition);
-                    var dy = Vector3.Dot(transform.forward, worldDeltaPosition);
-                    var deltaPosition = new Vector2(dx, dy);
-                    var smooth = Time.fixedDeltaTime / SmoothingCoefficient;
-
-                    _smoothDeltaPosition = Vector2.Lerp(_smoothDeltaPosition, deltaPosition, smooth);
-
-                    var velocity = _smoothDeltaPosition / (Time.fixedDeltaTime * _velocityDenominatorMultiplier);
-
-                    var x = Mathf.Clamp(Mathf.Round(velocity.x * 1000) / 1000, _minVelx, _maxVelx);
-                    var y = Mathf.Clamp(Mathf.Round(velocity.y * 1000) / 1000, _minVely, _maxVely);
-                                        
-                    Debug.Log("Remaining Dist " + nav.remainingDistance);
-                    Debug.Log("Stopping Dist " + nav.stoppingDistance);
-
-                    //Stop with offset
-
-                    if (nav.remainingDistance >= nav.stoppingDistance || _moveTriggerPoint)
-                    {
-                        _moveTriggerPoint = false;
-
-                        anim.SetBool("move", true);
-                        anim.SetFloat("velx", x);
-                        anim.SetFloat("vely", y);
-
-                        if (worldDeltaPosition.magnitude > nav.radius / 16)
-                        {
-                            nav.nextPosition = transform.position + 0.1f * worldDeltaPosition;
-                        }                        
-                    }
-                    else
-                    {
-                        MoveStop();
-                    }                    
+                    Debug.Log($"{name} has stopped at {AttackDistance}");
+                    MoveStop();
                 }
-          
+            }
+
+            if (_moving)
+            {
+                var worldDeltaPosition = nav.nextPosition - transform.position;
+                var dx = Vector3.Dot(transform.right, worldDeltaPosition);
+                var dy = Vector3.Dot(transform.forward, worldDeltaPosition);
+                var deltaPosition = new Vector2(dx, dy);
+                var smooth = Time.fixedDeltaTime / SmoothingCoefficient;
+
+                _smoothDeltaPosition = Vector2.Lerp(_smoothDeltaPosition, deltaPosition, smooth);
+
+                var velocity = _smoothDeltaPosition / (Time.fixedDeltaTime * _velocityDenominatorMultiplier);
+
+                var x = Mathf.Clamp(Mathf.Round(velocity.x * 1000) / 1000, _minVelx, _maxVelx);
+                var y = Mathf.Clamp(Mathf.Round(velocity.y * 1000) / 1000, _minVely, _maxVely);
+
+                if (nav.remainingDistance >= nav.stoppingDistance || _moveTriggerPoint)
+                {
+                    _moveTriggerPoint = false;
+
+                    anim.SetBool("move", true);
+                    anim.SetFloat("velx", x);
+                    anim.SetFloat("vely", y);
+
+                    if (worldDeltaPosition.magnitude > nav.radius / 16)
+                    {
+                        nav.nextPosition = transform.position + 0.1f * worldDeltaPosition;
+                    }
+                }
+                else
+                {
+                    MoveStop();
+                }
+            }
+
         }
         //This troop is flagged as an enemy
         else if (GetTag == Global.ENEMY_TAG)
-        {            
+        {
             //Return attack
             /*if (TargetByPlayer != null && _myAttacker == null)
             {
@@ -336,10 +339,17 @@ public abstract class Troop : BasePrefab, ISelectable, IPunObservable
     /// <summary>
     /// Attack methods needed for Troops
     /// </summary>
-    public virtual void Attack()
+    public virtual void Attack(ISelectable target)
     {
-        MoveStop();
-        InvokeRepeating("Fire", 0, AttackDelaySec);
+        //InvokeRepeating("Fire", 0, AttackDelaySec);        
+        if(target.IsDead)
+        {
+            StopAttack();
+            return;
+        }
+        _attackTarget = target;
+        IsAttacking = true;
+
     }
 
     /// <summary>
@@ -353,8 +363,8 @@ public abstract class Troop : BasePrefab, ISelectable, IPunObservable
     public virtual void StopAttack()
     {
         IsAttacking = false;
-        CancelInvoke(); //Stop Combat        
-        anim.Play("Idle");
+        _attackTarget = null;
+        //anim.Play("Idle");
     }
 
    

@@ -19,7 +19,7 @@ using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
-public abstract class Build : BasePrefab, IBuild, ISelectable, IPunObservable
+public abstract class Build : BasePrefab, IBuild, ISelectable
 {
     public BuildingLabelTypes BuildingLabelType = BuildingLabelTypes.None;
 

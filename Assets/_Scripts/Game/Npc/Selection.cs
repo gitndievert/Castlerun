@@ -142,40 +142,47 @@ public class Selection : DSingle<Selection>
             //Deselect on ground on building selection
             if (hit.point != null)
             {
-                //Multi Single Target Selections with CTRL
-                if (hit.transform.tag == Global.ARMY_TAG && SingleTargetSelected != null
-                && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                //Check for death
+                var selectable = hit.transform.GetComponent<ISelectable>();
+                if (selectable != null)
                 {
-                    UpdateMassList(hit.transform.GetComponent<ISelectable>());
-                }
-                else
-                {
-                    if (hit.transform.tag == Global.ARMY_TAG)
-                    {
-                        UpdateSingleTarget(hit.transform.GetComponent<ISelectable>());
-                    }
-                    else if (hit.transform.tag == Global.ENEMY_TAG)
-                    {
-                        UpdateEnemyTarget(hit.transform.GetComponent<ISelectable>());
-                    }
-                    //Dont clear on ground layers
-                    else if (/*hit.GetLayer() == Global.GROUND_LAYER
-                        || */((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
-                    {
-                        ClearAll();
+                    if (selectable.IsDead) return;
 
-                        if (SingleTargetSelected != null)
+                    //Multi Single Target Selections with CTRL
+                    if (hit.transform.tag == Global.ARMY_TAG && SingleTargetSelected != null
+                    && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                    {
+                        UpdateMassList(selectable);
+                    }
+                    else
+                    {
+                        if (hit.transform.tag == Global.ARMY_TAG)
                         {
-                            SingleTargetSelected.UnSelect();
-                            ClearSingleTarget();
+                            UpdateSingleTarget(selectable);
                         }
-
-                        //Removed for now to test if we want enemy ALWAYS selected
-                        /*if (EnemyTargetSelected != null)
+                        else if (hit.transform.tag == Global.ENEMY_TAG)
                         {
-                            EnemyTargetSelected.UnSelect();                            
-                            ClearEnemyTarget();
-                        }*/
+                            UpdateEnemyTarget(selectable);
+                        }
+                        //Dont clear on ground layers
+                        else if (/*hit.GetLayer() == Global.GROUND_LAYER
+                        || */((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
+                        {
+                            //ClearAll(); //Removed for now to maintain selections
+
+                            if (SingleTargetSelected != null)
+                            {
+                                SingleTargetSelected.UnSelect();
+                                ClearSingleTarget();
+                            }
+
+                            //Removed for now to test if we want enemy ALWAYS selected
+                            /*if (EnemyTargetSelected != null)
+                            {
+                                EnemyTargetSelected.UnSelect();                            
+                                ClearEnemyTarget();
+                            }*/
+                        }
                     }
                 }
             }
@@ -206,16 +213,15 @@ public class Selection : DSingle<Selection>
                         var character = select.GameObject.GetComponent<Troop>();
                         if (character != null)
                         {
+                            character.IsAttacking = false;
                             character.Move(hit.point);
-                           
+
                             if (hit.transform.tag == Global.ENEMY_TAG)
                             {
-                                /*var enemy = hit.transform.GetComponent<ISelectable>();
-                                EnemyTargetSelected = enemy;
-                                _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);
-                                UpdateEnemyTarget(EnemyTargetSelected);
-                                enemy.TargetingMe.Add(character);
-                                character.Target(EnemyTargetSelected);*/
+                                var enemy = hit.transform.GetComponent<ISelectable>();
+                                UpdateEnemyTarget(enemy);
+                                character.IsAttacking = EnemyTargetSelected == enemy;                                
+                                character.Attack(enemy);                                
                             }
                         }
                     }

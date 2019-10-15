@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 
 [RequireComponent(typeof(Rigidbody))]
-public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
+public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObservable
 {
     #region Base Stats
     /// <summary>
@@ -38,11 +38,6 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     public bool IsDead { get; set; }    
 
     /// <summary>
-    /// Being Targeted by a Player
-    /// </summary>
-    public Player TargetByPlayer { get; set; }
-
-    /// <summary>
     /// This is the Icon Representing the Base Prefab
     /// </summary>
     public Sprite Icon;
@@ -56,7 +51,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase
     }
 
     protected int MaxHealth;
-    protected float DestroyTimer = 2f;
+    protected float DestroyTimer = 1.5f;
     protected Player Player = null;
     protected GameManager GameManager;
 

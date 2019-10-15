@@ -26,7 +26,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     [Header("Basic Player Properties")]
     public float MoveSpeed;
     public float BuildSpeed;
-    public float AttackDistance = 1f;
+    public float AttackDistance = 3f;
 
     [Range(15,50)]
     public int HitAmountMin = 30;
