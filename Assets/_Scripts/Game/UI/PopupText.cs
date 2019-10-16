@@ -43,18 +43,21 @@ public class PopupText : MonoBehaviour
 
     public void SetCombatText(TextType type, string text, bool critical = false)
     {
-        switch(type)
+        string op = "";
+        switch (type)
         {
             case TextType.Damage:
                 _damageText.color = DamageColor;
+                op = "-";
                 break;
             case TextType.Heal:
                 _damageText.color = HealColor;
+                op = "+";
                 break;
         }
         
-        if (critical) _damageText.fontSize *= 1.5f;
-        SetText(text);
+        if (critical) _damageText.fontSize *= 1.8f;
+        SetText(op+text);
     }
 
     

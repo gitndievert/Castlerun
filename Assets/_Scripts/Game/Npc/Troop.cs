@@ -205,10 +205,15 @@ public abstract class Troop : BasePrefab, ISelectable
 
     #region PUN Callbacks
     //Main method for serialization on Player actions   
+    /// <summary>
+    /// Pushes data back and forth in stream
+    /// </summary>
+    /// <param name="stream"></param>
+    /// <param name="info"></param>
     public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         base.OnPhotonSerializeView(stream, info);
-    }  
+    }
 
     #endregion
 
@@ -397,7 +402,7 @@ public abstract class Troop : BasePrefab, ISelectable
         nav.isStopped = true;
         _moveTriggerPoint = false;        
     }
-
+        
     public override void SetHit(int min, int max)
     {
         //Taking this out to test

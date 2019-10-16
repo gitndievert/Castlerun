@@ -17,7 +17,7 @@ using UnityEngine;
 using System.Linq;
 using Photon.Pun;
 
-public class BasicBuild : Build
+public class BasicBuild : Build, IPunObservable
 {
     //public List<SnapPoints> SnapPoints = new List<SnapPoints>();
 

@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 
 [RequireComponent(typeof(Rigidbody))]
-public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObservable
+public abstract class BasePrefab : MonoBehaviourPun, IBase, IPunObservable
 {
     #region Base Stats
     /// <summary>
@@ -132,9 +132,9 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     {
         Player = player;
         transform.parent = player.PlayerWorldItems.transform;
-    }
+    }    
 
-    //Damage and Death
+    //Damage and Death    
     public virtual void SetHit(int min, int max)
     {
         if (Health <= 0 || IsDead) return;
@@ -155,11 +155,11 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
             Die();
         }
     }
-
+        
     public virtual void Die()
     {
-        IsDead = true;
-        Destroy(gameObject, DestroyTimer);
+        IsDead = true;       
+        Destroy(gameObject, DestroyTimer);       
     }
 
 
@@ -209,8 +209,9 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     public override string ToString()
     {
         return transform.name;
-    }   
+    }
 
+    //Main method for serialization on Player actions   
     /// <summary>
     /// Pushes data back and forth in stream
     /// </summary>
@@ -218,20 +219,20 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     /// <param name="info"></param>
     public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if(stream.IsWriting)
-        {
-            stream.SendNext(Health);
+        if (stream.IsWriting)
+        {            
+            stream.SendNext(Health);            
         }
         else
-        {
+        {            
             Health = (int)stream.ReceiveNext();
         }
     }
 
-    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    /*public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         object[] instantiationData = info.photonView.InstantiationData;
-    }
+    }*/
 
 
 }

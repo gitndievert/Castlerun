@@ -12,6 +12,7 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using Photon.Pun;
 using UnityEngine;
 
 public enum NecroSpawnType
@@ -44,7 +45,5 @@ public class Necromancer : RangedTroop
                 break;
         }
     }
-       
-
 
 }
