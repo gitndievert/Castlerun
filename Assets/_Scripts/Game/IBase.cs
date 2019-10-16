@@ -16,7 +16,7 @@ using UnityEngine;
 
 public interface IBase
 {
-    void SetHit(int min, int max, bool hascritical = false);
+    void SetHit(int min, int max);
     void Die();
     Costs GetCosts();
     Sprite GetIcon();

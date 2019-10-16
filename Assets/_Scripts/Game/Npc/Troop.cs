@@ -398,12 +398,12 @@ public abstract class Troop : BasePrefab, ISelectable
         _moveTriggerPoint = false;        
     }
 
-    public override void SetHit(int min, int max, bool hascritical = false)
+    public override void SetHit(int min, int max)
     {
         //Taking this out to test
         //if (!IsSelected) return;
         if (IsDead) return;
-        int amount = CalcDamage(min, max, hascritical);
+        int amount = CalcDamage(min, max, out bool crit);
         if (Health - amount > 0)
         {
             Health -= amount;
@@ -416,6 +416,7 @@ public abstract class Troop : BasePrefab, ISelectable
                 anim.Play("Hit");
                 _hitCounter = 1;
             }
+            UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
 
             _hitCounter++;
         }

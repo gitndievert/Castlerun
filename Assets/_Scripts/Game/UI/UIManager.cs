@@ -18,6 +18,13 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
+public enum TextType
+{
+    Normal,
+    Damage,
+    Heal
+}
+
 public partial class UIManager : PSingle<UIManager>
 {
     public Sprite DefaultIcon;
@@ -73,12 +80,18 @@ public partial class UIManager : PSingle<UIManager>
     /// </summary>    
     public SingleTargetBox EnemyTargetBox;
 
+    [Header("UI Elements")]
+    public PopupText PopText;
 
+    private Canvas _canvas;
+    private RectTransform _canvasTransform;
 
     protected override void PAwake()
     {
         if (SelectableComponent == null)
-            SelectableComponent = GetComponent<Selection>();       
+            SelectableComponent = GetComponent<Selection>();
+        _canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        _canvasTransform = _canvas.GetComponent<RectTransform>();
     }
     
     protected override void PDestroy()
@@ -100,6 +113,26 @@ public partial class UIManager : PSingle<UIManager>
         var results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(curPos, results);
         return results.Count > 0;
+    }
+
+    public void FloatText(string text, Transform trans)
+    {
+        var pt = Instantiate(PopText);
+        pt.transform.SetParent(_canvas.transform, false);
+    }    
+
+    public void FloatCombatText(TextType type, int amount, bool critical, Transform trans)
+    {
+        var pt = Instantiate(PopText);
+ 
+        var vp = Camera.main.WorldToViewportPoint(trans.position);
+        var textScreenPos = new Vector2(
+        ((vp.x * _canvasTransform.sizeDelta.x) - (_canvasTransform.sizeDelta.x * 0.5f)),
+        ((vp.y * _canvasTransform.sizeDelta.y) - (_canvasTransform.sizeDelta.y * 0.5f)));
+
+        pt.GetComponent<RectTransform>().anchoredPosition = textScreenPos;
+        pt.transform.SetParent(_canvas.transform, false);        
+        pt.SetCombatText(type, amount.ToString(), critical);
     }
     
 }

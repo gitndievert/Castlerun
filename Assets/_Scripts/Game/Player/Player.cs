@@ -328,7 +328,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
                 if (!IsDead)
                 {
                     Debug.Log("Doing damage to player!");
-                    SetHit(HitAmountMin,HitAmountMin,false);
+                    SetHit(HitAmountMin,HitAmountMin);
                 }
             }
 
@@ -431,7 +431,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             switch (MyTarget.GameObject.tag)
             {
                 case Global.ENEMY_TAG:
-                    MyTarget.SetHit(HitAmountMin, HitAmountMax, true);
+                    MyTarget.SetHit(HitAmountMin, HitAmountMax);
                     break;
             }
         }
@@ -457,16 +457,17 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         _lastAttacked = Time.time + _attackDelay;
     }
   
-    public override void SetHit(int min, int max, bool hascritical = false)
+    public override void SetHit(int min, int max)
     {
         //You're dead, go back
         if (Health <= 0 || IsDead) return;
-        int amount = CalcDamage(min, max, hascritical);
+        int amount = CalcDamage(min, max, out bool crit);
         if (Health - amount > 0)
         {
             Health -= amount;
             PlayerUI.HealthText.text = $"{Health}/100";
             UIManager.Instance.HealthBar.BarValue = Health;
+            UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
 
             if (_hitCounter >= 3)
             {

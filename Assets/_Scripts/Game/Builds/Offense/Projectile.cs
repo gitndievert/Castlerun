@@ -68,7 +68,7 @@ public class Projectile : BasePrefab
         if (col.transform.tag != TargetTag) return;        
         PlayHitSound();
         var target = col.gameObject.GetComponent<BasePrefab>();
-        target.SetHit(MinDamage, MaxDamage, true);
+        target.SetHit(MinDamage, MaxDamage);
         //Tuck away, don't destroy            
         Destroy(gameObject);                           
     }

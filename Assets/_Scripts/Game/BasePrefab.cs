@@ -135,16 +135,17 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     }
 
     //Damage and Death
-    public virtual void SetHit(int min, int max, bool hascritical = false)
+    public virtual void SetHit(int min, int max)
     {
         if (Health <= 0 || IsDead) return;
-        int amount = CalcDamage(min, max, hascritical);
+        int amount = CalcDamage(min, max, out bool crit);
 
         if (Health - amount > 0)
         {
             Health -= amount;
             if (HitSounds.Length > 0)
                 SoundManager.PlaySound(HitSounds);
+            UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
         }
         else
         {            
@@ -162,10 +163,15 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     }
 
 
-    protected int CalcDamage(int min, int max, bool hascritical = false)
+    protected int CalcDamage(int min, int max, out bool crit)
     {
         var dmg = Random.Range(min, max);
-        if (Random.Range(0, 20) > 17) dmg *= 2;
+        crit = false;
+        if (Random.Range(0, 20) > 17)
+        {
+            dmg *= 2;
+            crit = true;
+        }
         return dmg;
     }
 
