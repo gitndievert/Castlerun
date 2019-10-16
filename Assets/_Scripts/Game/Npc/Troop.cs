@@ -65,13 +65,15 @@ public abstract class Troop : BasePrefab, ISelectable
     [Header("Combat")]
     public float AttackDelaySec = 3f;
     public bool IsAttacking = false;
+    public float AttackDistance = 3f;
+    public float AgroDistance = 5f;
 
-    protected abstract float AttackDistance { get; }
-    protected abstract float AgroDistance { get; }
-
+    protected ISelectable AttackTarget;
+    
+    private float _lastAttacked;
     private int _hitCounter = 1;
     private bool _moveTriggerPoint;
-    private ISelectable _attackTarget;
+    
     #endregion
 
     //Components
@@ -91,12 +93,11 @@ public abstract class Troop : BasePrefab, ISelectable
     {
         base.Start();
         SelectionTargetStatus(false);
-        MaxHealth = Health;    
 
         //We don't want people exploding lol
         CanExplode = false;        
         DestroyTimer = TROOP_DESTROY_TIMER;
-        gameObject.layer = GetTag == Global.ARMY_TAG ? Global.ARMY_LAYER : 0;        
+        gameObject.layer = GetTag == Global.ARMY_TAG ? Global.ARMY_LAYER : Global.DEFAULT_LAYER;        
 
         if (Costs.CostFactors.Length == 0)
             throw new System.Exception("Please add a cost");
@@ -117,13 +118,21 @@ public abstract class Troop : BasePrefab, ISelectable
                 SelectMany();
 
             //So first get within range then do a MoveStop()
-            if (_attackTarget != null && IsAttacking)
+            if (AttackTarget != null && IsAttacking)
             {
-                if (Extensions.DistanceLess(_attackTarget.GameObject.transform, transform, AttackDistance))
+                if (Extensions.DistanceLess(AttackTarget.GameObject.transform, transform, AttackDistance))
                 {
-                    Debug.Log($"{name} has stopped at {AttackDistance}");
-                    MoveStop();
-                }
+                    if(_moving) MoveStop();
+                    if (AttackTarget.IsDead)
+                    {
+                        StopAttack();
+                    }
+                    else if (Time.time > _lastAttacked && !AttackTarget.IsDead)
+                    {
+                        ResetAttackTimer();
+                        Fire();
+                    }
+                }                
             }
 
             if (_moving)
@@ -347,7 +356,7 @@ public abstract class Troop : BasePrefab, ISelectable
             StopAttack();
             return;
         }
-        _attackTarget = target;
+        AttackTarget = target;
         IsAttacking = true;
 
     }
@@ -363,7 +372,7 @@ public abstract class Troop : BasePrefab, ISelectable
     public virtual void StopAttack()
     {
         IsAttacking = false;
-        _attackTarget = null;
+        AttackTarget = null;
         //anim.Play("Idle");
     }
 
@@ -427,6 +436,11 @@ public abstract class Troop : BasePrefab, ISelectable
             AssociatedFactory.UnListTroop();
         }
         base.Die();
+    }
+
+    private void ResetAttackTimer()
+    {
+        _lastAttacked = Time.time + AttackDelaySec;
     }
 
 

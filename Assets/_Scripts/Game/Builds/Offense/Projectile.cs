@@ -40,7 +40,7 @@ public class Projectile : BasePrefab
         TagPrefab("Projectile");
         gameObject.layer = Global.PROJECTILE_LAYER;
         SoundManager.PlaySound(FireSounds);
-        //Physics.IgnoreLayerCollision(Global.PROJECTILE_LAYER, Global.ARMY_LAYER, true);
+        Physics.IgnoreLayerCollision(Global.PROJECTILE_LAYER, Global.ARMY_LAYER, true);
         //Default destruction timer
         //Projectiles should not take longer than 10 seconds to hit a target
         Destroy(gameObject, 10f);

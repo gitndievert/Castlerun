@@ -168,7 +168,7 @@ public class Selection : DSingle<Selection>
                         else if (/*hit.GetLayer() == Global.GROUND_LAYER
                         || */((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
                         {
-                            //ClearAll(); //Removed for now to maintain selections
+                            ClearAll();
 
                             if (SingleTargetSelected != null)
                             {
@@ -260,15 +260,25 @@ public class Selection : DSingle<Selection>
     public void UpdateSingleTarget(ISelectable selection)
     {
         if (selection == SingleTargetSelected) return;
-        if (SingleTargetSelected != null)
-        {
-            ClearSingleTarget();
-        }
+        if (SingleTargetSelected != null) ClearSingleTarget();        
         SingleTargetSelected = selection;
         _ui.SingleTargetBox.SetTarget(SingleTargetSelected);
+        
         ClearAll();
+
         if(selection.GameObject.tag == Global.ARMY_TAG)
             UpdateMassList(SingleTargetSelected);       
+    }
+
+    public void SelectSingleTarget(ISelectable selection)
+    {
+        //We want this to switch the selection and retain the main list
+        //allowing single selection of troops FROM the list
+        
+        /*if (selection == SingleTargetSelected) return;
+        if (SingleTargetSelected != null) _ui.SingleTargetBox.ClearTarget();
+        SingleTargetSelected = selection;
+        _ui.SingleTargetBox.SetTarget(SingleTargetSelected);*/
     }
        
     public void UpdateEnemyTarget(ISelectable selection)

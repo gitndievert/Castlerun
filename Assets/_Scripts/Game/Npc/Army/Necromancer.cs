@@ -30,8 +30,7 @@ public class Necromancer : RangedTroop
     public GameObject Skelly;
     public GameObject Zombie;
         
-    public override string DisplayName => "Necromancer";
-    protected override float AttackDistance => 8f;
+    public override string DisplayName => "Necromancer";    
 
     public void Spawn(NecroSpawnType spawnType)
     {

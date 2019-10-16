@@ -34,16 +34,13 @@ public class Fighter : Troop
     #endregion   
 
     public override string DisplayName => "Soldier";
-    protected override float AttackDistance => 2f;
-    protected override float AgroDistance => 10f;
 
     public override void Fire()
-    {
-        /*if (EnemyTargetTransform == null) return;
-        Debug.Log("Attacking " + EnemyTargetTransform.name.ToString() + "!");
-        anim.Play("Attack");
-        var enemypos = EnemyTargetTransform.transform.position;
-        transform.LookAt(new Vector3(enemypos.x, transform.position.y, enemypos.z));        
-        EnemyTarget.SetHit(MinDamage, MaxDamage, true);*/
+    {        
+        Debug.Log("Attacking " + AttackTarget.DisplayName + "!");
+        anim.Play("Attack");        
+        var enemypos = AttackTarget.GameObject.transform.position;
+        transform.LookAt(new Vector3(enemypos.x, transform.position.y, enemypos.z));
+        AttackTarget.SetHit(MinDamage, MaxDamage, true);
     }
 }

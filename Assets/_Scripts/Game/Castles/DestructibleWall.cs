@@ -20,9 +20,13 @@ using UnityEngine.EventSystems;
 public class DestructibleWall : BasePrefab, ISelectable
 {
     #region ISelectable Properties
+    public string DestructableName;
     public bool IsSelected { get; set; }
     public GameObject GameObject => gameObject;
-    public string DisplayName { get; set; }
+    public string DisplayName
+    {
+        get { return DestructableName; }
+    }
     #endregion
 
     protected override void Awake()
@@ -33,6 +37,7 @@ public class DestructibleWall : BasePrefab, ISelectable
     protected override void Start()
     {
         CanExplode = true;
+        base.Start();
     }
 
     public void OnMouseDown()

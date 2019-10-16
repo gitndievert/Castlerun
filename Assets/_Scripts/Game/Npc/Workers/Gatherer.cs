@@ -43,15 +43,6 @@ public class Gatherer : Troop
 
     public override string DisplayName => "Gatherer";
 
-    /// <summary>
-    /// For a Gatherer this is the distance to harvesting on a node (not really attacking)
-    /// </summary>
-    protected override float AttackDistance => 0.5f;
-    /// <summary>
-    /// If Gatherer gets attack, he needs to fight back but only if people get really close!
-    /// </summary>
-    protected override float AgroDistance => 1f;
-
     protected int DestPoint;
 
     // Start is called before the first frame update
@@ -104,7 +95,7 @@ public class Gatherer : Troop
 
         anim.Play("Swing");
         yield return new WaitForSeconds(hTime);
-        if (photonView.IsMine)
+        if (photonView.IsMine || Global.DeveloperMode)
         {
             Player.Inventory.Set(HarvestingSelection, qty);
         }
@@ -116,7 +107,7 @@ public class Gatherer : Troop
 
     public override void Fire()
     {
-        
+        Debug.Log("Leave me alone!");
     }
 
     protected void GoToNextPoint()

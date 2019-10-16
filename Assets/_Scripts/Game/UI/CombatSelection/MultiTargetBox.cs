@@ -59,9 +59,10 @@ public class MultiTargetBox : DSingle<MultiTargetBox>
             _selections[i].HealthBar.BarValue = Mathf.RoundToInt(((float)list[i].GetCurrentHealth() / list[i].GetMaxHealth()) * 100);
             _selections[i].gameObject.SetActive(true);
 
-            //Set button on Image
-            _selections[i].TargetIcon.transform.GetComponent<Button>().onClick.AddListener(() => Selection.Instance.UpdateSingleTarget(list[i]));
-        }
+            //Set button on Image            
+            _selections[i].TargetIcon.transform.GetComponent<Button>().onClick.RemoveAllListeners();
+            _selections[i].TargetIcon.transform.GetComponent<Button>().onClick.AddListener(() => Selection.Instance.SelectSingleTarget(list[i]));
+        }       
     }
 
     public void ClearList()

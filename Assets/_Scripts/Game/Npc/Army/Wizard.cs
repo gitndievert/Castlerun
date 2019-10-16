@@ -18,6 +18,5 @@ using UnityEngine;
 
 public class Wizard : RangedTroop
 {
-    public override string DisplayName => "Wizard";
-    protected override float AttackDistance => 8f;
+    public override string DisplayName => "Wizard"; 
 }

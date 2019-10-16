@@ -315,16 +315,12 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             if (Input.GetKeyDown(KeyCode.O))
             {
                 CamShake.Instance.Shake();
-            }
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                CamShake.Instance.Shake(1f, .5f);
-            }
+            }           
 
-            if (Input.GetKeyDown(KeyCode.I))
+            /*if (Input.GetKeyDown(KeyCode.I))
             {
                 _movement.Dance();
-            }
+            }*/
 
             //Hit my face
             if (Input.GetKeyDown(KeyCode.F))
@@ -423,8 +419,10 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
     public void Swing()
     {
+        if (UIManager.Instance.IsMouseOverUI()) return;
         if (MyTarget != null)
         {
+            
             _movement.AttackPlayer();
             if (MyTarget.IsDead) return;
             if (!Extensions.DistanceLess(transform, MyTarget.GameObject.transform, AttackDistance)) return;
@@ -440,8 +438,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         else
         {
             if (Physics.Raycast(Selection.SelectionRayHit, out RaycastHit hit))
-            {
-                if (UIManager.Instance.IsMouseOverUI()) return;
+            {                
                 if (hit.point != null)
                 { 
                     if (hit.transform.tag != Global.ARMY_TAG 
@@ -459,16 +456,6 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     {
         _lastAttacked = Time.time + _attackDelay;
     }
-    
-    /*private ISelectable SwingEnemyTargetSelected()
-    {
-        var enemytarget = UIManager.Instance.SelectableComponent.EnemyTargetSelected;
-        if (enemytarget == null) return null;
-        GameObject target = enemytarget.GameObject;
-        //Removed for testing
-        if (!Extensions.DistanceLess(transform, target.transform, AttackDistance)) return null;
-        return enemytarget;
-    }*/
   
     public override void SetHit(int min, int max, bool hascritical = false)
     {

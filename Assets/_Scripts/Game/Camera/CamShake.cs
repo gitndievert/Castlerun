@@ -19,9 +19,9 @@ using UnityEngine;
 public class CamShake : DSingle<CamShake>
 {
     [SerializeField]
-    private readonly float _defaultDuration = 1f;
+    private float _defaultDuration = 1f;
     [SerializeField]
-    private readonly float _defaultIntensity = 2f;
+    private float _defaultIntensity = 2f;
 
     protected override void PAwake()
     {

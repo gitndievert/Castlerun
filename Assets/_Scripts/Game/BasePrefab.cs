@@ -107,6 +107,8 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
 
     protected virtual void Start()
     {
+        MaxHealth = Health;
+
         if (!Global.DeveloperMode)
         {
             if (photonView != null && !photonView.IsMine)
