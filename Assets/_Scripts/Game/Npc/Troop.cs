@@ -398,7 +398,7 @@ public abstract class Troop : BasePrefab, ISelectable
     }
 
     [PunRPC]
-    public void RPC_TakeHit(int amount, bool takehit)
+    private void RPC_TakeHit(int amount, bool takehit)
     {
         Health -= amount;
         if(takehit) anim.Play("Hit");
@@ -426,7 +426,7 @@ public abstract class Troop : BasePrefab, ISelectable
             }
 
             if (!Global.DeveloperMode)            
-                photonView.RPC("RPC_TakeHit", RpcTarget.All, amount, takehit);            
+                photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount, takehit);
 
             if (photonView.IsMine || Global.DeveloperMode)
                 UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
@@ -438,10 +438,19 @@ public abstract class Troop : BasePrefab, ISelectable
             if (DestroySound != null)
                 SoundManager.PlaySound(DestroySound);
             if (CanExplode) Explode();
-            Die();
+
+            if (!Global.DeveloperMode)
+            {
+                photonView.RPC("Die", RpcTarget.All);
+            }
+            else
+            {
+                Die();
+            }
         }
     }
 
+    [PunRPC]
     public override void Die()
     {        
         anim.Play("Death1");

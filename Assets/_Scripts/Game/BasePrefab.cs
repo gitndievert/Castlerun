@@ -130,6 +130,12 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         transform.parent = player.PlayerWorldItems.transform;
     }
 
+    [PunRPC]
+    private void RPC_TakeHit(int amount)
+    {
+        Health -= amount;        
+    }
+
     //Damage and Death    
     public virtual void SetHit(int min, int max)
     {
@@ -141,7 +147,12 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
             Health -= amount;
             if (HitSounds.Length > 0)
                 SoundManager.PlaySound(HitSounds);
-            UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+
+            if (!Global.DeveloperMode)
+                photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount);
+
+            if (photonView.IsMine || Global.DeveloperMode)
+                UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
         }
         else
         {            
