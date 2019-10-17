@@ -130,7 +130,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         transform.parent = player.PlayerWorldItems.transform;
     }
 
-    //Damage and Death
+    //Damage and Death    
     public virtual void SetHit(int min, int max)
     {
         if (Health <= 0 || IsDead) return;

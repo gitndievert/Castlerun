@@ -397,6 +397,13 @@ public abstract class Troop : BasePrefab, ISelectable
         _moveTriggerPoint = false;        
     }
 
+    [PunRPC]
+    public void RPC_TakeHit(int amount, bool takehit)
+    {
+        Health -= amount;
+        if(takehit) anim.Play("Hit");
+    }
+    
     public override void SetHit(int min, int max)
     {
         //Taking this out to test
@@ -407,7 +414,9 @@ public abstract class Troop : BasePrefab, ISelectable
         {
             Health -= amount;
 
-            if (_hitCounter >= 3)
+            bool takehit = _hitCounter >= 3;
+
+            if (takehit)
             {
                 if (HitSounds.Length > 0)
                     SoundManager.PlaySound(HitSounds);
@@ -415,7 +424,14 @@ public abstract class Troop : BasePrefab, ISelectable
                 anim.Play("Hit");
                 _hitCounter = 1;
             }
-            UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+
+            if (!Global.DeveloperMode)
+            {
+                photonView.RPC("RPC_TakeHit", RpcTarget.All, amount, takehit);
+            }
+
+            if (photonView.IsMine || Global.DeveloperMode)
+                UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
 
             _hitCounter++;
         }

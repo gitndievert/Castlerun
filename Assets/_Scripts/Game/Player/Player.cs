@@ -144,18 +144,16 @@ public class Player : BasePrefab, IPlayer
             {                
                 gameObject.layer = Global.PLAYER_LAYER;
             }
-        }
+        }        
 
         //Set Cameras
         if (photonView.IsMine || Global.DeveloperMode)
         {
             SelectionTarget.gameObject.SetActive(false);
 
-            Inventory = GetComponent<Inventory>();
-            _movement = GetComponent<MovementInput>();
+            Inventory = GetComponent<Inventory>();            
             _battleCursor = GetComponent<BattleCursor>();
-
-
+            
             PlayerName = PhotonNetwork.LocalPlayer.NickName;            
 
             CameraRotate.target = transform;
@@ -186,7 +184,7 @@ public class Player : BasePrefab, IPlayer
         }
 
         WepTrailDisable();
-
+        _movement = GetComponent<MovementInput>();
     }
 
     public override void OnDisable()
@@ -243,7 +241,14 @@ public class Player : BasePrefab, IPlayer
                     if (!Global.BuildMode)
                     {                        
                         ResetAttackTimer();
-                        Swing();
+                        if(Global.DeveloperMode)
+                        {
+                            Swing();
+                        }
+                        else
+                        {
+                            photonView.RPC("Swing", RpcTarget.All);
+                        }
                     }
                 }
             }
@@ -342,7 +347,8 @@ public class Player : BasePrefab, IPlayer
             {
                 CameraRotate.BattleFieldMode = false;
             }
-        }                
+           
+        }
 
         //Face player labels toward camera
         if (FloatingPlayerText != null && FloatingPlayerText.text.Length > 0)
@@ -350,43 +356,11 @@ public class Player : BasePrefab, IPlayer
             //var camVector = Camera.main.transform.position;
             FloatingPlayerText.rectTransform.LookAt(Camera.main.transform);
             FloatingPlayerText.rectTransform.Rotate(Vector3.up - new Vector3(0, 180, 0));
-        }        
-        
-    }
-
-    //Main method for serialization on Player actions
-    public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        //base.OnPhotonSerializeView(stream, info);
-        if (stream.IsWriting)
-        {
-            // We own this player: send the others our data            
-            //stream.SendNext(this.Health);
-            //stream.SendNext("My name is mr fancy pants");         
-            stream.SendNext(PlayerName);                
-            stream.SendNext(_movement.isAttacking);
-            stream.SendNext(Health);
-            
         }
-        else
-        {
-            // Network player, receive data            
-            //this.IsFiring = (bool)stream.ReceiveNext();
-            //this.Health = (float)stream.ReceiveNext();
 
-            //Debug.Log($"This is from the remote client {(string)stream.ReceiveNext()}");            
-            var pname = (string)stream.ReceiveNext();
-            FloatingPlayerText.text = pname;
-            PlayerName = pname;
-            var attacking = (bool)stream.ReceiveNext();
-            var myhealth = (int)stream.ReceiveNext();
-            if(attacking)
-            {
-                _movement.AttackPlayer();
-            }
-            Health = myhealth;
-        }
+
     }
+      
 
     //These three methods probably need their own class
     public void SetCompanion(CompanionType companion)
@@ -423,6 +397,7 @@ public class Player : BasePrefab, IPlayer
         WeaponTrail.Emit = false;
     }
 
+    [PunRPC]
     public void Swing()
     {
         if (UIManager.Instance.IsMouseOverUI()) return;
@@ -436,8 +411,8 @@ public class Player : BasePrefab, IPlayer
             //May need to manage PUN tags
             switch (MyTarget.GameObject.tag)
             {
-                case Global.ENEMY_TAG:
-                    MyTarget.SetHit(HitAmountMin, HitAmountMax);
+                case Global.ENEMY_TAG:                                         
+                        MyTarget.SetHit(HitAmountMin, HitAmountMax);                   
                     break;
             }
         }
@@ -462,7 +437,14 @@ public class Player : BasePrefab, IPlayer
     {
         _lastAttacked = Time.time + _attackDelay;
     }
-  
+
+    [PunRPC]
+    public void RPC_TakeHit(int amount, bool takehit)
+    {
+        Health -= amount;
+        if (takehit) _movement.Hit();
+    }
+
     public override void SetHit(int min, int max)
     {
         //You're dead, go back
@@ -475,18 +457,26 @@ public class Player : BasePrefab, IPlayer
             {
                 PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
                 UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);                
-            }
+            }            
 
-            UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+            bool takehit = _hitCounter >= 3;
 
-            if (_hitCounter >= 3)
+            if (takehit)
             {
                 if (HitSounds.Length > 0)
                     SoundManager.PlaySound(HitSounds);
 
-                //_movement.Hit();
+                _movement.Hit();
                 _hitCounter = 1;
             }
+
+            if (!Global.DeveloperMode)
+            {
+                photonView.RPC("RPC_TakeHit", RpcTarget.All, amount, takehit);
+            }
+
+            if (photonView.IsMine || Global.DeveloperMode)
+                UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
 
             _hitCounter++;
 
@@ -569,7 +559,40 @@ public class Player : BasePrefab, IPlayer
         if (SelectionTarget == null) return;
         SelectionTargetStatus(status);
         SelectionTarget.color = color;
-    } 
+    }
+
+    //Main method for serialization on Player actions
+    public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        //base.OnPhotonSerializeView(stream, info);
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data            
+            //stream.SendNext(this.Health);
+            //stream.SendNext("My name is mr fancy pants");         
+            stream.SendNext(PlayerName);
+            stream.SendNext(_movement.isAttacking);
+            //stream.SendNext(Health);
+        }
+        else
+        {
+            // Network player, receive data            
+            //this.IsFiring = (bool)stream.ReceiveNext();
+            //this.Health = (float)stream.ReceiveNext();
+
+            //Debug.Log($"This is from the remote client {(string)stream.ReceiveNext()}");            
+            var pname = (string)stream.ReceiveNext();
+            FloatingPlayerText.text = pname;
+            PlayerName = pname;
+            var attacking = (bool)stream.ReceiveNext();
+            //var myhealth = (int)stream.ReceiveNext();
+            if (attacking)
+            {
+                _movement.AttackPlayer();
+            }
+            //Health = myhealth;
+        }
+    }
 
 
 }
