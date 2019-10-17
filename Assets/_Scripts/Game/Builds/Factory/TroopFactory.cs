@@ -244,8 +244,7 @@ public class TroopFactory : Build
             if(place)
             {
                 gameObject.SetActive(true);
-                if(_buildArea != null)
-                    _buildArea.ShowPlane(false);
+                _buildArea.ShowPlane(false);
                 GameManager.PlayersByActor.TryGetValue(GameManager.MyPlayerNumber, out Player player);
                 if (player != null)
                 {                    

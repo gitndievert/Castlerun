@@ -147,7 +147,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
             IsSelected = false;
             BuildManager.Instance.RefreshBuilds();
         }
-    }
-   
+    } 
 
+   
 }

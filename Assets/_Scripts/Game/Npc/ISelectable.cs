@@ -14,7 +14,6 @@
 
 using UnityEngine;
 using System.Collections.Generic;
-using Photon.Pun;
 
 public interface ISelectable : IBase
 {
@@ -29,5 +28,5 @@ public interface ISelectable : IBase
     string DisplayName { get; }    
     int GetCurrentHealth();
     int GetMaxHealth();    
-    bool IsDead { get; set; }    
+    bool IsDead { get; set; }
 }

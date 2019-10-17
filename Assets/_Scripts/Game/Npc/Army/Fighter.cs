@@ -12,7 +12,6 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,5 +42,5 @@ public class Fighter : Troop
         var enemypos = AttackTarget.GameObject.transform.position;
         transform.LookAt(new Vector3(enemypos.x, transform.position.y, enemypos.z));
         AttackTarget.SetHit(MinDamage, MaxDamage);
-    }    
+    }
 }

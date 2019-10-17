@@ -188,12 +188,12 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
     }
 
-    /*public override void OnDisable()
+    public override void OnDisable()
     {
         // Always call the base to remove callbacks
         base.OnDisable();        
         SceneManager.sceneLoaded -= OnSceneLoaded;
-    }*/
+    }
   
     protected void OnSceneLoaded(Scene scene, LoadSceneMode loadingMode)
     {
@@ -352,7 +352,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         }        
         
     }
-      
+
     //Main method for serialization on Player actions
     public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -416,12 +416,13 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         if (WeaponTrail == null) return;
         WeaponTrail.Emit = false;
     }
-  
+
     public void Swing()
     {
         if (UIManager.Instance.IsMouseOverUI()) return;
         if (MyTarget != null)
-        {            
+        {
+            
             _movement.AttackPlayer();
             if (MyTarget.IsDead) return;
             if (!Extensions.DistanceLess(transform, MyTarget.GameObject.transform, AttackDistance)) return;
@@ -430,7 +431,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             switch (MyTarget.GameObject.tag)
             {
                 case Global.ENEMY_TAG:
-                    MyTarget.SetHit(HitAmountMin, HitAmountMax);                                            
+                    MyTarget.SetHit(HitAmountMin, HitAmountMax);
                     break;
             }
         }
