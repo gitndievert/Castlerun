@@ -19,7 +19,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class Player : BasePrefab, IPlayer, IPunObservable
+public class Player : BasePrefab, IPlayer
 {
     public static GameObject LocalPlayerInstance;
 
@@ -27,6 +27,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     public float MoveSpeed;
     public float BuildSpeed;
     public float AttackDistance = 3f;
+    public override string DisplayName => PlayerName;
 
     [Range(15,50)]
     public int HitAmountMin = 30;
@@ -80,8 +81,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     [Space(15)]
     public Light SelectionTarget;
     public bool IsSelected { get; set; }
-    public GameObject GameObject => gameObject;
-    public string DisplayName { get { return PlayerName; } }
+    public GameObject GameObject => gameObject;    
     #endregion
 
     #region Player Components  
@@ -93,7 +93,8 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
     #region Private Members
     private GameObject _mainHand;
-    private GameObject _offHand;                 
+    private GameObject _offHand;   
+    [SerializeField]
     private string _playerName;
     private BattleCursor _battleCursor;    
         
@@ -134,13 +135,13 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
     // Start is called before the first frame update
     protected override void Start()
-    {        
+    {
+        base.Start();
 
         if (!Global.DeveloperMode)
         {
             if (photonView != null && !photonView.IsMine)
-            {
-                TagPrefab(Global.ENEMY_TAG);
+            {                
                 gameObject.layer = Global.PLAYER_LAYER;
             }
         }
@@ -217,12 +218,12 @@ public class Player : BasePrefab, IPlayer, IPunObservable
 
     private void SetBasicPlayerStats()
     {
-        Health = 100;
-
+        if (Health <= 0)
+            Health = MaxHealth;
         //Figure out later                
         UIManager.Instance.HealthBar.BarValue = Health;
         UIManager.Instance.StaminaBar.BarValue = Health;
-        PlayerUI.HealthText.text = $"{Health}/100";
+        PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
 
         MoveSpeed = 10f;
         BuildSpeed = 10f;
@@ -356,7 +357,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
     //Main method for serialization on Player actions
     public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        base.OnPhotonSerializeView(stream, info);
+        //base.OnPhotonSerializeView(stream, info);
         if (stream.IsWriting)
         {
             // We own this player: send the others our data            
@@ -364,6 +365,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             //stream.SendNext("My name is mr fancy pants");         
             stream.SendNext(PlayerName);                
             stream.SendNext(_movement.isAttacking);
+            stream.SendNext(Health);
             
         }
         else
@@ -371,14 +373,18 @@ public class Player : BasePrefab, IPlayer, IPunObservable
             // Network player, receive data            
             //this.IsFiring = (bool)stream.ReceiveNext();
             //this.Health = (float)stream.ReceiveNext();
-            
+
             //Debug.Log($"This is from the remote client {(string)stream.ReceiveNext()}");            
-            FloatingPlayerText.text = (string)stream.ReceiveNext();
+            var pname = (string)stream.ReceiveNext();
+            FloatingPlayerText.text = pname;
+            PlayerName = pname;
             var attacking = (bool)stream.ReceiveNext();
+            var myhealth = (int)stream.ReceiveNext();
             if(attacking)
             {
                 _movement.AttackPlayer();
             }
+            Health = myhealth;
         }
     }
 
@@ -465,8 +471,12 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         if (Health - amount > 0)
         {
             Health -= amount;
-            PlayerUI.HealthText.text = $"{Health}/100";
-            UIManager.Instance.HealthBar.BarValue = Health;
+            if (photonView.IsMine || Global.DeveloperMode)
+            {
+                PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
+                UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);                
+            }
+
             UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
 
             if (_hitCounter >= 3)
@@ -474,7 +484,7 @@ public class Player : BasePrefab, IPlayer, IPunObservable
                 if (HitSounds.Length > 0)
                     SoundManager.PlaySound(HitSounds);
 
-                _movement.Hit();
+                //_movement.Hit();
                 _hitCounter = 1;
             }
 
@@ -540,6 +550,12 @@ public class Player : BasePrefab, IPlayer, IPunObservable
         SelectionUI.ClearEnemyTarget();
         SelectionTargetStatus(false);
         Select();
+    }
+
+    public void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON))
+            OnMouseDown();
     }
 
     private void SelectionTargetStatus(bool status)

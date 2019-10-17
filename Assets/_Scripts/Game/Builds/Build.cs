@@ -39,8 +39,8 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
 
     public bool IsSelected { get; set; }
     public GameObject GameObject => gameObject;
-    public string DisplayName { get; set; }
-        
+    public override string DisplayName => BuildingLabelType.ToString();
+
     /// <summary>
     /// Time it takes to build this building
     /// </summary>
@@ -65,8 +65,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         RigidBody.isKinematic = true;
         if (Health == 0) Health = 20;        
         MaxHealth = Health;
-        IsBasic = false;
-        DisplayName = BuildingLabelType.ToString();
+        IsBasic = false;        
         if (Costs.CostFactors.Length == 0)
             throw new System.Exception("Please add a cost");
     }

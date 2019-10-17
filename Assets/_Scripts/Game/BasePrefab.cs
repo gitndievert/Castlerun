@@ -50,6 +50,8 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         get { return tag; }
     }
 
+    public abstract string DisplayName { get; }
+
     protected int MaxHealth;
     protected float DestroyTimer = 1.5f;
     protected Player Player = null;
@@ -116,12 +118,6 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
                 TagPrefab(Global.ENEMY_TAG);
             }
         }
-    }
-
-    protected void SetStartHealth(int value)
-    {
-        Health = value;
-        MaxHealth = value;        
     }
 
     /// <summary>
@@ -218,14 +214,14 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     /// <param name="info"></param>
     public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if(stream.IsWriting)
-        {
+        /*if(stream.IsWriting)
+        {            
             stream.SendNext(Health);
         }
         else
         {
             Health = (int)stream.ReceiveNext();
-        }
+        }*/
     }
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)

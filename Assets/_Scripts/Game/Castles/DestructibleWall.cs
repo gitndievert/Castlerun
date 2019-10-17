@@ -23,10 +23,7 @@ public class DestructibleWall : BasePrefab, ISelectable
     public string DestructableName;
     public bool IsSelected { get; set; }
     public GameObject GameObject => gameObject;
-    public string DisplayName
-    {
-        get { return DestructableName; }
-    }
+    public override string DisplayName => DestructableName;    
     #endregion
 
     protected override void Awake()

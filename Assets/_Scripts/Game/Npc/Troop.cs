@@ -37,8 +37,7 @@ public abstract class Troop : BasePrefab, ISelectable
     #endregion    
     
 
-    #region Visual Troop Control        
-    public abstract string DisplayName { get; }
+    #region Visual Troop Control            
 
     private const float SmoothingCoefficient = .15f;
     private readonly float _velocityDenominatorMultiplier = .5f;

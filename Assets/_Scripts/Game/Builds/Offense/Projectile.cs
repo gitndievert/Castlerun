@@ -34,6 +34,7 @@ public class Projectile : BasePrefab
     #endregion
 
     public string TargetTag { get; set; }
+    public override string DisplayName => "Projectile";
 
     protected override void Start()
     {        
