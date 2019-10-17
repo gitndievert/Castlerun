@@ -437,12 +437,14 @@ public class Player : BasePrefab, IPlayer
     {
         _lastAttacked = Time.time + _attackDelay;
     }
-
+    
     [PunRPC]
-    public void RPC_TakeHit(int amount, bool takehit)
+    private void RPC_TakeHit(int amount, bool takehit)
     {
         Health -= amount;
         if (takehit) _movement.Hit();
+        PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
+        UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);
     }
 
     public override void SetHit(int min, int max)
@@ -470,10 +472,8 @@ public class Player : BasePrefab, IPlayer
                 _hitCounter = 1;
             }
 
-            if (!Global.DeveloperMode)
-            {
-                photonView.RPC("RPC_TakeHit", RpcTarget.All, amount, takehit);
-            }
+            if (!Global.DeveloperMode)            
+                photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount, takehit);            
 
             if (photonView.IsMine || Global.DeveloperMode)
                 UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
@@ -485,10 +485,19 @@ public class Player : BasePrefab, IPlayer
         {
             if (DestroySound != null)
                 SoundManager.PlaySound(DestroySound);            
-            Die();            
+
+            if (!Global.DeveloperMode)
+            {
+                photonView.RPC("Die", RpcTarget.All);
+            }
+            else
+            {
+                Die();
+            }
         }
     }
 
+    [PunRPC]
     public override void Die()
     {
         StartCoroutine(DeathSequence());
