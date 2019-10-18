@@ -95,7 +95,7 @@ public class Gatherer : Troop
 
         anim.Play("Swing");
         yield return new WaitForSeconds(hTime);
-        if (photonView.IsMine || Global.DeveloperMode)
+        if (photonView.IsMine || Global.DEVELOPER_MODE)
         {
             Player.Inventory.Set(HarvestingSelection, qty);
         }

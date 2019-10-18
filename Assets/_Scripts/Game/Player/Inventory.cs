@@ -142,7 +142,7 @@ public class Inventory : MonoBehaviourPun
     /// <param name="amount">Amount of Resource</param>
     public void Set(ResourceType type, int amount = 0)
     {
-        if ((_pv != null && !_pv.IsMine) || Global.DeveloperMode)
+        if ((_pv != null && !_pv.IsMine) || Global.DEVELOPER_MODE)
         {
             switch (type)
             {

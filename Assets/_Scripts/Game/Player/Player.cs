@@ -116,7 +116,7 @@ public class Player : BasePrefab, IPlayer
     {
         // #Important
         // used in GameManager.cs: we keep track of the localPlayer instance to prevent instanciation when levels are synchronized
-        if (photonView.IsMine || Global.DeveloperMode)
+        if (photonView.IsMine || Global.DEVELOPER_MODE)
         {
             LocalPlayerInstance = gameObject;
         }
@@ -138,7 +138,7 @@ public class Player : BasePrefab, IPlayer
     {
         base.Start();
 
-        if (!Global.DeveloperMode)
+        if (!Global.DEVELOPER_MODE)
         {
             if (photonView != null && !photonView.IsMine)
             {                
@@ -147,7 +147,7 @@ public class Player : BasePrefab, IPlayer
         }        
 
         //Set Cameras
-        if (photonView.IsMine || Global.DeveloperMode)
+        if (photonView.IsMine || Global.DEVELOPER_MODE)
         {
             SelectionTarget.gameObject.SetActive(false);
 
@@ -230,7 +230,7 @@ public class Player : BasePrefab, IPlayer
     private void Update()
     {
         //Attack 
-        if (photonView.IsMine || Global.DeveloperMode)
+        if (photonView.IsMine || Global.DEVELOPER_MODE)
         {
             if (Time.time > _lastAttacked)
             {
@@ -241,7 +241,7 @@ public class Player : BasePrefab, IPlayer
                     if (!Global.BuildMode)
                     {                        
                         ResetAttackTimer();
-                        if(Global.DeveloperMode)
+                        if(Global.DEVELOPER_MODE)
                         {
                             Swing();
                         }
@@ -455,7 +455,7 @@ public class Player : BasePrefab, IPlayer
         if (Health - amount > 0)
         {
             Health -= amount;
-            if (photonView.IsMine || Global.DeveloperMode)
+            if (photonView.IsMine || Global.DEVELOPER_MODE)
             {
                 PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
                 UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);                
@@ -472,10 +472,10 @@ public class Player : BasePrefab, IPlayer
                 _hitCounter = 1;
             }
 
-            if (!Global.DeveloperMode)            
+            if (!Global.DEVELOPER_MODE)            
                 photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount, takehit);            
 
-            if (photonView.IsMine || Global.DeveloperMode)
+            if (photonView.IsMine || Global.DEVELOPER_MODE)
                 UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
 
             _hitCounter++;
@@ -486,7 +486,7 @@ public class Player : BasePrefab, IPlayer
             if (DestroySound != null)
                 SoundManager.PlaySound(DestroySound);            
 
-            if (!Global.DeveloperMode)
+            if (!Global.DEVELOPER_MODE)
             {
                 photonView.RPC("Die", RpcTarget.All);
             }

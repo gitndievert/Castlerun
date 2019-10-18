@@ -29,7 +29,7 @@ public class BattleCursor : MonoBehaviourPun
     void Start()
     {        
         CursorOn = false;
-        if (photonView.IsMine || Global.DeveloperMode)
+        if (photonView.IsMine || Global.DEVELOPER_MODE)
         {
             _cursor = Instantiate(BattleCursorObj);
         }

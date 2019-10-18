@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void Start()
     {   
         
-        if(Global.DeveloperMode)
+        if(Global.DEVELOPER_MODE)
         {
             StartPlayersTest();
             //StartMusic();

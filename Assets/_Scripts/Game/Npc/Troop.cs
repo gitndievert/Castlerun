@@ -425,10 +425,10 @@ public abstract class Troop : BasePrefab, ISelectable
                 _hitCounter = 1;
             }
 
-            if (!Global.DeveloperMode)            
+            if (!Global.DEVELOPER_MODE)            
                 photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount, takehit);
 
-            if ((photonView != null && photonView.IsMine) || Global.DeveloperMode)
+            if ((photonView != null && photonView.IsMine) || Global.DEVELOPER_MODE)
                 UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
 
             _hitCounter++;
@@ -439,7 +439,7 @@ public abstract class Troop : BasePrefab, ISelectable
                 SoundManager.PlaySound(DestroySound);
             if (CanExplode) Explode();
 
-            if (!Global.DeveloperMode)
+            if (!Global.DEVELOPER_MODE)
             {
                 photonView.RPC("Die", RpcTarget.All);
             }
