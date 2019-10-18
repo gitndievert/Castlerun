@@ -442,9 +442,9 @@ MonoBehaviour:
   ConstructionTime: 10
   PlacementDistance: 2
   Troops:
-  - {fileID: -6222622778425993838, guid: 4424976e64c5223418767f18424d8b86, type: 3}
-  - {fileID: -4497893882281100752, guid: d3623546911d1e949823c67f53407132, type: 3}
-  - {fileID: 899599589692392483, guid: c95151ab6e1994f46a33da0cb64dcc0f, type: 3}
+  - {fileID: 3455814831879093825, guid: 517bd3b9c7b41014bb10911f458af80c, type: 3}
+  - {fileID: 1105761048248054589, guid: 85c2aac3605572743bd8555ee2a61987, type: 3}
+  - {fileID: 8438608998759518213, guid: 9ec0a82e36327f0489b4a0fcdf5f749a, type: 3}
   TrainingTime: 5
   NumberToTrain: 1
   _trainedCounter: 0
@@ -458,11 +458,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 881439948312305591}
     m_Modifications:
-    - target: {fileID: 4080848771998264260, guid: ca7b7af670d8c4b40a758b323adaa055,
-        type: 3}
-      propertyPath: m_Name
-      value: cannon
-      objectReference: {fileID: 0}
     - target: {fileID: 4080848771998300132, guid: ca7b7af670d8c4b40a758b323adaa055,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -533,6 +528,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2.2314
       objectReference: {fileID: 0}
+    - target: {fileID: 4080848771998264260, guid: ca7b7af670d8c4b40a758b323adaa055,
+        type: 3}
+      propertyPath: m_Name
+      value: cannon
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca7b7af670d8c4b40a758b323adaa055, type: 3}
 --- !u!4 &1337599381813140144 stripped
@@ -548,10 +548,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 881439948312305591}
     m_Modifications:
-    - target: {fileID: 100008, guid: e6c75113cd5c102469616b14029aa47f, type: 3}
-      propertyPath: m_Name
-      value: fi_vil_light_torch02_lit
-      objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: e6c75113cd5c102469616b14029aa47f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.98
@@ -596,6 +592,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: e6c75113cd5c102469616b14029aa47f, type: 3}
+      propertyPath: m_Name
+      value: fi_vil_light_torch02_lit
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6c75113cd5c102469616b14029aa47f, type: 3}
 --- !u!4 &3141440623645736271 stripped
@@ -611,10 +611,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 881439948312305591}
     m_Modifications:
-    - target: {fileID: 100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
-      propertyPath: m_Name
-      value: fi_vil_forge_weaponrack3_full (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.89
@@ -671,6 +667,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
+      propertyPath: m_Name
+      value: fi_vil_forge_weaponrack3_full (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
 --- !u!4 &3758971560358161406 stripped
@@ -686,10 +686,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 881439948312305591}
     m_Modifications:
-    - target: {fileID: 100004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
-      propertyPath: m_Name
-      value: fi_vil_shield04_combo01 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.39
@@ -745,6 +741,10 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
       propertyPath: m_LocalScale.z
       value: 5.1679
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
+      propertyPath: m_Name
+      value: fi_vil_shield04_combo01 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
@@ -847,14 +847,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5094614310873278481}
     m_Modifications:
-    - target: {fileID: 100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
-      propertyPath: m_Name
-      value: fi_vil_forge_weaponrack3_full
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.87
@@ -911,6 +903,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
+      propertyPath: m_Name
+      value: fi_vil_forge_weaponrack3_full
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -930,14 +930,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5094614310873278481}
     m_Modifications:
-    - target: {fileID: 100000, guid: 40281af5c35710345afe0584dd085921, type: 3}
-      propertyPath: m_Name
-      value: fi_vil_ladder_6m_used
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 40281af5c35710345afe0584dd085921, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 40281af5c35710345afe0584dd085921, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.59
@@ -994,6 +986,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 40281af5c35710345afe0584dd085921, type: 3}
+      propertyPath: m_Name
+      value: fi_vil_ladder_6m_used
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 40281af5c35710345afe0584dd085921, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 40281af5c35710345afe0584dd085921, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1014,14 +1014,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5094614310873278481}
     m_Modifications:
-    - target: {fileID: 197048, guid: d7114b6361947ef4493c3bcfbf3292d1, type: 3}
-      propertyPath: m_Name
-      value: Banner_2C (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 197048, guid: d7114b6361947ef4493c3bcfbf3292d1, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 471622, guid: d7114b6361947ef4493c3bcfbf3292d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.55
@@ -1074,6 +1066,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.4173
       objectReference: {fileID: 0}
+    - target: {fileID: 197048, guid: d7114b6361947ef4493c3bcfbf3292d1, type: 3}
+      propertyPath: m_Name
+      value: Banner_2C (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 197048, guid: d7114b6361947ef4493c3bcfbf3292d1, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2331236, guid: d7114b6361947ef4493c3bcfbf3292d1, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -1098,14 +1098,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5094614310873278481}
     m_Modifications:
-    - target: {fileID: 134106, guid: 5825ec3708c262c46bed39ff9a87601c, type: 3}
-      propertyPath: m_Name
-      value: Banner_2B
-      objectReference: {fileID: 0}
-    - target: {fileID: 134106, guid: 5825ec3708c262c46bed39ff9a87601c, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 455410, guid: 5825ec3708c262c46bed39ff9a87601c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
@@ -1150,6 +1142,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 134106, guid: 5825ec3708c262c46bed39ff9a87601c, type: 3}
+      propertyPath: m_Name
+      value: Banner_2B
+      objectReference: {fileID: 0}
+    - target: {fileID: 134106, guid: 5825ec3708c262c46bed39ff9a87601c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2357808, guid: 5825ec3708c262c46bed39ff9a87601c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1174,16 +1174,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5094614310873278481}
     m_Modifications:
-    - target: {fileID: 4080848771998264260, guid: ca7b7af670d8c4b40a758b323adaa055,
-        type: 3}
-      propertyPath: m_Name
-      value: cannon
-      objectReference: {fileID: 0}
-    - target: {fileID: 4080848771998264260, guid: ca7b7af670d8c4b40a758b323adaa055,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4080848771998300132, guid: ca7b7af670d8c4b40a758b323adaa055,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1253,6 +1243,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 2.2314
+      objectReference: {fileID: 0}
+    - target: {fileID: 4080848771998264260, guid: ca7b7af670d8c4b40a758b323adaa055,
+        type: 3}
+      propertyPath: m_Name
+      value: cannon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4080848771998264260, guid: ca7b7af670d8c4b40a758b323adaa055,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4080848771998264262, guid: ca7b7af670d8c4b40a758b323adaa055,
         type: 3}
@@ -1334,14 +1334,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5094614310873278481}
     m_Modifications:
-    - target: {fileID: 100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
-      propertyPath: m_Name
-      value: fi_vil_forge_weaponrack3_full (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.89
@@ -1398,6 +1390,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
+      propertyPath: m_Name
+      value: fi_vil_forge_weaponrack3_full (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1417,14 +1417,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5094614310873278481}
     m_Modifications:
-    - target: {fileID: 100004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
-      propertyPath: m_Name
-      value: fi_vil_shield04_combo01
-      objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.28
@@ -1481,6 +1473,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 5.1679
       objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
+      propertyPath: m_Name
+      value: fi_vil_shield04_combo01
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
       propertyPath: m_Layer
       value: 2
@@ -1516,14 +1516,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5094614310873278481}
     m_Modifications:
-    - target: {fileID: 100004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
-      propertyPath: m_Name
-      value: fi_vil_shield04_combo01 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.39
@@ -1580,6 +1572,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 5.1679
       objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
+      propertyPath: m_Name
+      value: fi_vil_shield04_combo01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
       propertyPath: m_Layer
       value: 2
@@ -1615,10 +1615,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 881439948312305591}
     m_Modifications:
-    - target: {fileID: 134106, guid: 5825ec3708c262c46bed39ff9a87601c, type: 3}
-      propertyPath: m_Name
-      value: Banner_2B
-      objectReference: {fileID: 0}
     - target: {fileID: 455410, guid: 5825ec3708c262c46bed39ff9a87601c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
@@ -1663,6 +1659,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 134106, guid: 5825ec3708c262c46bed39ff9a87601c, type: 3}
+      propertyPath: m_Name
+      value: Banner_2B
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6457422, guid: 5825ec3708c262c46bed39ff9a87601c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5825ec3708c262c46bed39ff9a87601c, type: 3}
@@ -1679,10 +1679,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 881439948312305591}
     m_Modifications:
-    - target: {fileID: 100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
-      propertyPath: m_Name
-      value: fi_vil_forge_weaponrack3_full
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.87
@@ -1739,6 +1735,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
+      propertyPath: m_Name
+      value: fi_vil_forge_weaponrack3_full
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4314f5f87ead3e94394abb809290e4d1, type: 3}
 --- !u!4 &5674010766356254925 stripped
@@ -1754,10 +1754,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 881439948312305591}
     m_Modifications:
-    - target: {fileID: 197048, guid: d7114b6361947ef4493c3bcfbf3292d1, type: 3}
-      propertyPath: m_Name
-      value: Banner_2C (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 471622, guid: d7114b6361947ef4493c3bcfbf3292d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.55
@@ -1810,6 +1806,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.4173
       objectReference: {fileID: 0}
+    - target: {fileID: 197048, guid: d7114b6361947ef4493c3bcfbf3292d1, type: 3}
+      propertyPath: m_Name
+      value: Banner_2C (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6418636, guid: d7114b6361947ef4493c3bcfbf3292d1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d7114b6361947ef4493c3bcfbf3292d1, type: 3}
@@ -1826,10 +1826,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 881439948312305591}
     m_Modifications:
-    - target: {fileID: 100004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
-      propertyPath: m_Name
-      value: fi_vil_shield04_combo01
-      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.28
@@ -1886,6 +1882,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 5.1679
       objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
+      propertyPath: m_Name
+      value: fi_vil_shield04_combo01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f2c8c2b761cf6a42835783636df96a4, type: 3}
 --- !u!4 &6404847028840753846 stripped
@@ -1901,10 +1901,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 881439948312305591}
     m_Modifications:
-    - target: {fileID: 100000, guid: 40281af5c35710345afe0584dd085921, type: 3}
-      propertyPath: m_Name
-      value: fi_vil_ladder_6m_used
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 40281af5c35710345afe0584dd085921, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.59
@@ -1961,6 +1957,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 40281af5c35710345afe0584dd085921, type: 3}
+      propertyPath: m_Name
+      value: fi_vil_ladder_6m_used
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6400000, guid: 40281af5c35710345afe0584dd085921, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 40281af5c35710345afe0584dd085921, type: 3}
@@ -1977,10 +1977,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 881439948312305591}
     m_Modifications:
-    - target: {fileID: 100008, guid: e6c75113cd5c102469616b14029aa47f, type: 3}
-      propertyPath: m_Name
-      value: fi_vil_light_torch02_lit (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: e6c75113cd5c102469616b14029aa47f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.72
@@ -2024,6 +2020,10 @@ PrefabInstance:
     - target: {fileID: 400008, guid: e6c75113cd5c102469616b14029aa47f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: e6c75113cd5c102469616b14029aa47f, type: 3}
+      propertyPath: m_Name
+      value: fi_vil_light_torch02_lit (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6c75113cd5c102469616b14029aa47f, type: 3}

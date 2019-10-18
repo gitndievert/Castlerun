@@ -1751,8 +1751,10 @@ MonoBehaviour:
   AttackBattleCryClips:
   - {fileID: 8300000, guid: 5d8fb95aebcc243d994b966d672b3bc7, type: 3}
   - {fileID: 8300000, guid: 37e66fbc473444ab4bcc4a45d358561c, type: 3}
-  AttackDelaySec: 6
-  CanAttack: 0
+  AttackDelaySec: 4
+  IsAttacking: 0
+  AttackDistance: 10
+  AgroDistance: 10
   Projectile: {fileID: 498153287576550493, guid: 1584d21a16d6fe44bb40ac6a363dee98,
     type: 3}
   FirePower: 200
@@ -1973,16 +1975,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7221352568659780545}
     m_Modifications:
-    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
-        type: 3}
-      propertyPath: m_Name
-      value: MiniMapIcon
-      objectReference: {fileID: 0}
-    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8547001551414770055, guid: ed262e909d070aa41915329ff5d1b7ae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2052,6 +2044,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
+        type: 3}
+      propertyPath: m_Name
+      value: MiniMapIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed262e909d070aa41915329ff5d1b7ae, type: 3}
