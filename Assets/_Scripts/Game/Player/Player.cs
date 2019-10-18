@@ -116,7 +116,7 @@ public class Player : BasePrefab, IPlayer
     {
         // #Important
         // used in GameManager.cs: we keep track of the localPlayer instance to prevent instanciation when levels are synchronized
-        if (photonView.IsMine || Global.DEVELOPER_MODE)
+        if (photonView.IsMine || Global.DeveloperMode)
         {
             LocalPlayerInstance = gameObject;
         }
@@ -138,7 +138,7 @@ public class Player : BasePrefab, IPlayer
     {
         base.Start();
 
-        if (!Global.DEVELOPER_MODE)
+        if (!Global.DeveloperMode)
         {
             if (photonView != null && !photonView.IsMine)
             {                
@@ -147,7 +147,7 @@ public class Player : BasePrefab, IPlayer
         }        
 
         //Set Cameras
-        if (photonView.IsMine || Global.DEVELOPER_MODE)
+        if (photonView.IsMine || Global.DeveloperMode)
         {
             SelectionTarget.gameObject.SetActive(false);
 
@@ -230,7 +230,7 @@ public class Player : BasePrefab, IPlayer
     private void Update()
     {
         //Attack 
-        if (photonView.IsMine || Global.DEVELOPER_MODE)
+        if (photonView.IsMine || Global.DeveloperMode)
         {
             if (Time.time > _lastAttacked)
             {
@@ -241,7 +241,7 @@ public class Player : BasePrefab, IPlayer
                     if (!Global.BuildMode)
                     {                        
                         ResetAttackTimer();
-                        if(Global.DEVELOPER_MODE)
+                        if(Global.DeveloperMode)
                         {
                             Swing();
                         }
@@ -402,18 +402,20 @@ public class Player : BasePrefab, IPlayer
     {
         if (UIManager.Instance.IsMouseOverUI()) return;
         if (MyTarget != null)
-        {
-            
+        {            
             _movement.AttackPlayer();
-            if (MyTarget.IsDead) return;
-            if (!Extensions.DistanceLess(transform, MyTarget.GameObject.transform, AttackDistance)) return;
-
-            //May need to manage PUN tags
-            switch (MyTarget.GameObject.tag)
+            if (photonView.IsMine)
             {
-                case Global.ENEMY_TAG:                                         
-                        MyTarget.SetHit(HitAmountMin, HitAmountMax);                   
-                    break;
+                if (MyTarget.IsDead) return;
+                if (!Extensions.DistanceLess(transform, MyTarget.GameObject.transform, AttackDistance)) return;
+
+                //May need to manage PUN tags
+                switch (MyTarget.GameObject.tag)
+                {
+                    case Global.ENEMY_TAG:
+                        MyTarget.SetHit(HitAmountMin, HitAmountMax);
+                        break;
+                }
             }
         }
         else
@@ -439,7 +441,7 @@ public class Player : BasePrefab, IPlayer
     }
     
     [PunRPC]
-    private void RPC_TakeHit(int amount, bool takehit)
+    protected override void RPC_TakeHit(int amount, bool takehit)
     {
         Health -= amount;
         if (takehit) _movement.Hit();
@@ -455,7 +457,7 @@ public class Player : BasePrefab, IPlayer
         if (Health - amount > 0)
         {
             Health -= amount;
-            if (photonView.IsMine || Global.DEVELOPER_MODE)
+            if (photonView.IsMine || Global.DeveloperMode)
             {
                 PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
                 UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);                
@@ -472,10 +474,10 @@ public class Player : BasePrefab, IPlayer
                 _hitCounter = 1;
             }
 
-            if (!Global.DEVELOPER_MODE)            
+            if (!Global.DeveloperMode)            
                 photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount, takehit);            
 
-            if (photonView.IsMine || Global.DEVELOPER_MODE)
+            if (photonView.IsMine || Global.DeveloperMode)
                 UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
 
             _hitCounter++;
@@ -486,9 +488,9 @@ public class Player : BasePrefab, IPlayer
             if (DestroySound != null)
                 SoundManager.PlaySound(DestroySound);            
 
-            if (!Global.DEVELOPER_MODE)
+            if (!Global.DeveloperMode)
             {
-                photonView.RPC("Die", RpcTarget.All);
+                photonView.RPC("Die", RpcTarget.Others);
             }
             else
             {

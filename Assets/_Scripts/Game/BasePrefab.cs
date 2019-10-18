@@ -111,7 +111,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     {
         MaxHealth = Health;
 
-        if (!Global.DEVELOPER_MODE)
+        if (!Global.DeveloperMode)
         {
             if (photonView != null && !photonView.IsMine)
             {
@@ -131,7 +131,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     }
 
     [PunRPC]
-    private void RPC_TakeHit(int amount)
+    protected virtual void RPC_TakeHit(int amount, bool takehit)
     {
         Health -= amount;        
     }
@@ -148,10 +148,10 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
             if (HitSounds.Length > 0)
                 SoundManager.PlaySound(HitSounds);
 
-            if (!Global.DEVELOPER_MODE)
+            if (!Global.DeveloperMode)
                 photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount);
 
-            if (photonView.IsMine || Global.DEVELOPER_MODE)
+            if (photonView.IsMine || Global.DeveloperMode)
                 UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
         }
         else

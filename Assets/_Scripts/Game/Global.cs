@@ -16,7 +16,7 @@ using UnityEngine;
 
 public static class Global
 {
-    public const bool DEVELOPER_MODE = false;
+    public static bool DeveloperMode = false;
 
     #region Game Objects
     /// <summary>

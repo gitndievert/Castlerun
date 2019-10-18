@@ -60,7 +60,7 @@ public class TroopFactory : Build
         {
             _buildArea = GetComponentInChildren<BuildArea>();
         }
-        if (!Global.DEVELOPER_MODE)
+        if (!Global.DeveloperMode)
             gameObject.SetActive(photonView.IsMine);
     }    
 
@@ -177,7 +177,7 @@ public class TroopFactory : Build
 
         GameObject makeTroop = null;
 
-        if (Global.DEVELOPER_MODE)
+        if (Global.DeveloperMode)
         {
             makeTroop = Instantiate(selectedTroop.gameObject, SpawnPointPosition.position, Quaternion.identity);
         }

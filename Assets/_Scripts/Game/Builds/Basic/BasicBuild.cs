@@ -33,7 +33,7 @@ public class BasicBuild : Build
     {
         base.Start();        
         IsBasic = true;
-        if(!Global.DEVELOPER_MODE)
+        if(!Global.DeveloperMode)
             gameObject.SetActive(photonView.IsMine);
     }
     
