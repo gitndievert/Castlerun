@@ -35,6 +35,8 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     /// </summary>
     public bool EnableFromBuilder = false;
 
+    public GameObject ConstructionZone;
+    
     //public float GridSnap = 0.5f;     
 
     public bool IsSelected { get; set; }
@@ -68,6 +70,8 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
         IsBasic = false;        
         if (Costs.CostFactors.Length == 0)
             throw new System.Exception("Please add a cost");
+        if (ConstructionZone != null)
+            ConstructionZone.SetActive(false);
     }
 
     protected virtual void Update()
@@ -81,6 +85,11 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     public float GetConstructionTime()
     {
         return ConstructionTime;
+    }
+
+    public GameObject GetConstructionZone()
+    {
+        return ConstructionZone;
     }
 
     public virtual bool ConfirmPlacement()

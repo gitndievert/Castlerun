@@ -18,7 +18,7 @@ using Photon.Pun;
 
 public class PlacementController : MonoBehaviourPun
 {
-    [Tooltip("Loaded Prefab for Placement")]
+    [HideInInspector]
     public GameObject PlaceableObjectPrefab = null;    
 
     /// <summary>
@@ -29,9 +29,8 @@ public class PlacementController : MonoBehaviourPun
     [Header("Build Properties")]
     public bool BuildMode;
     public float RotateAmount = 90f;    
-    public float SnapSize = 1f;        
-       
-    [SerializeField]
+    public float SnapSize = 1f;
+
     private MeshRenderer _placeObjectMeshRend;
 
     //TODO MOVE TO QUEUES
@@ -139,7 +138,7 @@ public class PlacementController : MonoBehaviourPun
                     {
                         inv.Set(costs);
                         CameraRotate.BuildCamMode = false;
-                        StartCoroutine(CorLoadBuilding(build));                        
+                        StartCoroutine(CorLoadBuilding(build, _currObj.transform.position));                        
                     }
                 }
                 else
@@ -181,9 +180,9 @@ public class PlacementController : MonoBehaviourPun
         }       
     }
     
-    private IEnumerator CorLoadBuilding(IBuild build)
+    private IEnumerator CorLoadBuilding(IBuild build, Vector3 position)
     {
-        build.SetPlayer(Player);                
+        build.SetPlayer(Player);     
         yield return new WaitForSeconds(build.GetConstructionTime());        
         build.FinishBuild();        
         yield return null;

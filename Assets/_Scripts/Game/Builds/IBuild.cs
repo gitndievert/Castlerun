@@ -12,10 +12,13 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using UnityEngine;
+
 public interface IBuild : IBase
 {
     bool ConfirmPlacement();        
     bool IsBasic { get; set; }
     float GetConstructionTime();
+    GameObject GetConstructionZone();
     void FinishBuild(); 
 }
