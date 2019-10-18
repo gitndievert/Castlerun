@@ -18,7 +18,6 @@ public interface IBuild : IBase
 {
     bool ConfirmPlacement();        
     bool IsBasic { get; set; }
-    float GetConstructionTime();
-    GameObject GetConstructionZone();
+    float GetConstructionTime();    
     void FinishBuild(); 
 }

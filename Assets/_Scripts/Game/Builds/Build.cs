@@ -51,6 +51,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     protected bool isPlaced = false;    
     protected bool isFinished = false;
     protected bool p_Finished = false;
+    protected bool p_ConfirmPlacement = false;
 
     private Vector3 _offset;
 
@@ -86,27 +87,33 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     {
         return ConstructionTime;
     }
-
-    public GameObject GetConstructionZone()
-    {
-        return ConstructionZone;
+    
+    public void EnableConstructionZone()
+    {        
+        if (ConstructionZone != null)
+        {
+            TransparentModel.SetActive(false);
+            ConstructionZone.SetActive(true);            
+        }
+        else
+        {
+            EnableLayModel();
+        }        
     }
 
     public virtual bool ConfirmPlacement()
     {
         isPlaced = true;
+        p_ConfirmPlacement = true;
         TagPrefab("Build");
+        EnableConstructionZone();
         return isPlaced;
-    }
-
-    /*public void StartBuildEffect()
-    {
-        if (BuildEffect != null && !BuildEffect.activeSelf && !_isFinished)
-            BuildEffect.SetActive(true);
-    }*/
+    } 
 
     public void EnableLayModel()
     {
+        if(ConstructionZone != null)
+            ConstructionZone.SetActive(false);
         TransparentModel.SetActive(true);
         FinalModel.SetActive(false);
     }
@@ -114,6 +121,8 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     public void EnableFinalModel()
     {
         TransparentModel.SetActive(false);
+        if (ConstructionZone != null)
+            ConstructionZone.SetActive(false);
         FinalModel.SetActive(true);
     }
 

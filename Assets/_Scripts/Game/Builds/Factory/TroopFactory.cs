@@ -235,15 +235,24 @@ public class TroopFactory : Build
         if (stream.IsWriting)
         {
             // We own this player: send the others our data            
+            stream.SendNext(p_ConfirmPlacement);
             stream.SendNext(p_Finished);
         }
         else
         {
             // Network player, receive data
+            var confirm = (bool)stream.ReceiveNext();
             var place = (bool)stream.ReceiveNext();
-            if(place)
+
+            if(confirm)
             {
                 gameObject.SetActive(true);
+                ConfirmPlacement();
+                p_ConfirmPlacement = false;
+            }
+
+            if(place)
+            {                
                 if(_buildArea != null) _buildArea.ShowPlane(false);
                 GameManager.PlayersByActor.TryGetValue(GameManager.MyPlayerNumber, out Player player);
                 if (player != null)

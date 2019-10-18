@@ -428,7 +428,7 @@ public abstract class Troop : BasePrefab, ISelectable
             if (!Global.DeveloperMode)            
                 photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount, takehit);
 
-            if (photonView.IsMine || Global.DeveloperMode)
+            if ((photonView != null && photonView.IsMine) || Global.DeveloperMode)
                 UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
 
             _hitCounter++;
