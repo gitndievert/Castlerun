@@ -123,7 +123,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
                 MyPlayerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
 
-                PlayersByActor.Add(MyPlayerNumber, character.GetComponent<Player>());
+                var player = character.GetComponent<Player>();
+
+                PlayersByActor.Add(MyPlayerNumber, player);              
 
                 Debug.Log($"Current actor number: {MyPlayerNumber}");
                 //Kill music for now
@@ -236,7 +238,11 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         var character = Instantiate(PlayerInstance, Player1SpawnPoint.position, Quaternion.identity);
         var player = character.GetComponent<Player>();
         player.PlayerName = "Krunchy";
-        player.PlayerNumber = playerNum;                        
+        player.PlayerNumber = playerNum;
+
+        var castle = GameObject.Find("Classic Castle 3").GetComponent<Castle>();
+        player.PlayerCastle = castle;
+        player.PlayerCastle.CaptureFlag.AttachedPlayer = player;
 
         /*for (int i = 1; i < _numOfPlayer; i++)
         {

@@ -142,6 +142,16 @@ public class Selection : DSingle<Selection>
             //Deselect on ground on building selection
             if (hit.point != null)
             {
+                if (hit.GetLayer() == Global.GROUND_LAYER)
+                {
+                    if (SingleTargetSelected != null && SingleTargetSelected.GameObject.tag == Global.BUILD_TAG)
+                    {
+                        SingleTargetSelected.UnSelect();
+                        ClearSingleTarget();
+                        return;
+                    }                    
+                }
+
                 //Check for death
                 var selectable = hit.transform.GetComponent<ISelectable>();
                 if (selectable != null)
@@ -163,10 +173,9 @@ public class Selection : DSingle<Selection>
                         else if (hit.transform.tag == Global.ENEMY_TAG)
                         {
                             UpdateEnemyTarget(selectable);
-                        }
+                        }                        
                         //Dont clear on ground layers
-                        else if (/*hit.GetLayer() == Global.GROUND_LAYER
-                        || */((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
+                        else if ((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1)
                         {
                             ClearAll();
 
