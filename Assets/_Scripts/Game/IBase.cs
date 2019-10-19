@@ -21,5 +21,6 @@ public interface IBase
     Costs GetCosts();
     Sprite GetIcon();
     void SetPlayer(Player player);
+    Vector3 DistanceToEdge(Vector3 point);
 }
     

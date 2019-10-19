@@ -14,8 +14,6 @@
 
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
-[RequireComponent(typeof(Rigidbody))]
 public class Projectile : BasePrefab
 {
     public AudioClip[] FireSounds;

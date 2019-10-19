@@ -70,12 +70,7 @@ public class Music : PSingle<Music>, IAudio
                 break;
         }
     }*/
-
-    public void PlayMusicTrack(MusicTracks track)
-    {
-        PlayMusicTrack((int)track);
-    }
-
+    
     public void PlayMusicTrack(int index)
     {
         MusicIndex = index;

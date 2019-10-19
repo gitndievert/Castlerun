@@ -388,7 +388,7 @@ public class Player : BasePrefab, IPlayer
     public void WepTrailEnable()
     {
         if (WeaponTrail == null) return;
-        WeaponTrail.Emit = true;
+        WeaponTrail.Emit = true;        
     }
 
     public void WepTrailDisable()
@@ -406,7 +406,7 @@ public class Player : BasePrefab, IPlayer
             _movement.AttackPlayer();
             if (photonView.IsMine)
             {
-                if (MyTarget.IsDead) return;
+                if (MyTarget.IsDead) return;                
                 if (!Extensions.DistanceLess(transform, MyTarget.GameObject.transform, AttackDistance)) return;
 
                 //May need to manage PUN tags

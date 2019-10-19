@@ -77,6 +77,10 @@ namespace UnityStandardAssets.Water
             // Render reflection if needed
             if (mode >= WaterMode.Reflective)
             {
+                if (m_TurnOffWaterOcclusion)
+                {
+                    reflectionCamera.useOcclusionCulling = false;             
+                }
                 // Reflect camera around reflection plane
                 float d = -Vector3.Dot(normal, pos) - m_ClipPlaneOffset;
                 Vector4 reflectionPlane = new Vector4(normal.x, normal.y, normal.z, d);
@@ -109,6 +113,11 @@ namespace UnityStandardAssets.Water
             // Render refraction
             if (mode >= WaterMode.Refractive)
             {
+                if (m_TurnOffWaterOcclusion)
+                {                 
+                    refractionCamera.useOcclusionCulling = false;
+                }
+
                 refractionCamera.worldToCameraMatrix = cam.worldToCameraMatrix;
 
                 // Setup oblique projection matrix so that near plane is our reflection
@@ -146,7 +155,7 @@ namespace UnityStandardAssets.Water
                     Shader.DisableKeyword("WATER_REFLECTIVE");
                     Shader.EnableKeyword("WATER_REFRACTIVE");
                     break;
-            }
+            }          
 
             s_InsideWater = false;
         }
@@ -251,7 +260,7 @@ namespace UnityStandardAssets.Water
             refractionCamera = null;
 
             if (mode >= WaterMode.Reflective)
-            {
+            {                
                 // Reflection render texture
                 if (!m_ReflectionTexture || m_OldReflectionTextureSize != m_TextureSize)
                 {
@@ -277,14 +286,12 @@ namespace UnityStandardAssets.Water
                     reflectionCamera.gameObject.AddComponent<FlareLayer>();
                     go.hideFlags = HideFlags.HideAndDontSave;
                     m_ReflectionCameras[currentCamera] = reflectionCamera;
-
-                    if (m_TurnOffWaterOcclusion)
-                        reflectionCamera.useOcclusionCulling = false;
+                   
                 }
             }
 
             if (mode >= WaterMode.Refractive)
-            {
+            {               
                 // Refraction render texture
                 if (!m_RefractionTexture || m_OldRefractionTextureSize != m_TextureSize)
                 {
@@ -309,11 +316,10 @@ namespace UnityStandardAssets.Water
                     refractionCamera.gameObject.AddComponent<FlareLayer>();
                     go.hideFlags = HideFlags.HideAndDontSave;
                     m_RefractionCameras[currentCamera] = refractionCamera;
-
-                    if (m_TurnOffWaterOcclusion)
-                        refractionCamera.useOcclusionCulling = false;
                 }
             }
+
+            
         }
 
         private WaterMode GetWaterMode()

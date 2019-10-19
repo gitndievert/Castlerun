@@ -17,6 +17,7 @@ using TMPro;
 using System.Collections.Generic;
 using Photon.Pun;
 
+[RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
 public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObservable
 {
@@ -49,7 +50,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     {
         get { return tag; }
     }
-
+        
     public abstract string DisplayName { get; }
 
     protected int MaxHealth;
@@ -63,6 +64,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     protected static readonly Color PassiveColor = Color.yellow;
     
     protected Rigidbody RigidBody;
+    protected Collider Collider;
 
 
     protected PlayerUI PlayerUI
@@ -97,6 +99,8 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
             gameObject.AddComponent<Rigidbody>();
 
         RigidBody = GetComponent<Rigidbody>();
+        Collider = GetComponent<Collider>();
+        
 
         //Set the GameManager
         GameManager = GameManager.LocalGameManagerInstance;
@@ -161,6 +165,11 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
             if (CanExplode) Explode();
             Die();
         }
+    }
+
+    public Vector3 DistanceToEdge(Vector3 point)
+    {
+        return Collider.bounds.ClosestPoint(point);
     }
 
     public virtual void Die()
