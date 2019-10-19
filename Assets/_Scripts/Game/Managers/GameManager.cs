@@ -56,7 +56,13 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     /// </summary>
     public static int MyPlayerNumber;
 
-    public float StartingTime;    
+    public float StartingTime;
+
+    #region Sounds
+    public AudioClip[] PlayerJoining;
+
+
+    #endregion
 
 
     private void Awake()
@@ -130,6 +136,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
                 Debug.Log($"Current actor number: {MyPlayerNumber}");
                 //Kill music for now
                 MusicManager.stop(3f);
+
+                SoundManager.PlaySound(PlayerJoining);
             }
             else
             {
@@ -186,8 +194,10 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-            //LoadArena();
+            //LoadArena();            
         }
+
+        SoundManager.PlaySound(PlayerJoining);
     }
 
     /// <summary>

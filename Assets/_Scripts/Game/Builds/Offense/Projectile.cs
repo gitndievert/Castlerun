@@ -26,14 +26,17 @@ public class Projectile : BasePrefab
     /// <summary>
     /// Minimum Damage Delt
     /// </summary>
+    [Range(10,500)]
     public int MinDamage;
     /// <summary>
     /// Maximum Damage Delt
     /// </summary>
+    [Range(10, 500)]
     public int MaxDamage;   
     #endregion
 
     public string TargetTag { get; set; }
+
     public override string DisplayName => "Projectile";
 
     protected override void Start()
