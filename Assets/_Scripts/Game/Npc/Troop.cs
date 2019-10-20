@@ -19,7 +19,7 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Collider))]
 public abstract class Troop : BasePrefab, ISelectable
 {
     const float TROOP_DESTROY_TIMER = 4f;

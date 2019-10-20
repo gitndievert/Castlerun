@@ -400,7 +400,8 @@ public class Player : BasePrefab, IPlayer
     [PunRPC]
     public void Swing()
     {
-        if (UIManager.Instance.IsMouseOverUI()) return;
+        if (UIManager.Instance.
+            IsMouseOverUI()) return;
         if (MyTarget != null)
         {            
             _movement.AttackPlayer();
