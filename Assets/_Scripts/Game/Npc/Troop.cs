@@ -90,6 +90,14 @@ public abstract class Troop : BasePrefab, ISelectable
 
     protected override void Start()
     {
+
+        int mask = 1 << Global.GROUND_LAYER;
+
+        if (Physics.Raycast(transform.position,Vector3.down,out RaycastHit hit,5f,mask))
+        {
+            nav.Warp(hit.point);
+        }        
+
         base.Start();
         SelectionTargetStatus(false);
 
@@ -102,7 +110,7 @@ public abstract class Troop : BasePrefab, ISelectable
             throw new System.Exception("Please add a cost");
         
         
-        _smoothDeltaPosition = default;
+        _smoothDeltaPosition = default;        
        
     }
 
@@ -211,7 +219,7 @@ public abstract class Troop : BasePrefab, ISelectable
 
     #endregion
 
-    public void OnAnimatorMove()
+    protected virtual void OnAnimatorMove()
     {
         if (!_moving) return;
         var position = anim.rootPosition;
@@ -379,7 +387,7 @@ public abstract class Troop : BasePrefab, ISelectable
     public void Move(Vector3 point)
     {
         //nav.ResetPath();
-        nav.isStopped = false;
+        nav.isStopped = false;        
         nav.SetDestination(point);
         transform.LookAt(point);        
         if(AttackBattleCryClips.Length > 0)
