@@ -20,6 +20,11 @@ public enum BuildingLabelTypes
     Ramp,
     Barracks,
     ResourceDepot,
-    Tower,
-    Stables
+    ArcherTower,
+    Spire,
+    WizardSanctum,
+    DragonRoost,
+    Keep,
+    Stables,
+    BlackSmith
 }

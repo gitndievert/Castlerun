@@ -14,7 +14,6 @@
 
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody))]
