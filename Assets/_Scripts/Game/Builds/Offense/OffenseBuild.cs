@@ -52,31 +52,38 @@ public class OffenseBuild : Build
     {
         base.Update();
 
-        foreach(var pos in FirePositions)
+        if (isFinished)
         {
-            if (!Global.DeveloperMode)
-            {                
-                var winnerDist = new Dictionary<Player, float>();
-                foreach (var player in GameManager.PlayersByActor)
+            foreach (var pos in FirePositions)
+            {
+                if (!Global.DeveloperMode)
                 {
-                    //Pool attack targets and distances, pick closest one
-                    int localNum = PhotonNetwork.LocalPlayer.ActorNumber;
-                    if (player.Key == localNum) continue;
-                    Player p = player.Value;                    
-                    float dist = Vector3.Distance(p.transform.position, pos.position);
-                    if (dist > AttackRadius) continue;                    
-                    if (!p.IsDead)
+                    var winnerDist = new Dictionary<Player, float>();
+                    foreach (var player in GameManager.PlayersByActor)
                     {
-                        winnerDist.Add(p, dist);
-                    }                    
+                        //Pool attack targets and distances, pick closest one
+                        int localNum = PhotonNetwork.LocalPlayer.ActorNumber;
+                        if (player.Key == localNum) continue;
+                        Player p = player.Value;
+                        float dist = Vector3.Distance(p.transform.position, pos.position);
+                        if (dist > AttackRadius) continue;
+                        if (!p.IsDead)
+                        {
+                            winnerDist.Add(p, dist);
+                        }
+                    }
+                    //Get lowest value for closet target
+                    if (winnerDist.Count > 0)
+                    {
+                        //One player is the winner!
+                        Player keyWinner = winnerDist.Min(f => f.Key);
+                        Debug.Log("Tower is shooting at " + keyWinner.PlayerName);
+                        pos.LookAt(keyWinner.transform.position);
+                        var project = PhotonNetwork.Instantiate(Projectile.gameObject.name, pos.position, Quaternion.identity);
+                        project.GetComponent<Rigidbody>().AddForce(pos.forward * FirePower);
+                    }
+
                 }
-                //Get lowest value for closet target
-                Player keyWinner = winnerDist.Min(f => f.Key);
-
-                pos.LookAt(keyWinner.transform.position);
-                var project = PhotonNetwork.Instantiate(Projectile.gameObject.name, pos.position, Quaternion.identity);                
-                project.GetComponent<Rigidbody>().AddForce(pos.forward * FirePower);
-
             }
         }
     }
