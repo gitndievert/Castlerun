@@ -109,16 +109,12 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
 
             if (render.gameObject.GetComponent<Outline>() == null)
             {
-                render.gameObject.AddComponent<Outline>();
-                //Set defaults on outline
-                var outline = render.gameObject.GetComponent<Outline>();
-                outline.enabled = false;
-                Outlines.Add(outline);
+                render.gameObject.AddComponent<Outline>();                                
             }
-            else
-            {
-                Outlines.Add(render.gameObject.GetComponent<Outline>());
-            }
+            //Set defaults on outline
+            var outline = render.gameObject.GetComponent<Outline>();
+            outline.enabled = false;
+            Outlines.Add(outline);
         }
 
         RigidBody = GetComponent<Rigidbody>();
