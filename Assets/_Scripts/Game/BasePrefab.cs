@@ -14,8 +14,9 @@
 
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
 using Photon.Pun;
+using cakeslice;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
@@ -65,6 +66,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     
     protected Rigidbody RigidBody;
     protected Collider Collider;
+    protected List<Outline> Outlines = new List<Outline>();
 
 
     protected PlayerUI PlayerUI
@@ -97,6 +99,27 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
 
         if (GetComponent<Rigidbody>() == null)
             gameObject.AddComponent<Rigidbody>();
+                
+        var renders = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (var render in renders)
+        {
+            var T = render.GetType();
+            if (T != typeof(MeshRenderer) && T != typeof(SkinnedMeshRenderer))
+                continue;
+
+            if (render.gameObject.GetComponent<Outline>() == null)
+            {
+                render.gameObject.AddComponent<Outline>();
+                //Set defaults on outline
+                var outline = render.gameObject.GetComponent<Outline>();
+                outline.enabled = false;
+                Outlines.Add(outline);
+            }
+            else
+            {
+                Outlines.Add(render.gameObject.GetComponent<Outline>());
+            }
+        }
 
         RigidBody = GetComponent<Rigidbody>();
         Collider = GetComponent<Collider>();
@@ -113,7 +136,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
 
     protected virtual void Start()
     {
-        MaxHealth = Health;
+        MaxHealth = Health;        
 
         if (!Global.DeveloperMode)
         {
@@ -178,7 +201,30 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         Destroy(gameObject, DestroyTimer);
     }
 
+    /// <summary>
+    /// Enable or disable outline around the gameobject
+    /// </summary>
+    /// <param name="action"></param>
+    public void Highlight(bool action)
+    {
+        Highlight(action, 0);
+    }
 
+    /// <summary>
+    /// Enable or disable outline around the gameobject
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="color"></param>
+    public void Highlight(bool action, byte color)
+    {
+        if (Outlines.Count <= 0) return;
+        foreach (var outline in Outlines)
+        {
+            outline.color = color;
+            outline.enabled = action;
+        }        
+    }
+        
     protected int CalcDamage(int min, int max, out bool crit)
     {
         var dmg = Random.Range(min, max);

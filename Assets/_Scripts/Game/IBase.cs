@@ -22,5 +22,7 @@ public interface IBase
     Sprite GetIcon();
     void SetPlayer(Player player);
     Vector3 DistanceToEdge(Vector3 point);
+    void Highlight(bool action);
+    void Highlight(bool action, byte color);    
 }
     

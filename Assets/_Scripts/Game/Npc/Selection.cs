@@ -96,6 +96,14 @@ public class Selection : DSingle<Selection>
 
     private void Update()
     {
+        //Escape out selections
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            ClearAll();
+            if(SingleTargetSelected != null)
+                ClearSingleTarget();
+        }        
+        
         //Selection mouse events
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
         {
@@ -276,7 +284,9 @@ public class Selection : DSingle<Selection>
         ClearAll();
 
         if(selection.GameObject.tag == Global.ARMY_TAG)
-            UpdateMassList(SingleTargetSelected);       
+            UpdateMassList(SingleTargetSelected);
+
+        SingleTargetSelected.Highlight(true, 1);
     }
 
     public void SelectSingleTarget(ISelectable selection)
@@ -300,6 +310,8 @@ public class Selection : DSingle<Selection>
         EnemyTargetSelected = selection;
         _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);
         SelectionCursorOn();
+
+        EnemyTargetSelected.Highlight(true, 0);
     }
         
     public void ClearSingleTarget()
@@ -307,9 +319,10 @@ public class Selection : DSingle<Selection>
         if (SingleTargetSelected != null)
         {
             SingleTargetSelected.UnSelect();
+            SingleTargetSelected.Highlight(false);
             ClearList(SingleTargetSelected);
             SingleTargetSelected = null;
-            _ui.SingleTargetBox.ClearTarget();
+            _ui.SingleTargetBox.ClearTarget();            
         }
     }
 
@@ -318,6 +331,7 @@ public class Selection : DSingle<Selection>
         if (EnemyTargetSelected != null)
         {
             EnemyTargetSelected.UnSelect();
+            EnemyTargetSelected.Highlight(false);
             EnemyTargetSelected = null;
             _ui.EnemyTargetBox.ClearTarget();
             SelectionCursorOff();
@@ -349,7 +363,7 @@ public class Selection : DSingle<Selection>
             }
 
             ClearList();
-        }
+        }        
     }
 
     private IEnumerator SelectionCursor()
