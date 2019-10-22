@@ -12,8 +12,10 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class OffenseBuild : Build
@@ -26,9 +28,10 @@ public class OffenseBuild : Build
     [Header("Projectile Properties")]
     [Range(0f, MAXIMUM_BO_POWER)]
     public float FirePower = 300f;
+    public float AttackRadius = 15f;
 
     private BuildArea _buildArea;
-
+    
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -36,6 +39,45 @@ public class OffenseBuild : Build
         if (_buildArea == null)
         {
             _buildArea = GetComponentInChildren<BuildArea>();
+        }
+
+        if (FirePositions.Length == 0)
+            throw new System.Exception("Offensive Towers Need Spawn Positions for Projectiles");
+
+
+        
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        foreach(var pos in FirePositions)
+        {
+            if (!Global.DeveloperMode)
+            {                
+                var winnerDist = new Dictionary<Player, float>();
+                foreach (var player in GameManager.PlayersByActor)
+                {
+                    //Pool attack targets and distances, pick closest one
+                    int localNum = PhotonNetwork.LocalPlayer.ActorNumber;
+                    if (player.Key == localNum) continue;
+                    Player p = player.Value;                    
+                    float dist = Vector3.Distance(p.transform.position, pos.position);
+                    if (dist > AttackRadius) continue;                    
+                    if (!p.IsDead)
+                    {
+                        winnerDist.Add(p, dist);
+                    }                    
+                }
+                //Get lowest value for closet target
+                Player keyWinner = winnerDist.Min(f => f.Key);
+
+                pos.LookAt(keyWinner.transform.position);
+                var project = PhotonNetwork.Instantiate(Projectile.gameObject.name, pos.position, Quaternion.identity);                
+                project.GetComponent<Rigidbody>().AddForce(pos.forward * FirePower);
+
+            }
         }
     }
 

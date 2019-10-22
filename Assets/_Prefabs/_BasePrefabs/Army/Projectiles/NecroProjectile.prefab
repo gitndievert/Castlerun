@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3852480882204348411}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 195.03, y: 25.96, z: 140.95}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3852480882204054493}
@@ -4789,11 +4789,13 @@ MonoBehaviour:
   HitSounds: []
   HealthText: {fileID: 0}
   Icon: {fileID: 0}
+  Costs:
+    CostFactors: []
   FireSounds:
   - {fileID: 8300000, guid: 9cca06694e70343d3a39f395667c9651, type: 3}
   TravelSound: {fileID: 0}
   ImpactSound: {fileID: 0}
-  MinDamage: 5
+  MinDamage: 10
   MaxDamage: 25
 --- !u!54 &3322622113706560888
 Rigidbody:

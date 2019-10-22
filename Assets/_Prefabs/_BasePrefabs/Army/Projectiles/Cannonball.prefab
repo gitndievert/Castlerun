@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2303484168160073305}
   - component: {fileID: 3413559707699108551}
   m_Layer: 0
-  m_Name: cannonball
+  m_Name: Cannonball
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,6 +68,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -121,6 +122,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a7b147c6c025a46949819c4ad41e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 0
+  CanExplode: 1
+  DestroySound: {fileID: 0}
+  HitSounds: []
+  HealthText: {fileID: 0}
+  Icon: {fileID: 0}
+  Costs:
+    CostFactors: []
+  FireSounds: []
   TravelSound: {fileID: 0}
   ImpactSound: {fileID: 0}
-  Damage: 25
+  MinDamage: 10
+  MaxDamage: 25
