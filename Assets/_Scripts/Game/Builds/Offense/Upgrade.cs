@@ -26,6 +26,17 @@ public class Upgrade : Build
         }
     }
 
+    public override bool ConfirmPlacement()
+    {
+        if (!_buildArea.CanBuild) return false;
+        gameObject.SetActive(true);
+        base.ConfirmPlacement();
+        _buildArea.ShowPlane(false);
+        CamShake.Instance.Shake(1f, .5f);
+
+        return true;
+    }
+
     protected override void Update()
     {
 
