@@ -12,6 +12,9 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using System;
+using System.Text.RegularExpressions;
+
 public enum BuildingLabelTypes
 {
     None,

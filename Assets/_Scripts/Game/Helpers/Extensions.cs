@@ -49,6 +49,10 @@ public static partial class Extensions
         return hit.transform.tag;
     }
 
+    public static string TypeToString(this Enum types)
+    {
+        return Regex.Replace(types.ToString(), "(\\B[A-Z])", " $1");
+    }
 
 }
 

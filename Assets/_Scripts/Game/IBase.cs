@@ -24,5 +24,6 @@ public interface IBase
     Vector3 DistanceToEdge(Vector3 point);
     void Highlight(bool action);
     void Highlight(bool action, byte color);    
+    string DisplayName { get; }
 }
     

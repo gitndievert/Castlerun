@@ -23,8 +23,7 @@ public interface ISelectable : IBase
     /// Gets all Properties on this Selectable Object
     /// </summary>
     GameObject GameObject { get; }
-    void OnMouseDown();    
-    string DisplayName { get; }    
+    void OnMouseDown();        
     int GetCurrentHealth();
     int GetMaxHealth();    
     bool IsDead { get; set; }

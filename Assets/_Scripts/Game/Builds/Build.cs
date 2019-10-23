@@ -39,7 +39,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
 
     public bool IsSelected { get; set; }
     public GameObject GameObject => gameObject;
-    public override string DisplayName => BuildingLabelType.ToString();
+    public override string DisplayName => BuildingLabelType.TypeToString();
 
     /// <summary>
     /// Time it takes to build this building
@@ -103,7 +103,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     {
         isPlaced = true;
         p_ConfirmPlacement = true;
-        TagPrefab("Build");
+        TagPrefab(Global.BUILD_TAG);
         EnableConstructionZone();
         return isPlaced;
     } 

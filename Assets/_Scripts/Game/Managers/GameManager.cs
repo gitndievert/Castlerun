@@ -43,8 +43,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public TextMeshProUGUI Messages;
     public TextMeshProUGUI PlayersConnected;
 
-    public static Dictionary<int, Player> PlayersByActor = new Dictionary<int, Player>();
-
     [Header("PUN Network Variables")]
     /// <summary>
     /// Total Players in Room
@@ -85,8 +83,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     }
 
     private void Start()
-    {   
-        
+    {           
         if(Global.DeveloperMode)
         {
             StartPlayersTest();
@@ -124,14 +121,12 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                 var character = PhotonNetwork.Instantiate(PlayerInstance.name, spawnPos, Quaternion.identity, 0);
-
                 character.layer = Global.IGNORE_LAYER;
 
-                MyPlayerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
-
+                MyPlayerNumber = PhotonNetwork.LocalPlayer.ActorNumber;              
+                
                 var player = character.GetComponent<Player>();
-
-                PlayersByActor.Add(MyPlayerNumber, player);              
+                player.ActorNumber = MyPlayerNumber;                
 
                 Debug.Log($"Current actor number: {MyPlayerNumber}");
                 //Kill music for now
@@ -209,22 +204,22 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         Debug.Log("OnPlayerLeftRoom() " + other.NickName); // seen when other disconnects
         Messages.text = $"{other.NickName} left the game";
 
-        UpdatePlayersList();
+        UpdatePlayersList();        
 
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
             //LoadArena();
         }
-    }
+    }     
 
     public void UpdatePlayersList()
     {
-        PlayersConnected.text = "";
+        PlayersConnected.text = "";        
 
         foreach (var player in PhotonNetwork.PlayerList)
         {
-            PlayersConnected.text += player.NickName+"\n";
+            PlayersConnected.text += player.NickName+"\n";            
         }
     }
 
@@ -247,8 +242,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
         var character = Instantiate(PlayerInstance, Player1SpawnPoint.position, Quaternion.identity);
         var player = character.GetComponent<Player>();
-        player.PlayerName = "Krunchy";
-        player.PlayerNumber = playerNum;
+        player.PlayerName = "Krunchy";        
 
         var castle = GameObject.Find("Classic Castle 3").GetComponent<Castle>();
         player.PlayerCastle = castle;
@@ -274,5 +268,5 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
                 //CameraRig.GetComponent<BasicCameraBehaviour>().SetPlayerTarget = pt;
             }
         }*/
-    }
+    }    
 }

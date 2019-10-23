@@ -254,14 +254,9 @@ public class TroopFactory : Build
             if(place)
             {                
                 if(_buildArea != null) _buildArea.ShowPlane(false);
-                GameManager.PlayersByActor.TryGetValue(GameManager.MyPlayerNumber, out Player player);
-                if (player != null)
-                {                    
-                    SetPlayer(player);
-                    EnableFinalModel();                    
-                    tag = Global.ENEMY_TAG;
-                    p_Finished = false;
-                }
+                EnableFinalModel();
+                TagPrefab(Global.ENEMY_TAG);
+                p_Finished = false;                
             }          
         }
     }

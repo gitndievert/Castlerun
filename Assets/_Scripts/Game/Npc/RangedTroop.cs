@@ -13,6 +13,7 @@
 // ********************************************************************
 
 
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 
@@ -43,13 +44,20 @@ public abstract class RangedTroop : Troop
         Debug.Log("Attacking " + AttackTarget.DisplayName + "!");
         anim.Play("Attack");
         var enemypos = AttackTarget.GameObject.transform.position;
-        transform.LookAt(new Vector3(enemypos.x, transform.position.y, enemypos.z)); 
-        
-        //Need to do PUN instance here
+        transform.LookAt(new Vector3(enemypos.x, transform.position.y, enemypos.z));
 
-        var project = Instantiate(Projectile, SpawnPoint.transform.position, Quaternion.identity);
-        project.TargetTag = AttackTarget.GameObject.tag;
-        project.GetComponent<Rigidbody>().AddForce(SpawnPoint.transform.forward * FirePower);        
+        //Need to do PUN instance here
+        //USE THE TOWER CODE
+
+        if (Global.DeveloperMode) {
+            var project = Instantiate(Projectile, SpawnPoint.transform.position, Quaternion.identity);
+            project.Seek(AttackTarget);
+        }
+        else
+        {
+            var project = PhotonNetwork.Instantiate(Projectile.gameObject.name, SpawnPoint.transform.position, Quaternion.identity);
+            project.GetComponent<Projectile>().Seek(AttackTarget);
+        }
     }
 
 }

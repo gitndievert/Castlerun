@@ -12,6 +12,7 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using Photon.Pun;
 using UnityEngine;
 
 public class Projectile : BasePrefab
@@ -30,22 +31,48 @@ public class Projectile : BasePrefab
     /// Maximum Damage Delt
     /// </summary>
     [Range(10, 500)]
-    public int MaxDamage;   
-    #endregion
+    public int MaxDamage;
 
-    public string TargetTag { get; set; }
+    public float Speed = 50f;
+    #endregion
+       
 
     public override string DisplayName => "Projectile";
 
+    private ISelectable _target = null;
+
     protected override void Start()
-    {        
-        TagPrefab("Projectile");
+    {
+        //Make Projectiles rigid and trigger
+        RigidBody.isKinematic = true;
+        Collider.isTrigger = true;
+
+        TagPrefab(Global.PROJECTILE_TAG);
         gameObject.layer = Global.PROJECTILE_LAYER;
         SoundManager.PlaySound(FireSounds);
         Physics.IgnoreLayerCollision(Global.PROJECTILE_LAYER, Global.ARMY_LAYER, true);
         //Default destruction timer
         //Projectiles should not take longer than 10 seconds to hit a target
-        Destroy(gameObject, 10f);
+        Destroy(gameObject, 10f);        
+    }
+
+    protected virtual void Update()
+    {
+        if(_target != null)
+        {
+            Transform t = _target.GameObject.transform;
+            Vector3 rPos = t.position - transform.position;
+            Quaternion lookRotation = Quaternion.LookRotation(rPos);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, .5f);
+        }
+
+        transform.Translate(0, 0, Speed * Time.deltaTime, Space.Self);
+    }
+
+    public void Seek(ISelectable target)
+    {
+        _target = target;
     }
     
     private void PlayTravelSound()
@@ -64,7 +91,17 @@ public class Projectile : BasePrefab
         SoundManager.PlaySoundOnGameObject(gameObject, ImpactSound);
     }
 
-    private void OnCollisionEnter(Collision col)
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.tag != _target.GameObject.tag) return;
+        PlayHitSound();
+        var target = col.gameObject.GetComponent<BasePrefab>();
+        target.SetHit(MinDamage, MaxDamage);
+        //Tuck away, don't destroy                    
+        PhotonNetwork.Destroy(gameObject);
+    }
+
+    /*private void OnCollisionEnter(Collision col)
     {
         //Only hit the target enemy        
         if (col.transform.tag != TargetTag) return;        
@@ -73,5 +110,5 @@ public class Projectile : BasePrefab
         target.SetHit(MinDamage, MaxDamage);
         //Tuck away, don't destroy            
         Destroy(gameObject);                           
-    }
+    }*/
 }   

@@ -57,8 +57,8 @@ public class BasicBuild : Build
             var place = (bool)stream.ReceiveNext();
             if (place)
             {                
-                EnableFinalModel();                
-                tag = Global.ENEMY_TAG;
+                EnableFinalModel();
+                TagPrefab(Global.ENEMY_TAG);
                 gameObject.SetActive(true);
                 p_Finished = false;
             }

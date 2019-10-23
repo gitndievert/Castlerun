@@ -128,6 +128,8 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     protected void TagPrefab(string tag)
     {
         transform.tag = tag;
+        if (tag == Global.ENEMY_TAG)
+            gameObject.layer = Global.ENEMY_LAYER;
     }
 
     protected virtual void Start()
@@ -288,8 +290,10 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        object[] instantiationData = info.photonView.InstantiationData;
+        object[] instantiationData = info.photonView.InstantiationData;                
     }
+
+    
 
 
 }

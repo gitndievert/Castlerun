@@ -20,18 +20,17 @@ using UnityEngine;
 
 public class OffenseBuild : Build
 {
-    const float MAXIMUM_BO_POWER = 2000f;
-
     public Transform[] FirePositions;
     [Header("Projectile Used")]
-    public Projectile Projectile;
-    [Header("Projectile Properties")]
-    [Range(0f, MAXIMUM_BO_POWER)]
-    public float FirePower = 300f;
+    public Projectile Projectile;      
+
+    [Header("Attack")]
     public float AttackRadius = 15f;
+    public float AttackDelaySec = 3f;
 
     private BuildArea _buildArea;
-    
+    private float _lastAttacked;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -41,11 +40,11 @@ public class OffenseBuild : Build
             _buildArea = GetComponentInChildren<BuildArea>();
         }
 
+        if (!Global.DeveloperMode)
+            gameObject.SetActive(photonView.IsMine);
+
         if (FirePositions.Length == 0)
-            throw new System.Exception("Offensive Towers Need Spawn Positions for Projectiles");
-
-
-        
+            throw new System.Exception("Offensive Towers Need Spawn Positions for Projectiles");        
     }
 
     protected override void Update()
@@ -54,35 +53,44 @@ public class OffenseBuild : Build
 
         if (isFinished)
         {
-            foreach (var pos in FirePositions)
+
+            if (Time.time > _lastAttacked)
             {
-                if (!Global.DeveloperMode)
+                ResetAttackTimer();
+
+                foreach (var pos in FirePositions)
                 {
-                    var winnerDist = new Dictionary<Player, float>();
-                    foreach (var player in GameManager.PlayersByActor)
+                    var winnerDist = new Dictionary<ISelectable, float>();
+
+                    //need to add in layer masks here
+                    int enemylayer = 1 << Global.ENEMY_LAYER;
+
+                    Collider[] enemycollisions = Physics.OverlapSphere(transform.position, AttackRadius, enemylayer, QueryTriggerInteraction.Ignore);
+
+                    if (enemycollisions.Length > 0)
                     {
-                        //Pool attack targets and distances, pick closest one
-                        int localNum = PhotonNetwork.LocalPlayer.ActorNumber;
-                        if (player.Key == localNum) continue;
-                        Player p = player.Value;
-                        float dist = Vector3.Distance(p.transform.position, pos.position);
-                        if (dist > AttackRadius) continue;
-                        if (!p.IsDead)
+                        foreach (var enemy in enemycollisions)
                         {
-                            winnerDist.Add(p, dist);
+                            Debug.Log($"Oh no an enemy hit {enemy.GetComponent<IBase>().DisplayName}");
+                            float dist = Vector3.Distance(enemy.transform.position, pos.position);
+                            if (dist > AttackRadius) continue;
+                            var player = enemy.GetComponent<ISelectable>();
+                            if (!player.IsDead)
+                            {
+                                winnerDist.Add(player, dist);
+                            }
+                        }
+                        if (winnerDist.Count > 0)
+                        {
+                            //One player is the winner!
+                            ISelectable keyWinner = winnerDist.Min(f => f.Key);
+                            Debug.Log("Tower is shooting at " + keyWinner.DisplayName);
+                            pos.LookAt(keyWinner.GameObject.transform.position);
+                            var project = PhotonNetwork.Instantiate(Projectile.gameObject.name, pos.position, Quaternion.identity);
+                            project.GetComponent<Projectile>().Seek(keyWinner);
+                            //project.GetComponent<Rigidbody>().AddForce(pos.forward * FirePower);
                         }
                     }
-                    //Get lowest value for closet target
-                    if (winnerDist.Count > 0)
-                    {
-                        //One player is the winner!
-                        Player keyWinner = winnerDist.Min(f => f.Key);
-                        Debug.Log("Tower is shooting at " + keyWinner.PlayerName);
-                        pos.LookAt(keyWinner.transform.position);
-                        var project = PhotonNetwork.Instantiate(Projectile.gameObject.name, pos.position, Quaternion.identity);
-                        project.GetComponent<Rigidbody>().AddForce(pos.forward * FirePower);
-                    }
-
                 }
             }
         }
@@ -97,5 +105,42 @@ public class OffenseBuild : Build
         CamShake.Instance.Shake(1f, .5f);
 
         return true;
+    }
+
+    private void ResetAttackTimer()
+    {
+        _lastAttacked = Time.time + AttackDelaySec;
+    }
+
+    public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        base.OnPhotonSerializeView(stream, info);
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data            
+            stream.SendNext(p_ConfirmPlacement);
+            stream.SendNext(p_Finished);
+        }
+        else
+        {
+            // Network player, receive data
+            var confirm = (bool)stream.ReceiveNext();
+            var place = (bool)stream.ReceiveNext();
+
+            if (confirm)
+            {
+                gameObject.SetActive(true);
+                ConfirmPlacement();
+                p_ConfirmPlacement = false;
+            }
+
+            if (place)
+            {
+                if (_buildArea != null) _buildArea.ShowPlane(false);
+                EnableFinalModel();
+                TagPrefab(Global.ENEMY_TAG);
+                p_Finished = false;
+            }
+        }
     }
 }

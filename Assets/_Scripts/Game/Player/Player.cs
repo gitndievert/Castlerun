@@ -57,8 +57,10 @@ public class Player : BasePrefab, IPlayer
 
     public Vector3 RespawnPos { get; set; }
 
-    [Range(1, Global.PLAYER_MAX_SLOTS)]
-    public int PlayerNumber = 1;
+    /// <summary>
+    /// Players PUN Actor Number Assigned in network
+    /// </summary>
+    public int ActorNumber = 0;
 
     public string PlayerName
     {
@@ -84,10 +86,8 @@ public class Player : BasePrefab, IPlayer
     public GameObject GameObject => gameObject;    
     #endregion
 
-    #region Player Components  
-    //Camera Rig    
-    public Inventory Inventory { get; private set; }    
-    public int ActorNumber { get; internal set; }
+    #region Player Components      
+    public Inventory Inventory { get; private set; }        
     public GameObject PlayerWorldItems { get; internal set; }    
     #endregion
 
@@ -142,7 +142,7 @@ public class Player : BasePrefab, IPlayer
         {
             if (photonView != null && !photonView.IsMine)
             {                
-                gameObject.layer = Global.PLAYER_LAYER;
+                gameObject.layer = Global.ENEMY_LAYER;
             }
         }        
 
@@ -584,7 +584,7 @@ public class Player : BasePrefab, IPlayer
             //stream.SendNext("My name is mr fancy pants");         
             stream.SendNext(PlayerName);
             stream.SendNext(_movement.isAttacking);
-            //stream.SendNext(Health);
+            stream.SendNext(ActorNumber);
         }
         else
         {
@@ -602,6 +602,8 @@ public class Player : BasePrefab, IPlayer
             {
                 _movement.AttackPlayer();
             }
+            var actornum = (int)stream.ReceiveNext();
+            ActorNumber = actornum;
             //Health = myhealth;
         }
     }
