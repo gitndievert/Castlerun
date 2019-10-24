@@ -186,7 +186,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         {
             Health -= amount;
             if (HitSounds.Length > 0)
-                SoundManager.PlaySound(HitSounds);
+                SoundManager.PlaySoundOnGameObject(gameObject,HitSounds);
 
             if (!Global.DeveloperMode)
                 photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount);

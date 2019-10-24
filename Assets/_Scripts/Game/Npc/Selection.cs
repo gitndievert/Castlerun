@@ -50,6 +50,11 @@ public class Selection : DSingle<Selection>
     /// </summary>
     public GameObject BattleTargetObj;
 
+    /// <summary>
+    /// UI Indicator that CTRL is down for Attacking and Selecting
+    /// </summary>
+    public GameObject AttackNSelectPanel;
+
     private Vector3 mousePosition1;
     private UIManager _ui;
     
@@ -78,10 +83,10 @@ public class Selection : DSingle<Selection>
     {
         get { return MassSelectionList.Count; }
     }
-    
+        
     protected override void PAwake()
     {
-        
+        AttackNSelectPanel.SetActive(false);
     }
 
     protected override void PDestroy()
@@ -95,11 +100,13 @@ public class Selection : DSingle<Selection>
     }
 
     private void Update()
-    {   
+    {
+        bool ctrlkey = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);        
+
         //Selection mouse events
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
         {
-            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+            if (ctrlkey)
             {
                 IsSelecting = true;
                 mousePosition1 = Input.mousePosition;
@@ -109,7 +116,10 @@ public class Selection : DSingle<Selection>
         }        
         else if(Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) && !Global.MouseLook)
         {
-            RightClickActions();
+            if (ctrlkey)
+            {
+                RightClickActions();
+            }
         }
         else if(Input.GetKeyDown(KeyCode.E) && !Global.MouseLook)
         {
@@ -122,7 +132,9 @@ public class Selection : DSingle<Selection>
         {
             IsSelecting = false;
         }
-        
+
+        AttackNSelectPanel.SetActive(ctrlkey);
+
     }
 
     private void OnGUI()
@@ -204,6 +216,9 @@ public class Selection : DSingle<Selection>
         SecondaryClickActions();
     }
 
+    /// <summary>
+    /// Can only attack or move if holding down CTRL keys
+    /// </summary>
     private void SecondaryClickActions()
     {
         if (Physics.Raycast(SelectionRayHit, out RaycastHit hit))
@@ -229,16 +244,15 @@ public class Selection : DSingle<Selection>
                             {
                                 var enemy = hit.transform.GetComponent<ISelectable>();
                                 UpdateEnemyTarget(enemy);
-                                character.IsAttacking = EnemyTargetSelected == enemy;                                
-                                character.Attack(enemy);                                
+                                character.IsAttacking = EnemyTargetSelected == enemy;
+                                character.Attack(enemy);
                             }
                         }
                     }
                 }
             }
         }
-
-
+        
     }
 
         
@@ -258,6 +272,7 @@ public class Selection : DSingle<Selection>
     public void UpdateMassList(ISelectable selection)
     {        
         MassSelectionList.Add(selection);
+        selection.Highlight(true, 1);
         _ui.MultiTargetBox.UpdateList(MassSelectionList);
 
         //Also update the SingleTarget with First Selection
@@ -359,6 +374,7 @@ public class Selection : DSingle<Selection>
             foreach (var select in MassSelectionList)
             {
                 select.UnSelect();
+                select.Highlight(false);
             }
 
             ClearList();
