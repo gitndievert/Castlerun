@@ -446,18 +446,26 @@ public abstract class Troop : BasePrefab, ISelectable
                 SoundManager.PlaySound(DestroySound);
             if (CanExplode) Explode();
 
-            if (!Global.DeveloperMode)
-            {
-                photonView.RPC("Die", RpcTarget.Others);
-            }
-            else
+            Die();
+
+            /*if (photonView.IsMine || Global.DeveloperMode)
             {
                 Die();
             }
+            else
+            {
+                photonView.RPC("RPC_Die", RpcTarget.Others);
+            }*/
+
         }
     }
 
     [PunRPC]
+    protected override void RPC_Die()
+    {
+        Die();
+    }
+
     public override void Die()
     {        
         anim.Play("Death1");

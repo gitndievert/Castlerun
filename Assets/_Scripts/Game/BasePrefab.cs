@@ -199,7 +199,17 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
             if (DestroySound != null)
                 SoundManager.PlaySound(DestroySound);
             if (CanExplode) Explode();
+
             Die();
+
+            /*if (photonView.IsMine || Global.DeveloperMode)
+            {
+                Die();
+            }
+            else
+            {
+                photonView.RPC("RPC_Die", RpcTarget.Others);
+            }*/
         }
     }
 
@@ -212,6 +222,12 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     {
         IsDead = true;
         Destroy(gameObject, DestroyTimer);
+    }
+
+    [PunRPC]
+    protected virtual void RPC_Die()
+    {
+        Die();
     }
 
     /// <summary>

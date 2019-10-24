@@ -468,6 +468,8 @@ public class Player : BasePrefab, IPlayer
         if (takehit) _movement.Hit();
         PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
         UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);
+        if (Health - amount > 0)
+            photonView.RPC("RPC_Die", RpcTarget.Others);
     }
 
     public override void SetHit(int min, int max)
@@ -507,20 +509,19 @@ public class Player : BasePrefab, IPlayer
         else
         {
             if (DestroySound != null)
-                SoundManager.PlaySound(DestroySound);            
+                SoundManager.PlaySound(DestroySound);
 
-            if (!Global.DeveloperMode)
-            {
-                photonView.RPC("Die", RpcTarget.Others);
-            }
-            else
-            {
-                Die();
-            }
+            Die();                    
         }
     }
 
     [PunRPC]
+    protected override void RPC_Die()
+    {
+        Global.Message("GUESS SOMEONE DIED?",Color.red);
+    }
+
+
     public override void Die()
     {
         StartCoroutine(DeathSequence());
