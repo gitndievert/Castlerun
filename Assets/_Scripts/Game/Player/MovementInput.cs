@@ -100,7 +100,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         /*if (!IsGrounded)
         {
             _anim.SetFloat("Jump", _rb.velocity.y);
-        }*/
+        }
 
         // calculate which leg is behind, so as to leave that leg trailing in the jump animation
         // (This code is reliant on the specific run cycle offset in our animations,
@@ -185,10 +185,10 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
 
     #endregion
 
-    /*public void Jump()
+    public void Jump()
     {
         _anim.Play("Jump");
-    }*/
+    }
 
     public void Dance()
     {

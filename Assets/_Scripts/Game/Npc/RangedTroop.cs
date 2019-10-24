@@ -45,10 +45,7 @@ public abstract class RangedTroop : Troop
         anim.Play("Attack");
         var enemypos = AttackTarget.GameObject.transform.position;
         transform.LookAt(new Vector3(enemypos.x, transform.position.y, enemypos.z));
-
-        //Need to do PUN instance here
-        //USE THE TOWER CODE
-
+                
         if (Global.DeveloperMode) {
             var project = Instantiate(Projectile, SpawnPoint.transform.position, Quaternion.identity);
             project.Seek(AttackTarget);

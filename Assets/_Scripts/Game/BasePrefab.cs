@@ -99,30 +99,15 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
 
         if (GetComponent<Rigidbody>() == null)
             gameObject.AddComponent<Rigidbody>();
-                
-        var renders = gameObject.GetComponentsInChildren<Renderer>();
-        foreach (var render in renders)
-        {
-            var T = render.GetType();
-            if (T != typeof(MeshRenderer) && T != typeof(SkinnedMeshRenderer))
-                continue;
-
-            if (render.gameObject.GetComponent<Outline>() == null)
-            {
-                render.gameObject.AddComponent<Outline>();                                
-            }
-            //Set defaults on outline
-            var outline = render.gameObject.GetComponent<Outline>();
-            outline.enabled = false;
-            Outlines.Add(outline);
-        }
 
         RigidBody = GetComponent<Rigidbody>();
-        Collider = GetComponent<Collider>();
-        
+        Collider = GetComponent<Collider>();        
 
         //Set the GameManager
         GameManager = GameManager.LocalGameManagerInstance;
+
+        //Set the outlines
+        SetOutline();
     }   
 
     protected void TagPrefab(string tag)
@@ -143,6 +128,8 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
                 TagPrefab(Global.ENEMY_TAG);
             }
         }
+
+        Highlight(false);
     }
 
     /// <summary>
@@ -159,6 +146,30 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     protected virtual void RPC_TakeHit(int amount, bool takehit)
     {
         Health -= amount;        
+    }
+
+    protected void SetOutline()
+    {
+        var renders = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (var render in renders)
+        {
+            var T = render.GetType();
+            
+            //Exclusions
+            if (T != typeof(MeshRenderer) && T != typeof(SkinnedMeshRenderer))
+                continue;
+            if (render.transform.tag == Global.BUILDAREA_TAG) continue;
+            if (render.transform.GetComponent<TextMeshPro>() != null) continue;
+
+            if (render.gameObject.GetComponent<Outline>() == null)
+            {
+                render.gameObject.AddComponent<Outline>();
+            }
+            //Set defaults on outline
+            var outline = render.gameObject.GetComponent<Outline>();
+            outline.enabled = false;
+            Outlines.Add(outline);
+        }
     }
 
     //Damage and Death    

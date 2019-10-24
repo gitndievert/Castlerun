@@ -93,7 +93,11 @@ public class Projectile : BasePrefab
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.tag != _target.GameObject.tag) return;
+        if (_target == null)
+            return;
+        else if (col.tag != _target.GameObject.tag)
+            return;
+
         PlayHitSound();
         var target = col.gameObject.GetComponent<BasePrefab>();
         target.SetHit(MinDamage, MaxDamage);

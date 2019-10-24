@@ -37,6 +37,7 @@ public class Player : BasePrefab, IPlayer
     public MeleeWeaponTrail WeaponTrail;
 
     public TextMeshPro FloatingPlayerText;
+    public TextMeshPro FloatingPlayerTitleText;
 
     public bool CompanionOut = false;        
 
@@ -89,6 +90,7 @@ public class Player : BasePrefab, IPlayer
     #region Player Components      
     public Inventory Inventory { get; private set; }        
     public GameObject PlayerWorldItems { get; internal set; }    
+    public string PlayerTitle { get; private set; }
     #endregion
 
     #region Private Members
@@ -101,6 +103,7 @@ public class Player : BasePrefab, IPlayer
     private float _attackDelay = 1f;
     private float _lastAttacked;
     private int _hitCounter = 1;
+    private bool _jumping;
 
 
     private MovementInput _movement;
@@ -176,10 +179,14 @@ public class Player : BasePrefab, IPlayer
 
             BuildManager.Instance.Placements.Player = this;
 
-            if(FloatingPlayerText != null)
-            {
+            if(FloatingPlayerText != null)            
                 FloatingPlayerText.gameObject.SetActive(false);
-            }            
+            
+            if (FloatingPlayerTitleText != null)            
+                FloatingPlayerTitleText.gameObject.SetActive(false);
+
+            if (PlayerText.PlayerTitles.Length > 0)
+                PlayerTitle = PlayerText.PlayerTitles[Random.Range(0, PlayerText.PlayerTitles.Length - 1)];
 
         }
 
@@ -256,6 +263,13 @@ public class Player : BasePrefab, IPlayer
             //Temporary, work out the details for build mappings later
             //Disallow movements if player is DEAD
             MovementInput.Lock = IsDead;
+
+            //Jump
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                _jumping = true;
+                _movement.Jump();                
+            }
 
             /////// BUILD MODE ACTIVATION
             if (Input.GetKeyDown(KeyCode.Q))
@@ -357,7 +371,13 @@ public class Player : BasePrefab, IPlayer
             FloatingPlayerText.rectTransform.LookAt(Camera.main.transform);
             FloatingPlayerText.rectTransform.Rotate(Vector3.up - new Vector3(0, 180, 0));
         }
-
+        //Face player labels toward camera
+        if (FloatingPlayerTitleText != null && FloatingPlayerTitleText.text.Length > 0)
+        {
+            //var camVector = Camera.main.transform.position;
+            FloatingPlayerTitleText.rectTransform.LookAt(Camera.main.transform);
+            FloatingPlayerTitleText.rectTransform.Rotate(Vector3.up - new Vector3(0, 180, 0));
+        }
 
     }
       
@@ -585,6 +605,8 @@ public class Player : BasePrefab, IPlayer
             stream.SendNext(PlayerName);
             stream.SendNext(_movement.isAttacking);
             stream.SendNext(ActorNumber);
+            //stream.SendNext(_jumping);            
+            stream.SendNext(PlayerTitle);
         }
         else
         {
@@ -604,7 +626,16 @@ public class Player : BasePrefab, IPlayer
             }
             var actornum = (int)stream.ReceiveNext();
             ActorNumber = actornum;
-            //Health = myhealth;
+           
+           /* var jumping = (bool)stream.ReceiveNext();
+            if(_jumping)
+            {
+                _movement.Jump();
+                _jumping = false;
+            }*/
+            var title = (string)stream.ReceiveNext();
+            FloatingPlayerTitleText.text = $"<{title}>";
+            PlayerTitle = title;
         }
     }
 

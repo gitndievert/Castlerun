@@ -103,8 +103,7 @@ public abstract class Troop : BasePrefab, ISelectable
 
         //We don't want people exploding lol
         CanExplode = false;        
-        DestroyTimer = TROOP_DESTROY_TIMER;
-        gameObject.layer = GetTag == Global.ARMY_TAG ? Global.ARMY_LAYER : Global.DEFAULT_LAYER;        
+        DestroyTimer = TROOP_DESTROY_TIMER;        
 
         if (Costs.CostFactors.Length == 0)
             throw new System.Exception("Please add a cost");

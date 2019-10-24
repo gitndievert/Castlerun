@@ -83,7 +83,7 @@ public class OffenseBuild : Build
                         if (winnerDist.Count > 0)
                         {
                             //One player is the winner!
-                            ISelectable keyWinner = winnerDist.Min(f => f.Key);
+                            ISelectable keyWinner = winnerDist.OrderBy(k => k.Value).FirstOrDefault().Key;
                             Debug.Log("Tower is shooting at " + keyWinner.DisplayName);
                             pos.LookAt(keyWinner.GameObject.transform.position);
                             var project = PhotonNetwork.Instantiate(Projectile.gameObject.name, pos.position, Quaternion.identity);
