@@ -158,8 +158,12 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
             //Exclusions
             if (T != typeof(MeshRenderer) && T != typeof(SkinnedMeshRenderer))
                 continue;
-            if (render.transform.tag == Global.BUILDAREA_TAG) continue;
-            if (render.transform.GetComponent<TextMeshPro>() != null) continue;
+            if (render.transform.tag == Global.BUILDAREA_TAG)
+                continue;
+            if (render.gameObject.layer == Global.MINIMAP_ICON_LAYER)
+                continue;
+            if (render.transform.GetComponent<TextMeshPro>() != null)
+                continue;
 
             if (render.gameObject.GetComponent<Outline>() == null)
             {

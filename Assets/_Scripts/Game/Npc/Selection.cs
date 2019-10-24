@@ -95,15 +95,7 @@ public class Selection : DSingle<Selection>
     }
 
     private void Update()
-    {
-        //Escape out selections
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            ClearAll();
-            if(SingleTargetSelected != null)
-                ClearSingleTarget();
-        }        
-        
+    {   
         //Selection mouse events
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
         {
@@ -312,6 +304,13 @@ public class Selection : DSingle<Selection>
         SelectionCursorOn();
 
         EnemyTargetSelected.Highlight(true, 0);
+    }
+
+    public void PreMenuClear()
+    {
+        ClearAll();
+        if (SingleTargetSelected != null)
+            ClearSingleTarget();
     }
         
     public void ClearSingleTarget()

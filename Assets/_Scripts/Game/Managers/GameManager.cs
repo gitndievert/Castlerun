@@ -142,17 +142,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
         UpdatePlayersList();
     }
-
-    private void Update()
-    {        
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            OnClick_Quit();
-        }
-
-
-    }
-
+    
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();

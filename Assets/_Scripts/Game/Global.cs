@@ -16,7 +16,7 @@ using UnityEngine;
 
 public static class Global
 {
-    public static bool DeveloperMode = false;
+    public static bool DeveloperMode = true;
 
     #region Game Objects
     /// <summary>
@@ -74,6 +74,7 @@ public static class Global
     public const int UI_LAYER = 5;    
     public const int BUILD_GRID_LAYER = 9;
     public const int ENEMY_LAYER = 15;
+    public const int MINIMAP_ICON_LAYER = 10;
 
     /// <summary>
     /// Max Number of Player Slots per game
