@@ -192,9 +192,8 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
 
             if (!Global.DeveloperMode)
                 photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount);
-
-            if (photonView.IsMine || Global.DeveloperMode)
-                UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+            
+            UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
         }
         else
         {            
@@ -243,11 +242,13 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         
     protected int CalcDamage(int min, int max, out bool crit)
     {
+        //20, 45
+        //32
         var dmg = Random.Range(min, max);
         crit = false;
         if (Random.Range(0, 20) > 17)
         {
-            dmg *= 2;
+            dmg = (dmg + (dmg - min)) * 2;
             crit = true;
         }
         return dmg;

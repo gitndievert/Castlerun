@@ -387,6 +387,10 @@ public abstract class Troop : BasePrefab, ISelectable
     {
         Health -= amount;
         if(takehit) anim.Play("Hit");
+
+        //Maybe show damage text across network??
+        //UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+
         if (Health - amount <= 0)
             Die();
     }
@@ -414,9 +418,8 @@ public abstract class Troop : BasePrefab, ISelectable
 
             if (!Global.DeveloperMode)            
                 photonView.RPC("RPC_TakeHit",RpcTarget.Others, amount, takehit);
-
-            if ((photonView != null && photonView.IsMine) || Global.DeveloperMode)
-                UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+            
+            UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
 
             _hitCounter++;
         }
