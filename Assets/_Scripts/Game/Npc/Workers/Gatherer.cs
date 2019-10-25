@@ -48,8 +48,7 @@ public class Gatherer : Troop
     // Start is called before the first frame update
     protected override void Start()
     {
-        base.Start();
-        SelectionTargetStatus(true);        
+        base.Start();        
         anim.Play("Walk");
         if (points.Count == 0) return;
         nav.SetDestination(RandomNavPoint());

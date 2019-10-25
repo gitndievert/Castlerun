@@ -45,7 +45,7 @@ public class SingleTargetBox : MonoBehaviour
 
     private void Update()
     {
-        if (HasSelection && HealthBar.isActiveAndEnabled)
+        if (HasSelection && HealthBar.isActiveAndEnabled && _target != null)
         {
             int health = _target.GetCurrentHealth();
             if (health <= 0 || _target.IsDead)
@@ -62,11 +62,13 @@ public class SingleTargetBox : MonoBehaviour
     public void SetTarget(ISelectable target)
     {        
         _target = target;
-        _targetObj = target.GameObject;
-        if (_targetObj && !target.IsDead)
+        if (target.IsDead)
         {
-            Process();
-        }        
+            _targetObj = null;
+            return;
+        }
+        _targetObj = target.GameObject;
+        Process();                
     }
 
     public void SetTarget(GameObject target)

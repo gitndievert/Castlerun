@@ -80,9 +80,7 @@ public class Player : BasePrefab, IPlayer
         get { return UIManager.Instance.SelectableComponent.EnemyTargetSelected; }
     }
 
-    #region ISelectables
-    [Space(15)]
-    public Light SelectionTarget;
+    #region ISelectables    
     public bool IsSelected { get; set; }
     public GameObject GameObject => gameObject;    
     #endregion
@@ -152,8 +150,6 @@ public class Player : BasePrefab, IPlayer
         //Set Cameras
         if (photonView.IsMine || Global.DeveloperMode)
         {
-            SelectionTarget.gameObject.SetActive(false);
-
             Inventory = GetComponent<Inventory>();            
             _battleCursor = GetComponent<BattleCursor>();
             
@@ -425,7 +421,7 @@ public class Player : BasePrefab, IPlayer
         if (MyTarget != null)
         {            
             _movement.AttackPlayer();
-            if (photonView.IsMine)
+            if (photonView.IsMine || Global.DeveloperMode)
             {
                 if (MyTarget.IsDead) return;                
                 if (!Extensions.DistanceLess(transform, MyTarget.GameObject.transform, AttackDistance)) return;
@@ -468,8 +464,8 @@ public class Player : BasePrefab, IPlayer
         if (takehit) _movement.Hit();
         PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
         UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);
-        if (Health - amount > 0)
-            photonView.RPC("RPC_Die", RpcTarget.Others);
+        if (Health - amount <= 0)
+            Die();
     }
 
     public override void SetHit(int min, int max)
@@ -514,14 +510,7 @@ public class Player : BasePrefab, IPlayer
             Die();                    
         }
     }
-
-    [PunRPC]
-    protected override void RPC_Die()
-    {
-        Global.Message("GUESS SOMEONE DIED?",Color.red);
-    }
-
-
+    
     public override void Die()
     {
         StartCoroutine(DeathSequence());
@@ -534,9 +523,12 @@ public class Player : BasePrefab, IPlayer
         PlayerUI.HealthText.text = $"0/100";
         UIManager.Instance.HealthBar.BarValue = 0;        
         _movement.Die();
-        Global.Message("YOU DIED, Respawn in 5 seconds...");
+        if (photonView.IsMine)
+        {
+            Global.Message("YOU DIED, Respawn in 5 seconds...");
+        }
         //Broadcast($"{PlayerName} has DIED!");
-        yield return new WaitForSeconds(5f);        
+        yield return new WaitForSeconds(5f);                
         SetBasicPlayerStats();
         _movement.RestartAnimator();        
         IsDead = false;        
@@ -547,8 +539,7 @@ public class Player : BasePrefab, IPlayer
     {
         if (IsSelected)
         {
-            IsSelected = false;
-            SelectionTargetStatus(false);                        
+            IsSelected = false;                              
         }
     }
 
@@ -560,8 +551,7 @@ public class Player : BasePrefab, IPlayer
             IsSelected = true;
             Selection selection = UIManager.Instance.SelectableComponent;
             //Single Target Selection Panel
-            SelectionUI.UpdateEnemyTarget(this);
-            SelectionTargetStatus(true, DamageColor);
+            SelectionUI.UpdateEnemyTarget(this);            
         }
     }
 
@@ -570,8 +560,7 @@ public class Player : BasePrefab, IPlayer
         if (EventSystem.current.IsPointerOverGameObject()) return;
         //if(Selection.Instance.SingleTargetSelected != null)
         //    Selection.Instance.BattleCursorOff();
-        SelectionUI.ClearEnemyTarget();
-        SelectionTargetStatus(false);
+        SelectionUI.ClearEnemyTarget();        
         Select();
     }
 
@@ -579,20 +568,7 @@ public class Player : BasePrefab, IPlayer
     {
         if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON))
             OnMouseDown();
-    }
-
-    private void SelectionTargetStatus(bool status)
-    {
-        if (SelectionTarget == null) return;
-        SelectionTarget.gameObject.SetActive(status);
-    }
-
-    private void SelectionTargetStatus(bool status, Color color)
-    {
-        if (SelectionTarget == null) return;
-        SelectionTargetStatus(status);
-        SelectionTarget.color = color;
-    }
+    }   
 
     //Main method for serialization on Player actions
     public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -608,6 +584,7 @@ public class Player : BasePrefab, IPlayer
             stream.SendNext(ActorNumber);
             //stream.SendNext(_jumping);            
             stream.SendNext(PlayerTitle);
+            stream.SendNext(IsDead);
         }
         else
         {
@@ -637,6 +614,8 @@ public class Player : BasePrefab, IPlayer
             var title = (string)stream.ReceiveNext();
             FloatingPlayerTitleText.text = $"<{title}>";
             PlayerTitle = title;
+
+            IsDead = (bool)stream.ReceiveNext();
         }
     }
 

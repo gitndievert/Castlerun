@@ -30,8 +30,7 @@ public abstract class Troop : BasePrefab, ISelectable
 
     public TroopFactory AssociatedFactory { get; private set; }
 
-    #region Selection Properties
-    public Light SelectionTarget;
+    #region Selection Properties    
     public bool IsSelected { get; set; }    
     public GameObject GameObject => gameObject;
     #endregion    
@@ -98,8 +97,7 @@ public abstract class Troop : BasePrefab, ISelectable
             nav.Warp(hit.point);
         }        
 
-        base.Start();
-        SelectionTargetStatus(false);
+        base.Start();        
 
         //We don't want people exploding lol
         CanExplode = false;        
@@ -233,8 +231,7 @@ public abstract class Troop : BasePrefab, ISelectable
         if (EventSystem.current.IsPointerOverGameObject()) return;
         //if(Selection.Instance.SingleTargetSelected != null)
         //    Selection.Instance.BattleCursorOff();
-        SelectionUI.ClearEnemyTarget();
-        SelectionTargetStatus(false);
+        SelectionUI.ClearEnemyTarget();        
         Select();
     }
 
@@ -273,8 +270,7 @@ public abstract class Troop : BasePrefab, ISelectable
         {
             IsSelected = true;
             if (GetTag == Global.ARMY_TAG)
-            {
-                SelectionTargetStatus(true, SelectedColor);
+            {                
                 UIManager.Instance.SelectableComponent.UpdateMassList(this);                
             }
         }
@@ -300,16 +296,12 @@ public abstract class Troop : BasePrefab, ISelectable
                 //Single Target Selection Panel
                 if(SelectionCall.Length > 0)
                     SoundManager.PlaySound(SelectionCall);
-                SelectionUI.UpdateSingleTarget(this);
-                SelectionTargetStatus(true, SelectedColor);                
-                //glow green
+                SelectionUI.UpdateSingleTarget(this);                                            
             }
             else if(GetTag == Global.ENEMY_TAG)
             {
                 //Single Target Selection Panel
-                SelectionUI.UpdateEnemyTarget(this);
-                SelectionTargetStatus(true, DamageColor);
-                //glow red
+                SelectionUI.UpdateEnemyTarget(this);                
             }
         }
     }
@@ -321,23 +313,9 @@ public abstract class Troop : BasePrefab, ISelectable
     {
         if (IsSelected)
         {
-            IsSelected = false;
-            SelectionTargetStatus(false);
+            IsSelected = false;            
             points.Clear();            
         }
-    }
-
-    protected void SelectionTargetStatus(bool status)
-    {
-        if (SelectionTarget == null) return;
-        SelectionTarget.gameObject.SetActive(status);
-    }
-
-    protected void SelectionTargetStatus(bool status, Color color)
-    {
-        if (SelectionTarget == null) return;
-        SelectionTargetStatus(status);
-        SelectionTarget.color = color;
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -409,6 +387,8 @@ public abstract class Troop : BasePrefab, ISelectable
     {
         Health -= amount;
         if(takehit) anim.Play("Hit");
+        if (Health - amount <= 0)
+            Die();
     }
     
     public override void SetHit(int min, int max)
@@ -447,25 +427,9 @@ public abstract class Troop : BasePrefab, ISelectable
             if (CanExplode) Explode();
 
             Die();
-
-            /*if (photonView.IsMine || Global.DeveloperMode)
-            {
-                Die();
-            }
-            else
-            {
-                photonView.RPC("RPC_Die", RpcTarget.Others);
-            }*/
-
         }
     }
-
-    [PunRPC]
-    protected override void RPC_Die()
-    {
-        Die();
-    }
-
+    
     public override void Die()
     {        
         anim.Play("Death1");

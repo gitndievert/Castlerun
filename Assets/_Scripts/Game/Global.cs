@@ -16,7 +16,11 @@ using UnityEngine;
 
 public static class Global
 {
-    public static bool DeveloperMode = false;
+
+    /// <summary>
+    /// This sets developer mode. NETWORK RELEASE IS FALSE ALWAYS
+    /// </summary>
+    public static bool DeveloperMode = true;
 
     #region Game Objects
     /// <summary>

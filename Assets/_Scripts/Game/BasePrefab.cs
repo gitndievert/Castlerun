@@ -145,7 +145,9 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     [PunRPC]
     protected virtual void RPC_TakeHit(int amount, bool takehit)
     {
-        Health -= amount;        
+        Health -= amount;
+        if (Health - amount <= 0)
+            Die();
     }
 
     protected void SetOutline()
@@ -200,16 +202,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
                 SoundManager.PlaySound(DestroySound);
             if (CanExplode) Explode();
 
-            Die();
-
-            /*if (photonView.IsMine || Global.DeveloperMode)
-            {
-                Die();
-            }
-            else
-            {
-                photonView.RPC("RPC_Die", RpcTarget.Others);
-            }*/
+            Die();           
         }
     }
 
@@ -223,13 +216,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         IsDead = true;
         Destroy(gameObject, DestroyTimer);
     }
-
-    [PunRPC]
-    protected virtual void RPC_Die()
-    {
-        Die();
-    }
-
+    
     /// <summary>
     /// Enable or disable outline around the gameobject
     /// </summary>
@@ -309,14 +296,14 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     /// <param name="info"></param>
     public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        /*if(stream.IsWriting)
+        if(stream.IsWriting)
         {            
-            stream.SendNext(Health);
+            stream.SendNext(IsDead);
         }
         else
         {
-            Health = (int)stream.ReceiveNext();
-        }*/
+            IsDead = (bool)stream.ReceiveNext();
+        }
     }
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)
