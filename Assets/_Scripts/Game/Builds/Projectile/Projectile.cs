@@ -16,11 +16,7 @@ using Photon.Pun;
 using UnityEngine;
 
 public class Projectile : BasePrefab
-{
-    public AudioClip[] FireSounds;
-    public AudioClip TravelSound;
-    public AudioClip ImpactSound;
-    
+{    
     #region Damage Settings
     /// <summary>
     /// Minimum Damage Delt
@@ -48,8 +44,7 @@ public class Projectile : BasePrefab
         Collider.isTrigger = true;
 
         TagPrefab(Global.PROJECTILE_TAG);
-        gameObject.layer = Global.PROJECTILE_LAYER;
-        SoundManager.PlaySound(FireSounds);
+        gameObject.layer = Global.PROJECTILE_LAYER;        
         Physics.IgnoreLayerCollision(Global.PROJECTILE_LAYER, Global.ARMY_LAYER, true);
         //Default destruction timer
         //Projectiles should not take longer than 10 seconds to hit a target
@@ -74,45 +69,24 @@ public class Projectile : BasePrefab
     {
         _target = target;
     }
-    
-    private void PlayTravelSound()
-    {
-        //NEED TO COME BACK
-
-        if (TravelSound == null) return;
-        //audioSource.loop = true;
-        //audioSource.clip = TravelSound;
-        //audioSource.Play();
-    }
-
-    private void PlayHitSound()
-    {
-        if (ImpactSound == null) return;
-        SoundManager.PlaySoundOnGameObject(gameObject, ImpactSound);
-    }
-
+        
     private void OnTriggerEnter(Collider col)
     {
         if (_target == null)
             return;
         else if (col.tag != _target.GameObject.tag)
             return;
-
-        PlayHitSound();
+                
         var target = col.gameObject.GetComponent<BasePrefab>();
         target.SetHit(MinDamage, MaxDamage);
-        //Tuck away, don't destroy                    
-        PhotonNetwork.Destroy(gameObject);
-    }
-
-    /*private void OnCollisionEnter(Collision col)
-    {
-        //Only hit the target enemy        
-        if (col.transform.tag != TargetTag) return;        
-        PlayHitSound();
-        var target = col.gameObject.GetComponent<BasePrefab>();
-        target.SetHit(MinDamage, MaxDamage);
-        //Tuck away, don't destroy            
-        Destroy(gameObject);                           
-    }*/
+        //Tuck away, don't destroy    
+        if (Global.DeveloperMode)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
+    }    
 }   

@@ -49,8 +49,7 @@ public class TroopFactory : Build
 
     [Header("Spawn and Waypoint Positions")]
     public Transform SpawnPointPosition;
-    public Transform WayPointPosition;  
-
+    public Transform WayPointPosition;
 
     // Start is called before the first frame update
     protected override void Start()

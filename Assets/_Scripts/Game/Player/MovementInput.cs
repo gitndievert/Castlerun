@@ -32,6 +32,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
 
     [Header("Sounds")]
     public AudioClip[] AttackSounds;
+    public AudioClip[] HitSounds;
 
     private float _verticalVelocity;
     private bool _isJumping;

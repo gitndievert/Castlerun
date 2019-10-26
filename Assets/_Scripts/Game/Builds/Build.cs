@@ -46,6 +46,13 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     /// </summary>
     public float ConstructionTime = 0f;
 
+    #region AudioClips For Troops
+    [Space(5)]
+    [Header("Audio Clips for Buildings")]
+    public AudioClip Construction;
+    public AudioClip ConstructionComplete;    
+    #endregion;
+
     protected bool isPlaced = false;    
     protected bool isFinished = false;
     protected bool p_Finished = false;

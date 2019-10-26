@@ -51,7 +51,10 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     {
         get { return tag; }
     }
-        
+
+    [Space(5)]
+    public GameObject FloatingSelectable;
+
     public abstract string DisplayName { get; }
 
     protected int MaxHealth;
@@ -241,9 +244,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     }
         
     protected int CalcDamage(int min, int max, out bool crit)
-    {
-        //20, 45
-        //32
+    {        
         var dmg = Random.Range(min, max);
         crit = false;
         if (Random.Range(0, 20) > 17)

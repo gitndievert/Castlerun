@@ -1743,20 +1743,21 @@ MonoBehaviour:
     CostFactors:
     - Resource: 0
       Amount: 150
-  SelectionTarget: {fileID: 0}
+  FloatingSelectable: {fileID: 0}
   FreshTroop: {fileID: 0}
   SelectionCall: []
   Acknowledgement: []
   AttackBattleCryClips:
   - {fileID: 8300000, guid: 5d8fb95aebcc243d994b966d672b3bc7, type: 3}
   - {fileID: 8300000, guid: 37e66fbc473444ab4bcc4a45d358561c, type: 3}
+  Death: {fileID: 0}
   AttackDelaySec: 4
   IsAttacking: 0
-  AttackDistance: 10
+  AttackDistance: 20
   AgroDistance: 10
-  Projectile: {fileID: 8249761120486556781, guid: b4ed4c5946ad9214091018674f2f648c,
+  Projectile: {fileID: 7125836004315368967, guid: b37fe4b7683e71c48ba4f794ed4fed59,
     type: 3}
-  FirePower: 200
+  FirePower: 100
   SpawnPoint: {fileID: 3925532070741439731}
 --- !u!1 &7216388742020999267
 GameObject:

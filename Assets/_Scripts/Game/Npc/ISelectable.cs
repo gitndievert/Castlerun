@@ -26,5 +26,5 @@ public interface ISelectable : IBase
     void OnMouseDown();        
     int GetCurrentHealth();
     int GetMaxHealth();    
-    bool IsDead { get; set; }
+    bool IsDead { get; set; }    
 }

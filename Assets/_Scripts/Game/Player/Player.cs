@@ -538,7 +538,9 @@ public class Player : BasePrefab, IPlayer
     {
         if (IsSelected)
         {
-            IsSelected = false;                              
+            IsSelected = false;
+            if (FloatingSelectable != null)
+                FloatingSelectable.SetActive(false);
         }
     }
 
@@ -550,7 +552,9 @@ public class Player : BasePrefab, IPlayer
             IsSelected = true;
             Selection selection = UIManager.Instance.SelectableComponent;
             //Single Target Selection Panel
-            SelectionUI.UpdateEnemyTarget(this);            
+            SelectionUI.UpdateEnemyTarget(this);
+            if (FloatingSelectable != null)
+                FloatingSelectable.SetActive(true);
         }
     }
 

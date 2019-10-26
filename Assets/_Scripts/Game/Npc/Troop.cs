@@ -57,6 +57,7 @@ public abstract class Troop : BasePrefab, ISelectable
     public AudioClip[] SelectionCall;
     public AudioClip[] Acknowledgement;
     public AudioClip[] AttackBattleCryClips;
+    public AudioClip Death;
     #endregion
 
     #region Combat Systems

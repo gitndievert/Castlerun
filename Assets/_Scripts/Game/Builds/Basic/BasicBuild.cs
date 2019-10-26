@@ -19,9 +19,7 @@ using Photon.Pun;
 
 public class BasicBuild : Build
 {
-    //public List<SnapPoints> SnapPoints = new List<SnapPoints>();
-
-    private ResourceType _pickType;    
+    //public List<SnapPoints> SnapPoints = new List<SnapPoints>();    
 
     protected override void Awake()
     {
