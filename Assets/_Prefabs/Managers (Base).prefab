@@ -43,8 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 660b3e553390d6948883fb9edc3b2695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackPanel: {fileID: 0}
   UIPanels:
-  - {fileID: 8015912539202854811, guid: 0802afc43f3cb454fa767b6aa6dc57b0, type: 3}
+  - {fileID: 0}
 --- !u!1 &7960657142978295689
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,7 +79,7 @@ Transform:
   - {fileID: 7960657144520267917}
   - {fileID: 7960657145047257161}
   - {fileID: 2422248770906368006}
-  - {fileID: 7960657144918440668}
+  - {fileID: 4514552155749915494}
   - {fileID: 5510258574034607244}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -162,8 +163,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectionBoxColor: {r: 0.9500148, g: 1, b: 0.9481132, a: 0.11764706}
   BorderColor: {r: 0.14814818, g: 1, b: 0, a: 1}
-  SelectionTargetObj: {fileID: 7960657144918438216}
+  SelectionTargetObj: {fileID: 4516256293688089342}
   BattleTargetObj: {fileID: 5510258574034606679}
+  AttackNSelectPanel: {fileID: 0}
 --- !u!1 &7960657143678701291
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,13 +766,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0f775a931d80a446af1747fa00188a5, type: 3}
---- !u!1 &7960657144918438216 stripped
+--- !u!1 &4516256293688089342 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5824588447338163656, guid: f0f775a931d80a446af1747fa00188a5,
     type: 3}
   m_PrefabInstance: {fileID: 7960657144918439734}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &7960657144918440668 stripped
+--- !u!4 &4514552155749915494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5827383292491164752, guid: f0f775a931d80a446af1747fa00188a5,
     type: 3}

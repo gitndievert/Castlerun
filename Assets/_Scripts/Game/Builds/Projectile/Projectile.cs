@@ -15,6 +15,7 @@
 using Photon.Pun;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Projectile : BasePrefab
 {    
     #region Damage Settings
@@ -32,16 +33,22 @@ public class Projectile : BasePrefab
     public float Speed = 50f;
     #endregion
        
-
-    public override string DisplayName => "Projectile";
+    public override string DisplayName => "Projectile";        
 
     private ISelectable _target = null;
+    private AudioSource _projSound;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _projSound = GetComponent<AudioSource>();
+    }
 
     protected override void Start()
     {
         //Make Projectiles rigid and trigger
         RigidBody.isKinematic = true;
-        Collider.isTrigger = true;
+        Collider.isTrigger = true;        
 
         TagPrefab(Global.PROJECTILE_TAG);
         gameObject.layer = Global.PROJECTILE_LAYER;        
@@ -79,6 +86,7 @@ public class Projectile : BasePrefab
                 
         var target = col.gameObject.GetComponent<BasePrefab>();
         target.SetHit(MinDamage, MaxDamage);
+        _projSound.PlayOneShot(HitSounds[Random.Range(0,HitSounds.Length - 1)]);
         //Tuck away, don't destroy    
         if (Global.DeveloperMode)
         {
