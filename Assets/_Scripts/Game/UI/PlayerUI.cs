@@ -21,8 +21,7 @@ public class PlayerUI
 {
     #region Main Player Stats
     public TextMeshProUGUI PlayerName;
-    public TextMeshProUGUI HealthText;
-    public TextMeshProUGUI CastleLevel;
+    public TextMeshProUGUI HealthText;    
     #endregion
 
 }

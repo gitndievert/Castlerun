@@ -234,9 +234,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         var player = character.GetComponent<Player>();
         player.PlayerName = "Krunchy";        
 
-        var castle = GameObject.Find("Classic Castle 3").GetComponent<Castle>();
+        /*var castle = GameObject.Find("Classic Castle 3").GetComponent<Castle>();
         player.PlayerCastle = castle;
-        player.PlayerCastle.CaptureFlag.AttachedPlayer = player;
+        player.PlayerCastle.CaptureFlag.AttachedPlayer = player;*/
 
         /*for (int i = 1; i < _numOfPlayer; i++)
         {
