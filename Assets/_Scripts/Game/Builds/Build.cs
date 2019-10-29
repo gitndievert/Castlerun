@@ -14,11 +14,9 @@
 
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(BoxCollider))]
 public abstract class Build : BasePrefab, IBuild, ISelectable
 {
     public BuildingLabelTypes BuildingLabelType = BuildingLabelTypes.None;
@@ -41,12 +39,19 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
 
     public bool IsSelected { get; set; }
     public GameObject GameObject => gameObject;
-    public override string DisplayName => BuildingLabelType.ToString();
+    public override string DisplayName => BuildingLabelType.TypeToString();
 
     /// <summary>
     /// Time it takes to build this building
     /// </summary>
     public float ConstructionTime = 0f;
+
+    #region AudioClips For Troops
+    [Space(5)]
+    [Header("Audio Clips for Buildings")]
+    public AudioClip Construction;
+    public AudioClip ConstructionComplete;    
+    #endregion;
 
     protected bool isPlaced = false;    
     protected bool isFinished = false;
@@ -105,7 +110,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     {
         isPlaced = true;
         p_ConfirmPlacement = true;
-        TagPrefab("Build");
+        TagPrefab(Global.BUILD_TAG);
         EnableConstructionZone();
         return isPlaced;
     } 

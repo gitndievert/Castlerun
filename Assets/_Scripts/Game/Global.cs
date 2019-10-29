@@ -16,7 +16,11 @@ using UnityEngine;
 
 public static class Global
 {
-    public const bool DEVELOPER_MODE = false;
+
+    /// <summary>
+    /// This sets developer mode. NETWORK RELEASE IS FALSE ALWAYS
+    /// </summary>
+    public static bool DeveloperMode = true;
 
     #region Game Objects
     /// <summary>
@@ -57,15 +61,15 @@ public static class Global
     /// Tag for generic selectable troops that are NPC's (NON COMBAT)
     /// </summary>
     public const string NPC_TAG = "Npc";
+
+    /// <summary>
+    /// Tag for all Projectiles flying around the map
+    /// </summary>
+    public const string PROJECTILE_TAG = "Projectile";
     #endregion
 
     #region Game Constants
-
-    /// <summary>
-    /// Default layer for all players
-    /// </summary>
-    public const int PLAYER_LAYER = 14;
-
+        
     public const int DEFAULT_LAYER = 0;
     public const int IGNORE_LAYER = 2;
     public const int GROUND_LAYER = 8;
@@ -73,6 +77,8 @@ public static class Global
     public const int PROJECTILE_LAYER = 12;
     public const int UI_LAYER = 5;    
     public const int BUILD_GRID_LAYER = 9;
+    public const int ENEMY_LAYER = 15;
+    public const int MINIMAP_ICON_LAYER = 10;
 
     /// <summary>
     /// Max Number of Player Slots per game

@@ -167,7 +167,7 @@ public class PlacementController : MonoBehaviourPun
         if (_triggerBuild)
         {
             if (_currObj != null) KillBuild();
-            if (Global.DEVELOPER_MODE)
+            if (Global.DeveloperMode)
             {
                 _currObj = Instantiate(PlaceableObjectPrefab, Player.transform.position * 2, Quaternion.identity);
             }

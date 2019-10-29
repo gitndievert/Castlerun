@@ -50,6 +50,11 @@ public class Selection : DSingle<Selection>
     /// </summary>
     public GameObject BattleTargetObj;
 
+    /// <summary>
+    /// UI Indicator that CTRL is down for Attacking and Selecting
+    /// </summary>
+    public GameObject AttackNSelectPanel;
+
     private Vector3 mousePosition1;
     private UIManager _ui;
     
@@ -78,10 +83,10 @@ public class Selection : DSingle<Selection>
     {
         get { return MassSelectionList.Count; }
     }
-    
+        
     protected override void PAwake()
     {
-        
+        AttackNSelectPanel.SetActive(false);
     }
 
     protected override void PDestroy()
@@ -96,10 +101,12 @@ public class Selection : DSingle<Selection>
 
     private void Update()
     {
+        bool ctrlkey = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);        
+
         //Selection mouse events
         if (Input.GetMouseButtonDown(KeyBindings.LEFT_MOUSE_BUTTON))
         {
-            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+            if (ctrlkey)
             {
                 IsSelecting = true;
                 mousePosition1 = Input.mousePosition;
@@ -109,7 +116,10 @@ public class Selection : DSingle<Selection>
         }        
         else if(Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON) && !Global.MouseLook)
         {
-            RightClickActions();
+            if (ctrlkey)
+            {
+                RightClickActions();
+            }
         }
         else if(Input.GetKeyDown(KeyCode.E) && !Global.MouseLook)
         {
@@ -122,7 +132,9 @@ public class Selection : DSingle<Selection>
         {
             IsSelecting = false;
         }
-        
+
+        AttackNSelectPanel.SetActive(ctrlkey);
+
     }
 
     private void OnGUI()
@@ -142,6 +154,16 @@ public class Selection : DSingle<Selection>
             //Deselect on ground on building selection
             if (hit.point != null)
             {
+                if (hit.GetLayer() == Global.GROUND_LAYER)
+                {
+                    if (SingleTargetSelected != null && SingleTargetSelected.GameObject.tag == Global.BUILD_TAG)
+                    {
+                        SingleTargetSelected.UnSelect();
+                        ClearSingleTarget();
+                        return;
+                    }                    
+                }
+
                 //Check for death
                 var selectable = hit.transform.GetComponent<ISelectable>();
                 if (selectable != null)
@@ -163,10 +185,9 @@ public class Selection : DSingle<Selection>
                         else if (hit.transform.tag == Global.ENEMY_TAG)
                         {
                             UpdateEnemyTarget(selectable);
-                        }
+                        }                        
                         //Dont clear on ground layers
-                        else if (/*hit.GetLayer() == Global.GROUND_LAYER
-                        || */((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1))
+                        else if ((hit.transform.tag == Global.ARMY_TAG) && SelectionListCount < 1)
                         {
                             ClearAll();
 
@@ -195,6 +216,9 @@ public class Selection : DSingle<Selection>
         SecondaryClickActions();
     }
 
+    /// <summary>
+    /// Can only attack or move if holding down CTRL keys
+    /// </summary>
     private void SecondaryClickActions()
     {
         if (Physics.Raycast(SelectionRayHit, out RaycastHit hit))
@@ -220,16 +244,15 @@ public class Selection : DSingle<Selection>
                             {
                                 var enemy = hit.transform.GetComponent<ISelectable>();
                                 UpdateEnemyTarget(enemy);
-                                character.IsAttacking = EnemyTargetSelected == enemy;                                
-                                character.Attack(enemy);                                
+                                character.IsAttacking = EnemyTargetSelected == enemy;
+                                character.Attack(enemy);
                             }
                         }
                     }
                 }
             }
         }
-
-
+        
     }
 
         
@@ -249,6 +272,7 @@ public class Selection : DSingle<Selection>
     public void UpdateMassList(ISelectable selection)
     {        
         MassSelectionList.Add(selection);
+        selection.Highlight(true, 1);
         _ui.MultiTargetBox.UpdateList(MassSelectionList);
 
         //Also update the SingleTarget with First Selection
@@ -267,7 +291,9 @@ public class Selection : DSingle<Selection>
         ClearAll();
 
         if(selection.GameObject.tag == Global.ARMY_TAG)
-            UpdateMassList(SingleTargetSelected);       
+            UpdateMassList(SingleTargetSelected);
+
+        SingleTargetSelected.Highlight(true, 1);
     }
 
     public void SelectSingleTarget(ISelectable selection)
@@ -291,6 +317,15 @@ public class Selection : DSingle<Selection>
         EnemyTargetSelected = selection;
         _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);
         SelectionCursorOn();
+
+        EnemyTargetSelected.Highlight(true, 0);
+    }
+
+    public void PreMenuClear()
+    {
+        ClearAll();
+        if (SingleTargetSelected != null)
+            ClearSingleTarget();
     }
         
     public void ClearSingleTarget()
@@ -298,9 +333,10 @@ public class Selection : DSingle<Selection>
         if (SingleTargetSelected != null)
         {
             SingleTargetSelected.UnSelect();
+            SingleTargetSelected.Highlight(false);
             ClearList(SingleTargetSelected);
             SingleTargetSelected = null;
-            _ui.SingleTargetBox.ClearTarget();
+            _ui.SingleTargetBox.ClearTarget();            
         }
     }
 
@@ -309,6 +345,7 @@ public class Selection : DSingle<Selection>
         if (EnemyTargetSelected != null)
         {
             EnemyTargetSelected.UnSelect();
+            EnemyTargetSelected.Highlight(false);
             EnemyTargetSelected = null;
             _ui.EnemyTargetBox.ClearTarget();
             SelectionCursorOff();
@@ -337,10 +374,11 @@ public class Selection : DSingle<Selection>
             foreach (var select in MassSelectionList)
             {
                 select.UnSelect();
+                select.Highlight(false);
             }
 
             ClearList();
-        }
+        }        
     }
 
     private IEnumerator SelectionCursor()

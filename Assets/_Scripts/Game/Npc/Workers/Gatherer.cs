@@ -48,8 +48,7 @@ public class Gatherer : Troop
     // Start is called before the first frame update
     protected override void Start()
     {
-        base.Start();
-        SelectionTargetStatus(true);        
+        base.Start();        
         anim.Play("Walk");
         if (points.Count == 0) return;
         nav.SetDestination(RandomNavPoint());
@@ -95,7 +94,7 @@ public class Gatherer : Troop
 
         anim.Play("Swing");
         yield return new WaitForSeconds(hTime);
-        if (photonView.IsMine || Global.DEVELOPER_MODE)
+        if (photonView.IsMine || Global.DeveloperMode)
         {
             Player.Inventory.Set(HarvestingSelection, qty);
         }

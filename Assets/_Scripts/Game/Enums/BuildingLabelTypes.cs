@@ -12,6 +12,9 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using System;
+using System.Text.RegularExpressions;
+
 public enum BuildingLabelTypes
 {
     None,
@@ -20,6 +23,11 @@ public enum BuildingLabelTypes
     Ramp,
     Barracks,
     ResourceDepot,
-    Tower,
-    Stables
+    ArcherTower,
+    Spire,
+    WizardSanctum,
+    DragonRoost,
+    Keep,
+    Stables,
+    BlackSmith
 }

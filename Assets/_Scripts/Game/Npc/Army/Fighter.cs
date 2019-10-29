@@ -26,10 +26,12 @@ public class Fighter : Troop
     /// <summary>
     /// Minimum Damage Delt
     /// </summary>
+    [Range(10,500)]
     public int MinDamage;
     /// <summary>
     /// Maximum Damage Delt
     /// </summary>
+    [Range(10,500)]
     public int MaxDamage;
     #endregion   
 

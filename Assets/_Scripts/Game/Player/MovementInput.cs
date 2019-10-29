@@ -32,6 +32,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
 
     [Header("Sounds")]
     public AudioClip[] AttackSounds;
+    public AudioClip[] HitSounds;
 
     private float _verticalVelocity;
     private bool _isJumping;
@@ -86,7 +87,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
 
     private void Update()
     {
-        if (Lock && (!photonView.IsMine || !Global.DEVELOPER_MODE)) return;        
+        if (Lock && (!photonView.IsMine || !Global.DeveloperMode)) return;        
         InputMagnitude();
         _moveVector = Vector3.zero;
         CharacterController.Move(_moveVector);
@@ -100,7 +101,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         /*if (!IsGrounded)
         {
             _anim.SetFloat("Jump", _rb.velocity.y);
-        }*/
+        }
 
         // calculate which leg is behind, so as to leave that leg trailing in the jump animation
         // (This code is reliant on the specific run cycle offset in our animations,
@@ -185,10 +186,10 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
 
     #endregion
 
-    /*public void Jump()
+    public void Jump()
     {
         _anim.Play("Jump");
-    }*/
+    }
 
     public void Dance()
     {

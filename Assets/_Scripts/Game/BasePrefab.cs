@@ -14,9 +14,11 @@
 
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
 using Photon.Pun;
+using cakeslice;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
 public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObservable
 {
@@ -50,6 +52,9 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         get { return tag; }
     }
 
+    [Space(5)]
+    public GameObject FloatingSelectable;
+
     public abstract string DisplayName { get; }
 
     protected int MaxHealth;
@@ -63,6 +68,8 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     protected static readonly Color PassiveColor = Color.yellow;
     
     protected Rigidbody RigidBody;
+    protected Collider Collider;
+    protected List<Outline> Outlines = new List<Outline>();
 
 
     protected PlayerUI PlayerUI
@@ -97,27 +104,35 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
             gameObject.AddComponent<Rigidbody>();
 
         RigidBody = GetComponent<Rigidbody>();
+        Collider = GetComponent<Collider>();        
 
         //Set the GameManager
         GameManager = GameManager.LocalGameManagerInstance;
+
+        //Set the outlines
+        SetOutline();
     }   
 
     protected void TagPrefab(string tag)
     {
         transform.tag = tag;
+        if (tag == Global.ENEMY_TAG)
+            gameObject.layer = Global.ENEMY_LAYER;
     }
 
     protected virtual void Start()
     {
-        MaxHealth = Health;
+        MaxHealth = Health;        
 
-        if (!Global.DEVELOPER_MODE)
+        if (!Global.DeveloperMode)
         {
             if (photonView != null && !photonView.IsMine)
             {
                 TagPrefab(Global.ENEMY_TAG);
             }
         }
+
+        Highlight(false);
     }
 
     /// <summary>
@@ -131,9 +146,39 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     }
 
     [PunRPC]
-    private void RPC_TakeHit(int amount)
+    protected virtual void RPC_TakeHit(int amount, bool takehit)
     {
-        Health -= amount;        
+        Health -= amount;
+        if (Health - amount <= 0)
+            Die();
+    }
+
+    protected void SetOutline()
+    {
+        var renders = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (var render in renders)
+        {
+            var T = render.GetType();
+            
+            //Exclusions
+            if (T != typeof(MeshRenderer) && T != typeof(SkinnedMeshRenderer))
+                continue;
+            if (render.transform.tag == Global.BUILDAREA_TAG)
+                continue;
+            if (render.gameObject.layer == Global.MINIMAP_ICON_LAYER)
+                continue;
+            if (render.transform.GetComponent<TextMeshPro>() != null)
+                continue;
+
+            if (render.gameObject.GetComponent<Outline>() == null)
+            {
+                render.gameObject.AddComponent<Outline>();
+            }
+            //Set defaults on outline
+            var outline = render.gameObject.GetComponent<Outline>();
+            outline.enabled = false;
+            Outlines.Add(outline);
+        }
     }
 
     //Damage and Death    
@@ -146,21 +191,26 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         {
             Health -= amount;
             if (HitSounds.Length > 0)
-                SoundManager.PlaySound(HitSounds);
+                SoundManager.PlaySoundOnGameObject(gameObject,HitSounds);
 
-            if (!Global.DEVELOPER_MODE)
+            if (!Global.DeveloperMode)
                 photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount);
-
-            if (photonView.IsMine || Global.DEVELOPER_MODE)
-                UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+            
+            UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
         }
         else
         {            
             if (DestroySound != null)
                 SoundManager.PlaySound(DestroySound);
             if (CanExplode) Explode();
-            Die();
+
+            Die();           
         }
+    }
+
+    public Vector3 DistanceToEdge(Vector3 point)
+    {
+        return Collider.bounds.ClosestPoint(point);
     }
 
     public virtual void Die()
@@ -168,15 +218,38 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         IsDead = true;
         Destroy(gameObject, DestroyTimer);
     }
-
-
-    protected int CalcDamage(int min, int max, out bool crit)
+    
+    /// <summary>
+    /// Enable or disable outline around the gameobject
+    /// </summary>
+    /// <param name="action"></param>
+    public void Highlight(bool action)
     {
+        Highlight(action, 0);
+    }
+
+    /// <summary>
+    /// Enable or disable outline around the gameobject
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="color"></param>
+    public void Highlight(bool action, byte color)
+    {
+        if (Outlines.Count <= 0) return;
+        foreach (var outline in Outlines)
+        {
+            outline.color = color;
+            outline.enabled = action;
+        }        
+    }
+        
+    protected int CalcDamage(int min, int max, out bool crit)
+    {        
         var dmg = Random.Range(min, max);
         crit = false;
         if (Random.Range(0, 20) > 17)
         {
-            dmg *= 2;
+            dmg = (dmg + (dmg - min)) * 2;
             crit = true;
         }
         return dmg;
@@ -225,20 +298,22 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     /// <param name="info"></param>
     public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        /*if(stream.IsWriting)
+        if(stream.IsWriting)
         {            
-            stream.SendNext(Health);
+            stream.SendNext(IsDead);
         }
         else
         {
-            Health = (int)stream.ReceiveNext();
-        }*/
+            IsDead = (bool)stream.ReceiveNext();
+        }
     }
 
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        object[] instantiationData = info.photonView.InstantiationData;
+        object[] instantiationData = info.photonView.InstantiationData;                
     }
+
+    
 
 
 }

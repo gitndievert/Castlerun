@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2293853057363095530}
   - component: {fileID: 2293853057364428330}
   - component: {fileID: 2293853057365111966}
-  - component: {fileID: 2293853057369650786}
   - component: {fileID: 4935535453342718527}
+  - component: {fileID: 8956365680938376729}
   m_Layer: 0
   m_Name: ResourceDepot
   m_TagString: Build
@@ -80,20 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2293853057369650786
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2293853057363374658}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 54042fb368ad4ad4c92c09f087c58092, type: 3}
 --- !u!208 &4935535453342718527
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -110,6 +96,20 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.851, y: 1.501, z: 1.531}
   m_TimeToStationary: 0.5
+--- !u!64 &8956365680938376729
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293853057363374658}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 54042fb368ad4ad4c92c09f087c58092, type: 3}
 --- !u!1 &4418347113291356092
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,9 +230,9 @@ GameObject:
   - component: {fileID: 5906597718435180074}
   - component: {fileID: 8921432873822021348}
   - component: {fileID: 2581460266177864152}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ResourceDepot
-  m_TagString: Untagged
+  m_TagString: Build
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245,7 +245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5486037512289511007}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.410099, y: 20.811026, z: 26.49234}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2293853057363095530}
@@ -310,12 +310,13 @@ MonoBehaviour:
   TransparentModel: {fileID: 4504566212378078266}
   FinalModel: {fileID: 2293853057363374658}
   EnableFromBuilder: 1
+  ConstructionZone: {fileID: 0}
   ConstructionTime: 10
   PlacementDistance: 2
   Troops:
-  - {fileID: 3710154189911815501, guid: b721e89ab386bd044ae686c19cccd397, type: 3}
-  - {fileID: 3710154189911815501, guid: d1343ceefb590834fab0d2314cf00065, type: 3}
-  - {fileID: 3710154189911815501, guid: 1034b3588826ca148911bbf9bdb09544, type: 3}
+  - {fileID: 5224819376993918386, guid: c981c22215e3cb246bba4d9c3c1f9b07, type: 3}
+  - {fileID: 5224819376993918386, guid: e94ea601538fe4e479602d752e1c58b1, type: 3}
+  - {fileID: 5224819376993918386, guid: 96754b98fd1898f419ace3bcc23f53c8, type: 3}
   TrainingTime: 15
   NumberToTrain: 1
   _trainedCounter: 0

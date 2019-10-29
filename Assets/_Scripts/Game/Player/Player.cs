@@ -37,6 +37,7 @@ public class Player : BasePrefab, IPlayer
     public MeleeWeaponTrail WeaponTrail;
 
     public TextMeshPro FloatingPlayerText;
+    public TextMeshPro FloatingPlayerTitleText;
 
     public bool CompanionOut = false;        
 
@@ -57,8 +58,10 @@ public class Player : BasePrefab, IPlayer
 
     public Vector3 RespawnPos { get; set; }
 
-    [Range(1, Global.PLAYER_MAX_SLOTS)]
-    public int PlayerNumber = 1;
+    /// <summary>
+    /// Players PUN Actor Number Assigned in network
+    /// </summary>
+    public int ActorNumber = 0;
 
     public string PlayerName
     {
@@ -77,18 +80,15 @@ public class Player : BasePrefab, IPlayer
         get { return UIManager.Instance.SelectableComponent.EnemyTargetSelected; }
     }
 
-    #region ISelectables
-    [Space(15)]
-    public Light SelectionTarget;
+    #region ISelectables    
     public bool IsSelected { get; set; }
     public GameObject GameObject => gameObject;    
     #endregion
 
-    #region Player Components  
-    //Camera Rig    
-    public Inventory Inventory { get; private set; }    
-    public int ActorNumber { get; internal set; }
+    #region Player Components      
+    public Inventory Inventory { get; private set; }        
     public GameObject PlayerWorldItems { get; internal set; }    
+    public string PlayerTitle { get; private set; }
     #endregion
 
     #region Private Members
@@ -101,6 +101,7 @@ public class Player : BasePrefab, IPlayer
     private float _attackDelay = 1f;
     private float _lastAttacked;
     private int _hitCounter = 1;
+    private bool _jumping;
 
 
     private MovementInput _movement;
@@ -116,7 +117,7 @@ public class Player : BasePrefab, IPlayer
     {
         // #Important
         // used in GameManager.cs: we keep track of the localPlayer instance to prevent instanciation when levels are synchronized
-        if (photonView.IsMine || Global.DEVELOPER_MODE)
+        if (photonView.IsMine || Global.DeveloperMode)
         {
             LocalPlayerInstance = gameObject;
         }
@@ -138,19 +139,17 @@ public class Player : BasePrefab, IPlayer
     {
         base.Start();
 
-        if (!Global.DEVELOPER_MODE)
+        if (!Global.DeveloperMode)
         {
             if (photonView != null && !photonView.IsMine)
             {                
-                gameObject.layer = Global.PLAYER_LAYER;
+                gameObject.layer = Global.ENEMY_LAYER;
             }
         }        
 
         //Set Cameras
-        if (photonView.IsMine || Global.DEVELOPER_MODE)
+        if (photonView.IsMine || Global.DeveloperMode)
         {
-            SelectionTarget.gameObject.SetActive(false);
-
             Inventory = GetComponent<Inventory>();            
             _battleCursor = GetComponent<BattleCursor>();
             
@@ -176,10 +175,14 @@ public class Player : BasePrefab, IPlayer
 
             BuildManager.Instance.Placements.Player = this;
 
-            if(FloatingPlayerText != null)
-            {
+            if(FloatingPlayerText != null)            
                 FloatingPlayerText.gameObject.SetActive(false);
-            }            
+            
+            if (FloatingPlayerTitleText != null)            
+                FloatingPlayerTitleText.gameObject.SetActive(false);
+
+            if (PlayerText.PlayerTitles.Length > 0)
+                PlayerTitle = PlayerText.PlayerTitles[Random.Range(0, PlayerText.PlayerTitles.Length - 1)];
 
         }
 
@@ -230,7 +233,7 @@ public class Player : BasePrefab, IPlayer
     private void Update()
     {
         //Attack 
-        if (photonView.IsMine || Global.DEVELOPER_MODE)
+        if (photonView.IsMine || Global.DeveloperMode)
         {
             if (Time.time > _lastAttacked)
             {
@@ -241,7 +244,7 @@ public class Player : BasePrefab, IPlayer
                     if (!Global.BuildMode)
                     {                        
                         ResetAttackTimer();
-                        if(Global.DEVELOPER_MODE)
+                        if(Global.DeveloperMode)
                         {
                             Swing();
                         }
@@ -256,6 +259,13 @@ public class Player : BasePrefab, IPlayer
             //Temporary, work out the details for build mappings later
             //Disallow movements if player is DEAD
             MovementInput.Lock = IsDead;
+
+            //Jump
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                _jumping = true;
+                _movement.Jump();                
+            }
 
             /////// BUILD MODE ACTIVATION
             if (Input.GetKeyDown(KeyCode.Q))
@@ -357,7 +367,13 @@ public class Player : BasePrefab, IPlayer
             FloatingPlayerText.rectTransform.LookAt(Camera.main.transform);
             FloatingPlayerText.rectTransform.Rotate(Vector3.up - new Vector3(0, 180, 0));
         }
-
+        //Face player labels toward camera
+        if (FloatingPlayerTitleText != null && FloatingPlayerTitleText.text.Length > 0)
+        {
+            //var camVector = Camera.main.transform.position;
+            FloatingPlayerTitleText.rectTransform.LookAt(Camera.main.transform);
+            FloatingPlayerTitleText.rectTransform.Rotate(Vector3.up - new Vector3(0, 180, 0));
+        }
 
     }
       
@@ -388,7 +404,7 @@ public class Player : BasePrefab, IPlayer
     public void WepTrailEnable()
     {
         if (WeaponTrail == null) return;
-        WeaponTrail.Emit = true;
+        WeaponTrail.Emit = true;        
     }
 
     public void WepTrailDisable()
@@ -400,20 +416,23 @@ public class Player : BasePrefab, IPlayer
     [PunRPC]
     public void Swing()
     {
-        if (UIManager.Instance.IsMouseOverUI()) return;
+        if (UIManager.Instance.
+            IsMouseOverUI()) return;
         if (MyTarget != null)
-        {
-            
+        {            
             _movement.AttackPlayer();
-            if (MyTarget.IsDead) return;
-            if (!Extensions.DistanceLess(transform, MyTarget.GameObject.transform, AttackDistance)) return;
-
-            //May need to manage PUN tags
-            switch (MyTarget.GameObject.tag)
+            if (photonView.IsMine || Global.DeveloperMode)
             {
-                case Global.ENEMY_TAG:                                         
-                        MyTarget.SetHit(HitAmountMin, HitAmountMax);                   
-                    break;
+                if (MyTarget.IsDead) return;                
+                if (!Extensions.DistanceLess(transform, MyTarget.GameObject.transform, AttackDistance)) return;
+
+                //May need to manage PUN tags
+                switch (MyTarget.GameObject.tag)
+                {
+                    case Global.ENEMY_TAG:
+                        MyTarget.SetHit(HitAmountMin, HitAmountMax);
+                        break;
+                }
             }
         }
         else
@@ -439,12 +458,14 @@ public class Player : BasePrefab, IPlayer
     }
     
     [PunRPC]
-    private void RPC_TakeHit(int amount, bool takehit)
+    protected override void RPC_TakeHit(int amount, bool takehit)
     {
         Health -= amount;
         if (takehit) _movement.Hit();
         PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
         UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);
+        if (Health - amount <= 0)
+            Die();
     }
 
     public override void SetHit(int min, int max)
@@ -455,7 +476,7 @@ public class Player : BasePrefab, IPlayer
         if (Health - amount > 0)
         {
             Health -= amount;
-            if (photonView.IsMine || Global.DEVELOPER_MODE)
+            if (photonView.IsMine || Global.DeveloperMode)
             {
                 PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
                 UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);                
@@ -472,11 +493,10 @@ public class Player : BasePrefab, IPlayer
                 _hitCounter = 1;
             }
 
-            if (!Global.DEVELOPER_MODE)            
+            if (!Global.DeveloperMode)            
                 photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount, takehit);            
 
-            if (photonView.IsMine || Global.DEVELOPER_MODE)
-                UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+            UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
 
             _hitCounter++;
 
@@ -484,20 +504,12 @@ public class Player : BasePrefab, IPlayer
         else
         {
             if (DestroySound != null)
-                SoundManager.PlaySound(DestroySound);            
+                SoundManager.PlaySound(DestroySound);
 
-            if (!Global.DEVELOPER_MODE)
-            {
-                photonView.RPC("Die", RpcTarget.All);
-            }
-            else
-            {
-                Die();
-            }
+            Die();                    
         }
     }
-
-    [PunRPC]
+    
     public override void Die()
     {
         StartCoroutine(DeathSequence());
@@ -510,9 +522,12 @@ public class Player : BasePrefab, IPlayer
         PlayerUI.HealthText.text = $"0/100";
         UIManager.Instance.HealthBar.BarValue = 0;        
         _movement.Die();
-        Global.Message("YOU DIED, Respawn in 5 seconds...");
+        if (photonView.IsMine)
+        {
+            Global.Message("YOU DIED, Respawn in 5 seconds...");
+        }
         //Broadcast($"{PlayerName} has DIED!");
-        yield return new WaitForSeconds(5f);        
+        yield return new WaitForSeconds(5f);                
         SetBasicPlayerStats();
         _movement.RestartAnimator();        
         IsDead = false;        
@@ -524,7 +539,8 @@ public class Player : BasePrefab, IPlayer
         if (IsSelected)
         {
             IsSelected = false;
-            SelectionTargetStatus(false);                        
+            if (FloatingSelectable != null)
+                FloatingSelectable.SetActive(false);
         }
     }
 
@@ -537,7 +553,8 @@ public class Player : BasePrefab, IPlayer
             Selection selection = UIManager.Instance.SelectableComponent;
             //Single Target Selection Panel
             SelectionUI.UpdateEnemyTarget(this);
-            SelectionTargetStatus(true, DamageColor);
+            if (FloatingSelectable != null)
+                FloatingSelectable.SetActive(true);
         }
     }
 
@@ -546,8 +563,7 @@ public class Player : BasePrefab, IPlayer
         if (EventSystem.current.IsPointerOverGameObject()) return;
         //if(Selection.Instance.SingleTargetSelected != null)
         //    Selection.Instance.BattleCursorOff();
-        SelectionUI.ClearEnemyTarget();
-        SelectionTargetStatus(false);
+        SelectionUI.ClearEnemyTarget();        
         Select();
     }
 
@@ -555,20 +571,7 @@ public class Player : BasePrefab, IPlayer
     {
         if (Input.GetMouseButtonDown(KeyBindings.RIGHT_MOUSE_BUTTON))
             OnMouseDown();
-    }
-
-    private void SelectionTargetStatus(bool status)
-    {
-        if (SelectionTarget == null) return;
-        SelectionTarget.gameObject.SetActive(status);
-    }
-
-    private void SelectionTargetStatus(bool status, Color color)
-    {
-        if (SelectionTarget == null) return;
-        SelectionTargetStatus(status);
-        SelectionTarget.color = color;
-    }
+    }   
 
     //Main method for serialization on Player actions
     public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -581,7 +584,10 @@ public class Player : BasePrefab, IPlayer
             //stream.SendNext("My name is mr fancy pants");         
             stream.SendNext(PlayerName);
             stream.SendNext(_movement.isAttacking);
-            //stream.SendNext(Health);
+            stream.SendNext(ActorNumber);
+            //stream.SendNext(_jumping);            
+            stream.SendNext(PlayerTitle);
+            stream.SendNext(IsDead);
         }
         else
         {
@@ -599,7 +605,20 @@ public class Player : BasePrefab, IPlayer
             {
                 _movement.AttackPlayer();
             }
-            //Health = myhealth;
+            var actornum = (int)stream.ReceiveNext();
+            ActorNumber = actornum;
+           
+           /* var jumping = (bool)stream.ReceiveNext();
+            if(_jumping)
+            {
+                _movement.Jump();
+                _jumping = false;
+            }*/
+            var title = (string)stream.ReceiveNext();
+            FloatingPlayerTitleText.text = $"<{title}>";
+            PlayerTitle = title;
+
+            IsDead = (bool)stream.ReceiveNext();
         }
     }
 

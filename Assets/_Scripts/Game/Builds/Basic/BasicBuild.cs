@@ -19,9 +19,7 @@ using Photon.Pun;
 
 public class BasicBuild : Build
 {
-    //public List<SnapPoints> SnapPoints = new List<SnapPoints>();
-
-    private ResourceType _pickType;    
+    //public List<SnapPoints> SnapPoints = new List<SnapPoints>();    
 
     protected override void Awake()
     {
@@ -33,7 +31,7 @@ public class BasicBuild : Build
     {
         base.Start();        
         IsBasic = true;
-        if(!Global.DEVELOPER_MODE)
+        if(!Global.DeveloperMode)
             gameObject.SetActive(photonView.IsMine);
     }
     
@@ -57,8 +55,8 @@ public class BasicBuild : Build
             var place = (bool)stream.ReceiveNext();
             if (place)
             {                
-                EnableFinalModel();                
-                tag = Global.ENEMY_TAG;
+                EnableFinalModel();
+                TagPrefab(Global.ENEMY_TAG);
                 gameObject.SetActive(true);
                 p_Finished = false;
             }

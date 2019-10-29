@@ -49,8 +49,7 @@ public class TroopFactory : Build
 
     [Header("Spawn and Waypoint Positions")]
     public Transform SpawnPointPosition;
-    public Transform WayPointPosition;  
-
+    public Transform WayPointPosition;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -60,7 +59,7 @@ public class TroopFactory : Build
         {
             _buildArea = GetComponentInChildren<BuildArea>();
         }
-        if (!Global.DEVELOPER_MODE)
+        if (!Global.DeveloperMode)
             gameObject.SetActive(photonView.IsMine);
     }    
 
@@ -177,7 +176,7 @@ public class TroopFactory : Build
 
         GameObject makeTroop = null;
 
-        if (Global.DEVELOPER_MODE)
+        if (Global.DeveloperMode)
         {
             makeTroop = Instantiate(selectedTroop.gameObject, SpawnPointPosition.position, Quaternion.identity);
         }
@@ -254,14 +253,9 @@ public class TroopFactory : Build
             if(place)
             {                
                 if(_buildArea != null) _buildArea.ShowPlane(false);
-                GameManager.PlayersByActor.TryGetValue(GameManager.MyPlayerNumber, out Player player);
-                if (player != null)
-                {                    
-                    SetPlayer(player);
-                    EnableFinalModel();                    
-                    tag = Global.ENEMY_TAG;
-                    p_Finished = false;
-                }
+                EnableFinalModel();
+                TagPrefab(Global.ENEMY_TAG);
+                p_Finished = false;                
             }          
         }
     }

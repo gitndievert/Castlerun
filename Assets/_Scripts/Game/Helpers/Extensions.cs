@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -49,6 +50,10 @@ public static partial class Extensions
         return hit.transform.tag;
     }
 
+    public static string TypeToString(this Enum types)
+    {
+        return Regex.Replace(types.ToString(), "(\\B[A-Z])", " $1");
+    }
 
 }
 

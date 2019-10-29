@@ -19,7 +19,7 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Collider))]
 public abstract class Troop : BasePrefab, ISelectable
 {
     const float TROOP_DESTROY_TIMER = 4f;
@@ -30,8 +30,7 @@ public abstract class Troop : BasePrefab, ISelectable
 
     public TroopFactory AssociatedFactory { get; private set; }
 
-    #region Selection Properties
-    public Light SelectionTarget;
+    #region Selection Properties    
     public bool IsSelected { get; set; }    
     public GameObject GameObject => gameObject;
     #endregion    
@@ -58,6 +57,7 @@ public abstract class Troop : BasePrefab, ISelectable
     public AudioClip[] SelectionCall;
     public AudioClip[] Acknowledgement;
     public AudioClip[] AttackBattleCryClips;
+    public AudioClip Death;
     #endregion
 
     #region Combat Systems
@@ -90,19 +90,25 @@ public abstract class Troop : BasePrefab, ISelectable
 
     protected override void Start()
     {
-        base.Start();
-        SelectionTargetStatus(false);
+
+        int mask = 1 << Global.GROUND_LAYER;
+
+        if (Physics.Raycast(transform.position,Vector3.down,out RaycastHit hit,5f,mask))
+        {
+            nav.Warp(hit.point);
+        }        
+
+        base.Start();        
 
         //We don't want people exploding lol
         CanExplode = false;        
-        DestroyTimer = TROOP_DESTROY_TIMER;
-        gameObject.layer = GetTag == Global.ARMY_TAG ? Global.ARMY_LAYER : Global.DEFAULT_LAYER;        
+        DestroyTimer = TROOP_DESTROY_TIMER;        
 
         if (Costs.CostFactors.Length == 0)
             throw new System.Exception("Please add a cost");
         
         
-        _smoothDeltaPosition = default;
+        _smoothDeltaPosition = default;        
        
     }
 
@@ -211,7 +217,7 @@ public abstract class Troop : BasePrefab, ISelectable
 
     #endregion
 
-    public void OnAnimatorMove()
+    protected virtual void OnAnimatorMove()
     {
         if (!_moving) return;
         var position = anim.rootPosition;
@@ -226,8 +232,7 @@ public abstract class Troop : BasePrefab, ISelectable
         if (EventSystem.current.IsPointerOverGameObject()) return;
         //if(Selection.Instance.SingleTargetSelected != null)
         //    Selection.Instance.BattleCursorOff();
-        SelectionUI.ClearEnemyTarget();
-        SelectionTargetStatus(false);
+        SelectionUI.ClearEnemyTarget();        
         Select();
     }
 
@@ -266,8 +271,7 @@ public abstract class Troop : BasePrefab, ISelectable
         {
             IsSelected = true;
             if (GetTag == Global.ARMY_TAG)
-            {
-                SelectionTargetStatus(true, SelectedColor);
+            {                
                 UIManager.Instance.SelectableComponent.UpdateMassList(this);                
             }
         }
@@ -293,16 +297,12 @@ public abstract class Troop : BasePrefab, ISelectable
                 //Single Target Selection Panel
                 if(SelectionCall.Length > 0)
                     SoundManager.PlaySound(SelectionCall);
-                SelectionUI.UpdateSingleTarget(this);
-                SelectionTargetStatus(true, SelectedColor);                
-                //glow green
+                SelectionUI.UpdateSingleTarget(this);                                            
             }
             else if(GetTag == Global.ENEMY_TAG)
             {
                 //Single Target Selection Panel
-                SelectionUI.UpdateEnemyTarget(this);
-                SelectionTargetStatus(true, DamageColor);
-                //glow red
+                SelectionUI.UpdateEnemyTarget(this);                
             }
         }
     }
@@ -314,23 +314,9 @@ public abstract class Troop : BasePrefab, ISelectable
     {
         if (IsSelected)
         {
-            IsSelected = false;
-            SelectionTargetStatus(false);
+            IsSelected = false;            
             points.Clear();            
         }
-    }
-
-    protected void SelectionTargetStatus(bool status)
-    {
-        if (SelectionTarget == null) return;
-        SelectionTarget.gameObject.SetActive(status);
-    }
-
-    protected void SelectionTargetStatus(bool status, Color color)
-    {
-        if (SelectionTarget == null) return;
-        SelectionTargetStatus(status);
-        SelectionTarget.color = color;
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -379,7 +365,7 @@ public abstract class Troop : BasePrefab, ISelectable
     public void Move(Vector3 point)
     {
         //nav.ResetPath();
-        nav.isStopped = false;
+        nav.isStopped = false;        
         nav.SetDestination(point);
         transform.LookAt(point);        
         if(AttackBattleCryClips.Length > 0)
@@ -398,10 +384,16 @@ public abstract class Troop : BasePrefab, ISelectable
     }
 
     [PunRPC]
-    private void RPC_TakeHit(int amount, bool takehit)
+    protected override void RPC_TakeHit(int amount, bool takehit)
     {
         Health -= amount;
         if(takehit) anim.Play("Hit");
+
+        //Maybe show damage text across network??
+        //UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+
+        if (Health - amount <= 0)
+            Die();
     }
     
     public override void SetHit(int min, int max)
@@ -425,11 +417,10 @@ public abstract class Troop : BasePrefab, ISelectable
                 _hitCounter = 1;
             }
 
-            if (!Global.DEVELOPER_MODE)            
-                photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount, takehit);
-
-            if ((photonView != null && photonView.IsMine) || Global.DEVELOPER_MODE)
-                UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+            if (!Global.DeveloperMode)            
+                photonView.RPC("RPC_TakeHit",RpcTarget.Others, amount, takehit);
+            
+            UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
 
             _hitCounter++;
         }
@@ -439,18 +430,10 @@ public abstract class Troop : BasePrefab, ISelectable
                 SoundManager.PlaySound(DestroySound);
             if (CanExplode) Explode();
 
-            if (!Global.DEVELOPER_MODE)
-            {
-                photonView.RPC("Die", RpcTarget.All);
-            }
-            else
-            {
-                Die();
-            }
+            Die();
         }
     }
-
-    [PunRPC]
+    
     public override void Die()
     {        
         anim.Play("Death1");

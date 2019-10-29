@@ -17,9 +17,10 @@ using UnityEngine;
 public class Castle : MonoBehaviour
 {    
     public int DoorBustHealth = 10;
-    public CastleType CastleType = CastleType.Default;    
-    public Player CastleOwner { get; set; }
-
-    [Header("Inside")]
-    public GameObject InnerCastle;
+    public CastleType CastleType = CastleType.Default;        
+        
+    /// <summary>
+    /// Capture object inside castle
+    /// </summary>
+    public Capture CaptureFlag;
 }
