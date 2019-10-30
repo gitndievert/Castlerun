@@ -31,6 +31,9 @@ public class MenuManager : MonoBehaviourPunCallbacks
     public Button StartGameButton;
     public List<GameObject> UIPanels;
 
+    [Header("Test Map")]
+    public string MapToLoad;
+
     private Dictionary<string, RoomInfo> cachedRoomList;
     private Dictionary<string, GameObject> roomListEntries;
     private Dictionary<int, GameObject> playerListEntries;    
@@ -273,8 +276,10 @@ public class MenuManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             // #Critical
-            // Load the Room Level.             
-            PhotonNetwork.LoadLevel("Demo_2");
+            // Load the Room Level.            
+            if (string.IsNullOrEmpty(MapToLoad))
+                throw new System.Exception("No map was specified for loading");
+            PhotonNetwork.LoadLevel(MapToLoad);
         }
     }
 

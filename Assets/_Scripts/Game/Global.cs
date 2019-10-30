@@ -20,7 +20,7 @@ public static class Global
     /// <summary>
     /// This sets developer mode. NETWORK RELEASE IS FALSE ALWAYS
     /// </summary>
-    public static bool DeveloperMode = true;
+    public static bool DeveloperMode = false;
 
     #region Game Objects
     /// <summary>
