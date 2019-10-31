@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.33542925, g: 0.40421787, b: 0.48918903, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -50,14 +50,14 @@ LightmapSettings:
     m_BounceScale: 1
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
-    m_EnvironmentLightingMode: 0
+    m_EnvironmentLightingMode: 1
     m_EnableBakedLightmaps: 1
-    m_EnableRealtimeLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 12
     m_Resolution: 2
-    m_BakeResolution: 40
-    m_AtlasSize: 1024
+    m_BakeResolution: 5
+    m_AtlasSize: 128
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
@@ -75,9 +75,9 @@ LightmapSettings:
     m_BakeBackend: 1
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
-    m_PVRSampleCount: 512
+    m_PVRSampleCount: 128
     m_PVRBounces: 2
-    m_PVREnvironmentSampleCount: 256
+    m_PVREnvironmentSampleCount: 128
     m_PVREnvironmentReferencePointCount: 2048
     m_PVRFilteringMode: 1
     m_PVRDenoiserTypeDirect: 1
@@ -96,7 +96,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: eb1ff1f06f1a07c4db087c4bba6ad7ac,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -565,6 +566,16 @@ PrefabInstance:
       propertyPath: MiniMapCamera
       value: 
       objectReference: {fileID: 683675656}
+    - target: {fileID: 7434169107742715853, guid: 712fd89b487d3b94992211d67a5f9ae1,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1059921502}
+    - target: {fileID: 7434169107742715853, guid: 712fd89b487d3b94992211d67a5f9ae1,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick_Quit
+      objectReference: {fileID: 0}
     - target: {fileID: 7434169106771280315, guid: 712fd89b487d3b94992211d67a5f9ae1,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -970,7 +981,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 2124794172}
+      objectReference: {fileID: 1571169091}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98901fb555d0ce8439b115e48c7b8cb6, type: 3}
 --- !u!1 &771766561
@@ -1198,13 +1209,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933213903}
-  m_LocalRotation: {x: 0.33715996, y: 0.8636538, z: -0.3690478, w: 0.06503063}
+  m_LocalRotation: {x: 0.18161137, y: 0.82911265, z: -0.4657154, w: -0.25039738}
   m_LocalPosition: {x: -91, y: 328, z: 197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 42.946003, y: 190.74998, z: 46.889004}
+  m_LocalEulerAnglesHint: {x: 42.946003, y: 232.971, z: 46.889004}
 --- !u!1001 &1059921501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1389,7 +1400,19 @@ PrefabInstance:
       objectReference: {fileID: 636805974}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a58400c8306aa7f43aeb157bb1c66b0f, type: 3}
---- !u!84 &1131018557
+--- !u!114 &1059921502 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7960657144520267955, guid: a58400c8306aa7f43aeb157bb1c66b0f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1059921501}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d919cd179639a654bb5b3f6d5acbdfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!84 &1276461739
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1402,8 +1425,8 @@ RenderTexture:
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
   serializedVersion: 3
-  m_Width: 825
-  m_Height: 516
+  m_Width: 765
+  m_Height: 478
   m_AntiAliasing: 1
   m_MipCount: -1
   m_DepthFormat: 1
@@ -1547,6 +1570,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1403475966}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &1571169091
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 765
+  m_Height: 478
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 1
+  m_ColorFormat: 8
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1660084012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,38 +1704,3 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!84 &2124794172
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 825
-  m_Height: 516
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 1
-  m_ColorFormat: 8
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1

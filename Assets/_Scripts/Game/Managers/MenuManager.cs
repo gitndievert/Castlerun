@@ -20,6 +20,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine.UI;
+using ExitGames.Client.Photon;
 
 public class MenuManager : MonoBehaviourPunCallbacks
 {   
@@ -27,6 +28,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
     public TMP_InputField PlayerNameInput;
     public TMP_InputField RoomNameInputField;
     public TMP_InputField MaxPlayersInputField;
+    public TextMeshProUGUI SelectedCastleText;
 
     public Button StartGameButton;
     public List<GameObject> UIPanels;
@@ -38,18 +40,19 @@ public class MenuManager : MonoBehaviourPunCallbacks
     private Dictionary<string, GameObject> roomListEntries;
     private Dictionary<int, GameObject> playerListEntries;    
     private GameObject _activePanel = null;
+    private string _castleSelected;
 
     /// <summary>
     /// Keep track of the current process. Since connection is asynchronous and is based on several callbacks from Photon, 
     /// we need to keep track of this to properly adjust the behavior when we receive call back by Photon.
     /// Typically this is used for the OnConnectedToMaster() callback.
     /// </summary>
-    private bool isConnecting;
+    private bool _isConnecting;
 
     /// <summary>
     /// This client's version number. Users are separated from each other by gameVersion (which allows you to make breaking changes).
     /// </summary>
-    private string gameVersion = "1";
+    private string _gameVersion = "1";
 
     /// <summary>
     /// Set Max Number of Players
@@ -108,8 +111,9 @@ public class MenuManager : MonoBehaviourPunCallbacks
     /// </summary>
     public void Connect()
     {
+        if (string.IsNullOrEmpty(_castleSelected)) return;
         // keep track of the will to join a room, because when we come back from the game we will get a callback that we are connected, so we need to know what to do then
-        isConnecting = true;
+        _isConnecting = true;
 
         // hide the Play button for visual consistency
         //controlPanel.SetActive(false);       
@@ -118,7 +122,11 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
         if (!string.IsNullOrEmpty(playerName))
         {
-            PhotonNetwork.LocalPlayer.NickName = playerName;            
+            PhotonNetwork.LocalPlayer.NickName = playerName;  
+            Hashtable ht = new Hashtable {
+                { "castle", _castleSelected }
+            };            
+            PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
         }
         else
         {
@@ -129,12 +137,16 @@ public class MenuManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsConnected)
         {
             // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
+            //Hashtable ht = new Hashtable()
+            //Hashtable ht = new Hashtable() { { "map", 1 } };
+            //JoinRandomRoom(expectedCustomRoomProperties, 4);
+            //PhotonNetwork.JoinRandomRoom(ht, 4);
             PhotonNetwork.JoinRandomRoom();
         }
         else
         {            
             // #Critical, we must first and foremost connect to Photon Online Server.
-            PhotonNetwork.GameVersion = gameVersion;
+            PhotonNetwork.GameVersion = _gameVersion;
             PhotonNetwork.ConnectUsingSettings();
         }
     }
@@ -145,13 +157,19 @@ public class MenuManager : MonoBehaviourPunCallbacks
         SceneManager.LoadSceneAsync(scenename);
     }
 
+    public void OnClick_SelectCastle(string castlename)
+    {
+        _castleSelected = castlename;
+        SelectedCastleText.text = castlename;
+    }
+
     public void OnClick_PUN_Login()
     {
         string playerName = PlayerNameInput.text;
         
         if(!string.IsNullOrEmpty(playerName))
         {
-            PhotonNetwork.LocalPlayer.NickName = playerName;            
+            PhotonNetwork.LocalPlayer.NickName = playerName;             
             PhotonNetwork.ConnectUsingSettings();            
         }
         else
@@ -212,7 +230,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
         // we don't want to do anything if we are not attempting to join a room. 
         // this case where isConnecting is false is typically when you lost or quit the game, when this level is loaded, OnConnectedToMaster will be called, in that case
         // we don't want to do anything.
-        if (isConnecting)
+        if (_isConnecting)
         {            
             Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN. Now this client is connected and could join a room.\n Calling: PhotonNetwork.JoinRandomRoom(); Operation will fail if no room found");
 
@@ -252,7 +270,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {        
         Debug.LogError("PUN Basics Tutorial/Launcher:Disconnected");
-        isConnecting = false;
+        _isConnecting = false;
         OnClick_LoadPanelsByName("MainMenuPanel");
     }
 

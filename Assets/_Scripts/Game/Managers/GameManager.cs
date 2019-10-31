@@ -132,6 +132,13 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
                 //Kill music for now
                 MusicManager.stop(3f);
 
+                //Castle test data                
+                var custom = PhotonNetwork.LocalPlayer.CustomProperties;
+                foreach(var c in custom)
+                {
+                    Debug.Log($"{c.Key} as {c.Value} on Player {PhotonNetwork.LocalPlayer.NickName}");
+                }
+
                 SoundManager.PlaySound(PlayerJoining);
             }
             else
@@ -160,7 +167,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     private void LoadArena()
     {
-        PhotonNetwork.LoadLevel("Demo_2");
+        PhotonNetwork.LoadLevel("PlayTest");
     }
 
     #region Photon Callbacks
@@ -175,6 +182,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         Messages.text = $"{other.NickName} entered the game";
 
         PlayersConnected.text += other.NickName;
+        other.CustomProperties.TryGetValue("castle", out object castle);
+
+        Debug.Log($"Player {other.NickName} has castle {(string)castle}");
 
         if (PhotonNetwork.IsMasterClient)
         {
