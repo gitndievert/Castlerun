@@ -184,7 +184,10 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         PlayersConnected.text += other.NickName;
         other.CustomProperties.TryGetValue("castle", out object castle);
 
-        Debug.Log($"Player {other.NickName} has castle {(string)castle}");
+        if (castle != null)
+        {
+            Debug.Log($"Player {other.NickName} has castle {(string)castle}");
+        }
 
         if (PhotonNetwork.IsMasterClient)
         {
