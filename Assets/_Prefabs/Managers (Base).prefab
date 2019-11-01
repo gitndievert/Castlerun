@@ -140,7 +140,6 @@ MonoBehaviour:
   PlayerUIPanel:
     PlayerName: {fileID: 0}
     HealthText: {fileID: 0}
-    CastleLevel: {fileID: 0}
   BuildingUIPanel:
     SelectionsPanel: {fileID: 0}
   TargetPanel: {fileID: 0}
@@ -246,6 +245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7960657143725769598}
   - component: {fileID: 7960657143725769596}
+  - component: {fileID: 2315991761307725487}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -286,6 +286,21 @@ MonoBehaviour:
   - {fileID: 7247185160737256889, guid: 045dea8e81313a14995c009789214b0a, type: 3}
   - {fileID: 6618010534362030520, guid: 779d6dc4c9fd4e8439667fa3faa639ae, type: 3}
   - {fileID: 5035756408536959990, guid: 8d29893c33b848b42a8d76d3428d4165, type: 3}
+--- !u!114 &2315991761307725487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7960657143725769593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a9a13d7c1105fa4a82b39e7e2282cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CastleList:
+  - {fileID: 242410134351857711, guid: 21556eb92aa57a048a970b695bdbde41, type: 3}
+  - {fileID: 242410134351857711, guid: eda1ea3a1ee51ec4889639c29fc60a6a, type: 3}
 --- !u!1 &7960657144520267916
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +349,10 @@ MonoBehaviour:
   Player2SpawnPoint: {fileID: 0}
   Player3SpawnPoint: {fileID: 0}
   Player4SpawnPoint: {fileID: 0}
+  Player1CastlePoint: {fileID: 0}
+  Player2CastlePoint: {fileID: 0}
+  Player3CastlePoint: {fileID: 0}
+  Player4CastlePoint: {fileID: 0}
   Player1ResourcePoints: {fileID: 0}
   Player2ResourcePoints: {fileID: 0}
   Messages: {fileID: 0}

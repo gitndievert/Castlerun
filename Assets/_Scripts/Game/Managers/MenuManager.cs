@@ -157,6 +157,12 @@ public class MenuManager : MonoBehaviourPunCallbacks
         SceneManager.LoadSceneAsync(scenename);
     }
 
+    public void OnClick_SelectCastleByType(CastleType castletype)
+    {
+        _castleSelected = castletype.ToString();
+        SelectedCastleText.text = castletype.ToString();
+    }
+
     public void OnClick_SelectCastle(string castlename)
     {
         _castleSelected = castlename;

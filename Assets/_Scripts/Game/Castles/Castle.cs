@@ -12,15 +12,22 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
+using Photon.Pun;
 using UnityEngine;
 
-public class Castle : MonoBehaviour
+public class Castle : MonoBehaviour, IPunObservable
 {    
     public int DoorBustHealth = 10;
-    public CastleType CastleType = CastleType.Default;        
+    public CastleType CastleType = CastleType.Default;
+    public Player Player;
         
     /// <summary>
     /// Capture object inside castle
     /// </summary>
     public Capture CaptureFlag;
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        
+    }
 }
