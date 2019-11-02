@@ -181,12 +181,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void StartMusic()
     {
         Music.Instance.PlayMusicTrack(1);
-    }
-
-    private void LoadArena()
-    {
-        PhotonNetwork.LoadLevel("PlayTest");
-    }      
+    }        
 
     #region Photon Callbacks
 
