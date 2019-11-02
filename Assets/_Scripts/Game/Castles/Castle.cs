@@ -18,9 +18,10 @@ using UnityEngine;
 public class Castle : MonoBehaviour, IPunObservable
 {    
     public int DoorBustHealth = 10;
-    public CastleType CastleType = CastleType.Default;
-    public Player Player;
-        
+    public CastleType CastleType = CastleType.Default;    
+    
+    private Vector3 _spawnPos;
+    private Quaternion _spawnRotation;
     /// <summary>
     /// Capture object inside castle
     /// </summary>
@@ -29,5 +30,6 @@ public class Castle : MonoBehaviour, IPunObservable
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         
-    }
+    }  
+
 }

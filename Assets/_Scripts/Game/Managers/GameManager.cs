@@ -149,11 +149,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
                 {                    
                     if((string)c.Key == "castle")
                     {
-                        var castle = CastleManager.Instance.GetCastle((string)c.Value);
-                        var castleSpawn = PhotonNetwork.Instantiate(castle.name, castleTransform.localPosition, castleTransform.localRotation, 0);
-                        castleSpawn.GetComponent<Castle>().Player = player;                        
-                        //castleSpawn.transform.SetPositionAndRotation(castleTransform.position, castleTransform.rotation);
-                        Debug.Log($"Found the castle {castle.name} for {player.PlayerName}");
+                        var castleObj = CastleManager.Instance.GetCastle((string)c.Value);                        
+                        var castleSpawn = PhotonNetwork.Instantiate(castleObj.name, castleTransform.localPosition, castleTransform.localRotation, 0);                        
                     }
                 }
 
@@ -260,11 +257,13 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         var player = character.GetComponent<Player>();
         player.PlayerName = "Krunchy";
         
-        var castleSpawn = Instantiate(CastleManager.Instance.GetCastle("classic"), Player1CastlePoint.localPosition, Player1CastlePoint.localRotation);
-        castleSpawn.GetComponent<Castle>().Player = player;
+        var castleSpawn = Instantiate(CastleManager.Instance.GetCastle("classic"), Player1CastlePoint.localPosition, Player1CastlePoint.localRotation);        
 
         var castleSpawnTwo = Instantiate(CastleManager.Instance.GetCastle("fod"), Player2CastlePoint.localPosition, Player2CastlePoint.localRotation);
-        castleSpawnTwo.GetComponent<Castle>().Player = new Player { PlayerName = "MrTest" };
+        var charactertwo = Instantiate(PlayerInstance, Player2SpawnPoint.localPosition, Player2SpawnPoint.localRotation);
+        var playertwo = charactertwo.GetComponent<Player>();
+        playertwo.PlayerName = "MrTest";
+
         castleSpawnTwo.tag = Global.ENEMY_TAG;
         castleSpawnTwo.layer = Global.ENEMY_LAYER;
         

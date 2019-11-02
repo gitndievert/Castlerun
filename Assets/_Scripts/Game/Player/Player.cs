@@ -43,8 +43,7 @@ public class Player : BasePrefab, IPlayer
 
     [Header("Custom Additions to Player")]
     [Tooltip("For changing the companion on the player")]
-    public CompanionType CompanionType = CompanionType.None;
-    
+    public CompanionType CompanionType = CompanionType.None;    
         
     /// <summary>
     /// Returns the current companion of the player
@@ -129,6 +128,7 @@ public class Player : BasePrefab, IPlayer
         RespawnPos = transform.position;
 
     }
+       
 
     // Start is called before the first frame update
     protected override void Start()
@@ -184,6 +184,7 @@ public class Player : BasePrefab, IPlayer
 
         WepTrailDisable();
         _movement = GetComponent<MovementInput>();
+        
     }
 
     public override void OnDisable()
