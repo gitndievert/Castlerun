@@ -43,12 +43,17 @@ public class Player : BasePrefab, IPlayer
 
     [Header("Custom Additions to Player")]
     [Tooltip("For changing the companion on the player")]
-    public CompanionType CompanionType = CompanionType.None;    
-        
+    public CompanionType CompanionType = CompanionType.None;
+
     /// <summary>
     /// Returns the current companion of the player
     /// </summary>
-    public Companion PlayerCompanion { get; set; }
+    public Companion PlayerCompanion;
+
+    /// <summary>
+    /// Returns the Players Castle
+    /// </summary>
+    public Castle PlayerCastle;
     
 
     public Vector3 RespawnPos { get; set; }

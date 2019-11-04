@@ -16,7 +16,9 @@ using Photon.Pun;
 using UnityEngine;
 
 public class Castle : MonoBehaviour, IPunObservable
-{    
+{
+    public int PlayerNumber;
+
     public int DoorBustHealth = 10;
     public CastleType CastleType = CastleType.Default;    
     
@@ -26,10 +28,18 @@ public class Castle : MonoBehaviour, IPunObservable
     /// Capture object inside castle
     /// </summary>
     public Capture CaptureFlag;
-
+    
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        
+        if(stream.IsWriting)
+        {
+            stream.SendNext(PlayerNumber);
+        }
+        else
+        {
+            var n = (int)stream.ReceiveNext();
+            PlayerNumber = n;
+        }
     }  
 
 }

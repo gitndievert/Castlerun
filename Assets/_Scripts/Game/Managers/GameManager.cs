@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     /// Player Prefab
     /// </summary>
     [Tooltip("The prefab to use for representing the player")]
-    public GameObject PlayerInstance;            
-
+    public GameObject PlayerInstance;
+    
     [Header("Spawn Points")]
     //Player Spawns
     public Transform Player1SpawnPoint;
@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                 var character = PhotonNetwork.Instantiate(PlayerInstance.name, spawnTransform.localPosition, spawnTransform.localRotation, 0);
-                character.layer = Global.IGNORE_LAYER;
+                character.layer = Global.IGNORE_LAYER;                
 
                 MyPlayerNumber = PhotonNetwork.LocalPlayer.ActorNumber;              
                 
@@ -149,8 +149,10 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
                 {                    
                     if((string)c.Key == "castle")
                     {
-                        var castleObj = CastleManager.Instance.GetCastle((string)c.Value);                        
-                        var castleSpawn = PhotonNetwork.Instantiate(castleObj.name, castleTransform.localPosition, castleTransform.localRotation, 0);                        
+                        var castleObj = CastleManager.Instance.GetCastle((string)c.Value);
+                        var castleSpawn = PhotonNetwork.Instantiate(castleObj.name, castleTransform.localPosition, castleTransform.localRotation, 0);
+                        player.PlayerCastle = castleSpawn.GetComponent<Castle>();
+                        player.PlayerCastle.PlayerNumber = MyPlayerNumber;
                     }
                 }
 
@@ -191,18 +193,11 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         Debug.Log("OnPlayerEnteredRoom() " + other.NickName); // not seen if you're the player connecting
         Messages.text = $"{other.NickName} entered the game";
 
-        PlayersConnected.text += other.NickName;
-        other.CustomProperties.TryGetValue("castle", out object castle);
-
-        if (castle != null)
-        {
-            Debug.Log($"Player {other.NickName} has castle {(string)castle}");
-        }
+        UpdatePlayersList();
 
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-            //LoadArena();            
+            Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom         
         }
 
         SoundManager.PlaySound(PlayerJoining);
@@ -221,8 +216,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-            //LoadArena();
+            Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom            
         }
     }     
 
@@ -233,7 +227,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         foreach (var player in PhotonNetwork.PlayerList)
         {
             PlayersConnected.text += player.NickName+"\n";            
-        }
+        }        
+        
     }
 
     /// <summary>
@@ -254,15 +249,19 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         int playerNum = spawnIndex + 1;        
 
         var character = Instantiate(PlayerInstance, Player1SpawnPoint.localPosition, Player1SpawnPoint.localRotation);
-        var player = character.GetComponent<Player>();
+        var player = character.GetComponent<Player>();        
+        var castleSpawn = Instantiate(CastleManager.Instance.GetCastle("classic"), Player1CastlePoint.localPosition, Player1CastlePoint.localRotation);
         player.PlayerName = "Krunchy";
-        
-        var castleSpawn = Instantiate(CastleManager.Instance.GetCastle("classic"), Player1CastlePoint.localPosition, Player1CastlePoint.localRotation);        
+        player.PlayerCastle = castleSpawn.GetComponent<Castle>();
+        player.PlayerCastle.PlayerNumber = MyPlayerNumber;
 
-        var castleSpawnTwo = Instantiate(CastleManager.Instance.GetCastle("fod"), Player2CastlePoint.localPosition, Player2CastlePoint.localRotation);
+
         var charactertwo = Instantiate(PlayerInstance, Player2SpawnPoint.localPosition, Player2SpawnPoint.localRotation);
         var playertwo = charactertwo.GetComponent<Player>();
+        var castleSpawnTwo = Instantiate(CastleManager.Instance.GetCastle("fod"), Player2CastlePoint.localPosition, Player2CastlePoint.localRotation);
         playertwo.PlayerName = "MrTest";
+        playertwo.PlayerCastle = castleSpawnTwo.GetComponent<Castle>();
+        player.PlayerCastle.PlayerNumber = MyPlayerNumber;
 
         castleSpawnTwo.tag = Global.ENEMY_TAG;
         castleSpawnTwo.layer = Global.ENEMY_LAYER;
