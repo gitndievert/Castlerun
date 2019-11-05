@@ -34,7 +34,7 @@ public class CompanionManager : PSingle<CompanionManager>
 
     }
 
-    public GameObject GetCompanionByType(CompanionType companion)
+    public GameObject GetCompanion(CompanionType companion)
     {
         foreach(var c in CompanionList)
         {
@@ -44,6 +44,20 @@ public class CompanionManager : PSingle<CompanionManager>
         }
 
         return null;
+    }
+
+    public GameObject GetCompanion(string companionname)
+    {
+        switch (companionname.ToLower())
+        {
+            default:
+            case "fox":
+                return GetCompanion(CompanionType.Fox);
+            case "fox_s":
+                return GetCompanion(CompanionType.Fox_S);
+            case "racoon":
+                return GetCompanion(CompanionType.Racoon);
+        }
     }
 
 }

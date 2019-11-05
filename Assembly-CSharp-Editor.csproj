@@ -92,6 +92,10 @@
     <Compile Include="Assets\UnityAssets\Standard Assets\Editor\Water\Water4\SpecularLightingEditor.cs" />
     <Compile Include="Assets\UnityAssets\Standard Assets\Editor\Water\Water4\WaterBaseEditor.cs" />
     <Compile Include="Assets\UnityAssets\Standard Assets\Editor\Water\Water4\WaterEditorUtility.cs" />
+    <None Include="Assets\_Assets\Tools\UMotionEditor\Plugins\Windows\Editor\x64\AutodeskFbxSdkLicense.txt" />
+    <None Include="Assets\_Assets\Tools\UMotionEditor\Plugins\Windows\Editor\x64\UnityFbxSdkNativeLicense.txt" />
+    <None Include="Assets\_Assets\Tools\UMotionEditor\Plugins\MacOS\Editor\x64\UnityFbxSdkNativeLicense.txt" />
+    <None Include="Assets\_Assets\Tools\UMotionEditor\Plugins\MacOS\Editor\x64\AutodeskFbxSdkLicense.txt" />
     <None Include="Assets\_Assets\PostProcessing\Cinema Suite\About\Editor\Resources\BaseProductInfo.xml" />
     <None Include="Assets\_Assets\PostProcessing\Cinema Suite\Cinema Themes\Editor\Resources\CinemaThemesInstalledProductInfo.xml" />
     <Reference Include="UnityEditor.TestRunner">
@@ -375,6 +379,12 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="UMotionApplication">
+      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Tools/UMotionEditor/Plugins/Application/UMotionApplication.dll</HintPath>
+    </Reference>
+    <Reference Include="UMotionEditor">
+      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Tools/UMotionEditor/Plugins/Editor/UMotionEditor.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
@@ -782,6 +792,14 @@
     <ProjectReference Include="PhotonUnityNetworking.Editor.csproj">
       <Project>{B2C4CCEF-F973-F590-30CF-24CF2096BA14}</Project>
       <Name>PhotonUnityNetworking.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UMotionSourceApplication.csproj">
+      <Project>{6D56E3BC-8556-8266-CDA1-0CA0E4383159}</Project>
+      <Name>UMotionSourceApplication</Name>
+    </ProjectReference>
+    <ProjectReference Include="UMotionSourceEditor.csproj">
+      <Project>{9EA6330E-D3AB-0539-8034-B2C7EC751CE4}</Project>
+      <Name>UMotionSourceEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

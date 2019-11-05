@@ -373,7 +373,7 @@ public class Player : BasePrefab, IPlayer
     {
         CompanionOut = true;
         ReleaseCompanion();
-        var mycompanion = Instantiate(CompanionManager.Instance.GetCompanionByType(companion),transform.position,transform.rotation);        
+        var mycompanion = Instantiate(CompanionManager.Instance.GetCompanion(companion),transform.position,transform.rotation);        
         PlayerCompanion = mycompanion.GetComponent<Companion>();
         if(_movement != null)
             _movement.SetPlayerCompanion = PlayerCompanion;
@@ -627,6 +627,11 @@ public class Player : BasePrefab, IPlayer
                 }
             }
         }
+    }
+
+    private void AttachCompanion()
+    {
+        //Future code to attach companions go here
     }
 
 
