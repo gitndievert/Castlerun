@@ -41,10 +41,6 @@ public class Player : BasePrefab, IPlayer
 
     public bool CompanionOut = false;        
 
-    [Header("Custom Additions to Player")]
-    [Tooltip("For changing the companion on the player")]
-    public CompanionType CompanionType = CompanionType.None;
-
     /// <summary>
     /// Returns the current companion of the player
     /// </summary>
@@ -162,17 +158,7 @@ public class Player : BasePrefab, IPlayer
             PlayerUI.PlayerName.text = _playerName;
 
             //Player stats
-            SetBasicPlayerStats();
-
-            //NOTE
-            //Quick test for two types of castles        
-            //CastleType = PlayerNumber == 1 ? CastleType.Default : CastleType.FortressOfDoom;
-            //CastleManager.Instance.SpawnCastle(CastleType.FortressOfDoom, this);
-
-            if (CompanionOut && CompanionType != CompanionType.None)
-            {
-                SetCompanion(CompanionType);
-            }
+            SetBasicPlayerStats();           
 
             BuildManager.Instance.Placements.Player = this;
 
@@ -376,6 +362,8 @@ public class Player : BasePrefab, IPlayer
             FloatingPlayerTitleText.rectTransform.LookAt(Camera.main.transform);
             FloatingPlayerTitleText.rectTransform.Rotate(Vector3.up - new Vector3(0, 180, 0));
         }
+
+        AttachCastle();        
 
     }
       
@@ -621,6 +609,23 @@ public class Player : BasePrefab, IPlayer
             PlayerTitle = title;
 
             IsDead = (bool)stream.ReceiveNext();
+        }
+    }
+
+    private void AttachCastle()
+    {
+        //Attach scene castle to player
+        if (PlayerCastle == null)
+        {
+            var castles = FindObjectsOfType<Castle>();
+            foreach (var castle in castles)
+            {
+                if (ActorNumber == castle.PlayerNumber)
+                {
+                    PlayerCastle = castle;
+                    break;
+                }
+            }
         }
     }
 

@@ -59,6 +59,6 @@ public class CastleManager : PSingle<CastleManager>
             case "other":
                 return GetCastle(CastleType.Citadel);
         }
-    }
+    }    
 
 }

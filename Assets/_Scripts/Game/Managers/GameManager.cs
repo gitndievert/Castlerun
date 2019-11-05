@@ -240,6 +240,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     }
 
     #endregion
+      
 
     //Hacked up
     private void StartPlayersTest()
