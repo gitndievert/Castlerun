@@ -365,6 +365,12 @@
     <Reference Include="websocket-sharp">
       <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Networking/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
     </Reference>
+    <Reference Include="UMotionApplication">
+      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Tools/UMotionEditor/Plugins/Application/UMotionApplication.dll</HintPath>
+    </Reference>
+    <Reference Include="UMotionEditor">
+      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Tools/UMotionEditor/Plugins/Editor/UMotionEditor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -379,12 +385,6 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="UMotionApplication">
-      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Tools/UMotionEditor/Plugins/Application/UMotionApplication.dll</HintPath>
-    </Reference>
-    <Reference Include="UMotionEditor">
-      <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Assets/_Assets/Tools/UMotionEditor/Plugins/Editor/UMotionEditor.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>F:/PROJECTS/WinTheCastle/WinTheCastle/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
@@ -781,6 +781,10 @@
       <Project>{1B4B0155-62C4-D337-617F-E2ABD0208112}</Project>
       <Name>PhotonUnityNetworking</Name>
     </ProjectReference>
+    <ProjectReference Include="UMotionSourceApplication.csproj">
+      <Project>{6D56E3BC-8556-8266-CDA1-0CA0E4383159}</Project>
+      <Name>UMotionSourceApplication</Name>
+    </ProjectReference>
     <ProjectReference Include="PhotonChat.csproj">
       <Project>{975989A6-B038-403E-2397-978EE0EA84DF}</Project>
       <Name>PhotonChat</Name>
@@ -792,10 +796,6 @@
     <ProjectReference Include="PhotonUnityNetworking.Editor.csproj">
       <Project>{B2C4CCEF-F973-F590-30CF-24CF2096BA14}</Project>
       <Name>PhotonUnityNetworking.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UMotionSourceApplication.csproj">
-      <Project>{6D56E3BC-8556-8266-CDA1-0CA0E4383159}</Project>
-      <Name>UMotionSourceApplication</Name>
     </ProjectReference>
     <ProjectReference Include="UMotionSourceEditor.csproj">
       <Project>{9EA6330E-D3AB-0539-8034-B2C7EC751CE4}</Project>

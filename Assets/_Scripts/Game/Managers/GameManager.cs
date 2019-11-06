@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     /// </summary>
     [Tooltip("The prefab to use for representing the player")]
     public GameObject PlayerInstance;
-    
+
+    #region SpawnPoints
     [Header("Spawn Points")]
     //Player Spawns
     public Transform Player1SpawnPoint;
@@ -46,13 +47,14 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public Transform Player2ResourcePoints;
     //public Transform Player3ResourcePoints;
     //public Transform Player4ResourcePoints;
+
+    #endregion
+
     public TextMeshProUGUI Messages;
     public TextMeshProUGUI PlayersConnected;
     
     #region Sounds
     public AudioClip[] PlayerJoining;
-
-
     #endregion
 
 
@@ -80,7 +82,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         if(Global.DeveloperMode)
         {
             StartPlayersTest();
-            //StartMusic();
+            //Music.Instance.PlayMusicTrack(1);
             return;
         }
         
@@ -161,12 +163,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public void OnClick_Quit()
     {
         Application.Quit();
-    }
-
-    private void StartMusic()
-    {
-        Music.Instance.PlayMusicTrack(1);
-    }        
+    }          
 
     #region Photon Callbacks
 
@@ -226,8 +223,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     }
 
     #endregion
-      
 
+    #region Developer/Test Calls
     //Hacked up
     private void StartPlayersTest()
     {
@@ -248,5 +245,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
         castleSpawnTwo.tag = Global.ENEMY_TAG;
         castleSpawnTwo.layer = Global.ENEMY_LAYER;        
-    }    
+    }
+
+    #endregion
 }

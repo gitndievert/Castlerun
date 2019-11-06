@@ -27,6 +27,7 @@ public class Player : BasePrefab, IPlayer
     public float MoveSpeed;
     public float BuildSpeed;
     public float AttackDistance = 3f;
+    public float AttackDelay = 1f;
     public override string DisplayName => PlayerName;
 
     [Range(15,50)]
@@ -37,9 +38,7 @@ public class Player : BasePrefab, IPlayer
     public MeleeWeaponTrail WeaponTrail;
 
     public TextMeshPro FloatingPlayerText;
-    public TextMeshPro FloatingPlayerTitleText;
-
-    public bool CompanionOut = false;        
+    public TextMeshPro FloatingPlayerTitleText;            
 
     /// <summary>
     /// Returns the current companion of the player
@@ -87,25 +86,15 @@ public class Player : BasePrefab, IPlayer
     public string PlayerTitle { get; private set; }
     #endregion
 
-    #region Private Members
-    private GameObject _mainHand;
-    private GameObject _offHand;   
+    #region Private Members    
     [SerializeField]
     private string _playerName;
     private BattleCursor _battleCursor;    
-        
-    private float _attackDelay = 1f;
     private float _lastAttacked;
     private int _hitCounter = 1;
     private bool _jumping;
-
-
     private MovementInput _movement;
-
-    #region PUN Triggers    
-
-    #endregion
-
+       
 
     #endregion
 
@@ -370,8 +359,7 @@ public class Player : BasePrefab, IPlayer
 
     //These three methods probably need their own class
     public void SetCompanion(CompanionType companion)
-    {
-        CompanionOut = true;
+    {        
         ReleaseCompanion();
         var mycompanion = Instantiate(CompanionManager.Instance.GetCompanion(companion),transform.position,transform.rotation);        
         PlayerCompanion = mycompanion.GetComponent<Companion>();
@@ -387,8 +375,7 @@ public class Player : BasePrefab, IPlayer
         Destroy(PlayerCompanion.gameObject);
         if(_movement != null)
             _movement.SetPlayerCompanion = null;
-        PlayerCompanion = null;
-        CompanionOut = false;
+        PlayerCompanion = null;     
     }
 
     public void WepTrailEnable()
@@ -444,7 +431,7 @@ public class Player : BasePrefab, IPlayer
 
     private void ResetAttackTimer()
     {
-        _lastAttacked = Time.time + _attackDelay;
+        _lastAttacked = Time.time + AttackDelay;
     }
     
     [PunRPC]
