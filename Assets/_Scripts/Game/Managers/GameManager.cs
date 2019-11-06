@@ -14,7 +14,6 @@
 
 using Photon.Pun;
 using Photon.Realtime;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -49,20 +48,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     //public Transform Player4ResourcePoints;
     public TextMeshProUGUI Messages;
     public TextMeshProUGUI PlayersConnected;
-
-    [Header("PUN Network Variables")]
-    /// <summary>
-    /// Total Players in Room
-    /// </summary>
-    public static int PlayersInRoom;
-
-    /// <summary>
-    /// My Players Number in Room
-    /// </summary>
-    public static int MyPlayerNumber;
-
-    public float StartingTime;
-
+    
     #region Sounds
     public AudioClip[] PlayerJoining;
 
@@ -134,12 +120,12 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
                 var character = PhotonNetwork.Instantiate(PlayerInstance.name, spawnTransform.localPosition, spawnTransform.localRotation, 0);
                 character.layer = Global.IGNORE_LAYER;                
 
-                MyPlayerNumber = PhotonNetwork.LocalPlayer.ActorNumber;              
+                int playernum = PhotonNetwork.LocalPlayer.ActorNumber;              
                 
                 var player = character.GetComponent<Player>();
-                player.ActorNumber = MyPlayerNumber;                
+                player.ActorNumber = playernum;                
 
-                Debug.Log($"Current actor number: {MyPlayerNumber}");
+                Debug.Log($"Current actor number: {playernum}");
                 //Kill music for now
                 MusicManager.stop(3f);
 
@@ -152,7 +138,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
                         var castleObj = CastleManager.Instance.GetCastle((string)c.Value);
                         var castleSpawn = PhotonNetwork.Instantiate(castleObj.name, castleTransform.localPosition, castleTransform.localRotation, 0);
                         player.PlayerCastle = castleSpawn.GetComponent<Castle>();
-                        player.PlayerCastle.PlayerNumber = MyPlayerNumber;
+                        player.PlayerCastle.PlayerNumber = playernum;
                     }
                 }
 
@@ -245,16 +231,12 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     //Hacked up
     private void StartPlayersTest()
     {
-        //PUN Networking pieces
-        int spawnIndex = 0;
-        int playerNum = spawnIndex + 1;        
-
         var character = Instantiate(PlayerInstance, Player1SpawnPoint.localPosition, Player1SpawnPoint.localRotation);
         var player = character.GetComponent<Player>();        
         var castleSpawn = Instantiate(CastleManager.Instance.GetCastle("classic"), Player1CastlePoint.localPosition, Player1CastlePoint.localRotation);
         player.PlayerName = "Krunchy";
         player.PlayerCastle = castleSpawn.GetComponent<Castle>();
-        player.PlayerCastle.PlayerNumber = MyPlayerNumber;
+        player.PlayerCastle.PlayerNumber = 1;
 
 
         var charactertwo = Instantiate(PlayerInstance, Player2SpawnPoint.localPosition, Player2SpawnPoint.localRotation);
@@ -262,10 +244,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         var castleSpawnTwo = Instantiate(CastleManager.Instance.GetCastle("fod"), Player2CastlePoint.localPosition, Player2CastlePoint.localRotation);
         playertwo.PlayerName = "MrTest";
         playertwo.PlayerCastle = castleSpawnTwo.GetComponent<Castle>();
-        player.PlayerCastle.PlayerNumber = MyPlayerNumber;
+        player.PlayerCastle.PlayerNumber = 2;
 
         castleSpawnTwo.tag = Global.ENEMY_TAG;
-        castleSpawnTwo.layer = Global.ENEMY_LAYER;
-        
+        castleSpawnTwo.layer = Global.ENEMY_LAYER;        
     }    
 }
