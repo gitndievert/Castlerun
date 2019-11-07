@@ -121,7 +121,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: db18bea3bd2e69242850c3bf76bd2611, type: 2}
---- !u!84 &202744991
+--- !u!84 &135433586
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -320,41 +320,6 @@ Transform:
   m_Father: {fileID: 9084014647368622963}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!84 &583496517
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 765
-  m_Height: 478
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 1
-  m_ColorFormat: 8
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &636805967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1059,7 +1024,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 583496517}
+      objectReference: {fileID: 135433586}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98901fb555d0ce8439b115e48c7b8cb6, type: 3}
 --- !u!1 &771766561
@@ -1398,6 +1363,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eda1ea3a1ee51ec4889639c29fc60a6a, type: 3}
+--- !u!84 &1235064842
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 765
+  m_Height: 478
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 1
+  m_ColorFormat: 8
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1660084012
 GameObject:
   m_ObjectHideFlags: 0
@@ -2401,6 +2401,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerInstance: {fileID: 1507808357, guid: 47c4c30cb31bfbb47bf369cc29485702, type: 3}
+  TestPlayerInstance: {fileID: 667178269109588929, guid: a89e00d9fddaf624297a834c8fbd6f77,
+    type: 3}
   Player1SpawnPoint: {fileID: 465018841657294748}
   Player2SpawnPoint: {fileID: 465018842136915525}
   Player3SpawnPoint: {fileID: 465018840811830369}
@@ -2413,7 +2415,6 @@ MonoBehaviour:
   Player2ResourcePoints: {fileID: 0}
   Messages: {fileID: 636805969}
   PlayersConnected: {fileID: 636805976}
-  StartingTime: 0
   PlayerJoining:
   - {fileID: 8300000, guid: 1f3a9737c0c42a24a9a2f1b2b1c923c7, type: 3}
   - {fileID: 8300000, guid: b87329a3307e0fc4885e86b7e0dfd5bd, type: 3}

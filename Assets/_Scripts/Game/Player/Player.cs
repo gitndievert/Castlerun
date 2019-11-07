@@ -88,6 +88,7 @@ public class Player : BasePrefab, IPlayer
 
     #region Private Members    
     [SerializeField]
+    private bool _isTestPlayer = false;
     private string _playerName;
     private BattleCursor _battleCursor;    
     private float _lastAttacked;
@@ -100,16 +101,19 @@ public class Player : BasePrefab, IPlayer
 
     protected override void Awake()
     {
-        // #Important
-        // used in GameManager.cs: we keep track of the localPlayer instance to prevent instanciation when levels are synchronized
-        if (photonView.IsMine || Global.DeveloperMode)
+        if (!_isTestPlayer)
         {
-            LocalPlayerInstance = gameObject;
-        }
+            // #Important
+            // used in GameManager.cs: we keep track of the localPlayer instance to prevent instanciation when levels are synchronized
+            if (photonView.IsMine || Global.DeveloperMode)
+            {
+                LocalPlayerInstance = gameObject;
+            }
 
-        // #Critical
-        // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
-        DontDestroyOnLoad(gameObject);
+            // #Critical
+            // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
+            DontDestroyOnLoad(gameObject);
+        }
 
         PlayerWorldItems = new GameObject("PlayerWorldItems");
         base.Awake();
@@ -124,6 +128,8 @@ public class Player : BasePrefab, IPlayer
     protected override void Start()
     {
         base.Start();
+
+        if (_isTestPlayer) return;
 
         if (!Global.DeveloperMode)
         {
@@ -209,7 +215,27 @@ public class Player : BasePrefab, IPlayer
            
     private void Update()
     {
-        //Attack 
+        //Face player labels toward camera
+        if (FloatingPlayerText != null && FloatingPlayerText.text.Length > 0)
+        {
+            //var camVector = Camera.main.transform.position;
+            FloatingPlayerText.rectTransform.LookAt(Camera.main.transform);
+            FloatingPlayerText.rectTransform.Rotate(Vector3.up - new Vector3(0, 180, 0));
+        }
+        //Face player labels toward camera
+        if (FloatingPlayerTitleText != null && FloatingPlayerTitleText.text.Length > 0)
+        {
+            //var camVector = Camera.main.transform.position;
+            FloatingPlayerTitleText.rectTransform.LookAt(Camera.main.transform);
+            FloatingPlayerTitleText.rectTransform.Rotate(Vector3.up - new Vector3(0, 180, 0));
+        }
+
+        AttachCastle();
+
+        //If test player don't proceed through update()
+        if (_isTestPlayer) return;
+
+        //All "Active" player settings in the loop
         if (photonView.IsMine || Global.DeveloperMode)
         {
             if (Time.time > _lastAttacked)
@@ -335,24 +361,7 @@ public class Player : BasePrefab, IPlayer
                 CameraRotate.BattleFieldMode = false;
             }
            
-        }
-
-        //Face player labels toward camera
-        if (FloatingPlayerText != null && FloatingPlayerText.text.Length > 0)
-        {
-            //var camVector = Camera.main.transform.position;
-            FloatingPlayerText.rectTransform.LookAt(Camera.main.transform);
-            FloatingPlayerText.rectTransform.Rotate(Vector3.up - new Vector3(0, 180, 0));
-        }
-        //Face player labels toward camera
-        if (FloatingPlayerTitleText != null && FloatingPlayerTitleText.text.Length > 0)
-        {
-            //var camVector = Camera.main.transform.position;
-            FloatingPlayerTitleText.rectTransform.LookAt(Camera.main.transform);
-            FloatingPlayerTitleText.rectTransform.Rotate(Vector3.up - new Vector3(0, 180, 0));
-        }
-
-        AttachCastle();        
+        }              
 
     }
       
@@ -400,7 +409,7 @@ public class Player : BasePrefab, IPlayer
             _movement.AttackPlayer();
             if (photonView.IsMine || Global.DeveloperMode)
             {
-                if (MyTarget.IsDead) return;                
+                if (MyTarget.IsDead) return;
                 if (!Extensions.DistanceLess(transform, MyTarget.GameObject.transform, AttackDistance)) return;
 
                 //May need to manage PUN tags
@@ -453,11 +462,14 @@ public class Player : BasePrefab, IPlayer
         if (Health - amount > 0)
         {
             Health -= amount;
-            if (photonView.IsMine || Global.DeveloperMode)
+            if (!_isTestPlayer)
             {
-                PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
-                UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);                
-            }            
+                if (photonView.IsMine || Global.DeveloperMode)
+                {
+                    PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
+                    UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);
+                }
+            }
 
             bool takehit = _hitCounter >= 3;
 
@@ -466,7 +478,9 @@ public class Player : BasePrefab, IPlayer
                 if (HitSounds.Length > 0)
                     SoundManager.PlaySound(HitSounds);
 
-                _movement.Hit();
+                if(!_isTestPlayer)
+                    _movement.Hit();
+
                 _hitCounter = 1;
             }
 

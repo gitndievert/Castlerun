@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     /// </summary>
     [Tooltip("The prefab to use for representing the player")]
     public GameObject PlayerInstance;
+    public GameObject TestPlayerInstance;
 
     #region SpawnPoints
     [Header("Spawn Points")]
@@ -236,12 +237,14 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         player.PlayerCastle.PlayerNumber = 1;
 
 
-        var charactertwo = Instantiate(PlayerInstance, Player2SpawnPoint.localPosition, Player2SpawnPoint.localRotation);
+        var charactertwo = Instantiate(TestPlayerInstance, Player2SpawnPoint.localPosition, Player2SpawnPoint.localRotation);
         var playertwo = charactertwo.GetComponent<Player>();
         var castleSpawnTwo = Instantiate(CastleManager.Instance.GetCastle("fod"), Player2CastlePoint.localPosition, Player2CastlePoint.localRotation);
         playertwo.PlayerName = "MrTest";
         playertwo.PlayerCastle = castleSpawnTwo.GetComponent<Castle>();
         player.PlayerCastle.PlayerNumber = 2;
+        charactertwo.tag = Global.ENEMY_TAG;
+        charactertwo.layer = Global.ENEMY_LAYER;
 
         castleSpawnTwo.tag = Global.ENEMY_TAG;
         castleSpawnTwo.layer = Global.ENEMY_LAYER;        
