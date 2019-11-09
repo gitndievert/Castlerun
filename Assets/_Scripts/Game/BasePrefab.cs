@@ -213,6 +213,12 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         return Collider.bounds.ClosestPoint(point);
     }
 
+    [PunRPC]
+    protected virtual void RPC_Die()
+    {
+        Die();
+    }
+
     public virtual void Die()
     {
         IsDead = true;
