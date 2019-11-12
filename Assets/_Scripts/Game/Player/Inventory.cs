@@ -12,10 +12,9 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-using Photon.Pun;
 using UnityEngine;
 
-public class Inventory : MonoBehaviourPun
+public class Inventory : MonoBehaviour
 {   
     const int MAX_WOOD = 500;
     const int MAX_ROCK = 500;
@@ -31,16 +30,6 @@ public class Inventory : MonoBehaviourPun
     [Range(0, MAX_GOLD)]
     public int GoldCount = 0;
 
-    [Header("Main Hand Weapons")]
-    [SerializeField]
-    private GameObject PrimaryHand;
-    [SerializeField]
-    private GameObject SecondaryHand;
-
-    [Header("Weapons")]
-    public GameObject Weapon;
-    public GameObject Shield;
-
     public bool ResetOnStart = false;
 
     public bool IsWoodFull { get { return WoodCount >= MAX_WOOD; } }
@@ -49,17 +38,12 @@ public class Inventory : MonoBehaviourPun
     public bool IsGoldFull { get { return GoldCount >= MAX_GOLD; } }
 
     private InventoryUI _ui;    
-    private PhotonView _pv;
-    
 
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Start()
     {
         _ui = UIManager.Instance.InventoryUIPanel;
-        if(ResetOnStart) ResetAll();
-        //Set up hands
-        ResetHands();
-        _pv = GetComponent<PhotonView>();
+        if(ResetOnStart) ResetAll();             
 
         //To Trigger Events
         //EventManager.StartListening("Resource", ResourceMessage);
@@ -134,7 +118,7 @@ public class Inventory : MonoBehaviourPun
             Set(cost.Resource, -cost.Amount);
         }
     }
-        
+
     /// <summary>
     /// Add or subtract amount in Inventory
     /// </summary>
@@ -142,105 +126,66 @@ public class Inventory : MonoBehaviourPun
     /// <param name="amount">Amount of Resource</param>
     public void Set(ResourceType type, int amount = 0)
     {
-        if ((_pv != null && !_pv.IsMine) || Global.DeveloperMode)
-        {
-            switch (type)
-            {
-                case ResourceType.Wood:
-                    if ((amount + WoodCount) <= MAX_WOOD)
-                    {
-                        WoodCount += amount;
-                    }
-                    else
-                    {
-                        Global.Message("You cannot store anymore wood");
-                        return;
-                    }
-                    break;
-                case ResourceType.Rock:
-                    if ((amount + RockCount) <= MAX_ROCK)
-                    {
-                        RockCount += amount;
-                    }
-                    else
-                    {
-                        Global.Message("You cannot store anymore rock");
-                        return;
-                    }
-                    break;
-                case ResourceType.Metal:
-                    if ((amount + MetalCount) <= MAX_METAL)
-                    {
-                        MetalCount += amount;
-                    }
-                    else
-                    {
-                        Global.Message("You cannot store anymore metal");
-                        return;
-                    }
-                    break;
-                case ResourceType.Gold:
-                    if ((amount + GoldCount) <= MAX_GOLD)
-                    {
-                        GoldCount += amount;
-                    }
-                    else
-                    {
-                        Global.Message("You cannot store anymore gems");
-                        return;
 
-                    }
-                    break;
-            }
-
-            if (amount > 0)
-            {
-                Global.Message($"You gathered {amount} {type.ToString()}");
-            }
-            else
-            {
-                Global.Message($"You used {Mathf.Abs(amount)} {type.ToString()}");
-            }
-        }
-    }   
-
-    public void ResetHands()
-    {
-        EmptyHand("primary");
-        EmptyHand("secondary");
-        PrimaryHand = Weapon;
-        PrimaryHand.SetActive(true);
-        SecondaryHand = Shield;
-        SecondaryHand.SetActive(true);
-    }
-
-    public void SwitchHand(GameObject newHand, string hand)
-    {
-        if (hand == "primary")
+        switch (type)
         {
-            PrimaryHand.SetActive(false);
-            PrimaryHand = newHand;
-            PrimaryHand.SetActive(true);
-        }
-        else if (hand == "secondary")
-        {
-            SecondaryHand.SetActive(false);
-            SecondaryHand = newHand;
-            SecondaryHand.SetActive(true);
-        }
-    }
+            case ResourceType.Wood:
+                if ((amount + WoodCount) <= MAX_WOOD)
+                {
+                    WoodCount += amount;
+                }
+                else
+                {
+                    Global.Message("You cannot store anymore wood");
+                    return;
+                }
+                break;
+            case ResourceType.Rock:
+                if ((amount + RockCount) <= MAX_ROCK)
+                {
+                    RockCount += amount;
+                }
+                else
+                {
+                    Global.Message("You cannot store anymore rock");
+                    return;
+                }
+                break;
+            case ResourceType.Metal:
+                if ((amount + MetalCount) <= MAX_METAL)
+                {
+                    MetalCount += amount;
+                }
+                else
+                {
+                    Global.Message("You cannot store anymore metal");
+                    return;
+                }
+                break;
+            case ResourceType.Gold:
+                if ((amount + GoldCount) <= MAX_GOLD)
+                {
+                    GoldCount += amount;
+                }
+                else
+                {
+                    Global.Message("You cannot store anymore gems");
+                    return;
 
-    public void EmptyHand(string hand)
-    {
-        if (hand == "primary" && PrimaryHand != null)
-        {
-            PrimaryHand.SetActive(false);
+                }
+                break;
         }
-        else if (hand == "secondary" && SecondaryHand != null)
+
+        if (amount > 0)
         {
-            SecondaryHand.SetActive(false);
+            Global.Message($"You gathered {amount} {type.ToString()}");
         }
-    }
+        else
+        {
+            Global.Message($"You used {Mathf.Abs(amount)} {type.ToString()}");
+        }
+
+    }    
 
 
 }

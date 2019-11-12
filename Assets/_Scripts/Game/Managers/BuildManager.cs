@@ -27,7 +27,7 @@ public class BuildManager : DSingle<BuildManager>
     public GameObject BasicRamp;
 
     [Header("Buildings")]
-    public List<Build> Builds;    
+    public List<Build> AvailableBuilds;    
 
     public PlacementController Placements { get; private set; }    
 
@@ -80,14 +80,14 @@ public class BuildManager : DSingle<BuildManager>
     public void RefreshBuilds()
     {
         int i = 0;
-        int buildcount = Builds.Count;
+        int buildcount = AvailableBuilds.Count;
 
         RefreshSelections();
 
         foreach (Transform trans in BuildUI.SelectionsPanel.transform)
         {
             if (i >= buildcount) break;
-            var build = Builds[i];
+            var build = AvailableBuilds[i];
 
             var image = trans.GetComponent<Image>();
             image.sprite = build.GetIcon();
@@ -114,7 +114,7 @@ public class BuildManager : DSingle<BuildManager>
     
     public void SetStatusEnabled(BuildingLabelTypes type, bool status)
     {
-        foreach(var build in Builds)
+        foreach(var build in AvailableBuilds)
         {
             if(build.BuildingLabelType == type)
             {
@@ -125,9 +125,9 @@ public class BuildManager : DSingle<BuildManager>
     
     public Build GetBuildByType(BuildingLabelTypes building)
     {        
-        if (Builds.Count > 0)
+        if (AvailableBuilds.Count > 0)
         {
-            foreach (var build in Builds)
+            foreach (var build in AvailableBuilds)
             {
                 if (build.BuildingLabelType == building) return build;                    
             }

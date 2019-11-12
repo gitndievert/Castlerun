@@ -69,7 +69,7 @@ public class TroopFactory : Build
         gameObject.SetActive(true);
         base.ConfirmPlacement();
         _buildArea.ShowPlane(false);
-        CamShake.Instance.Shake(1f, .5f);      
+        CamShake.Instance.Shake(8f, 1f);
 
         return true;
     }

@@ -953,17 +953,23 @@ MonoBehaviour:
       Amount: 25
     - Resource: 3
       Amount: 25
-  BuildingLabelType: 7
+  FloatingSelectable: {fileID: 0}
+  BuildingLabelType: 11
   TransparentModel: {fileID: 4729371250097304672}
   FinalModel: {fileID: 6079840342956903723}
   EnableFromBuilder: 1
+  ConstructionZone: {fileID: 0}
   ConstructionTime: 3
+  Construction: {fileID: 0}
+  ConstructionComplete: {fileID: 0}
   PlacementDistance: 2
   Troops: []
-  StartTime: 0
   TrainingTime: 0
   NumberToTrain: 1
+  _trainedCounter: 0
   MaxTrained: 5
+  SpawnPointPosition: {fileID: 0}
+  WayPointPosition: {fileID: 0}
 --- !u!1 &4729371250097304672
 GameObject:
   m_ObjectHideFlags: 0

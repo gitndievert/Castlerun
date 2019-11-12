@@ -1781,7 +1781,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3647206254150417623}
-  m_LocalRotation: {x: 0.033519093, y: -0.034557577, z: 0.026498446, w: 0.9984889}
+  m_LocalRotation: {x: 0.033519097, y: -0.034557577, z: 0.026498448, w: 0.9984889}
   m_LocalPosition: {x: -6.039614e-16, y: 1.8118841e-16, z: -0.04234837}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3024,7 +3024,7 @@ Animator:
   m_GameObject: {fileID: 3647626570993457585}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ffaf641b210f5ea41952cf36f1379d66, type: 3}
-  m_Controller: {fileID: 9100000, guid: 39cc8aa3209dcbb4a85758b992c8ba5a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5a0a5036d378d9b41a5e6d2e93d680b5, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3107,11 +3107,12 @@ MonoBehaviour:
     CostFactors:
     - Resource: 0
       Amount: 1000
-  SelectionTarget: {fileID: 0}
+  FloatingSelectable: {fileID: 0}
   FreshTroop: {fileID: 0}
   SelectionCall: []
   Acknowledgement: []
   AttackBattleCryClips: []
+  Death: {fileID: 0}
   AttackDelaySec: 3
   IsAttacking: 0
   AttackDistance: 3
@@ -3125,16 +3126,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3645607666657039073}
     m_Modifications:
-    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
-        type: 3}
-      propertyPath: m_Name
-      value: MiniMapIcon
-      objectReference: {fileID: 0}
-    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8547001551414770055, guid: ed262e909d070aa41915329ff5d1b7ae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3204,6 +3195,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.6153846
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
+        type: 3}
+      propertyPath: m_Name
+      value: MiniMapIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795081009475742225, guid: ed262e909d070aa41915329ff5d1b7ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed262e909d070aa41915329ff5d1b7ae, type: 3}
