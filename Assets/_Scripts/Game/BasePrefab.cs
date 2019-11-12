@@ -144,15 +144,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         Player = player;
         transform.parent = player.PlayerWorldItems.transform;
     }
-
-    [PunRPC]
-    protected virtual void RPC_TakeHit(int amount, bool takehit)
-    {
-        Health -= amount;
-        if (Health - amount <= 0)
-            Die();
-    }
-
+    
     protected void SetOutline()
     {
         var renders = gameObject.GetComponentsInChildren<Renderer>();
@@ -192,9 +184,6 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
             Health -= amount;
             if (HitSounds.Length > 0)
                 SoundManager.PlaySoundOnGameObject(gameObject,HitSounds);
-
-            if (!Global.DeveloperMode)
-                photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount);
             
             UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
         }
@@ -212,13 +201,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     {
         return Collider.bounds.ClosestPoint(point);
     }
-
-    [PunRPC]
-    protected virtual void RPC_Die()
-    {
-        Die();
-    }
-
+    
     public virtual void Die()
     {
         IsDead = true;

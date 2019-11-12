@@ -261,8 +261,14 @@ public class Player : BasePrefab, IPlayer
             //Disallow movements if player is DEAD
             MovementInput.Lock = IsDead;
 
+            if (!_isTestPlayer)
+            {               
+                 PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
+                 UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);               
+            }
+
             //Jump
-            if(Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 _jumping = true;
                 _movement.Jump();                
@@ -432,14 +438,26 @@ public class Player : BasePrefab, IPlayer
     }
     
     [PunRPC]
-    protected override void RPC_TakeHit(int amount, bool takehit)
+    protected void RPC_TakeHit(int amount, bool takehit, int target)
     {
-        Health -= amount;
-        if (takehit) _movement.Hit();
-        PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
-        UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);
-        if (Health - amount <= 0)
-            photonView.RPC("RPC_Die", RpcTarget.Others);
+        Debug.Log($"Target number is {target} and my number is {ActorNumber}");
+        if (target == ActorNumber)
+        {
+            Health -= amount;
+            if (takehit) _movement.Hit();
+            PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
+            UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);
+        }
+    }
+
+    [PunRPC]
+    protected void RPC_Die(int target)
+    {
+        if (target == ActorNumber)
+        {
+            Debug.Log($"Die RPC is called on {ActorNumber}");
+            Die();
+        }
     }
 
     public override void SetHit(int min, int max)
@@ -447,54 +465,43 @@ public class Player : BasePrefab, IPlayer
         //You're dead, go back
         if (Health <= 0 || IsDead) return;
         int amount = CalcDamage(min, max, out bool crit);
-        if (Health - amount > 0)
+
+        Health -= amount;        
+
+        bool takehit = _hitCounter >= 3;
+
+        if (takehit)
         {
-            Health -= amount;
+            if (HitSounds.Length > 0)
+                SoundManager.PlaySound(HitSounds);
+
             if (!_isTestPlayer)
-            {
-                if (photonView.IsMine || Global.DeveloperMode)
-                {
-                    PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
-                    UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);
-                }
-            }
+                _movement.Hit();
 
-            bool takehit = _hitCounter >= 3;
-
-            if (takehit)
-            {
-                if (HitSounds.Length > 0)
-                    SoundManager.PlaySound(HitSounds);
-
-                if(!_isTestPlayer)
-                    _movement.Hit();
-
-                _hitCounter = 1;
-            }
-
-            if (!Global.DeveloperMode)            
-                photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount, takehit);            
-
-            UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
-
-            _hitCounter++;
-
+            _hitCounter = 1;
         }
-        else
+
+        if (!Global.DeveloperMode)
+            photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount, takehit, ActorNumber);
+
+        UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+
+        _hitCounter++;
+
+        if (Health <= 0)
         {
             if (DestroySound != null)
                 SoundManager.PlaySound(DestroySound);
 
-            Die();                    
+            Die();
+            Debug.Log($"Die is called on {ActorNumber}");
+
+            if (!Global.DeveloperMode)
+                photonView.RPC("RPC_Die", RpcTarget.Others, ActorNumber);
         }
-    }
 
-    [PunRPC]
-    protected override void RPC_Die()
-    {
-        StartCoroutine(DeathSequence());
     }
-
+    
     public override void Die()
     {
         StartCoroutine(DeathSequence());
@@ -564,46 +571,31 @@ public class Player : BasePrefab, IPlayer
         //base.OnPhotonSerializeView(stream, info);
         if (stream.IsWriting)
         {
-            // We own this player: send the others our data            
-            //stream.SendNext(this.Health);
-            //stream.SendNext("My name is mr fancy pants");                 
+            // We own this player: send the others our data                        
             stream.SendNext(PlayerName);
             stream.SendNext(_movement.isAttacking);
-            stream.SendNext(ActorNumber);
-            //stream.SendNext(_jumping);            
-            stream.SendNext(PlayerTitle);
-            stream.SendNext(IsDead);
+            stream.SendNext(ActorNumber);            
+            stream.SendNext(PlayerTitle);            
         }
         else
         {
             // Network player, receive data            
-            //this.IsFiring = (bool)stream.ReceiveNext();
-            //this.Health = (float)stream.ReceiveNext();
-
-            //Debug.Log($"This is from the remote client {(string)stream.ReceiveNext()}");  
+            
             var pname = (string)stream.ReceiveNext();
             FloatingPlayerText.text = pname;
             PlayerName = pname;
             var attacking = (bool)stream.ReceiveNext();
-            //var myhealth = (int)stream.ReceiveNext();
+            
             if (attacking)
             {
                 _movement.AttackPlayer();
             }
             var actornum = (int)stream.ReceiveNext();
-            ActorNumber = actornum;
+            ActorNumber = actornum;           
            
-           /* var jumping = (bool)stream.ReceiveNext();
-            if(_jumping)
-            {
-                _movement.Jump();
-                _jumping = false;
-            }*/
             var title = (string)stream.ReceiveNext();
             FloatingPlayerTitleText.text = $"<{title}>";
-            PlayerTitle = title;
-
-            IsDead = (bool)stream.ReceiveNext();
+            PlayerTitle = title;            
         }
     }
 
