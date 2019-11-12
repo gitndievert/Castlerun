@@ -15,6 +15,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -121,7 +122,9 @@ public class TroopFactory : Build
             color.a = 0.85f;
             image.color = color;
 
-            trans.GetComponent<Button>().onClick.AddListener(() => Train(troop));           
+            var counterText = trans.GetComponentInChildren<TextMeshProUGUI>();
+
+            trans.GetComponent<Button>().onClick.AddListener(() => Train(troop, counterText));           
 
             i++;
         }
@@ -133,7 +136,7 @@ public class TroopFactory : Build
             _trainedCounter--;
     }
     
-    public void Train(Troop selectedTroop)
+    public void Train(Troop selectedTroop, TextMeshProUGUI counterText)
     {
         if (_trainedCounter >= MaxTrained)
         {
