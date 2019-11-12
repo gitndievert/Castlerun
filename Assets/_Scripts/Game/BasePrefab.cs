@@ -183,23 +183,18 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         {
             Health -= amount;
             if (HitSounds.Length > 0)
-                SoundManager.PlaySoundOnGameObject(gameObject,HitSounds);
-            
+                SoundManager.PlaySoundOnGameObject(gameObject, HitSounds);
+
             UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
         }
         else
-        {            
+        {
             if (DestroySound != null)
                 SoundManager.PlaySound(DestroySound);
             if (CanExplode) Explode();
 
-            Die();           
+            Die();
         }
-    }
-
-    public Vector3 DistanceToEdge(Vector3 point)
-    {
-        return Collider.bounds.ClosestPoint(point);
     }
     
     public virtual void Die()
@@ -207,7 +202,12 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         IsDead = true;
         Destroy(gameObject, DestroyTimer);
     }
-    
+
+    public Vector3 DistanceToEdge(Vector3 point)
+    {
+        return Collider.bounds.ClosestPoint(point);
+    }
+
     /// <summary>
     /// Enable or disable outline around the gameobject
     /// </summary>

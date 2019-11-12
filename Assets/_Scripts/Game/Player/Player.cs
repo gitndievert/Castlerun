@@ -47,7 +47,6 @@ public class Player : BasePrefab, IPlayer
     /// Returns the Players Castle
     /// </summary>
     public Castle PlayerCastle;
-    
 
     public Vector3 RespawnPos { get; set; }
 
@@ -92,8 +91,7 @@ public class Player : BasePrefab, IPlayer
     private float _lastAttacked;
     private int _hitCounter = 1;
     private bool _jumping;
-    private MovementInput _movement;
-       
+    private MovementInput _movement;    
 
     #endregion
 
@@ -168,7 +166,7 @@ public class Player : BasePrefab, IPlayer
 
         WepTrailDisable();
         _movement = GetComponent<MovementInput>();
-        
+
     }
 
     public override void OnDisable()
@@ -444,21 +442,28 @@ public class Player : BasePrefab, IPlayer
         if (target == ActorNumber)
         {
             Health -= amount;
-            if (takehit) _movement.Hit();
-            PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
-            UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);
+            if (Health > 0)
+            {
+                if (takehit) _movement.Hit();
+                PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
+                UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);
+            }
+            else
+            {
+                Die();
+            }            
         }
     }
 
-    [PunRPC]
+    /*[PunRPC]
     protected void RPC_Die(int target)
     {
-        if (target == ActorNumber)
+        if (target == PhotonNetwork.LocalPlayer.ActorNumber)
         {
             Debug.Log($"Die RPC is called on {ActorNumber}");
-            Die();
+            //Die();            
         }
-    }
+    }*/
 
     public override void SetHit(int min, int max)
     {
@@ -492,18 +497,14 @@ public class Player : BasePrefab, IPlayer
         {
             if (DestroySound != null)
                 SoundManager.PlaySound(DestroySound);
-
-            Die();
-            Debug.Log($"Die is called on {ActorNumber}");
-
-            if (!Global.DeveloperMode)
-                photonView.RPC("RPC_Die", RpcTarget.Others, ActorNumber);
+            
+            Die();                    
         }
 
     }
     
     public override void Die()
-    {
+    {        
         StartCoroutine(DeathSequence());
     }   
    
@@ -521,8 +522,9 @@ public class Player : BasePrefab, IPlayer
         //Broadcast($"{PlayerName} has DIED!");
         yield return new WaitForSeconds(5f);                
         SetBasicPlayerStats();
-        _movement.RestartAnimator();        
-        IsDead = false;        
+        _movement.RestartAnimator();
+        IsDead = false;
+        transform.position = RespawnPos;
         yield return null;
     }  
 

@@ -383,7 +383,7 @@ public abstract class Troop : BasePrefab, ISelectable
         _moveTriggerPoint = false;        
     }
 
-    /*[PunRPC]
+    [PunRPC]
     protected void RPC_TakeHit(int amount, bool takehit)
     {
         Health -= amount;
@@ -391,7 +391,7 @@ public abstract class Troop : BasePrefab, ISelectable
 
         //Maybe show damage text across network??
         //UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
-    }*/
+    }
     
     public override void SetHit(int min, int max)
     {
@@ -414,8 +414,8 @@ public abstract class Troop : BasePrefab, ISelectable
                 _hitCounter = 1;
             }
 
-            //if (!Global.DeveloperMode)            
-            //    photonView.RPC("RPC_TakeHit",RpcTarget.Others, amount, takehit);
+            if (!Global.DeveloperMode)
+                photonView.RPC("RPC_TakeHit",RpcTarget.Others, amount, takehit);
             
             UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
 

@@ -21,6 +21,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
     public static GameManager LocalGameManagerInstance;
+    public static Player MyLocalPlayer;
     
     /// <summary>
     /// Player Prefab
@@ -126,7 +127,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
                 int playernum = PhotonNetwork.LocalPlayer.ActorNumber;              
                 
                 var player = character.GetComponent<Player>();
-                player.ActorNumber = playernum;                
+                player.ActorNumber = playernum;
+                MyLocalPlayer = player;
 
                 Debug.Log($"Current actor number: {playernum}");
                 //Kill music for now
