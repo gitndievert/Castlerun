@@ -107,7 +107,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         Collider = GetComponent<Collider>();        
 
         //Set the GameManager
-        GameManager = GameManager.LocalGameManagerInstance;
+        GameManager = GameManager.Instance;
 
         //Set the outlines
         SetOutline();
@@ -172,6 +172,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
             Outlines.Add(outline);
         }
     }
+      
 
     //Damage and Death    
     public virtual void SetHit(int min, int max)
@@ -199,7 +200,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     
     public virtual void Die()
     {
-        IsDead = true;
+        IsDead = true;      
         Destroy(gameObject, DestroyTimer);
     }
 
@@ -301,8 +302,5 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     {
         object[] instantiationData = info.photonView.InstantiationData;                
     }
-
-    
-
 
 }

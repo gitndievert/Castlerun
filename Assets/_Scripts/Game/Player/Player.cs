@@ -442,28 +442,12 @@ public class Player : BasePrefab, IPlayer
         if (target == ActorNumber)
         {
             Health -= amount;
-            if (Health > 0)
-            {
-                if (takehit) _movement.Hit();
-                PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
-                UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);
-            }
-            else
-            {
-                Die();
-            }            
+            if (Health <= 0) Die();            
+            if (takehit) _movement.Hit();
+            PlayerUI.HealthText.text = $"{Health}/{MaxHealth}";
+            UIManager.Instance.HealthBar.BarValue = Mathf.RoundToInt(((float)Health / MaxHealth) * 100);            
         }
     }
-
-    /*[PunRPC]
-    protected void RPC_Die(int target)
-    {
-        if (target == PhotonNetwork.LocalPlayer.ActorNumber)
-        {
-            Debug.Log($"Die RPC is called on {ActorNumber}");
-            //Die();            
-        }
-    }*/
 
     public override void SetHit(int min, int max)
     {
@@ -493,13 +477,7 @@ public class Player : BasePrefab, IPlayer
 
         _hitCounter++;
 
-        if (Health <= 0)
-        {
-            if (DestroySound != null)
-                SoundManager.PlaySound(DestroySound);
-            
-            Die();                    
-        }
+        if (Health <= 0) Die();        
 
     }
     
@@ -510,9 +488,12 @@ public class Player : BasePrefab, IPlayer
    
     private IEnumerator DeathSequence()
     {
+        if (DestroySound != null)
+            SoundManager.PlaySound(DestroySound);
         IsDead = true;
         Health = 0;        
         _movement.Die();
+        UnSelect();
         if (photonView.IsMine)
         {
             Global.Message("YOU DIED, Respawn in 5 seconds...");

@@ -59,6 +59,7 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
     protected bool p_ConfirmPlacement = false;
 
     private Vector3 _offset;
+    private int _hitCounter = 1;
 
     protected override void Awake()
     {
@@ -169,6 +170,46 @@ public abstract class Build : BasePrefab, IBuild, ISelectable
             IsSelected = false;
             BuildManager.Instance.RefreshBuilds();
         }
+    }
+
+    [PunRPC]
+    protected void RPC_TakeHit(int amount, bool takehit)
+    {
+        Health -= amount;
+        if (Health <= 0) Die();
+    }
+
+    public override void SetHit(int min, int max)
+    {
+        if (Health <= 0 || IsDead) return;
+        int amount = CalcDamage(min, max, out bool crit);
+
+        Health -= amount;
+
+        bool takehit = _hitCounter >= 3;
+
+        if (takehit)
+        {
+            if (HitSounds.Length > 0)
+                SoundManager.PlaySound(HitSounds);
+            
+            _hitCounter = 1;
+        }
+
+        if (!Global.DeveloperMode)
+            photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount, takehit);
+
+        UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+
+        _hitCounter++;
+
+        if (Health <= 0) Die();
+    }
+
+    public override void Die()
+    {
+        UnSelect();
+        base.Die();
     }
 
 }

@@ -14,13 +14,14 @@
 
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
-    public static GameManager LocalGameManagerInstance;
+    public static GameManager Instance;
     public static Player MyLocalPlayer;
     
     /// <summary>
@@ -63,16 +64,16 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void Awake()
     {
         //Flip to Singleton
-        if (LocalGameManagerInstance == null)
+        if (Instance == null)
         {
-            LocalGameManagerInstance = this;
+            Instance = this;
         }
         else
         {
-            if(LocalGameManagerInstance != this)
+            if(Instance != this)
             {
-                Destroy(LocalGameManagerInstance);
-                LocalGameManagerInstance = this;
+                Destroy(Instance);
+                Instance = this;
             }
         }
 
@@ -253,4 +254,5 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     }
 
     #endregion
+   
 }

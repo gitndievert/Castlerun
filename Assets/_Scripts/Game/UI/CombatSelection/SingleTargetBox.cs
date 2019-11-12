@@ -12,7 +12,6 @@
 // Dissemination or reproduction of this material is forbidden.
 // ********************************************************************
 
-using SBK.Unity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,8 +48,15 @@ public class SingleTargetBox : MonoBehaviour
         {
             int health = _target.GetCurrentHealth();
             if (health <= 0 || _target.IsDead)
-            {
-                ClearTarget();
+            {                
+                if(_target.GameObject.tag == Global.ENEMY_TAG)
+                {
+                    Selection.Instance.ClearEnemyTarget();
+                }
+                else
+                {
+                    Selection.Instance.ClearSingleTarget();
+                }
             }
             else
             {                
@@ -59,24 +65,24 @@ public class SingleTargetBox : MonoBehaviour
         }
     }
 
-    public void SetTarget(ISelectable target)
-    {        
-        _target = target;
+    public void SetTargetBox(ISelectable target)
+    {   
         if (target.IsDead)
         {
             _targetObj = null;
             return;
         }
+        _target = target;
         _targetObj = target.GameObject;
         Process();                
     }
 
-    public void SetTarget(GameObject target)
+    public void SetTargetBox(GameObject target)
     {
-        SetTarget(target.GetComponent<ISelectable>());
+        SetTargetBox(target.GetComponent<ISelectable>());
     }
 
-    public void ClearTarget()
+    public void ClearTargetBox()
     {
         HasSelection = false;
         _target = null;

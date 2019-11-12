@@ -277,7 +277,7 @@ public class Selection : DSingle<Selection>
 
         //Also update the SingleTarget with First Selection
         SingleTargetSelected = MassSelectionList[0];
-        _ui.SingleTargetBox.SetTarget(SingleTargetSelected);
+        _ui.SingleTargetBox.SetTargetBox(SingleTargetSelected);
 
     }
 
@@ -286,7 +286,7 @@ public class Selection : DSingle<Selection>
         if (selection == SingleTargetSelected) return;
         if (SingleTargetSelected != null) ClearSingleTarget();        
         SingleTargetSelected = selection;
-        _ui.SingleTargetBox.SetTarget(SingleTargetSelected);
+        _ui.SingleTargetBox.SetTargetBox(SingleTargetSelected);
         
         ClearAll();
 
@@ -306,18 +306,14 @@ public class Selection : DSingle<Selection>
         SingleTargetSelected = selection;
         _ui.SingleTargetBox.SetTarget(SingleTargetSelected);*/
     }
-       
+
     public void UpdateEnemyTarget(ISelectable selection)
     {
         if (selection == EnemyTargetSelected) return;
-        if (EnemyTargetSelected != null)
-        {
-            ClearEnemyTarget();
-        }
+        if (EnemyTargetSelected != null) ClearEnemyTarget();
         EnemyTargetSelected = selection;
-        _ui.EnemyTargetBox.SetTarget(EnemyTargetSelected);
+        _ui.EnemyTargetBox.SetTargetBox(EnemyTargetSelected);
         SelectionCursorOn();
-
         EnemyTargetSelected.Highlight(true, 0);
     }
 
@@ -336,7 +332,7 @@ public class Selection : DSingle<Selection>
             SingleTargetSelected.Highlight(false);
             ClearList(SingleTargetSelected);
             SingleTargetSelected = null;
-            _ui.SingleTargetBox.ClearTarget();            
+            _ui.SingleTargetBox.ClearTargetBox();            
         }
     }
 
@@ -347,7 +343,7 @@ public class Selection : DSingle<Selection>
             EnemyTargetSelected.UnSelect();
             EnemyTargetSelected.Highlight(false);
             EnemyTargetSelected = null;
-            _ui.EnemyTargetBox.ClearTarget();
+            _ui.EnemyTargetBox.ClearTargetBox();
             SelectionCursorOff();
         }
     }

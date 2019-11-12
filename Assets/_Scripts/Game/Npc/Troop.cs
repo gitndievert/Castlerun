@@ -387,61 +387,60 @@ public abstract class Troop : BasePrefab, ISelectable
     protected void RPC_TakeHit(int amount, bool takehit)
     {
         Health -= amount;
-        if(takehit) anim.Play("Hit");
-
-        //Maybe show damage text across network??
-        //UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+        if (Health <= 0) Die();
+        if (takehit) anim.Play("Hit");        
     }
-    
+
     public override void SetHit(int min, int max)
-    {
-        //Taking this out to test
-        //if (!IsSelected) return;
-        if (IsDead) return;
+    {   
+        if (Health <= 0 || IsDead) return;
         int amount = CalcDamage(min, max, out bool crit);
-        if (Health - amount > 0)
+
+        Health -= amount;
+
+        bool takehit = _hitCounter >= 3;
+
+        if (takehit)
         {
-            Health -= amount;
+            if (HitSounds.Length > 0)
+                SoundManager.PlaySound(HitSounds);
 
-            bool takehit = _hitCounter >= 3;
-
-            if (takehit)
-            {
-                if (HitSounds.Length > 0)
-                    SoundManager.PlaySound(HitSounds);
-
-                anim.Play("Hit");
-                _hitCounter = 1;
-            }
-
-            if (!Global.DeveloperMode)
-                photonView.RPC("RPC_TakeHit",RpcTarget.Others, amount, takehit);
-            
-            UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
-
-            _hitCounter++;
+            anim.Play("Hit");
+            _hitCounter = 1;
         }
-        else
-        {            
-            if (DestroySound != null)
-                SoundManager.PlaySound(DestroySound);
 
-            if (CanExplode) Explode();
+        if (!Global.DeveloperMode)
+            photonView.RPC("RPC_TakeHit", RpcTarget.Others, amount, takehit);
 
-            Die();
-        }
+        UIManager.Instance.FloatCombatText(TextType.Damage, amount, crit, transform);
+
+        _hitCounter++;
+
+        if(Health <= 0) Die();
     }
     
     public override void Die()
-    {        
-        anim.Play("Death1");
+    {
+        if (DestroySound != null)
+            SoundManager.PlaySound(DestroySound);
+
+        if (CanExplode)
+        {
+            Explode();
+        }
+        else
+        {
+            anim.Play("Death1");
+        }
+        
         if (GetTag == Global.ARMY_TAG)
         {
             AssociatedFactory.UnListTroop();
         }
+        UnSelect();
         base.Die();
     }
-
+   
     private void ResetAttackTimer()
     {
         _lastAttacked = Time.time + AttackDelaySec;

@@ -4783,7 +4783,6 @@ MonoBehaviour:
   MinDamage: 10
   MaxDamage: 25
   Speed: 50
-  ImpactSound: {fileID: 0}
 --- !u!54 &3322622113706560888
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4824,8 +4823,8 @@ Light:
   serializedVersion: 9
   m_Type: 2
   m_Color: {r: 0.41726607, g: 0.14204343, b: 0.5283019, a: 1}
-  m_Intensity: 5
-  m_Range: 10
+  m_Intensity: 2
+  m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -4857,7 +4856,7 @@ Light:
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_Flare: {fileID: 12100000, guid: 54fbbf098d116effa00081aba8ad6659, type: 2}
+  m_Flare: {fileID: 12100000, guid: d03d45583759e674dbf23e2bd7eec310, type: 2}
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
