@@ -31,12 +31,6 @@ public partial class UIManager : PSingle<UIManager>
 
     public TextMeshProUGUI Messages;    
 
-    /// <summary>
-    /// Inventory Panel
-    /// </summary>
-    [Header("Inventory")]
-    public InventoryUI InventoryUIPanel;
-
     [Header("Player")]
     public ProgressBar HealthBar;
 
@@ -45,12 +39,6 @@ public partial class UIManager : PSingle<UIManager>
     /// Player Panel
     /// </summary>
     public PlayerUI PlayerUIPanel;
-
-    /// <summary>
-    /// Panel for selecting Buildings and Troops
-    /// </summary>
-    [Header("Building")]
-    public BuildUI BuildingUIPanel;
 
  
     [Header("Selection System")]
@@ -69,11 +57,6 @@ public partial class UIManager : PSingle<UIManager>
     /// Target Box (Single Selection)
     /// </summary>    
     public SingleTargetBox SingleTargetBox;
-
-    /// <summary>
-    /// Multitarget Box Manager (All Selected Targets)
-    /// </summary>    
-    public MultiTargetBox MultiTargetBox;
 
     /// <summary>
     /// Enemy Target Box (Single Selection)

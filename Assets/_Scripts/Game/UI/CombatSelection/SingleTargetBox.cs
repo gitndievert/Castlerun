@@ -99,11 +99,7 @@ public class SingleTargetBox : MonoBehaviour
         HasSelection = true;       
         
         switch (_targetObj.tag)
-        {
-            case Global.ARMY_TAG:
-            case Global.BUILD_TAG:
-                SwapBackgroundColor(DefaultColor);
-                break;
+        {            
             case Global.ENEMY_TAG:
                 SwapBackgroundColor(EnemyColor);
                 break;

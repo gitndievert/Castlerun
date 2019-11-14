@@ -20,47 +20,25 @@ public static class Global
     /// <summary>
     /// This sets developer mode. NETWORK RELEASE IS FALSE ALWAYS
     /// </summary>
-    public static bool DeveloperMode = false;
+    public static bool DeveloperMode = true;
+
+    public const int PLAYER_MAX_SLOTS = 4;
 
     #region Game Objects
     /// <summary>
     /// Global Tag for MultiCamRig
     /// </summary>
     public const string CAM_RIG_TAG = "CamRig";
-    /// <summary>
-    /// Global Tag for Basic Build Snappoints
-    /// </summary>
-    public const string SNAP_POINT_TAG = "SnapPoint";
-    /// <summary>
-    /// Global Tag for Resources
-    /// </summary>
-    public const string RESOURCE_TAG = "Resource";
-    /// <summary>
-    /// Build Area tag for specific BUILD AREA TRANSFORMS
-    /// </summary>
-    public const string BUILDAREA_TAG = "BuildArea";
+    
     #endregion
 
     #region Selectable Objects
-    /// <summary>
-    /// Tag for Selectable Buildings
-    /// </summary>
-    public const string BUILD_TAG = "Build";
-
-    /// <summary>
-    /// Tag for selectable troops that are combat active
-    /// </summary>
-    public const string ARMY_TAG = "Army";
-
+    
     /// <summary>
     /// Tag for Opponents Troops that are combat active
     /// </summary>
     public const string ENEMY_TAG = "Enemy";
-
-    /// <summary>
-    /// Tag for generic selectable troops that are NPC's (NON COMBAT)
-    /// </summary>
-    public const string NPC_TAG = "Npc";
+    
 
     /// <summary>
     /// Tag for all Projectiles flying around the map
@@ -68,28 +46,25 @@ public static class Global
     public const string PROJECTILE_TAG = "Projectile";
     #endregion
 
-    #region Game Constants
+    #region Scene Layers
         
     public const int DEFAULT_LAYER = 0;
     public const int IGNORE_LAYER = 2;
-    public const int GROUND_LAYER = 8;
-    public const int ARMY_LAYER = 12;
+    public const int GROUND_LAYER = 8;    
     public const int PROJECTILE_LAYER = 12;
-    public const int UI_LAYER = 5;    
-    public const int BUILD_GRID_LAYER = 9;
+    public const int UI_LAYER = 5;        
     public const int ENEMY_LAYER = 15;
     public const int MINIMAP_ICON_LAYER = 10;
 
     /// <summary>
     /// Max Number of Player Slots per game
     /// </summary>
-    public const int PLAYER_MAX_SLOTS = 4;
+    
     #endregion
 
     #region Player Flags
     public static bool BuildMode = false;
-    public static bool MouseLook = false;
-    //public static bool BattleMode = false;
+    public static bool MouseLook = false;    
     public static bool InsideCastle = false;
     #endregion
 
@@ -97,11 +72,6 @@ public static class Global
     //Player
     public static int PlayerMoveSpeedBonus = 0;
     public static int PlayerHealthBonus = 0;
-
-    //Troop
-    public static float ConstructionSpeedBonus = 1f;
-    public static int TroopHealthBonus = 0;
-    public static int TroopAttackBonus = 0;    
     #endregion
 
 

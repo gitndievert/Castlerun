@@ -48,7 +48,23 @@ public class Player : BasePrefab, IPlayer
     /// </summary>
     public Castle PlayerCastle;
 
+    /// <summary>
+    /// Returns if the Players Flag if Carrying
+    /// </summary>
+    public Flag PlayerFlag;
+
     public Vector3 RespawnPos { get; set; }
+
+    /// <summary>
+    /// Returns the status of player holding the flag
+    /// </summary>
+    public bool HasFlag
+    {
+        get
+        {
+            return PlayerFlag != null;
+        }
+    }
 
     /// <summary>
     /// Players PUN Actor Number Assigned in network
@@ -77,9 +93,7 @@ public class Player : BasePrefab, IPlayer
     public GameObject GameObject => gameObject;    
     #endregion
 
-    #region Player Components      
-    public Inventory Inventory { get; private set; }        
-    public GameObject PlayerWorldItems { get; internal set; }    
+    #region Player Components               
     public string PlayerTitle { get; private set; }
     #endregion
 
@@ -110,8 +124,7 @@ public class Player : BasePrefab, IPlayer
             // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
             DontDestroyOnLoad(gameObject);
         }
-
-        PlayerWorldItems = new GameObject("PlayerWorldItems");
+                
         base.Awake();
 
         //Sets the transform respawn point
@@ -133,25 +146,20 @@ public class Player : BasePrefab, IPlayer
             {                
                 gameObject.layer = Global.ENEMY_LAYER;
             }
-        }        
-
+        }
+        
         //Set Cameras
         if (photonView.IsMine || Global.DeveloperMode)
-        {
-            Inventory = GetComponent<Inventory>();            
+        {            
             _battleCursor = GetComponent<BattleCursor>();
             
             PlayerName = PhotonNetwork.LocalPlayer.NickName;            
 
             CameraRotate.target = transform;
-            MiniMapControls.target = transform;
-
-            PlayerUI.PlayerName.text = _playerName;
+            MiniMapControls.target = transform;            
 
             //Player stats
-            SetBasicPlayerStats();           
-
-            BuildManager.Instance.Placements.Player = this;
+            SetBasicPlayerStats();       
 
             if(FloatingPlayerText != null)            
                 FloatingPlayerText.gameObject.SetActive(false);
@@ -165,7 +173,12 @@ public class Player : BasePrefab, IPlayer
         }
 
         WepTrailDisable();
-        _movement = GetComponent<MovementInput>();
+        _movement = GetComponent<MovementInput>();        
+
+        if (_playerName == "")
+            PlayerName = "Mr Player";
+
+        PlayerUI.PlayerName.text = PlayerName;
 
     }
 
@@ -271,53 +284,7 @@ public class Player : BasePrefab, IPlayer
                 _jumping = true;
                 _movement.Jump();                
             }
-
-            /////// BUILD MODE ACTIVATION
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                Global.BuildMode = !Global.BuildMode;
-                _battleCursor.Off();
-
-                if (Global.BuildMode)
-                {
-                    //Announce build mode on                                
-                    BuildManager.Instance.Placements.SetGrid = true;
-                    BuildManager.Instance.LoadBasicWall();
-                }
-                else
-                {
-                    //Announce build mode off                
-                    CameraRotate.BuildCamMode = false;
-                    BuildManager.Instance.Placements.SetGrid = false;
-                    BuildManager.Instance.Placements.ClearObject();
-                }
-
-            }
-
-            /////// BUILD MODE OPTIONS
-            if (Global.BuildMode)
-            {
-                if (Input.GetKeyDown(KeyBindings.BuildKey1))
-                {
-                    BuildManager.Instance.LoadBasicWall();
-                }
-                else if (Input.GetKeyDown(KeyBindings.BuildKey2))
-                {
-                    BuildManager.Instance.LoadBasicFloor();
-                }
-                else if (Input.GetKeyDown(KeyBindings.BuildKey3))
-                {
-                    BuildManager.Instance.LoadBasicRamp();
-                }
-            }
-
-
-            /////// TEST TROOP EXPLODER
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                Selection.Instance.SingleTargetSelected.GameObject.GetComponent<Troop>().AddExplosionForce(10f);
-            }
-
+            
             /////// TEST COMPANIONS
             if (Input.GetKeyDown(KeyCode.C))
             {
@@ -330,33 +297,11 @@ public class Player : BasePrefab, IPlayer
             if (Input.GetKeyDown(KeyCode.B))
             {
                 ReleaseCompanion();
-            }
-
-            /////// TEST CAM SHAKER
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                CamShake.Instance.Shake();
-            }           
-
-            /*if (Input.GetKeyDown(KeyCode.I))
-            {
-                _movement.Dance();
-            }*/           
-
-            //Camera Switch
-            if(Input.GetKeyDown(KeyCode.Z))
-            {
-                CameraRotate.BattleFieldMode = true;
-            }
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                CameraRotate.BattleFieldMode = false;
-            }
+            }                      
            
         }              
 
-    }
-      
+    }      
 
     //These three methods probably need their own class
     public void SetCompanion(CompanionType companion)
@@ -419,9 +364,7 @@ public class Player : BasePrefab, IPlayer
             {                
                 if (hit.point != null)
                 { 
-                    if (hit.transform.tag != Global.ARMY_TAG 
-                        && hit.transform.tag != Global.BUILD_TAG 
-                        && hit.GetLayer() != Global.UI_LAYER)
+                    if (hit.GetLayer() != Global.UI_LAYER)
                     {
                         _movement.AttackPlayer();
                     }
@@ -548,7 +491,7 @@ public class Player : BasePrefab, IPlayer
             OnMouseDown();
     }   
 
-    //Main method for serialization on Player actions
+    
     public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         //base.OnPhotonSerializeView(stream, info);
@@ -581,6 +524,9 @@ public class Player : BasePrefab, IPlayer
             PlayerTitle = title;            
         }
     }
+
+
+    //Attachments 
 
     private void AttachCastle()
     {

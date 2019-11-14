@@ -1233,7 +1233,6 @@ GameObject:
   - component: {fileID: 1507808363}
   - component: {fileID: 1507808359}
   - component: {fileID: 1507808360}
-  - component: {fileID: 1507808361}
   - component: {fileID: 706162164831775572}
   - component: {fileID: -2392940468147617419}
   - component: {fileID: 7703449772116736736}
@@ -1263,9 +1262,9 @@ Transform:
   - {fileID: 850413292}
   - {fileID: 1427456322}
   - {fileID: 675718231}
-  - {fileID: 1893078936}
   - {fileID: 8534244724460432063}
   - {fileID: 9134937075726256112}
+  - {fileID: 2060099821001417033}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1350,8 +1349,6 @@ MonoBehaviour:
   HitSounds: []
   HealthText: {fileID: 0}
   Icon: {fileID: 21300000, guid: ce52d0989a2c8ff439b68f3525367aad, type: 3}
-  Costs:
-    CostFactors: []
   FloatingSelectable: {fileID: 6209431020024728444}
   AttackDistance: 8
   AttackDelay: 1
@@ -1364,23 +1361,6 @@ MonoBehaviour:
   PlayerCastle: {fileID: 0}
   ActorNumber: 0
   _isTestPlayer: 0
---- !u!114 &1507808361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1507808357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe2359d927fa25849bad1197a2d17f01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WoodCount: 500
-  RockCount: 500
-  MetalCount: 500
-  GoldCount: 10000
-  ResetOnStart: 0
 --- !u!143 &706162164831775572
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1865,36 +1845,6 @@ Transform:
   m_Father: {fileID: 2031815582}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1893078935
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1893078936}
-  m_Layer: 2
-  m_Name: PlacementSpawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1893078936
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1893078935}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.281, z: 3.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1507808365}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1954867407
 GameObject:
   m_ObjectHideFlags: 0
@@ -2080,7 +2030,7 @@ Transform:
   - {fileID: 8747016292166342831}
   - {fileID: 7541812833664512523}
   m_Father: {fileID: 1507808365}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1190699687951767509
 GameObject:
@@ -2489,6 +2439,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &6486645615996745844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2060099821001417033}
+  m_Layer: 2
+  m_Name: FlagMount
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2060099821001417033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6486645615996745844}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.175, z: -0.307}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1507808365}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8288696294608672132
 GameObject:
   m_ObjectHideFlags: 0
@@ -2520,7 +2500,7 @@ Transform:
   - {fileID: 196375159172565872}
   - {fileID: 2612543447896114855}
   m_Father: {fileID: 1507808365}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9088294473886253016
 GameObject:
@@ -2734,18 +2714,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8534244724460432063}
     m_Modifications:
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_Name
-      value: MinimapIcon_Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.82
@@ -2802,6 +2770,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_Name
+      value: MinimapIcon_Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -2825,26 +2805,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8534244724460432063}
     m_Modifications:
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_Name
-      value: MinimapIcon_Player (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_Name
-      value: MinimapIcon_Player (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.9
@@ -2900,6 +2860,26 @@ PrefabInstance:
     - target: {fileID: 400000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
       propertyPath: m_LocalScale.z
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_Name
+      value: MinimapIcon_Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_Name
+      value: MinimapIcon_Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
       propertyPath: m_Materials.Array.data[0]

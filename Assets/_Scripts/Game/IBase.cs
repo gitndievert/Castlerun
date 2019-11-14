@@ -17,8 +17,7 @@ using UnityEngine;
 public interface IBase
 {
     void SetHit(int min, int max);
-    void Die();
-    Costs GetCosts();
+    void Die();    
     Sprite GetIcon();
     void SetPlayer(Player player);
     Vector3 DistanceToEdge(Vector3 point);

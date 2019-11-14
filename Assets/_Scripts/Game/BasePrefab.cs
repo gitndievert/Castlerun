@@ -45,8 +45,6 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     public Sprite Icon;
     #endregion
     
-    public Costs Costs;
-
     public string GetTag
     {
         get { return tag; }
@@ -141,8 +139,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     /// <param name="player"></param>
     public void SetPlayer(Player player)
     {
-        Player = player;
-        transform.parent = player.PlayerWorldItems.transform;
+        Player = player;        
     }
     
     protected void SetOutline()
@@ -154,9 +151,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
             
             //Exclusions
             if (T != typeof(MeshRenderer) && T != typeof(SkinnedMeshRenderer))
-                continue;
-            if (render.transform.tag == Global.BUILDAREA_TAG)
-                continue;
+                continue;            
             if (render.gameObject.layer == Global.MINIMAP_ICON_LAYER)
                 continue;
             if (render.transform.GetComponent<TextMeshPro>() != null)
@@ -269,11 +264,6 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
     public int GetMaxHealth()
     {
         return MaxHealth;
-    }
-
-    public Costs GetCosts()
-    {
-        return Costs ?? null;
     }
 
     public override string ToString()
