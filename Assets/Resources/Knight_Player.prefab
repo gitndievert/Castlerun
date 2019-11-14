@@ -1365,6 +1365,7 @@ MonoBehaviour:
   PlayerFlag: {fileID: 0}
   HandMountPoint: {fileID: 475044054}
   BackMountPoint: {fileID: 2060099821001417033}
+  PickedUpFlag: 0
   _isTestPlayer: 0
 --- !u!143 &706162164831775572
 CharacterController:
@@ -2719,6 +2720,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8534244724460432063}
     m_Modifications:
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_Name
+      value: MinimapIcon_Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.82
@@ -2775,18 +2788,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_Name
-      value: MinimapIcon_Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -2810,6 +2811,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8534244724460432063}
     m_Modifications:
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_Name
+      value: MinimapIcon_Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_Name
+      value: MinimapIcon_Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.9
@@ -2865,26 +2886,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
       propertyPath: m_LocalScale.z
       value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_Name
-      value: MinimapIcon_Player (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_Name
-      value: MinimapIcon_Player (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: be6b7eb8095b9b24f93f3fa0b10891b2, type: 3}
       propertyPath: m_Materials.Array.data[0]

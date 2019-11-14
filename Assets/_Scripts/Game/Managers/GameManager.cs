@@ -235,6 +235,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         player.PlayerCastle = castleSpawn.GetComponent<Castle>();
         player.PlayerCastle.PlayerNumber = 1;
 
+        var flagone = Instantiate(GameFlag.gameObject, player.HandMountPoint.position, Quaternion.identity);
+        flagone.transform.SetParent(player.HandMountPoint);
+        player.PlayerFlag = flagone.GetComponent<Flag>();
 
         var charactertwo = Instantiate(TestPlayerInstance, Player2SpawnPoint.localPosition, Player2SpawnPoint.localRotation);
         var playertwo = charactertwo.GetComponent<Player>();
@@ -246,7 +249,11 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         charactertwo.layer = Global.ENEMY_LAYER;
 
         castleSpawnTwo.tag = Global.ENEMY_TAG;
-        castleSpawnTwo.layer = Global.ENEMY_LAYER;        
+        castleSpawnTwo.layer = Global.ENEMY_LAYER;
+
+        var flagtwo = Instantiate(GameFlag.gameObject, playertwo.HandMountPoint.position, Quaternion.identity);
+        flagtwo.transform.SetParent(playertwo.HandMountPoint);
+        playertwo.PlayerFlag = flagtwo.GetComponent<Flag>();
     }
 
     #endregion

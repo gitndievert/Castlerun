@@ -94,6 +94,8 @@ public class Player : BasePrefab, IPlayer
         }
     }
 
+    public bool PickedUpFlag = false;
+
     public string PlayerName
     {
         get { return _playerName; }
@@ -180,7 +182,7 @@ public class Player : BasePrefab, IPlayer
         if (Offhand != null)
             Offhand.SetActive(false);
 
-        MakeFlag();
+        CreateFlag();
 
         //Set Cameras
         if (photonView.IsMine || Global.DeveloperMode)
@@ -202,10 +204,9 @@ public class Player : BasePrefab, IPlayer
                 FloatingPlayerTitleText.gameObject.SetActive(false);
 
             if (PlayerText.PlayerTitles.Length > 0)
-                PlayerTitle = PlayerText.PlayerTitles[Random.Range(0, PlayerText.PlayerTitles.Length - 1)];            
+                PlayerTitle = PlayerText.PlayerTitles[Random.Range(0, PlayerText.PlayerTitles.Length - 1)];           
 
         }
-
         
         _movement = GetComponent<MovementInput>();        
 
@@ -273,7 +274,7 @@ public class Player : BasePrefab, IPlayer
             FloatingPlayerTitleText.rectTransform.Rotate(Vector3.up - new Vector3(0, 180, 0));
         }
 
-        AttachCastle();
+        AttachCastle();        
 
         //If test player don't proceed through update()
         if (_isTestPlayer) return;
@@ -368,36 +369,13 @@ public class Player : BasePrefab, IPlayer
     {
         if (WeaponTrail == null) return;
         WeaponTrail.Emit = false;
-    }
-
-    private void MakeFlag()
-    {
-        if(PlayerFlag == null)
-        {
-            var newFlag = GameManager.Instance.GameFlag;
-
-            GameObject makeFlag = null;
-
-            if (Global.DeveloperMode)
-            {
-                makeFlag = Instantiate(newFlag.gameObject, HandMountPoint.position, Quaternion.identity);
-            }
-            else
-            {
-                makeFlag = PhotonNetwork.Instantiate(newFlag.gameObject.name, HandMountPoint.position, Quaternion.identity);
-            }
-
-            makeFlag.transform.SetParent(HandMountPoint);
-            PlayerFlag = makeFlag.GetComponent<Flag>();
-        }
-    }
-
+    }    
 
     [PunRPC]
     public void Swing()
     {
         //Don't swing if weapon not visible
-        if (MainHand == null) return;
+        if (MainHand == null || !MainHand.activeSelf) return;
 
         if (UIManager.Instance.
             IsMouseOverUI()) return;
@@ -605,10 +583,57 @@ public class Player : BasePrefab, IPlayer
         }
     }
 
+    private void CreateFlag()
+    {
+        if (PlayerFlag == null)
+        {
+            var makeFlag = PhotonNetwork.Instantiate(GameManager.Instance.GameFlag.name, HandMountPoint.position, Quaternion.identity);
+            PlayerFlag = makeFlag.GetComponent<Flag>();
+            PlayerFlag.PlayerNumber = ActorNumber;
+            PickUpFlag(PlayerFlag);
+        }
+
+    }   
+
+    /*
+    private void Attachment<T>(GameObject obj) where T: IAttachable
+    {
+        if (obj == null)
+        {
+            var type = FindObjectsOfType<T>();
+            foreach (var flag in type)
+            {
+                if (ActorNumber == flag.PlayerNumber)
+                {
+                    obj = flag;
+                    break;
+                }
+            }
+        }
+    }*/
+
     private void AttachCompanion()
     {
         //Future code to attach companions go here
     }
+
+    public void PickUpFlag(Flag flag)
+    {        
+        PickedUpFlag = true;        
+        //Move to RPC
+        //PlayerFlag.transform.SetParent(HandMountPoint);        
+    }
+
+    public void DropFlag()
+    {
+        if(HasFlag)
+        {
+            PickedUpFlag = false;
+            //Move to RPC
+            //PlayerFlag.transform.parent = null;            
+        }
+    }
+
 
 
 }
