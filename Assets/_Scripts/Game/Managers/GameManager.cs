@@ -45,16 +45,12 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public Transform Player3CastlePoint;
     public Transform Player4CastlePoint;
 
-    [Header("Resource Points")]
-    public Transform Player1ResourcePoints;
-    public Transform Player2ResourcePoints;
-    //public Transform Player3ResourcePoints;
-    //public Transform Player4ResourcePoints;
-
     #endregion
-
+    [Space(10)]
     public TextMeshProUGUI Messages;
     public TextMeshProUGUI PlayersConnected;
+
+    public GameObject GameFlag;
     
     #region Sounds
     public AudioClip[] PlayerJoining;

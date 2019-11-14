@@ -36,8 +36,29 @@ public class Player : BasePrefab, IPlayer
     public MeleeWeaponTrail WeaponTrail;
 
     public TextMeshPro FloatingPlayerText;
-    public TextMeshPro FloatingPlayerTitleText;            
+    public TextMeshPro FloatingPlayerTitleText;
+    
+    /// <summary>
+    /// Players PUN Actor Number Assigned in network
+    /// </summary>
+    [Tooltip("The PUN assigned player actor number")]
+    public int ActorNumber = 0;
 
+
+    #region Player Holdings
+
+    [Header("Player Attachements")]
+    /// <summary>
+    /// Mainhand Object
+    /// </summary>
+    public GameObject MainHand = null;
+
+    /// <summary>
+    /// (Optional) Offhand Object
+    /// </summary>
+    public GameObject Offhand = null;
+
+  
     /// <summary>
     /// Returns the current companion of the player
     /// </summary>
@@ -48,10 +69,17 @@ public class Player : BasePrefab, IPlayer
     /// </summary>
     public Castle PlayerCastle;
 
+    [Header("Flag Actions")]
     /// <summary>
     /// Returns if the Players Flag if Carrying
     /// </summary>
     public Flag PlayerFlag;
+
+    public Transform HandMountPoint;
+
+    public Transform BackMountPoint;
+
+    #endregion
 
     public Vector3 RespawnPos { get; set; }
 
@@ -65,11 +93,6 @@ public class Player : BasePrefab, IPlayer
             return PlayerFlag != null;
         }
     }
-
-    /// <summary>
-    /// Players PUN Actor Number Assigned in network
-    /// </summary>
-    public int ActorNumber = 0;
 
     public string PlayerName
     {
@@ -147,7 +170,18 @@ public class Player : BasePrefab, IPlayer
                 gameObject.layer = Global.ENEMY_LAYER;
             }
         }
-        
+
+        //Hide Weapons on Start
+        WepTrailDisable();
+
+        if (MainHand != null)
+            MainHand.SetActive(false);
+
+        if (Offhand != null)
+            Offhand.SetActive(false);
+
+        MakeFlag();
+
         //Set Cameras
         if (photonView.IsMine || Global.DeveloperMode)
         {            
@@ -168,11 +202,11 @@ public class Player : BasePrefab, IPlayer
                 FloatingPlayerTitleText.gameObject.SetActive(false);
 
             if (PlayerText.PlayerTitles.Length > 0)
-                PlayerTitle = PlayerText.PlayerTitles[Random.Range(0, PlayerText.PlayerTitles.Length - 1)];
+                PlayerTitle = PlayerText.PlayerTitles[Random.Range(0, PlayerText.PlayerTitles.Length - 1)];            
 
         }
 
-        WepTrailDisable();
+        
         _movement = GetComponent<MovementInput>();        
 
         if (_playerName == "")
@@ -336,9 +370,35 @@ public class Player : BasePrefab, IPlayer
         WeaponTrail.Emit = false;
     }
 
+    private void MakeFlag()
+    {
+        if(PlayerFlag == null)
+        {
+            var newFlag = GameManager.Instance.GameFlag;
+
+            GameObject makeFlag = null;
+
+            if (Global.DeveloperMode)
+            {
+                makeFlag = Instantiate(newFlag.gameObject, HandMountPoint.position, Quaternion.identity);
+            }
+            else
+            {
+                makeFlag = PhotonNetwork.Instantiate(newFlag.gameObject.name, HandMountPoint.position, Quaternion.identity);
+            }
+
+            makeFlag.transform.SetParent(HandMountPoint);
+            PlayerFlag = makeFlag.GetComponent<Flag>();
+        }
+    }
+
+
     [PunRPC]
     public void Swing()
     {
+        //Don't swing if weapon not visible
+        if (MainHand == null) return;
+
         if (UIManager.Instance.
             IsMouseOverUI()) return;
         if (MyTarget != null)
