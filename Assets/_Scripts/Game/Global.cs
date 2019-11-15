@@ -20,7 +20,7 @@ public static class Global
     /// <summary>
     /// This sets developer mode. NETWORK RELEASE IS FALSE ALWAYS
     /// </summary>
-    public static bool DeveloperMode = false;
+    public static bool DeveloperMode = true;
 
     public const int PLAYER_MAX_SLOTS = 4;
 
@@ -44,6 +44,11 @@ public static class Global
     /// Tag for all Projectiles flying around the map
     /// </summary>
     public const string PROJECTILE_TAG = "Projectile";
+
+    /// <summary>
+    /// Tag all usable flags
+    /// </summary>
+    public const string FLAG_TAG = "Flag";
     #endregion
 
     #region Scene Layers

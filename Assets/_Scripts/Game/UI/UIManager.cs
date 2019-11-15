@@ -40,6 +40,8 @@ public partial class UIManager : PSingle<UIManager>
     /// </summary>
     public PlayerUI PlayerUIPanel;
 
+    public TextMeshProUGUI CountDownText;
+
  
     [Header("Selection System")]
 

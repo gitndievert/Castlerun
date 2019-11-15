@@ -81,18 +81,7 @@ public class Player : BasePrefab, IPlayer
 
     #endregion
 
-    public Vector3 RespawnPos { get; set; }
-
-    /// <summary>
-    /// Returns the status of player holding the flag
-    /// </summary>
-    public bool HasFlag
-    {
-        get
-        {
-            return PlayerFlag != null;
-        }
-    }
+    public Vector3 RespawnPos { get; set; }    
 
     public bool PickedUpFlag = false;
 
@@ -161,7 +150,7 @@ public class Player : BasePrefab, IPlayer
     // Start is called before the first frame update
     protected override void Start()
     {
-        base.Start();
+        base.Start();        
 
         if (_isTestPlayer) return;
 
@@ -180,9 +169,7 @@ public class Player : BasePrefab, IPlayer
             MainHand.SetActive(false);
 
         if (Offhand != null)
-            Offhand.SetActive(false);
-
-        CreateFlag();
+            Offhand.SetActive(false);        
 
         //Set Cameras
         if (photonView.IsMine || Global.DeveloperMode)
@@ -319,7 +306,13 @@ public class Player : BasePrefab, IPlayer
                 _jumping = true;
                 _movement.Jump();                
             }
-            
+
+            //////DROP Flag
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                DropFlag();
+            }
+
             /////// TEST COMPANIONS
             if (Input.GetKeyDown(KeyCode.C))
             {
@@ -582,18 +575,7 @@ public class Player : BasePrefab, IPlayer
             }
         }
     }
-
-    private void CreateFlag()
-    {
-        if (PlayerFlag == null)
-        {
-            var makeFlag = PhotonNetwork.Instantiate(GameManager.Instance.GameFlag.name, HandMountPoint.position, Quaternion.identity);
-            PlayerFlag = makeFlag.GetComponent<Flag>();
-            PlayerFlag.PlayerNumber = ActorNumber;
-            PickUpFlag(PlayerFlag);
-        }
-
-    }   
+       
 
     /*
     private void Attachment<T>(GameObject obj) where T: IAttachable
@@ -615,23 +597,21 @@ public class Player : BasePrefab, IPlayer
     private void AttachCompanion()
     {
         //Future code to attach companions go here
-    }
+    }   
 
     public void PickUpFlag(Flag flag)
     {        
-        PickedUpFlag = true;        
+        PickedUpFlag = true;
         //Move to RPC
-        //PlayerFlag.transform.SetParent(HandMountPoint);        
+        flag.transform.position = BackMountPoint.position;
+        flag.transform.SetParent(transform);
     }
 
     public void DropFlag()
-    {
-        if(HasFlag)
-        {
-            PickedUpFlag = false;
-            //Move to RPC
-            //PlayerFlag.transform.parent = null;            
-        }
+    {        
+        PickedUpFlag = false;        
+        PlayerFlag.transform.position = transform.position + new Vector3(0, 0, 5f);
+        PlayerFlag.Reset();        
     }
 
 

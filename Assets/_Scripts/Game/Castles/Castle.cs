@@ -15,9 +15,9 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class Castle : MonoBehaviour, IPunObservable, IAttachable
+public class Castle : MonoBehaviour, IPunObservable
 {
-    public int PlayerNumber { get; set; }
+    public int PlayerNumber;
 
     public int DoorBustHealth = 10;
     public CastleType CastleType = CastleType.Default;    

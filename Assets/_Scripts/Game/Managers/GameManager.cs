@@ -50,7 +50,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public TextMeshProUGUI Messages;
     public TextMeshProUGUI PlayersConnected;
 
+    public static bool HideEvent = false;
     public GameObject GameFlag;
+    public float GameStartTimeSeconds = 45f;
     
     #region Sounds
     public AudioClip[] PlayerJoining;
@@ -144,6 +146,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
                     }
                 }
 
+                var pp = player.transform.position;
+                CreateFlag(new Vector3(pp.x + 5f, pp.y, pp.z + 5f));
+
                 SoundManager.PlaySound(PlayerJoining);
             }
             else
@@ -163,7 +168,19 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public void OnClick_Quit()
     {
         Application.Quit();
-    }          
+    }
+
+    private void Update()
+    {
+        //Start Countdown
+        if (GameStartTimeSeconds > 0)
+        {
+            GameStartTimeSeconds -= Time.deltaTime;
+            LevelTimer(GameStartTimeSeconds);            
+        }
+
+        HideEvent = GameStartTimeSeconds > 0;
+    }
 
     #region Photon Callbacks
 
@@ -235,27 +252,57 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         player.PlayerCastle = castleSpawn.GetComponent<Castle>();
         player.PlayerCastle.PlayerNumber = 1;
 
-        var flagone = Instantiate(GameFlag.gameObject, player.HandMountPoint.position, Quaternion.identity);
-        flagone.transform.SetParent(player.HandMountPoint);
-        player.PlayerFlag = flagone.GetComponent<Flag>();
+        var pp = player.transform.position;
+        CreateFlag(new Vector3(pp.x + 5f, pp.y, pp.z + 5f));
 
         var charactertwo = Instantiate(TestPlayerInstance, Player2SpawnPoint.localPosition, Player2SpawnPoint.localRotation);
         var playertwo = charactertwo.GetComponent<Player>();
         var castleSpawnTwo = Instantiate(CastleManager.Instance.GetCastle("fod"), Player2CastlePoint.localPosition, Player2CastlePoint.localRotation);
         playertwo.PlayerName = "MrTest";
         playertwo.PlayerCastle = castleSpawnTwo.GetComponent<Castle>();
-        player.PlayerCastle.PlayerNumber = 2;
+        playertwo.PlayerCastle.PlayerNumber = 2;
         charactertwo.tag = Global.ENEMY_TAG;
         charactertwo.layer = Global.ENEMY_LAYER;
 
-        castleSpawnTwo.tag = Global.ENEMY_TAG;
-        castleSpawnTwo.layer = Global.ENEMY_LAYER;
+        var pp2 = playertwo.transform.position;
+        CreateFlag(new Vector3(pp2.x + 5f, pp2.y, pp2.z + 5f));
 
-        var flagtwo = Instantiate(GameFlag.gameObject, playertwo.HandMountPoint.position, Quaternion.identity);
-        flagtwo.transform.SetParent(playertwo.HandMountPoint);
-        playertwo.PlayerFlag = flagtwo.GetComponent<Flag>();
+        castleSpawnTwo.tag = Global.ENEMY_TAG;
+        castleSpawnTwo.layer = Global.ENEMY_LAYER;        
     }
 
     #endregion
    
+    private void LevelTimer(float timeSeconds)
+    {
+        int minutes = Mathf.FloorToInt(timeSeconds / 60f);
+        int seconds = Mathf.RoundToInt(timeSeconds % 60f);
+
+        string formatedSeconds = seconds.ToString();
+
+        if (seconds == 60)
+        {
+            seconds = 0;
+            minutes += 1;
+        }
+
+        UIManager.Instance.CountDownText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+    }
+
+    private void CreateFlag(Vector3 spawnpoint)
+    {
+        if (GameFlag != null)
+        {
+            GameObject makeFlag = null;
+            if (!Global.DeveloperMode)
+            {
+                makeFlag = PhotonNetwork.Instantiate(GameFlag.name, spawnpoint, Quaternion.identity);
+            }
+            else
+            {
+                makeFlag = Instantiate(GameFlag, spawnpoint, Quaternion.identity);
+            }            
+        }
+
+    }
 }

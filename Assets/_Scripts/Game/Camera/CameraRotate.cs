@@ -138,7 +138,7 @@ public class CameraRotate : MonoBehaviour
                 _yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
             }
             //otherwise, ease behind the target if any of the directional keys are pressed
-            else if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            else if ((Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)))
             {
                 float targetRotationAngle = target.eulerAngles.y;
                 float currentRotationAngle = transform.eulerAngles.y;
