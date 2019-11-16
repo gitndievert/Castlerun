@@ -173,13 +173,11 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void Update()
     {
         //Start Countdown
-        if (GameStartTimeSeconds > 0)
+        if (!HideEvent)
         {
             GameStartTimeSeconds -= Time.deltaTime;
-            LevelTimer(GameStartTimeSeconds);            
-        }
-
-        HideEvent = GameStartTimeSeconds > 0;
+            HideEvent = LevelTimer(GameStartTimeSeconds);            
+        }        
     }
 
     #region Photon Callbacks
@@ -273,7 +271,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     #endregion
    
-    private void LevelTimer(float timeSeconds)
+    private bool LevelTimer(float timeSeconds)
     {
         int minutes = Mathf.FloorToInt(timeSeconds / 60f);
         int seconds = Mathf.RoundToInt(timeSeconds % 60f);
@@ -287,6 +285,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         }
 
         UIManager.Instance.CountDownText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+
+        return minutes <= 0 && seconds <= 0;
     }
 
     private void CreateFlag(Vector3 spawnpoint)

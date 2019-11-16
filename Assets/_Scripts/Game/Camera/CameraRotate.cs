@@ -147,7 +147,9 @@ public class CameraRotate : MonoBehaviour
                 }
                 float targetRotationAngle = target.eulerAngles.y;
                 float currentRotationAngle = transform.eulerAngles.y;
-                _xDeg = Mathf.LerpAngle(currentRotationAngle, targetRotationAngle, rotationDampening * Time.deltaTime);
+
+                if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+                    _xDeg = Mathf.LerpAngle(currentRotationAngle, targetRotationAngle, rotationDampening * Time.deltaTime);
             }     
             else
             {
