@@ -132,18 +132,28 @@ public class CameraRotate : MonoBehaviour
         {
             //This will enable both middle and right buttons. Right will assist in camera changes, 
             //and middle will allow freelook
-            if (Input.GetMouseButton(KeyBindings.MIDDLE_MOUSE_BUTTON) || Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
+            /*if (Input.GetMouseButton(KeyBindings.MIDDLE_MOUSE_BUTTON) || Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
+            {
+                _xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
+                _yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+            }*/
+            //otherwise, ease behind the target if any of the directional keys are pressed
+            if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            {
+                if(Input.GetMouseButton(KeyBindings.RIGHT_MOUSE_BUTTON))
+                {
+                    _xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
+                    _yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+                }
+                float targetRotationAngle = target.eulerAngles.y;
+                float currentRotationAngle = transform.eulerAngles.y;
+                _xDeg = Mathf.LerpAngle(currentRotationAngle, targetRotationAngle, rotationDampening * Time.deltaTime);
+            }     
+            else
             {
                 _xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
                 _yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
             }
-            //otherwise, ease behind the target if any of the directional keys are pressed
-            else if ((Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)))
-            {
-                float targetRotationAngle = target.eulerAngles.y;
-                float currentRotationAngle = transform.eulerAngles.y;
-                _xDeg = Mathf.LerpAngle(currentRotationAngle, targetRotationAngle, rotationDampening * Time.deltaTime);
-            }           
         }
 
 
