@@ -50,9 +50,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public TextMeshProUGUI Messages;
     public TextMeshProUGUI PlayersConnected;
 
-    public static bool HideEvent = false;
+    public bool HideEvent = false;
     public GameObject GameFlag;
-    public float GameStartTimeSeconds = 45f;
+    public float GameStartTimeSeconds = 5f;
     
     #region Sounds
     public AudioClip[] PlayerJoining;
@@ -79,8 +79,10 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     }
 
     private void Start()
-    {           
-        if(Global.DeveloperMode)
+    {
+        HideEvent = true;
+
+        if (Global.DeveloperMode)
         {
             StartPlayersTest();
             //Music.Instance.PlayMusicTrack(1);
@@ -146,8 +148,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
                     }
                 }
 
-                var pp = player.transform.position;
-                CreateFlag(new Vector3(pp.x + 5f, pp.y, pp.z + 5f));
+                var flag = CreateFlag(new Vector3(0, 0, 0));
+                player.PickUpFlag(flag.GetComponent<Flag>());
 
                 SoundManager.PlaySound(PlayerJoining);
             }
@@ -173,10 +175,10 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void Update()
     {
         //Start Countdown
-        if (!HideEvent)
+        if (HideEvent)
         {
             GameStartTimeSeconds -= Time.deltaTime;
-            HideEvent = LevelTimer(GameStartTimeSeconds);            
+            HideEvent = LevelTimer(GameStartTimeSeconds);         
         }        
     }
 
@@ -250,8 +252,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         player.PlayerCastle = castleSpawn.GetComponent<Castle>();
         player.PlayerCastle.PlayerNumber = 1;
 
-        var pp = player.transform.position;
-        CreateFlag(new Vector3(pp.x + 5f, pp.y, pp.z + 5f));
+        var flag = CreateFlag(new Vector3(0,0,0));
+        player.PickUpFlag(flag.GetComponent<Flag>());
+
 
         var charactertwo = Instantiate(TestPlayerInstance, Player2SpawnPoint.localPosition, Player2SpawnPoint.localRotation);
         var playertwo = charactertwo.GetComponent<Player>();
@@ -261,9 +264,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         playertwo.PlayerCastle.PlayerNumber = 2;
         charactertwo.tag = Global.ENEMY_TAG;
         charactertwo.layer = Global.ENEMY_LAYER;
-
-        var pp2 = playertwo.transform.position;
-        CreateFlag(new Vector3(pp2.x + 5f, pp2.y, pp2.z + 5f));
+                
+        var flag2 = CreateFlag(new Vector3(0, 0, 0));
+        playertwo.PickUpFlag(flag2.GetComponent<Flag>());
 
         castleSpawnTwo.tag = Global.ENEMY_TAG;
         castleSpawnTwo.layer = Global.ENEMY_LAYER;        
@@ -271,6 +274,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     #endregion
    
+    [PunRPC]
     private bool LevelTimer(float timeSeconds)
     {
         int minutes = Mathf.FloorToInt(timeSeconds / 60f);
@@ -284,12 +288,14 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
             minutes += 1;
         }
 
-        UIManager.Instance.CountDownText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        string mins = minutes < 1 ? "00" : minutes.ToString("00");
 
-        return minutes <= 0 && seconds <= 0;
+        UIManager.Instance.CountDownText.text = mins + ":" + seconds.ToString("00");
+
+        return timeSeconds >= 0;
     }
 
-    private void CreateFlag(Vector3 spawnpoint)
+    private GameObject CreateFlag(Vector3 spawnpoint)
     {
         if (GameFlag != null)
         {
@@ -301,8 +307,11 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
             else
             {
                 makeFlag = Instantiate(GameFlag, spawnpoint, Quaternion.identity);
-            }            
+            }
+
+            return makeFlag;
         }
 
+        return null;
     }
 }

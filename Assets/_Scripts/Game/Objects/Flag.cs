@@ -11,7 +11,7 @@ public class Flag : MonoBehaviour, IPunObservable
     {
         if (col.tag != "Player") return;
         var player = col.GetComponent<Player>();
-        if(PlayerNumber == 0 && !player.PickedUpFlag)
+        if(PlayerNumber == 0 && !player.HasFlag)
         {
             PlayerNumber = player.ActorNumber;
             player.PlayerFlag = this;

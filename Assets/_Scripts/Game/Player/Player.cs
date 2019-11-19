@@ -83,7 +83,7 @@ public class Player : BasePrefab, IPlayer
 
     public Vector3 RespawnPos { get; set; }    
 
-    public bool PickedUpFlag = false;
+    public bool HasFlag = false;
 
     public string PlayerName
     {
@@ -601,15 +601,15 @@ public class Player : BasePrefab, IPlayer
 
     public void PickUpFlag(Flag flag)
     {        
-        PickedUpFlag = true;
+        HasFlag = true;
         //Move to RPC
         flag.transform.position = BackMountPoint.position;
         flag.transform.SetParent(transform);
     }
-
+        
     public void DropFlag()
     {        
-        PickedUpFlag = false;        
+        HasFlag = false;        
         PlayerFlag.transform.position = transform.position + new Vector3(0, 0, 5f);
         PlayerFlag.Reset();        
     }
