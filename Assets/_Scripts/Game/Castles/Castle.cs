@@ -24,10 +24,7 @@ public class Castle : MonoBehaviour, IPunObservable
     
     private Vector3 _spawnPos;
     private Quaternion _spawnRotation;
-    /// <summary>
-    /// Capture object inside castle
-    /// </summary>
-    public Capture CaptureFlag;    
+    
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
