@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public TextMeshProUGUI PlayersConnected;
 
     public bool HideEvent = false;
-    public GameObject GameFlag;
+    
     public float GameStartTimeSeconds = 5f;
     
     #region Sounds
@@ -147,10 +147,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
                         player.PlayerCastle.PlayerNumber = playernum;
                     }
                 }
-
-                var flag = CreateFlag(new Vector3(0, 0, 0));
-                player.PickUpFlag(flag.GetComponent<Flag>());
-
+                
                 SoundManager.PlaySound(PlayerJoining);
             }
             else
@@ -250,10 +247,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         var castleSpawn = Instantiate(CastleManager.Instance.GetCastle("classic"), Player1CastlePoint.localPosition, Player1CastlePoint.localRotation);
         player.PlayerName = "Krunchy";
         player.PlayerCastle = castleSpawn.GetComponent<Castle>();
-        player.PlayerCastle.PlayerNumber = 1;
-
-        var flag = CreateFlag(new Vector3(0,0,0));
-        player.PickUpFlag(flag.GetComponent<Flag>());
+        player.PlayerCastle.PlayerNumber = 1;        
 
 
         var charactertwo = Instantiate(TestPlayerInstance, Player2SpawnPoint.localPosition, Player2SpawnPoint.localRotation);
@@ -264,9 +258,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         playertwo.PlayerCastle.PlayerNumber = 2;
         charactertwo.tag = Global.ENEMY_TAG;
         charactertwo.layer = Global.ENEMY_LAYER;
-                
-        var flag2 = CreateFlag(new Vector3(0, 0, 0));
-        playertwo.PickUpFlag(flag2.GetComponent<Flag>());
+        
 
         castleSpawnTwo.tag = Global.ENEMY_TAG;
         castleSpawnTwo.layer = Global.ENEMY_LAYER;        
@@ -294,7 +286,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
         return timeSeconds >= 0;
     }
-
+    /*
     private GameObject CreateFlag(Vector3 spawnpoint)
     {
         if (GameFlag != null)
@@ -313,5 +305,5 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         }
 
         return null;
-    }
+    }*/
 }
