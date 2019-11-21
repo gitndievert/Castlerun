@@ -19,7 +19,7 @@ public class Flag : MonoBehaviourPun, IPunObservable
 {
     public int PlayerNumber = 0;
 
-    private void OnTriggerEnter(Collider col)
+    /*private void OnTriggerEnter(Collider col)
     {
         if (col.tag != "Player") return;
         var player = col.GetComponent<Player>();
@@ -28,12 +28,8 @@ public class Flag : MonoBehaviourPun, IPunObservable
             PlayerNumber = player.ActorNumber;
             player.PlayerFlag = this;
             player.PickUpFlag(this);
-        }
-        /*else if (PlayerNumber != player.ActorNumber && !player.PickedUpFlag)
-        {
-            player.PickUpFlag(this);
-        }*/
-    }
+        }        
+    }*/
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
