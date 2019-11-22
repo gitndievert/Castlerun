@@ -40,7 +40,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
     [SerializeField]
     private readonly float m_JumpPower = 12f;
 
-    public CharacterController CharacterController;
+    public CharacterController CharacterController;    
 
     public Companion SetPlayerCompanion
     {
@@ -60,7 +60,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
     private Animator _anim;    
     private Vector3 _moveVector;
     private Animator _companionAnim;
-    private Rigidbody _rb;
+    private Rigidbody _rb;    
 
     private int _attackCounter;    
 
@@ -74,7 +74,7 @@ public class MovementInput : MonoBehaviourPun, IPunObservable
         _anim = GetComponent<Animator>();        
         CharacterController = GetComponent<CharacterController>();
         Global.MouseLook = false;
-        _rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();        
     }
 
     // Start is called before the first frame update
