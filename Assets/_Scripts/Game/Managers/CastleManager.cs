@@ -22,7 +22,7 @@ public class CastleManager : PSingle<CastleManager>
     /// All Castles in Game
     /// </summary>
     [Tooltip("All the castle prefabs in the game")]
-    public List<GameObject> CastleList;
+    public GameObject[] CastleList;
 
 
     protected override void PAwake()

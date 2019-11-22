@@ -17,37 +17,63 @@ using UnityEngine;
 
 public class Flag : MonoBehaviourPun, IPunObservable
 {
-    public int PlayerNumber = 0;
+    public bool EnemyHasFlag = false;
+    public bool PlayerHasFlag = false;
+    public int OwnerPlayerNumber = -1;
 
-    /*private void OnTriggerEnter(Collider col)
+    private void OnTriggerEnter(Collider col)
     {
-        if (col.tag != "Player") return;
+        if (col.tag != "Player") return;            
         var player = col.GetComponent<Player>();
-        if(PlayerNumber == 0 && !player.HasFlag)
+        if(!player.HasFlag)
         {
-            PlayerNumber = player.ActorNumber;
+            PlayerHasFlag = player.ActorNumber == OwnerPlayerNumber;
+            EnemyHasFlag = !PlayerHasFlag;
+            player.HasFlag = true;
+            transform.position = player.BackMountPoint.position;
+            transform.SetParent(player.BackMountPoint);
             player.PlayerFlag = this;
-            player.PickUpFlag(this);
         }        
-    }*/
+    }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(PlayerNumber);
+            stream.SendNext(OwnerPlayerNumber);
+            stream.SendNext(EnemyHasFlag);
+            stream.SendNext(PlayerHasFlag);
         }
         else
         {
             var num = (int)stream.ReceiveNext();
-            PlayerNumber = num;
+            OwnerPlayerNumber = num;
+            var eFlag = (bool)stream.ReceiveNext();
+            EnemyHasFlag = eFlag;
+            var pFlag = (bool)stream.ReceiveNext();
+            PlayerHasFlag = pFlag;
         }
 
     }
-
+        
     public void Reset()
     {
-        PlayerNumber = 0;
-        transform.parent = null;
+        if (Global.DeveloperMode)
+        {
+            RPC_Reset();
+        }
+        else
+        {
+            photonView.RPC("RPC_Reset", RpcTarget.All);
+        }
     }
+
+    [PunRPC]
+    private void RPC_Reset()
+    {
+        transform.parent = null;
+        EnemyHasFlag = false;
+        PlayerHasFlag = false;
+    }
+
 }

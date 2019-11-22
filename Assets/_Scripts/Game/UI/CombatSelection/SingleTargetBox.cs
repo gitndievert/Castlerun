@@ -49,7 +49,7 @@ public class SingleTargetBox : MonoBehaviour
             int health = _target.GetCurrentHealth();
             if (health <= 0 || _target.IsDead)
             {                
-                if(_target.GameObject.tag == Global.ENEMY_TAG)
+                if(_target.GameObject.layer == Global.ENEMY_LAYER)
                 {
                     Selection.Instance.ClearEnemyTarget();
                 }
@@ -96,14 +96,13 @@ public class SingleTargetBox : MonoBehaviour
     {
         TargetText.text = _target.DisplayName;
         TargetIcon.sprite = _target.GetIcon();
-        HasSelection = true;       
-        
-        switch (_targetObj.tag)
-        {            
-            case Global.ENEMY_TAG:
-                SwapBackgroundColor(EnemyColor);
-                break;
+        HasSelection = true;
+
+        if(_targetObj.layer == Global.ENEMY_LAYER)
+        {
+            SwapBackgroundColor(EnemyColor);
         }
+        
         _backgroundImage.gameObject.SetActive(true);
         HealthBar.gameObject.SetActive(true);
     }

@@ -136,7 +136,7 @@ public class Selection : DSingle<Selection>
                 {
                     if (selectable.IsDead) return;
                     
-                    if (hit.transform.tag == Global.ENEMY_TAG)
+                    if (hit.GetLayer() == Global.ENEMY_LAYER)
                     {
                         UpdateEnemyTarget(selectable);
                     }                                            

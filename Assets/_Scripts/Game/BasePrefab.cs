@@ -126,7 +126,7 @@ public abstract class BasePrefab : MonoBehaviourPunCallbacks, IBase, IPunObserva
         {
             if (photonView != null && !photonView.IsMine)
             {
-                TagPrefab(Global.ENEMY_TAG);
+                gameObject.layer = Global.ENEMY_LAYER;
             }
         }
 

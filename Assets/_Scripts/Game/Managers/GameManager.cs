@@ -15,6 +15,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -49,6 +50,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     [Space(10)]
     public TextMeshProUGUI Messages;
     public TextMeshProUGUI PlayersConnected;
+
+    public Dictionary<int, Player> PlayersInGame = new Dictionary<int, Player>();
 
     public bool HideEvent = false;
     
@@ -219,11 +222,24 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     public void UpdatePlayersList()
     {
-        PlayersConnected.text = "";        
+        PlayersConnected.text = "";
+        PlayersInGame.Clear();
+
+        var gPlayers = GameObject.FindGameObjectsWithTag("Player");
 
         foreach (var player in PhotonNetwork.PlayerList)
         {
-            PlayersConnected.text += player.NickName+"\n";            
+            PlayersConnected.text += player.NickName+"\n";         
+            foreach(var gp in gPlayers)
+            {
+                var play = gp.GetComponent<Player>();
+                if(play.ActorNumber == player.ActorNumber)
+                {
+                    PlayersInGame.Add(play.ActorNumber, play);
+                    break;
+                }
+            }
+            
         }        
         
     }
@@ -255,12 +271,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
         var castleSpawnTwo = Instantiate(CastleManager.Instance.GetCastle("fod"), Player2CastlePoint.localPosition, Player2CastlePoint.localRotation);
         playertwo.PlayerName = "MrTest";
         playertwo.PlayerCastle = castleSpawnTwo.GetComponent<Castle>();
-        playertwo.PlayerCastle.PlayerNumber = 2;
-        charactertwo.tag = Global.ENEMY_TAG;
+        playertwo.PlayerCastle.PlayerNumber = 2;        
         charactertwo.layer = Global.ENEMY_LAYER;
-        
-
-        castleSpawnTwo.tag = Global.ENEMY_TAG;
         castleSpawnTwo.layer = Global.ENEMY_LAYER;        
     }
 

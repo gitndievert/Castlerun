@@ -143,7 +143,7 @@ public class Player : BasePrefab, IPlayer
 
         //Sets the transform respawn point
         RespawnPos = transform.position;
-
+        HasFlag = true;
     }
        
 
@@ -151,6 +151,12 @@ public class Player : BasePrefab, IPlayer
     protected override void Start()
     {
         base.Start();        
+
+        if (PlayerFlag != null)
+        {
+            PlayerFlag.OwnerPlayerNumber = ActorNumber;
+            PlayerFlag.PlayerHasFlag = true;
+        }
 
         if (_isTestPlayer) return;
 
@@ -381,11 +387,9 @@ public class Player : BasePrefab, IPlayer
                 if (!Extensions.DistanceLess(transform, MyTarget.GameObject.transform, AttackDistance)) return;
 
                 //May need to manage PUN tags
-                switch (MyTarget.GameObject.tag)
-                {
-                    case Global.ENEMY_TAG:
-                        MyTarget.SetHit(HitAmountMin, HitAmountMax);
-                        break;
+                if (MyTarget.GameObject.layer == Global.ENEMY_LAYER)
+                {                    
+                    MyTarget.SetHit(HitAmountMin, HitAmountMax);                    
                 }
             }
         }
@@ -495,7 +499,7 @@ public class Player : BasePrefab, IPlayer
 
     public void Select()
     {
-        if (GetTag != Global.ENEMY_TAG) return;
+        if (gameObject.layer != Global.ENEMY_LAYER) return;
         if (!IsSelected)
         {
             IsSelected = true;
@@ -597,23 +601,13 @@ public class Player : BasePrefab, IPlayer
     private void AttachCompanion()
     {
         //Future code to attach companions go here
-    }   
-
-    public void PickUpFlag(Flag flag)
-    {        
-        HasFlag = true;
-        //Move to RPC
-        flag.transform.position = BackMountPoint.position;
-        flag.transform.SetParent(transform);
-    }
+    }      
         
     public void DropFlag()
     {        
         HasFlag = false;        
-        PlayerFlag.transform.position = transform.position + new Vector3(0, 0, 5f);
-        PlayerFlag.Reset();        
+        PlayerFlag.transform.position = transform.position + new Vector3(0, 0, 5f);        
+        PlayerFlag.Reset();
     }
-
-
 
 }
