@@ -34,7 +34,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1103717243990901687}
-  - {fileID: 8270353707001267030}
+  - {fileID: 0}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -105,7 +105,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2504212931326639998, guid: de3355923ed1f2d47af867bed81d9950, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: de3355923ed1f2d47af867bed81d9950, type: 3}
 --- !u!1 &8270353707001266985 stripped
 GameObject:
@@ -113,15 +114,3 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5766563023742090280}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8270353707001267030 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2504212931326639998, guid: de3355923ed1f2d47af867bed81d9950,
-    type: 3}
-  m_PrefabInstance: {fileID: 5766563023742090280}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8270353707001266985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3145189b735dbe41a7154314dc29656, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
